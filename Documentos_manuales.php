@@ -89,10 +89,10 @@ class docmanuales{
 	function __construct()
 	{
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -162,9 +162,9 @@ class docmanuales{
 		
 		//se construye el menu
 		include("includes/opciones_menu.php");
-		//print_r($_REQUEST);
+		//print_r($_POST);
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -175,7 +175,7 @@ class docmanuales{
 		}
 	
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -206,7 +206,7 @@ class docmanuales{
 	//Accion del boton agregar un nuevo registro 
 	private function agregar()
 	{	
-		if (!isset($_REQUEST["accion2"]))
+		if (!isset($_POST["accion2"]))
 		{
 			// creamos un contenedor de la tabla
 			$dt = new DataTable();
@@ -221,14 +221,14 @@ class docmanuales{
 		}
 
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "AGREGAR":
 					// enviamos los datos del formulario a guardar
-					if ($this->docmanualesBD->agregar($_REQUEST))
+					if ($this->docmanualesBD->agregar($_POST))
 					{
 						//Pasamos el mensaje de Ok
 						$this->mensajeOK="Registro Completado! Su registro se ha guardado con exito";
@@ -267,12 +267,12 @@ class docmanuales{
 
 	private function modificar()
 	{	
-		if (!isset($_REQUEST["accion2 "]))
+		if (!isset($_POST["accion2 "]))
 		{
 			// creamos un contenedor de la tabla
 			$dt = new DataTable();
 			// obtenemos los datos a modificar
-			$this->docmanualesBD->obtener($_REQUEST,$dt);
+			$this->docmanualesBD->obtener($_POST,$dt);
 			// guardamos los datos en un arreglo
 			$campos=$dt->data;
 			// guardamos el error por si aca hubo
@@ -281,14 +281,14 @@ class docmanuales{
 		}
 
 		// si es que nos enviaron una accion
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "MODIFICAR":
-				//print_r($_REQUEST);
+				//print_r($_POST);
 					// si apretaron el boton modificar obtenermos los datos desde el formulario
-					if ($this->docmanualesBD->modificar($_REQUEST))
+					if ($this->docmanualesBD->modificar($_POST))
 					{
 						// si resulta mostramos el listado
 						//Mensaje del CallOut
@@ -300,7 +300,7 @@ class docmanuales{
 					// si sale todo mal leemos el error
 					$this->mensajeError=$this->docmanualesBD->mensajeError;
 					// y guardamos los datos enviamos en una variable
-					$campos[0]=$_REQUEST;
+					$campos[0]=$_POST;
 					break;
 
 				case "VOLVER":
@@ -310,7 +310,7 @@ class docmanuales{
 			}
 		}
 
-		$datos2=$_REQUEST;
+		$datos2=$_POST;
        
 		//Asignamos los datos que recibimos del formulario
 		$this->docmanualesBD->listado($datos2,$dt);
@@ -319,8 +319,8 @@ class docmanuales{
 		$this->pagina->agregarDato("formulario",$formulario);
 
 		// agregamos pagina actual del listado
-		$this->pagina->agregarDato("pagina",$_REQUEST["pagina"]);
-		$this->pagina->agregarDato("nombrex",$_REQUEST["nombrex"]);
+		$this->pagina->agregarDato("pagina",$_POST["pagina"]);
+		$this->pagina->agregarDato("nombrex",$_POST["nombrex"]);
 		$this->pagina->agregarDato("formulario",$campos);
 		// agregamos los posibles errores a la pagina
 		$this->pagina->agregarDato("mensajeError",$this->mensajeError);
@@ -334,7 +334,7 @@ class docmanuales{
 	private function eliminar()
 	{
 		// se envia a eliminar a la tabla con los datos del formulario
-		if ($this->docmanualesBD->eliminar($_REQUEST)){
+		if ($this->docmanualesBD->eliminar($_POST)){
 			//Pasamos el mensaje de Ok
 			$this->mensajeOK="Registro Elimnado! Su registro se ha eliminado con exito";
 			//Pasamos el error a la pagina 
@@ -362,8 +362,8 @@ class docmanuales{
 		$dt3 	= new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
-       // print_r($_REQUEST);
+		$datos=$_POST;
+       // print_r($_POST);
 
         $datos["usuarioid"]=$this->seguridad->usuarioid;
         //print_r($datos);
@@ -461,7 +461,7 @@ class docmanuales{
 		$dt = new DataTable();
 		$dt2 = new DataTable();
 		$dt3 = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$this->docmanualesBD->Obtener($datos,$dt);
 		$this->mensajeError.=$this->docmanualesBD->mensajeError;
@@ -505,7 +505,7 @@ class docmanuales{
 
 	private function aprobar()
 	{ 
-		$datos = $_REQUEST;	
+		$datos = $_POST;	
 		
 		$this->docmanualesBD->modificar_estado($datos);
 		$this->mensajeError=$this->docmanualesBD->mensajeError;
@@ -519,11 +519,11 @@ class docmanuales{
 	
 	public function verdocumento()
 	{
-		//print_r ($_REQUEST);
+		//print_r ($_POST);
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
 		$dt2 = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		//Llenar Select de Empresas registradas
 		// Buscamos el idCategoria que vamos a asignar
 		$this->docmanualesBD->obtenerb64($datos,$dt); //print_r($datos);

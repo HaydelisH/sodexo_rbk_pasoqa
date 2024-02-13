@@ -46,7 +46,7 @@ class documentos {
 		$this->docvigentesBD->usarConexion($conecc);
 
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$resultado = array();
 		
 		$datos["pagina"]="1";

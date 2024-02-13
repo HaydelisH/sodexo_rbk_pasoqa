@@ -24,9 +24,10 @@
           <div class="icon">
             <i class="fa fa-file-text-o" aria-hidden="true"></i>
           </div>
-          <form name="formulario" id="formulario_usuarios" action="<php:texto id='action' />" method="POST" autocomplete="off">           
-            <button class="btn-xs btn-block bg-aqua" type="submit"  name="accion" value="TODOS"><span>Ver <i class="fa fa-arrow-circle-right"></i></span></button>
-          </form>
+            <form name="formulario" id="formulario" action="<php:texto id='action' />" method="POST" autocomplete="off">           
+              <button class="btn-block bg-aqua btn-sm" style="width: 100%; border: 2px solid #000; border-style: outset; font-family: inherit; line-height: 1.5; font-size: 12px;" type="submit"  name="accion" value="TODOS"><span>Ver <i class="fa fa-arrow-circle-right"></i></span></button>
+              <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
           </div>
         </div>        
         
@@ -42,9 +43,10 @@
           <div class="icon">
             <i class="fa fa-spinner" aria-hidden="true"></i>
           </div>
-          <form name="formulario" id="formulario_usuarios" action="<php:texto id='action' />" method="POST" autocomplete="off">           
-            <button class="btn-xs btn-block bg-yellow" type="submit" name="accion" value="POR_FIRMA"><span>Ver <i class="fa fa-arrow-circle-right"></i></span></button>
-          </form>
+          <form name="formulario" id="formulario" action="<php:texto id='action' />" method="POST" autocomplete="off">           
+            <button class="btn-xs btn-block bg-yellow" style="width: 100%; border: 2px solid #000; border-style: outset; font-family: inherit; line-height: 1.5; font-size: 12px;" type="submit" name="accion" value="POR_FIRMA"><span>Ver <i class="fa fa-arrow-circle-right"></i></span></button>
+            <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
           </div>
         </div>        
     
@@ -60,9 +62,10 @@
           <div class="icon">
             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
           </div>            
-          <form name="formulario" id="formulario_usuarios" action="<php:texto id='action' />" method="POST" autocomplete="off">           
-            <button class="btn-xs btn-block bg-green" type="submit"  name="accion" value="FIRMADOS"><span>Ver <i class="fa fa-arrow-circle-right"></i></span></button>
-          </form>
+          <form name="formulario" id="formulario" action="<php:texto id='action' />" method="POST" autocomplete="off">           
+            <button class="btn-xs btn-block bg-green" style="width: 100%; border: 2px solid #000; border-style: outset; font-family: inherit; line-height: 1.5; font-size: 12px;"  type="submit"  name="accion" value="FIRMADOS"><span>Ver <i class="fa fa-arrow-circle-right"></i></span></button>
+            <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
           </div>          
         </div>  
 
@@ -78,9 +81,10 @@
           <div class="icon">
             <i class="fa fa-ban"></i>
           </div>            
-          <form name="formulario" id="formulario_usuarios" action="<php:texto id='action' />" method="POST" autocomplete="off">           
-            <button class="btn-xs btn-block bg-red" type="submit"  name="accion" value="RECHAZADOS"><span>Ver <i class="fa fa-arrow-circle-right"></i></span></button>
-          </form>
+          <form name="formulario" id="formulario" action="<php:texto id='action' />" method="POST" autocomplete="off">           
+            <button class="btn-xs btn-block bg-red" style="width: 100%; border: 2px solid #000; border-style: outset; font-family: inherit; line-height: 1.5; font-size: 12px;"  type="submit"  name="accion" value="RECHAZADOS"><span>Ver <i class="fa fa-arrow-circle-right"></i></span></button>
+            <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
           </div>          
         </div>  
         
@@ -88,31 +92,32 @@
       </div><!--/.row-->
       
       <!--Grafico de torta-->
-      <div class="col-md-6" style="">
-        <div class="row pull-center-container">     
-          <div class="box box-danger">
-            <div class="box-header with-border">
-              <h3 class="box-title">Mis Documentos</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+      <div class="row">
+        <div class="col-md-6" style="">
+          <div class="row pull-center-container">
+            <div class="box box-danger">
+              <div class="box-header with-border">
+                <h3 class="box-title">Mis Documentos</h3>
+      
+                <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+              </div>
+              <div class="box-body">
+                <canvas id="pieChart" style="height: 150px; width: 407px;" width="407" height="150"></canvas>
               </div>
             </div>
-          <div class="box-body">
-            <canvas id="pieChart" style="height: 150px; width: 407px;" width="407" height="150"></canvas>
           </div>
-         </div>          
         </div>
-      </div>
-           
-      <!--Ultimos documentos creados-->
-         <div class="col-md-6" style="">
+      
+        <!--Ultimos documentos creados-->
+        <div class="col-md-6" style="">
           <div class="box box-warning">
             <div class="box-header with-border">
               <h3 class="box-title">Documentos recientes</h3>
-
+      
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
@@ -124,42 +129,55 @@
               <div class="table-responsive">
                 <table class="table no-margin">
                   <thead>
-                  <tr>
-                    <th>Id Documento</th>
-                    <th>Modelo de Contrato</th>
-                    <th>Estado de firma</th>
-                  </tr>
+                    <tr>
+                      <th>Id Documento</th>
+                      <th>Modelo de Contrato</th>
+                      <th>Estado de firma</th>
+                    </tr>
                   </thead>
                   <tbody>
-                  <php:repeticion id="doc_ultimos">
-                    <tr>
-                     <form action="<php:texto id='action' />" name="formulario5" id="formulario5" method="post">
-                        <input type="hidden" name="idDocumento" id="idDocumento"  value='<php:item id="idDocumento"/>' >
-                      <td align="center"><button type="submit" id="accion_dr" name="accion" value="DETALLE" class="btn btn-md"><div id="boton"><php:item id="idDocumento" /></div></button></td>
-                      <td align="center"><php:item id="NombreTipoDoc" /></td>
-                      <td align="center"><span class="<php:item id="color"/>"><php:item id="Nombre" /></span></td>
-
-                        <input type="hidden" name="pagina" value="1">
-                        <input type="hidden" name="nombrex" value="<php:texto id="nombrex" />">
+                    <php:repeticion id="doc_ultimos">
+                      <tr>
+                        <form action="<php:texto id='action' />" name="formulario5" id="formulario5" method="post">
+                          <input type="hidden" name="idDocumento" id="idDocumento" value='<php:item id="idDocumento"/>'>
+                          <td align="center"><button type="submit" id="accion_dr" name="accion" value="DETALLE"
+                              class="btn btn-md">
+                              <div id="boton">
+                                <php:item id="idDocumento" />
+                              </div>
+                            </button></td>
+                          <td align="center">
+                            <php:item id="NombreTipoDoc" />
+                          </td>
+                          <td align="center"><span class="<php:item id=" color" />">
+                            <php:item id="Nombre" /></span>
+                          </td>
+      
+                          <input type="hidden" name="pagina" value="1">
+                          <input type="hidden" name="nombrex" value="<php:texto id=" nombrex" />">
+                          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
                     </form>
-                    </tr>
-                   </php:repeticion>
+                      </tr>
+                    </php:repeticion>
                   </tbody>
                 </table>
               </div>
               <!-- /.table-responsive -->
             </div>
             <!-- /.box-body -->
-           <div class="box-footer text-center">
-            <!--Ver todos los documentos-->
-            <!--<form action="Reportes.php" method="POST" role="form" id="formulario3" name="formulario3">
-              <button name="accion" id="accion" value="BUSCAR_P" class="btn" style="background-color: transparent;"><a>Ver Todos</a></button>
-            </form>-->
-          </div>
+            <div class="box-footer text-center">
+              <!--Ver todos los documentos-->
+              <!--<form action="Reportes.php" method="POST" role="form" id="formulario3" name="formulario3">
+                                <button name="accion" id="accion" value="BUSCAR_P" class="btn" style="background-color: transparent;"><a>Ver Todos</a></button>
+                                <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>-->
+            </div>
             <!-- /.box-footer -->
           </div>
         </div>
+      </div>
       </div> <!-- Conteiner -->
+
 
 <script>
 

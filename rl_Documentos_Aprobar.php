@@ -100,10 +100,10 @@ class docvigentes{
 	function __construct()
 	{
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -185,7 +185,7 @@ class docvigentes{
 		include("includes/opciones_menu.php");
 
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -196,7 +196,7 @@ class docvigentes{
 		}
 
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "ACTUALIZAR":
 				$this->actualizar();
@@ -240,10 +240,10 @@ class docvigentes{
 	//Actualizar documento descargando de nuevo desde Acepta
 	private function actualizar(){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 	
 		$doccode = '';
 
@@ -262,8 +262,8 @@ class docvigentes{
 
 			if ($dt["status"] == "200")
 			{
-				$_REQUEST["DocCode"] 	= $dt["result"][0]["code"];
-				$_REQUEST["documento"]	= $dt["result"][0]["file"];
+				$_POST["DocCode"] 	= $dt["result"][0]["code"];
+				$_POST["documento"]	= $dt["result"][0]["file"];
 
 				$this->actualizarDocumento();			
 				$this->mensajeOK = "El documento ha sido actualizado con &eacute;xito";
@@ -283,7 +283,7 @@ class docvigentes{
 	//Accion de modificar un registro 
 	private function rechazar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['RutUsuario'] = $this->seguridad->usuarioid;
 		
 		$this->docvigentesBD->rechazar($datos);
@@ -300,7 +300,7 @@ class docvigentes{
 	//Accion de eliminar un registro
 	private function eliminar()
 	{
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $datos['idDocumento_el'];
 
 	 	$dt = new DataTable();
@@ -314,7 +314,7 @@ class docvigentes{
 			$this->mensajeError.=$this->documentosdetBD->mensajeError;
 		}
 		
-		$_REQUEST['idDocumento'] = '';
+		$_POST['idDocumento'] = '';
 		//Pasamos al listado actualizado
 		$this->listado();
 		return;		
@@ -330,7 +330,7 @@ class docvigentes{
 		$dt4 	= new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
 
         $datos["usuarioid"]=$this->seguridad->usuarioid;
 
@@ -482,7 +482,7 @@ class docvigentes{
 		$dt = new DataTable();
 		$dt1 = new DataTable();
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		$this->docvigentesBD->Obtener($datos,$dt);
 		$this->mensajeError.=$this->docvigentesBD->mensajeError;
@@ -537,7 +537,7 @@ class docvigentes{
 	{
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$fecha = date('dmY_hms');
 
 		$datos["idDocumento"] = $datos["idDocumento_vd"];
@@ -788,8 +788,8 @@ class docvigentes{
 		$dt4 	= new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
-       // print_r($_REQUEST);
+		$datos=$_POST;
+       // print_r($_POST);
 
         $datos["usuarioid"]=$this->seguridad->usuarioid;
         //print_r($datos);
@@ -897,8 +897,8 @@ class docvigentes{
 		$dt4 	= new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
-       // print_r($_REQUEST);
+		$datos=$_POST;
+       // print_r($_POST);
 
         $datos["usuarioid"]=$this->seguridad->usuarioid;
         //print_r($datos);
@@ -1005,7 +1005,7 @@ class docvigentes{
 		$dt4 	= new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
 
         $datos["usuarioid"]=$this->seguridad->usuarioid;
         //print_r($datos);
@@ -1111,8 +1111,8 @@ class docvigentes{
 		$dt4 	= new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
-       // print_r($_REQUEST);
+		$datos=$_POST;
+       // print_r($_POST);
 
         $datos["usuarioid"]=$this->seguridad->usuarioid;
         //print_r($datos);
@@ -1211,7 +1211,7 @@ class docvigentes{
 	//Actualiza firma en BD
 	public function actualizarDocumento(){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		//Actualiza el documento firmado
 		if( $datos['documento'] != '' ){

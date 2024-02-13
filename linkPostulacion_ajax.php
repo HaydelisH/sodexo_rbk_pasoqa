@@ -47,7 +47,7 @@ class linkPostulacion_ajax {
 
 		$dt = new DataTable();
 		$array = array ();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		/*
 			array(
 				'proximidadCaducidadId'=>'1',

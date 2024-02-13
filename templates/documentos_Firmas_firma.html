@@ -23,14 +23,15 @@
   			<form role="form" name="formulario2" id="formulario2" action="Documentos_Firmas.php" method="POST">
   				<input type="hidden" name="idDocumento" value="<php:item id="idDocumento" />" />
   				<button type="button" class="btn btn-default" onclick="history.back(-1)"><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
-  			</form>
+  			  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
       <!-- /.box-header -->
       <div class="box-body">
         <!--Mensajes-->
         <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
         <div id="mensajeError"><php:texto id="mensajeError" /></div>
         <!--Datos referenciales-->
-        <div class="form-row">
+        <div class="row">
           <!--Empresas-->
         
     
@@ -67,7 +68,8 @@
 				
 			  </php:repeticion>  
          </div>
-        </form> 
+          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form> 
 
       </div>
     <!-- /.box -->

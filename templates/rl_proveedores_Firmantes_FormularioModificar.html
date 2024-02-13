@@ -11,7 +11,8 @@
                 <input type="hidden" class="form-control" id="RutProveedor" name="RutProveedor" value="<php:item id="RutProveedor"/>"/>
                 <input type="hidden" class="form-control" id="RutEmpresa" name="RutEmpresa" value="<php:item id="RutEmpresa"/>"/>
                 <button type="submit" name="accion" value="MODIFICAR" class="btn btn-default btn_letra_azul"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</button>
-           </form>
+             <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
          </div>
       <div class="box-body">
 
@@ -28,26 +29,26 @@
 			<input type="text" class="form-control" id="RutProveedor" readonly="readonly" name="RutProveedor" value="<php:item id="RutProveedor"/>">
 		  </div>
 	
-         <div class="form-row">
+         <div class="row">
               <div class="col-md-6 xs-12">
                   <label for="RutUsuario">Rut del Representante</label>
                   <input type="text" class="form-control" id="RutUsuario"  readonly="readonly" name="RutUsuario" placeholder="Rut" value="<php:item id="RutUsuario"/>">
               </div>
           </div>
-          <div class="form-row">
+          <div class="row">
             <div class="col-md-6 xs-12">
               <label for="nacionalidad">Nacionalidad</label>
               <input type="text" class="form-control" id="nacionalidad" name= "nacionalidad" placeholder="Nacionalidad" value="<php:item id="nacionalidad"/>">
             </div>
           </div>
-         <div class="form-row">
+         <div class="row">
 			<div class="col-md-6 xs-12">
 				<label for="nombre">Nombre</label>
 				<input type="text" class="form-control" id="nombre" name= "nombre" placeholder="Nombres " value="<php:item id="nombre"/>">
 			</div>
 		</div>
 	
-		<div class="form-row">  
+		<div class="row">  
 			<div class="col-md-6 xs-12">
 				<label for="appaterno">Apellido Paterno</label>
 				<input type="text" class="form-control" id="appaterno" name= "appaterno" placeholder="Apellido Paterno" value="<php:item id="appaterno"/>" >
@@ -58,7 +59,7 @@
 			</div>
 		</div> 
        
-    			<!--<div class="form-row" >
+    			<!--<div class="row" >
     			  <div class="col-md-6 xs-12">
     				  <label for="Cargo">Rol</label>
     				  <select class= "form-control" name="idCargo" id="idCargo">
@@ -70,14 +71,14 @@
     			  </div>
     			</div>-->
 				
-						<div class="form-row">  
+						<div class="row">  
 						  <div class="col-md-6 xs-12">
 							<label for="correo">Correo</label>
 							<input type="text" class="form-control" id="correo" name= "correo" placeholder="correo" value="<php:item id="correo"/>">
 						  </div>
 						</div>
 						
-						<div class="form-row" >
+						<div class="row" >
 						  <div class="col-md-6 xs-12">
 							<label for="">Tipo de Firma</label>
 							<select class= "form-control" name="idFirma" id="idFirma">
@@ -89,14 +90,14 @@
 						  </div>
 						</div>
 						
-						<div class="form-row">  
+						<div class="row">  
 							<div class="col-md-6 xs-12">
 								<label for="Cargo">Cargo</label>
 								<input type="text" class="form-control" id="Cargo" name= "Cargo" placeholder="Cargo" value="<php:item id="cargo"/>" >
 							</div>
 						</div>
 					
-          <div class="form-row">  
+          <div class="row">  
             <div class="col-md-2 xs-12 pull-right style"> 
               <input type="hidden" name="accion" value="MODIFICAR_R" />
               <button class="btn btn-md btn-primary btn-block " type="submit" style="margin-top: 10px" name="accion2" value="MODIFICAR_R" onclick="javascript: return validarFormulario(this,new Array(),new Array('apmaterno'))"/>Guardar</button>
@@ -105,7 +106,8 @@
 
         </php:repeticion> 
 
-        </form>  
+          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>  
       </div>
     </div>
     </div>

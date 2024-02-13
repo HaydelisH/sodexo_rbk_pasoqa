@@ -51,7 +51,7 @@ class documentos {
 		
 		$dt = new DataTable();
 		
-		$datos = $_REQUEST; 
+		$datos = $_POST; 
 		$datos["pagina"] = 1;
 		$datos["decuantos"] = $datos["total_registros"] + 1;
 

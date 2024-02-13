@@ -7,48 +7,45 @@
 					<a class="btn btn-default btn_letra_azul" href="usuariosmant.php"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</a>
 				</div>
 				<!-- /.box-header -->
-				<div class="box-body">
+				<div class="box-body" style="padding: 30px;">
 					<!--Mensajes-->
 					<div id="mensajeError"><php:texto id="mensajeError" /></div>
 					<div id="mensajeOK"><php:texto id="mensajeOK" /></div>	
 					<form name="formulario" class="formularioModificar" id="formulario"  class="form-horizontal" action="usuariosmant.php" method="POST" autocomplete=off>
 						<php:repeticion id="formulario">
-						<div class="form-row">
+						<div class="row">
 							<div class="col-md-12">
 								<label style="float:right;"> (*) Campos obligatorios </label>
 							</div>
 						</div>
-						<div class="form-row">
+						<div class="row">
 							<div class="col-md-6 col-xs-12">
 								<label for="tipousuarioid">Rut (*)</label>
 								<input type="contenedor" class="form-control" id="newusuarioid"  name="newusuarioid" placeholder="Rut v&aacute;lido" maxlength="10" value="<php:item id="newusuarioid" />" autofocus >
 							</div>
-						</div>
-						<div class="form-row">
+						
 							<div class="col-md-6 col-xs-12">
 								<label for="contenedorid" >Nombre (*)</label>
 								<input type="contenedor" class="form-control" id="nombre" name="nombre" placeholder="Nombre completo" maxlength="50" value="<php:item id="nombre" />">
 							</div>
 						</div>
-						<div class="form-row">
+						<div class="row">
 							<div class="col-md-6 col-xs-12">
 								<label for="contenedorid" >Apellido Paterno (*)</label>
 								<input type="contenedor" class="form-control" id="appaterno" name="appaterno" placeholder="Apellido Paterno" maxlength="50" value="<php:item id="appaterno" />">
 							</div>
-						</div>
-						<div class="form-row">
+						
 							<div class="col-md-6 col-xs-12">
 								<label for="contenedorid" >Apellido Materno</label>
 								<input type="contenedor" class="form-control" id="apmaterno" name="apmaterno" placeholder="Apellido Materno" maxlength="50" value="<php:item id="apmaterno" />">
 							</div>
 						</div>
-						<div class="form-row">
+						<div class="row">
 							<div class="col-md-6 col-xs-12">
 								<label for="contenedorid" >Correo Electr&oacute;nico (*)</label>
 								<input type="contenedor" class="form-control" id="correo" name="correo" placeholder="Correo electr&oacute;nico" maxlength="50" value="<php:item id="correo" />">
 							</div>
-						</div>
-						<div class="form-row">
+						
 							<div class="col-md-6 col-xs-12">
 								<label for="contenedorid" >Perfil (*)</label>
 								<select class= "form-control" name="tipousuarioid" id="tipousuarioid">
@@ -59,7 +56,7 @@
 								</select>
 							</div>
 						</div>	
-						<div class="form-row" >
+						<div class="row" >
 							<div class="col-md-6 col-xs-12">
 								<label for="idFirma">Tipo de Firma (*)</label>
 								<select class= "form-control" name="idFirma" id="idFirma">
@@ -69,8 +66,7 @@
 									</php:repeticion>
 								</select>
 							</div>
-						</div>
-						<div class="form-row">
+						
 							<div class="col-md-6 col-xs-12">
 								<label for="contenedorid" >Rol (*)</label>
 								<select class= "form-control" name="rolid" id="rolid">
@@ -82,7 +78,7 @@
 							</div>
 						</div>
 						<!--Empresas-->
-						<div class="form-row" >
+						<div class="row" >
 							<div class="col-md-6 col-xs-12">
 								<label for="contenedorid" >Empresa (*) </label>
 								<!--Select de Empresas disponibles-->
@@ -94,37 +90,17 @@
 								</select>
 							</div>
 						</div>
-						<!--Corta palo - Ocultar/Mostrar Division personal de ventana usuario-->
-						<!--div class="col-md-6 xs-12">
-							<label>Divisi&oacute;n de Personal</label>
-							<div class="col-md-11 xs-12 box-body" style="padding-left: 0px;padding-top: 0px;">
-								<input class="form-control" type="text" name="nombrecentrocosto" id="nombrecentrocosto" placeholder="(Seleccione)" value="<php:item id="nombrecentrocosto"/>" readonly="readonly" />
-								<input type="hidden" name="centrocostoid" id="centrocostoid" placeholder="(Seleccione)" value="<php:item id="idCentroCosto"/>" />
-							</div>
-							<div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
-								<button class="btn btn-md btn-primary btn-block" type="button" id="btn_centro_costo" data-toggle="modal" data-target="#modal_centro_costo"><i class="fa fa-search"></i></button>  
-							</div>
-						</div-->
-						<!--Corta palo - Ocultar/Mostrar Division personal de ventana usuario-->
-						<!-- <div class="form-row" >
-							<div class="col-md-6 xs-12">
-								<label class="form-check-label" >Login con PIN </label>    
-								<select class= "form-control" name="idloginExterno" id="idloginExterno">          
-									<option value="0">(Seleccione)</option>
-									<php:repeticion id="LoginExterno">
-									<option value="<php:item id="idloginExterno" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idloginExterno"" /><php:argumento idvalor="idloginExterno" /></php:funcion>><php:item id="Descripcion" /></option>
-									</php:repeticion>
-								</select>
-							</div>
-						</div>-->
+					
 						</php:repeticion>
-						<div class="form-row">  
-							<div class="col-md-2 xs-12 pull-right" style="margin-top: 15px" >            
+						<div class="row d-flex justify-content-end ">              
+							<div class="col-md-2 d-grid gap-2" >
+							<!--<div class="col-md-2 xs-12 pull-right" style="margin-top: 15px" >            -->
 								<input type="hidden" name="accion" value="AGREGAR" />
 								<button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" id="accion2" value="AGREGAR" onclick="javascript:return validarFormulario(this,new Array(),new Array('apmaterno','idloginExterno','nombrecentrocosto')) && validaRut2(document.formulario.newusuarioid) && validarRutEmpresa();"/>Guardar</button>
 							</div>
 						</div>   
-					</form>
+					  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 					<!--Corta palo - Ocultar/Mostrar Division personal de ventana usuario-->
 					<!--Modal de Centros de Costo>
 					<div class="modal fade" id="modal_centro_costo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -133,7 +109,7 @@
 								<div class="modal-header" align="center">
 									<h4 class="modal-title" id="ejemplo-titulo"> Divisi&oacute;n personal </h4>
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
+										<span aria-hidden="true" class="cerrar_modal">&times;</span>
 									</button>
 								</div>
 								<div class="modal-body">

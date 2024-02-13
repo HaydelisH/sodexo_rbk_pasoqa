@@ -2,7 +2,7 @@
  */
 // Depends on jsbn.js and rng.js
 
-// Version 1.1: support utf-8 encoding in pkcs1pad2
+// Version : support utf-8 encoding in pkcs1pad2
 
 // convert a (hex) string to a bignum object
 function parseBigInt(str,r) {

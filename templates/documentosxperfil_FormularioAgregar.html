@@ -8,7 +8,7 @@
 			<php:repeticion id="formulario">			
 		  </div>
 			<div class="form-group">
-			  <form name="formulario1" id="formulario_usuarios" action="documentosxperfil.php" method="POST" autocomplete="off" >
+			  <form name="formulario1" id="formulario" action="documentosxperfil.php" method="POST" autocomplete="off" >
 			  
 				<input type="hidden" name="tipousuarioid" 	id="tipousuarioid" 	value="<php:item id="tipousuarioid" />">		
 				<input type="hidden" name="holdingid" 		id="holdingid"		value="<php:item id="holdingid" />">
@@ -17,7 +17,8 @@
 				<input type="hidden" name="nombre"	 	 	value="<php:item id="nombre" />" />	
 				
 				<button type="submit" class="btn btn-default"><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>																
-			  </form>
+			    <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 				<br>
 				<label for="nombre">Nombre de Perfil: <php:item id="nombre" /></label>		
 			</div>
@@ -31,7 +32,7 @@
 			  
 			                          
 
-			<form name="formulario" id="formulario_usuarios" action="documentosxperfil.php" method="POST" >
+			<form name="formulario" id="formulario" action="documentosxperfil.php" method="POST" >
 				<div id="divtabla" class="tabla-responsiva" >
 				
 					<table id="example2" class="table table-bordered table-hover" name="tbltabla">
@@ -62,8 +63,8 @@
 				<input type="hidden" name="nombre"	 	  value="<php:item id="nombre" />" />	
 				
 				<input type="hidden" name="accion" value="AGREGAR" />
-				<div class="form-row">  
-                    <div class="col-md-2 xs-12 pull-right">
+				<div class="row d-flex justify-content-end">  
+					<div class="col-md-2 xs-12 d-grid gap-2 ">           
                         <button class="btn btn-md btn-primary btn-block" type="submit" name="accion2" value="AGREGAR" style="margin-top: 10px">Guardar</button>  
                     </div>
 			    </div>  
@@ -71,5 +72,6 @@
 		
 				</DIV>
 
-		</form>
+		  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 		</php:repeticion>

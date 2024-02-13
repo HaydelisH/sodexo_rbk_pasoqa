@@ -83,10 +83,10 @@ class docvigentes{
 	function __construct()
 	{
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -172,7 +172,7 @@ class docvigentes{
 		include("includes/opciones_menu.php");
 
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -181,9 +181,9 @@ class docvigentes{
 			// y salimos
 			return;
 		}
-        //var_dump($_REQUEST);
+        //var_dump($_POST);
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-        switch ($_REQUEST["accion"])
+        switch ($_POST["accion"])
 		{
             case "BUSCAR":
                 $this->listado();
@@ -239,7 +239,7 @@ class docvigentes{
 	/*private function actualizar(){
 	
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$id = '';
 
 		$this->documentosdetBD->Obtener($datos, $dt);
@@ -347,7 +347,7 @@ class docvigentes{
 	/*//Accion de modificar un registro 
 	private function rechazar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$this->docvigentesBD->rechazar($datos);
 		$this->mensajeError.=$this->docvigentesBD->mensajeError;
@@ -363,7 +363,7 @@ class docvigentes{
 	//Accion de eliminar un registro
 	/*private function eliminar()
 	{
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $datos['idDocumento_el'];
 
 	 	$dt = new DataTable();
@@ -377,7 +377,7 @@ class docvigentes{
 			$this->mensajeError.=$this->documentosdetBD->mensajeError;
 		}
 		
-		$_REQUEST['idDocumento'] = '';
+		$_POST['idDocumento'] = '';
 		//Pasamos al listado actualizado
 		$this->listado();
 		return;		
@@ -393,7 +393,7 @@ class docvigentes{
 		$dt4 	= new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
 
         //$datos["usuarioid"]=$this->seguridad->usuarioid;
 
@@ -483,7 +483,7 @@ class docvigentes{
 		$dt = new DataTable();
 		$dt1 = new DataTable();
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		//if( isset($datos['idDocumento_filtro'])) $datos['idDocumento'] = $datos['idDocumento_filtro'];
 		//var_dump($datos['idDocumento_filtro']);
 		//var_dump($datos['idDocumento']);
@@ -607,10 +607,10 @@ class docvigentes{
         //Instanciar la clase
         $dt = new DataTable();
         $dt1 = new DataTable();
-        $datos = $_REQUEST;
+        $datos = $_POST;
         $datos['usuarioid'] = $this->seguridad->usuarioid;
         $datos['actorid'] = 1;
-        //var_dump($_REQUEST);
+        //var_dump($_POST);
         //Actualizar datos
         $this->formularioPlantillaBD->modificar_estadogestion($datos);
 		$this->mensajeError.=$this->formularioPlantillaBD->mensajeError;
@@ -639,7 +639,7 @@ class docvigentes{
 
 	/*private function aprobar()
 	{ 
-		$datos = $_REQUEST;	
+		$datos = $_POST;	
 		$datos["RutAprobador"] = $this->seguridad->usuarioid;
 		
 		//$this->docvigentesBD->modificar_estado($datos);
@@ -661,7 +661,7 @@ class docvigentes{
         
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$fecha = date('dmY_hms');
 
 		$datos["idDocumento"] = $datos["idDocumento_vd"];
@@ -938,7 +938,7 @@ class docvigentes{
 		$dt4 	= new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
   
   	 	$datos["usuarioid"] = $this->seguridad->usuarioid;
         $datos["Firmante"] = $datos["usuarioid"];
@@ -1059,7 +1059,7 @@ class docvigentes{
 		$dt4 	= new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
        
         $datos["usuarioid"] = $this->seguridad->usuarioid;
         $datos["Firmante"] = $datos["usuarioid"];
@@ -1181,7 +1181,7 @@ class docvigentes{
 		$dt4 	= new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
 
         $datos["usuarioid"] = $this->seguridad->usuarioid;
         $datos["Firmante"] = $datos["usuarioid"];
@@ -1302,7 +1302,7 @@ class docvigentes{
 		$dt4 	= new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
 
         $datos["usuarioid"] = $this->seguridad->usuarioid;
         $datos["Firmante"] = $datos["usuarioid"];
@@ -1420,7 +1420,7 @@ class docvigentes{
 	/*//Actualiza firma en BD
 	public function actualizarDocumento(){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		//Actualiza el documento firmado
 		if( $datos['documento'] != '' ){
@@ -1458,7 +1458,7 @@ class docvigentes{
 	/*//Actualiza firma en BD
 	private function actualizarFirma($idDocumento, $firmante, $fechafirma, $documento){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $idDocumento;
 		$datos['RutFirmante'] = $firmante;
 		$datos['FechaFirma'] = $fechafirma;
@@ -1491,7 +1491,7 @@ class docvigentes{
 	/*//Envio Manual al Gestor de firmas 
 	private function envio(){
 	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$dt = new DataTable();
 

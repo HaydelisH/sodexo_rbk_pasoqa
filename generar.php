@@ -737,7 +737,7 @@ class generar
 	public function crearDocumento($datos){
 
 		//Generar Documento nuevo 
-		//$datos = $_REQUEST;
+		//$datos = $_POST;
 		$dt = new DataTable();
 
 		if (!isset($datos['idFirma']))
@@ -883,7 +883,7 @@ class generar
 	//Crear Plantilla completa 
 	public function crearPlantilla($datos){
 
-		/*$datos = $_REQUEST;
+		/*$datos = $_POST;
 		$datos['idDocumento'] = $idDocumento;*/
 		//$datos2 = $datos;
 		$dt = new DataTable();
@@ -1674,7 +1674,7 @@ class generar
 	//------             ULTIMINIO RAMOS GALÁN     ---------------
 	//------            uramos@gmail.com           ---------------
 	//------    10 de junio de 2009. México, D.F.  ---------------
-	//------    PHP Version 4.3.1 o mayores (aunque podría funcionar en versiones anteriores, tendrías que probar)
+	//------    PHP Version o mayores (aunque podría funcionar en versiones anteriores, tendrías que probar)
 
 	{
 	    $xarray = array(0 => "Cero",
@@ -2026,7 +2026,7 @@ class generar
 	//Crear Plantilla completa 
 	public function crearPlantillaCompleta($datos){
 
-		//$datos = $_REQUEST;
+		//$datos = $_POST;
 		//$datos2 = $empleado;
 		//$datos2['idDocumento'] = $idDocumento;
 		$idDocumento = $datos['idDocumento'];
@@ -2591,7 +2591,7 @@ class generar
 	//Validar si el documento tiene variables de un tipo 
 	private function buscarVariables($idDocumento,$html,$busqueda,$datos2,&$resultado){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $idDocumento;
 
 		$dt = new DataTable();
@@ -2847,7 +2847,7 @@ class generar
 	//Buscar subclausulas
 	private function buscarVariablesSubClausulas($idDocumento,$html,&$resultado){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 	
 		$dt = new DataTable();
 		$dt_doc = new DataTable();
@@ -4171,7 +4171,7 @@ class generar
 	public function rl_crearDocumento($datos){
 
 		//Generar Documento nuevo 
-		//$datos = $_REQUEST;
+		//$datos = $_POST;
 		$dt = new DataTable();
 
 		if (!isset($datos['idFirma']))

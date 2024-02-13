@@ -7,13 +7,13 @@
           <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
           <div id="mensajeError"><php:texto id="mensajeError" /></div>      
         </div>
-        <form name="formulario2" id="formulario_usuarios" action="Reportes_Proyectos.php" method="POST" autocomplete="off">
+        <form name="formulario2" id="formulario" action="Reportes_Proyectos.php" method="POST" autocomplete="off">
           <table id="example2" class="table table-bordered table-hover">
 	          <div class="col-md-2 xs-12">
 		          <button class="btn btn-md btn-default btn-block " type="button" style="margin-top: 10px" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"  data-parent="#accordion"><a href="" >Ocultar Filtro</a></button>
 	          </div>
           </table>
-      	<div class="collapse in" id="collapseExample">
+      									
       		<!--<div class="row">-->
       			<div class="col-md-12">
       				<div class="box">
@@ -22,7 +22,7 @@
       						  <div class="form-group">
 							 <php:repeticion id="formulario">
 
-							 <div class="form-row">
+							 <div class="row">
     							  <div class="col-md-4 xs-12">
     							    <label for="RazonSocialGama">Empresa</label>
   								<select class= "form-control" name="RutEmpresa" id="RutEmpresa" >
@@ -32,66 +32,51 @@
 									</php:repeticion>
 									</select>	
     							  </div>
-    							</div>
-        							   
-       							<div class="form-row">
+    						
     							  <div class="col-md-4 xs-12">
     							   <label for="idDocumento">idProyecto</label>
     							    <input type="text" class="form-control" id="idProyecto" name="idProyecto" maxlength="50" value="<php:item id="idProyecto" />" placeholder="idProyecto">
     							  </div>
-					  			</div>
-								
-    							<div class="form-row">
+					  			
     							  <div class="col-md-4 xs-12">
     							    <label for="RazonSocialCliente">Cliente</label>
     							    <input type="text" class="form-control" id="RazonSocialCliente" name="RazonSocialCliente" maxlength="50" value="<php:item id="RazonSocialCliente" />" placeholder="Datos del Cliente">
     							  </div>
     							</div>
 
-    							<div class="form-row">
+    							<div class="row">
     							  <div class="col-md-4 xs-12">
     							    <label for="Ejecutivo">Ejecutivo</label>
     							    <input type="text" class="form-control" id="RutEjecutivo" name="RutEjecutivo" maxlength="50" value="<php:item id="RutEjecutivo" />" placeholder="Datos del Ejecutivo">
     							  </div>
-    							</div>
-
-    							<div class="form-row">
+    							
     							  <div class="col-md-4 xs-12">
     							    <label for="Supervisor">Supervisor</label>
     							    <input type="text" class="form-control" id="RutSupervisor" name="RutSupervisor" maxlength="50" value="<php:item id="RutSupervisor" />" placeholder="Datos del Supervisor">
     							  </div>
-    							</div>
- 						  		
-  						  		<div class="form-row">
+    							
   						  		    <div class="col-md-4 xs-12">
-						              <label for="">Fechas de Inicio</label>
-						               <div class="form-group">
-						                <div class="input-group date">
-						                  <div class="input-group-addon">
-						                    <i class="fa fa-calendar"></i>
-						                  </div>
-						                  <input type="datetime" style="background-color: white;" class="form-control pull-right" id="fechaInicio" name="fechaInicio" placeholder="Fecha de inicio" value="<php:item id="fechaInicio"/>"  />
-						                </div>
+						              <label for="">	s de Inicio</label>
+						              <div class="input-group mb-3 date">
+										<div class="input-group-prepend date"><span class="input-group-text" style="padding-bottom: 12px;padding-top: 12px;"><i class="fa fa-calendar"></i></span></div>
+						                  <input type="datetime" style="background-color: white;" class="form-control pull-right" id="	Inicio" name="	Inicio" placeholder="	 de inicio" value="<php:item id="	Inicio"/>"  />
+						             
 						              </div>
 						            </div>
       						  	</div>
 
-  						  		<div class="form-row">
+  						  		<div class="row">
   						  		    <div class="col-md-4 xs-12">
-						              <label for="">Fecha de Culminaci&oacute;n</label>
-						             <div class="form-group">
-						                <div class="input-group date">
-						                  <div class="input-group-addon">
-						                    <i class="fa fa-calendar"></i>
-						                  </div>
-						                  <input type="datetime" class="form-control pull-right"  style="background-color: white;"id="fechaFin" name="fechaFin" placeholder="Fecha de culminacion" value="<php:item id="fechaFin"/>"/>
-						                </div>
+						              <label for="">	 de Culminaci&oacute;n</label>
+									  <div class="input-group mb-3 date">
+										<div class="input-group-prepend date"><span class="input-group-text" style="padding-bottom: 12px;padding-top: 12px;"><i class="fa fa-calendar"></i></span></div>
+						                  <input type="datetime" class="form-control pull-right"  style="background-color: white;"id="	Fin" name="	Fin" placeholder="	 de culminacion" value="<php:item id="	Fin"/>"/>
+						              
 						              </div>
 						            </div>
-  						  		</div>
-
+  						  		
       						 	<!--Tipo de subida-->
-    							<!--<div class="form-row">
+    							<!--<div class="row">
     							  <div class="col-md-4 xs-12">
     							    <label for="Nombre">Tipo de Generaci&oacute;n</label>	
     							 
@@ -104,7 +89,7 @@
     							  </div>
     							</div>-->
 									
-				      		        <div class="form-row">
+				      		       
 				            			<div class="col-md-2 xs-12 pull-right"  style="margin-top: 20px;">
 				            				<input type="hidden" name="accion" value="BUSCAR_P" />
 				            				<button class="btn btn-md btn-primary btn-block"  name="accion2" type="submit" value="BUSCAR_P">Buscar</button>
@@ -117,7 +102,8 @@
             </div> <!-- <div class="col-md-12">-->
           <!--</div> <!--<div class="row"> -->
       	</div> <!-- <div class="collapse" id="collapseExample"> -->
-      </form>
+        <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
        
        
         <!--Tabla-->	  
@@ -129,8 +115,8 @@
 						<th style="text-align: center;" data-campo="Proyecto">Proyecto</th>
 						<th style="text-align: center;" data-campo="RutCliente">Rut Cliente</th>
 						<th style="text-align: center;" data-campo="Cliente">Cliente</th>
-						<th style="text-align: center;" data-campo="Fecha de Arriendo">Fecha de Arriendo</th>
-						<th style="text-align: center;" data-campo="Fecha de Culminacion">Fecha de Culminaci&oacute;n</th>
+						<th style="text-align: center;" data-campo="	 de Arriendo">	 de Arriendo</th>
+						<th style="text-align: center;" data-campo="	 de Culminacion">	 de Culminaci&oacute;n</th>
 						<th style="text-align: center;" data-campo="Ejecutivo">Ejecutivo</th>
 						<th style="text-align: center;" data-campo="Supervisor">Supervisor</th>
 					</tr>
@@ -142,8 +128,8 @@
 					<td style="text-align: center;" data-campo="idProyecto"><php:item id="idProyecto" /></td>
 					<td style="text-align: center;" data-campo="RutEmpresa"><php:item id="RutEmpresa" /></td>
 					<td style="text-align: center;" data-campo="NombreCliente"><php:item id="NombreCliente" /></td>
-					<td style="text-align: center;" data-campo="FechaInicio_Arriendo"><php:item id="FechaInicio_Arriendo" /></td>
-					<td style="text-align: center;" data-campo="FechaFinal_Arriendo"><php:item id="FechaFinal_Arriendo" /></td>
+					<td style="text-align: center;" data-campo="	Inicio_Arriendo"><php:item id="	Inicio_Arriendo" /></td>
+					<td style="text-align: center;" data-campo="	Final_Arriendo"><php:item id="	Final_Arriendo" /></td>
 					<td style="text-align: center;"  data-campo="Ejecutivo"><php:item id="NombreEjecutivo" /> <php:item id="AppaternoEjecutivo" /> <php:item id="ApmaternoEjecutivo" /></td>
 					<td style="text-align: center;"  data-campo="Supervisor"><php:item id="NombreSupervisor" /> <php:item id="AppaternoSupervisor" /> <php:item id="ApmaternoSupervisor" /></td>
 				  </tr>
@@ -152,23 +138,23 @@
 				
 				<th colspan=10 class="tabla_abajo">
 					<div class="col-md-12" style="font-weight: normal;">
-                     	<php:item id="pagina_actual" /> de <php:item id="pagina_ultimo" /> - Total <php:item id="total_registros" /> Registros
+                     	<php:item id="pagina_actual" /> de <php:item id='pagina_ultimo' /> - Total <php:item id="total_registros" /> Registros
                   	</div>
 				  <div class="col-xs-offset-5"> 
 					<nav aria-label="nav1">
 					  <ul class="pagination justify-content-center" style="margin-top: 0px; margin-bottom: 0px;">
 						<li class="page-item ">
-						  <a id="pagina_primera" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_primera" />);" ><span><i class="fa fa-angle-double-left"></i></span></a>
+						  <a id="pagina_primera" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id='pagina_primera' />);" ><span><i class="fa fa-angle-double-left"></i></span></a>
 						</li>
 						<li class="page-item ">
-						  <a id="pagina_anterior" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_anterior" />);" ><span ><i class="fa fa-angle-left"></i></span></a>
+						  <a id="pagina_anterior" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id='pagina_anterior' />);" ><span ><i class="fa fa-angle-left"></i></span></a>
 						</li>                  
-						<li class="page-item active"><a class="page-link1" href="#"><php:item id="pagina_actual" /></a></li>                              
+						<li class="page-item active"><a class="page-link" href="#"><php:item id="pagina_actual" /></a></li>                              
 						<li class="page-item">
-						  <a id="pagina_siguente" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_siguente" />);" ><span><i class="fa fa-angle-right"></i></span></a>
+						  <a id="pagina_siguente" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id='pagina_siguente' />);" ><span><i class="fa fa-angle-right"></i></span></a>
 						</li>
 					  <li class="page-item">
-						<a id="pagina_ultimo" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_ultimo" />);" ><span><i class="fa fa-angle-double-right"></i></span></a>
+						<a id="pagina_ultimo" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id='pagina_ultimo' />);" ><span><i class="fa fa-angle-double-right"></i></span></a>
 					  </li>                                                     
 					  </ul>
 					</nav>
@@ -182,10 +168,11 @@
 							<input type="hidden" name="RazonSocialCliente"       value="<php:item id="RazonSocialCliente" />" >
 							<input type="hidden" name="RutEjecutivo" id="RutEjecutivo" value='<php:item id="RutEjecutivo" />'>
 							<input type="hidden" name="RutSupervisor" id="RutSupervisor" value='<php:item id="RutSupervisor" />'>
-						  	<input type="hidden" name="fechaInicio" id="fechaInicio" value="<php:item id="fechaInicio" />">
-						  	<input type="hidden" name="fechaFin" id="fechaFin" value="<php:item id="fechaFin" />">						
+						  	<input type="hidden" name="	Inicio" id="	Inicio" value="<php:item id="	Inicio" />">
+						  	<input type="hidden" name="	Fin" id="	Fin" value="<php:item id="	Fin" />">						
 							<button type="submit" name="accion" id="accion" value="DESCARGAR" class="form-control btn btn-md btn-primary"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Descargar</button>
-						</form>
+						  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 					</div>
 				 </th>
 				<form name="paginado" id="paginado" action="Reportes_Proyectos.php" method="POST" >
@@ -200,9 +187,10 @@
 					<input type="hidden" name="RazonSocialCliente"       value="<php:item id="RazonSocialCliente" />" >
 					<input type="hidden" name="RutEjecutivo" id="RutEjecutivo" value='<php:item id="RutEjecutivo" />'>
 					<input type="hidden" name="RutSupervisor" id="RutSupervisor" value='<php:item id="RutSupervisor" />'>
-				  	<input type="hidden" name="fechaInicio" id="fechaInicio" value="<php:item id="fechaInicio" />">
-				  	<input type="hidden" name="fechaFin" id="fechaFin" value="<php:item id="fechaFin" />">						
-				</form>
+				  	<input type="hidden" name="	Inicio" id="	Inicio" value="<php:item id="	Inicio" />">
+				  	<input type="hidden" name="	Fin" id="	Fin" value="<php:item id="	Fin" />">						
+				  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 			</table>
 			
 		</div>
@@ -213,24 +201,3 @@
   </div>
 </div> 
 </section>
-   
-<!--Calendario-->
-<script>
-	
-  $('#fechaInicio').datepicker({
-    language: "es",
-    orientation: "bottom",
-    autoclose: true,
-    todayHighlight: true,
-    format: 'dd-mm-yyyy'
-  });
-
-  $('#fechaFin').datepicker({
-    language: "es",
-    orientation: "bottom",
-    autoclose: true,
-    todayHighlight: true,
-    format: 'dd-mm-yyyy'
-  });
-
-</script>

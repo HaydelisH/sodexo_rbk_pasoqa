@@ -7,7 +7,8 @@
            <form role="form" name="formulario2" id="formulario2" action="Plantillas.php" method="POST" >
               <input type="hidden" name="RutEmpresa" value='<php:item id="RutEmpresa"/>'/>
               <button type="submit" name="accion" value="BUSCAR" class="btn btn-default"/><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
-          </form>
+            <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
         </div>
       <!-- /.box-header -->
       <div class="box-body">
@@ -16,9 +17,9 @@
         <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
         <div id="mensajeAd"><php:texto id="mensajeAd" /></div> 
 
-        <form role="form" name="formulario" id="formulario_principal" action="Plantillas.php" method="POST" autocomplete="off">
+        <form role="form" name="formulario" id="formulario" action="Plantillas.php" method="POST" autocomplete="off">
          
-         <div class="form-row">
+         <div class="row">
            <div class="col-md-6">
               <label for="Titulo" >C&oacute;digo Plantilla</label>
               <!--idPlantilla-->
@@ -26,7 +27,7 @@
                     
            </div>
          </div>
-          <div class="form-row">            
+          <div class="row">            
               <!--Categorias-->
               <div class="col-md-6" style="padding-bottom: 15px;">
                
@@ -44,7 +45,7 @@
             <!--Fin del row-->
             </div>
              
-             <div class="form-row">
+             <div class="row">
               <!--Tipo de Documento-->
               <div class="col-md-6" style="padding-bottom: 15px;">
                   <label for="TipoDeDocumento" >Tipo de Documento</label>
@@ -77,41 +78,50 @@
         
            
             <!--Titulo-->
-            <div class="form-row">
+            <div class="row">
               <div class="col-md-12">
                 <label for="Titulo" >T&iacute;tulo</label>
                  <textarea id="TextoTxt" name="Titulo_Pl" rows="5" cols="80" disabled><php:item id="Titulo_Pl" /></textarea>
               </div>
             </div> 
             <!--Descripcion-->
-            <div class="form-row">
+            <div class="row">
               <div class="col-md-12">
                 <label for="Descripcion">Descripci&oacute;n</label>
                 <input type="text" class="form-control" id="Descripcion_Pl" name="Descripcion_Pl" value="<php:item id="Descripcion_Pl" />" placeholder="Descripcion" disabled>
               </div>
             </div>
-                                       
-         
-          <div class="form-row"> 
-            <!--Datos ocultos--> 
-           
-            <input type="hidden" name="accion" value="MODIFICAR" />
-            <!--Boton de Clusulas-->
-            <div class="col-md-2 xs-12">
-              <button class="btn btn-md btn-default btn-block" type="submit" style="margin-top: 10px" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" name="accion2" value="CLAUSULAS" disabled=""><a href="">Clausulas</a></button>
+                        
+        <div class="row justify-content-between">
+          <!-- Datos ocultos -->
+          <input type="hidden" name="accion" value="MODIFICAR" />
+      
+          <!-- BotÃ³n de Clausulas -->
+          <div class="col-md-2 xs-12 d-grid gap-2">
+              <button class="btn btn-md btn-default btn-block btnFirmantes_e" type="button" style="margin-top: 10px" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" name="accion2" value="CLAUSULAS">
+                 Clausulas
+              </button>
+          </div>
+      
+          <!-- Contenedor para los botones de Previsualizar y Guardar -->
+          <div class="col-md-4 xs-12 d-flex justify-content-end">
+      
+              <!-- Boton para Modificar (Guardar) -->
+              <div class="col-md-5 xs-12 d-grid gap-2">
+                <input type="hidden" name="accion2" value="APROBAR" />
+                <button class="btn btn-md btn-primary btn-block APROBAR_PFA" type="button" style="margin-top: 10px" id="APROBAR" name="accion2" value="APROBAR"/>Aprobar</button>
+              </div>
+
+              <!-- Boton de Generar (Previsualizar) -->
+              <div class="col-md-5 xs-12 d-grid gap-2">
+                <button class="btn btn-md btn-success btn-block" type="submit" style="margin-top: 10px" id="GENERAR" name="accion" value="GENERAR">Previsualizar</button>
             </div>
-            <!--Boton de Generar-->
-            <div class="col-md-2 xs-12 pull-right">
-              <button class="btn btn-md btn-success btn-block" type="submit" style="margin-top: 10px" id="GENERAR" name="accion" value="GENERAR">Previsualizar</button>
-            </div>
-            <!--Boton para Modificar-->
-            <div class="col-md-2 xs-12 pull-right">
-               <input type="hidden" name="accion2" value="APROBAR" />
-               <button class="btn btn-md btn-primary btn-block" type="button" style="margin-top: 10px" id="APROBAR" name="accion2" value="APROBAR"/>Aprobar</button>
-            </div>           
-          </div> 
+          </div>
+
+      </div>
                  
-        </form> 
+          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form> 
       </div>
     </div>
   </div>
@@ -133,7 +143,8 @@
                   <input type="hidden" id="idPlantilla" name="idPlantilla" value="<php:texto id="idPlantilla"/>"/>
                   <!--Boton de Agregar Clausulas-->
                   <button class="btn btn-md btn-default" style="margin-top: 10px" type="submit" name="accion" id="AGREGAR_CLAUSULA" value="AGREGAR_CLAUSULA"><a><i class="fa fa-plus" aria-hidden="true"></i>Agregar Clausula</a></button>
-                </form>
+                  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
               </div>
               <!-- /.box-header -->
               <div class="box-body">
@@ -174,76 +185,6 @@
 </php:repeticion>
 </section>
              
-
-
-<!--Tomar datos con ajax y reasigna datos de un selec a un input hidden-->
-<script>
-
-  $(document).ready(function(){
-
-    if( $("#mensajeAd").html().length > 0 ){
-        $("#mensajeAd").addClass("callout callout-warning");
-        $("#GENERAR").attr("disabled", true);
-    }
-    else{
-        $("#mensajeAd").removeClass("callout callout-warning");
-        $("#GENERAR").attr("disabled", false);
-    }
-    if( $("#mensajeOK").html().length > 1 ){
-      $("#APROBAR").attr("disabled",true);
-    }
-
-  });
-
-  $("#APROBAR").click(function(){
-
-    //Consultar si esta Plantilla existe para mas de una empresa 
-    var idPlantilla = $("#idPlantilla").val();
-    var url = "Plantillas_ajax3.php?idPlantilla=" + idPlantilla;
-
-    // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-    if( window.XMLHttpRequest )
-      ajax = new XMLHttpRequest(); // No Internet Explorer
-    else
-      ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-   
-    // Almacenamos en el control al funcion que se invocara cuando la peticion
-    // cambie de estado 
-    ajax.onreadystatechange = funcionCallback;
-
-    // Enviamos la peticion
-    ajax.open( "GET", url, true );
-    ajax.send( "" );
-  });
-
-  var ajax;
-  var salida;
-   
-  function funcionCallback()
-  {
-    // Comprobamos si la peticion se ha completado (estado 4)
-    if( ajax.readyState == 4 )
-    {
-      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-      if( ajax.status == 200 )
-      {
-        // Escribimos el resultado en la pagina HTML mediante DHTML
-        salida = ajax.responseText;
-
-        if( salida == '1' ){
-          var respuesta = confirm("Esta Plantilla esta asociada a más de una Empresa, desea continuar ?");
-
-          if( respuesta ){
-            $("#formulario_principal").submit();
-          }
-        }else{
-           $("#formulario_principal").submit();
-        }
-      }
-    }
-  }
-
-</script>
 
 
 

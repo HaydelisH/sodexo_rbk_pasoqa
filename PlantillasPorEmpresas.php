@@ -63,10 +63,10 @@ class PlantillasPorEmpresas {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -97,7 +97,7 @@ class PlantillasPorEmpresas {
 			// y nos vamos
 			return;
 		}
-        //print_r($_REQUEST);
+        //print_r($_POST);
 		// creamos la seguridad
 		$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		// si no funciona hay que logearse
@@ -132,7 +132,7 @@ class PlantillasPorEmpresas {
 		include("includes/opciones_menu.php");
 
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -144,7 +144,7 @@ class PlantillasPorEmpresas {
 	
 		
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica siempre va
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -167,7 +167,7 @@ class PlantillasPorEmpresas {
 	//Accion del boton agregar un nuevo registro 
 	private function agregar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		// si hubo algun evento
 		if (isset($datos["accion2"]))
@@ -253,7 +253,7 @@ class PlantillasPorEmpresas {
 	private function plantillas()
 	{	
 		
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$dt = new DataTable();
 		
 		$this->empresasBD->obtener($datos,$dt);		
@@ -295,7 +295,7 @@ class PlantillasPorEmpresas {
 	private function eliminar()
 	{
 		// se envia a eliminar a la tabla con los datos del formulario
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		$this->PlantillasBD->eliminarPlantillaEmpresa($datos,$dt);
 		$this->mensajeError .= $this->PlantillasBD->mensajeError;

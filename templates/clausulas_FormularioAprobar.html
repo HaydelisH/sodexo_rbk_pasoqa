@@ -8,7 +8,8 @@
          <form role="form" name="formulario2" id="formulario2" action="Clausulas.php" method="POST" >
               <input type="hidden" name="RutEmpresa" value='<php:item id="RutEmpresa"/>'/>
               <button type="submit" name="accion" value="BUSCAR" class="btn btn-default"/><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
-          </form>
+            <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
         </div>
       <!-- /.box-header -->
       <div class="box-body">
@@ -20,16 +21,16 @@
        
             <!--Datos referenciales-->
             <!--idClausula-->
-             <div class="form-row">
-              <div class="col-md-6">
+             <div class="row">
+              <div class="col-md-12">
                 <label for="Descripcion">C&oacute;digo Clausula</label>
                 <input type="text" class="form-control" id="idClausula" name="idClausula" value="<php:item id="idClausula" />" placeholder="Descripcion" readonly />
               </div>
             </div>
-              <div class="form-row">
-              
+
+              <div class="row">              
                 <!--Categorias-->
-                <div class="col-md-6" style="padding-bottom: 15px;">
+                <div class="col-md-12" style="padding-bottom: 15px;">
                   <label for="Categoria" >Categoria</label>
                   <!--Select de Empresas disponibles-->
                   <select class= "form-control" name="idCategoria" id="idCategoria" disabled>
@@ -37,47 +38,50 @@
                     <php:repeticion id="Categorias">
                       <option value="<php:item id="idCategoria" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idCategoria" /><php:argumento idvalor="idCategoria" /></php:funcion>><php:item id="Titulo" /></option>
                     </php:repeticion>
-                  </select>
-				  
-				   <input type="hidden" name="idCategoria" id="idCategoria" value="<php:item id="idCategoria" />" />
+                  </select>				  
+				            <input type="hidden" name="idCategoria" id="idCategoria" value="<php:item id="idCategoria" />" />
                 </div>
               </div>
 
             <!--Campos estan fuera del formulario-->
     
-            <!--Titulo-->
-            <div class="form-row">
-              <div class="col-md-12">
-                <label for="Titulo" >T&iacute;tulo</label>
-                <input type="text" class="form-control" id="Titulo_Cl" name="Titulo_Cl" value="<php:item id="Titulo_Cl" />" autofocus placeholder="Titulo" disabled>
-              </div>
-            </div> 
-            <!--Descripcion-->
-            <div class="form-row">
-              <div class="col-md-12">
-                <label for="Descripcion">Descripci&oacute;n</label>
-                <input type="text" class="form-control" id="Descripcion_Cl" name="Descripcion_Cl" value="<php:item id="Descripcion_Cl" />" placeholder="Descripcion" disabled>
-              </div>
-            </div>
+                <!--Titulo-->
+                <div class="row">
+                  <div class="col-md-12">
+                    <label for="Titulo" >T&iacute;tulo</label>
+                    <input type="text" class="form-control" id="Titulo_Cl" name="Titulo_Cl" value="<php:item id="Titulo_Cl" />" autofocus placeholder="Titulo" disabled>
+                  </div>
+                </div> 
+                
+                <!--Descripcion-->
+                <div class="row">
+                  <div class="col-md-12">
+                    <label for="Descripcion">Descripci&oacute;n</label>
+                    <input type="text" class="form-control" id="Descripcion_Cl" name="Descripcion_Cl" value="<php:item id="Descripcion_Cl" />" placeholder="Descripcion" disabled>
+                  </div>
+                </div>
 
-            <!--Editor de texto--> 
-           <div class="form-row">
-             <div class="col-md-12">
-                <label for="texto">Texto de Clausula</label>
-                 <textarea id="TextoTxt_Clausulas" name="Texto" rows="10" cols="80" disabled=""><php:item id="Texto"/></textarea>
-             </div>
-           </div>                     
-        
-          <div class="form-row">  
-            <div class="col-md-2 xs-12 pull-right">
-               
-               <input type="hidden" name="accion" value="APROBAR" />
-               <button class="btn btn-md btn-info btn-block" type="button" style="margin-top: 10px" name="accion2" value="APROBAR" id="APROBAR" onclick="javascript:return validarFormulario(this);"/>Aprobar</button>
+                <!--Editor de texto--> 
+              <div class="row">
+                <div class="col-md-12">
+                    <label for="texto">Texto de Clausula</label>
+                    <textarea id="TextoTxt_Clausulas" name="Texto" rows="10" cols="80" disabled=""><php:item id="Texto"/></textarea>
+                </div>
+              </div>                     
+                      
+              <div class="row">  
+                <div class="col-md-12 xs-12 d-flex justify-content-end p-0">
+                  <div class="col-md-2 d-grid gap-2 p-0">
+                    <input type="hidden" name="accion" value="APROBAR" />
+                    <button class="btn btn-md btn-info btn-block APROBAR_CLA" type="button" style="margin-top: 10px" name="accion2" value="APROBAR" id="APROBAR" onclick="javascript:return validarFormulario(this);"/>Aprobar</button>
+    
+                    <button class="btn btn-md btn-info btn-block" type="submit" style="display:none" name="accion2" value="APROBAR" id="APROBAR_1"/>Aprobar</button>
+                  </div>
+                </div>
+              </div> 
 
-               <button class="btn btn-md btn-info btn-block" type="submit" style="display:none" name="accion2" value="APROBAR" id="APROBAR_1"/>Aprobar</button>
-            </div>
-          </div>      
-        </form> 
+              <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+            </form> 
       </div>
     </php:repeticion>
   </div>
@@ -85,56 +89,3 @@
 </div>
 </div>
 </section>
-
-<script>
-
-   $("#APROBAR").click(function(){
-
-    //Consultar si esta Plantilla existe para mas de una empresa 
-    var idClausula = $("#idClausula").val();
-    var url = "Clausulas_ajax1.php?idClausula=" + idClausula;
-
-    // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-    if( window.XMLHttpRequest )
-      ajax = new XMLHttpRequest(); // No Internet Explorer
-    else
-      ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-   
-    // Almacenamos en el control al funcion que se invocara cuando la peticion
-    // cambie de estado 
-    ajax.onreadystatechange = funcionCallback;
-
-    // Enviamos la peticion
-    ajax.open( "GET", url, true );
-    ajax.send( "" );
-  });
-
-  var ajax;
-  var salida;
-   
-  function funcionCallback()
-  {
-    // Comprobamos si la peticion se ha completado (estado 4)
-    if( ajax.readyState == 4 )
-    {
-      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-      if( ajax.status == 200 )
-      {
-        // Escribimos el resultado en la pagina HTML mediante DHTML
-        salida = ajax.responseText;
-       
-        if( salida > 1 ){
-          var respuesta = confirm("Esta Clausula esta asociada a " + salida + " Plantilla, desea continuar ?");
-          
-          if( respuesta )
-            $("#APROBAR_1").click();
-          else
-            return respuesta;
-        }else{
-           $("#APROBAR_1").click();
-        }
-
-      }
-    }
-  }
-</script>

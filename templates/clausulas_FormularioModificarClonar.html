@@ -8,7 +8,8 @@
          <form role="form" name="formulario2" id="formulario2" action="Clausulas.php" method="POST" >
               <input type="hidden" name="RutEmpresa" value='<php:texto id="RutEmpresa"/>'/>
               <button type="submit" name="accion" value="BUSCAR" class="btn btn-default"/><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
-          </form>
+            <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
         </div>
       <!-- /.box-header -->
       <div class="box-body">
@@ -18,18 +19,18 @@
       <form role="form" name="formulario" id="formulario" action="Clausulas.php" method="POST" autocomplete="off">
         
          <!--idClausula-->
-             <div class="form-row">
-              <div class="col-md-6">
+             <div class="row">
+              <div class="col-md-12">
                 <label for="Descripcion">C&oacute;digo Clausula</label>
                 <input type="text" class="form-control" id="idClausula" name="idClausula" value="<php:item id="idClausula" />" placeholder="Descripcion" readonly />
               </div>
             </div>
 
               <!--Datos referenciales-->
-              <div class="form-row">
+              <div class="row">
 
                 <!--Categorias-->
-                <div class="col-md-6" style="padding-bottom: 15px;">
+                <div class="col-md-12" style="padding-bottom: 15px;">
                   <label for="Categoria" >Categoria</label>
                   <!--Select de Empresas disponibles-->
                   <select class= "form-control" name="idCategoria" id="idCategoria" disabled>
@@ -44,34 +45,39 @@
               </div>
 
            <!--Titulo-->
-            <div class="form-row">
+            <div class="row">
               <div class="col-md-12">
                 <label for="Titulo" >T&iacute;tulo</label>
                 <input type="text" class="form-control" id="Titulo_Cl" name="Titulo_Cl" value="<php:item id="Titulo_Cl" />" autofocus placeholder="Titulo">
               </div>
             </div> 
             <!--Descripcion-->
-            <div class="form-row">
+            <div class="row">
               <div class="col-md-12">
                 <label for="Descripcion">Descripci&oacute;n</label>
                 <input type="text" class="form-control" id="Descripcion_Cl" name="Descripcion_Cl" value="<php:item id="Descripcion_Cl" />" placeholder="Descripcion" >
               </div>
             </div>
             <!--Editor de texto--> 
-           <div class="form-row">
+           <div class="row">
              <div class="col-md-12">
                 <label for="texto">Texto de Clausula</label>
                  <textarea id="TextoTxt_Clausulas" name="Texto" rows="10" cols="80" ><php:item id="Texto"/></textarea>
              </div>
            </div>                      
           </php:repeticion>  
-          <div class="form-row">  
-            <div class="col-md-2 xs-12 pull-right">
-               <input type="hidden" name="accion" value="MODIFICAR" />
-               <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="MODIFICAR" onclick="javascript:return validarFormulario(this);"/>Guardar</button>
+          
+
+          <div class="row">  
+            <div class="col-md-12 xs-12 d-flex justify-content-end p-0">
+              <div class="col-md-2 d-grid gap-2 p-0">
+                <input type="hidden" name="accion" value="MODIFICAR" />
+                <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="MODIFICAR" onclick="javascript:return validarFormulario(this);"/>Guardar</button>
+            
             </div>
-          </div>    
-        </form> 
+          </div> 
+          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form> 
       </div>
       </div>
     <!-- /.box -->
@@ -79,10 +85,3 @@
   </div>
   <!-- /.col -->
   </div>
-
-  <script>
-    $("#Categoria").change(function(){
-      $("#idCategoria-1").val($("#Categoria").val());
-    });
-
-  </script>

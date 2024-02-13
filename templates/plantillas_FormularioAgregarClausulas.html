@@ -9,7 +9,8 @@
           <form role="form" name="formulario" id="formulario" action="Plantillas.php" method="POST">
             <input type="hidden" id="idPlantilla" name="idPlantilla" value="<php:item id="idPlantilla" />" />
             <button type="submit" class="btn btn-default" name="accion" value="MODIFICAR" ><a><i class="fa fa-arrow-left" aria-hidden="true"></i></a> Volver</button>
-          </form>
+            <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
@@ -35,7 +36,7 @@
                             <input type="hidden" id="idPlantilla" name="idPlantilla" value="<php:item id="idPlantilla"/>"/>
                             <input type="hidden" id="idClausula_<php:filamenos />" name="idClausula" value="<php:item id="idClausula"/>"/>
                             <input type="hidden" id="aprob_<php:filamenos />" value='<php:item id="aprob"/>' />
-                            <button type="button" style="background-color: transparent;" class="btn" id="boton_<php:filamenos />" onclick="mostrar('<php:filamenos />');" ><i class="fa fa-plus" aria-hidden="true"></i></button>
+                            <button type="button" style="background-color: transparent;" class="btn" id="boton_<php:filamenos />" onclick="mostrar_PFAC('<php:filamenos />');" ><i class="fa fa-plus" aria-hidden="true"></i></button>
                             <!--  function seleccion(fila, cat, pla, cla){-->
                           </div>
                         </td>
@@ -74,7 +75,7 @@
       <div class="modal-header" align="center">
         <h3 class="modal-title" id="ejemplo-titulo"> Opciones de Clausulas </h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true" class="cerrar_modal">&times;</span>
         </button>
       </div>
       <div class="modal-body" id="ejemplo-cuerpo" align="justify">
@@ -102,116 +103,9 @@
         </div>
         <div class="modal-footer">
         <!--Formulario de Agregar Todos los datos de Clausulas--> 
-          <button type="button" href="javascript:;" class="btn btn-default" name="accion3" value="AGREGAR_CLAUSULA" onclick="enviar(); return false;" >Guardar</button>
+          <button type="button" class="btn btn-default" name="accion3" value="AGREGAR_CLAUSULA" onclick="enviar_PFAC(); return false;" >Guardar</button>
       </div>
     </div>
   </div>
 </div>
-
-
-
-<script type="text/javascript">
-
-  $(document).ready(function(){
-    var row = $("#example2 tr").length;
-    var i = 0;
-
-    for( i = 0; i < row ; i++ ){
-      //Si esta pendiente por aprobacion
-     if($("#aprob_"+i).val() == 0 ){
-      //Inhabilitar el boton de agregar
-       $("#boton_"+i).prop('disabled', true);
-       $("#fila_"+i).css("background-color","#f4f4f4");
-     }
-    }
-
-  });
-
-</script>
-
-<!--Script para generar Modal de Encabezado y Titulo-->
-<script>
-  //Variables Globales 
-  var ajax;
-  var i = "";
-
-  //Hace el llamado a funcion ajax externo
-  function funcionCallback()
-  {
-    // Comprobamos si la peticion se ha completado (estado 4)
-    if( ajax.readyState == 4 )
-    {
-      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-      if( ajax.status == 200 )
-      {
-        // Escribimos el resultado en la pagina HTML mediante DHTML
-        //document.getElementById("#divtabla").innerHTML = ajax.responseText; 
-        if (ajax.responseText == 0){
-          //Correcto
-        }
-        else if(aja.responseText == 1){
-          //Error inesperado 
-        }
-      }
-    }
-  }
-  //Envia Datos del Formulario para agregar
-  function enviar(){
-
-    var cat = $("#idCategoria").val();
-    var pla = $("#idPlantilla").val();
-    var cla = $("#idClausula_" + i).val();
-
-    var url = "" ;
-    var enc = "" ;
-    var tit = "" ;
-
-    if( $('#Encabezado_OC').is(':checked')){
-      enc = "1";
-    }   
-    else{
-      enc = "0";
-    }
-    if( $('#Titulo_OC').is(':checked') ){
-      tit = "1";
-    }   
-    else{
-       tit = "0";
-    }
-    //Reasignar valores de los campos a la variable
-    url = "Plantillas_ajax2.php?idCategoria=" + cat + "&idPlantilla=" + pla + "&idClausula=" + cla + "&accion=AGREGAR&accion3=AGREGAR_CLAUSULA &Encabezado=" + enc + "&Titulo=" + tit;
-
-    // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-    if( window.XMLHttpRequest )
-      ajax = new XMLHttpRequest(); // No Internet Explorer
-    else
-      ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-
-    ajax.onreadystatechange = funcionCallback;
-    // Enviamos la peticion
-    ajax.open( "GET", url, true );
-    ajax.send( "" );
-
-    //Ocultar el modal automaticamente 
-    $('#OC').modal('hide');
-
-    // Reiniciar campos de checkbox
-    $('#Titulo_OC').prop("checked",false);
-    $('#Encabezado_OC').prop("checked",false);
-
-    //Reiniciamos la pagina
-    var nuevo = "#fila_" + i ;
-
-    $(nuevo).remove();
-  }
-
-  //Almacena la fila en la que esta y muestra el Modal 
-  function mostrar(fila){
-    i = fila;
-    $("#OC").modal({show:'true'});
-  }
-
-</script>
-
-
 

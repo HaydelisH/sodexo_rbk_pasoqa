@@ -46,7 +46,7 @@ class documentos {
 		$this->contratofirmantesBD->usarConexion($conecc);
 
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		$this->contratofirmantesBD->ObtenerXcontrato($datos,$dt);
 		$this->mensajeError.=$this->contratofirmantesBD->mensajeError;

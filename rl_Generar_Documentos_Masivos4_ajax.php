@@ -48,7 +48,7 @@ class clientes {
 		$this->rl_proveedoresBD->usarConexion($conecc);
 		
 		//Consultar las clientes que se tengan disponibles de ese tipo de contrato y esa empresa
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$dt = new DataTable();
 

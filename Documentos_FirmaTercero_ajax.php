@@ -46,7 +46,7 @@ class documentos {
 		$this->documentosdetBD->usarConexion($conecc);
 
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["personaid"] = $datos["usuarioid"];
 		$salida = '';
 

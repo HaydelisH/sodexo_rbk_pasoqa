@@ -1,0 +1,97 @@
+		
+		<form name="formulario" class="formularioAgregar" id="formulario"  class="form-horizontal" action="usuariosmant.php" method="POST">
+			<php:repeticion id="formulario">
+		
+				
+				
+				<div id="mensajeError"><php:texto id="mensajeError" /></div>
+				<div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+				
+					
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title" >Agregar Usuario</h3>
+				</div><!-- /.box-header -->
+
+					<div class="box-body">
+						<div class="col-md-7">
+							
+							<div class="row">
+							  <label for="tipousuarioid" class="col-sm-4 control-label estilo_label"><strong>Rut</strong></label>
+							  <div class="col-sm-8">
+								<input type="contenedor" class="form-control" id="newusuarioid"  name="newusuarioid" placeholder="" maxlength="10" value="<php:item id="newusuarioid" />" autofocus >
+							  </div>
+							</div>
+
+							<div class="row">
+							  <label for="contenedorid" class="col-sm-4 control-label estilo_label"><strong>Nombre</strong></label>
+							  <div class="col-sm-8">
+								<input type="contenedor" class="form-control" id="nombre" name="nombre" placeholder="" maxlength="50" value="<php:item id="nombre" />">
+							  </div>
+							</div>
+							
+							<div class="row">
+							  <label for="contenedorid" class="col-sm-4 control-label estilo_label"><strong>Apellido Paterno</strong></label>
+							  <div class="col-sm-8">
+								<input type="contenedor" class="form-control" id="appaterno" name="appaterno" placeholder="" maxlength="50" value="<php:item id="appaterno" />">
+							  </div>
+							</div>
+
+							
+							<div class="row">
+							  <label for="contenedorid" class="col-sm-4 control-label estilo_label"><strong>Apellido Materno</strong></label>
+							  <div class="col-sm-8">
+								<input type="contenedor" class="form-control" id="apmaterno" name="apmaterno" placeholder="" maxlength="50" value="<php:item id="apmaterno" />">
+							  </div>
+							</div>
+							
+							<div class="row">
+							  <label for="contenedorid" class="col-sm-4 control-label estilo_label"><strong>Correo Electr&oacute;nico</strong></label>
+							  <div class="col-sm-8">
+								<input type="contenedor" class="form-control" id="correo" name="correo" placeholder="" maxlength="50" value="<php:item id="correo" />">
+							  </div>
+							</div>
+
+							<!--<div class="row">
+							  <label for="contenedorid" class="col-sm-4 control-label estilo_label"><strong>Fono</strong></label>
+							  <div class="col-sm-8">
+								<input type="contenedor" class="form-control" id="fono" name="fono" placeholder="" maxlength="20" value="<php:item id="fono" />">
+							  </div>
+							</div>-->
+
+							<div class="row">
+							  <label for="contenedorid" class="col-sm-4 control-label estilo_label"><strong>Clave</strong></label>
+							  <div class="col-sm-8">
+								<input type="password" class="form-control" id="clave" name="clave" placeholder="" maxlength="20" value="<php:item id="clave" />">
+							  </div>
+							</div>
+							
+							<div class="row">
+								<label for="contenedorid" class="col-sm-4 control-label estilo_label"><strong>Perfil</strong></label>
+								<div class="col-sm-8">
+									<select class= "col-sm-12 form-select" name="tipousuarioid" id="tipousuarioid">
+									<option value="0">(Seleccionar)</option>
+									<php:repeticion id="tiposusuarios">
+										<option value="<php:item id="tipousuarioid" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="tipousuarioid"" /><php:argumento valor="tipousuarioid"" /></php:funcion>><php:item id="nombre" /></option>
+									</php:repeticion>
+									</select>
+								</div>
+							</div>		
+						</div>	
+					</div><!--<div class="box-body">-->
+				</div>
+
+				</php:repeticion>
+	
+		
+			<fieldset class="centrado">
+				<input type="hidden" name="pagina"  value="<php:texto id="pagina" />" />		
+				<input type="hidden" name="nombrex" value="<php:texto id="nombrex" />" />	
+				<input type="hidden" name="accion" value="AGREGAR" />
+				<input class="btn btn-primary btn-sm" type="submit" name="accion2" value="VOLVER" />
+				<input class="btn btn-primary validarFormulario2 btn-sm" type="submit" name="accion2" value="AGREGAR" />
+				<input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+			
+			</fieldset>			
+		  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>

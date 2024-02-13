@@ -1,12 +1,24 @@
 <?php
+function graba_log($info)
+{
+	date_default_timezone_set('America/Santiago');
+	$time = time();
+	$nomarchivo = 'logs\opcion_menu'.@date("Ymd").'.TXT';
+	$ar=fopen($nomarchivo,"a") or
+	die("Problemas en la creacion");
+	fputs($ar,@date("H:i:s",$time)." ".$info);
+	fputs($ar,"\n");
+	fclose($ar);
+}
+ 
 		//el nombre del script php nos servirá como identificador de la opción
 		$this->nroopcion = "";
 		$scriptarr 	= explode ("\\",$_SERVER["SCRIPT_FILENAME"]);
 		//$scriptarr 	= explode ("/",$_SERVER["SCRIPT_FILENAME"]);
-		$this->nroopcion = end($scriptarr);
+		$this->nroopcion = end($scriptarr);		
 		
-		//
-				
+	//
+
 		$this->pagina->agregarDato("usuario_nombre",$this->seguridad->nombre);
 		
 		$nombreperfil =  substr($this->seguridad->nombreperfil, 0, 20);
@@ -21,11 +33,16 @@
 		// mostramos el encabezado
 		$this->pagina->imprimirTemplate('templates/fij_encabezado.html');
 		$this->pagina->imprimirTemplate('templates/fij_perfil.html');
+		$this->pagina->imprimirTemplate('templates/fij_perfil.html21-032-');
 		
 		//para mostrar opciones en el menu
 		$datos["tipousuarioid"]=$this->seguridad->tipousuarioid;
 		$this->opcionesxtipousuarioBD->Listado($datos,$dt1);
 		//var_dump($dt1);
+
+		/* *INI* Parche anti ataque XSS*/
+		$_REQUEST = array_map("ContenedorUtilidades::sanitizacion", $_REQUEST);
+		/* *FIN* Parche anti ataque XSS*/
 
 		// Formularios
 		$this->opcionesxtipousuarioBD->getFormularios($dt11);
@@ -154,6 +171,6 @@
 		$this->pagina->agregarDato("mensajeError","");
 		}
 		//	
-
+	
 			
 ?>

@@ -29,7 +29,8 @@
           <php:texto id="autoFiltroRetorno" />
           <!-- Filtro de busqueda y navegacion -->
   				<button type="submit" class="btn btn-default"><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
-  			</form>
+  			  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
         </div>
       <!-- /.box-header -->
       <div class="box-body">
@@ -39,7 +40,7 @@
 		<div id="mensajeAd"><php:texto id="mensajeAd" /></div> 
 		
         <!--Datos referenciales-->
-        <div class="form-row">
+        <div class="row">
           <!--Empresas-->
         
     
@@ -59,7 +60,8 @@
          
           </php:repeticion>  
          
-        </form> 
+          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form> 
 
       </div>
     <!-- /.box -->
@@ -69,17 +71,3 @@
   </div>
   <!--Tomar datos con ajax y reasigna datos de un selec a un input hidden-->
   
-   
-  <script>
-  
-	$(document).ready(function(){
-		 if( $("#mensajeAd").html().length > 0 ){
-			$("#mensajeAd").addClass("callout callout-warning");
-		}
-		else{
-			$("#mensajeAd").removeClass("callout callout-warning");
-		}
-	});
-  </script>
- 
- 

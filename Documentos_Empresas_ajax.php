@@ -60,7 +60,7 @@ class documentos {
 		$dt = new DataTable();
 		$dt1 = new DataTable();
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["tipousuarioid"]=$this->seguridad->tipousuarioid;
 
 		$doc_1 = array();

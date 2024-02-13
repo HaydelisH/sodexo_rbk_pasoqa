@@ -15,33 +15,32 @@
             <input type="hidden" class="form-control" id="idFeriado" name="idFeriado" value="<php:item id="idFeriado"/>"      />
 
             <!--Campo basico--> 
-                   <!--Fecha-->
-            <div class="form-row">
+                   <!--	-->
+            <div class="row">
               <div class="col-md-12">
-                <label for="Fecha">Fecha</label>
-                  <div class="input-group date">
-                    <div class="input-group-addon">
-                      <i class="fa fa-calendar"></i>
-                    </div>
-                    <input type="text" class="form-control" id="Fecha" name="Fecha"  readonly="readonly" value="<php:item id="Fecha" />" placeholder="Fecha" >
-                  </div>
+                <label for="	">	</label>
+                <div class="input-group mb-3 date">
+                  <div class="input-group-prepend date"><span class="input-group-text" style="padding-bottom: 12px;padding-top: 12px;"><i class="fa fa-calendar"></i></span></div>
+                    <input type="text" class="form-control" id="	" name="	"  readonly="readonly" value="<php:item id="	" />" placeholder="	" >
+                
               </div>
             </div>
-          <div class="form-row">
+          <div class="row">
             <div class="col-md-12">
               <label for="Descripcion">Descripci&oacute;n</label>
               <input type="text" class="form-control" id="Descripcion" name="Descripcion"  maxlength="50" value="<php:item id="Descripcion" />" placeholder="Descripcion" >
             </div>
           </div>
           </php:repeticion> 
-          <div class="form-row">  
-            <div class="col-md-2 xs-12 pull-right">
+          <div class="row d-flex justify-content-end">  
+            <div class="col-md-2 xs-12 d-grid gap-2 ">      
                <input type="hidden" name="accion" value="MODIFICAR" />
               <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="MODIFICAR" onclick="javascript:return validarFormulario(this);"/>Guardar</button>
             </div>
           </div> 
                      
-        </form>  
+          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>  
       </div>
       </div>
     <!-- /.box -->

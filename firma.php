@@ -934,7 +934,7 @@ class firma {
 	//FIRMA DEC
 	public function firmar_pin($idDocumento, $usuarioid){
 		
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["idDocumento"] = $idDocumento;
 		$datos['RutFirmante'] = $usuarioid;
 
@@ -1104,7 +1104,7 @@ class firma {
 	//Firmar RBK
 	public function firmar_rbk($documento, $usuarioid){
 		
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["idDocumento"] = $documento['idDocumento'];
 		$datos['RutFirmante'] = $usuarioid;
 		$datos['operadorid'] = $documento['operadorid'];
@@ -1330,7 +1330,7 @@ class firma {
 	//Actualizar documento de RBK 
 	private function buscarDatosDocumentosRBK($dt){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//Actualizar datos del documento
 		$this->valor_arr = "";
@@ -1393,7 +1393,7 @@ class firma {
 	//Buscar datos del documentos RBK guadado
 	private function buscarDatosDeSession($idDocumento){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $idDocumento;
 
 		$dt = new DataTable();
@@ -1429,7 +1429,7 @@ class firma {
 	//Accion de completar los datos del Firmante 
 	private function cargarFirmante($idDocumento, $RutFirmante){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["idDocumento"] = $idDocumento;
 		$institucion = DEC5_INSTITUCION;
 
@@ -1556,7 +1556,7 @@ class firma {
 	//Cargar un firmante rbk 
 	private function cargarFirmanteSinRol($idDocumento, $RutFirmante){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $idDocumento;
 
 		//Variables para subida del Documento
@@ -1678,7 +1678,7 @@ class firma {
 	//Accion de completar todos los datos para subir el Documento 
 	private function cargarDocumentoSinRoles($idDocumento){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["idDocumento"] = $idDocumento;
 
 		//Variables para subida del Documento
@@ -1784,7 +1784,7 @@ class firma {
 	//Accion de completar todos los datos para subir el Documento 
 	private function cargarDocumentoConRoles_RBK($idDocumento){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["idDocumento"] = $idDocumento;
 
 		//Variables para subida del Documento
@@ -1904,7 +1904,7 @@ class firma {
 	//Accion de completar todos los datos para subir el Documento 
 	private function cargarDocumentoConRoles($idDocumento){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $idDocumento;
 
 		//Variables para subida del Documento
@@ -2007,7 +2007,7 @@ class firma {
 	//Actualiza firma en BD
 	private function actualizarFirma($idDocumento, $firmante, $fechafirma, $documento){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $idDocumento;
 		$datos['RutFirmante'] = $firmante;
 		$datos['FechaFirma'] = $fechafirma;
@@ -2070,7 +2070,7 @@ class firma {
 	//Actualiza Documento en la BD
 	private function actualizaDocumento($idDocumento, $DocCode){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $idDocumento;
 		$datos['DocCode'] = $DocCode;
 
@@ -2197,7 +2197,7 @@ class firma {
 		//si ya tiene una firma devuelve true
 		$dt = new DataTable(); //Numero de Documento
 		$dt1 = new DataTable(); //Firmantes
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $idDocumento;
 
 		//Obtener Datos del Documento
@@ -2267,7 +2267,7 @@ class firma {
 
 	private function envioGestor($idDocumento){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $idDocumento;
 
 		$dt = new DataTable();
@@ -2816,7 +2816,7 @@ class firma {
 
 	public function rl_firmar_rbk($documento, $usuarioid){
 		
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["idDocumento"] = $documento['idDocumento'];
 		$datos['RutFirmante'] = $usuarioid;
 		$datos['operadorid'] = $documento['operadorid'];
@@ -2952,7 +2952,7 @@ class firma {
 	//Accion de completar todos los datos para subir el Documento 
 	private function rl_cargarDocumentoConRoles_RBK($idDocumento){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["idDocumento"] = $idDocumento;
 
 		//Variables para subida del Documento
@@ -3093,7 +3093,7 @@ class firma {
 		//si ya tiene una firma devuelve true
 		$dt = new DataTable(); //Numero de Documento
 		$dt1 = new DataTable(); //Firmantes
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $idDocumento;
 
 		//Obtener Datos del Documento

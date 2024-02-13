@@ -60,10 +60,10 @@ class rl_proveedores {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -124,12 +124,12 @@ class rl_proveedores {
 		$this->firmasBD->usarConexion($conecc);
 		$this->cargosBD->usarConexion($conecc);
 		$this->empresasBD->usarConexion($conecc);
-		//print_r($_REQUEST);
+		//print_r($_POST);
 		//se construye el menu
 		include("includes/opciones_menu.php");
 
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -140,7 +140,7 @@ class rl_proveedores {
 		}
 
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica siempre va
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -172,7 +172,7 @@ class rl_proveedores {
 	//Accion del boton agregar un nuevo registro 
 	private function agregar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 	
 		if (isset($datos["accion2"]))
 		{
@@ -201,7 +201,7 @@ class rl_proveedores {
 			}
 		}
 		
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$formulario[0]=$datos;	
 		
 		$this->pagina->agregarDato("formulario",$formulario);
@@ -220,15 +220,15 @@ class rl_proveedores {
 	private function agregarFirmante()
 	{
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "AGREGAR_R":
 					// enviamos los datos del formulario a guardar
 
-					$datos = $_REQUEST;
+					$datos = $_POST;
 		 
 					$rut_arr 	= explode("-",$datos["RutUsuario"]);
 					$rut_sindv 	= $rut_arr[0];		
@@ -258,7 +258,7 @@ class rl_proveedores {
 			}
 		}
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$dt = new DataTable();
 
 		$formulario[0] = $datos;	
@@ -294,7 +294,7 @@ class rl_proveedores {
 	private function modificar()
 	{	
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$formulario=$datos;
 		// si es que nos enviaron una accion
 		if (isset($datos["accion2"]))
@@ -322,7 +322,7 @@ class rl_proveedores {
 			}
 		}
 		
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		$this->rl_proveedoresBD->obtenerProveedor($datos,$dt);		
 		$this->mensajeError.=$this->rl_proveedoresBD->mensajeError;
@@ -387,13 +387,13 @@ class rl_proveedores {
 	private function modificarFirmante()
 	{
 	// si es que nos enviaron una accion
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "MODIFICAR_R":
 
-					$datos = $_REQUEST;
+					$datos = $_POST;
 				
 					// si apretaron el boton modificar obtenermos los datos desde el formulario
 					if ($this->rl_proveedoresBD->modificarFirmante($datos))
@@ -412,7 +412,7 @@ class rl_proveedores {
 			}
 		}
 
-      	$datos = $_REQUEST;
+      	$datos = $_POST;
 		$dt = new DataTable();
 	
         // aqui se obtienen los datos del Firmante
@@ -450,15 +450,15 @@ class rl_proveedores {
 	private function eliminar()
 	{
 		// se envia a eliminar a la tabla con los datos del formulario
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["TipoEmpresa"] = 1;
 		
  		if ($this->rl_proveedoresBD->eliminar($datos)){
 			// si es que hubiera error lo obtenemos
 			$this->mensajeOK = "El Cliente seleccionado fue eliminado";
 			// si elimino entonces mostrar listado sin ningún filtro, o sea mostrar todo
-			$_REQUEST["pagina"]  = 1;
-			$_REQUEST["nombrex"] = "";
+			$_POST["pagina"]  = 1;
+			$_POST["nombrex"] = "";
 		}
 		
 		$this->mensajeError=$this->rl_proveedoresBD->mensajeError;
@@ -518,7 +518,7 @@ class rl_proveedores {
 
     private function eliminarFirmante()
 	{
-		$this->rl_proveedoresBD->eliminarFirmante($_REQUEST);
+		$this->rl_proveedoresBD->eliminarFirmante($_POST);
 		$this->mensajeError=$this->rl_proveedoresBD->mensajeError;
 		
 		if($this->mensajeError == '' ){
@@ -537,7 +537,7 @@ class rl_proveedores {
 		$dt = new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
 
 		if (!isset($datos["pagina"])) $datos["pagina"]="1";
 		if ($datos["pagina"]==1) $datos["pagina_anterior"]="1"; 

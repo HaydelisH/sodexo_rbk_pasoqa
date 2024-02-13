@@ -15,7 +15,8 @@
 							<input type="hidden" name="RutEmpresa" id="RutEmpresa" value="<php:item id='RutEmpresa'/>"/>
 							<input type="hidden" name="lugarpagoid" id="lugarpagoid" value="<php:item id='lugarpagoid'/>" />
 							<input type="hidden" name="idCentroCosto" id="idCentroCosto" value="<php:item id='idCentroCosto'/>"/>
-						</form>
+						  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
@@ -24,7 +25,7 @@
 						<div id="mensajeError"><php:texto id="mensajeError" /></div>
 					<!--Datos referenciales-->
 					<form role="form" name="formulario" id="formulario" action="rl_Documentos_Vigentes.php" method="POST" enctype="multipart/form-data">
-						<div class="form-row">
+						<div class="row">
 							<div class="col-md-6" style="padding-bottom: 15px;">
 								<h3>Datos del documento</h3>
 									<table class="table table-striped">
@@ -88,7 +89,7 @@
 										</tbody>
 									</table>
 									<input type="hidden" name="idDocumento" id="idDocumento" value="<php:item id="idDocumento" />" />
-									<div class="form-row">  
+									<div class="row">  
 									<php:repeticion id="ver">
 									<div class="col-md-4 xs-12">
 										<input type="hidden" name="idDocumento_vd" id="idDocumento_vd"/>
@@ -192,75 +193,10 @@
 							<input type="hidden" name="idCentroCosto" id="idCentroCosto" value="<php:item id='idCentroCosto'/>"/>
 						</div>
 						</php:repeticion>
-					</form>
+					  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
-<script>
-	$(document).ready(function(){
-		$("#idDocumento_vd").val($("#idDocumento").val());
-		$("#idDocumento_ac").val($("#idDocumento").val());
-		$("#idDocumento_el").val($("#idDocumento").val());
-		$("#idDocumento_ac").val($("#idDocumento").val());
-		$("#idDocumento_eg").val($("#idDocumento").val());											
-		$("#idDocumento_rn").val($("#idDocumento").val());
-		
-		if( $("#ficha").val().length > 0 ){
-			$(".fichaid").show();
-		}
-		else{
-			$(".fichaid").hide();
-		}
-	});
-	function renotificar($RutUsuario){
-		//alert($('#idDocumento').val());
-		var url  = "renotificarDocumentos_ajax.php?idDocumento=" + $('#idDocumento').val() + ($RutUsuario != '' ? "&RutUsuario=" + $RutUsuario : '');
-		// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-		if( window.XMLHttpRequest )
-			ajaxRenotificar = new XMLHttpRequest(); // No Internet Explorer
-		else
-			ajaxRenotificar = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-		// Almacenamos en el control al funcion que se invocara cuando la peticion
-		// cambie de estado 
-		ajaxRenotificar.onreadystatechange = funcionCallback_renotificar;
-		// Enviamos la peticion
-		ajaxRenotificar.open( "GET", url, false );
-		ajaxRenotificar.send( "" );
-	}
-	function funcionCallback_renotificar()
-  	{
-		// Comprobamos si la peticion se ha completado (estado 4)
-		if( ajaxRenotificar.readyState == 4 )
-		{
-			// Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-			if( ajaxRenotificar.status == 200 )
-			{
-				// Escribimos el resultado en la pagina HTML mediante DHTML
-				salida = ajaxRenotificar.responseText;
-				listado = JSON.parse(salida);
-				console.log(listado);
-				if (listado.estado){
-					$("#mensajeOK").addClass("callout callout-success");
-					$("#mensajeOK").html("Las notificaciones se realizaron exitosamente");
-				}
-				else{
-					$("#mensajeError").addClass("callout callout-warning");
-					$("#mensajeError").html("Hubo un error intente mas tarde");
-				}
-				/*
-				num = listado.length;
-				if( num > 0 ){
-					$.each(listado, function( index, value ) {
-						$('#lugarpagoid').append('<option class="fila_lp" value=' + listado[index].lugarpagoid + '>' + listado[index].nombrelugarpago + ' </option>');    
-					});
-					$("#lugarpagoid").attr("disabled", false);
-				}*/
-			}
-		}
-	}
-	/*function renotificarUsuario(RutUsuario){
-		alert(RutUsuario);
-	}*/
-</script>

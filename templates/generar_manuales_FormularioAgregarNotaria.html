@@ -37,7 +37,8 @@
                      <input type="hidden" id="idDocumento_Gama" name="idDocumento_Gama" value="<php:item id="idDocumento_Gama"/>" />
                      <input type="hidden" name="accion" value="AGREGAR"/>
                      <button type="submit" style="background-color: transparent;" class="btn" name="accion2" value="BUSCAR_N"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                  </form>
+                    <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
                   </div>
                 </td>
                 <!--RutEmpresa-->

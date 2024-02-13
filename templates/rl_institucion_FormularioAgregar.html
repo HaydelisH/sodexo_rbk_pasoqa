@@ -12,25 +12,24 @@
                         <php:repeticion id="formulario">
                         <input type="hidden" class="form-control" name="RutEmpresa" value="" /> 
                         <!--Campos basicos-->
-                        <div class="form-row">
+                        <div class="row">
                             <div class="col-md-6">
                                 <label for="RutProveedor">Rut Instituci&oacute;n</label>
                                 <input type="text" class="form-control" id="RutProveedor" name="RutProveedor" maxlength="10" value="<php:item id="RutProveedor" />" placeholder="Rut Instituci&oacute;n" onkeyup="mayus(this);" /> 
                             </div>
-                        </div>
-                        <div class="form-row">
+                        
                             <div class="col-md-6 xs-12">
                                 <label for="NombreProveedor">Raz&oacute;n Social</label>
                                 <input type="text" class="form-control" id="NombreProveedor" name="NombreProveedor" maxlength="50" value="<php:item id="NombreProveedor" />" placeholder="Raz&oacute;n Social" >
                             </div>
                         </div>
-                        <div class="form-row">
+                        <div class="row">
                             <div class="col-md-12 xs-12">
                                <label for="Direccion">Direcci&oacute;n</label>
                                 <input type="text" class="form-control" id="Direccion" name="Direccion" maxlength="50" value="<php:item id="Direccion" />" placeholder="Direccion" >
                             </div>
                         </div>
-                        <div class="form-row">
+                        <div class="row">
                             <div class="col-md-6 xs-12">
                                 <label for="Comuna">Comuna</label>
                                 <input type="text" class="form-control" id="Comuna" name="Comuna" maxlength="50" value="<php:item id="Comuna" />" placeholder="Comuna" >
@@ -40,26 +39,29 @@
                                 <input type="text" class="form-control" id="Ciudad" name="Ciudad" maxlength="50" value="<php:item id="Ciudad" />" placeholder="Ciudad" >
                             </div>
                         </div>
-                        <!-- <div class="form-row">
+                        <!-- <div class="row">
                             <div class="col-md-12 xs-12">
                                 <label for="Personeria">Personeria</label>
                                 <textarea rows="10" cols="80" class="form-control"  name="Personerias"><php:item id="Personerias"/></textarea>
                             </div>
                         </div>
-                        <div class="form-row">  
+                        <div class="row">  
                             <div class="col-md-6 xs-12">
                                 <label for="Correo">Correo</label>
                                 <input type="email" class="form-control" id="Correo" name="Correo" maxlength="50" value="<php:item id="Correo" />" placeholder="Correo" >
                             </div>
                         </div>-->
                         </php:repeticion>  
-                        <div class="form-row">  
-                            <div class="col-md-2 xs-12 pull-right">
-                                <input type="hidden" id="TipoEmpresa" name="TipoEmpresa" value="<php:texto id="TipoEmpresa" />" />
-                                <input type="hidden" name="accion" value="AGREGAR" />
-                                <button class="btn btn-md btn-primary btn-block " type="submit" style="margin-top: 10px" name="accion2" value="AGREGAR" onclick="javascript:return validarFormulario(this) && validaRut(obtenerElemento('RutEmpresa').value );"/>Guardar</button>
-                            </div> <!-- <div class="col-md-2 xs-12">-->
-                        </div>    <!--<div class="form-row">  -->  
+                        <div class="row">  
+                            <div class="col-md-12 xs-12 d-flex justify-content-end p-0">
+                                <div class="col-md-2 d-grid gap-2 p-0">
+                                    <input type="hidden" id="TipoEmpresa" name="TipoEmpresa" value="<php:texto id="TipoEmpresa" />" />
+                                    <input type="hidden" name="accion" value="AGREGAR" />
+                                    <button class="btn btn-md btn-primary btn-block " type="submit" style="margin-top: 10px" name="accion2" value="AGREGAR" onclick="javascript:return validarFormulario(this) && validaRut(obtenerElemento('RutEmpresa').value );"/>Guardar</button>
+                                </div> <!-- <div class="col-md-2 xs-12">-->
+                            </div>
+                        </div>    <!--<div class="row">  -->  
+                      <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
                     </form>  
                 </div> <!--<div class="box-body">-->
             </div> <!--<div class="box-body pad table-responsive">-->

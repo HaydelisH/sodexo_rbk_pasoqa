@@ -2,7 +2,7 @@
  */
 // Depends on rsa.js and jsbn2.js
 
-// Version 1.1: support utf-8 decoding in pkcs1unpad2
+// Version : support utf-8 decoding in pkcs1unpad2
 
 // Undo PKCS#1 (type 2, random) padding and, if valid, return the plaintext
 function pkcs1unpad2(d,n) {

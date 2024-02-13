@@ -47,10 +47,10 @@ class usuarios {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -83,7 +83,7 @@ class usuarios {
 			return;
 		}
 		
-		//print_r($_REQUEST);
+		//print_r($_POST);
 		// creamos la seguridad
 		$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		// si no funciona hay que logearse
@@ -111,9 +111,9 @@ class usuarios {
 		
 		//se construye el menu
 		include("includes/opciones_menu.php");
-		//print_r ($_REQUEST);
+		//print_r ($_POST);
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -124,7 +124,7 @@ class usuarios {
 		}
 
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -148,15 +148,15 @@ class usuarios {
 	{
 		$dt = new DataTable();
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "AGREGAR":
-					//print_r($_REQUEST);
+					//print_r($_POST);
 					// enviamos los datos del formulario a guardar
-					$datos = $_REQUEST;
+					$datos = $_POST;
 					
 					if (isset($datos["rolprivado"])){
 						$datos["rolprivado"]=1; //  lo dejamos en 1, que corresponde si puede ver rol privado
@@ -212,29 +212,29 @@ class usuarios {
 					
 					if ($this->tiposusuariosBD->agregar($datos))
 					{ 	
-						$cantfilas = $_REQUEST["cantfilas"];
+						$cantfilas = $_POST["cantfilas"];
 						for ($filas=0;$filas<$cantfilas;$filas++)
 						{	
 							$consulta=0;$modifica=0;$crea=0;$elimina=0;$opcion=0;
-							if (isset($_REQUEST["consulta".$filas])){
+							if (isset($_POST["consulta".$filas])){
 								$consulta=1;
-								$opcion=$_REQUEST["consulta".$filas];
+								$opcion=$_POST["consulta".$filas];
 							}
-							if (isset($_REQUEST["modifica".$filas])){
+							if (isset($_POST["modifica".$filas])){
 								$modifica=1;
-								$opcion=$_REQUEST["modifica".$filas];
+								$opcion=$_POST["modifica".$filas];
 							}
-							if (isset($_REQUEST["crea".$filas])){
+							if (isset($_POST["crea".$filas])){
 								$crea=1;
-								$opcion=$_REQUEST["crea".$filas];
+								$opcion=$_POST["crea".$filas];
 							}
-							if (isset($_REQUEST["elimina".$filas])){
+							if (isset($_POST["elimina".$filas])){
 								$elimina=1;
-								$opcion=$_REQUEST["elimina".$filas];
+								$opcion=$_POST["elimina".$filas];
 							}
-							if (isset($_REQUEST["ver".$filas])){
+							if (isset($_POST["ver".$filas])){
 								$ver=1;
-								$opcion=$_REQUEST["ver".$filas];
+								$opcion=$_POST["ver".$filas];
 							}		
 							
 							//csb 08-03-2018 rescatamos opciones del perfil que esta logueado para ver si puede dar permisos
@@ -299,9 +299,9 @@ class usuarios {
 							//if ($opcion > 0)
 							if ($opcion != "")
 							{	
-								$datosopciones["holdingid"]=$_REQUEST["holdingid"];
+								$datosopciones["holdingid"]=$_POST["holdingid"];
 								$datosopciones["tipousuarioid"]=$datos2["tipousuarioid"];
-								$datosopciones["nombre"]=$_REQUEST["nombre"];
+								$datosopciones["nombre"]=$_POST["nombre"];
 								$datosopciones["opcionid"]=$opcion;
 								$datosopciones["consulta"]=$consulta;
 								$datosopciones["modifica"]=$modifica;
@@ -316,9 +316,9 @@ class usuarios {
 						if (trim($this->mensajeError) == "")
 						{
 							// si resulta mostramos el listado
-							$this->tiposusuariosBD->obtenerxnombre($_REQUEST,$dt);
+							$this->tiposusuariosBD->obtenerxnombre($_POST,$dt);
 							if($dt->leerFila()){
-								$_REQUEST["tipousuarioid"] = $dt->obtenerItem("tipousuarioid");
+								$_POST["tipousuarioid"] = $dt->obtenerItem("tipousuarioid");
 								if ($this->mensajeError2 == "")
 								{
 									$this->mensajeOK = "Informaci&oacute;n Grabada OK. <br> Ahora puede conceder los permisos en bot&oacute;n Ir a documentos por perfil e Ir a permisos por perfil";
@@ -347,7 +347,7 @@ class usuarios {
 			}
 		}
 		// recuperamos lo que se escribio en el formulario que va llegando si es que hubo
-		$campos[0]=$_REQUEST;
+		$campos[0]=$_POST;
 
 		$datos["tipousuarioid"]=$this->seguridad->tipousuarioid;
 		$this->opcionessistemaBD->ListadoXperfil($datos,$dt);
@@ -357,7 +357,7 @@ class usuarios {
 		
 		$cantfilas = count($dt->data);
 		$this->pagina->agregarDato("cantfilas",$cantfilas);
-		$this->pagina->agregarDato("pagina",$_REQUEST["pagina"]);
+		$this->pagina->agregarDato("pagina",$_POST["pagina"]);
 		// agregamos a la pagina el mensaje de error
 		$this->pagina->agregarDato("mensajeError",$this->mensajeError);
 		// se imprime el formulario
@@ -366,13 +366,13 @@ class usuarios {
 	}
 
 	private function modificar()
-	{	//print_r($_REQUEST);
-		if (!isset($_REQUEST["accion2"]))
+	{	//print_r($_POST);
+		if (!isset($_POST["accion2"]))
 		{
 			// creamos un contenedor de la tabla
 			$dt = new DataTable();
 			// obtenemos los datos a modificar
-			$this->tiposusuariosBD->obtener($_REQUEST,$dt);
+			$this->tiposusuariosBD->obtener($_POST,$dt);
 
 			// guardamos los datos en un arreglo
 			$campos=$dt->data;
@@ -382,12 +382,12 @@ class usuarios {
 		}
 
 		// si es que nos enviaron una accion
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "MODIFICAR":
-					$datos = $_REQUEST;
+					$datos = $_POST;
 					if (isset($datos["rolprivado"])){
 						$datos["rolprivado"]=1; // lo dejamos en 1, que corresponde si puede ver rol privado
 					}else{
@@ -440,29 +440,29 @@ class usuarios {
 					
 					if ($this->tiposusuariosBD->modificar($datos))
 					{
-						$cantfilas = $_REQUEST["cantfilas"];
+						$cantfilas = $_POST["cantfilas"];
 						for ($filas=0;$filas<$cantfilas;$filas++)
 						{	
 							$consulta=0;$modifica=0;$crea=0;$elimina=0;$opcion=0;$ver=0;
-							if (isset($_REQUEST["consulta".$filas])){
-								$opcion=$_REQUEST["consulta".$filas];
+							if (isset($_POST["consulta".$filas])){
+								$opcion=$_POST["consulta".$filas];
 								$consulta=1;
 							}
-							if (isset($_REQUEST["modifica".$filas])){
-								$opcion=$_REQUEST["modifica".$filas];
+							if (isset($_POST["modifica".$filas])){
+								$opcion=$_POST["modifica".$filas];
 								$modifica=1;
 							}
-							if (isset($_REQUEST["crea".$filas])){
-								$opcion=$_REQUEST["crea".$filas];
+							if (isset($_POST["crea".$filas])){
+								$opcion=$_POST["crea".$filas];
 								$crea=1;
 							}
-							if (isset($_REQUEST["elimina".$filas])){
-								$opcion=$_REQUEST["elimina".$filas];
+							if (isset($_POST["elimina".$filas])){
+								$opcion=$_POST["elimina".$filas];
 								$elimina=1;
 							}
-							if (isset($_REQUEST["ver".$filas])){
+							if (isset($_POST["ver".$filas])){
 								$ver=1;
-								$opcion=$_REQUEST["ver".$filas];
+								$opcion=$_POST["ver".$filas];
 							}
 							
 							//csb 08-03-2018 rescatamos opciones del perfil que esta logueado para ver si puede dar permisos
@@ -523,9 +523,9 @@ class usuarios {
 							}
 							// fin
 							
-							$datosopciones["holdingid"]		=$_REQUEST["holdingid"];
-							$datosopciones["tipousuarioid"]	=$_REQUEST["tipousuarioid"];
-							$datosopciones["opcionid"]		=$_REQUEST["opcion".$filas];
+							$datosopciones["holdingid"]		=$_POST["holdingid"];
+							$datosopciones["tipousuarioid"]	=$_POST["tipousuarioid"];
+							$datosopciones["opcionid"]		=$_POST["opcion".$filas];
 							$datosopciones["consulta"]		=$consulta;
 							$datosopciones["modifica"]		=$modifica;
 							$datosopciones["crea"]    		=$crea;
@@ -547,7 +547,7 @@ class usuarios {
 					// si sale todo mal leemos el error
 					$this->mensajeError.=$this->tiposusuariosBD->mensajeError;
 					// y guardamos los datos enviamos en una variable
-					$campos[0]=$_REQUEST;
+					$campos[0]=$_POST;
 					break;
 
 				case "ELIMINAR":
@@ -563,19 +563,19 @@ class usuarios {
 			}
 		}
 	
-		$this->tiposusuariosBD->obtener($_REQUEST,$dt);
+		$this->tiposusuariosBD->obtener($_POST,$dt);
 		$this->mensajeError.=$this->tiposusuariosBD->mensajeError;
 		$formulario[0]["listado"]=$dt->data;
 		
-		$_REQUEST["tipousuarioingid"]=$this->seguridad->tipousuarioid;
-		$this->tiposusuariosBD->obtener_opciones($_REQUEST,$dt);
+		$_POST["tipousuarioingid"]=$this->seguridad->tipousuarioid;
+		$this->tiposusuariosBD->obtener_opciones($_POST,$dt);
 		$this->mensajeError.=$this->tiposusuariosBD->mensajeError;
 		$formulario[0]["listado2"]=$dt->data;		
 		
 		// agregamos pagina actual del listado
 		$cantfilas = count($dt->data);
 		$this->pagina->agregarDato("cantfilas",$cantfilas);
-		$this->pagina->agregarDato("pagina",$_REQUEST["pagina"]);
+		$this->pagina->agregarDato("pagina",$_POST["pagina"]);
 		$this->pagina->agregarDato("formulario",$formulario);
 		
 		// agregamos los posibles errores a la pagina
@@ -590,7 +590,7 @@ class usuarios {
 	private function eliminar()
 	{
 		// se envia a eliminar a la tabla con los datos del formulario
-		$this->tiposusuariosBD->eliminar($_REQUEST);
+		$this->tiposusuariosBD->eliminar($_POST);
 		// si es que hubiera error lo obtenemos
 		$this->mensajeError=$this->tiposusuariosBD->mensajeError;
 		if ($this->mensajeError == '')
@@ -608,7 +608,7 @@ class usuarios {
 		$dt = new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
 		$datos["usuarioid"]=$this->seguridad->usuarioid;
 
 		$datos["decuantos"]="10";

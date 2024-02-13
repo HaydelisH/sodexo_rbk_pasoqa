@@ -6,7 +6,7 @@
           <a class="btn btn-default btn_letra_azul" href="Empresas.php"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
         </div>
       </div>
-      <div class="box-body">
+      <div class="box-body" style="padding: 30px;">
         <div id="mensajeError"><php:texto id="mensajeError" /></div>
         <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
      
@@ -14,7 +14,7 @@
           <php:repeticion id="formulario">
           <php:repeticion id="empresas">
           <input type="hidden" class="form-control" id="RutEmpresa" name="RutEmpresa" value="<php:item id="RutEmpresa"/>"/>
-          <div class="form-row">
+          <div class="row">
             <div class="col-md-6">
               <label for="RutEmpresa">RutEmpresa</label>
               <input type="text" class="form-control" id="RutEmpresa" name="RutEmpresa" maxlength="10"  readonly="readonly" value="<php:item id="RutEmpresa" />">
@@ -24,13 +24,13 @@
               <input type="text" class="form-control" id="RazonSocial" name="RazonSocial" maxlength="50" value="<php:item id="RazonSocial" />"autofocus required="">
             </div>
           </div>
-          <div class="form-row">
+          <div class="row">
             <div class="col-md-12">
               <label for="Direccion">Direcci&oacute;n</label>
               <input type="text" class="form-control" id="Direccion" name="Direccion" maxlength="50" value="<php:item id="Direccion" />">
             </div>
           </div>
-          <div class="form-row">
+          <div class="row">
             <div class="col-md-6 xs-12">
               <label for="Comuna">Comuna</label>
               <input type="text" class="form-control" id="Comuna" name="Comuna" maxlength="50" value="<php:item id="Comuna" />">
@@ -40,28 +40,23 @@
               <input type="text" class="form-control" id="Ciudad" name="Ciudad" maxlength="50" value="<php:item id="Ciudad" />">
             </div>
           </div>
-            <!-- 
-            <div class="form-row">
-              <div class="col-md-12 xs-12">
-              <label for="Personeria">Personeria</label>
-              <textarea rows="10" cols="80" class="form-control" name="Personerias"><php:item id="Personerias"/></textarea>
+        
+          <div class="row">
+            <div class="col-md-12 d-flex justify-content-between p-0">
+                <!-- Botón de Firmantes -->
+                <div class="col-md-2 d-grid gap-2 p-0">
+                    <button class="btn btn-md btn-default btn-block btnFirmantes_e" id="btnFirmantes" type="button" style="margin-top: 10px" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Firmantes</button>
+                    <input type="hidden" name="accion" value="MODIFICAR" />
+                </div>
+        
+                <!-- Botón de Guardar -->
+                <div class="col-md-2 d-grid gap-2 p-0">
+                    <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="MODIFICAR" onclick="javascript:return validarFormulario(this);">Guardar</button>
+                </div>
             </div>
-            </div>
-            <div class="form-row">  
-              <div class="col-md-12 xs-12">
-                <label for="Correo">Correo</label>
-                <input type="email" class="form-control" id="Correo" name="Correo" maxlength="50" value="<php:item id="Correo" />">
-              </div>-->
-          <div class="form-row">  
-            <div class="col-md-2 xs-12">
-                <button class="btn btn-md btn-default btn-block" type="submit" style="margin-top: 10px" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" ><a href="" >Firmantes</a></button>
-            </div>
-            <input type="hidden" name="accion" value="MODIFICAR" />
-            <div class="col-md-2 xs-12 pull-right">
-              <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="MODIFICAR" onclick="javascript:return validarFormulario(this);"/>Guardar</button>
-            </div>
-          </div>   
-        </form>      
+        </div>
+          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>      
       </div>  
     </div>
     <!-- /.box -->
@@ -69,16 +64,17 @@
   <!--.col-->
 </div> 
 <!--Seccion para mostrar firmantes de Notaria-->
-<div class="collapse" id="collapseExample">
+<div class="collapse" id="collapseExample" >
   <div class="col-md-12">
     <div class="row">
-      <div class="box">
+      <div class="box" style="margin: 10px;">
         <div class="box-body pad table-responsive">
           <div class="form-group">
-            <form name="formulario2" id="formulario_usuarios" action="Empresas.php" method="POST" autocomplete="off">
+            <form name="formulario2" id="formulario" action="Empresas.php" method="POST" autocomplete="off">
               <input type="hidden" name="RutEmpresa" id="RutEmpresa" value ="<php:item id="RutEmpresa" />">
               <button type="submit" class="btn btn-default" name="accion" value="AGREGAR_R"><a><i class="fa fa-plus" class="fa fa-plus" aria-hidden="true"></i> Agregar</a></button>
-            </form>
+              <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
           </div>
           </php:repeticion>    
         </div>
@@ -90,10 +86,7 @@
                 <th style="text-align: center;" >Nombre del Firmante</th>
                 <th style="text-align: center;" >Tipo Firma</th>
                 <th style="text-align: center;" >Rol</th>
-                <!--Corta palo - Ocultar/Mostrar las columnas Division personal-->
-				<!--th style="text-align: center;" >Divisi&oacute;n de Personal</th>
-				<th style="text-align: center;" >Prioridad de firma</th-->
-                <!--Corta palo - Ocultar/Mostrar las columnas Division personal-->
+               
                 <th style="text-align: center;" >Opciones</th>
               </tr>
             </thead>
@@ -104,20 +97,15 @@
                 <td data-campo="nombre"><php:item id="nombre" /> <php:item id="appaterno" /> <php:item id="apmaterno" /> </td>
                 <td data-campo="TipoFirma"><php:item id="firma" /></td>
                 <td data-campo="Cargo"><php:item id="descripcion" /></td>
-                <!--Corta palo - Ocultar/Mostrar las columnas Division personal-->
-                <!--td data-campo="TipoFirma"><php:item id="nombrecentrocosto" /></td>
-                <td data-campo="Cargo"><php:item id="pordefecto" /></td-->
-                <!--Corta palo - Ocultar/Mostrar las columnas Division personal-->
+               
                 <td data-campo="Opciones">
                   <form name="formulario3" id="formulario_tipo" action="Empresas.php" method="POST">
                     <input type="hidden" name="RutEmpresa" value="<php:item id="RutEmpresa" />">
                     <input type="hidden" name="RutUsuario" value="<php:item id="personaid" />">
                     <button class="btn btn-primary btn-sm" type="submit" name="accion" value="MODIFICAR_R">Modificar</button>
-                <!--Corta palo - Ocultar/Mostrar las columnas Division personal-->
-                    <!--button class="btn btn-primary btn-sm" type="submit" name="accion" value="VER_MODIFICAR_CENTRO_COSTO">Divisi&oacute;n de personal</button-->
-                <!--Corta palo - Ocultar/Mostrar las columnas Division personal-->
                 <button class="btn btn-default btn-sm" type="submit" name="accion" value="ELIMINAR_R" onclick="javascript:return preguntarPorBorrar_1();">Eliminar</button>
-                  </form>
+                    <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
                 </td>
               </tr>
               </php:repeticion> <!-- repeticion de representantes -->
@@ -129,19 +117,3 @@
     </div>
   </div>
 </div>
-<script type="text/javascript">
-  function validarcorreo()
-  {
-    var resultado = validarEmail(obtenerElemento('Correo').value);
-    if (resultado == false) 
-    { 
-      document.getElementById('mensajeError').innerHTML = 'Correo invalido'; 
-      return false;
-    }
-  } 
-  
-  function preguntarPorBorrar_1()
-  {
-		return confirm("Esta seguro que desea eliminar este Representante?, recuerde que lo eliminar� tambi�n de los Centros de Costo a los que este asociado");
-  }
-</script>

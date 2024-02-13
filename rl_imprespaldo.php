@@ -105,10 +105,10 @@ class imprespaldo {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -176,12 +176,12 @@ class imprespaldo {
 		$this->tipoFirmasBD->usarConexion($conecc);
 		$this->opcionesxtipousuarioBD->usarConexion($conecc);
 		
-		//print_r($_REQUEST);
+		//print_r($_POST);
 		//se construye el menu
 		include("includes/opciones_menu.php");
-		//if( $this->seguridad->usuarioid == '26131316-2')print_r($_REQUEST);
+		//if( $this->seguridad->usuarioid == '26131316-2')print_r($_POST);
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -192,7 +192,7 @@ class imprespaldo {
 		}
 	
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR_DOC":
 				$this->agregar_doc();
@@ -236,7 +236,7 @@ class imprespaldo {
 	{	
 		if ( isset ($_FILES['archivo'])){
 		
-			$datos = $_REQUEST; 
+			$datos = $_POST; 
 			$dt = new Datatable();
 			$datos["idFichaOrigen"] = 1;
 			$this->validar();
@@ -281,7 +281,7 @@ class imprespaldo {
 	//Agregar docuemntos 
 	private function agregar_doc()
 	{	
-		$datos = $_REQUEST; 
+		$datos = $_POST; 
 		$dt = new Datatable();
 		//print_r($datos);
 		//print_r($_FILES);
@@ -315,7 +315,7 @@ class imprespaldo {
 	//Validar subida de archivo
 	/*private function validar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$dt = new Datatable();
 		
 		if( isset ($datos['idTipoGestor']) ){
@@ -350,7 +350,7 @@ class imprespaldo {
 	//Validar subida de archivo
 	private function validar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$dt = new Datatable();
 		//if( isset ($datos['idTipoGestor']) ){
 			
@@ -418,7 +418,7 @@ class imprespaldo {
 	{  
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos=$_REQUEST;
+		$datos=$_POST;
 
 		//Preparamos los datos necesarios para la consulta 
 		if (!isset($datos["pagina"])) $datos["pagina"]="1";
@@ -497,7 +497,7 @@ class imprespaldo {
 	{
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$fecha = date("dmY_hms");
 		$datos["idFichaOrigen"] = 1;
 
@@ -551,7 +551,7 @@ class imprespaldo {
 	{
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$fecha = date("dmY_hms");
 		$datos["idFichaOrigen"] = 2;
 
@@ -602,7 +602,7 @@ class imprespaldo {
 	//Ver detalle de ficha 
 	private function procesar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$dt = new DataTable();
 		$dt_imprespaldo = new Datatable();
 		$dt_tipos = new Datatable();
@@ -670,7 +670,7 @@ class imprespaldo {
 	//Elimina un documento de una Ficha
 	private function eliminar_documento()
 	{			
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$dt = new DataTable;
 				
 		$this->rl_imprespaldoBD->eliminardocumento($datos);
@@ -682,7 +682,7 @@ class imprespaldo {
 	//Confirmar ficha 
 	private function cancelar(){
 		
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$dt = new Datatable();
 		if ($datos['idEstado'] == "5")
 		{
@@ -707,7 +707,7 @@ class imprespaldo {
 		}
 		if ($datos['idestado'] == "5")
 		{
-			$_REQUEST = array();
+			$_POST = array();
 			$this->listado();
 		}
 		else
@@ -768,7 +768,7 @@ class imprespaldo {
 
 	private function siguiente(){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$dt = new DataTable();
 		$resultado = array();
 		$RutTrabajador = '';
@@ -798,7 +798,7 @@ class imprespaldo {
 
 	private function setFirmantes()
 	{
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$dt = new DataTable();
 		$dt2 = new DataTable();

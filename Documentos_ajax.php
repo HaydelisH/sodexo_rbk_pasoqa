@@ -52,7 +52,7 @@ class documentos {
 		$dt = new DataTable();
 		// pedimos el listado
 
-		$this->documentosBD->obtenerContratoMarco($_REQUEST,$dt);
+		$this->documentosBD->obtenerContratoMarco($_POST,$dt);
 
 		if($dt->leerFila())
 		{

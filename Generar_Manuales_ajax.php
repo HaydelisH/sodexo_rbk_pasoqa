@@ -55,9 +55,9 @@ class generar_manuales {
 		$dt = new DataTable();
 		$dt1 = new DataTable();
 			
-		//$this->generar_manualesBD->obtenerNotario($_REQUEST,$dt);
-		//$this->generar_manualesBD->obtenerAval($_REQUEST,$dt1);
-		$this->generar_manualesBD->obtenerFlujo($_REQUEST,$dt);
+		//$this->generar_manualesBD->obtenerNotario($_POST,$dt);
+		//$this->generar_manualesBD->obtenerAval($_POST,$dt1);
+		$this->generar_manualesBD->obtenerFlujo($_POST,$dt);
 
 		//Inicializamos la variable 
 		$salida = "";

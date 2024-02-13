@@ -16,7 +16,7 @@
  *    @author Bartosz Matosiuk
  *    @author Michael Bommarito
  *    @version 1.1
- *    @license PHP v3.0
+
  */
 class PHPExcel_Shared_JAMA_LUDecomposition
 {

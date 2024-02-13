@@ -197,7 +197,7 @@ class importar
 	//Realiza el llamado a la funcion contarColumnas
 	$resultadoContColumnas=$this->contarColumnas($highestColumnIndex);
 
-	$datos=$_REQUEST;//$_REQUEST es para pasarle el IdArchivo que viene desde el HTML.
+	$datos=$_POST;//$_POST es para pasarle el IdArchivo que viene desde el HTML.
 	$this->importarBD->contarColumnasTabla($datos,$dt);//Realiza el llamado al SP de importarBD 
 	$this->total= $dt->data[0]["total"];//para rescatar una variable de la base de datos
     
@@ -264,7 +264,7 @@ class importar
 			//valida empresa, centro de costo y lugar de pago 
 			$empresa = $centrocosto = $lugarpago = '';
 			
-			$empresa = $_REQUEST['RutEmpresa']; 
+			$empresa = $_POST['RutEmpresa']; 
 			$lugarpago = $this->valorCelda[VAR_LUGARPAGO]; //Lugar de pago 
 			$centrocosto = $this->valorCelda[VAR_CENTROCOSTO]; //Centro de costo
 			
@@ -309,7 +309,7 @@ class importar
 	
 private function ProcesarScript($arr_CamposTabla)
 {	
-	$datos = $_REQUEST;
+	$datos = $_POST;
 	
 	$strinsert 		= "";
 	$strcondicion 	= "";
@@ -435,7 +435,7 @@ private function ProcesarScript($arr_CamposTabla)
 			
 			//Sustituir variables 
 			$resultado_html = '';
-			$datos2 = $_REQUEST;
+			$datos2 = $_POST;
 			$this->sustituirVariables($idDocumento,$this->html,$datos2,$resultado_html); 
 			
 			//Si es de firma manual
@@ -805,7 +805,7 @@ private function validarDatoObligatorio($valorCelda,$Obligatorio)
 	private function crearContrato(){
 
 		//Generar Documento nuevo 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$dt = new DataTable();
 		
 		//Datos que faltan al registro 
@@ -829,7 +829,7 @@ private function validarDatoObligatorio($valorCelda,$Obligatorio)
 	//Construir Arreglos de los Firmantes
 	private function construirFirmantes($idDocumento,$empleado,&$resultado){
 	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		//Cambiar el orden de los firmantes 
 		$rut_1 = '';
@@ -1065,7 +1065,7 @@ private function validarDatoObligatorio($valorCelda,$Obligatorio)
 	//Validar si el documento tiene variables de un tipo 
 	private function buscarVariables($idDocumento,$busqueda,$datos2,&$resultado){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $idDocumento;
 
 		$dt = new DataTable();
@@ -1302,7 +1302,7 @@ private function validarDatoObligatorio($valorCelda,$Obligatorio)
 	//Buscar subclausulas
 	private function buscarVariablesSubClausulas($html,&$resultado){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 	
 		$dt = new DataTable();
 		$var_busqueda = '';
@@ -1809,7 +1809,7 @@ private function validarDatoObligatorio($valorCelda,$Obligatorio)
 	//------             ULTIMINIO RAMOS GAL�N     ---------------
 	//------            uramos@gmail.com           ---------------
 	//------    10 de junio de 2009. M�xico, D.F.  ---------------
-	//------    PHP Version 4.3.1 o mayores (aunque podr�a funcionar en versiones anteriores, tendr�as que probar)
+	//------    PHP Version o mayores (aunque podr�a funcionar en versiones anteriores, tendr�as que probar)
 
 	{
 	    $xarray = array(0 => "Cero",

@@ -52,7 +52,7 @@ class documentos {
 		$dt = new DataTable();
 		// pedimos el listado
 
-		$this->documentosBD->obtenerContratoRenting($_REQUEST,$dt);
+		$this->documentosBD->obtenerContratoRenting($_POST,$dt);
 
 		if($dt->leerFila())
 		{

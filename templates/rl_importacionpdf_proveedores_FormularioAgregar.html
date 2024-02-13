@@ -14,7 +14,7 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab_4">
                                 <div class="box-body">
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-md-12">
                                             <label style="float:right;"> (*) Campos obligatorios </label>
                                         </div>
@@ -23,7 +23,7 @@
                                     <div class="col-md-6" >
                                         <label for="Empresa" >Empresa (*) </label>
                                         <!--Select de Empresas disponibles-->
-                                        <select class= "form-control" name="RutEmpresa" id="RutEmpresa">
+                                        <select class= "form-control RutEmpresa_RLIP" name="RutEmpresa" id="RutEmpresa">
                                             <php:repeticion id="Empresas">
                                             <option value="<php:item id="RutEmpresa" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEmpresa" /><php:argumento idvalor="RutEmpresa" /></php:funcion>><php:item id="RazonSocial" /></option>
                                             </php:repeticion>
@@ -34,20 +34,20 @@
                                         <label>Instituci&oacute;n / Relaci&oacute;n Laboral (*)</label>
                                         <div class="box-body" style="padding-left: 0px;padding-top: 0px;">
                                             <div class="col-md-3 xs-12" style="padding-left: 0px; padding-right: 0px;">
-                                                <input class="form-control" type="text" name="RutProveedor" id="RutProveedor" value="<php:item id="RutProveedor" />" placeholder=""  />
+                                                <input class="form-control RutProveedor_RLIP" type="text" name="RutProveedor" id="RutProveedor" value="<php:item id="RutProveedor" />" placeholder=""  />
                                             </div>
                                             <div class="col-md-7 xs-12" style="padding-left: 0px; padding-right: 0px;">
                                                 <input class="form-control" type="text" name="NombreProveedor" id="NombreProveedor" value="<php:item id="NombreProveedor" />" placeholder="" readonly />
                                             </div>
                                             <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
-                                                <button class="btn btn-md btn-primary btn-block proveedores"  onclick="mantenedor()" type="button" id="btn_proveedores" data-toggle="modal" data-toggle="tooltip" title="B&uacute;squeda avanzada" ><i class="fa fa-search"></i></button>
+                                                <button class="btn btn-md btn-primary btn-block proveedores btn_proveedores_RLIP"  onclick="mantenedor_RLIP()" type="button" id="btn_proveedores" data-toggle="modal" data-toggle="tooltip" title="B&uacute;squeda avanzada" ><i class="fa fa-search"></i></button>
                                             </div>
                                             <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
                                                 <button class="btn btn-md btn-primary btn-block proveedores"  type="button" id="btn_empresa"  title="Agregar Empresa Externa" data-toggle="modal"  data-target="#modal_creaproveedor"><i class="fa fa-plus"></i></button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-md-6 col-xs-12" >
                                         <label>Nombre documento (*)</label>
                                             <!--div class="input-group date"-->
@@ -56,7 +56,7 @@
                                         </div>
                                     </div>
                                     <!--Division de personal-->
-                                    <!--<div class="form-row" >
+                                    <!--<div class="row" >
                                         <div class="col-md-6 xs-12">
                                             <label>Divisi&oacute;n (*)</label>
                                             <div class="box-body" style="padding-left: 0px;padding-top: 0px;">
@@ -71,14 +71,14 @@
                                             </div>
                                         </div>
                                     </div>-->
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-md-6 col-xs-12" >
                                             <label for="contenedorid" >Fecha de Documento (*)</label>
                                             <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control" id="FechaDocumento" name="FechaDocumento" placeholder="FechaDocumento"  />
+                                                <input type="datetime" class="form-control" id="FechaDocumento" name="FechaDocumento" placeholder="FechaDocumento"  />
                                             </div>
                                         </div>
                                     </div>
@@ -86,7 +86,7 @@
                                     <div class="col-md-6" style="padding-bottom: 15px; display:none;">
                                         <label for="TipoDeDocumento" >Tipo de Documento (*)</label>
                                         <!--Select de Empresas disponibles-->
-                                        <select class= "form-control" name="idTipoDoc" id="idTipoDoc" required>
+                                        <select class= "form-control idTipoDoc_RLIP" name="idTipoDoc" id="idTipoDoc" required>
                                             <option value="0">(Seleccione)</option>
                                             <php:repeticion id="TipoDocumentos">
                                             <option value="<php:item id="idTipoDoc" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idTipoDoc" /><php:argumento idvalor="idTipoDoc" /></php:funcion>><php:item id="NombreTipoDoc" /></option>
@@ -106,7 +106,7 @@
                                     <!--Plantilla-->
                                     <div class="col-md-6 xs-12" style="padding-bottom: 15px;">
                                         <label>Flujo (*)</label>
-                                        <select class="form-control" name="idPlantilla" id="idPlantilla">
+                                        <select class="form-control idPlantilla_RLIP name="idPlantilla" id="idPlantilla">
                                             <option value="0">( Seleccione )</option>
                                         </select>
                                     </div>
@@ -119,7 +119,7 @@
                                         </select>
                                     </div>
                                     <!--Subir documento-->
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-md-6" id="doc">
                                             <label for="Subir" id="doc_label">Seleccione archivo PDF (*)</label>
                                             <div class="form-group" id="doc_hijo"> 
@@ -129,7 +129,7 @@
                                                 <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
                                                     <span class="btn btn-primary btn-file">
                                                         <i id="ico_upload" class="fa fa-upload" aria-hidden="true"></i>
-                                                        <input type="file" name="pdf64" id="pdf64"  accept="application/pdf" />
+                                                        <input type="file" name="pdf64" id="pdf64"  accept="application/pdf"  class="pdf64_RLIP"/>
                                                     </span>
                                                 </div>
                                                 <span class="fileinput-filename"></span>
@@ -138,12 +138,12 @@
                                         </div>
                                     </div>
                                     <!--Seleccionar Firmantes por Empresas -->
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-md-12">
                                         <h5></h5>
                                         </div>
                                     </div>
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-md-12">
                                             <label id="label" style="display: none">Seleccione Firmantes (*)</label>
                                             <!-- Pasos-->
@@ -191,7 +191,7 @@
                                                             <h4>Instituci&oacute;n</h4>
                                                         </div>
                                                         <div class="col-md-1 xs-1" style="padding-left: 0px; padding-right: 0px;">
-                                                            <button class="btn btn-md btn-primary btn-block proveedores pull-left"  type="button" id="btn_creafirmanteproveedor" onclick="inicio_firmate_proveedor()" data-toggle="modal" data-toggle="tooltip" title="Agregar Firmante Empresa Externa" data-target="#modal_creafirmanteproveedor"><i class="fa fa-plus"></i></button>
+                                                            <button class="btn btn-md btn-primary btn-block proveedores pull-left"  type="button" id="btn_creafirmanteproveedor" onclick="inicio_firmate_proveedor_RLIP()" data-toggle="modal" data-toggle="tooltip" title="Agregar Firmante Empresa Externa" data-target="#modal_creafirmanteproveedor"><i class="fa fa-plus"></i></button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -211,7 +211,7 @@
                                               <!--Fin de firmantes-->
                                         </div>
                                           <!--Fin de Firmantes-->
-                                        <div class="form-row">  
+                                        <div class="row">  
                                             <div class="col-md-2 xs-12 pull-right">  
                                                 <input type="hidden" id="idWF" name="idWF"/>
                                                 <!--Firmantes de la Plantilla-->
@@ -225,7 +225,7 @@
                                                 <input type="hidden" id="orden_representantes" value="<php:texto id="orden_representantes" />" />
                                                 <input type="hidden" id="orden_proveedores" value="<php:texto id="orden_proveedores" />" />
                                                 <input type="hidden" id="input_empleado" name="input_empleado" value="<php:item id="input_empleado"/>"/>
-                                                <button class="btn btn-md btn-success btn-block" type="submit" name="accion"  onclick="javascript:return validargenerar()" id="GENERAR" value="GENERAR" style="margin-top: 10px">Generar</button> 
+                                                <button class="btn btn-md btn-success btn-block" type="submit" name="accion"  onclick="javascript:return validargenerar_RLIP()" id="GENERAR" value="GENERAR" style="margin-top: 10px">Generar</button> 
                                             </div>
                                         </div>
                                     </div>	
@@ -246,7 +246,7 @@
                             <div class="modal-header" align="center">
                                 <h4 class="modal-title" id="ejemplo-titulo"> Divisi&oacute;n </h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+                                    <span aria-hidden="true" class="cerrar_modal">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
@@ -264,7 +264,7 @@
                                 </table>
                             </div>
                             <div class="modal-footer" style="margin-top:10px;">
-                                <button type="button" class="btn btn-secondary btn-md" id="cerrar_lugares_pago" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-secondary btn-md cerrar_modal" id="cerrar_lugares_pago" data-dismiss="modal">Cerrar</button>
                             </div>
                         </div>
                     </div>
@@ -275,7 +275,7 @@
                         <div class="modal-header" align="center">
                             <h4 class="modal-title" id="ejemplo-titulo"> Relaci&oacute;n Laboral </h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
+                                <span aria-hidden="true" class="cerrar_modal">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
@@ -293,7 +293,7 @@
                             </table>
                         </div>
                         <div class="modal-footer" style="margin-top:10px;">
-                            <button type="button" class="btn btn-secondary btn-md" id="cerrar_centro_costo" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-secondary btn-md cerrar_modal" id="cerrar_centro_costo" data-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                 </div>
@@ -304,7 +304,7 @@
                             <div class="modal-header" align="center">
                                 <h4 class="modal-title" id="ejemplo-titulo"> Externo </h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="tooltip" title="Crear Firmante Empresa Externa" data-target="#modal_creafirmanteproveedor">
-                                    <span aria-hidden="true">&times;</span>
+                                    <span aria-hidden="true" class="cerrar_modal">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
@@ -322,7 +322,7 @@
                                 </table>
                             </div>
                             <div class="modal-footer" style="margin-top:10px;">
-                                <button type="button" class="btn btn-secondary btn-md" id="cerrar_proveedores" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-secondary btn-md cerrar_proveedores_RLIP" id="cerrar_proveedores" data-dismiss="modal">Cerrar</button>
                             </div>
                         </div>
                     </div>
@@ -334,50 +334,50 @@
                             <div class="modal-header" align="center">
                                 <h4 class="modal-title" id="ejemplo-titulo"> Crear Externo</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+                                    <span aria-hidden="true" class="cerrar_modal">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
                                 <div id="mensajeError_modal"></div>
                                 <form name="formulario2" id="formulario2"  >
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-md-6">
                                             <label for="RutEmpresa">Rut Empresa</label>
                                             <input type="text" class="form-control" id="rutempresa_m" name="rutempresa_m" maxlength="10" value="" placeholder="" > 
                                         </div>
                                     </div>
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-md-6 xs-12">
                                             <label for="RazonSocial">Raz&oacute;n Social</label>
                                             <input type="text" class="form-control" id="razonsocial_m" name="razonsocial_m" maxlength="50" value="" placeholder="" >
                                         </div>
                                     </div>
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-md-12 xs-12">
                                             <label for="Direccion">Direcci&oacute;n</label>
                                             <input type="text" class="form-control" id="direccion_m" name="direccion_m" maxlength="100" value="" placeholder="" >
                                         </div>
                                     </div>
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-md-6">
                                             <label for="Comuna">Comuna</label>
                                             <input type="text" class="form-control" id="comuna_m" name="comuna_m" maxlength="50" value="" placeholder="" > 
                                         </div>
                                     </div>
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-md-6 xs-12">
                                             <label for="Ciudad">Ciudad</label>
                                             <input type="text" class="form-control" id="ciudad_m" name="ciudad_m" maxlength="50" value="" placeholder="" >
                                         </div>
                                     </div>
-                                    <!--<div class="form-row">
+                                    <!--<div class="row">
                                         <div class="col-md-6 xs-12" style="margin-top:10px">
                                             <button type="button" class="btn btn-secondary btn-md" id="cerrar_creaproveedor" data-dismiss="modal">Cerrar</button>
                                         </div>
                                     </div>	-->
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-md-6 xs-12" style="margin-top:10px">
-                                            <button type="button" class="btn btn-secondary btn-md" onclick="javascript:return validarFormulario2(this) && validaRut3(obtenerElemento('rutempresa_m').value,'rutempresa_m') && graba_proveedor();" name="grabar_creaproveedor" id="grabar_creaproveedor" >Grabar</button>
+                                            <button type="button" class="btn btn-secondary btn-md" onclick="javascript:return validarFormulario2(this) && validaRut3(obtenerElemento('rutempresa_m').value,'rutempresa_m') && graba_proveedor_RLIP();" name="grabar_creaproveedor" id="grabar_creaproveedor" >Grabar</button>
                                         </div>
                                     </div>
                                 </form>
@@ -394,55 +394,55 @@
                             <div class="modal-header" align="center">
                                 <h4 class="modal-title" id="ejemplo-titulo"> Crea Firmante Empresa Externa</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+                                    <span aria-hidden="true" class="cerrar_modal">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
                                 <div id="mensajeError_modal"></div>
                                 <form name="formulario3" id="formulario3"  >
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-md-6">
                                             <label for="RutRepresentante">Rut Empresa Externa</label>
                                             <input type="text" class="form-control" id="rutempresa_fp" name="rutempresa_fp" maxlength="10" value="" placeholder="" readonly>
                                         </div>
                                     </div>
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-md-6">
                                             <label for="RutRepresentante">Rut Representante</label>
                                             <input type="text" class="form-control" id="rutrepresentate_fp" name="rutrepresentate_fp" maxlength="10" value="" placeholder="" >
                                         </div>
                                     </div>
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-md-6">
                                             <label for="Nacionalidad">Nacionalidad</label>
                                             <input type="text" class="form-control" id="nacionalidad_fp" name="nacionalidad_fp" maxlength="20 value="" placeholder="" >
                                         </div>
                                     </div>
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-md-6">
                                             <label for="Nombre">Nombre</label>
                                             <input type="text" class="form-control" id="nombre_fp" name="nombre_fp" maxlength="50" value="" placeholder="" > 
                                         </div>
                                     </div>
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-md-6 xs-12">
                                             <label for="ApPaterno">Apellido Paterno</label>
                                             <input type="text" class="form-control" id="paterno_fp" name="paterno_fp" maxlength="50" value="" placeholder="" >
                                         </div>
                                     </div>
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-md-6 xs-12">
                                             <label for="ApMaterno">Apellido Materno</label>
                                             <input type="text" class="form-control" id="materno_fp" name="materno_fp" maxlength="50" value="" placeholder="" >
                                         </div>
                                     </div>	
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-md-6 xs-12">
                                             <label for="Correo">Correo</label>
                                             <input type="text" class="form-control" id="email" name="email" maxlength="60" value="" placeholder="" >
                                         </div>
                                     </div>	
-                                    <div class="form-row" >
+                                    <div class="row" >
                                         <div class="col-md-6 xs-12">
                                             <label for="">Tipo de Firma</label>
                                             <select class= "form-control" name="idFirma" id="idFirma">
@@ -454,13 +454,13 @@
                                             </select>
                                         </div>
                                     </div>					
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-md-6 xs-12">
                                             <label for="Cargo">Cargo</label>
                                             <input type="text" class="form-control" id="cargo_fp" name="cargo_fp" maxlength="60" value="" placeholder="" >
                                         </div>
                                     </div>				
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-md-6 xs-12" style="margin-top:10px">
                                             <button type="button" class="btn btn-secondary btn-md" onclick="javascript:return validarFormulario3(this,new Array(),new Array('materno_fp')) && validaRut3(obtenerElemento('rutrepresentate_fp').value,'rutrepresentate_fp') && graba_firmante_proveedor();" name="grabar_creaproveedor" id="grabar_creaproveedor" >Grabar</button>
                                         </div>
@@ -477,1158 +477,3 @@
     </div>
   </div>
 </section>
-<script>
-/*Variables*/
-var ajax;
-var salida;
-var cantidad_firmantes;
-var arreglo_emp = [];
-var orden_emp = [];
-var nuevo_emp = {};
-var arreglo = [];
-var orden = [];
-var nuevo = {};
-var orden_representantes = $("#orden_representantes").val();
-var orden_proveedores = $("#orden_proveedores").val();
-var num = 0;
-var proceso;		 
-  
-$('#FechaDocumento').datepicker({
-    language: "es",
-    orientation: "bottom",
-    autoclose: true,
-    todayHighlight: true,
-    format: 'dd-mm-yyyy'
-});
-  
-$(document).ready(function(){
-    inicio();
-});
-
-var RutEmpresa = $("#RutEmpresa").val();
-     
-function inicio()
-{
-    $("#GENERAR").attr('disabled', true);
-    $("#idTipoDoc").attr("disabled",true);
-    //$("#idProceso").attr("disabled",true);
-    $("#idPlantilla").attr("disabled",true);
-    $("#idCentroCosto").attr("disabled",true);
-    //para deshabilitar la subida del pdf
-    $("#Documento").attr("disabled",true);
-    $(".btn-file").attr("disabled",true);
-    $("#pdf64").attr("disabled",true);
-    RutEmpresa = $("#RutEmpresa").val();
-    if ( RutEmpresa == 0)
-    {
-        $("#RutProveedor").attr("disabled",true);
-        $("#btn_proveedores").attr("disabled",true);
-        $("#btn_empresa").attr("disabled",true);
-    }
-    else
-    {
-        seleccion_empresa();
-    }
-    var rutproveedor = $("#RutProveedor").val();
-    if (rutproveedor.trim() == '')
-    {
-        $("#FechaDocumento").attr("disabled",true);
-    }
-}
-  
-/*******************************/
-/**BUSCAR FIRMANTES DE EMPRESA**/
-/*******************************/
-$("#RutEmpresa").change(function(){
-    $("#NombreProveedor").val('');
-    $("#RutProveedor").val('');
-    $("#RutProveedor").attr("disabled",false);
-    $("#RutProveedor").focus();
-    $("#FechaDocumento").attr("disabled",true);  
-    seleccion_empresa();
-});
-
-function seleccion_empresa()
-{	
-    var RutEmpresa = $("#RutEmpresa").val();
-    $("#mensajeError").removeClass("callout callout-warning");
-    $("#mensajeError").html("");
-    $("#idTipoDoc").attr("disabled",true);
-    //  $("#idProceso").attr("disabled",true);
-    $("#idPlantilla").attr("disabled",true);
-    //  $("#FechaDocumento").attr("disabled",true);  
-    //para deshabilitar la subida del pdf
-    $("#pdf64").attr("disabled",true);
-    $(".btn-file").attr("disabled",true);
-    //fin
-    $("#FechaDocumento").val('');
-    //$("#idTipoDoc").val(0);
-    //   $("#idProceso").val(0);
-    $("#idPlantilla").val(0);
-    $("#Documento").val('');
-    $("#archivo").val();
-    $("#idWF").val(0);
-    $(".plan").remove();
-    $(".orden").val('');
-    $(".orden_emp").val('');
-    // $("#nombrecentrocosto").val('');
-    //  $("#idCentroCosto").val('');
-    /*$("#NombreProveedor").val('');
-    $("#RutProveedor").val('');
-    $("#RutProveedor").attr("disabled",false);
-    $("#RutProveedor").focus();*/
-    //Ocultar firmantes 
-    $("#icono_representante").hide();
-    $("#icono_proveedores").hide();
-    $("#label").hide();
-    $("#step-1").collapse('hide');
-    $("#step-2").collapse('hide');
-    if( RutEmpresa != 0 ){
-        $("#idTipoDoc").attr("disabled",true);
-        //$("#idTipoDoc").val(0);
-        $("#btn_proveedores").attr("disabled",false);
-        $("#btn_empresa").attr("disabled",false);
-        $("#RutProveedor").attr("disabled",false);
-        var url  = "Generar_Documentos_Masivos2_ajax.php?RutEmpresa=" + RutEmpresa;
-        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-        if( window.XMLHttpRequest )
-            ajax = new XMLHttpRequest(); // No Internet Explorer
-        else
-            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-        // Almacenamos en el control al funcion que se invocara cuando la peticion
-        // cambie de estado 
-        ajax.onreadystatechange = funcionCallback_Empresa;
-        // Enviamos la peticion
-        ajax.open( "GET", url, true );
-        ajax.send( "" );
-    }
-}
-
-function funcionCallback_Empresa()
-{
-    // Comprobamos si la peticion se ha completado (estado 4)
-    if( ajax.readyState == 4 )
-    {
-        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-        if( ajax.status == 200 )
-        {
-            // Escribimos el resultado en la pagina HTML mediante DHTML
-            //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
-            salida = ajax.responseText;
-            try {
-                var datos = JSON.parse(salida);
-                $.each(datos,function(key, registro) {                            
-                    var fila_orden = '';
-                    fila_orden = "<tr align='center' class='fila'><td ><input type='checkbox' name='Firmantes_Emp[]' class='f_emp' value='" + registro.personaid + "'id='emp_" + registro.incremental + "'  onclick='seleccion(" + registro.incremental + ");'/> </td><td>" + registro.personaid + "</td><td>" + registro.nombrecompleto +"</td><td>" +  registro.descripcion + "</td><td class='columna_emp'><input name='orden_emp_" + registro.personaid + "'' id='orden_emp_" + registro.personaid + "' class='orden_emp' style='text-align:center; border: none;' readonly /></td></tr>";
-                    $("#tabla_emp tr:last ").after(fila_orden);
-                });         
-            }catch(e) {
-                $("#mensajeError").addClass("callout callout-warning");
-                $("#mensajeError").html(salida);
-                $("#idTipoDoc").attr("disabled",true);
-                //$("#idProceso").attr("disabled",true);
-                $("#idPlantilla").attr("disabled",true);
-                $("#FechaDocumento").attr("disabled",true);
-                //para deshabilitar la subida del pdf
-                $("#pdf64").attr("disabled",true);
-                $(".btn-file").attr("disabled",true);
-                //fin
-                $("#btn_proveedores").attr("disabled",true);
-                $("#FechaDocumento").val('');
-                //$("#idTipoDoc").val(0);
-                //$("#idProceso").val(0);
-                $("#idPlantilla").val(0);
-                $("#Documento").val('');
-                $("#archivo").val();
-                $("#idWF").val(0);
-                $(".plan").remove();
-                $(".orden").val('');
-                $(".orden_emp").val('');
-                $("#nombrecentrocosto").val('');
-                //$("#idCentroCosto").val('');
-                //$("#NombreProveedor").val('');
-                //Limpiar tabla 
-                $(".fila").remove();
-                //Ocultar firmantes 
-                $("#icono_representante").hide();
-                $("#icono_proveedores").hide();
-                $("#label").hide();
-                $("#step-1").collapse('hide');
-                $("#step-2").collapse('hide');
-            }
-        }
-      }
-}
-  
-/*******************************/
-/**BUSCAR LISTADO DE proveedores **/
-/*******************************/
-$("#btn_proveedores").click(function(){
-    var RutEmpresa = $("#RutEmpresa").val();
-    $(".fila_cl").remove();
-    if( RutEmpresa == 0 ){
-        $("#mensajeError").addClass("callout callout-warning");
-        $("#mensajeError").html("Debe seleccionar la Empresa");
-        return false;
-    }else{
-        $("#FechaDocumento").val('');
-        $("#FechaDocumento").attr("disabled",false);
-        //$("#idTipoDoc").attr("disabled",true);
-        $("#mensajeError").html("");
-        $("#mensajeError").removeClass("callout callout-warning");
-        var url  = "rl_Generar_Documento_PorFicha_ajax6.php?RutEmpresa=" + RutEmpresa;
-        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-        if( window.XMLHttpRequest )
-            ajax = new XMLHttpRequest(); // No Internet Explorer
-        else
-            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-        // Almacenamos en el control al funcion que se invocara cuando la peticion
-        // cambie de estado 
-        ajax.onreadystatechange = funcionCallback_cl;
-        // Enviamos la peticion
-        ajax.open( "GET", url, true );
-        ajax.send( "" );
-    }
-});
-
-function funcionCallback_cl()
-{
-    // Comprobamos si la peticion se ha completado (estado 4)
-    if( ajax.readyState == 4 )
-    {
-        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-        if( ajax.status == 200 )
-        { 
-            // Escribimos el resultado en la pagina HTML mediante DHTML
-            salida = ajax.responseText; 
-            listado = JSON.parse(salida);
-            num = listado.length;
-            if( num > 0 ){
-                    $.each(listado, function( index, value ) {
-                    $('#example2 tr:last').after('<tr class="fila_cl"><td>' + listado[index].RutProveedor + '</td><td><div id="' + listado[index].RutProveedor + '">' + listado[index].NombreProveedor + ' </div></td><td ><button type="button" style="background-color: transparent;" class="btn" name="btn_agregar_cl" id="btn_agregar_cl" onclick="agregarClX(\'' + listado[index].RutProveedor + '\');"><i class="fa fa-plus" aria-hidden="true"></i></button></td></tr>');
-                });
-            }
-            else{
-                $('#example2 tr:last').after('<tr class="fila_cl"><td colspan=3>No existen Proveedores registrados para la Empresa seleccionada</td></tr>');
-                $("#idTipoDoc").attr("disabled",true);
-                //$("#idProceso").attr("disabled",true);
-                $("#idPlantilla").attr("disabled",true);
-                $("#FechaDocumento").val('');
-                $("#FechaDocumento").attr("disabled",true);
-                //para deshabilitar la subida del pdf
-                $("#pdf64").attr("disabled",true);
-                $(".btn-file").attr("disabled",true);
-                //fin
-                $("#FechaDocumento").val('');
-                //$("#idTipoDoc").val(0);
-                //$("#idProceso").val(0);
-                $("#idPlantilla").val(0);
-                $("#Documento").val('');
-                $("#archivo").val();
-                $("#idWF").val(0);
-                $(".plan").remove();
-                $(".orden").val('');
-                $(".orden_emp").val('');
-                //Limpiar tabla 
-                $(".fila").remove();
-                //Ocultar firmantes 
-                $("#icono_representante").hide();
-                $("#icono_proveedores").hide();
-                $("#label").hide();
-                $("#step-1").collapse('hide');
-                $("#step-2").collapse('hide');
-            }
-        }
-    }
-}
-
-function agregarClX(i){
-    $("#RutProveedor").val(i);
-    $("#NombreProveedor").val($("#" + i ).html());
-    $("#cerrar_proveedores").click();
-    //buscarFirmantesproveedores(); 
-}
-
-/********************************/
-/**BUSCAR FIRMANTES DEL CLIENTE**/
-/********************************/
-
-$("#FechaDocumento").change(function(){
-    //$("#idTipoDoc").attr("disabled",false);
-    $("#idPlantilla").attr("disabled",false);
-    getPlantillas();
-});
-
-//Modal de Lugares de pago 
-$("#btn_lugares_pago").click(function(){
-    var RutEmpresa = $("#RutEmpresa").val();
-    $(".fila_lp").remove();
-    if( RutEmpresa == 0 ){
-        $("#mensajeError").addClass("callout callout-warning");
-        $("#mensajeError").html("Debe seleccionar la Empresa");
-        return false;
-    }else{
-        $("#mensajeError").html("");
-        $("#mensajeError").removeClass("callout callout-warning");
-        var url  = "rl_Generar_Documento_PorFicha_ajax1.php?RutEmpresa=" + RutEmpresa;
-        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-        if( window.XMLHttpRequest )
-            ajax = new XMLHttpRequest(); // No Internet Explorer
-        else
-            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-        // Almacenamos en el control al funcion que se invocara cuando la peticion
-        // cambie de estado 
-        ajax.onreadystatechange = funcionCallback_lugarespago;
-        // Enviamos la peticion
-        ajax.open( "GET", url, true );
-        ajax.send( "" );
-    }
-});
-
-function funcionCallback_lugarespago()
-{
-    // Comprobamos si la peticion se ha completado (estado 4)
-    if( ajax.readyState == 4 )
-    {
-        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-        if( ajax.status == 200 )
-        {
-            // Escribimos el resultado en la pagina HTML mediante DHTML
-            salida = ajax.responseText;
-            listado = JSON.parse(salida);
-            var numlp = listado.length;
-            if( numlp > 0 ){
-                $.each(listado, function( index, value ) {
-                    $('#tabla_lugares_pago tr:last').after('<tr class="fila_lp"><td>' + listado[index].lugarpagoid + '</td><td><div id="' + listado[index].lugarpagoid + '">' + listado[index].nombrelugarpago + ' </div></td><td ><button type="button" style="background-color: transparent;" class="btn" name="btn_agregar_lp" id="btn_agregar_lp" onclick="agregarLp(' + listado[index].lp + ');"><i class="fa fa-plus" aria-hidden="true"></i></button></td></tr>');
-                });
-            }
-            else{
-                $('#tabla_lugares_pago tr:last').after('<tr class="fila_lp"><td colspan = 3>No existen Centros de Costo de la Empresa seleccionada</td></tr>');
-            }
-        }
-    }
-}
-
-function agregarLp(i){
-    $("#lugarpagoid").val(i);
-    $("#idCentroCosto").val(i);
-    $("#nombrelugarpago").val($("#" + i ).html());
-    $("#cerrar_lugares_pago").click();
-}
-
-/*********************/
-/**FILTRAR PLANTILLA**/
-/********************/
-$("#idTipoDoc").change(function(){
-    $("#mensajeError").removeClass("callout callout-warning");
-    $("#mensajeError").html(""); 
-    if( $("#idTipoDoc").val() != 0 ){
-        $("#icono_representante").hide();
-        $("#icono_proveedores").hide();
-        $("#Representates").val("");
-        $("#Empleado").val("");
-        $("#Cantidad_Firmantes").val("");
-        $("#proveedores").val("");
-        $(".orden").val('');
-        $(".orden_emp").val('');
-        $("#mensajeError").removeClass("callout callout-warning");
-        $("#mensajeError").html("");
-        $('input[type=checkbox]').prop('checked', false);
-        $("#step-1").collapse('hide');
-        $("#step-2").collapse('hide');
-        var empresa = $("#RutEmpresa").val();
-        var idTipoDoc = $("#idTipoDoc").val();
-        var idTipoFlujo = 1; //No exista flujos de Cliente
-        $(".plan").remove();
-        if( idTipoDoc != 0 && empresa != 0 ){
-            getPlantillas();
-        }
-    }else{
-        //$("#idProceso").attr("disabled",true);
-        $("#idPlantilla").attr("disabled",true);
-        //para deshabilitar la subida del pdf
-        $("#pdf64").attr("disabled",true);
-        $(".btn-file").attr("disabled",true);
-        //fin
-        //Ocultar firmantes 
-        $("#icono_representante").hide();
-        $("#icono_proveedores").hide();
-        //$("#idTipoDoc").val(0);
-        //$("#idProceso").val(0);
-        $("#idPlantilla").val(0);
-        $("#Documento").val('');
-        $("#archivo").val();
-        $("#idWF").val(0);
-        $(".orden").val('');
-        $(".orden_emp").val('');
-      }
-});
-
-function getPlantillas()
-{
-    var empresa = $("#RutEmpresa").val();
-    var idTipoDoc = $("#idTipoDoc").val();
-    var idTipoFlujo = 1; //No exista flujos de Cliente
-    var url  = "rl_importacionpdf_buscarplantillas_porcliente_ajax.php?RutEmpresa=" + empresa + "&idTipoDoc=" + idTipoDoc + "&idTipoFlujo=" + idTipoFlujo;
-    // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-    if( window.XMLHttpRequest )
-        ajax = new XMLHttpRequest(); // No Internet Explorer
-    else
-        ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-    // Almacenamos en el control al funcion que se invocara cuando la peticion
-    // cambie de estado 
-    ajax.onreadystatechange = funcionCallback;
-    // Enviamos la peticion
-    ajax.open( "GET", url, true );
-    ajax.send( "" );
-}
-
-function funcionCallback()
-{
-    // Comprobamos si la peticion se ha completado (estado 4)
-    if( ajax.readyState == 4 )
-    {
-        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-        if( ajax.status == 200 )
-        {
-            // Escribimos el resultado en la pagina HTML mediante DHTML
-            //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
-            salida = ajax.responseText;
-            if( salida != '' ){
-                var datos = JSON.parse(salida);
-                $("#idPlantilla").empty().append('<option value="0">( Seleccione )</option>');
-                $.each(datos,function(key, registro) {
-                    $("#idPlantilla").append('<option class="plan" ' + registro.Aprobado + ' value='+ registro.idPlantilla +'>'+registro.Descripcion_Pl+'</option>');                                      
-                }); 
-                // $('#idProceso').attr("disabled",false);  
-                $('#idPlantilla').attr("disabled",false);  
-            }else{
-                $("#mensajeError").addClass("callout callout-warning");
-                $("#mensajeError").html("La Empresa seleccionada no tiene flujos de importacion asociados."); 
-                $("#idProceso").attr("disabled",true);
-                $("#idPlantilla").attr("disabled",true);
-                //$("#idFirma").attr("disabled",true);
-                //$("#idTipoDoc").val(0);
-                $("#idProceso").val(0);
-                $("#idPlantilla").val(0);
-                //$("#idFirma").val(0);
-                $("#idWF").val(0);
-                $(".orden").val('');
-                $(".orden_emp").val('');
-            }
-        }
-    }
-}
-
-
-   $("#idProceso").change(function(){
-    if( $("#idProceso").val() != 0 )
-        $("#idPlantilla").attr("disabled",false);
-    else{
-        $("#idPlantilla").attr("disabled",true);
-        //$("#idFirma").attr("disabled",true);
-        //deshabilita subida pdf
-        $("#pdf64").attr("disabled",true);
-        $(".btn-file").attr("disabled",true);
-        $("#Documento").val('');
-        //fin
-        //Ocultar firmantes 
-        $("#icono_representante").hide();
-        $("#icono_proveedores").hide();
-        $("#idProceso").val(0);
-        $("#idPlantilla").val(0);
-        // $("#idFirma").val(0);
-        $("#idWF").val(0);
-        $(".orden").val('');
-        $(".orden_emp").val('');
-    }
-});
-
-  
-$("#idPlantilla").change(function(){
-    $("#Documento").val('');
-    //Ocultar firmantes 
-    $("#icono_representante").hide();
-    $("#icono_proveedores").hide();
-    $("#pdf64").val('');
-    $("#GENERAR").attr('disabled', true);
-    if( $("#idPlantilla").val() != 0 ){
-        getSubAreas();
-        $("#idCentroCosto").attr("disabled",false);
-        //habilita la subida del pdf
-        $(".btn-file").attr("disabled",false);
-        $("#pdf64").attr("disabled",false);
-        //fin
-        $("#Representates").val("");
-        $("#Empleado").val("");
-        $("#Cantidad_Firmantes").val("");
-        $("#proveedores").val("");
-        $(".orden").val('');
-        $(".orden_emp").val('');
-        $("#mensajeError").removeClass("callout callout-warning");
-        $("#mensajeError").html("");
-        $('input[type=checkbox]').prop('checked', false);
-        $("#step-1").collapse('hide');
-        $("#step-2").collapse('hide');
-    }else{
-        $("#idCentroCosto").attr("disabled",true);
-        //deshabilita subida pdf
-        $("#pdf64").attr("disabled",true);
-        $(".btn-file").attr("disabled",true);
-        //fin
-        $("#idPlantilla").val(0);
-        $("#Documento").val('');
-        $("#pdf64").val();
-        $("#idWF").val(0);
-        $(".orden").val('');
-    }
-    //para eliminar filas tabla
-    var nfilas = $("#tabla_cli tr").length;
-    for (var i = 1; i < nfilas; i++) 
-    {		
-        document.getElementById("tabla_cli").deleteRow(1);
-    }
-});
-
-/*********************/
-/**FILTRAR SUB AREAS**/
-/********************/
-function getSubAreas()
-{
-    //console.log(123);
-    var RutEmpresa = $("#RutEmpresa").val();
-    $(".tgcc").remove();
-    $("#mensajeError").removeClass("callout callout-warning");
-    $("#mensajeError").html(""); 
-    var idplantilla = $("#idPlantilla").val();
-    if( $("#idPlantilla").val() != 0 ){
-        var url  = "rl_importacionpdf_tipogestorcc_ajax.php?idplantilla=" + idplantilla + "&RutEmpresa=" + RutEmpresa;
-        if( window.XMLHttpRequest )
-            ajax2 = new XMLHttpRequest(); 
-        else
-            ajax2 = new ActiveXObject("Microsoft.XMLHTTP"); 
-        ajax2.onreadystatechange = funcionCallback_subarea;
-        // Enviamos la peticion
-        ajax2.open( "GET", url, true );
-        ajax2.send( "" );
-    }
-}
-var salida2;
-function funcionCallback_subarea()
-{
-    // Comprobamos si la peticion se ha completado (estado 4)
-    if( ajax2.readyState == 4 )
-    {
-        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-        if( ajax2.status == 200 )
-        {
-            salida2 = ajax2.responseText;
-            if( salida2 != '' ){
-                var datos = JSON.parse(salida2);
-                $.each(datos,function(key, registro) {
-                    $("#idCentroCosto").append('<option class="tgcc" value='+ registro.centrocostoid +'>'+registro.nombrecentrocosto+'</option>');                                      
-                }); 
-            }
-            //console.log('HOLO');
-            buscarFirmantesproveedores();
-        }
-    }
-}
-
-var axaj3;
-var salida3;
-function buscarFirmantesproveedores(){
-    //clearInterval(proceso);// poner esto cuando llega respuesta														
-    var RutProveedor = $("#RutProveedor").val(); 
-    var RutEmpresa = $("#RutEmpresa").val(); 
-    if( RutEmpresa != 0 ){
-        var url  = "rl_Generar_Documentos_Masivos4_ajax.php?RutProveedor=" + RutProveedor + "&RutEmpresa=" + RutEmpresa;
-        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-        if( window.XMLHttpRequest )
-            axaj3 = new XMLHttpRequest(); // No Internet Explorer
-        else
-            axaj3 = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-        // Almacenamos en el control al funcion que se invocara cuando la peticion
-        // cambie de estado 
-        axaj3.onreadystatechange = funcionCallback_proveedores_seleccionado;
-        // Enviamos la peticion
-        axaj3.open( "GET", url, true );
-        axaj3.send( "" );
-    }
-}
-
-function funcionCallback_proveedores_seleccionado()
-{
-    // Comprobamos si la peticion se ha completado (estado 4)
-    if( axaj3.readyState == 4 )
-    {
-        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-        if( axaj3.status == 200 )
-        {
-            // Escribimos el resultado en la pagina HTML mediante DHTML 
-            salida3 = axaj3.responseText; 
-            datos = JSON.parse(salida3);
-            if( salida3 === '1' ) num = 0;
-            else num = datos.length;
-            try {
-                $.each(datos,function(key, registro) {
-                    var fila_orden = '';
-                    fila_orden = "<tr align='center' class='fila_cl'><td ><input type='checkbox' name='Firmantes_Cli[]' class='f_cli' value='" + registro.RutUsuario + "'id='cli_" + registro.correlativo + "'  onclick='seleccion_cli(" + registro.correlativo + ");'/> </td><td>" + registro.RutUsuario + "</td><td>" + registro.nombrecompleto +"</td><td class='columna_cli'><input name='orden_" + registro.RutUsuario + "'' id='orden_" + registro.RutUsuario + "' class='orden' style='text-align:center; border: none;' readonly /></td></tr>";
-                    $("#tabla_cli tr:last ").after(fila_orden);                   
-                });         
-            //<td>" + registro.NombreProveedor + "</td>
-            }catch(e) {
-                $("#mensajeError").addClass("callout callout-warning");
-                $("#mensajeError").html(salida3);
-                $("#FechaDocumento").attr("disabled",true);
-            }
-            if( num === 0 ){
-                $("#mensajeError").addClass("callout callout-warning");
-                $("#mensajeError").html("Los accionistas seleccionados no tiene firmantes asociados");
-            }
-            getDataFlujo();
-        }
-    }
-}
-
-function getDataFlujo()
-{
-    var idPlantilla = $("#idPlantilla").val();
-    if( idPlantilla != 0 ){
-        var url  = "rl_Generar_Documentos_Masivos1_ajax.php?idPlantilla=" + idPlantilla;
-        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-        if( window.XMLHttpRequest )
-            ajax = new XMLHttpRequest(); // No Internet Explorer
-        else
-            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-        // Almacenamos en el control al funcion que se invocara cuando la peticion
-        // cambie de estado 
-        ajax.onreadystatechange = funcionCallback_Plantilla;
-        // Enviamos la peticion
-        ajax.open( "GET", url, true );
-        ajax.send( "" );
-    }
-}
-
-function funcionCallback_Plantilla()
-{
-    // Comprobamos si la peticion se ha completado (estado 4)
-    if( ajax.readyState == 4 )
-    {
-        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-        if( ajax.status == 200 )
-        {
-            // Escribimos el resultado en la pagina HTML mediante DHTML
-            //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
-            salida = ajax.responseText;
-            if( salida != '' ){ 
-                var datos = JSON.parse(salida);
-                var max = $("#max").val();
-                $.each(datos,function(key, registro) {
-                    //2 : Representante 
-                    //3 : Empleado
-                    //11: Cliente
-                    if( registro.idEstado == 2 ){
-                        $("#Representantes").val("1");
-                        if ( registro.ConOrden === 1 ){
-                            $(".columna_emp").css("display","block");
-                        }else{
-                            $(".columna_emp").css("display","none");
-                        }
-                    }
-                    if( registro.idEstado == 12 ){
-                        $("#proveedores").val("1");
-                        if ( registro.ConOrden === 1 ){
-                            $(".columna_cli").css("display","block");
-                        }else{
-
-                            $(".columna_cli").css("display","none");
-                        }
-                    }        
-                    $("#Cantidad_Firmantes").val('n'); 
-                    $("#idWF").val(registro.idWF);                               
-                }); 
-            }else{
-                $("#mensajeError").removeClass("callout callout-warning");
-                $("#mensajeError").html("");
-            }
-        }
-    }
-}
-  
-function mostrarFirmantes(){
-    var Representantes = $("#Representantes").val();
-    if( Representantes != '' ){
-        $("#icono_representante").show();
-        $("#label").show();
-    }
-    if( $("#proveedores").val() != '' ){
-        $("#icono_proveedores").show();
-    }
-    //$("#Representantes").val('');
-    //$("#proveedores").val('');
-}
-
-$("#pdf64").change(function(){
-    $("#Documento").val($("#pdf64").val());
-    $("#Documento").attr("disabled",true);//deshabilita texto de la subida del documento
-    var cantidad_proveedores = $('.f_cli:checked').length; 
-    var cantidad_firmantes = $('.f_emp:checked').length; 
-    if ( $("#mensajeError").html() == '' || num > 0 )	mostrarFirmantes(); 
-    if ( cantidad_proveedores > 0 && cantidad_firmantes > 0 ){
-         $("#GENERAR").attr('disabled', false);
-    }
-});
-
-function Checkfiles()
-   {	
-    var fup = document.getElementById('pdf64');
-    var fileName = fup.value;
-    var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
-    if(ext == "pdf" || ext == "PDF")
-    {
-        return true;
-    } 
-    else
-    {
-        alert("Solo se pueden seleccionar archivos pdf !");
-        fup.focus();
-        return false;	
-    }
-}
-
-/**************************************/
-/**SELECCION DE FIRMANTES POR EMPRESA**/
-/**************************************/
-function seleccion(id){
-    var cantidad_proveedores = $('.f_cli:checked').length; 
-    var cantidad_firmantes = $('.f_emp:checked').length; 
-    var max_firmantes = $("#max").val();
-    var cant = cantidad_firmantes + cantidad_proveedores; 
-    if ( cantidad_firmantes == 0 ){
-        $("#mensajeError").addClass("callout callout-warning");
-        $("#mensajeError").html("Debe seleccionar al menos un Firmante, seg&uacute;n el flujo de firma de la Plantilla seleccionada" );
-        $("#GENERAR").attr('disabled', true);						   
-        $('.f_emp').prop("checked",false);
-        $(".orden_emp").val('');
-        return false;
-    }else{
-        $("#mensajeError").removeClass("callout callout-warning");
-        $("#mensajeError").html("");
-        if( $('.f_cli:checked').length > 0 ){
-            if ( max_firmantes != 0 ){
-                if ( cant > max_firmantes ){
-                $("#mensajeError").addClass("callout callout-warning");
-                $("#mensajeError").html("La cantidad de firmantes por Documento no debe ser mayor a " + max_firmantes );
-                $("#GENERAR").attr('disabled', true);
-                return false;
-                }else{
-                    $("#GENERAR").attr('disabled', false);
-                }
-            }else{
-                $("#GENERAR").attr('disabled', false);
-            }
-        }else{
-            if( cant > 0 && ($("#proveedores").val() != '1' || $("#proveedores").val() === 'n')){ //Si el flujo no tiene proveedores
-                $("#GENERAR").attr('disabled',false);
-            }
-            else{
-                $("#GENERAR").attr('disabled', true);
-            }
-            //return false;
-        }
-        //Colocar orden 
-        var rutempresa = $("#emp_" + id).val();
-        if($('#emp_'+ id).is(':checked')){
-            $("#orden_emp_" + rutempresa ).val(cantidad_firmantes);	   
-        }else{
-            //if( $("#Representantes_ConOrden").val() == 1 ){
-            //cantidad_firmantes = $('.f_emp:checked').length; 
-            //Actualizar arreglo
-            convertirArreglo_emp();
-            $("#orden_emp_" + rutempresa ).val('');
-            cantidad_firmantes = $('.f_emp:checked').length; 
-            if ( cantidad_firmantes == 1 ){
-                if( confirm(' Desea reiniciar el orden de los firmantes ?')){
-                    //Si 
-                    $(".f_emp").prop("checked",false);
-                    $(".orden_emp").val('');
-                    $("#GENERAR").attr('disabled', true);
-                }else{	
-                    for( i = 1; i < ($("#tabla_emp tr").length + 1) ; i++ ){
-                        rutempresa = $("#emp_" + i).val();
-                        var orden_rc = $("#orden_emp_" + rutempresa).val(); 
-                        if ( orden_rc != '' ) {
-                            $("#orden_emp_" + rutempresa ).val('1');
-                        }
-                    }
-                }
-            }
-            if ( cantidad_firmantes > 1 ){
-                if( confirm(' Desea reiniciar el orden de los firmantes ?')){
-                    //Si 
-                    $(".f_emp").prop("checked",false);
-                    $(".orden_emp").val('');
-                    $("#GENERAR").attr('disabled', true);
-                }else{
-                    convertirArreglo_emp();
-                    nuevo_emp = convertirItem(arreglo_emp, orden_emp);
-                    var items = nuevo_emp;
-                    items.sort(function (a, b) {
-                    if (a.orden > b.orden) {
-                        return 1;
-                    }
-                    if (a.orden < b.orden) {
-                        return -1;
-                    }
-                    // a must be equal to b
-                    return 0;
-                    });
-                    reasignarOrden(items,'emp_');
-                }
-            }else{
-                $("#orden_emp_" + rutempresa ).val('');
-            }
-        }
-    }
-}
-  
-/****************************/
-/**OPERACIONES DE SELECCION**/
-/****************************/
-function reasignarOrden(items,emp){
-    for ( i = 0; i < items.length ; i++ ){
-        var rut = $("#" + items[i].id).val(); 
-        if( emp != '' )
-            $("#orden_" + emp + rut).val(i+1);
-        else
-            $("#orden_" + rut).val(i+1);
-    }
-}
-
-function convertirArreglo(){
-    arreglo = [];
-    var rut = '';
-    var orden_id = '';
-    $(".f_cli").each(function (index) {  
-        if( $(this).is(':checked') ){
-            rut = this.id;
-            orden_id = $("#orden_"+ $("#" + this.id).val()).val();
-            arreglo.push(this.id);
-            orden.push(orden_id);
-        }
-    });
-}
-
-function convertirArreglo_emp(){
-    arreglo_emp = [];
-    orden_emp = [];
-    var rut = '';
-    var orden_id = '';
-    $(".f_emp").each(function (index) {  
-        if( $(this).is(':checked') ){
-            rut = this.id;
-            orden_id = $("#orden_emp_" + $("#" + this.id).val()).val();
-            arreglo_emp.push(this.id);
-            orden_emp.push(orden_id);
-        }
-    });
-}
-
-function convertirItem(arreglo1,arreglo2){
-    var data = new Object();
-    var array = new Array();
-    $.each(arreglo1, function (ind, elem){ 
-        var data = new Object();
-        data.id = elem;
-        data.orden = arreglo2[ind];
-        array[ind] = data;
-    }); 	
-    return array;
-}
-
-/**************************************/
-/**SELECCION DE FIRMANTES POR CLIENTE**/
-/**************************************/
-function seleccion_cli(id){
-    var cantidad_proveedores = $(".f_cli:checked").length;
-    var cantidad_firmantes = $(".f_emp:checked").length;
-    var max_firmantes = $("#max").val();
-    var cant = cantidad_firmantes + cantidad_proveedores;
-    //Si el flujo tiene Cliente la cantidad de firmantes sera n
-    if ( cantidad_proveedores == 0 ){
-        $("#mensajeError").addClass("callout callout-warning");
-        $("#mensajeError").html("Debe seleccionar al menos un Firmante por Proveedor, seg&uacute;n el flujo de firma de la Plantilla seleccionada" );
-        $("#GENERAR").attr("disabled", true);
-        $(".f_cli").prop("checked",false);
-        $(".orden").val('');
-        return false;
-    }else{
-        $("#mensajeError").removeClass("callout callout-warning");
-        $("#mensajeError").html("");
-        //Activar o Desactivar el boton de Generar
-        if( $('.f_emp:checked').length > 0 ){
-            if( max_firmantes != 0 ){
-                if ( cant > max_firmantes ){
-                $("#mensajeError").addClass("callout callout-warning");
-                $("#mensajeError").html("La cantidad de firmantes por Documento no debe ser mayor a " + max_firmantes);
-                $("#GENERAR").attr('disabled', true);
-                return false;
-                }else{
-                    $("#GENERAR").attr('disabled', false);
-                }
-            }else{
-                $("#GENERAR").attr('disabled', false);
-            }
-        }else if( $("#Representantes").val() == ""  ){
-            $("#GENERAR").attr('disabled', false);
-        }else{
-            $("#GENERAR").attr('disabled', true);
-            //return false;
-        }
-        //Colocar orden 
-        var RutProveedor = $("#cli_" + id).val();
-        if($('#cli_'+ id).is(':checked')){
-            $("#orden_" + RutProveedor ).val(cantidad_proveedores);
-        }else{
-            //Actualizar arreglo
-            convertirArreglo();
-            $("#orden_" + RutProveedor ).val('');
-            cantidad_proveedores = $(".f_cli:checked").length;
-            if ( cantidad_proveedores == 1 ){
-                if( confirm(' Desea reiniciar el orden de los firmantes ?')){
-                    //Si 
-                    $(".f_cli").prop("checked",false);
-                    $(".orden").val('');
-                    $("#GENERAR").attr('disabled', true);
-                }else{	
-                    for( i = 1; i < ($("#tabla_cli tr").length + 1) ; i++ ){
-                        RutProveedor = $("#cli_" + i).val();
-                        var orden_rc = $("#orden_" + RutProveedor).val();
-                        if ( orden_rc != '' ) {
-                            $("#orden_" + RutProveedor ).val('1');
-                        }
-                    }
-                }
-            }
-            if ( cantidad_proveedores > 1 ){
-                if( confirm(' Desea reiniciar el orden de los firmantes ?')){
-                    //Si 
-                    $(".f_cli").prop("checked",false);
-                    $(".orden").val('');
-                    $("#GENERAR").attr('disabled', true);
-                }else{
-                    convertirArreglo();
-                    nuevo = convertirItem(arreglo, orden);
-                    var items = nuevo;
-                    items.sort(function (a, b) {
-                    if (a.orden > b.orden) {
-                        return 1;
-                    }
-                    if (a.orden < b.orden) {
-                        return -1;
-                    }
-                    // a must be equal to b
-                    return 0;
-                    });
-                    reasignarOrden(items,'');
-                }
-            }else{
-                $("#orden_" + RutProveedor ).val('');
-            }
-        }
-    }
-} 
-  
-$(".close").click(function(){
-    if( $("#RutProveedor").val() == '' ){
-        $("#FechaDocumento").attr("disabled",true);
-        $("#mensajeError").html("Debe seleccionar un Cliente");
-        $("#mensajeError").addClass("callout callout-warning");
-    }
-    else{
-        $("#FechaDocumento").attr("disabled",false);
-        $("#mensajeError").html("");
-        $("#mensajeError").removeClass("callout callout-warning");
-    }
-});
-  
-$("#cerrar_proveedores").click(function(){
-    if( $("#RutProveedor").val() == '' ){
-        $("#FechaDocumento").attr("disabled",true);
-        $("#mensajeError").html("Debe seleccionar un Cliente");
-        $("#mensajeError").addClass("callout callout-warning");
-    }
-    else{
-        $("#FechaDocumento").attr("disabled",false);
-        $("#FechaDocumento").val('');
-        $("#idTipoDoc").attr("disabled",true);
-        //$("#idTipoDoc").val(0);
-        $("#idProceso").attr("disabled",true);
-        $("#idProceso").val(0);
-        $("#idPlantilla").attr("disabled",true);
-        $("#idPlantilla").val(0);
-        //para deshabilitar la subida del pdf
-        $("#pdf64").attr("disabled",true);
-        $(".btn-file").attr("disabled",true);
-        //fin
-        //Ocultar firmantes 
-        $("#icono_representante").hide();
-        $("#icono_proveedores").hide();
-        $("#label").hide();
-        $("#step-1").collapse('hide');
-        $("#step-2").collapse('hide');
-        $("#mensajeError").html("");
-        $("#mensajeError").removeClass("callout callout-warning");
-    }
-});
-
-$("#idCentroCosto").change(function(){
-    var cc = $("#idCentroCosto").val();
-    if( cc == 0 )
-    {
-        $("#pdf64").attr("disabled",true);
-        $(".btn-file").attr("disabled",true);
-        $("#Documento").val('');
-    }
-    else
-    {
-        $("#pdf64").attr("disabled",false);
-        $(".btn-file").attr("disabled",false);
-    }
-});
-  
-//nuevo///////////////////////////////////////////////
-function validargenerar()
-{
-    var cc = $("#idCentroCosto").val();
-    if ( cc == 0)
-    {
-        alert ("Error, Debe Ingresar Sub Area!");
-        return false;	
-    }
-}
-  
-$("#RutProveedor").focusout(function(){
-    resultado = ajax_buscar_proveedor( $("#RutProveedor").val() );
-    if (resultado != "ERROR")
-    {
-        $("#NombreProveedor").val(resultado.NombreProveedor); 
-        $("#FechaDocumento").attr("disabled",false);
-    }
-    var rut = $("#RutProveedor").val();
-    var nom = $("#NombreProveedor").val();
-    if ( nom.trim() == '' && rut.trim() != '' )
-    {	
-        ventanax("Proveedor no registrado","error");
-    }
-});
-  
-$("#rutempresa_m").focusout(function(){
-    resultado = ajax_buscar_proveedor( $("#rutempresa_m").val() );
-    if (resultado != 'ERROR' && resultado != '')
-    {
-        $("#razonsocial_m").val(resultado.NombreProveedor); 
-        $("#direccion_m").val(resultado.Direccion); 
-        $("#comuna_m").val(resultado.Comuna); 
-        $("#ciudad_m").val(resultado.Ciudad); 
-    }
-});
-  
-var existefirmante = '';
-$("#rutrepresentate_fp").focusout(function(){
-    resultado = ajax_buscar_proveedor_firmante( $("#rutempresa_fp").val(), $("#rutrepresentate_fp").val() );
-    if (resultado != 'ERROR' && resultado != '')
-    {	
-        $("#nacionalidad_fp").val(resultado.nacionalidad); 
-        $("#nombre_fp").val(resultado.nombre); 
-        $("#paterno_fp").val(resultado.appaterno); 
-        $("#materno_fp").val(resultado.apmaterno); 
-        $("#idFirma option[value='"+ resultado.idFirma +"']").attr("selected",true);
-        $("#email").val(resultado.correo); 
-        $("#cargo_fp").val(resultado.cargo); 
-        existefirmante = 'S';
-    }		
-});
-
-function graba_firmante_proveedor()
-{
-    resultado = ajax_graba_firmante_proveedor( $("#nacionalidad_fp").val(),$("#nombre_fp").val(),$("#paterno_fp").val(),$("#materno_fp").val(),$("#email").val(),$("#rutempresa_fp").val(),$("#rutrepresentate_fp").val(),$("#idFirma").val(),$("#cargo_fp").val() )
-    if (resultado != "ERROR")
-    {	
-        if (existefirmante == '')
-        {
-            var nfilas = $("#tabla_cli tr").length;
-            nfilas = nfilas + 1;
-            fila_orden = "<tr align='center' class='fila_cl'><td ><input type='checkbox' name='Firmantes_Cli[]' class='f_cli' value='" + $("#rutrepresentate_fp").val() + "'id='cli_" + nfilas + "'  onclick='seleccion_cli(" + nfilas + ");'/> </td><td>" + $("#rutrepresentate_fp").val() + "</td><td>" +  $("#nombre_fp").val() + ' ' + $("#paterno_fp").val() + ' ' + $("#materno_fp").val() +"</td><td class='columna_cli'><input name='orden_" + $("#rutrepresentate_fp").val() + "'' id='orden_" + $("#rutrepresentate_fp").val() + "' class='orden' style='text-align:center; border: none;' readonly /></td></tr>";
-            $("#tabla_cli tr:last ").after(fila_orden);  
-        }
-        resultado = ajax_asigna_rol_firma( $("#rutrepresentate_fp").val() , 'CLIENTE' )	
-        if (resultado != "ERROR")
-        {
-            $('#modal_creafirmanteproveedor').modal('hide');
-            $("#nacionalidad_fp").val('');
-            $("#nombre_fp").val('');
-            $("#paterno_fp").val('');
-            $("#materno_fp").val('');
-            $("#email").val('');
-            $("#rutempresa_fp").val('')
-            $("#rutrepresentate_fp").val('');
-            $("#cargo_fp").val('');
-        }
-    }
-}	
-  
-function graba_proveedor()
-{
-    resultado = ajax_graba_proveedor( $("#rutempresa_m").val(), $("#razonsocial_m").val(), $("#direccion_m").val(), $("#comuna_m").val(), $("#ciudad_m").val() )
-    if (resultado != "ERROR")
-    {
-        var rut = $("#rutempresa_m").val();
-        var nom = $("#razonsocial_m").val();
-        $("#RutProveedor").val(rut);
-        $("#NombreProveedor").val(nom);
-        $('#modal_creaproveedor').modal('hide');
-        $("#rutempresa_m").val(''); 
-        $("#razonsocial_m").val(''); 
-        $("#direccion_m").val(''); 
-        $("#comuna_m").val(''); 
-        $("#ciudad_m").val(''); 
-        $("#FechaDocumento").attr("disabled",false);		
-    }		
-    else
-    {
-        $("#NombreProveedor").val(resultado.NombreProveedor); 
-        $("#FechaDocumento").attr("disabled",false);	
-    }
-}
-  
-//para ir al mantenedor de proveedores
-function mantenedor()
-{
-    rut = $("#RutEmpresa").val();
-    $("#RutEmpresadin").val(rut);
-    formproveedor.submit();
-}
-  
-//para agregar el rut del  proveedor al popup de ingreso de proveeedor
-function inicio_firmate_proveedor()
-{
-    var rut = $("#RutProveedor").val();
-    $("#rutempresa_fp").val(rut);
-}
-  
-//Botón de empresa
-$('#boton_emp').click(function(){
-    if( $("#step-2").hasClass('in') ){
-        $("#step-2").removeClass('in');
-    }
-});
-
-//Botón de cliente/accionista
-$('#boton_cli').click(function(){
-    if( $("#step-1").hasClass('in') ){
-        $("#step-1").removeClass('in');
-    }
-});
-</script>

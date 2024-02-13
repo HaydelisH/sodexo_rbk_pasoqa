@@ -1,0 +1,96 @@
+/*Paginado*/
+
+#pagina_primera  {
+    background: url(../images/navegacion/2atras.gif) no-repeat;
+}
+
+
+#pagina_anterior {
+    width: 8px;
+    background: url(../images/navegacion/1atras.gif) no-repeat;
+}
+
+#pagina_siguente {
+    width: 8px;
+    background: url(../images/navegacion/1adelante.gif) no-repeat;
+}
+
+
+#pagina_ultimo {
+    background: url(../images/navegacion/2adelante.gif) no-repeat;
+}
+
+ul.cke_autocomplete_panel {
+    width: 300px;
+}
+ul.cke_autocomplete_panel li {
+    padding: 5px;
+}
+.columns {
+    overflow: hidden;
+}
+.columns > .editor {
+    float: left;
+    width: 65%;
+    position: relative;
+}
+.columns > .templates {
+    float: right;
+    width: 35%;
+}
+.columns > .templates > ul {
+    margin: 15px 0 0 10px;
+}
+.item-title {
+    background-color: #ffeec2
+}
+
+#cargando {
+    width: 100%;height: 100%;
+    overflow: hidden; 
+    top: 0px;
+    left: 0px;
+    z-index: 10000;
+    text-align: center;
+    position:absolute; 
+    background-color: #FFFFFF;
+    opacity:0.3;
+    filter:alpha(opacity=40);
+ }
+
+.colorBlanco{
+	background-color: transparent;
+	color:white;
+	padding: 15px;
+}
+
+#cargandoImagen {
+    position: fixed;
+    margin-top:5%;
+    margin-left:25%;
+    top: 100px;
+    left: 240px;
+    z-index: 100;
+}
+
+.logoInicio {
+    background: url('../../images/logo.png') no-repeat;
+    background-repeat: no-repeat;
+    background-position: center; 
+    background-size: cover;
+    height:10%;
+    width:10%;
+    margin: 2px 5px 5px 0;
+    border-radius: 50%;
+}
+
+.logoblanco{
+    background: url('../../images/logo_mini.png');
+    background-repeat: no-repeat;
+    background-position: center; 
+    background-size: cover;
+    height:100%;
+    width:100%;
+    margin: 2px 5px 5px 0;
+    border-radius: 50%;
+  }

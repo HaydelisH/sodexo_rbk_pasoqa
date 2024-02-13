@@ -78,10 +78,10 @@ class importacion_firma {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: importacionpdf.php');
@@ -113,7 +113,7 @@ class importacion_firma {
 			// y nos vamos
 			return;
 		}
-		//print_r ($_REQUEST);
+		//print_r ($_POST);
 		// creamos la seguridad
 		
 		$this->seguridad = new Seguridad($this->pagina,$this->bd);
@@ -151,9 +151,9 @@ class importacion_firma {
 
 		//se construye el menu
 		include("includes/opciones_menu.php");
-		//print_r ($_REQUEST);
+		//print_r ($_POST);
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]) && (!isset($_REQUEST["accion2"])))
+		if (!isset($_POST["accion"]) && (!isset($_POST["accion2"])))
 		{
 			// mostramos el listado
 			$this->importa();
@@ -164,7 +164,7 @@ class importacion_firma {
 		}
 	
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "GENERAR":
 				$this->procesar();
@@ -180,9 +180,9 @@ class importacion_firma {
 					
 		}
 
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "PROCESOANTERIOR":
 					$this->proceso_anterior();
@@ -197,12 +197,12 @@ class importacion_firma {
 
 	private function procesar()
 	{
-		if ($_REQUEST["accion2"] == "Inicio")
+		if ($_POST["accion2"] == "Inicio")
 		{
 			$this->importa();
 		}
 		
-		if ($_REQUEST["accion2"] == "Listado")
+		if ($_POST["accion2"] == "Listado")
 		{
 			$this->listado();
 		}
@@ -229,7 +229,7 @@ class importacion_firma {
 			if($dt2->leerFila())
 			{
 				$noenviados = count($dt2->data);
-				$formulario2[0]=$_REQUEST;
+				$formulario2[0]=$_POST;
 				$this->pagina->agregarDato("formulario2",$formulario2);
 			}
 		}
@@ -244,12 +244,12 @@ class importacion_firma {
 	
 	private function importa()
 	{	
-		//print_r ($_REQUEST);
+		//print_r ($_POST);
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
 
 		$datos["rut"]=$this->seguridad->rut;
 
@@ -306,12 +306,12 @@ class importacion_firma {
 	
 	private function listado()
 	{	
-		//print_r ($_REQUEST);
+		//print_r ($_POST);
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
 
 		$datos["usuarioid"]=$this->seguridad->rut;
 

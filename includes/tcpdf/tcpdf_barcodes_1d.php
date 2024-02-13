@@ -1,7 +1,6 @@
 <?php
 //============================================================+
 // File name   : tcpdf_barcodes_1d.php
-// Version     : 1.0.027
 // Begin       : 2008-06-09
 // Last Update : 2014-10-20
 // Author      : Nicola Asuni - Tecnick.com LTD - www.tecnick.com - info@tecnick.com

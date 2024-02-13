@@ -41,10 +41,10 @@ class respuesta_importar_masivo{
 	function __construct()
 	{
 	// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -104,7 +104,7 @@ class respuesta_importar_masivo{
 		include("includes/opciones_menu.php");
 	
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -116,7 +116,7 @@ class respuesta_importar_masivo{
 	
 		
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica siempre va
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "BUSCAR":
 				$this->listado();
@@ -132,7 +132,7 @@ class respuesta_importar_masivo{
 	{  
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["usuarioingid"]=$this->seguridad->usuarioid;
 
 		$this->respuesta_importarBD->listado($datos,$dt);

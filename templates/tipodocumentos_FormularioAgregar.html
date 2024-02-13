@@ -18,20 +18,21 @@
           <php:repeticion id="formulario">
             <!--Campos basicos-->   
             <!--Descripcion-->
-            <div class="form-row">
+            <div class="row">
               <div class="col-md-12">
                 <label for="Descripcion">Descripci&oacute;n</label>
                 <input type="text" class="form-control" id="descripcion" name="descripcion"  maxlength="50" value="<php:item id="Descripcion" />" placeholder="Descripcion" >
               </div>
             </div>
             </php:repeticion>  
-          <div class="form-row">  
-            <div class="col-md-2 xs-12 pull-right">
-               <input type="hidden" name="accion" value="AGREGAR" />
-              <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="AGREGAR" onclick="javascript:return validarFormulario(this);"/>Guardar</button>
-            </div>
-          </div>      
-        </form>  
+            <div class="row d-flex justify-content-end">  
+              <div class="col-md-2 xs-12 d-grid gap-2 ">           
+                <input type="hidden" name="accion" value="AGREGAR" />
+                <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="AGREGAR" onclick="javascript:return validarFormulario(this);"/>Guardar</button>
+              </div>
+            </div>      
+          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>  
 		
       </div>
       </div>

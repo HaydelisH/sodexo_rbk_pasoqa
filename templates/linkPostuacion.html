@@ -11,18 +11,18 @@
 						<!--Mensajes-->
 						<div id="mensajeError"><php:texto id="mensajeError" /></div>
 						<div id="mensajeOK"><php:texto id="mensajeOK" /></div>	
-						<form name="formulariox" class="formulariox" id="formulariox"  class="form-horizontal" action="Postulacion.phpx" method="POST" autocomplete=off>
+						<form name="formulariox" class="formulariox" id="formulario"  class="form-horizontal" action="Postulacion.phpx" method="POST" autocomplete=off>
 							<php:repeticion id="formulario">
 							<div class="box-body">
-								<!--div class="form-row">
+								<!--div class="row">
 									<div class="col-md-12">
 										<label style="float:right;"> (*) Campos obligatorios </label>
 									</div>
 								</div-->
-								<div class="form-row">
+								<div class="row">
                                     <div class="col-md-6 xs-12">
                                         <label for="contenedorid" >Empresa</label>
-                                        <select class= "form-control" name="RutEmpresa" id="RutEmpresa">
+                                        <select class= "form-control RutEmpresa_LINKP" name="RutEmpresa" id="RutEmpresa">
                                             <option value="0">(Seleccione)</option>
                                             <php:repeticion id="Empresas">
                                             <option value="<php:item id="RutEmpresa" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEmpresa" /><php:argumento idvalor="RutEmpresa" /></php:funcion>><php:item id="RazonSocial" /></option>
@@ -31,7 +31,7 @@
                                     </div>
                                     <div class="col-md-6 xs-12">
                                         <label for="contenedorid" >Caducidad Link</label>
-                                        <select class= "form-control" name="proximidadCaducidadId" id="proximidadCaducidadId">
+                                        <select class= "form-control proximidadCaducidadId_LINKP" name="proximidadCaducidadId" id="proximidadCaducidadId">
                                             <option value="0">(Seleccione)</option>
                                             <php:repeticion id="proximidadCaducidad">
                                             <option value="<php:item id="proximidadCaducidadId" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="proximidadCaducidadId" /><php:argumento idvalor="proximidadCaducidadId" /></php:funcion>><php:item id="proximidadCaducidadNombre" /></option>
@@ -40,7 +40,8 @@
                                     </div>
 								</div>
 							</div>
-						</form>
+						  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 						</php:repeticion>
 						<form name="formulario" class="formulario" id="formulario"  class="form-horizontal" action="Postulacion.php" method="POST" autocomplete=off>
 							<div class="box-body">
@@ -58,7 +59,8 @@
 									</tbody>
 								</table>
 							</div>
-						</form>
+						  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
                         <!--Modal modifiacacion-->
                         <div class="modal fade" id="modal_link" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                             <div class="modal-dialog" >
@@ -66,7 +68,7 @@
                                     <div class="modal-header" align="center">
                                         <h4 class="modal-title" id="ejemplo-titulo"> Asignaci&oacute;n link externo a cargo postulable </h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
+                                            <span aria-hidden="true" class="cerrar_modal">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
@@ -74,42 +76,41 @@
                                     <div class="box">
                                         <div class="box-body pad table-responsive">
                                             <div class="box-header">
-                                                <div class="form-row">
+                                                <div class="row">
                                                     <div class="col-md-12">
                                                         <label id="obligatorio" style="float:right; display:none;"> (*) Campos obligatorios </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <div class="form-row">
+                                                    <div class="row">
                                                         <!--Postulante rut-->
                                                         <div class="col-md-12 xs-12">
                                                             <label for="RazonSocial">Empresa</label>
                                                             <input type="text" class="form-control" id="RazonSocial" name="RazonSocial" disabled />
                                                         </div>
                                                     </div>
-                                                    <div class="form-row">
+                                                    <div class="row">
                                                         <!--Postulante rut-->
                                                         <div class="col-md-12 xs-12">
                                                             <label for="Titulo">Cargo</label>
                                                             <input type="text" class="form-control" id="Titulo" name="Titulo" disabled />
                                                         </div>
                                                     </div>
-                                                    <div class="form-row">
+                                                    <div class="row">
                                                         <!--Postulante rut-->
                                                         <div class="col-md-12 xs-12">
                                                             <label class="unid" id="uno" for="link">Link</label>
-                                                            <input type="text" class="form-control" id="link" name="link" value="<php:item id="link" />" placeholder="Link" />
+                                                            <input type="text" class="form-control link_LINKP" id="link" name="link" value="<php:item id="link" />" placeholder="Link" />
                                                         </div>
                                                     </div>
-                                                    <div class="form-row">
+                                                    <div class="row">
                                                         <!--Fecha de inicio-->
                                                         <div class="col-md-12 xs-12" >
                                                             <label class="unid" id="dos" for="">Fechas caducidad link</label>
                                                             <div class="form-group">
-                                                                <div class="input-group date">
-                                                                    <div class="input-group-addon">
-                                                                        <i class="fa fa-calendar"></i>
-                                                                    </div>
+                                                                <div class="input-group mb-3 date">
+                                                                    <div class="input-group-prepend date"><span class="input-group-text" style="padding-bottom: 12px;padding-top: 12px;"><i class="fa fa-calendar"></i></span></div>
+                                                                    
                                                                     <input type="datetime" style="background-color: white;" class="form-control pull-right" id="fechaCaducidadLink" name="fechaCaducidadLink" placeholder="Fecha caducidad link" value="<php:item id="fechaCaducidadLink"/>"  />
                                                                 </div>
                                                             </div>
@@ -122,7 +123,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer" style="margin-top:10px;">
-                                        <button type="button" class="btn btn-secondary btn-md" id="cerrar_cargoEmpleado" onclick="modificar('' + $('#link').val() + '', '' + $('#fechaCaducidadLink').val() + '', '' + $('#RutEmpresa').val() + '', '' + $('#idCargoEmpleado').val() + '');">Actualizar</button>
+                                        <button type="button" class="btn btn-secondary btn-md" id="cerrar_cargoEmpleado" onclick="modificar_LINKP('' + $('.link_LINKP').val() + '', '' + $('.fechaCaducidadLink_LINKP').val() + '', '' + $('.RutEmpresa_LINKP').val() + '', '' + $('#idCargoEmpleado').val() + '');">Actualizar</button>
                                     </div>
                                 </div>
                             </div>
@@ -134,231 +135,3 @@
         <!--input type="datetime" style="background-color: white;" class="form-control" id="a_M023" name="a_M023" placeholder="Fecha de expiración" value=""-->
 	</div>
 </section>
-<script>
-	var ajax;
-
-    $('#fechaCaducidadLink').datepicker({
-        language: "es",
-        orientation: "bottom",
-        autoclose: true,
-        todayHighlight: true,
-        format: 'dd-mm-yyyy'
-    });
-
-    var listado = [];
-
-    $('#RutEmpresa').on('change', function(){
-        activaListado();
-    });
-
-    $('#proximidadCaducidadId').on('change', function(){
-        activaListado();
-    });
-
-    function activaListado()
-    {
-        if ($('#RutEmpresa').val() != 0)
-        {
-            getListado();
-        }
-        else
-        {
-            listado = [];
-            add2listado(listado);
-            // Limpier listado
-        }
-    }
- 
-    $('#link').on('change', function(){
-        etiquetaGuia();
-    });
-    $('#fechaCaducidadLink').on('change', function(){
-        etiquetaGuia();
-    });
-
-    function etiquetaGuia()
-    {
-        console.log($('#link').val(), $('#fechaCaducidadLink').val());
-        if ($('#link').val() != '' || $('#fechaCaducidadLink').val() != '')
-        {
-            $('#obligatorio').show();
-            $('#uno').html('Link (*)');
-            $('#dos').html('Fechas caducidad link (*)');
-        }
-        else
-        {
-            $('#obligatorio').hide();
-            $('#uno').html('Link');
-            $('#dos').html('Fechas caducidad link');
-        }
-    }
-
-
-    function getListado()
-    {
-		var RutEmpresa = $("#RutEmpresa").val();
-		$("#mensajeError").html("");
-		$("#mensajeError").removeClass("callout callout-warning");
-		var url  = "linkPostulacion_ajax.php?RutEmpresa=" + RutEmpresa + '&proximidadCaducidadId=' + $("#proximidadCaducidadId").val();
-		// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-		if( window.XMLHttpRequest )
-			ajax = new XMLHttpRequest(); // No Internet Explorer
-		else
-			ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-		// Almacenamos en el control al funcion que se invocara cuando la peticion
-		// cambie de estado 
-		ajax.onreadystatechange = funcionCallback_cargaCargos;
-		// Enviamos la peticion
-		ajax.open( "GET", url, true );
-		ajax.send( "" );
-    }
-
-	function funcionCallback_cargaCargos()
-	{
-		// Comprobamos si la peticion se ha completado (estado 4)
-		if( ajax.readyState == 4 )
-		{
-			// Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-			if( ajax.status == 200 )
-			{
-				// Escribimos el resultado en la pagina HTML mediante DHTML
-                salida = ajax.responseText;
-				listado = JSON.parse(salida);
-                add2listado(listado); 
-			}
-		}
-	}
-
-	function add2listado(listado)
-	{
-		$('#tabla_actualizacionLink').DataTable().destroy();
-		$('#tabla_actualizacionLink').DataTable({
-			data: listado,
-			columns: [
-				{
-					data: 'Titulo'
-				},
-				{
-					data: 'link'
-				},
-				{
-					data: 'fechaCaducidadLink'
-				},
-				{
-					data: 'estadoLink',
-                    render: function ( data, type, row ) {
-                        switch(data)
-                        {
-                            case 1: // Negro
-                            {
-                                html = '<div style="text-align: center;" title="' + row.estadoLinkTitle + '">		<i class="fa fa-circle" aria-hidden="true" style="color:black;" 	data-toggle="tooltip" title="' + row.estadoLinkTitle + '" 		alt="' + row.estadoLinkTitle + '"></i></div>';
-                                break;
-                            }
-                            case 2: // Verde
-                            {
-                                html = '<div style="text-align: center;" title="' + row.estadoLinkTitle + '">		<i class="fa fa-circle" aria-hidden="true" style="color:green;" 	data-toggle="tooltip" title="' + row.estadoLinkTitle + '" 		alt="' + row.estadoLinkTitle + '"></i></div>';;
-                                break;
-                            }
-                            case 3: // Naranjo
-                            {
-                                html = '<div style="text-align: center;" title="' + row.estadoLinkTitle + '">	<i class="fa fa-circle" aria-hidden="true" style="color:yellow;" 	data-toggle="tooltip" title="' + row.estadoLinkTitle + '" 	alt="' + row.estadoLinkTitle + '"></i></div>';
-                                break;
-                            }
-                            case 4: // Rojo
-                            {
-                                html = '<div style="text-align: center;" title="' + row.estadoLinkTitle + '">		<i class="fa fa-circle" aria-hidden="true" style="color:red;" 		data-toggle="tooltip" title="' + row.estadoLinkTitle + '" 	alt="' + row.estadoLinkTitle + '"></i></div>';
-                                break;
-                            }
-                        }
-                        return html;
-                    }
-				},
-                {
-                    data: 'Opciones',
-                    render: function ( data, type, row ) {
-                        html = '<button class="btn btn-md btn-warning btn-block" onclick="javascrip: mostrarModal(\'' + row.link + '\', \'' + row.fechaCaducidadLink + '\', \'' + row.RutEmpresa + '\', \'' + row.idCargoEmpleado + '\', \'' + row.RazonSocial + '\', \'' + row.Titulo + '\')" type="button" id="btn_modificarLink" data-toggle="modal" data-target="#modal_link" style="margin-top: 10px" >Modificar</button>';
-                        return html;
-                    }
-                }
-			],
-			paging: false,
-			//lengthMenu: [ 10, 25, 50 ],
-			lengthChange: true,
-			searching: false,
-			ordering: false,
-			info: true,
-			autoWidth: false,
-			fixedColumns: true
-		});
-	}
-
-    function mostrarModal(link, fechaCaducidadLink, RutEmpresa, idCargoEmpleado, RazonSocial, Titulo)
-    {
-        $('#link').val((link == 'null' ? '' : link));
-        $('#fechaCaducidadLink').val((fechaCaducidadLink == 'null' ? '' : fechaCaducidadLink));
-        $('#RutEmpresa').val(RutEmpresa);
-        $('#idCargoEmpleado').val(idCargoEmpleado);
-        $('#RazonSocial').val(RazonSocial);
-        $('#Titulo').val(Titulo);
-    }
-
-    function modificar(link, fechaCaducidadLink, RutEmpresa, idCargoEmpleado)
-    {
-        if ((link == '' && fechaCaducidadLink == '' ? true : (link != '' && fechaCaducidadLink != '' ? true : alert('Complete ambos campos o limpie ambos campos'))))
-        {
-            // Cerrar modal
-            $("#modal_link").modal('hide');//ocultamos el modal
-            $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
-            $('.modal-backdrop').remove();//eliminamos el backdrop del modal
-            console.log(link, fechaCaducidadLink, RutEmpresa, idCargoEmpleado);
-            actualizar(link, fechaCaducidadLink, RutEmpresa, idCargoEmpleado);
-        }
-        else
-        {}
-	}
-
-    function actualizar(link, fechaCaducidadLink, RutEmpresa, idCargoEmpleado)
-    {
-		//var RutEmpresa = $("#RutEmpresa").val();
-		$("#mensajeError").html("");
-		$("#mensajeError").removeClass("callout callout-warning");
-		var url  = "linkPostulacion_ajax2.php?RutEmpresa=" + RutEmpresa + '&idCargoEmpleado=' + idCargoEmpleado + '&fechaCaducidadLink=' + fechaCaducidadLink + '&link=' + encodeURIComponent(btoa(link));
-		// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-		if( window.XMLHttpRequest )
-			ajax = new XMLHttpRequest(); // No Internet Explorer
-		else
-			ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-		// Almacenamos en el control al funcion que se invocara cuando la peticion
-		// cambie de estado 
-		ajax.onreadystatechange = funcionCallback_actualizar;
-		// Enviamos la peticion
-		ajax.open( "GET", url, true );
-		ajax.send( "" );
-    }
-
-    function funcionCallback_actualizar()
-	{
-		// Comprobamos si la peticion se ha completado (estado 4)
-		if( ajax.readyState == 4 )
-		{
-			// Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-			if( ajax.status == 200 )
-			{
-				// Escribimos el resultado en la pagina HTML mediante DHTML
-                salida = ajax.responseText;
-				listado = JSON.parse(salida);
-                //add2listado(listado);
-                if (listado.exito)
-                {
-                    alert(listado.mensaje);
-                    getListado();
-                }
-                else
-                {
-                    alert(listado.mensaje);
-                }
-			}
-		}
-	}
-
-</script>

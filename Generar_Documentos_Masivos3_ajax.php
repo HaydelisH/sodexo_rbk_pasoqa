@@ -48,7 +48,7 @@ class empresas {
 		$this->plantillasBD->usarConexion($conecc);
 		
 		//Consultar las empresas que se tengan disponibles de ese tipo de contrato y esa empresa
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['PREFIJO_VAR'] = PREFIJO_VAR;
 		$datos['SUFIJO_VAR'] = SUFIJO_VAR;
 		$datos['SEPARADOR'] = SEPARADOR;

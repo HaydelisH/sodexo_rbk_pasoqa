@@ -46,7 +46,7 @@ class postulacion {
 
 		$dt = new DataTable();
 		$array = array ();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$ahora = date(VAR_FORMATO_FECHA);
         $datos['fechaPostulacionMIN'] = date(VAR_FORMATO_FECHA, strtotime($ahora."- " . VAR_X_MESES_TRAS . " month"));
 		if ( $this->PostulacionBD->existePostulacion($datos,$dt)){

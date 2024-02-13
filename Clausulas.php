@@ -60,10 +60,10 @@ class clausulas {
 	function __construct()
 	{
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -123,7 +123,7 @@ class clausulas {
 		include("includes/opciones_menu.php");
 
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -135,7 +135,7 @@ class clausulas {
 	
 		
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -164,7 +164,7 @@ class clausulas {
 	//Accion de agregar
 	private function agregar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		// si hubo algun evento
 		if (isset($datos["accion2"]))
@@ -182,7 +182,7 @@ class clausulas {
 						//Pasamos el mensaje de Ok
 						$this->mensajeOK="Registro Completado! Su registro se ha guardado con exito";
 						
-						$_REQUEST["idClausula"] = $dt->data[0]["idClausula"];
+						$_POST["idClausula"] = $dt->data[0]["idClausula"];
 
 						//Me quedo en el modificar
 						$this->modificar();
@@ -228,7 +228,7 @@ class clausulas {
 	//Accion de modificar un registro
 	private function modificar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		if (isset($datos["accion2"]))
 		{
@@ -262,7 +262,7 @@ class clausulas {
 						$this->mensajeError .= $this->clausulasBD->mensajeError;
 					}
 	
-					$_REQUEST["accion2"]=" ";
+					$_POST["accion2"]=" ";
 					$this->modificar();
 					return;
 					break;
@@ -307,11 +307,11 @@ class clausulas {
 	//Accion de modificar un registro
 	private function modificarClonar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "MODIFICAR":
 					
@@ -326,7 +326,7 @@ class clausulas {
 						//Pasamos el error si hubo
 						$this->mensajeError.=$this->clausulasBD->mensajeError;
 					}
-					$_REQUEST["accion2"]=" ";
+					$_POST["accion2"]=" ";
 					$this->modificarClonar();
 					return;
 					break;
@@ -370,7 +370,7 @@ class clausulas {
 	//Accion de modificar un registro
 	private function aprobar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		if (isset($datos["accion2"]))
 		{
@@ -392,7 +392,7 @@ class clausulas {
 						//Pasamos el error si hubo
 						$this->mensajeError.=$this->proyectosBD->mensajeError;
 					}
-					$_REQUEST["accion2"]=" ";
+					$_POST["accion2"]=" ";
 					//Me quedo en el modificar
 					$this->aprobar();
 					return;
@@ -450,14 +450,14 @@ class clausulas {
 	//Accion de clonar un registro
 	private function clonar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$dt = new DataTable();
 		// se envia a eliminar a la tabla con los datos del formulario
 		if ($this->clausulasBD->clonar($datos,$dt)){
 
 			//Pasamos al consultar el nuevo registro
-			$_REQUEST["idClausula"] = $dt->data[0]["idClausula"];
+			$_POST["idClausula"] = $dt->data[0]["idClausula"];
 			$this->modificarClonar();
 			return;
 		}	
@@ -474,7 +474,7 @@ class clausulas {
 	//Accion de eliminar un registro
 	private function eliminar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		// se envia a eliminar a la tabla con los datos del formulario
 		if ($this->clausulasBD->eliminar($datos)){
@@ -492,7 +492,7 @@ class clausulas {
 	//Mostrar listado de todas las disponibles
 	private function listado()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		
 	    	// creamos una nueva instancia de la tabla

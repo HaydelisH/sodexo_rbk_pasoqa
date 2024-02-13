@@ -61,9 +61,9 @@ class correos {
 		
 		$dt = new DataTable();
 		// pedimos el listado
-		//print_r ($_REQUEST);
+		//print_r ($_POST);
 
-		$this->correoBD->obtener($_REQUEST,$dt);
+		$this->correoBD->obtener($_POST,$dt);
 
 		if($dt->leerFila())
 		{

@@ -34,7 +34,7 @@ class obtenersesion {
 
 	private function obtenersesion()
 	{
-		$datos 	= $_REQUEST;
+		$datos 	= $_POST;
 		
 		$datos["user_rut"] 	= $datos["rut"];
 		$datos["user_pin"]	= $datos["pin"];

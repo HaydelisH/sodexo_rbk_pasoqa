@@ -60,10 +60,10 @@ class autoevaluacionriesgorev{
 	function __construct()
 	{
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -123,7 +123,7 @@ class autoevaluacionriesgorev{
 		include("includes/opciones_menu.php");
 
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -132,9 +132,9 @@ class autoevaluacionriesgorev{
 			// y salimos
 			return;
 		}
-        //var_dump($_REQUEST);
+        //var_dump($_POST);
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-        switch ($_REQUEST["accion"])
+        switch ($_POST["accion"])
 		{
             case "BUSCAR":
                 $this->listado();
@@ -161,7 +161,7 @@ class autoevaluacionriesgorev{
 		$dt 	= new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
 
 		if ((!isset($datos["pagina"])) || $datos['pagina'] =='') $datos["pagina"]="1";
 		if ($datos["pagina"]==1) $datos["pagina_anterior"]="1"; 
@@ -250,7 +250,7 @@ class autoevaluacionriesgorev{
         
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$fecha = date('dmY_hms');
 
 		$datos["idDocumento"] = $datos["idDocumentof"];

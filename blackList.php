@@ -30,10 +30,10 @@ class Postulacion {
     function __construct()
 	{
 		/*// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -90,7 +90,7 @@ class Postulacion {
 		include("includes/opciones_menu.php");
 	
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->agregar();
@@ -101,7 +101,7 @@ class Postulacion {
 		}
 
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-        /*switch ($_REQUEST["accion"])
+        /*switch ($_POST["accion"])
 		{
             case "LOAD":
                 $this->load();
@@ -125,7 +125,7 @@ class Postulacion {
 	//Accion del boton agregar un nuevo registro 
 	private function agregar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//Inicialiamos la variable de tipo Tabla 
 		/*$dt = new DataTable();

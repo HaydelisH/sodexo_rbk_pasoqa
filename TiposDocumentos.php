@@ -50,10 +50,10 @@ class TipoDocumentos {
 	function __construct()
 	{
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -113,7 +113,7 @@ class TipoDocumentos {
 		include("includes/opciones_menu.php");
 	
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -124,7 +124,7 @@ class TipoDocumentos {
 		}
 	
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -147,15 +147,15 @@ class TipoDocumentos {
 	private function agregar()
 	{	
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "AGREGAR":
 				
 					$dt = new DataTable();
-					$datos = $_REQUEST;
+					$datos = $_POST;
 					
 					// enviamos los datos del formulario a guardar
 					if ($this->tiposdocumentosBD->agregar($datos,$dt))
@@ -164,7 +164,7 @@ class TipoDocumentos {
 						$this->mensajeOK="Registro Completado! Su registro se ha guardado con exito";
 						$this->pagina->agregarDato("mensajeOK",$this->mensajeOK);
 						
-						$_REQUEST["idTipoDoc"] = $dt->data[0]["idTipoDoc"];
+						$_POST["idTipoDoc"] = $dt->data[0]["idTipoDoc"];
 
 						$this->modificar();
 						return;
@@ -173,7 +173,7 @@ class TipoDocumentos {
 					$this->mensajeError.=$this->tiposdocumentosBD->mensajeError;
 					$this->pagina->agregarDato("mensajeError",$this->mensajeError);
 					
-					$_REQUEST['accion2'] = '';
+					$_POST['accion2'] = '';
 					$this->agregar();
 					return;
 
@@ -202,7 +202,7 @@ class TipoDocumentos {
 	//Accion de modificar un registro 
 	private function modificar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$dt = new DataTable();
 	
 		// si es que nos enviaron una accion
@@ -223,7 +223,7 @@ class TipoDocumentos {
 						$this->pagina->agregarDato("mensajeError",$this->mensajeError);
 					}
 							
-					$_REQUEST["accion2"]="";
+					$_POST["accion2"]="";
 					//Nos vamos a modificar
 					$this->modificar();
 					return;
@@ -238,7 +238,7 @@ class TipoDocumentos {
 		
 		// creamos un contenedor de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		$this->tiposdocumentosBD->obtener($datos,$dt);
 		$this->mensajeError.=$this->tiposdocumentosBD->mensajeError;
@@ -257,7 +257,7 @@ class TipoDocumentos {
 	//Accion de eliminar un registro
 	private function eliminar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$dt = new DataTable();
 		
 		// se envia a eliminar a la tabla con los datos del formulario
@@ -284,7 +284,7 @@ class TipoDocumentos {
 	{  
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		$this->tiposdocumentosBD->Todos($dt);
 		$this->mensajeError.=$this->tiposdocumentosBD->mensajeError;

@@ -51,7 +51,7 @@ class plantillas {
 		$dt = new DataTable();
 		// pedimos el listado
 
-		if ( $this->plantillasBD->agregarClausula($_REQUEST) ) {
+		if ( $this->plantillasBD->agregarClausula($_POST) ) {
 			echo "0";
 		}
 		else{

@@ -8,9 +8,10 @@
               <php:repeticion id="formulario">
                 
                 <php:repeticion id="crear">
-                  <form name="formulario" id="formulario_usuarios" action="Procesos.php" method="POST" >
+                  <form name="formulario" id="formulario" action="Procesos.php" method="POST" >
                     <button type="submit" class="btn btn-default" name="accion" value="AGREGAR"><a><i class="fa fa-plus" aria-hidden="true"></i> Nuevo</a></button> 
-                  </form>
+                    <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
                 </php:repeticion>
 
             </div>
@@ -51,7 +52,8 @@
                       <button class="btn btn-default btn-sm" type="submit" name="accion" value="ELIMINAR" onclick="javascript:return preguntarPorBorrar();">Eliminar</button>
                     </php:repeticion>
 
-                  </form></td>
+                    <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form></td>
                 </tr>
               </php:repeticion>
               </tbody>
@@ -67,11 +69,3 @@
      </div>
     <!-- /.roe -->
     </div>
-
-<script>
-
-$(document).ready(function(){
-  
-});
-
-</script>

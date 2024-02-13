@@ -51,10 +51,10 @@ class correos {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -114,7 +114,7 @@ class correos {
 		include("includes/opciones_menu.php");
 	
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -126,7 +126,7 @@ class correos {
 	
 		
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica siempre va
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -148,27 +148,27 @@ class correos {
 	//Accion del boton agregar un nuevo registro 
 	private function agregar()
 	{	
-		if (!isset($_REQUEST["accion2"]))
+		if (!isset($_POST["accion2"]))
 		{
 			// creamos un contenedor de la tabla
 			$dt = new DataTable();
 		}
 
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "AGREGAR":
 					// enviamos los datos del formulario a guardar
-					if ($this->correoBD->agregar($_REQUEST))
+					if ($this->correoBD->agregar($_POST))
 					{
 						// si resulta mostramos el listado
 						$this->mensajeOK = '<div class="callout callout-success"><h4>Registro Completado!</h4><p>Su registro se ha guardado con exito</p></div>';
 						$this->pagina->agregarDato("mensajeOK",$this->mensajeOK);
-						$this->pagina->agregarDato("CodCorreo",$_REQUEST["CodCorreo"]);
-						$this->pagina->agregarDato("Descripcion",$_REQUEST["Descripcion"]);
+						$this->pagina->agregarDato("CodCorreo",$_POST["CodCorreo"]);
+						$this->pagina->agregarDato("Descripcion",$_POST["Descripcion"]);
 						//Imprimir la plantillas
 						$this->pagina->imprimirTemplate('templates/correos_MensajeOK.html');
 						//$this->listado();
@@ -185,7 +185,7 @@ class correos {
 			}
 		}
 		// recuperamos lo que se escribio en el formulario que va llegando si es que hubo
-		$datos2=$_REQUEST;
+		$datos2=$_POST;
 
 		//Asignamos los datos que recibimos del formulario
 		$this->correoBD->listado($dt);
@@ -194,8 +194,8 @@ class correos {
 		$this->pagina->agregarDato("formulario",$formulario);
 		//print_r($formulario);
 
-		$this->pagina->agregarDato("pagina",$_REQUEST["pagina"]);
-		$this->pagina->agregarDato("nombrex",$_REQUEST["nombrex"]);
+		$this->pagina->agregarDato("pagina",$_POST["pagina"]);
+		$this->pagina->agregarDato("nombrex",$_POST["nombrex"]);
 		// agregamos a la pagina el mensaje de error
 		$this->pagina->agregarDato("mensajeError",$this->mensajeError);
 		// se imprime el formulario
@@ -205,13 +205,13 @@ class correos {
 
 	//Accion de modificar un registro 
 	private function modificar()
-	{	//print_r( $_REQUEST);
-		if (!isset($_REQUEST["accion2 "]))
+	{	//print_r( $_POST);
+		if (!isset($_POST["accion2 "]))
 		{
 			// creamos un contenedor de la tabla
 			$dt = new DataTable();
 			// obtenemos los datos a modificar
-			$this->correoBD->obtener($_REQUEST,$dt);
+			$this->correoBD->obtener($_POST,$dt);
 			// guardamos los datos en un arreglo
 			$campos=$dt->data;
 			// guardamos el error por si aca hubo
@@ -220,13 +220,13 @@ class correos {
 		}
 
 		// si es que nos enviaron una accion
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "MODIFICAR":
 					// si apretaron el boton modificar obtenermos los datos desde el formulario
-					if ($this->correoBD->modificar($_REQUEST))
+					if ($this->correoBD->modificar($_POST))
 					{
 						// si resulta mostramos el listado
 						//Mensaje del CallOut
@@ -238,7 +238,7 @@ class correos {
 					// si sale todo mal leemos el error
 					$this->mensajeError=$this->correoBD->mensajeError;
 					// y guardamos los datos enviamos en una variable
-					$campos[0]=$_REQUEST;
+					$campos[0]=$_POST;
 					break;
 
 				case "VOLVER":
@@ -248,7 +248,7 @@ class correos {
 			}
 		}
 
-		$datos2=$_REQUEST;
+		$datos2=$_POST;
 
 		//Asignamos los datos que recibimos del formulario
 		$this->correoBD->listado($dt);
@@ -257,8 +257,8 @@ class correos {
 		$this->pagina->agregarDato("formulario",$formulario);
 
 		// agregamos pagina actual del listado
-		$this->pagina->agregarDato("pagina",$_REQUEST["pagina"]);
-		$this->pagina->agregarDato("nombrex",$_REQUEST["nombrex"]);
+		$this->pagina->agregarDato("pagina",$_POST["pagina"]);
+		$this->pagina->agregarDato("nombrex",$_POST["nombrex"]);
 		$this->pagina->agregarDato("formulario",$campos);
 		// agregamos los posibles errores a la pagina
 		$this->pagina->agregarDato("mensajeError",$this->mensajeError);
@@ -274,12 +274,12 @@ class correos {
 	{
 		// se envia a eliminar a la tabla con los datos del formulario
 		
-		if ($this->correoBD->eliminar($_REQUEST["CodCorreo"])){
+		if ($this->correoBD->eliminar($_POST["CodCorreo"])){
 			// si es que hubiera error lo obtenemos
 			$this->mensajeOK="Su registro se ha eliminado correctamente";
 			// si elimino entonces mostrar listado sin ningún filtro, o sea mostrar todo
-			$_REQUEST["pagina"]  = 1;
-			$_REQUEST["nombrex"] = "";
+			$_POST["pagina"]  = 1;
+			$_POST["nombrex"] = "";
 		}
 		
 		$this->mensajeError=$this->correoBD->mensajeError;
@@ -294,7 +294,7 @@ class correos {
 		$dt = new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
 	
 		$this->correoBD->listado($dt);
 		$this->mensajeError.=$this->correoBD->mensajeError;

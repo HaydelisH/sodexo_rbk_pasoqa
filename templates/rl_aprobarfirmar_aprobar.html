@@ -34,14 +34,15 @@
                              </php:repeticion>  
                         </div>
                     </div>
-                </form>
+                  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
             </div>
           <!-- /.box-header -->
           <div class="box-body">
             <!--Mensajes-->
     
             <!--Datos referenciales-->
-            <div class="form-row">
+            <div class="row">
           
              <!--Formulario de datos propios de Clausulas-->
             <form role="form" name="formulario" id="formulario" action="rl_aprobarfirmar.php" method="POST">
@@ -57,7 +58,8 @@
              
               </php:repeticion>  
              
-            </form> 
+              <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form> 
     
           </div>
         <!-- /.box -->

@@ -78,10 +78,10 @@ class fichas {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -152,9 +152,9 @@ class fichas {
 	
 		//se construye el menu
 		include("includes/opciones_menu.php");
-		//if( $this->seguridad->usuarioid == '26131316-2')print_r($_REQUEST);
+		//if( $this->seguridad->usuarioid == '26131316-2')print_r($_POST);
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -165,7 +165,7 @@ class fichas {
 		}
 	
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR_DOC":
 				$this->agregar_doc();
@@ -209,7 +209,7 @@ class fichas {
 	{	
 		if ( isset ($_FILES['archivo'])){
 		
-			$datos = $_REQUEST; 
+			$datos = $_POST; 
 			$dt = new Datatable();
 			$datos["idFichaOrigen"] = 1;
 			$this->validar();
@@ -256,7 +256,7 @@ class fichas {
 	{	
 		if ( isset ($_FILES['archivo'])){
 		
-			$datos = $_REQUEST; 
+			$datos = $_POST; 
 			$dt = new Datatable();
 			$datos["idFichaOrigen"] = 1;
 			$this->validar();
@@ -301,7 +301,7 @@ class fichas {
 	//Validar subida de archivo
 	/*private function validar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$dt = new Datatable();
 		
 		if( isset ($datos['idTipoGestor']) ){
@@ -336,7 +336,7 @@ class fichas {
 	//Validar subida de archivo
 	private function validar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$dt = new Datatable();
 		//if( isset ($datos['idTipoGestor']) ){
 			
@@ -402,7 +402,7 @@ class fichas {
 	//Mostrar listado de los registro disponibles
 	private function listado()
 	{  
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$dt = new DataTable;
 		$dt2 = new DataTable;
@@ -504,7 +504,7 @@ class fichas {
 	{
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$fecha = date("dmY_hms");
 		$datos["idFichaOrigen"] = 1;
 
@@ -557,7 +557,7 @@ class fichas {
 	{
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$fecha = date("dmY_hms");
 		$datos["idFichaOrigen"] = 2;
 
@@ -608,7 +608,7 @@ class fichas {
 	//Ver detalle de ficha 
 	private function procesar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$dt = new DataTable();
 		$dt_fichas = new Datatable();
 		$dt_tipos = new Datatable();
@@ -791,7 +791,7 @@ class fichas {
 	//Elimina un documento de una Ficha
 	private function eliminar_documento()
 	{			
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$dt = new DataTable;
 		$datos["usuarioid"]=$this->seguridad->usuarioid;
 		$datos["idFichaOrigen"] = 1;
@@ -812,7 +812,7 @@ class fichas {
 	//Confirmar ficha 
 	private function cancelar(){
 		
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$dt = new Datatable();
 		if ($datos['idEstado'] == "5")
 		{
@@ -837,7 +837,7 @@ class fichas {
 		}
 		if ($datos['idestado'] == "5")
 		{
-			$_REQUEST = array();
+			$_POST = array();
 			$this->listado();
 		}
 		else
@@ -898,7 +898,7 @@ class fichas {
 
 	private function siguiente(){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$dt = new DataTable();
 		$resultado = array();
 		$RutTrabajador = '';
@@ -928,7 +928,7 @@ class fichas {
 
 	private function setFirmantes()
 	{
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$dt = new DataTable();
 		$dt2 = new DataTable();

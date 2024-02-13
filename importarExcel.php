@@ -135,7 +135,7 @@ class importar
 	$resultadoContColumnas=$this->contarColumnas($highestColumnIndex);
 	$this->graba_log('resultado cuenta Columnas:'.$resultadoContColumnas);
 
-	$datos=$_REQUEST;//$_REQUEST es para pasarle el IdArchivo que viene desde el HTML.
+	$datos=$_POST;//$_POST es para pasarle el IdArchivo que viene desde el HTML.
 	$this->importarBD->contarColumnasTabla($datos,$dt);//Realiza el llamado al SP de importarBD 
 	$this->total= $dt->data[0]["total"];//para rescatar una variable de la base de datos
     //$this->graba_log('tota columnas configuracion:'.$this->total);

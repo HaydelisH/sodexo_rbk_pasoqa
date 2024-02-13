@@ -39,7 +39,7 @@ include_once("includes/accesoxusuarioBD.php");
 	$dt = new DataTable();
 	// pedimos el listado
 	
-	$datos = $_REQUEST;
+	$datos = $_POST;
 	
 
 	if ($datos["accion"] == "graba")

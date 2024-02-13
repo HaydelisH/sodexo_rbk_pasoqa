@@ -52,7 +52,7 @@ class plantillas {
 		$dt = new DataTable();
 		// pedimos el listado
 
-		$this->plantillasBD->obtener($_REQUEST,$dt);
+		$this->plantillasBD->obtener($_POST,$dt);
 
 		if($dt->leerFila())
 		{

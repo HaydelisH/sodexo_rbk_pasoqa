@@ -67,6 +67,12 @@ class Excel {
 
 		  header("Content-Type: application/x-msexcel; name=\"".$this->nombre.".xls\"");
 		  header("Content-Disposition: inline; filename=\"".$this->nombre.".xls\"");
+		  header("Set-Cookie: HttpOnly;Secure;SameSite=Lax");
+			// Seguridad OWAS (INI)
+				ini_set('session.cookie_secure', 'true');
+				ini_set('session.cookie_httponly', 'true');
+				ini_set('session.cookie_path', '/; samesite=lax');
+			// Seguridad OWAS (FIN)
 		  $fh=fopen($this->archivo, "rb");
 		  fpassthru($fh);
 	}

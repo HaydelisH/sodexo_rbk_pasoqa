@@ -13,7 +13,7 @@
  *    returns false.
  *
  *    @author  Paul Meagher
- *    @license PHP v3.0
+
  *    @version 1.1
  */
 class PHPExcel_Shared_JAMA_QRDecomposition

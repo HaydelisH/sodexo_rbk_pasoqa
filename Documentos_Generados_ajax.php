@@ -58,7 +58,7 @@ class documentos {
 		$dt1 = new DataTable();
 		$anno = 0;
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 	
 		$datos["usuarioid"]=$this->seguridad->usuarioid;
 		$datos["ptipousuarioid"]=$this->seguridad->tipousuarioid;

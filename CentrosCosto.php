@@ -62,10 +62,10 @@ class centroscosto {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -96,7 +96,7 @@ class centroscosto {
 			// y nos vamos
 			return;
 		}
-        //print_r($_REQUEST);
+        //print_r($_POST);
 		// creamos la seguridad
 		$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		// si no funciona hay que logearse
@@ -133,9 +133,9 @@ class centroscosto {
 		
 		//se construye el menu
 		include("includes/opciones_menu.php");
-		//print_r($_REQUEST);
+		//print_r($_POST);
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -146,7 +146,7 @@ class centroscosto {
 		}
 
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica siempre va
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -169,7 +169,7 @@ class centroscosto {
 	//Accion del boton agregar un nuevo registro 
 	private function agregar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['usuarioid'] = $this->seguridad->usuarioid;
 		
 		if (isset($datos["accion2"]))
@@ -221,7 +221,7 @@ class centroscosto {
 	private function modificar()
 	{	
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['usuarioid'] = $this->seguridad->usuarioid;
 	
 		// si es que nos enviaron una accion
@@ -241,7 +241,7 @@ class centroscosto {
 						$this->mensajeError=$this->centroscostoBD->mensajeError;
 					}
 					// y guardamos los datos enviamos en una variable
-					$campos[0]=$_REQUEST;
+					$campos[0]=$_POST;
 					break;
 
 				case "VOLVER":
@@ -285,14 +285,14 @@ class centroscosto {
 	private function eliminar()
 	{
 		// se envia a eliminar a la tabla con los datos del formulario
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
  		if ($this->centroscostoBD->eliminar($datos)){
 			// si es que hubiera error lo obtenemos
 			$this->mensajeOK = CENTROCOSTO_LABEL." seleccionado fue eliminado con &eacute;xito";
 			// si elimino entonces mostrar listado sin ningún filtro, o sea mostrar todo
-			unset($_REQUEST['idCentroCosto']);
-			unset($_REQUEST['lugarpagoid']);
+			unset($_POST['idCentroCosto']);
+			unset($_POST['lugarpagoid']);
 		}
 		
 		$this->mensajeError=$this->centroscostoBD->mensajeError;
@@ -305,7 +305,7 @@ class centroscosto {
 	{ 
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		if (!isset($datos["pagina"])) $datos["pagina"]="1";
 		if ($datos["pagina"]==1) $datos["pagina_anterior"]="1"; 

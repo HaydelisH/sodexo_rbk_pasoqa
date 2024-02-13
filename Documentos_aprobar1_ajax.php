@@ -46,7 +46,7 @@ class documentos {
 		$this->documentosBD->usarConexion($conecc);
 
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//Separar los idDocumentos
 		$docs = explode(',',$datos['docs']);

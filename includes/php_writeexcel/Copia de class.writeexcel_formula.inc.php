@@ -6,7 +6,7 @@
  * This is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
+
  *
  * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -1468,7 +1468,7 @@ function _func()
             }
  else {
                 trigger_error("Sintactic error: coma expected in ".
-                                  "function $function, {$num_args}º arg", E_USER_ERROR);
+                                  "function $function, {$num_args}ï¿½ arg", E_USER_ERROR);
             }
             $result2 = $this->_condition();
             if ($this->isError($result2)) {

@@ -1536,7 +1536,7 @@
   background-color:#006c90;
   color: #fff;/* los tres guiones*/
   border-width: 10px;
-  border-bottom: 1px solid #2a56d3;
+  /*border-bottom: 1px solid #2a56d3;*/
 }
 .skin-purple .main-header .navbar .sidebar-toggle:hover {
   /*background-color: #555299;*/

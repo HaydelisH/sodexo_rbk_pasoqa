@@ -49,7 +49,7 @@ class rl_estampa_aprobador_pdf {
 		$this->docvigentesBD->usarConexion($conecc);
 		$this->PersonasBD->usarConexion($conecc);
 		
-		/*$datos = $_REQUEST;
+		/*$datos = $_POST;
 		$this->marca_documento($datos);
 
 		$this->bd->desconectar();*/

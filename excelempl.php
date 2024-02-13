@@ -98,30 +98,30 @@ class excelempl {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
 				return;
 			}
 			
-			if ($_REQUEST["accion"]=="ESTADO" || $_REQUEST["accion"]=="PROCESO")
+			if ($_POST["accion"]=="ESTADO" || $_POST["accion"]=="PROCESO")
 			{
 				$this->con_plantillas = false;
 			}
 			
-			if ($_REQUEST["accion"]=="PROCESO")
+			if ($_POST["accion"]=="PROCESO")
 			{
-				if (isset($_REQUEST["usuarioid"]))
+				if (isset($_POST["usuarioid"]))
 				{
 					$this->con_seguridad = false;
 				}
 			}
 			
-			//$this->graba_log("accion ".$_REQUEST["accion"]." plantillas:".$this->con_plantillas." seguridad:".$this->con_seguridad);
+			//$this->graba_log("accion ".$_POST["accion"]." plantillas:".$this->con_plantillas." seguridad:".$this->con_seguridad);
 			
 		}
 		
@@ -183,7 +183,7 @@ class excelempl {
 		}
 		
 		//$this->graba_log("llego");	
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			$this->listado();
 			// el pie
@@ -196,11 +196,11 @@ class excelempl {
 		}
 		else
 		{
-			//$this->graba_log("accion ".$_REQUEST["accion"]);
+			//$this->graba_log("accion ".$_POST["accion"]);
 		}
 		
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "IMPORTAR":
 				$this->importar();
@@ -233,7 +233,7 @@ class excelempl {
 	
 	private function estado()
 	{
-		$totalfilas = $_REQUEST["totalfilas"];
+		$totalfilas = $_POST["totalfilas"];
 				
 		$this->filas_procesadas();
 		$this->filasprocesadas = $this->filasprocesadas + 1;
@@ -656,9 +656,9 @@ $this->graba_log("Columnas leidas hasta la :".$this->highestColumn." | Cantidad 
 	private function proceso()
 	{	
 		$this->graba_log ("se inicia proceso");	
-		if (isset($_REQUEST["usuarioid"]))
+		if (isset($_POST["usuarioid"]))
 		{
-			$this->usuarioid = $_REQUEST["usuarioid"];
+			$this->usuarioid = $_POST["usuarioid"];
 		}
 		else
 		{

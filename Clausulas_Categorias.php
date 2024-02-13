@@ -54,7 +54,7 @@ class clausulas {
 		
 		$dt = new DataTable();
 		// pedimos el listado
-		$this->clausulasBD->obtenerCategoriaEmpresa($_REQUEST,$dt);
+		$this->clausulasBD->obtenerCategoriaEmpresa($_POST,$dt);
 		$this->mensajeError=$this->clausulasBD->mensajeError;
 
 		//Pasar los datos al elemento 

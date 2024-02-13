@@ -2,7 +2,7 @@ private function InicioFirma_RBK()
 	{
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//Llenar Select de Empresas registradas
 		$this->documentosdetBD->obtenerb64($datos,$dt);
@@ -83,7 +83,7 @@ private function InicioFirma_RBK()
 		//si ya tiene una firma devuelve true
 		$dt = new DataTable(); //Numero de Documento
 		$dt1 = new DataTable(); //Firmantes
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//Obtener Datos del Documento
 		$this->documentosdetBD->totalFirmantes($datos,$dt);
@@ -115,7 +115,7 @@ private function InicioFirma_RBK()
 
 		//Recibir $datos["idContrato"], $datos["personaid"], $this->firma = tipo de firma del firmante
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//Variables para subida del Documento
 		$dt = new DataTable(); //Numero de Documento
@@ -240,7 +240,7 @@ private function InicioFirma_RBK()
 	    $dt1= new DataTable(); //Firmantes 
 	    $dt2= new DataTable(); //Datos del Documento
 
-	    $datos = $_REQUEST;
+	    $datos = $_POST;
 	  
 		//Buscar Firmantes
 		$this->documentosdetBD->obtenerFirmantes($datos, $dt1);
@@ -345,7 +345,7 @@ private function InicioFirma_RBK()
 	//Actualiza Documento en la BD
 	private function actualizaDocumentoRBK($idDocumento, $DocCode){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $idDocumento;
 		$datos['DocCode'] = $DocCode;
 
@@ -366,7 +366,7 @@ private function InicioFirma_RBK()
 		//Variables para subida del Documento
 		$dt = new DataTable(); 
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		if(! $this->TieneUnaFirma() ){
 
@@ -419,7 +419,7 @@ private function InicioFirma_RBK()
 	//Actualizar documento de RBK 
 	private function buscarDatosDocumentosRBK($dt){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//Actualizar datos del documento
 		$this->valor_arr = "";

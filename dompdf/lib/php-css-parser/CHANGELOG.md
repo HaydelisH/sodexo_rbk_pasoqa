@@ -62,7 +62,7 @@
 
 ### 6.0.1 (2015-08-24)
 
-* Remove some declarations in interfaces incompatible with PHP 5.3 (< 5.3.9)
+* Remove some declarations in interfaces incompatible with PHP  (< .9)
 * *No deprecations*
 
 ## 5.0

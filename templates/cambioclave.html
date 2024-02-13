@@ -55,7 +55,7 @@
 							</div>	
 					
 	
-						  <div class="form-row">  
+						  <div class="row">  
 							  <div class="col-md-3 xs-8">
 									  <button class="btn btn-md btn-primary btn-block" type="submit" name="accion2" value="Cambiar" style="margin-top: 10px" onclick="javascript:return validarFormulario(this);" />Guardar</button>  
 							  </div>
@@ -72,7 +72,7 @@
 						  <div id="numeroPass" class="callout callout-danger" style="padding: 7px;  margin: 0px 0;"><php:texto id='minNumber'/> c&aacute;racter num&eacute;rico</div></br>
 						  <div id ="especialPass" class="callout callout-danger" style="padding: 7px;  margin: 0px 0;" title="!@#$%^&*()_+{}\:;<>,.?~"><php:texto id='minCaracterEspecial'/> c&aacute;racter especial , Ejemplos ! @ # $ % ^ & * </div>	
 					  </div>
-					  <div class="form-row">  
+					  <div class="row">  
 							  <div class="col-md-8">							  
 								<input type="hidden" name="minMayus" id="minMayus"  value="<php:texto id='minMayus'/>">
 								<input type="hidden" name="minMinus" id="minMinus"  value="<php:texto id='minMinus'/>">
@@ -84,7 +84,8 @@
 								<input type="hidden" name="minCaracterEspecial" id="minCaracterEspecial"  value="<php:texto id='minCaracterEspecial'/>">
 							  </div>
 						  </div>  
-				  </form>     
+				    <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>     
 				  </php:repeticion>
 				  <button class="btn btn-md btn-primary btn-block" style="display:none" type="hidden" id="btn_msj_cambio_clave" data-toggle="modal" data-target="#modal_msj_cambio_clave">Mensaje</button>  			
 							  
@@ -96,7 +97,7 @@
 								  <div class="modal-header" align="center">
 									  
 									  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										  <span aria-hidden="true">&times;</span>
+										  <span aria-hidden="true" class="cerrar_modal">&times;</span>
 									  </button>
 								  </div>
 								  <div class="modal-body" style="text-align:center">
@@ -117,117 +118,3 @@
 		<!-- /.col -->
 	  </div>
 	  
-	  
-	<script>
-	
-	var numeros="0123456789";
-	var letras="abcdefghijklmnñopqrstuvwxyz";	
-	$('#clavenew').keyup(function(e) {
-	var enoughRegex = new RegExp("(?=.{<php:texto id='largoClaveMin'/>,}).*", "g");
-	if(tiene_numeros($('#clavenew').val(),$('#minNumber').val())){
-	  $('#numeroPass').removeClass('callout callout-danger');
-	  $('#numeroPass').addClass('callout callout-success');
-	}else{		
-	  $('#numeroPass').removeClass('callout callout-success');
-	  $('#numeroPass').addClass('callout callout-danger');
-	}
-	if(tiene_minusculas($('#clavenew').val(),$('#minMinus').val())){
-	  $('#minusculaPass').removeClass('callout callout-danger');
-	  $('#minusculaPass').addClass('callout callout-success');
-	}else{		
-	  $('#minusculaPass').removeClass('callout callout-success');
-	  $('#minusculaPass').addClass('callout callout-danger');
-	}
-	if(tiene_mayusculas($('#clavenew').val(),$('#minMayus').val())){
-	  $('#mayusculaPass').removeClass('callout callout-danger');
-	  $('#mayusculaPass').addClass('callout callout-success');
-	}else{		
-	  $('#mayusculaPass').removeClass('callout callout-success');
-	  $('#mayusculaPass').addClass('callout callout-danger');
-	}
-	if (true == enoughRegex.test($(this).val())) {
-	  $('#caracterPass').removeClass('callout callout-danger');
-	  $('#caracterPass').addClass('callout callout-success');
-	}else{		
-	  $('#caracterPass').removeClass('callout callout-success');
-	  $('#caracterPass').addClass('callout callout-danger');
-	}
-	if (tiene_caracter_especial($('#clavenew').val(),$('#minCaracterEspecial').val())) {
-		$('#especialPass').removeClass('callout callout-danger');
-		$('#especialPass').addClass('callout callout-success');
-	} else {
-		$('#especialPass').removeClass('callout callout-success');
-		$('#especialPass').addClass('callout callout-danger');
-	}
-	
-	});
-	function tiene_caracter_especial(valor, cantidadMinima) {
-		
-		var expresionRegular = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/g;
-	
-		 // Utilizar el método match para encontrar todas las coincidencias
-		 var coincidencias = valor.match(expresionRegular);
-		 // Calcular la cantidad total de caracteres especiales
-		 var cantidadTotal = coincidencias ? coincidencias.length : 0;
-		 // alert(cantidadTotal);
-	   return expresionRegular.test(valor) && cantidadTotal >= cantidadMinima;
-	}
-	function tiene_mayusculas(texto, minMayusculas) {
-	  var contadorMayusculas = 0;
-	
-	  for (var i = 0; i < texto.length; i++) {
-		if ((letras.toUpperCase()).indexOf(texto.charAt(i), 0) !== -1) {
-		  contadorMayusculas++;
-		}
-	  }
-	
-	  return contadorMayusculas >= minMayusculas;
-	}
-	
-	function tiene_minusculas(texto, minMinusculas) {
-	  var contadorMinusculas = 0;
-	
-	  for (var i = 0; i < texto.length; i++) {
-		if (letras.indexOf(texto.charAt(i), 0) !== -1) {
-		  contadorMinusculas++;
-		}
-	  }
-	
-	  return contadorMinusculas >= minMinusculas;
-	}
-	
-	function tiene_numeros(texto, minNumeros) {
-	  var contadorNumeros = 0;
-	
-	  for (var i = 0; i < texto.length; i++) {
-		if (numeros.indexOf(texto.charAt(i), 0) !== -1) {
-		  contadorNumeros++;
-		}
-	  }
-	
-	  return contadorNumeros >= minNumeros;
-	}
-	$(document).ready(function(){
-	
-	  if( $("#mensajeOK").html() != '' ){
-		  $("#btn_msj_cambio_clave").click();
-	  }
-	});
-	
-	function showPassword(button)
-	{
-		var idPass = "clave"
-		var suffix = button.id.replace("show_password_", "");
-		idPass = idPass+suffix;
-		
-		var cambio = document.getElementById(idPass);
-		if(cambio.type == "password"){
-			cambio.type = "text";
-			$('.icon_'+suffix).removeClass('fa fa-eye-slash').addClass('fa fa-eye');
-		}else{
-			cambio.type = "password";
-			$('.icon_'+suffix).removeClass('fa fa-eye').addClass('fa fa-eye-slash');
-		}	
-	}
-	
-	</script>

@@ -7,7 +7,8 @@
            <form role="form" name="formulario2" id="formulario2" action="Plantillas.php" method="POST" >
               <input type="hidden" name="idPlantilla" value='<php:item id="idPlantilla"/>'/>
               <button type="submit" name="accion" value="MODIFICAR" class="btn btn-default"/><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
-          </form>
+            <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
       	 
         </div>
 	     <div class="box-body">

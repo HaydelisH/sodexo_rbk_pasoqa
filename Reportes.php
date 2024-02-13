@@ -73,10 +73,10 @@ class reportes {
 	function __construct()
 	{
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -148,9 +148,9 @@ class reportes {
 		
 		//se construye el menu
 		include("includes/opciones_menu.php");
-		//print_r($_REQUEST);
+		//print_r($_POST);
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado_p();
@@ -161,7 +161,7 @@ class reportes {
 		}
 
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -186,7 +186,7 @@ class reportes {
 	//Accion del boton agregar un nuevo registro 
 	private function agregar()
 	{	
-		if (!isset($_REQUEST["accion2"]))
+		if (!isset($_POST["accion2"]))
 		{
 			// creamos un contenedor de la tabla
 			$dt = new DataTable();
@@ -201,14 +201,14 @@ class reportes {
 		}
 
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "AGREGAR":
 					// enviamos los datos del formulario a guardar
-					if ($this->docvigentesBD->agregar($_REQUEST))
+					if ($this->docvigentesBD->agregar($_POST))
 					{
 						//Pasamos el mensaje de Ok
 						$this->mensajeOK="Registro Completado! Su registro se ha guardado con exito";
@@ -248,12 +248,12 @@ class reportes {
 	//Accion de modificar un registro 
 	private function modificar()
 	{	
-		if (!isset($_REQUEST["accion2 "]))
+		if (!isset($_POST["accion2 "]))
 		{
 			// creamos un contenedor de la tabla
 			$dt = new DataTable();
 			// obtenemos los datos a modificar
-			$this->docvigentesBD->obtener($_REQUEST,$dt);
+			$this->docvigentesBD->obtener($_POST,$dt);
 			// guardamos los datos en un arreglo
 			$campos=$dt->data;
 			// guardamos el error por siaca hubo
@@ -262,20 +262,20 @@ class reportes {
 		}
 
 		// si es que nos enviaron una accion
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "MODIFICAR":
 					// si apretaron el boton modificar obtenermos los datos desde el formulario
-					if ($this->docvigentesBD->modificar($_REQUEST))
+					if ($this->docvigentesBD->modificar($_POST))
 					{
 						//Pasamos el mensaje de Ok
 						$this->mensajeOK="Registro Completado! Su registro se ha modificado con exito";
 						//Pasamos el error a la pagina 
 						$this->pagina->agregarDato("mensajeOK",$this->mensajeOK);
 						//Agrega un valor vacio a esta accion , para que se quede en la pantalla de Modificar 
-						$_REQUEST["accion2"]=" ";
+						$_POST["accion2"]=" ";
 						//Me quedo en el modificar
 						$this->modificar();
 						return;
@@ -287,7 +287,7 @@ class reportes {
 					//Imprimir la plantillas
 					$this->modificar();
 					// y guardamos los datos enviamos en una variable
-					$campos[0]=$_REQUEST;
+					$campos[0]=$_POST;
 					break;
 
 				case "VOLVER":
@@ -296,7 +296,7 @@ class reportes {
 					return;
 			}
 		}
-		$datos2=$_REQUEST;
+		$datos2=$_POST;
 
 		//Asignamos los datos que recibimos del formulario
 		$this->docvigentesBD->listado($dt);
@@ -316,7 +316,7 @@ class reportes {
 	private function eliminar()
 	{
 		// se envia a eliminar a la tabla con los datos del formulario
-		if ($this->docvigentesBD->eliminar($_REQUEST)){
+		if ($this->docvigentesBD->eliminar($_POST)){
 			//Pasamos el mensaje de Ok
 			$this->mensajeOK="Registro Elimnado! Su registro se ha eliminado con exito";
 			//Pasamos el error a la pagina 
@@ -345,7 +345,7 @@ class reportes {
 		$dt4 	= new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
 
         $datos["usuarioid"]=$this->seguridad->usuarioid;
 
@@ -457,7 +457,7 @@ class reportes {
 		$dt4 	= new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
 
         $datos["usuarioid"]=$this->seguridad->usuarioid;
 

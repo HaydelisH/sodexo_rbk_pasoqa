@@ -47,35 +47,35 @@
                             <form name="formulario" class="formulario" id="formulario"  class="form-horizontal" action="DeclaracionConflictoInteres.php" method="POST" autocomplete=off>
                                 <php:repeticion id="formulario">
                                 <div class="box-body">
-                                    <div class="form-row esteFormulario" style="display:<php:texto id="esteFormulario" />;">
+                                    <div class="row esteFormulario" style="display:<php:texto id="esteFormulario" />;">
                                         <div class="col-md-12">
                                             <label style="float:right;"> (*) Campos obligatorios </label>
                                         </div>
                                     </div>
-                                    <div class="form-row esteFormulario" style="display:<php:texto id="esteFormulario" />;">
+                                    <div class="row esteFormulario" style="display:<php:texto id="esteFormulario" />;">
                                         <div class="col-md-12">
                                             <label for="tituloCargo" >Titulo / cargo (*)</label>
                                             <div class="input-group col-xs-12">
-                                                <input type="text" class="form-control" name="tituloCargo-R" placeholder="Titulo / cargo" maxlength="110" onkeyup="pinta(this)" value="<php:item id="tituloCargo" />" >
+                                                <input type="text" class="form-control" name="tituloCargo-R" placeholder="Titulo / cargo" maxlength="110" onkeyup="pinta_dci(this)" value="<php:item id="tituloCargo" />" >
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-row esteFormulario" style="display:<php:texto id="esteFormulario" />;">
+                                    <div class="row esteFormulario" style="display:<php:texto id="esteFormulario" />;">
                                         <!--div class="col"><hr /></div-->
                                         <div class="col-auto">&nbsp;</div>
                                         <div class="col"><hr /></div>
                                     </div>
-                                    <div class="form-row esteFormulario" style="display:<php:texto id="esteFormulario" />;">
+                                    <div class="row esteFormulario" style="display:<php:texto id="esteFormulario" />;">
                                         <h3>Responda las siguientes preguntas:</h3>
                                         <ol  type="1">
                                             <hr />
                                             <li>&#191;Tiene <b>usted o alguno de sus familiares directos</b> alguna relaci&oacute;n personal, comercial, econ&oacute;mica o de direcci&oacute;n, directa o indirectamente, con un cliente, competidor, proveedor, consultor o asesor de la empresa donde usted labora o en Mel&oacute;n y sus subsidiar&iacute;as?</li>
                                             <div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs1" id="querySiNoObs1_SI" value="si">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck_dci(this);" name="querySiNoObs1" id="querySiNoObs1_SI" value="si">
                                                     <label class="form-check-label querySiNoObs1" for="querySiNoObs1">Si</label>
                                                     &nbsp;&nbsp;
-                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs1" id="querySiNoObs1_NO" value="no">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck_dci(this);" name="querySiNoObs1" id="querySiNoObs1_NO" value="no">
                                                     <label class="form-check-label querySiNoObs1" for="querySiNoObs1">No</label>
                                                 </div>
                                                 <div id="querySiNoObs1_show" style="display:none;">
@@ -86,7 +86,7 @@
                                                     </ol>
                                                     <label id="querySiNoObs1_etiqueta" for="contenedorid">Escriba y explique dentro del recuadro:</label>
                                                     <div class="input-group col-xs-12">
-                                                        <textarea class="form-control" id="querySiNoObs1_texto" name="querySiNoObs1_texto-R" rows="2" placeholder="Escriba y explique" value="<php:item id="querySiNoObs1_texto" />" disabled  onkeyup="pinta(this)"></textarea>
+                                                        <textarea class="form-control" id="querySiNoObs1_texto" name="querySiNoObs1_texto-R" rows="2" placeholder="Escriba y explique" value="<php:item id="querySiNoObs1_texto" />" disabled  onkeyup="pinta_dci(this)"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -94,10 +94,10 @@
                                             <li>&#191;Tiene <b>usted o alguno de sus familiares directos</b> alguna relaci&oacute;n personal, comercial o econ&oacute;mica con alg&uacute;n directivo, trabajador o subordinado en la empresa donde usted labora o en Mel&oacute;n y sus subsidiarias?</li>
                                             <div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs2" id="querySiNoObs2_SI" value="si">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck_dci(this);" name="querySiNoObs2" id="querySiNoObs2_SI" value="si">
                                                     <label class="form-check-label querySiNoObs2" for="querySiNoObs2">Si</label>
                                                     &nbsp;&nbsp;
-                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs2" id="querySiNoObs2_NO" value="no">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck_dci(this);" name="querySiNoObs2" id="querySiNoObs2_NO" value="no">
                                                     <label class="form-check-label querySiNoObs2" for="querySiNoObs2">No</label>
                                                 </div>
                                                 <div id="querySiNoObs2_show" style="display:none;">
@@ -108,7 +108,7 @@
                                                     </ol>
                                                     <label id="querySiNoObs2_etiqueta" for="contenedorid">Escriba y explique dentro del recuadro:</label>
                                                     <div class="input-group col-xs-12">
-                                                        <textarea class="form-control" id="querySiNoObs2_texto" name="querySiNoObs2_texto-R" rows="2" placeholder="Escriba y explique" value="<php:item id="querySiNoObs2_texto" />" disabled  onkeyup="pinta(this)"></textarea>
+                                                        <textarea class="form-control" id="querySiNoObs2_texto" name="querySiNoObs2_texto-R" rows="2" placeholder="Escriba y explique" value="<php:item id="querySiNoObs2_texto" />" disabled  onkeyup="pinta_dci(this)"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -116,10 +116,10 @@
                                             <li>&#191;Tiene <b>usted o alguno de sus familiares directos</b> alguna participaci&oacute;n econ&oacute;mica o inversi&oacute;n en el Grupo Mel&oacute;n y sus subsidiarias?</li>
                                             <div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs3" id="querySiNoObs3_SI" value="si">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck_dci(this);" name="querySiNoObs3" id="querySiNoObs3_SI" value="si">
                                                     <label class="form-check-label querySiNoObs3" for="querySiNoObs3">Si</label>
                                                     &nbsp;&nbsp;
-                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs3" id="querySiNoObs3_NO" value="no">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck_dci(this);" name="querySiNoObs3" id="querySiNoObs3_NO" value="no">
                                                     <label class="form-check-label querySiNoObs3" for="querySiNoObs3">No</label>
                                                 </div>
                                                 <div id="querySiNoObs3_show" style="display:none;">
@@ -130,7 +130,7 @@
                                                     </ol>
                                                     <label id="querySiNoObs3_etiqueta" for="contenedorid">Escriba y explique dentro del recuadro:</label>
                                                     <div class="input-group col-xs-12">
-                                                        <textarea class="form-control" id="querySiNoObs3_texto" name="querySiNoObs3_texto-R" rows="2" placeholder="Escriba y explique" value="<php:item id="querySiNoObs3_texto" />" disabled  onkeyup="pinta(this)"></textarea>
+                                                        <textarea class="form-control" id="querySiNoObs3_texto" name="querySiNoObs3_texto-R" rows="2" placeholder="Escriba y explique" value="<php:item id="querySiNoObs3_texto" />" disabled  onkeyup="pinta_dci(this)"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -138,17 +138,17 @@
                                             <li>&#191;Ha estado implicados <b>usted o alguno de sus familiares directos</b> en alguna disputa legal con Mel&oacute;n y sus subsidiarias o se encuentra actualmente involucrado en cualquier otra disputa legal que pudiera tener un efecto real o percibido sobre sus funciones en la empresa donde usted labora o en Mel&oacute;n y sus subsidiarias?</li>
                                             <div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs4" id="querySiNoObs4_SI" value="si">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck_dci(this);" name="querySiNoObs4" id="querySiNoObs4_SI" value="si">
                                                     <label class="form-check-label querySiNoObs4" for="querySiNoObs4">Si</label>
                                                     &nbsp;&nbsp;
-                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs4" id="querySiNoObs4_NO" value="no">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck_dci(this);" name="querySiNoObs4" id="querySiNoObs4_NO" value="no">
                                                     <label class="form-check-label querySiNoObs4" for="querySiNoObs4">No</label>
                                                 </div>
                                                 <div id="querySiNoObs4_show" style="display:none;">
                                                     <p>Si ha respondido &#34;s&iacute;&#34;, explique en el recuadro inferior la naturaleza de la disputa, las partes implicadas y, si corresponde, el estado de la disputa o c&oacute;mo y d&oacute;nde fue resuelta.</p>
                                                     <label id="querySiNoObs4_etiqueta" for="contenedorid">Escriba y explique dentro del recuadro:</label>
                                                     <div class="input-group col-xs-12">
-                                                        <textarea class="form-control" id="querySiNoObs4_texto"  name="querySiNoObs4_texto-R" rows="2" placeholder="Escriba y explique" value="<php:item id="querySiNoObs4_texto" />" disabled  onkeyup="pinta(this)"></textarea>
+                                                        <textarea class="form-control" id="querySiNoObs4_texto"  name="querySiNoObs4_texto-R" rows="2" placeholder="Escriba y explique" value="<php:item id="querySiNoObs4_texto" />" disabled  onkeyup="pinta_dci(this)"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -157,34 +157,34 @@
                                             <div>
                                                 <p>&#191;Tiene usted relaci&oacute;n familiar con alg&uacute;n funcionario estatal o autoridad pol&iacute;tica?</p>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this); mas(this, 'check');" name="querySiNoDinamico1" id="querySiNoDinamico1_SI" value="si">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck_dci(this); mas_dci(this, 'check');" name="querySiNoDinamico1" id="querySiNoDinamico1_SI" value="si">
                                                     <label class="form-check-label querySiNoDinamico1" for="querySiNoDinamico1">Si</label>
                                                     &nbsp;&nbsp;
-                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this); limpiar(this, 'check');"; name="querySiNoDinamico1" id="querySiNoDinamico1_NO" value="no">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck_dci(this); limpiar_dci(this, 'check');"; name="querySiNoDinamico1" id="querySiNoDinamico1_NO" value="no">
                                                     <label class="form-check-label querySiNoDinamico1" for="querySiNoDinamico1">No</label>
                                                 </div>
                                                 <div id="querySiNoDinamico1_show" style="display:none;">
                                                     <p>Si ha respondido &#34;s&iacute;&#34;, liste en el recuadro inferior el nombre del familiar, grado de parentesco, entidad gubernamental y cargo o partido politico.</p>
                                                     <ol type="1" id="querySiNoDinamico1_fila"></ol>
-                                                    <button class="btn btn-md btn-default" onclick="javascript: mas(this, 'button');" type="button" id="querySiNoDinamico1_MAS" value="MAS" style="margin-top: 10px;" disabled >Agregar</button>
-                                                    <button class="btn btn-md btn-default" onclick="javascript: menos(this, 'button');" type="button" id="querySiNoDinamico1_MENOS" value="MENOS" style="margin-top: 10px;" disabled >Quitar</button>
+                                                    <button class="btn btn-md btn-default" onclick="javascript: mas_dci(this, 'button');" type="button" id="querySiNoDinamico1_MAS" value="MAS" style="margin-top: 10px;" disabled >Agregar</button>
+                                                    <button class="btn btn-md btn-default" onclick="javascript: menos_dci(this, 'button');" type="button" id="querySiNoDinamico1_MENOS" value="MENOS" style="margin-top: 10px;" disabled >Quitar</button>
                                                 </div>
                                             </div>
                                             <hr />
                                             <li>&#191;Hay alguna otra situaci&oacute;n no incluida en las preguntas precedentes que pudiera afectar su objetividad o independencia en el desempe&ntilde;o de sus funciones o la percepci&oacute;n de esa independencia y objetividad por parte de los dem&aacute;s?</li>
                                             <div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs5" id="querySiNoObs5_SI" value="si">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck_dci(this);" name="querySiNoObs5" id="querySiNoObs5_SI" value="si">
                                                     <label class="form-check-label querySiNoObs5" for="querySiNoObs5">Si</label>
                                                     &nbsp;&nbsp;
-                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs5" id="querySiNoObs5_NO" value="no">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck_dci(this);" name="querySiNoObs5" id="querySiNoObs5_NO" value="no">
                                                     <label class="form-check-label querySiNoObs5" for="querySiNoObs5">No</label>
                                                 </div>
                                                 <div id="querySiNoObs5_show" style="display:none;">
                                                     <p>Si ha respondido &#34;s&iacute;&#34;, proporcione detalles que permitan evaluar la situaci&oacute;n.</p>
                                                     <label id="querySiNoObs5_etiqueta" for="contenedorid">Escriba y explique dentro del recuadro:</label>
                                                     <div class="input-group col-xs-12">
-                                                        <textarea class="form-control" id="querySiNoObs5_texto" name="querySiNoObs5_texto-R" rows="2" placeholder="Escriba y explique" value="<php:item id="querySiNoObs5_texto" />" disabled  onkeyup="pinta(this)"></textarea>
+                                                        <textarea class="form-control" id="querySiNoObs5_texto" name="querySiNoObs5_texto-R" rows="2" placeholder="Escriba y explique" value="<php:item id="querySiNoObs5_texto" />" disabled  onkeyup="pinta_dci(this)"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -193,17 +193,18 @@
                                         <p><em>Confirmo que he le&iacute;do y entendido y que cumplo con el C&oacute;digo de Conducta y &Eacute;tica. Declaro que la informaci&oacute;n que revelo en este Formulario de Declaraci&oacute;n de Conflicto de Inter&eacute;s es verdadera, correcta y completa. Me comprometo a actualizar la informaci&oacute;n contenida en este formulario anualmente y en caso de que se produjese cualquier cambio material.</em></p>
                                     </div>
                                     <!--class="esteFormulario" style="display:<php:texto id="esteFormulario" />;" hr /-->
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-md-2 xs-12 pull-left">  
-                                            <button style="display:none" class="btn btn-info btn-md btn-block" name="accion" id="vista_previa" value="" type="button" data-toggle="modal" data-target="#modal_vp" >Ver Documento</button>  
+                                            <button style="display:none" class="btn btn-info btn-md btn-block vista_previa_dci" name="accion" id="vista_previa" value="" type="button" data-toggle="modal" data-target="#modal_vp" >Ver Documento</button>  
                                         </div>
                                         <div class="col-md-2 xs-12 pull-right esteFormulario" style="display:<php:texto id="esteFormulario" />;">  
-                                            <button class="btn btn-md btn-success btn-block" type="button" name="accion" id="ENVIARFORMULARIO" value="ENVIARFORMULARIO" style="margin-top: 10px;">Enviar formulario</button>  
+                                            <button class="btn btn-md btn-success btn-block ENVIARFORMULARIO_dci" type="button" name="accion" id="ENVIARFORMULARIO" value="ENVIARFORMULARIO" style="margin-top: 10px;">Enviar formulario</button>  
                                         </div>
                                     </div>
                                 </div>
                                 </php:repeticion>
-                            </form>
+                              <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
                         </div>
                     </div>
                 </div>
@@ -220,14 +221,14 @@
                     <div class="modal-header" align="center">
                         <h4 class="modal-title" id="ejemplo-titulo"> Vista Previa de Documento <h3 id="num"></h3></h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true" class="cerrar_modal">&times;</span>
                         </button>
                         <div class="row">
                             <div class="col-md-2 xs-12 pull-left">  
-                                <button type="button" class="btn btn-md btn-primary btn-block" id="eliminar" data-dismiss="modal">Eliminar</button>
+                                <button type="button" class="btn btn-md btn-primary btn-block eliminar_dci" id="eliminar" data-dismiss="modal">Eliminar</button>
                             </div>
                             <div class="col-md-2 xs-12 pull-right">  
-                                <button type="button" class="btn btn-md btn-success btn-block" id="aprobar" data-dismiss="modal">Aprobar</button>
+                                <button type="button" class="btn btn-md btn-success btn-block aprobar_dci" id="aprobar" data-dismiss="modal">Aprobar</button>
                             </div>
                         </div>
                     </div>
@@ -240,7 +241,7 @@
                     <div class="modal-footer" style="margin-top:10px;">
                         <div class="row">
                             <div class="col-md-2 xs-12 pull-right">  
-                                <button type="button" class="btn btn-secondary btn-md btn-block" id="cerrar" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-secondary btn-md btn-block cerrar_modal" id="cerrar" data-dismiss="modal">Cerrar</button>
                             </div>
                         </div>
                     </div>
@@ -249,340 +250,3 @@
         </div>
     </div>
 </section>
-<script>
-    $(document).ready(function(){
-        <php:texto id="clickAutomatico" />
-    });
-
-    var ajax;
-    $('#eliminar').click(function(){
-        var url = "EliminarFormulario_ajax.php?idDocumento=" + $("#idDocumento").val() + "&empleadoFormularioid=" + $('#empleadoFormularioid').val();
-        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-        if( window.XMLHttpRequest )
-            ajax = new XMLHttpRequest(); // No Internet Explorer
-        else
-            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-        // Almacenamos en el control al funcion que se invocara cuando la peticion
-        ajax.onreadystatechange = funcionCallback_rechazar;
-        // Enviamos la peticion
-        ajax.open( "GET", url, false);
-        ajax.send( "" );
-    });
-    function funcionCallback_rechazar()
-    {
-        // Comprobamos si la peticion se ha completado (estado 4)
-        if( ajax.readyState == 4 )
-        {
-            // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-            if( ajax.status == 200 )
-            {
-                // Escribimos el resultado en la pagina HTML mediante DHTML
-                salida = ajax.responseText;
-                if( salida != '' )
-                {
-                    if(salida)
-                    {
-                        $('.esteFormulario').show();
-                        $('#ENVIARFORMULARIO').show();
-                        $('#vista_previa').hide();
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    $("#mensajeError").show();
-                    $("#mensajeError").html("Ha habido un error, intente mas tarde.");
-                }
-            }
-        }
-    }
-    $('#aprobar').click(function(){
-        MostrarCargando();
-        var url = "Documentos_aprobar2_ajax.php?idDocumento=" + $('#idDocumento').val();// + "&empleadoFormularioid=" + $('#empleadoFormularioid').val();
-        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-        if( window.XMLHttpRequest )
-            ajax = new XMLHttpRequest(); // No Internet Explorer
-        else
-            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-        // Almacenamos en el control al funcion que se invocara cuando la peticion
-        ajax.onreadystatechange = funcionCallback_aprobar;
-        // Enviamos la peticion
-        ajax.open( "GET", url, false);
-        ajax.send( "" );
-    });
-    //Callback de Vista previa
-    function funcionCallback_aprobar()
-    {
-        OcultarCargando();
-        // Comprobamos si la peticion se ha completado (estado 4)
-        if( ajax.readyState == 4 )
-        {
-            // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-            if( ajax.status == 200 )
-            {
-                // Escribimos el resultado en la pagina HTML mediante DHTML
-                salida = ajax.responseText;
-                if( salida != '' )
-                {
-                    if(salida)
-                    {
-                        $('#formularioFirmador').submit();
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    $("#mensajeError").show();
-                    $("#mensajeError").html("Ha habido un error, intente mas tarde.");
-                }
-            }
-        }
-    }
-    $("#vista_previa").click(function()
-    {
-        //MostrarCargando();
-		var url = "Documentos_aprobar4_ajax.php?idDocumento=" + $('#idDocumento').val(); //Descargar Documento
-        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-		if( window.XMLHttpRequest )
-		   ajax = new XMLHttpRequest(); // No Internet Explorer
-		else
-		   ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-        // Almacenamos en el control al funcion que se invocara cuando la peticion
-		ajax.onreadystatechange = funcionCallback_descargarDoc;
-		// Enviamos la peticion
-		ajax.open( "GET", url, false);
-		ajax.send( "" );
-	});
-	//Callback de Vista previa
-    function funcionCallback_descargarDoc()
-    {
-        OcultarCargando();
-        // Comprobamos si la peticion se ha completado (estado 4)
-        if( ajax.readyState == 4 )
-        {
-            // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-            if( ajax.status == 200 )
-            {
-                // Escribimos el resultado en la pagina HTML mediante DHTML
-                salida = ajax.responseText;
-                if(salida)
-                {
-                    var ruta = salida;
-                    $("#viewer").attr("src",ruta);
-                    $("#num").html('Documento : ' + $('#idDocumento').val());
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-	}
-    $('#ENVIARFORMULARIO').on('click', function(){
-        if (validar())
-        {
-	        MostrarCargando();
-            var parametros = $('#formulario').serialize();
-            //Produccion var url = "EnvioFormulario_ajax.php?idPlantilla=" + 70 + "&idProceso=" + 59 + "&empleadoFormularioid=" + $('#empleadoFormularioid').val() + "&" + parametros;
-            //QA 
-            var url = "EnvioFormulario_ajax.php?idPlantilla=" + 1016 + "&idProceso=" + 2 + "&empleadoFormularioid=" + $('#empleadoFormularioid').val() + "&" + parametros;
-            //Desarrollo var url = "EnvioFormulario_ajax.php?idPlantilla=" + 36 + "&idProceso=" + 13 + "&empleadoFormularioid=" + $('#empleadoFormularioid').val() + "&" + parametros;
-            // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-            if( window.XMLHttpRequest )
-                ajax = new XMLHttpRequest(); // No Internet Explorer
-            else
-                ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-            // Almacenamos en el control al funcion que se invocara cuando la peticion
-            // cambie de estado 
-            ajax.onreadystatechange = funcionCallback_envioformulario;
-            // Enviamos la peticion
-            ajax.open( "GET", url, true );
-            ajax.send( "" );
-        }
-    });
-    function funcionCallback_envioformulario()
-    {
-        // Comprobamos si la peticion se ha completado (estado 4)
-        //OcultarCargando();
-        if( ajax.readyState == 4 )
-        {
-            // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-            if( ajax.status == 200 )
-            {
-                // Escribimos el resultado en la pagina HTML mediante DHTML
-                //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
-                var salida = ajax.responseText;
-                //console.log(salida);
-                if( salida != '' )
-                {
-                    var datos = JSON.parse(salida);
-                    if (datos.estado)
-                    {
-                        $('#idDocumento').val(datos.idDocumento);
-                        //$('#vista_previa').val(datos.idDocumento);
-                        $('#ENVIARFORMULARIO').hide();
-                        $('#vista_previa').show();
-                        $('#vista_previa').click();
-                    }
-                    else
-                    {
-                        //alert(123);
-                        $("#mensajeError").show();
-                        $("#mensajeError").html(datos.mensaje);
-                    }
-                }
-                else
-                {
-                    $("#mensajeError").show();
-                    $("#mensajeError").html("Ha habido un error, intente mas tarde.");
-                }
-            }
-        }
-    }
-    function validar()
-    {
-        var respuesta = true;
-        $('#formulario input[type=text]').each(function(index, element)
-        {
-            if (element.name.split('-')[1])
-            {
-                if ($(element).val() == '')
-                {
-                    respuesta = false;
-                    $(element).focus();
-                    $(element).css('background', 'darkred');
-                    $(element).css('font-color', 'white');
-                }
-            }
-        });
-        $('#formulario textarea').each(function(index, element)
-        {
-            if (!$(element).prop('disabled'))
-            {
-                if ($(element).val() == '')
-                {
-                    respuesta = false;
-                    $(element).focus();
-                    $(element).css('background', 'darkred');
-                    $(element).css('font-color', 'white');
-                }
-            }
-        });
-        $('input:radio').each(function(index, element)
-        {
-            if ($('input:radio[name=' + element.name + ']:checked').val() == undefined)
-            {
-                aux = element.id.split('_');
-                respuesta = false;
-                $(element).focus();
-                $('.' + aux[0]).css('background', 'darkred');
-                $('.' + aux[0]).css('color', 'white');
-           }
-        });
-        return respuesta;
-    }
-    function pinta(element)
-    {
-        $(element).css('background', 'white');
-        $(element).css('font-color', 'grey');
-        $(element).css('color', 'black');
-    }
-    function controlCheck(elemento)
-    {
-        var aux = elemento.id.split('_');
-        pinta($('.' + aux[0]));
-        // Para tipo pregunta 1
-        try
-        {
-            if ($(elemento).val() == 'si')
-            {
-                $('#' + aux[0] + '_texto').attr('disabled', false);
-                if ($('#' + aux[0] + '_etiqueta').html().indexOf('(*)') == -1)
-                {
-                    $('#' + aux[0] + '_etiqueta').html($('#' + aux[0] + '_etiqueta').html() + ' (*)');
-                }
-                $('#' + aux[0] + '_show').show();
-            }
-            else
-            {
-                $('#' + aux[0] + '_texto').attr('disabled', true);
-                $('#' + aux[0] + '_etiqueta').html($('#' + aux[0] + '_etiqueta').html().replace(' (*)', ''));
-                $('#' + aux[0] + '_show').hide();
-            }
-        }
-        catch(e){}
-        // Para tipo pregunta 2
-        try
-        {
-            if ($(elemento).val() == 'si')
-            {
-                $('#' + aux[0] + '_MAS').attr('disabled', false);
-                $('#' + aux[0] + '_MENOS').attr('disabled', false);
-                $('#' + aux[0] + '_show').show();
-            }
-            else
-            {
-                $('#' + aux[0] + '_MAS').attr('disabled', true);
-                $('#' + aux[0] + '_MENOS').attr('disabled', true);
-                $('#' + aux[0] + '_show').hide();
-            }
-        }
-        catch(e){}
-    }
-
-    var indice = 0;
-    function limpiar(elemento, origen)
-    {
-        for (i = indice; i > 0; i--)
-        {
-            menos(elemento, origen);
-        }
-    }
-    function mas(elemento, origen)
-    {
-        if ((origen == 'check' && indice == 0) || origen == 'button' && indice >= 0)
-        {
-            var aux = elemento.id.split('_');
-            var html = '';
-            html += '<div class="row" id="fila_' + indice + '">';
-            html += '   <li>';
-            html += '       <div class="col-md-4">';
-            html += '           <label for="contenedorid" >Nombre (*)</label>';
-            html += '           <div class="input-group col-xs-12">';
-            html += '               <input type="text" class="form-control" name="' + aux[0] + '_columna1-R[]" placeholder="Nombre" maxlength="110" value="<php:item id="' + aux[0] + '_nombre" />"  onkeyup="pinta(this)">';
-            html += '           </div>';
-            html += '       </div>';
-            html += '       <div class="col-md-4">';
-            html += '           <label for="contenedorid" >Parentesco (*)</label>';
-            html += '           <div class="input-group col-xs-12">';
-            html += '               <input type="text" class="form-control" name="' + aux[0] + '_columna2-R[]" placeholder="Parentesco" maxlength="50" value="<php:item id="' + aux[0] + '_parentesco" />"  onkeyup="pinta(this)">';
-            html += '           </div>';
-            html += '       </div>';
-            html += '       <div class="col-md-4">';
-            html += '           <label for="contenedorid" >Entidad / Autoridad politica / Cargo (*)</label>';
-            html += '           <div class="input-group col-xs-12">';
-            html += '               <input type="text" class="form-control" name="' + aux[0] + '_columna3-R[]" placeholder="Entidad / Autoridad politica / Cargo" maxlength="50" value="<php:item id="' + aux[0] + '_entidadAutoridadCargo" />"  onkeyup="pinta(this)">';
-            html += '           </div>';
-            html += '       </div>';
-            html += '   </li>';
-            html += '</div>';
-            $('#' + aux[0] + '_fila').append(html);
-            indice++;
-        }
-    }
-    function menos(elemento, origen)
-    {
-        if ((indice > 1 && origen == 'button') || (origen == 'check'))
-        {
-            var aux = elemento.id.split('_');
-            indice--;
-            $('#fila_' + indice).remove();
-        }
-    }
-</script>

@@ -87,10 +87,10 @@ class documentosdet {
 	function __construct()
 	{
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -154,7 +154,7 @@ class documentosdet {
 		include("includes/opciones_menu.php");
 
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -165,7 +165,7 @@ class documentosdet {
 		}
 	
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "VERDOCUMENTO":
 				$this->verdocumento();
@@ -208,7 +208,7 @@ class documentosdet {
 		$dt = new DataTable();
 		$dt2 = new DataTable();
 		$dt3 = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 	
 		$this->documentosdetBD->Obtener($datos,$dt);
 		$this->mensajeError.=$this->documentosdetBD->mensajeError;
@@ -259,7 +259,7 @@ class documentosdet {
 		
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//Llenar Select de Empresas registradas
 		// Buscamos el idCategoria que vamos a asignar
@@ -310,7 +310,7 @@ class documentosdet {
 		
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $idDocumento;
 
 		//Llenar Select de Empresas registradas
@@ -370,7 +370,7 @@ class documentosdet {
 	
 	private function aprobar()
 	{ 
-		$datos = $_REQUEST;	
+		$datos = $_POST;	
 		$datos["estado"] = 2;
 		$this->documentosdetBD->modificar_estado($datos);
 		$this->mensajeError=$this->documentosdetBD->mensajeError;
@@ -384,7 +384,7 @@ class documentosdet {
 	
 	private function rechazar()
 	{ 
-		$datos = $_REQUEST;	
+		$datos = $_POST;	
 		$datos["estado"] = 8; //cambiar a estado de rechazo
 		$this->documentosdetBD->modificar_estado($datos);
 		$this->mensajeError=$this->documentosdetBD->mensajeError;
@@ -481,7 +481,7 @@ class documentosdet {
 		
 		$dt = new DataTable();
 		$dt1 = new DataTable();
-		$datos = $_REQUEST;	
+		$datos = $_POST;	
 
 		//consulta para deducir tipo de firma pin, token o huella
 		$usuarioid = $this->seguridad->usuarioid;
@@ -552,7 +552,7 @@ class documentosdet {
 	{
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//Llenar Select de Empresas registradas
 		// Buscamos el idCategoria que vamos a asignar
@@ -600,7 +600,7 @@ class documentosdet {
 	{
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//Llenar Select de Empresas registradas
 		$this->documentosdetBD->obtenerb64($datos,$dt);
@@ -680,7 +680,7 @@ class documentosdet {
 	{
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		$formulario[0] = $datos;	
 		
@@ -727,7 +727,7 @@ class documentosdet {
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
 		$dt1 = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$this->orden = 0;
 		
 		//Buscar el orden de firmante 	
@@ -762,8 +762,8 @@ class documentosdet {
 
 			if ($dt["status"] == "200")
 			{
-				$_REQUEST["DocCode"] 	= $dt["result"][0]["code"];
-				$_REQUEST["documento"]	= $dt["result"][0]["file"];
+				$_POST["DocCode"] 	= $dt["result"][0]["code"];
+				$_POST["documento"]	= $dt["result"][0]["file"];
 				
 				$res = array();
 				$res = $dt["result"][0]["signers"];
@@ -783,8 +783,8 @@ class documentosdet {
 				}else{
 					$ejemplo = date("d-m-Y H:i:s");
 				}
-				$_REQUEST["FechaFirma"] = $ejemplo; 
-				$_REQUEST["RutFirmante"] = $this->seguridad->usuarioid;
+				$_POST["FechaFirma"] = $ejemplo; 
+				$_POST["RutFirmante"] = $this->seguridad->usuarioid;
 				
 				$this->actualizaDocumento();
 				$this->actualizarFirma();
@@ -828,7 +828,7 @@ class documentosdet {
 	{
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		$nombrearchivo = $this->ObtenerDocBase64();
 		
@@ -857,7 +857,7 @@ class documentosdet {
 	{
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$this->band = 0;
 		$formulario[0] = $datos;	
 		
@@ -874,8 +874,8 @@ class documentosdet {
 
 				if($dt["status"] == 200)
 				{
-					$_REQUEST["DocCode"] 	= $dt["result"][0]["code"];
-					$_REQUEST["documento"]	= $dt["result"][0]["file"];
+					$_POST["DocCode"] 	= $dt["result"][0]["code"];
+					$_POST["documento"]	= $dt["result"][0]["file"];
 			
 					$res = array();
 					$res = $dt["result"][0]["signers"];
@@ -896,7 +896,7 @@ class documentosdet {
 						
 						$ejemplo = date("d-m-Y H:i:s");
 					}
-					$_REQUEST["FechaFirma"] = $ejemplo; 
+					$_POST["FechaFirma"] = $ejemplo; 
 
 					$this->actualizaDocumento();
 				  	$this->actualizarFirma();
@@ -909,7 +909,7 @@ class documentosdet {
 					
 					if ($dt["result"]["code"] != "")
 					{
-						$_REQUEST["DocCode"] = $dt["result"]["code"];
+						$_POST["DocCode"] = $dt["result"]["code"];
 						$this->actualizaDocumento();
 
 						$this->buscarDatosDec($dt["result"]["code"]);
@@ -940,7 +940,7 @@ class documentosdet {
 	
 	private function firmahuella()
 	{
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		//si todo ok en la firma, mostramos el inicio para que nos muestre el documento con el ladrillo
 		if ($datos["accion"] == "FIRMAHUELLA")
 		{
@@ -977,7 +977,7 @@ class documentosdet {
 		//si ya tiene una firma devuelve true
 		$dt = new DataTable(); //Numero de Documento
 		$dt1 = new DataTable(); //Firmantes
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//Obtener Datos del Documento
 		$this->documentosdetBD->totalFirmantes($datos,$dt);
@@ -1007,7 +1007,7 @@ class documentosdet {
 	private function ObtenerDocBase64()
 	{
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//vamos a buscar el documento que debe contener la firma adicional del token
 		$this->documentosdetBD->obtenerb64($datos,$dt);//print_r($dt);
@@ -1039,12 +1039,12 @@ class documentosdet {
 	//Accion de Firmar 
 	private function firmar(){
 
-		//Recibir $_REQUEST["idContrato"]
+		//Recibir $_POST["idContrato"]
 
 		//Variables para subida del Documento
 		$dt = new DataTable(); //Numero de Documento
 		$dt1 = new DataTable(); //Firmantes
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//Obtener Datos del Documento
 		$this->documentosdetBD->totalFirmantes($datos,$dt);
@@ -1097,8 +1097,8 @@ class documentosdet {
 
 				//Asignamos variables
 				if( $dt["result"][0]["code"] ){
-					$_REQUEST["DocCode"] = $dt["result"][0]["code"];
-					$_REQUEST["documento"] = $dt["result"][0]["file"];
+					$_POST["DocCode"] = $dt["result"][0]["code"];
+					$_POST["documento"] = $dt["result"][0]["file"];
 
 					//Fecha de firma de DEC
 					$fecha_actual = '';
@@ -1121,7 +1121,7 @@ class documentosdet {
 					}else{
 						$ejemplo = date("d-m-Y H:i:s");
 					}
-					$_REQUEST["FechaFirma"] = $ejemplo; 
+					$_POST["FechaFirma"] = $ejemplo; 
 				}
 				//Si la firma fue todo Ok
 				if( ($dt["status"] == 200) && ($dt["message"] == "Success") ) {
@@ -1138,7 +1138,7 @@ class documentosdet {
 						if($dt["result"]["code"] != "" ){ 
 
 							//Actualizar en la BD
-							$_REQUEST["DocCode"] = $dt["result"]["code"];
+							$_POST["DocCode"] = $dt["result"]["code"];
 							$this->actualizaDocumento();
 			
 							$this->buscarDatosDec($dt["result"]["code"]);
@@ -1172,8 +1172,8 @@ class documentosdet {
 			}
 
 			//Asignamos variables
-			$_REQUEST["DocCode"] = $dt["result"][0]["code"];
-			$_REQUEST["documento"] = $dt["result"][0]["file"];
+			$_POST["DocCode"] = $dt["result"][0]["code"];
+			$_POST["documento"] = $dt["result"][0]["file"];
 			
 			//Fecha de firma de DEC
 			$fecha_actual = '';
@@ -1198,7 +1198,7 @@ class documentosdet {
 				//$this->pagina->agregarDato("mensajeError",$this->mensajeError);
 				$ejemplo = date("d-m-Y H:i:s");
 			}
-			$_REQUEST["FechaFirma"] = $ejemplo; 
+			$_POST["FechaFirma"] = $ejemplo; 
 
 			//Si todo fue bien
 			if( ($dt["status"] == 200) && ($dt["message"] == "Success") ) {
@@ -1214,7 +1214,7 @@ class documentosdet {
 				if( $dt["status"] == 400 ){
 					if($dt["result"]["code"] != "" ){ 
 						//Actualizar en la BD
-						$_REQUEST["DocCode"] = $dt["result"]["code"];
+						$_POST["DocCode"] = $dt["result"]["code"];
 						$this->actualizaDocumento();
 
 						$this->buscarDatosDec($dt["result"]["code"]);
@@ -1232,7 +1232,7 @@ class documentosdet {
 
 		//Recibir $datos["idContrato"], $datos["personaid"], $this->firma = tipo de firma del firmante
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//Variables para subida del Documento
 		$dt = new DataTable(); //Numero de Documento
@@ -1357,7 +1357,7 @@ class documentosdet {
 	    $dt1= new DataTable(); //Firmantes 
 	    $dt2= new DataTable(); //Datos del Documento
 
-	    $datos = $_REQUEST;
+	    $datos = $_POST;
 	  
 		//Buscar Firmantes
 		$this->documentosdetBD->obtenerFirmantes($datos, $dt1);
@@ -1478,7 +1478,7 @@ class documentosdet {
 	//Actualiza firma en BD
 	public function actualizarFirma(){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		if( $datos["FechaFirma"] == ''){
 			$datos["FechaFirma"] = date("d-m-Y H:i:s");
@@ -1498,7 +1498,7 @@ class documentosdet {
 	//Actualiza firma en BD
 	private function actualizarFirmaRBK($idDocumento, $firmante, $fechafirma, $documento){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $idDocumento;
 		$datos['RutFirmante'] = $firmante;
 		$datos['FechaFirma'] = $fechafirma;
@@ -1531,7 +1531,7 @@ class documentosdet {
 	//Actualiza Documento en la BD
 	public function actualizaDocumento(){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		if ( $datos['DocCode'] != '' ){
 			//Actualizar el codigo del documento
@@ -1544,7 +1544,7 @@ class documentosdet {
 	//Actualiza Documento en la BD
 	private function actualizaDocumentoRBK($idDocumento, $DocCode){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $idDocumento;
 		$datos['DocCode'] = $DocCode;
 
@@ -1563,7 +1563,7 @@ class documentosdet {
 	//Consultar fsi firmo el documento 
 	private function buscarDatosDec($docCode){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//Consulto los datos del documento en Acepta 
 		$datos["code"] = $docCode;
@@ -1572,8 +1572,8 @@ class documentosdet {
 
 		if ($dt["status"] == "200"){
 
-			$_REQUEST["DocCode"] 	= $dt["result"][0]["code"];
-			$_REQUEST["documento"]	= $dt["result"][0]["file"];
+			$_POST["DocCode"] 	= $dt["result"][0]["code"];
+			$_POST["documento"]	= $dt["result"][0]["file"];
 
 			$res = array();
 			$res = $dt["result"][0]["signers"];
@@ -1598,8 +1598,8 @@ class documentosdet {
 			if( $fecha_actual != '' ){ //Si tiene fecha de firma
 
 				$ejemplo = str_replace('/','-', $fecha_actual); 
-				$_REQUEST["FechaFirma"] = $ejemplo; 
-				$_REQUEST["RutFirmante"] = $this->seguridad->usuarioid;
+				$_POST["FechaFirma"] = $ejemplo; 
+				$_POST["RutFirmante"] = $this->seguridad->usuarioid;
 				
 				$this->actualizaDocumento();
 				$this->actualizarFirma();
@@ -1617,7 +1617,7 @@ class documentosdet {
 
 	private function envioGestor($idDocumento){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $idDocumento;
 
 		$dt = new DataTable();
@@ -1648,7 +1648,7 @@ class documentosdet {
 		//Variables para subida del Documento
 		$dt = new DataTable(); 
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		if( !$this->TieneUnaFirma() ){
 
@@ -1717,7 +1717,7 @@ class documentosdet {
 		//Variables para subida del Documento
 		$dt = new DataTable(); 
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 					
 		$this->cargarFirmante();
 
@@ -1783,7 +1783,7 @@ class documentosdet {
 	//Actualizar documento de RBK 
 	private function buscarDatosDocumentosRBK($dt){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//Actualizar datos del documento
 		$this->valor_arr = "";
@@ -1847,7 +1847,7 @@ class documentosdet {
 	//Buscar datos del documentos RBK guadado
 	private function buscarDatosDeSession($idDocumento){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $idDocumento;
 
 		$dt = new DataTable();

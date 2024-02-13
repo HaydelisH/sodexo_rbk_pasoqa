@@ -64,9 +64,9 @@ class EliminarFormulario {
 		$dt = new DataTable();
 		// pedimos el listado
 
-        $datos = $_REQUEST;
+        $datos = $_POST;
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		//$datos['idDocumento'] = $datos['idDocumento_el'];
 
 	 	$dt = new DataTable();
@@ -76,7 +76,7 @@ class EliminarFormulario {
 
 		if( $this->mensajeError == '' ){
 			// AQUI ELIMINAR
-            if (isset($_REQUEST['empleadoFormularioid']))
+            if (isset($_POST['empleadoFormularioid']))
             {
                 $this->formularioPlantillaBD->deleteIdDocumento($datos, $dt);
                 $this->mensajeError .= $this->formularioPlantillaBD->mensajeError;

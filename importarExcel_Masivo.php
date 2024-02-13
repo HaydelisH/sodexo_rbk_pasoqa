@@ -85,7 +85,7 @@ class importar
 	// funcion contructora, al instanciar
 	function __construct()
 	{
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		// creamos una instacia de la base de datos
 		$this->bd = new ObjetoBD();
 		$this->pagina = new Paginas();
@@ -148,7 +148,7 @@ class importar
 
 	private function matchColumn()
 	{
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$this->importarBD->obtenerConfimpArchivoDet($datos,$dt2);
 		$this->camposArchivoDet=$dt2; //datos de la tabla confiDet
 		for($col = 0; $col <= $this->highestColumnIndex - 1; $col++)
@@ -177,9 +177,9 @@ class importar
 	private function procesar()
 	{
 		set_time_limit(0);
-		$filaActual = (isset($_REQUEST['fila']) ? $_REQUEST['fila'] : 2);
+		$filaActual = (isset($_POST['fila']) ? $_POST['fila'] : 2);
 		$tiempoInicial = time();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['usuarioid'] = isset($this->seguridad->usuarioid) ? $this->seguridad->usuarioid : $datos['usuarioid'];
 		/*$this->respuesta_importarBD->cuenta(array(
 			'usuarioingid'=>$datos['usuarioid'],
@@ -589,7 +589,7 @@ class importar
 			exit;
 		}
 		//eliminamos resultado de carga por el codigo del usuario
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["usuarioid"] = $this->seguridad->usuarioid; 
 		$this->importarBD->eliminar($datos);
 		echo json_encode(array('highestRow'=>$this->highestRow - 1));
@@ -603,7 +603,7 @@ class importar
 
 	private function setNombreFichero()
 	{
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['usuarioid'] = isset($this->seguridad->usuarioid) ? $this->seguridad->usuarioid : $datos['usuarioid'];
 		$this->nombreArchivoSubida = "{$this->nombreNemotecnicoArchivo}{$datos['usuarioid']}";//.{$this->nombreExtensionArchivoSubida}";
 	}
@@ -620,7 +620,7 @@ class importar
 		$this->highestColumnIndex = PHPExcel_Cell::columnIndexFromString($this->highestColumn); // transforma el campo E, que seria el total a numero
 		//Realiza el llamado a la funcion contarColumnas
 		$this->resultadoContColumnas=$this->contarColumnas($this->highestColumnIndex);
-		$datos=$_REQUEST;//$_REQUEST es para pasarle el IdArchivo que viene desde el HTML.
+		$datos=$_POST;//$_POST es para pasarle el IdArchivo que viene desde el HTML.
 		$this->importarBD->contarColumnasTabla($datos,$dt);//Realiza el llamado al SP de importarBD 
 		$this->total= $dt->data[0]["total"];//para rescatar una variable de la base de datos
 		

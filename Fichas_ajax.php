@@ -58,7 +58,7 @@ class fichas {
 		$this->fichasDatosImportacionBD->usarConexion($conecc);
 		$this->procesosBD->usarConexion($conecc);
 		
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$dt = new Datatable();
 		$dt2 = new Datatable();
 		$dt3 = new Datatable();

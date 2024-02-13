@@ -50,7 +50,8 @@
 
                       <input type="hidden" name="accion" value="AGREGAR"/>
                       <button type="submit" style="background-color: transparent;" class="btn" id="boton_<php:filamenos />" name="accion2" value="BUSCAR_P"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                  </form>
+                    <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
                   </div>
                 </td>
                 <!--Titulo de Plantilla-->

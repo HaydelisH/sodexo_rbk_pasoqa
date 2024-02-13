@@ -1,92 +1,40 @@
 <!DOCTYPE html>
 <html >
 	<head>
+
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<!--Titulo de Sitio-->
 		<title>Rubrika | Firma</title>
-		<!--Meta Vieport-->
 		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-		<!--Estilos-->
-		<!-- Bootstrap 3.3.7 -->
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<!-- Font Awesome -->
+		<link rel="stylesheet" href="assets\bootstrap\css\bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
 		<link rel="stylesheet" href="css/font-awesome.min.css">
-		<!-- Ionicons -->
 		<link rel="stylesheet" href="css/ionicons.min.css">
-		<!-- Estilo de Plantilla -->
 		<link rel="stylesheet" href="css/AdminLTE.min.css">
-	  	<!-- AdminLTE Skins -->
 	  	<link rel="stylesheet" href="css/_all-skins.css?=1.2">
-	  	<!-- Seleccion de Firmantes -->
 	  	<link rel="stylesheet" href="css/steps.css">
-	  	<!--Estilos personalizados-->
-		<link href="css/gama_leasing.css" rel="stylesheet">
-		<!--Data Tables-->
-		<link href="css/jquery.dataTables.css" rel="stylesheet">
-		<!--Toastr-->
+	  	<!--<link rel="stylesheet" href="css/estilos.css">-->
+	  	<link rel="stylesheet" href="css/gama_leasing.css" >
+		<link rel="stylesheet" href="css/dataTables.css" >
 		<link rel="stylesheet" href="css/toastr.css" rel="stylesheet">
-
-		<link href="css/switchery.min.css" rel="stylesheet"/>
-		<!--<script src="js/jquery.min.js" charset="UTF-8"></script>-->
+		<link rel="stylesheet" href="css/switchery.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap5.min.css"/>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+		<link rel="stylesheet" type="text/css" href="js/datepicker/css/bootstrap-datepicker3.min.css"/>
 		
-		<!--Calendario-->
-		<script src="js/jquery-1.9.1.min.js"></script>
-		<link href="js/datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
-		<script type="text/javascript" src="js/datepicker/js/bootstrap-datepicker.min.js"></script>
-	    <script src="js/datepicker/locales/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
-		
-		<!--Java Script-->
-		<!--JS Personalizado-->
+		<script src="js/jquery.js"></script>		
+		<script src="js/datepicker/js/bootstrap-datepicker.min.js"></script>
+	    <script src="js/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
 		<script src="js/comun.js?=1.5"></script>  
 		<script src="js/rl_form.js?v=2.5"></script>
-
-		<!--Fuentes-->
-		<!-- Google Font -->
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
-		<!--Favicon-->
 		<link rel="shortcut icon" href="images/favicon.ico"/>
-
-		<!--Validacion de Navegador IE-->
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
-        <style>
-			ul.cke_autocomplete_panel {
-				width: 300px;
-			}
-			ul.cke_autocomplete_panel li {
-				padding: 5px;
-			}
-			.columns {
-				overflow: hidden;
-			}
-			.columns > .editor {
-				float: left;
-				width: 65%;
-				position: relative;
-			}
-			.columns > .templates {
-				float: right;
-				width: 35%;
-			}
-			.columns > .templates > ul {
-				margin: 15px 0 0 10px;
-			}
-			.item-title {
-				background-color: #ffeec2
-			}
-		</style>
+	
 	</head>
 	<body class="hold-transition skin-purple sidebar-mini" id="bodyx">
 		<!--Gift de Cragando pagina-->
-		<div id="cargando" >
+	<!--	<div id="cargando" >
 			<img id="cargandoImagen" src="images/cargando.gif" alt="cargando" height="242" width="242" >
-		</div>
+		</div>	-->
 		 <!--Contenedor principal-->
 		<div class="wrapper">
 			<!-- Encabezado -->
@@ -105,142 +53,31 @@
 
 				</a>
 				<!-- Header Navbar -->
-				<nav class="navbar navbar-static-top" role="navigation">
-					<!-- Sidebar toggle button-->
-					<a href="#" class="sidebar-toggle" onclick="muestramenu()" data-toggle="push-menu"  role="button"><!--data-toggle="offcanvas"--> 
-						<span class="sr-only">Men&uacute;</span>
-					</a>
-					<!--Menu prinicipal (izquierda)-->
-					<div class="navbar-custom-menu">
-						<ul class="nav navbar-nav">
-							 <!-- User Account: style can be found in dropdown.less -->
-							<li class="" style="padding-top: 2px;">
-								<a href="cambioclave.php"  >
-									<span >Cambio Contrase&ntilde;a</span>
+				<nav class="main-header navbar navbar-expand navbar-white navbar-light" style="padding-top: 0; padding-bottom: 0;">
+					<div class="container-fluid" style="padding-top: 0;">
+						<ul class="navbar-nav">
+							<a href="#" class="sidebar-toggle" onclick="muestramenu()" data-toggle="push-menu"  role="button"><!--data-toggle="offcanvas"--> 
+								<span class="sr-only">Men&uacute;</span>
+							</a>
+						</ul>
+						<ul class="navbar-nav d-flex">
+							<li class="nav-item">
+								<a href="index3.html" class="nav-link text-light" style="padding-top: 20px;">Cambio Contrase&ntilde;a
+									<span class="hidden-xs"></span><br/></a>
+							</li>
+							<li class="nav-item">
+								<a href="#" class="nav-link text-light" style="padding-top: 20px;">Cerrar Sesi&oacute;n
+									<span class="hidden-xs"></span><br/></a>
+							</li>
+							<li class="nav-item">
+								<a href="#" class="nav-link text-light">
+									<i class="fa fa-user-circle fa-lg" aria-hidden="true"></i> 
+									<span class="hidden-xs"><php:texto id="usuario_nombre" /><br/>
+									<php:texto id="nombreperfil" /></span>
 								</a>
 							</li>
-							<li class="dropdown user user-menu">
-															
-								<a href="#" class="dropdown-toggle" id="dtoogle" data-toggle="dropdown" style="padding-top: 5px; padding-bottom: 5px;">
-										<i class="fa fa-user-circle fa-lg" style=" padding-top: 10px;" aria-hidden="true"></i> 
-										<span class="hidden-xs"><php:texto id="usuario_nombre" /></span>
-										<span ><p style="text-align: center;margin-bottom: 0px;"><php:texto id="nombreperfil" /></p></span>
-								</a>
-								
-								<!--Desplegable del perfil de Usuario-->
-								<ul class="dropdown-menu">
-									<!-- User image -->
-									<li class="user-header">
-										<i class="fa fa-user-circle fa-5x" style="color:#fff;" aria-hidden="true"></i>
-										<p><php:texto id="usuario_nombre" />
-										<!--<small>Registrado desde Abr 2018</small>-->
-										</p>
-									</li>
-									<!-- Menu Footer-->
-									<li class="user-footer">
-										<!--<a href="RegistroDec.php" class="btn btn-default">Registro DEC</a>
-										<a href="cambiopin.php" class="btn btn-default">Cambio de PIN</a>
-										<a href="cambiodatosdec.php" class="btn btn-default">Modificar datos DEC</a>
-										-->
-										<!--<div class="pull-left">
-											<a href="cambioclave.php" class="btn btn-default btn-flat">Cambio Contrase&ntilde;a</a>
-										</div>-->
-										<div style="text-align:center">
-											 <a href="index.php?accion=cerrarSesion" class="btn btn-default btn-flat">Cerrar Sesi&oacute;n</a>
-										</div>
-									</li>
-								</ul>
-			              	</li>
-			            </ul>
-			          </div>
-			    </nav>
+						</ul>	
+					</div>
+				</nav>			
 			</header>
 
-<script>
-  
-var cookie_dc = document.cookie;
-var cookie_prefix = "muestramenu" + "=";
-var cookie_begin = cookie_dc.indexOf("; " + cookie_prefix);//alert ("vv:" +  cookie_begin);
-
-if (cookie_begin != -1)
-{
-	var rescookie = getCookie("muestramenu");//alert ("jj:" + rescookie);
-	var elemento = document.getElementById("bodyx");
-
-	if (rescookie == "cerrado")
-	{
-		elemento.className = " skin-purple sidebar-mini sidebar-collapse";                                    
-	}
-	else
-	{
-		elemento.className = " skin-purple sidebar-mini";                                       
-	}
-}
-
-function homex()
-{
-	OpcionMenu('');
-	window.location = 'index.php';
-}
-$( document ).ready(function() {
-    getUltimoCambioClave();
-});
-var ajax;
-function getUltimoCambioClave()
-{
-
-
-	var parametros = '';
-	var url = "ultimoCambioClave_ajax.php";
-	// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-	if( window.XMLHttpRequest )
-		ajax = new XMLHttpRequest(); // No Internet Explorer
-	else
-		ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-	// Almacenamos en el control al funcion que se invocara cuando la peticion
-	// cambie de estado 
-	ajax.onreadystatechange = funcionCallback_getUltimoCambioClave;
-	// Enviamos la peticion
-	ajax.open( "POST", url, true );
-	ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	ajax.send(parametros);
-}
-function funcionCallback_getUltimoCambioClave()
-{
-	// Comprobamos si la peticion se ha completado (estado 4)
-	//OcultarCargando();
-	if( ajax.readyState == 4 )
-	{
-		// Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-		if( ajax.status == 200 )
-		{
-			// Escribimos el resultado en la pagina HTML mediante DHTML
-			//document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
-			var salida = ajax.responseText;
-			//console.log(salida);
-			if( salida != '' )
-			{
-				var datos = JSON.parse(salida);
-				if (datos.exito)
-				{
-					if (datos.mensaje.estado == 'notificar')
-					{
-						alert(datos.mensaje.mensaje);
-					}
-				}
-				else
-				{
-					//alert(123);
-					$("#mensajeError").show();
-					$("#mensajeError").html(datos.mensaje);
-				}
-			}
-			else
-			{
-				$("#mensajeError").show();
-				$("#mensajeError").html("Ha habido un error, intente mas tarde.");
-			}
-		}
-	}
-}
-  </script>

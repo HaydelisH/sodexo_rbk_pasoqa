@@ -30,7 +30,8 @@
                       <!--input type="hidden" name="idTipoFirma" value="<php:item id="idTipoFirma_filtro" />"/-->	
                       <!--input type="hidden" name="idProceso" value="<php:item id="idProceso_filtro" />"/-->		
                       <!--input type="hidden" name="Enviado" value="<php:item id="Enviado_filtro" />"/-->		
-                  </form>
+                    <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
               </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -40,7 +41,7 @@
           <div id="mensajeError"><php:texto id="mensajeError" /></div>
          
           <!--Datos referenciales-->
-          <div class="form-row">
+          <div class="row">
             
             <div class="col-md-6" style="padding-bottom: 15px;">
               <h3>Datos del documento</h3>
@@ -134,7 +135,8 @@
                               <td valign="center"><label for="centrocostoid" class="col-md-6">Fecha de solicitud:</label></td>
                               <td valign="center">
                                   <div class="input-group date">
-                                      <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                      <div class="input-group-prepend date"><span class="input-group-text" style="padding-bottom: 12px;padding-top: 12px;"><i class="fa fa-calendar"></i></span></div>
+									
                                       <input type="text" class="form-control" id="FechaSolicitud" name="FechaSolicitud" placeholder="Fecha de solicitud" value="<php:item id="FechaSolicitud" />"  />
                                   </div>
                               </td>
@@ -150,7 +152,7 @@
                           <tr>
                             <td valign="center"><label for="idEstadoGestion" class="col-md-6">Estado de Gesti&oacute;n:</label></td>
                             <td valign="center">
-                              <select class="form-control" name="idEstadoGestion" id="idEstadoGestion" >
+                              <select class="form-control idEstadoGestion_RA1" name="idEstadoGestion" id="idEstadoGestion" >
                                   <option value="0">(Seleccione)</option>
                                   <php:repeticion id="EstadosGestion">			
                                       <option value="<php:item id="idEstadoGestion" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idEstadoGestion" /><php:argumento idvalor="idEstadoGestion" /></php:funcion>><php:item id="Descripcion" /></option>
@@ -166,7 +168,8 @@
                             <td valign="center"><label for="centrocostoid" class="col-md-6">Fecha DT:</label></td>
                               <td valign="center">
                                   <div class="input-group date">
-                                      <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                      <div class="input-group-prepend date"><span class="input-group-text" style="padding-bottom: 12px;padding-top: 12px;"><i class="fa fa-calendar"></i></span></div>
+									
                                       <input type="text" class="form-control" id="FechaDT" name="FechaDT" placeholder="Fecha DT" value="<php:item id="FechaDT" />"  />
                                   </div>
                               </td>
@@ -175,7 +178,7 @@
                   </table>
                   <input type="hidden" name="idDocumento" id="idDocumento" value="<php:item id="idDocumento" />" />
   
-                  <div class="form-row">  
+                  <div class="row">  
                                       
                       <php:repeticion id="ver">
                           <div class="col-md-4 xs-12">
@@ -219,8 +222,8 @@
                       <div class="col-md-4 xs-12">
                               <input type="hidden" name="idDocumento_eg" id="idDocumento_eg" />
                               <input type="hidden" name="empleadoFormularioid" 			value="<php:texto id="empleadoFormularioid" />"/>
-                              <!--button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion" id="GUARDAR" value="ESTADO" onclick="guardarValida();MostrarCargando();"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button-->
-                              <button class="btn btn-md btn-primary btn-block" type="button" style="margin-top: 10px" name="accion" id="GUARDAR" value="ESTADO" onclick="guardarValida();"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
+                              <!--button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion" id="GUARDAR" value="ESTADO" onclick="guardarValida_RA1();MostrarCargando();"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button-->
+                              <button class="btn btn-md btn-primary btn-block" type="button" style="margin-top: 10px" name="accion" id="GUARDAR" value="ESTADO" onclick="guardarValida_RA1();"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
                       </div>
                       </php:repeticion>																   
                   </div>  
@@ -276,7 +279,8 @@
                   <!--fin  Modal de Rechazo -->  
   
                   </php:repeticion>
-               </form>
+                 <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
             </div>
           </div>
         </div>
@@ -285,100 +289,3 @@
   </div>
   </section>
   
-  
-  <script>
-      var idEstadoGestion = '<php:texto id="estadoFormularioid" />';
-      //alert(idEstadoGestion);
-      function guardarValida()
-      {
-          if ($('#idEstadoGestion').val() == 3 && $('#Observacion').val().trim() == '')//Cerrado por RRHH
-          {
-              alert('Debe agregar una observacion a la gestion de cierre');
-              return false;
-          }
-          var datos = '&idEstadoGestion='+$('#idEstadoGestion').val()+'&Observacion='+$('#Observacion').val().trim()+'&empleadoFormularioid=<php:texto id="empleadoFormularioid" />'
-          $("#formulario").attr("action", "revisionActor1.php?accion=ESTADO"+datos);
-          $('#formulario').submit();
-          MostrarCargando();
-      }
-
-      $('#FechaSolicitud').datepicker({
-          language: "es",
-          orientation: "bottom",
-          autoclose: true,
-          todayHighlight: true,
-          format: 'dd-mm-yyyy'
-      });
-      
-      $('#FechaDT').datepicker({
-          language: "es",
-          orientation: "bottom",
-          autoclose: true,
-          todayHighlight: true,
-          format: 'dd-mm-yyyy'
-      });
-      
-      $('#idEstadoGestion').change(function(){
-        hab_deshab_boton();
-      });
-
-      function hab_deshab_boton()
-      {
-        if ($('#idEstadoGestion').val() != 3)// Cerrado por RRHH
-        {
-            $('#Observacion').prop("disabled", true);
-        }
-        else
-        {
-            $('#Observacion').prop("disabled", false);
-        }
-        if ($('#idEstadoGestion').val() != 2)
-        {
-            $('#GUARDAR').prop("disabled", false);
-        }
-        else
-        {
-            $('#GUARDAR').prop("disabled", true);
-        }
-        if (idEstadoGestion != 2)
-          {
-            $('#GUARDAR').hide();
-          }
-      }
-
-      $(document).ready(function(){
-  
-          $("#idDocumento_vd").val($("#idDocumento").val());
-          $("#idDocumento_ac").val($("#idDocumento").val());
-          $("#idDocumento_el").val($("#idDocumento").val());
-          $("#idDocumento_ac").val($("#idDocumento").val());
-          $("#idDocumento_eg").val($("#idDocumento").val());
-          
-          hab_deshab_boton();
-          
-          /*if( $("#ficha").val().length > 0 ){
-              $(".fichaid").show();
-          }
-          else{
-              $(".fichaid").hide();
-          }*/
-      });
-      
-      /*$("#GUARDAR").click(function(){
-          
-          if( document.getElementById('FechaPayroll').value != '' ){
-           if( ! validarFecha(document.getElementById('FechaPayroll').value )){
-              $("#mensajeError").addClass("callout callout-warning");
-              $("#mensajeError").html("La fecha de ingreso a payroll debe tener formato de fecha dd/mm/YYYY");
-              return false;
-           }
-           else{
-              $("#mensajeError").removeClass("callout callout-warning");
-              $("#mensajeError").html("");
-              MostrarCargando();
-           }
-          }
-              
-      });*/
-  
-  </script>

@@ -10,13 +10,13 @@
                     <!--Formulario de los datos propios de Categoria-->   
                     <form role="form" name="formulario" id="formulario" action="blackList.php" method="POST" autocomplete="off" enctype="multipart/form-data">
                         <php:repeticion id="formulario">
-                        <!--div class="form-row">
+                        <!--div class="row">
                             <div class="col-md-12">
                                 <label style="float:right;"> (*) Campos obligatorios </label>
                             </div>
                         </div-->
                         <!--Subir documento-->
-                        <div class="form-row">
+                        <div class="row">
                             <div class="col-md-6" id="doc">
                                 <label for="Subir" id="doc_label">Seleccione archivo de carga</label>
                                 <div class="form-group" id="doc_hijo"> 
@@ -33,6 +33,8 @@
                                     <span class="fileinput-new"></span>
                                 </div>
                             </div>
+
+                            
                             <div class="col-md-6">
                                 <label for="tipousuarioid">Rut</label>
                                 <div class="input-group col-xs-12">
@@ -48,7 +50,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-row">  
+                        <div class="row">  
                             <div class="col-md-2 xs-12 pull-left">  
                                 <button class="btn btn-md btn-success btn-block" type="button" name="accion" id="VER" value="VER" onclick="ver()" style="margin-top: 10px">Ver &uacute;ltima carga</button>  
                             </div>
@@ -69,311 +71,14 @@
                         </div>
                         <!--Fin del repeticion de formulario-->
                         </php:repeticion>  
+                      <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
                     </form>
                     <form name="resultado" id="resultado" action="Respuesta_blackList.php" method="POST" >
                         <input type="hidden" id="IdArchivo" name="IdArchivo" value="2" />
+                      <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<script>
-    $(document).ready(function(){
-        if ($('#progreso').attr('max') != '')
-        {
-            estadoGeneracionMasiva();
-        }
-    });
-
-	$("#newusuarioid").change(function(){
-        $("#Documento").val('');
-        $("#archivo").val('');
-		var respuesta = validaRut2(document.formulario.newusuarioid);
-        habilitaBoton();
-	});
-
-    function ver()
-    {
-        document.getElementById("resultado").submit();
-    }
-
-    var consulta;
-    function estadoGeneracionMasiva()
-    {
-        $('#estado').show();
-        consultaEstado();
-        consulta = setInterval(function(){ consultaEstado() }, 10000);
-    }
-
-    function consultaEstado()
-    {
-        conexion=crearXMLHttpRequest();
-        conexion.open('POST', 'blackListProcessEstado.php?accion=ESTADO&IdArchivo=2',false);
-        conexion.send(null);
-        try
-        {
-            respuesta = JSON.parse(conexion.responseText);
-        }
-        catch (e)
-        {
-            respuesta.actual = 0;
-        }
-        respuesta.actual = respuesta.actual == null ? 0 : respuesta.actual;
-        $('#progreso').val(respuesta.actual);
-        $('#estadodetalle').html(respuesta.actual + " filas procesadas de un total de " +  ($('#progreso').attr('max')) + " filas.");
-        if (controlMemory(respuesta.actual))
-        {
-            if (respuesta.actual == $('#progreso').attr('max'))
-            {
-                clearInterval(consulta);
-                $('#estado').hide();
-                alert('El proceso de generacion masiva de documentos ha finalizado.');
-            }
-        }
-        else
-        {
-            matarProceso();
-            clearInterval(consulta);
-            $('#estado').hide();
-            alert('Ha ocurrio un error, revise detalle y ejecute nuevamene las filas no procesadas.');
-        }
-    }
-
-    function matarProceso()
-    {
-        conexion=crearXMLHttpRequest();
-        conexion.open('POST', 'blackListProcess.php?accion=KILL',false);
-        conexion.send(null);
-        memoryCount = 0;
-    }
-
-    var memory = '';
-    var memoryTop = 10;
-    var memoryCount = 0;
-    function controlMemory(dato)
-    {
-        var respuesta = true;
-        if (memory == dato)
-        {
-            memoryCount++;
-        }
-        else
-        {
-            memoryCount = 0;
-        }
-        if (memoryCount >= memoryTop)
-        {
-            respuesta = false;
-        }
-        memory = dato;
-        console.log(dato, memory, memoryCount, memoryTop, respuesta);
-        return respuesta;
-    }
-
-    function habilitaBoton()
-    {
-        if( $("#Documento").val() != '' || $('#newusuarioid').val() != '')
-        {
-            $("#GENERAR").attr('disabled', false);
-        }
-    }
-
-    $("#archivo").change(function()
-    {
-        $("#Documento").val($("#archivo").val());
-        $('#newusuarioid').val('');
-        habilitaBoton();
-    });
-
-    function subirArchivo()
-    {
-        if( $("#Documento").val() != '')
-        {
-            //revisa si hay algun cambio en el archivo
-            $("#mensajeError").removeClass("callout callout-warning");
-            $("#mensajeError").html("");
-            MostrarCargando();
-            if (validar() == true)
-            {
-                upload_input = document.querySelectorAll('#archivo')[0];
-                uploadFile( upload_input.files[0] );
-            }
-        }
-        else if ($('#newusuarioid').val() != '')
-        {
-            procesarUno();
-        }
-    }
-
-    function validar()
-    {
-        /*if ( $("#RutEmpresa").val() == 0 ){
-            $("#RutEmpresa").focus();
-            return false;
-        }
-        if ( $("#idTipoDoc").val() == 0 ){
-            $("#mensajeError").addClass("callout callout-warning");
-            $("#mensajeError").html("Seleccione el tipo de documento");
-            $("#idTipoDoc").focus();
-            return false;
-        }
-        if( $("#idProceso").val() == 0 ){
-            $("#mensajeError").addClass("callout callout-warning");
-            $("#mensajeError").html("Seleccione un Proceso");
-            $("#idProceso").focus();
-            return false;
-        }
-        if( $("#idPlantilla").val() == 0 ){
-            $("#mensajeError").addClass("callout callout-warning");
-            $("#mensajeError").html("Seleccione la plantilla");
-            $("#idPlantilla").focus();
-            return false;
-        }
-        if( $("#idFirma").val() == 0 ){
-            $("#mensajeError").addClass("callout callout-warning");
-            $("#mensajeError").html("Seleccione el tipo de firma del documento");
-            $("#idFirma").focus();
-            return false;
-        }
-        if( $("#Documento").val().length == 0 ){
-            $("#mensajeError").addClass("callout callout-warning");
-            $("#mensajeError").html("Seleccione el archivo de carga que necesita");
-            $("#Documento").focus();
-            return false;
-        }*/
-        return true;
-    }
-
-	function uploadFile(file)
-	{
-        $("#GENERAR").attr('disabled', true);
-		importar(file,2);
-	}
-
-    function importar(file,IdArchivo)
-	{
-        var xhr =  createXMLHttp();
-		xhr.upload.addEventListener('loadstart',function(e)
-        {
-		    document.getElementById('mensaje').innerHTML = 'Cargando archivo...';
-		}, false);
-		xhr.upload.addEventListener('load',function(e)
-        {
-	    	document.getElementById('mensaje').innerHTML = '';
-		}, false);
-		xhr.upload.addEventListener('error',function(e)
-        {
-    		alert('Ha habido un error :/');
-		}, false);
-		var datos = $('#formulario').serialize();
-		var url  = 'blackListProcess.php?accion=LOAD&datos=' + datos + '&IdArchivo='+ IdArchivo;
-		//var url  = 'blackList.php?accion=LOAD&IdArchivo='+ IdArchivo + '&RutEmpresa=' + rutempresa + '&datos=' + datos;
-		xhr.open('POST',url,false);//se le agrego false para que sea sincrono, para que espere antes de comenzar a cargar el otro archivo.
-		xhr.setRequestHeader("Cache-Control", "no-cache");
-		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-		xhr.setRequestHeader("X-File-Name", file.name);
-		xhr.addEventListener('readystatechange', function(e) 
-        {
-			if( this.readyState == 4 ) 
-            {
-				try
-				{
-                    respuesta = JSON.parse(xhr.responseText);
-                    if(IdArchivo == 2 )
-                    {
-                        $('#progreso').attr('max', respuesta.highestRow);
-                        procesar(IdArchivo);
-                        estadoGeneracionMasiva();
-                    }
-				}
-				catch (e)
-				{
-                    respuesta = xhr.responseText;
-                    var elementoError   = document.getElementById("mensajeError");
-                    elementoError.innerHTML = respuesta;
-                    elementoError.className += "callout callout-danger";
-				}
-			}
-			if( IdArchivo == 2 )
-			{
-                document.getElementById("Documento").value = "";
-				document.getElementById("archivo").value = "";
-				OcultarCargando();
-			} 
-		});
-		xhr.send(file);
-	}
-
-    function createXMLHttp()
-    {
-        var xmlHttp = null; 
-        if(window.XMLHttpRequest)
-        {
-            xmlHttp = new XMLHttpRequest();
-        }
-        else if(window.ActiveXObject)
-        {   
-            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        return xmlHttp;
-    }
-
-    var ajax;
-    function procesarUno()
-    {
-        parametros = '?accion=UNO' + '&IdArchivo=2&to=' + ($("#soloUno").is(':checked') ? '2' : '1') + '&rut=' + $('#newusuarioid').val();
-        var url  = "blackListProcess.php" + parametros;
-        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-        if( window.XMLHttpRequest )
-            ajax = new XMLHttpRequest(); // No Internet Explorer
-        else
-            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-        // Almacenamos en el control al funcion que se invocara cuando la peticion
-        // cambie de estado 
-        ajax.onreadystatechange = funcionCallback_soloUNO;
-        // Enviamos la peticion
-        ajax.open( "GET", url, true );
-        ajax.send( "" );
-    }
-
-	function funcionCallback_soloUNO()
-	{
-		// Comprobamos si la peticion se ha completado (estado 4)
-		if( ajax.readyState == 4 )
-		{
-			// Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-			if( ajax.status == 200 )
-			{
-				var salida = ajax.responseText;
-				respuesta = JSON.parse(salida);
-				$('#mensajeOK').removeClass();
-				if (respuesta.exito)
-                {
-                    alert(respuesta.mensaje);
-                }
-            }
-		}
-	}
-
-    function procesar(IdArchivo)
-    {
-        conexion=crearXMLHttpRequest();
-        var datos = $('#formulario').serialize();
-        parametros = '?accion=LOOP0' + '&IdArchivo='+ IdArchivo + '&to=1';
-        conexion.open('POST', 'blackListProcess.php' + parametros);
-        conexion.send(null);
-        respuesta = conexion.responseText;	
-    }
-
-	function crearXMLHttpRequest() 
-    {
-        var xmlHttp=null;
-        if (window.ActiveXObject) 
-            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-        else 
-            if (window.XMLHttpRequest) 
-                xmlHttp = new XMLHttpRequest();
-        return xmlHttp;
-    }		
-</script>

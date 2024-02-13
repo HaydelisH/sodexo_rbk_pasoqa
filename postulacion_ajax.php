@@ -50,7 +50,7 @@ class postulacion {
 
 		$dt = new DataTable();
 		$array = array ();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		//Consultar el tipo de firma que tiene asociada el usuario
 		if ( $this->PostulacionBD->obtener($datos,$dt)){
 			if( count($dt->data) > 0) 

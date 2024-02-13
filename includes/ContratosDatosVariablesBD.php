@@ -50,7 +50,7 @@ class ContratosDatosVariablesBD extends ObjetoBD //implements IOperacionesBD
 		$this->definicion1["Duracion"]=array("Tipo"=>"character","Largo"=>"","Key"=>"NO");
 		$this->definicion1["Fecha"]=array("Tipo"=>"date","Largo"=>"","Key"=>"NO");
 		$this->definicion1["ModTeletrabajo"]=array("Tipo"=>"character","Largo"=>"","Key"=>"NO");
-		$this->definicion1["Segmento"]=array("Tipo"=>"base64","Largo"=>"","Key"=>"NO");
+		$this->definicion1["Segmento"]=array("Tipo"=>"character","Largo"=>"","Key"=>"NO");
 		$this->definicion1["PorcentajeBonoTarget"]=array("Tipo"=>"character","Largo"=>"","Key"=>"NO");
 		$this->definicion1["MetaTargetS"]=array("Tipo"=>"character","Largo"=>"","Key"=>"NO");
 		$this->definicion1["MetaTargetU"]=array("Tipo"=>"character","Largo"=>"","Key"=>"NO");

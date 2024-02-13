@@ -24,9 +24,9 @@ class personas {
 	function __construct()
 	{
 		$inforequest = '';
-		$infovariables 	= array_keys($_REQUEST); 	// obtiene los nombres de las variables
-		$infovalores 	= array_values($_REQUEST);	// obtiene los valores de las variables
-		$cantparametros = count($_REQUEST);
+		$infovariables 	= array_keys($_POST); 	// obtiene los nombres de las variables
+		$infovalores 	= array_values($_POST);	// obtiene los valores de las variables
+		$cantparametros = count($_POST);
 		for($i=0;$i<$cantparametros;$i++){
 			$inforequest.= $infovariables[$i].'='.$infovalores[$i].'|';
 		}	
@@ -54,7 +54,7 @@ class personas {
 		$conecc = $this->bd->obtenerConexion();
 		$this->rl_proveedoresBD->usarConexion($conecc);
 		
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "BUSCAR":
 				$this->buscar();
@@ -83,7 +83,7 @@ class personas {
 	
 	private function agregarrol()
 	{
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		$rut = explode("-",$datos["rut"]);
 		$datos["personalNumber"]=$rut[0].$rut[1];
@@ -138,7 +138,7 @@ class personas {
 	
 	private function agregar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		if ( $this->rl_proveedoresBD->agregar($datos,$dt))
 		{	
@@ -153,7 +153,7 @@ class personas {
 	
 	private function agregarfirmante()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		$rut_arr 	= explode("-",$datos["RutUsuario"]);
 		$rut_sindv 	= $rut_arr[0];		
@@ -176,7 +176,7 @@ class personas {
 	
 	private function buscar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		if ( $this->rl_proveedoresBD->obtenerProveedor($datos,$dt))
 		{	
@@ -200,7 +200,7 @@ class personas {
 
 	private function buscarfirmante()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		if ( $this->rl_proveedoresBD->obtenerFirmanteUsuario($datos,$dt))
 		{	

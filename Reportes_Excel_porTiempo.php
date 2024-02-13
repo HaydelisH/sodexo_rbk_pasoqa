@@ -32,10 +32,10 @@ class consultageneral_excel {
 	{
 		
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -97,7 +97,7 @@ class consultageneral_excel {
 		$dt1 = new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
 
 		$datos["usuarioid"]=$this->seguridad->usuarioid;
 		$datos["ptipousuarioid"]=$this->seguridad->tipousuarioid;

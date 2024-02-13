@@ -49,7 +49,7 @@ class Postulacion {
 
 	function __construct()
 	{
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		// creamos una instacia de la base de datos
 		$this->bd = new ObjetoBD();
 		$this->pagina = new Paginas();
@@ -91,7 +91,7 @@ class Postulacion {
 
 	private function getEstado()
 	{
-        $datos = $_REQUEST;
+        $datos = $_POST;
 		$this->setNombreFichero();
 		$dt = new DataTable();
 		$datos["usuarioingid"]=$this->seguridad->usuarioid;
@@ -106,7 +106,7 @@ class Postulacion {
 
     private function setNombreFichero()
 	{
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['usuarioid'] = isset($this->seguridad->usuarioid) ? $this->seguridad->usuarioid : $datos['usuarioid'];
 		$this->nombreArchivoSubida = "{$this->nombreNemotecnicoArchivo}{$datos['usuarioid']}";//.{$this->nombreExtensionArchivoSubida}";
 	}

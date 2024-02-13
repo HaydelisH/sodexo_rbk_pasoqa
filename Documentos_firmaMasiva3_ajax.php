@@ -67,7 +67,7 @@ class documentos {
 		$conecc = $this->bd->obtenerConexion();
 	
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$usuarioid = $datos['usuarioid'];
 
 		switch (GESTOR_FIRMA) {

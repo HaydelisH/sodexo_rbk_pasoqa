@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <div class="box">
       <!-- /.box-header -->
-      <div class="box-body">
+      <div class="box-body" style="padding: 30px;">
         <!--Mensajes-->
         <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
         <div id="mensajeError"><php:texto id="mensajeError" /></div>
@@ -11,871 +11,180 @@
         <form role="form" name="formulario" id="formulario" action="importacion_firma.php" method="POST" autocomplete="off" enctype="multipart/form-data">
           <php:repeticion id="formulario">
 			
-			<div class="form-row">
-			  <div class="col-md-12">
-				<label style="float:right;"> (*) Campos obligatorios </label>
-			  </div>
-			</div>
-							
-							
-              <!--Empresas-->
-              <div class="col-md-6" style="padding-bottom: 15px;">
-                <label for="Empresa" >Empresa (*)</label>
-                <!--Select de Empresas disponibles-->
-                <select class= "form-control" name="RutEmpresa" id="RutEmpresa">
-				     <option value="0">(Seleccione)</option>
-                  <php:repeticion id="empresas">
-                    <option value="<php:item id="RutEmpresa" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEmpresa" /><php:argumento idvalor="RutEmpresa" /></php:funcion>><php:item id="RazonSocial" /></option>
-                  </php:repeticion>
-                </select>
-              </div>
-  
-              <!--Tipo de Documento-->
-              <div class="col-md-6" style="padding-bottom: 15px;">
-                  <label for="TipoDeDocumento" >Tipo de Documento (*)</label>
-                  <!--Select de Empresas disponibles-->
-                  <select class= "form-control" name="idTipoDoc" id="idTipoDoc" required>
-                   <option value="0">(Seleccione)</option>
-                    <php:repeticion id="tiposdocumentos">
-                      <option value="<php:item id="idTipoDoc" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idTipoDoc" /><php:argumento idvalor="idTipoDoc" /></php:funcion>><php:item id="NombreTipoDoc" /></option>
-                    </php:repeticion>
-                  </select>
-              </div>
+          <div class="tab-content">
 
-              <!--Procesos-->
-              <div class="col-md-6" style="padding-bottom: 15px;">
-                  <label for="Proceso" >Proceso (*)</label>
-                  <!--Select de Empresas disponibles-->
-                  <select class= "form-control" name="idProceso" id="idProceso" required>
-                    <option value="0">(Seleccione)</option>
-                    <php:repeticion id="procesos">
-                      <option value="<php:item id="idProceso" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idProceso" /><php:argumento idvalor="idProceso" /></php:funcion>><php:item id="Descripcion" /></option>
-                    </php:repeticion>
-                  </select>
-              </div>
-
-		    <!--Plantilla-->
-            <div class="col-md-6 xs-12" style="padding-bottom: 15px;">
-               <label>Plantilla (*)</label>
-               <select class="form-control" name="idPlantilla" id="idPlantilla">
-                 <option value="0">( Seleccione )</option>
-               </select>
-            </div>
-        
-           <!--Fecha de documento-->
- 		<div class="form-row">
-			<div class="col-md-6 col-xs-12" >
-				<label for="contenedorid" >Fecha de Documento (*)</label>
-				<div class="form-group">
-					<div class="input-group date">
-					  <div class="input-group-addon">
-						<i class="fa fa-calendar"></i>
-					  </div>
-						<input type="text" class="form-control" id="FechaDocumento" name="FechaDocumento" placeholder="FechaDocumento"  />
-					</div>
-				</div>
-			</div>
-		</div>
-
-        <!--Subir documento-->
-        <div class="form-row">
-          <div class="col-md-6" id="doc">
-            <label for="Subir" id="doc_label">Seleccione archivo de carga (*)</label>
-            <div class="form-group" id="doc_hijo"> 
-              <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
-                <input type="text" class="form-control" placeholder="Seleccione archivo de carga" name="Documento" id="Documento" readonly>
-              </div>
-              <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
-                <span class="btn btn-primary btn-file">
-                  <i class="fa fa-upload" aria-hidden="true"></i>
-                  <input type="file" name="archivo" id="archivo"  accept="application/pdf"  />
-                </span>
-              </div>
-              <span class="fileinput-filename"></span>
-              <span class="fileinput-new"></span>
-            </div>
-          </div>
-        </div>
-
-         <!--Seleccionar Firmantes por Empresas -->
-         <div class="form-row">
-           <div class="col-md-12">
-             <h5></h5>
-           </div>
-         </div>
-
-        <div class="form-row">
-            <div class="col-md-12">
-                <label id="label" style="display: none">Seleccione Firmantes</label>
-               
-                  <!-- Pasos-->
-                  <div class="steps-form-2">
-                      <div class="steps-row-2 setup-panel-2 d-flex justify-content-between">
-                          <div class="steps-step-2" id="icono_representante" style="display:none">
-                              <a href="#step-1" id="boton_emp" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0" data-placement="top" title="Empresa"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-building" aria-hidden="true"></i></a>
-                              <div id="text_emp" class="text">Firmantes</div>
-                          </div>
-                          <div class="steps-step-2" style="display:none">
-                              <a href="#step-2" id="boton_cli" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0" data-placement="top" title="Cliente"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-users" aria-hidden="true"></i></a>
-                               <div id="text_cli" class="text">Cliente</div>
-                          </div>
-                          <div class="steps-step-2" style="display:none">
-                              <a href="#step-3" id="boton_not" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0 not steps-not" data-placement="top" title="Notaria"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                              <div id="text_not" class="text">Notaria</div>
-                          </div>
-                      </div>
-                  </div>
-              
-                  <!--Firmantes de Empresas-->
-                  <div class="collapse" id="step-1">
-                   <table id="tabla_emp" class="table table-bordered table-hover">
-                    <thead>
-                      <tr>
-                          <h4> Firmantes </h4>
-                      </tr> 
-                      <tr>
-                        <th style="text-align: center;">Selecci&oacute;n</th>
-                        <th style="text-align: center;">Rut</th>
-                        <th style="text-align: center;">Nombre y Apellido</th>
-                        <th style="text-align: center;">Cargo</th>
-						<th style="text-align: center;">Orden</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>                 
-                   </table>
-                  </div>
-                <!--Fin de firmantes-->
-            </div>
-        </div>
-        <!--Fin de Firmantes-->
-         
-            <div class="form-row">  
-              <div class="col-md-2 xs-12 pull-left">  
-                  <button class="btn btn-md btn-success btn-block" type="button" name="accion" id="VER" value="VER" onclick="ver()" style="margin-top: 10px">Ver &uacute;ltima generaci&oacute;n</button>  
-              </div>
-              <div class="col-md-4 xs-12">  
-                <div id="estado" style="display:none;">
-                  <div>
-                    <label id="estadodetalle">Estado generaci&oacute;n</label>
-                  </div>
-                  <progress value="0" id="progreso" max="<php:item id="highestRow" />">	</progress>
+              <div class="row">
+                <div class="col-md-12">
+                <label style="float:right;"> (*) Campos obligatorios </label>
                 </div>
               </div>
-              <div class="col-md-2 xs-12 pull-right">  
-                  <input type="hidden" id="idWF" name="idWF"/>
-              
-                <!--Firmantes de la Plantilla-->
-                <input type="hidden" id="Representantes" name="Representantes" />
-                <input type="hidden" id="Empleado" name="Empleado" />
-                <input type="hidden" id="Cantidad_Firmantes" name="Cantidad_Firmantes" />
- 
-				<input type="hidden" id="input_empleado" name="input_empleado" value="<php:item id="input_empleado"/>"/>
-                <input type="hidden" id="ACTIVAR" name="ACTIVAR"/>
-                <button class="btn btn-md btn-success btn-block" type="button" name="accion" id="GENERAR" value="GENERAR" style="margin-top: 10px" onclick="subirArchivo()">Generar</button>  
+							
+							<div class="row">
+                <!--Empresas-->
+                <div class="col-md-6" style="padding-bottom: 15px;">
+                  <label for="Empresa" >Empresa (*)</label>
+                  <!--Select de Empresas disponibles-->
+                  <select class= "form-control RutEmpresa_IF" name="RutEmpresa" id="RutEmpresa">
+                    <option value="0">(Seleccione)</option>
+                    <php:repeticion id="empresas">
+                      <option value="<php:item id="RutEmpresa" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEmpresa" /><php:argumento idvalor="RutEmpresa" /></php:funcion>><php:item id="RazonSocial" /></option>
+                    </php:repeticion>
+                  </select>
+                </div>
+    
+                <!--Tipo de Documento-->
+                <div class="col-md-6" style="padding-bottom: 15px;">
+                    <label for="TipoDeDocumento" >Tipo de Documento (*)</label>
+                    <!--Select de Empresas disponibles-->
+                    <select class= "form-control idTipoDoc_IF" name="idTipoDoc" id="idTipoDoc" required>
+                    <option value="0">(Seleccione)</option>
+                      <php:repeticion id="tiposdocumentos">
+                        <option value="<php:item id="idTipoDoc" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idTipoDoc" /><php:argumento idvalor="idTipoDoc" /></php:funcion>><php:item id="NombreTipoDoc" /></option>
+                      </php:repeticion>
+                    </select>
+                </div>
               </div>
-           </div>
 
-            <!--Fin del repeticion de formulario-->
-          </php:repeticion>  
-        </form>
+              <div class="row">
+                <!--Procesos-->
+                <div class="col-md-6" style="padding-bottom: 15px;">
+                    <label for="Proceso" >Proceso (*)</label>
+                    <!--Select de Empresas disponibles-->
+                    <select class= "form-control idProceso_IF" name="idProceso" id="idProceso" required>
+                      <option value="0">(Seleccione)</option>
+                      <php:repeticion id="procesos">
+                        <option value="<php:item id="idProceso" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idProceso" /><php:argumento idvalor="idProceso" /></php:funcion>><php:item id="Descripcion" /></option>
+                      </php:repeticion>
+                    </select>
+                </div>
+
+                <!--Plantilla-->
+                <div class="col-md-6 xs-12" style="padding-bottom: 15px;">
+                  <label>Plantilla (*)</label>
+                  <select class="form-control idPlantilla_IF" name="idPlantilla" id="idPlantilla">
+                    <option value="0">( Seleccione )</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row">
+                <!--	 de documento-->
+              
+                  <div class="col-md-6 col-xs-12" >
+                    <label for="contenedorid" >	Fecha de Documento (*)</label>
+                    <div class="input-group mb-3 date">
+                      <div class="input-group-prepend date"><span class="input-group-text" style="padding-bottom: 12px;padding-top: 12px;"><i class="fa fa-calendar"></i></span></div>  
+                      <input type="datetime" class="form-control" id="FechaDocumento" name="FechaDocumento" placeholder="Fecha de Documento"  />
+                    </div>
+                 </div>
+
+              
+                <!--Subir documento-->        
+                  <div class="col-md-6" id="doc">
+                    <label for="Subir" id="doc_label">Seleccione archivo de carga (*)</label>
+                    <div class="box-body" id="doc_hijo" style="padding-right: 0px;padding-left: 0px;padding-top: 0px;padding-bottom: 0px;"> 
+                      <div class="input-group input-group-md" >
+                        <input type="text" class="form-control" placeholder="Seleccione archivo de carga" name="Documento" id="Documento" readonly>
+                        <span class="input-group-append"> 
+                          <button type="file"  class="btn btn-md btn-primary btn-fla btn-file archivo_IF"   name="archivo" id="archivo"  accept="application/pdf"  ><i class="fa fa-upload" aria-hidden="true"></i></button>
+                        </span>
+                      </div>
+                      <span class="fileinput-filename"></span>
+                      <span class="fileinput-new"></span>
+                    </div>
+                  </div>
+              </div>
+
+            <!--Seleccionar Firmantes por Empresas -->
+            <div class="row">
+              <div class="col-md-12">
+                <h5></h5>
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label id="label" style="display: none">Seleccione Firmantes</label>
+                  
+                      <!-- Pasos-->
+                      <div class="steps-form-2">
+                          <div class="steps-row-2 setup-panel-2 d-flex justify-content-between">
+                              <div class="steps-step-2" id="icono_representante" style="display:none">
+                                  <a href="#step-1" id="boton_emp" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0" data-placement="top" title="Empresa"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-building" aria-hidden="true"></i></a>
+                                  <div id="text_emp" class="text">Firmantes</div>
+                              </div>
+                              <div class="steps-step-2" style="display:none">
+                                  <a href="#step-2" id="boton_cli" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0" data-placement="top" title="Cliente"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-users" aria-hidden="true"></i></a>
+                                  <div id="text_cli" class="text">Cliente</div>
+                              </div>
+                              <div class="steps-step-2" style="display:none">
+                                  <a href="#step-3" id="boton_not" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0 not steps-not" data-placement="top" title="Notaria"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                  <div id="text_not" class="text">Notaria</div>
+                              </div>
+                          </div>
+                      </div>
+                  
+                      <!--Firmantes de Empresas-->
+                      <div class="collapse" id="step-1">
+                      <table id="tabla_emp" class="table table-bordered table-hover">
+                        <thead>
+                          <tr>
+                              <h4> Firmantes </h4>
+                          </tr> 
+                          <tr>
+                            <th style="text-align: center;">Selecci&oacute;n</th>
+                            <th style="text-align: center;">Rut</th>
+                            <th style="text-align: center;">Nombre y Apellido</th>
+                            <th style="text-align: center;">Cargo</th>
+                <th style="text-align: center;">Orden</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>                 
+                      </table>
+                      </div>
+                    <!--Fin de firmantes-->
+                </div>
+            </div>
+            <!--Fin de Firmantes-->
+            
+                <div class="row d-flex justify-content-between">  
+                  <div class="col-md-2 xs-12 pull-left">  
+                      <button class="btn btn-md btn-success btn-block" type="button" name="accion" id="VER" value="VER" onclick="ver_IF()" style="margin-top: 10px">Ver &uacute;ltima generaci&oacute;n</button>  
+                  </div>
+                  <div class="col-md-4 xs-12">  
+                    <div id="estado" style="display:none;">
+                      <div>
+                        <label id="estadodetalle">Estado generaci&oacute;n</label>
+                      </div>
+                      <progress value="0" id="progreso" max="<php:item id="highestRow" />">	</progress>
+                    </div>
+                  </div>
+                  <div class="col-md-2 xs-12  d-flex justify-content-end">  
+                      <input type="hidden" id="idWF" name="idWF"/>
+                  
+                    <!--Firmantes de la Plantilla-->
+                    <input type="hidden" id="Representantes" name="Representantes" />
+                    <input type="hidden" id="Empleado" name="Empleado" />
+                    <input type="hidden" id="Cantidad_Firmantes" name="Cantidad_Firmantes" />
+    
+                    <input type="hidden" id="input_empleado" name="input_empleado" value="<php:item id="input_empleado"/>"/>
+                    <input type="hidden" id="ACTIVAR" name="ACTIVAR"/>
+                    <button class="btn btn-md btn-success btn-block" type="button" name="accion" id="GENERAR" value="GENERAR" style="margin-top: 10px" onclick="subirArchivo_IF()">Generar</button>  
+                  </div>
+              </div>
+
+                <!--Fin del repeticion de formulario-->
+              </php:repeticion>  
+            </div>
+          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
         <form name="resultado" id="resultado" action="importacion_firma.php" method="POST" >
 			 <input type="hidden" id="accion2" name="accion2" value="PROCESOANTERIOR"/>
-        </form>
+          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
       </div>
     </div>
   </div>
 </div>
 </section>
-
-<script>
-
-   $('#FechaDocumento').datepicker({
-	    language: "es",
-	    orientation: "bottom",
-	    autoclose: true,
-	    todayHighlight: true,
-	    format: 'dd-mm-yyyy'
-    });
-
-
-  $(document).ready(function(){
-    $("#GENERAR").attr('disabled', true);
-    $("#idTipoDoc").attr("disabled",true);
-    $("#idProceso").attr("disabled",true);
-    $("#idPlantilla").attr("disabled",true);
-  //  $("#idFirma").attr("disabled",true);
-    $("#Documento").attr("disabled",true);
-    $(".btn-file").attr("disabled",true);
-    $("#archivo").attr("disabled",true);
-	  $("#FechaDocumento").attr("disabled",true);
-    if ($('#progreso').attr('max') != '')
-    {
-		$("#RutEmpresa").attr("disabled",true);
-		estadoGeneracionMasiva();
-    }
-  });
-
-  var consulta;
-  function estadoGeneracionMasiva()
-  {
-      $('#estado').show();
-  	  consultaEstado();
-      consulta = setInterval(function(){ consultaEstado() }, 7000);
-  }
- 
- function consultaEstado()
-  {
-    conexion=crearXMLHttpRequest();
-	conexion.open('POST', 'importacion_firma_split.php?accion=ESTADO',false);
-    conexion.send(null);
-    try
-    {
-      respuesta = JSON.parse(conexion.responseText);
-	 
-    }
-    catch (e)
-    {
-      respuesta.actual = 0;
-    }
-  
-    //console.log(respuesta);
-    respuesta.actual = respuesta.actual == null ? 0 : respuesta.actual;
-    $('#progreso').val(respuesta.actual);
-    $('#estadodetalle').html(respuesta.actual + " filas procesadas de un total de " +  ($('#progreso').attr('max') - 1) + " filas.");
-    //console.log(controlMemory(respuesta.actual));
-    if (controlMemory(respuesta.actual))
-    {
-      if (respuesta.actual == $('#progreso').attr('max') - 1)
-      {
-        clearInterval(consulta);
-        $('#estado').hide();
-        alert('El proceso de generacion masiva de documentos ha finalizado.');
-      }
-    }
-    else
-    {
-      //matarProceso();
-      clearInterval(consulta);
-      $('#estado').hide();
-      alert('Ha ocurrio un error, revise detalle');
-    }
-  }
-
-  function matarProceso()
-  {
-	conexion=crearXMLHttpRequest();
-    conexion.open('POST', 'importacion_firma_split.php?accion=KILL',false);
-    conexion.send(null);   
-
-  }
-  
-  var memory = '';
-  var memoryTop = 20;
-  var memoryCount = 0;
-  function controlMemory(dato)
-  {
-    var respuesta = true;
-    if (memory == dato)
-    {
-      memoryCount++;
-    }
-    else
-    {
-      memoryCount = 0;
-    }
-    if (memoryCount >= memoryTop)
-    {
-      respuesta = false;
-    }
-    memory = dato;
-    //console.log(dato, memory, memoryCount, memoryTop, respuesta);
-    return respuesta;
-  }
-
- $("#idProceso").change(function(){
-
-    if( $("#idProceso").val() != 0 )
-      $("#idPlantilla").attr("disabled",false);
-    else{
-        $("#idPlantilla").attr("disabled",true);
-        //$("#idFirma").attr("disabled",true);
-        $("#Documento").attr("disabled",true);
-        $(".btn-file").attr("disabled",true);
-        $("#archivo").attr("disabled",true);
-
-        $("#idProceso").val(0);
-        $("#idPlantilla").val(0);
-        $("#idFirma").val(0);
-		$(".orden").val('');
-        $("#Documento").val('');
-        $("#archivo").val();
-    }
- });
-
- /*
-  $("#idFirma").change(function(){
-
-    if( $("#idFirma").val() != 0 ){
-      $("#Documento").attr("disabled",false);
-      $(".btn-file").attr("disabled",false);
-      $("#archivo").attr("disabled",false);
-    }else{
-      $("#Documento").val('');
-      $("#Documento").attr("disabled",true);
-      $(".btn-file").attr("disabled",true);
-      $("#archivo").attr("disabled",true);
-    }
-  });
-  */
-
-  var cantidad_firmantes;
-
-  $("#idPlantilla").change(function(){
-
-      if( $("#idPlantilla").val() != 0 ){
-		
-		$("#Documento").attr("disabled",false);
-		$(".btn-file").attr("disabled",false);
-		$("#archivo").attr("disabled",false);
-		$("#FechaDocumento").attr("disabled",false);
-		
-        /*$("#idFirma").attr("disabled",false);
-		$("#idFirma").val(0);*/
-         	
-		//Ocultar firmantes 
-		$("#icono_representante").hide();
-		$("#GENERAR").attr('disabled', true);
-		$("#Documento").val('');
-		$("#archivo").val('');
-          
-        $("#Representates").val("");
-        $("#Empleado").val("");
-        $("#Cantidad_Firmantes").val("");
-        $("#idWF").val(0);
-		$(".orden").val('');
-
-        $("#mensajeError").removeClass("callout callout-warning");
-        $("#mensajeError").html("");
-
-        $('input[type=checkbox]').prop('checked', false);
-        $("#step-1").collapse('hide');
-
-        var idPlantilla = $("#idPlantilla").val();
-
-        if( idPlantilla != 0 ){
-          var url  = "Generar_Documentos_Masivos1_ajax.php?idPlantilla=" + idPlantilla;
-
-          // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-          if( window.XMLHttpRequest )
-            ajax = new XMLHttpRequest(); // No Internet Explorer
-          else
-            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-         
-          // Almacenamos en el control al funcion que se invocara cuando la peticion
-          // cambie de estado 
-          ajax.onreadystatechange = funcionCallback_Plantilla;
-
-          // Enviamos la peticion
-          ajax.open( "GET", url, true );
-          ajax.send( "" );
-        }
-      }else{
-      
-     //   $("#idFirma").attr("disabled",true);
-        $("#Documento").attr("disabled",true);
-        $(".btn-file").attr("disabled",true);
-        $("#archivo").attr("disabled",true);
-
-        $("#idPlantilla").val(0);
-        $("#idFirma").val(0);
-        $("#Documento").val('');
-        $("#archivo").val();
-        $("#idWF").val(0);
-		$(".orden").val('');
-      }
-     
-  });
-
-  function ver()
-  {
-	MostrarCargando();
-    document.getElementById("resultado").submit();
-  }
-  
-  function funcionCallback_Plantilla()
-  {
-    // Comprobamos si la peticion se ha completado (estado 4)
-    if( ajax.readyState == 4 )
-    {
-      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-      if( ajax.status == 200 )
-      {
-        // Escribimos el resultado en la pagina HTML mediante DHTML
-        //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
-        salida = ajax.responseText;
-
-        if( salida != '' ){ 
-            var datos = JSON.parse(salida);
-            var cont = 0; 
-            var cant_firm = 0;
-            var cant_firm = datos.length;
-
-            $.each(datos,function(key, registro) {
-
-
-			   if ( cant_firm == 1 ){
-					 if( registro.idEstado == 2 || registro.idEstado == 10 || registro.idEstado == 9){ //Reresentante - Representante 2 - Notario 
-						$("#Representantes").val("1");
-						$("#Empleado").val("");
-						cont++;
-					 }
-					 if( registro.idEstado == 3 ){
-						$("#Empleado").val("1");
-						$("#Representantes").val("");
-					 } 
-				}  
-				else 
-				{ 	
-					if( registro.idEstado == 2 || registro.idEstado == 10 || registro.idEstado == 9){ //Reresentante - Representante 2 - Notario 
-						cont++; 
-						$("#Representantes").val(cont);
-					 }
-					 if( registro.idEstado == 3 ){
-						$("#Empleado").val("1");
-					 }
-				}
-				$("#Cantidad_Firmantes").val(cont); 
-				$("#idWF").val(registro.idWF); 
-			});
-        }else{
-            $("#mensajeError").removeClass("callout callout-warning");
-            $("#mensajeError").html("");
-        }
-      }
-    }
-  }
-
-  $("#archivo").change(function(){
-   
-    $("#Documento").val($("#archivo").val());
-
-    if( $("#Documento").val() != '' ){
-      mostrarFirmantes();  
-
-      if ( $("#Representantes").val() == '' ){
-        $("#GENERAR").attr('disabled', false);
-      }
-    }
-
-  });
-
-	/*********************/
-	/**FILTRAR PLANTILLA**/
-	/********************/
-  $("#idTipoDoc").change(function(){
-
-    $("#mensajeError").removeClass("callout callout-warning");
-    $("#mensajeError").html(""); 
-
-    if( $("#idTipoDoc").val() != 0 ){
-    
-
-      var empresa = $("#RutEmpresa").val();
-      var idTipoDoc = $("#idTipoDoc").val();
-      $(".plan").remove();
-
-      if( idTipoDoc != 0 && empresa != 0 ){
-        var url  = "Generar_Documentos_Masivos_ajax.php?RutEmpresa=" + empresa + "&idTipoDoc=" + idTipoDoc;
-     
-        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-        if( window.XMLHttpRequest )
-          ajax = new XMLHttpRequest(); // No Internet Explorer
-        else
-          ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-       
-        // Almacenamos en el control al funcion que se invocara cuando la peticion
-        // cambie de estado 
-        ajax.onreadystatechange = funcionCallback;
-
-        // Enviamos la peticion
-        ajax.open( "GET", url, true );
-        ajax.send( "" );
-      }
-    }else{
-       
-        $("#idProceso").attr("disabled",true);
-        $("#idPlantilla").attr("disabled",true);
-      //  $("#idFirma").attr("disabled",true);
-        $("#Documento").attr("disabled",true);
-        $(".btn-file").attr("disabled",true);
-        $("#archivo").attr("disabled",true);
-
-        $("#idTipoDoc").val(0);
-        $("#idProceso").val(0);
-        $("#idPlantilla").val(0);
-      //  $("#idFirma").val(0);
-        $("#Documento").val('');
-        $("#archivo").val();
-        $("#idWF").val(0);
-		$(".orden").val('');
-    }
-
-  });
-
-  var ajax;
-  var salida;
- 
-  function funcionCallback()
-  {
-    // Comprobamos si la peticion se ha completado (estado 4)
-    if( ajax.readyState == 4 )
-    {
-      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-      if( ajax.status == 200 )
-      {
-        // Escribimos el resultado en la pagina HTML mediante DHTML
-        //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
-        salida = ajax.responseText;
-
-        if( salida != '' ){
-            var datos = JSON.parse(salida);
-           
-            $.each(datos,function(key, registro) {
-                $("#idPlantilla").append('<option class="plan" ' + registro.Aprobado + ' value='+ registro.idPlantilla +'>'+ registro.Descripcion_Pl+'</option>');                                      
-            }); 
-
-            $('#idProceso').attr("disabled",false);  
-
-        }else{
-            $("#mensajeError").addClass("callout callout-warning");
-            $("#mensajeError").html("La Empresa seleccionada no tiene Plantillas aprobadas o asociadas"); 
-            
-            $("#idProceso").attr("disabled",true);
-            $("#idPlantilla").attr("disabled",true);
-        //    $("#idFirma").attr("disabled",true);
-            $("#Documento").attr("disabled",true);
-            $(".btn-file").attr("disabled",true);
-            $("#archivo").attr("disabled",true);
-
-            $("#idTipoDoc").val(0);
-            $("#idProceso").val(0);
-            $("#idPlantilla").val(0);
-        //    $("#idFirma").val(0);
-            $("#Documento").val('');
-            $("#archivo").val();
-            $("#idWF").val(0);
-			$(".orden").val('');
-        }
-      }
-    }
-  }
- 
-  /*****************/
-  /**IMPORTAR EXCEL**/
-  /******************/
-   
-  function createXMLHttp()
-  {
-      var xmlHttp = null; 
-      if(window.XMLHttpRequest)
-      {
-          xmlHttp = new XMLHttpRequest();
-      }
-      else if(window.ActiveXObject)
-      {   
-          xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-      }
-      return xmlHttp;
-  }
-    
-  var importax;
-  function uploadFile(file)
-  {	
-		$("#GENERAR").attr('disabled', true);
-		MostrarCargando();
-		importax = setInterval(function(){ importar(file,1) }, 1000);
-   }
-	
-  
-  function importar(file,IdArchivo)
-	{
-	    clearInterval(importax);
-		var xhr =  createXMLHttp();
-
-		xhr.upload.addEventListener('loadstart',function(e){
-		document.getElementById('mensaje').innerHTML = 
-		'Cargando archivo...';
-		}, false);
-
-		xhr.upload.addEventListener('load',function(e){
-		document.getElementById('mensaje').innerHTML = '';
-		}, false);
-
-		xhr.upload.addEventListener('error',function(e){
-		alert('Ha habido un error :/');
-		}, false);
-
-		var datos = $('#formulario').serialize();
-		//console.log(datos);
-		var rutempresa = $("#RutEmpresa").val();
-		var url  = 'importacion_firma_split.php?accion=VALIDAR&RutEmpresa=' + rutempresa + '&datos=' + datos;
-
-		xhr.open('POST',url,false);//se le agrego false para que sea sincrono, para que espere antes de comenzar a cargar el otro archivo.
-	
-		xhr.setRequestHeader("Cache-Control", "no-cache");
-		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-		xhr.setRequestHeader("X-File-Name", file.name);
-
-		xhr.addEventListener('readystatechange', function(e) 
-		{
-			
-			if( this.readyState == 4 ) {
-
-				respuesta = xhr.responseText;
-				
-				var res = respuesta.split("|");
-				//alert ("resp " + res[0] + " " + res[1]);
-				
-				if (res[0] == "OK")//cuando sepa que fue bien.
-				{ 
-					$('#progreso').attr('max', res[1]);
-					procesar();
-					estadoGeneracionMasiva();
-				
-				}
-				else
-				{
-					$('#estado').hide();
-					$("#GENERAR").attr('disabled', false);
-					var elementoError   = document.getElementById("mensajeError");
-					elementoError.innerHTML = respuesta;
-					elementoError.className += "callout callout-danger";
-				}
-			}
-			
-			OcultarCargando();
-
-		});
-		xhr.send(file);
-	}
-	
-  function procesar()
-  {
-    conexion=crearXMLHttpRequest();
-    var datos = $('#formulario').serialize();
-    //console.log(datos);
-    conexion.open('POST', 'importacion_firma_split.php?' + datos);
-    conexion.send(null);
-    respuesta =  conexion.responseText;	
-   
-  }
-	
-  function subirArchivo()
-  {
-
-		//revisa si hay algun cambio en el archivo
-    $("#mensajeError").removeClass("callout callout-warning");
-    $("#mensajeError").html("");
-	
-    if (validar() == true)
-	{
-		upload_input = document.querySelectorAll('#archivo')[0];
-		uploadFile( upload_input.files[0] );
-	}
-  }
-	
-  function crearXMLHttpRequest() 
-  {
-    var xmlHttp=null;
-    if (window.ActiveXObject) 
-      xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-    else 
-    if (window.XMLHttpRequest) 
-      xmlHttp = new XMLHttpRequest();
-    return xmlHttp;
-  }		
-
-  function mostrarFirmantes(){
-
-      var Representantes = $("#Representantes").val();
-
-      if( Representantes != '' ){
-        $("#icono_representante").show();
-        $("#label").show();
-      }
-  }
-
-  /*******************************/
-  /**BUSCAR FIRMANTES DE EMPRESA**/
-  /*******************************/
-
-   $("#RutEmpresa").change(function(){
-            
-      var RutEmpresa = $("#RutEmpresa").val();
-
-      $("#mensajeError").removeClass("callout callout-warning");
-      $("#mensajeError").html("");
-      $("#idTipoDoc").attr("disabled",true);
-      $("#idProceso").attr("disabled",true);
-      $("#idPlantilla").attr("disabled",true);
-      $("#idFirma").attr("disabled",true);
-      $("#Documento").attr("disabled",true);
-      $(".btn-file").attr("disabled",true);
-      $("#archivo").attr("disabled",true);
-
-      $("#idTipoDoc").val(0);
-      $("#idProceso").val(0);
-      $("#idPlantilla").val(0);
-      $(".plan").remove();
-      $("#idFirma").val(0);
-      $("#Documento").val('');
-      $("#archivo").val();
-      $("#idWF").val(0);
-	  $(".orden").val('');
-
-      //Limpiar tabla 
-      $(".fila").remove();
-
-      //Ocultar firmantes 
-      $("#icono_representante").hide();
-      $("#label").hide();
-      $("#step-1").collapse('hide');
-
-      if( RutEmpresa != 0 ){
-        
-        $("#idTipoDoc").attr("disabled",false);
-        $("#idTipoDoc").val(0);
-
-        var url  = "Generar_Documentos_Masivos2_ajax.php?RutEmpresa=" + RutEmpresa;
-    
-        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-        if( window.XMLHttpRequest )
-          ajax = new XMLHttpRequest(); // No Internet Explorer
-        else
-          ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-       
-        // Almacenamos en el control al funcion que se invocara cuando la peticion
-        // cambie de estado 
-        ajax.onreadystatechange = funcionCallback_Empresa;
-
-        // Enviamos la peticion
-        ajax.open( "GET", url, true );
-        ajax.send( "" );
-      }
-  });
-
-  function funcionCallback_Empresa()
-  {
-    // Comprobamos si la peticion se ha completado (estado 4)
-    if( ajax.readyState == 4 )
-    {
-      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-      if( ajax.status == 200 )
-      {
-        // Escribimos el resultado en la pagina HTML mediante DHTML
-        //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
-        salida = ajax.responseText;
-
-        if( salida != '' ){ 
-            var datos = JSON.parse(salida);
-
-            $.each(datos,function(key, registro) {
-              //  $("#tabla_emp tr:last ").after("<tr align='center' class='fila'><td ><input type='checkbox' name='Firmantes_Emp[]' class='f_emp' value='" + registro.personaid + "'id='emp_<php:filamenos />'  onclick='seleccion(<php:filamenos />);'/> </td><td>" + registro.personaid + "</td><td>" + registro.nombrecompleto  + "</td><td>" +  registro.descripcion + "</td></tr>");                                 
-			  x = "onclick=\"seleccion(\'" + registro.personaid + "\');\"";
-              $("#tabla_emp tr:last ").after("<tr align='center' class='fila'><td ><input type='checkbox' name='Firmantes_Emp[]' class='f_emp' value='" + registro.personaid + "'id='emp_"+ registro.personaid +"' " + x + "/> </td><td>" + registro.personaid + "</td><td>" + registro.nombrecompleto +"</td><td>" +  registro.descripcion + "</td><td><input name='orden_" + registro.personaid + "' id='orden_" + registro.personaid + "' class='orden' style='text-align:center; border: none;' /></td></tr>");                                 
-           
-		   });          
-        }else{
-            $("#mensajeError").removeClass("callout callout-warning");
-            $("#mensajeError").html("");
-        }
-      }
-    }
-  }
-
-  function seleccion(id){
-
-      var num = $('input[type=checkbox]:checked').length;
-      var cantidad_firmantes = $("#Cantidad_Firmantes").val(); 
-     var representantes = $("#Representantes").val();
-		
-      if ( cantidad_firmantes == '' ){
-          $("#mensajeError").addClass("callout callout-warning");
-          $("#mensajeError").html("Debe seleccionar la Plantilla" );
-          $("#idPlantilla").focus();
-          $("#GENERAR").attr('disabled', true);
-          return false;
-      }
-	  
-	  if ( num < cantidad_firmantes ){
-		 $("#GENERAR").attr('disabled',true);
-	  }
-	  
-      if ( num > cantidad_firmantes ){
-          $("#mensajeError").addClass("callout callout-warning");
-          $("#mensajeError").html("Debe seleccionar solo " + cantidad_firmantes + " Firmante, seg&uacute;n el flujo de firma de la Plantilla seleccionada" );
-          $("#GENERAR").attr('disabled', true);
-      }
-	  
-	  if( num == cantidad_firmantes ){
-          $("#mensajeError").removeClass("callout callout-warning");
-          $("#mensajeError").html("");
-		  $("#GENERAR").attr('disabled', false);
-      }
-	
-	  if( $("#orden_" + id ).val() == '' ){ //Seleccionado
-		if ( cantidad_firmantes > 1 ){
-			$("#orden_" + id).val(num);
-		}
-	  }else{//Deseleccionado
-		if ( cantidad_firmantes > 1 ){
-			$("#orden_" + id).val('');
-		}
-	  }
-  }
-
-  function validar(){
-
-    if ( $("#RutEmpresa").val() == 0 ){
-        $("#RutEmpresa").focus();
-        return false;
-    }
-    if ( $("#idTipoDoc").val() == 0 ){
-        $("#mensajeError").addClass("callout callout-warning");
-        $("#mensajeError").html("Seleccione el tipo de documento");
-        $("#idTipoDoc").focus();
-        return false;
-    }
-  
-    if( $("#idProceso").val() == 0 ){
-        $("#mensajeError").addClass("callout callout-warning");
-        $("#mensajeError").html("Seleccione un Proceso");
-        $("#idProceso").focus();
-        return false;
-    }
-
-    if( $("#idPlantilla").val() == 0 ){
-        $("#mensajeError").addClass("callout callout-warning");
-        $("#mensajeError").html("Seleccione la plantilla");
-        $("#idPlantilla").focus();
-        return false;
-    }
-	/*
-    if( $("#idFirma").val() == 0 ){
-        $("#mensajeError").addClass("callout callout-warning");
-        $("#mensajeError").html("Seleccione el tipo de firma del documento");
-        $("#idFirma").focus();
-        return false;
-    }
-	*/
-    if( $("#Documento").val().length == 0 ){
-        $("#mensajeError").addClass("callout callout-warning");
-        $("#mensajeError").html("Seleccione el archivo de carga que necesita");
-        $("#Documento").focus();
-        return false;
-    }
-    return true;
-  }
- </script>
- 

@@ -96,10 +96,10 @@ class seguimiento_firmas{
 	function __construct()
 	{
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -177,9 +177,9 @@ class seguimiento_firmas{
 		
 		//se construye el menu
 		include("includes/opciones_menu.php");
-		//print_r($_REQUEST);
+		//print_r($_POST);
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -190,7 +190,7 @@ class seguimiento_firmas{
 		}
 
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -242,7 +242,7 @@ class seguimiento_firmas{
 	//Accion del boton agregar un nuevo registro 
 	private function agregar()
 	{	
-		if (!isset($_REQUEST["accion2"]))
+		if (!isset($_POST["accion2"]))
 		{
 			// creamos un contenedor de la tabla
 			$dt = new DataTable();
@@ -257,14 +257,14 @@ class seguimiento_firmas{
 		}
 
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "AGREGAR":
 					// enviamos los datos del formulario a guardar
-					if ($this->docvigentesBD->agregar($_REQUEST))
+					if ($this->docvigentesBD->agregar($_POST))
 					{
 						//Pasamos el mensaje de Ok
 						$this->mensajeOK="Registro Completado! Su registro se ha guardado con exito";
@@ -303,7 +303,7 @@ class seguimiento_firmas{
 
 	private function agregar_com(){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$dt = new DataTable();
 
@@ -320,7 +320,7 @@ class seguimiento_firmas{
 	//Accion de modificar un registro 
 	private function modificar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		//print_r($datos);
 		$this->docvigentesBD->modifica_estado_contrato($datos);
 		$this->mensajeError.=$this->docvigentesBD->mensajeError;
@@ -336,7 +336,7 @@ class seguimiento_firmas{
 	//Accion de modificar un registro 
 	private function modificar_com()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$datos["RutUsuario"] = $this->seguridad->usuarioid;
 		$datos["Comentario"] = $datos["coment"];
@@ -352,7 +352,7 @@ class seguimiento_firmas{
 	//Accion de modificar un registro 
 	private function rechazar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		//print_r($datos);
 		$this->docvigentesBD->rechazar($datos);
 		$this->mensajeError.=$this->docvigentesBD->mensajeError;
@@ -369,7 +369,7 @@ class seguimiento_firmas{
 	private function cancelar()
 	{	
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		$this->docvigentesBD->rechazarPendienteTerminado($datos);
 		$this->mensajeError.=$this->docvigentesBD->mensajeError;
@@ -385,7 +385,7 @@ class seguimiento_firmas{
 	//Accion de eliminar un comentario
 	private function eliminar()
 	{
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		// se envia a eliminar a la tabla con los datos del formulario
 		if ($this->comentariosBD->eliminar($datos)){
@@ -410,7 +410,7 @@ class seguimiento_firmas{
 		$dt4 	= new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
 
         $datos["usuarioid"]=$this->seguridad->usuarioid;
         //print_r($datos);
@@ -522,7 +522,7 @@ class seguimiento_firmas{
 		$dt6 = new DataTable();
 		$dt7 = new DataTable();
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		$this->docvigentesBD->Obtener($datos,$dt);
 		$this->mensajeError.=$this->docvigentesBD->mensajeError;
@@ -607,7 +607,7 @@ class seguimiento_firmas{
 
 	private function aprobar()
 	{ 
-		$datos = $_REQUEST;	
+		$datos = $_POST;	
 		
 		$this->docvigentesBD->modificar_estado($datos);
 		$this->mensajeError=$this->docvigentesBD->mensajeError;
@@ -621,10 +621,10 @@ class seguimiento_firmas{
 	
 	public function verdocumento()
 	{
-		//print_r ($_REQUEST);
+		//print_r ($_POST);
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		//Llenar Select de Empresas registradas
 		// Buscamos el idCategoria que vamos a asignar
 		$this->docvigentesBD->obtenerb64($datos,$dt); //print_r($datos);
@@ -671,7 +671,7 @@ class seguimiento_firmas{
 	{
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		//Llenar Select de Empresas registradas
 		// Buscamos el idCategoria que vamos a asignar
 		$this->docvigentesBD->obtenerb64($datos,$dt); 
@@ -916,8 +916,8 @@ class seguimiento_firmas{
 		$dt4 	= new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
-       // print_r($_REQUEST);
+		$datos=$_POST;
+       // print_r($_POST);
 
         $datos["usuarioid"]=$this->seguridad->usuarioid;
         //print_r($datos);
@@ -1017,8 +1017,8 @@ class seguimiento_firmas{
 		$dt4 	= new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
-       // print_r($_REQUEST);
+		$datos=$_POST;
+       // print_r($_POST);
 
         $datos["usuarioid"]=$this->seguridad->usuarioid;
         //print_r($datos);

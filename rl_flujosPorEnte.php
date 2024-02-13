@@ -55,10 +55,10 @@ class rl_flujosPorEnte {
 	function __construct()
 	{
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -120,7 +120,7 @@ class rl_flujosPorEnte {
 		include("includes/opciones_menu.php");
 	
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -130,9 +130,9 @@ class rl_flujosPorEnte {
 			return;
 		}
 	
-		//print_r ($_REQUEST);
+		//print_r ($_POST);
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -159,16 +159,16 @@ class rl_flujosPorEnte {
 	private function agregar()
 	{	
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "AGREGAR":
 
-					$datos=$_REQUEST;
+					$datos=$_POST;
 					$datos['tipoWF'] = 1;
 
 					if ($this->flujofirmaBD->agregar_porEnte($datos,$dt))
@@ -176,7 +176,7 @@ class rl_flujosPorEnte {
 						if($dt->leerFila())
 						{
 							$datos["idworkflow"] = $dt->obtenerItem("idwf");
-							$_REQUEST["idworkflow"] =  $dt->obtenerItem("idwf");
+							$_POST["idworkflow"] =  $dt->obtenerItem("idwf");
 							if ($this->flujofirmaBD->agregar_estado_ConOrden($datos))
 							{
 								$this->mensajeOK = "Grabado Exitosamente";
@@ -212,7 +212,7 @@ class rl_flujosPorEnte {
 			}
 		}
 		// recuperamos lo que se escribio en el formulario que va llegando si es que hubo
-		$datos=$_REQUEST;
+		$datos=$_POST;
 		$formulario[0] = $datos;
 		
 		$this->estadosworkflowBD->rl_listado($dt);
@@ -238,16 +238,16 @@ class rl_flujosPorEnte {
 	private function modificar()
 	{	
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "MODIFICAR":
 		
 					// si apretaron el boton modificar obtenermos los datos desde el formulario
-					$datos["idworkflow"] = $_REQUEST["idwf"];
+					$datos["idworkflow"] = $_POST["idwf"];
 					if ($this->flujofirmaBD->agregar_estado_ConOrden($datos))
 					{
 						$this->mensajeOK = "Grabado Exitosamente";
@@ -260,7 +260,7 @@ class rl_flujosPorEnte {
 					
 				case "GRABAR":
 					
-					$datos["idworkflow"] = $_REQUEST["idwf"];
+					$datos["idworkflow"] = $_POST["idwf"];
 					
 					$diasmax = 0;
 					
@@ -350,7 +350,7 @@ class rl_flujosPorEnte {
 	private function eliminar()
 	{
 		// se envia a eliminar a la tabla con los datos del formulario
-		$this->flujofirmaBD->eliminar($_REQUEST);
+		$this->flujofirmaBD->eliminar($_POST);
 		$this->mensajeError.=$this->flujofirmaBD->mensajeError;
 		if ($this->mensajeError == "")
 		{
@@ -366,7 +366,7 @@ class rl_flujosPorEnte {
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
 		
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		$this->flujofirmaBD->listado_PorEnte($dt);
 		$this->mensajeError.=$this->flujofirmaBD->mensajeError;

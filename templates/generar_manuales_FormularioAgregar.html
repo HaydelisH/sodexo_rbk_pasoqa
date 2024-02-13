@@ -14,7 +14,7 @@
           <php:repeticion id="formulario">
             
              <!--Empresa-->
-            <div class="form-row">
+            <div class="row">
               <div class="col-md-6 xs-12">
                <label>Empresa</label>
                 <div class="box-body" style="padding-left: 0px;">
@@ -30,7 +30,7 @@
             </div>
 
             <!--Cliente-->
-            <div class="form-row">
+            <div class="row">
               <div class="col-md-6 xs-12">
                  <label>Cliente</label>
                  <div class="box-body" style="padding-left: 0px;">
@@ -46,10 +46,10 @@
             </div>
 
           <!--Flujos-->
-          <div class="form-row">
+          <div class="row">
             <div class="col-md-6 xs-12"> 
             <label for="Flujo" >Flujo de Firmas</label>
-            <select class= "form-control" name="Flujo" id="Flujo" tabindex="2">
+            <select class= "form-control Flujo_GMAgregar" name="Flujo" id="Flujo" tabindex="2">
               <option value='<php:item id="idWF" />'><php:item id="NombreWF" /></option>
               <php:repeticion id="Flujo">
                 <option value='<php:item id="idWF" />'>
@@ -65,10 +65,10 @@
           </div> 
 
         <!--Modelo de Contrato-->
-          <div class="form-row">
+          <div class="row">
             <div class="col-md-6 xs-12"  >
                <label>Modelo de Contrato</label>
-               <select class= "form-control" name="modelo_contrato" id="modelo_contrato" tabindex="3">
+               <select class= "form-control modelo_contrato_GMAgregar" name="modelo_contrato" id="modelo_contrato" tabindex="3">
                  <option value='<php:item id="idMC"/>'><php:item id="DescripcionMC" /></option>
                   <php:repeticion id="Modelo_Contrato">
                     <option value='<php:item id="idMC"/>'>
@@ -84,7 +84,7 @@
           </div>
   
          <!--idDocumento_Gama-->
-         <div id="Documento_Gama" class="form-row">
+         <div id="Documento_Gama" class="row">
            <div class="col-md-6 xs-12 " style="margin-top: 15px;" >
             <label for="Documento_Gama" >Id Documento Gama</label>
             <input class="form-control" type="text" name="idDocumento_Gama" id="idDocumento_Gama" value='<php:item id="idDocumento_Gama" />' placeholder="Id de Documento" tabindex="4"/>
@@ -92,10 +92,10 @@
         </div>
 
           <!--Tipo de Firmas-->
-          <div class="form-row">
+          <div class="row">
             <div class="col-md-6 xs-12" style="margin-top: 15px;" >
               <label>Tipo de Firma</label>
-              <select class="form-control" id="TipoFirmas" name="TipoFirmas" tabindex="5">
+              <select class="form-control TipoFirmas_GMAgregar" id="TipoFirmas" name="TipoFirmas" tabindex="5">
                 <option value='<php:item id="idTipoFirma"/>'><php:item id="Descripcion" /></option>
                   <php:repeticion id="TipoFirmas">
                     <option value='<php:item id="idTipoFirma" />'>
@@ -111,7 +111,7 @@
           </div>
 
          <!--Notarias-->
-         <div id="Notaria_div" class="form-row">
+         <div id="Notaria_div" class="row">
            <div class="col-md-6 xs-12 ">
             <label for="Notaria" style="margin-top: 10px;margin-bottom: 0px;">Notaria</label>
             <div class="box-body"  style="padding-left: 0px; padding-right: 0px;">
@@ -127,7 +127,7 @@
         </div>
 
         <!--Subir documento-->
-        <div class="form-row">
+        <div class="row">
           <div class="col-md-6" id="doc" style="margin-top:15px;">
             <label for="Subir" id="doc_label">Seleccionar archivo PDF</label>
             <div class="form-group" id="doc_hijo"> 
@@ -137,7 +137,7 @@
               <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
                 <span class="btn btn-primary btn-file ">
                   <i class="fa fa-upload" aria-hidden="true"></i>
-                  <input type="file" name="archivo" id="archivo" accept=".pdf" />
+                  <input type="file" name="archivo" id="archivo" accept=".pdf" class="archivo_GMAgregar"/>
                 </span>
               </div>
               <span class="fileinput-filename"></span>
@@ -147,13 +147,13 @@
         </div>
 
          <!--Seleccionar Firmantes por Empresas -->
-         <div class="form-row">
+         <div class="row">
            <div class="col-md-12">
              <h5></h5>
            </div>
          </div>
 
-          <div class="form-row">
+          <div class="row">
             <div class="col-md-12">
                 <label>Seleccione Firmantes</label>
                
@@ -192,7 +192,7 @@
                     <tbody>
                      <php:repeticion id="firmantes_empresa">
                       <tr id="fila_emp_<php:filamenos />">
-                        <td style="text-align: center;"><input type="checkbox" aria-label="Checkbox for following text input" name="Firmantes_Emp[]" class="f_emp" value='<php:item id="personaid"/>' id='emp_<php:filamenos />'><input type="checkbox" aria-label="Checkbox for following text input" name="Firmantes_Emp_Per[]" class="f_emp_per" id="<php:item id="personaid"/>" style="display:none;"></td>
+                        <td style="text-align: center;"><input type="checkbox" aria-label="Checkbox for following text input" name="Firmantes_Emp[]" class="f_emp f_emp_GMAgregar" value='<php:item id="personaid"/>' id='emp_<php:filamenos />'><input type="checkbox" aria-label="Checkbox for following text input" name="Firmantes_Emp_Per[]" class="f_emp_per" id="<php:item id="personaid"/>" style="display:none;"></td>
                         <td style="text-align: center;"><php:item id="personaid"/></td>
                         <td style="text-align: center;"><php:item id="nombre"/> <php:item id="appaterno"/></td>
                         <td style="text-align: center;">
@@ -223,7 +223,7 @@
                     <tbody>
                       <php:repeticion id="firmantes_cliente">
                       <tr id="fila_cli_<php:filamenos />">
-                        <td style="text-align: center;"><input type="checkbox" aria-label="Checkbox for following text input" name="Firmantes_Cli[]" class="f_cli" value='<php:item id="personaid"/>' id="cli_<php:filamenos />"><input type="checkbox" aria-label="Checkbox for following text input" name="Firmantes_Cli_Per[]" class="f_cli_per" id="<php:item id="personaid"/>_cli" style="display:none;"></td>
+                        <td style="text-align: center;"><input type="checkbox" aria-label="Checkbox for following text input" name="Firmantes_Cli[]" class="f_cli_GMAgregar" value='<php:item id="personaid"/>' id="cli_<php:filamenos />"><input type="checkbox" aria-label="Checkbox for following text input" name="Firmantes_Cli_Per[]" class="f_cli_per" id="<php:item id="personaid"/>_cli" style="display:none;"></td>
                         <td style="text-align: center;"><php:item id="personaid"/></td>
                         <td style="text-align: center;"><php:item id="nombre"/> <php:item id="appaterno"/></td>
                          <td style="text-align: center;"><button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" value="1" title='<php:item id="Personeria"/>' id="btn_ver_cli_<php:filamenos />">Ver</button></td>
@@ -232,12 +232,12 @@
                     </tbody>                 
                    </table>
 
-                   <div class="form-row" id="avales">
+                   <div class="row" id="avales">
                     <h4>Avales</h4>
                      <div class="col-md-12">
                       <table id="avales" class="table table-bordered table-hover" >
                         <tr>
-                          <td><input type="text" name='rut_aval' id="rut_aval" placeholder="Rut del aval" class="form-control" maxlength="10"></td>
+                          <td><input type="text" name='rut_aval' id="rut_aval" placeholder="Rut del aval" class="form-control rut_aval_GMAgregar" maxlength="10"></td>
                           <td><input type="text" name="nombre_aval" id="nombre_aval" placeholder="Nombre " class="form-control" maxlength="50" ></td>
                           <td><input type="text" name="apellido_aval" id="apellido_aval" placeholder="Apellido Paterno" class="form-control" maxlength="50"></td>
                           <td><input type="email" name="correo_aval" id="correo_aval" placeholder="Correo electr&oacute;nico" class="form-control" maxlength="60"></td>
@@ -268,7 +268,7 @@
                     <tbody>
                       <php:repeticion id="firmantes_notaria">
                       <tr id="firmantes_notaria">
-                        <td style="text-align: center;"><input type="checkbox" aria-label="Checkbox for following text input" name="Firmantes_Not[]" class="f_not" value="<php:item id="personaid"/>"></td>
+                        <td style="text-align: center;"><input type="checkbox" aria-label="Checkbox for following text input" name="Firmantes_Not[]" class="f_cli_GMAgregar" value="<php:item id="personaid"/>"></td>
                         <td style="text-align: center;"><php:item id="personaid"/></td>
                         <td style="text-align: center;"><php:item id="nombre"/> <php:item id="appaterno"/></td>
                       </tr>
@@ -281,7 +281,7 @@
               </div>
             <!--Fin de Firmantes-->
 
-           <div class="form-row">  
+           <div class="row">  
             <div class="col-md-2 xs-12 pull-right">  
                 <input type="hidden" id="input_emp" name="input_emp" value="<php:item id="input_emp"/>"/>
                 <input type="hidden" id="input_cli" name="input_cli" value="<php:item id="input_cli"/>"/>
@@ -294,969 +294,9 @@
 
             <!--Fin del repeticion de formulario-->
           </php:repeticion>  
-        </form>  
+          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>  
       </div>
     </div>
   </div>
 </div>
-
-<script>
-//Variables 
-notario = 0;
-aval = 0;
-
-$(document).ready(function(){
-
-  //Tooltip
-  $('[data-toggle="tooltip"]').tooltip(); 
-
-  //Empresa
-  if ($("#RutEmp").val().length == 2 ){
-    $("#RutEmp").val("(Seleccione)");
-    $("#GENERAR").prop("disabled", true);
-    //Deshabilitar firmantes 
-    $(".btn-circle-2").addClass("disabled");
-  }
-
-  //Cliente
-  if( $("#RutCli").val().length == 1 ){
-    $("#RutCli").val("(Seleccione)");
-    $("#GENERAR").prop("disabled", true);
-    //Deshabilitar firmantes 
-    $(".btn-circle-2").addClass("disabled");
-  }
-
-  //Flujo
-  if($("#Flujo").val().length == 0 ){
-     $("#Flujo option:selected").text("(Seleccione)");  
-     //Deshabilitar firmantes 
-     $(".btn-circle-2").addClass("disabled");
-  }
-
-  //Modelos de contratos
-  if( $("#modelo_contrato").val().length == 0 ){
-    $("#modelo_contrato option:selected").text("(Seleccione)"); 
-    $("#GENERAR").prop("disabled", true); 
-    $(".btn-circle-2").addClass("disabled");
-
-  }
-
-  //id de Documento 
-  if( $("#idDocumento_Gama").val().length == 0 || $("#idDocumento_Gama").val().length < 6 ){
-    $("#GENERAR").prop("disabled", true); 
-    //Deshabilitar firmantes 
-    $(".btn-circle-2").addClass("disabled");
-  }
-
-  //Tipo de Firmas 
-  if($("#TipoFirmas").val().length == 0 ){
-     $("#TipoFirmas option:selected").text("(Seleccione)");  
-     //Deshabilitar firmantes 
-     $(".btn-circle-2").addClass("disabled");
-  }
-
-  //Documento
-  if( $("#Documento").val().length == 0 ){
-    $("#Documento").val("(Seleccione)");
-    $("#GENERAR").prop("disabled", true);
-    //Deshabilitar firmantes 
-    $(".btn-circle-2").addClass("disabled");
-  }
-
-  //Tipo de Firmas 
-  if($("#TipoFirmas").val().length == 0 ){
-     $("#TipoFirmas option:selected").text("(Seleccione)"); 
-  }
-  else{
-    if( $("#TipoFirmas").val() == 1 ){ //Si es Manual
-       $(".btn-circle-2").addClass("disabled");
-       $("#Notaria").val("");
-       $("#Notaria_div").hide();
-    }
-    else{
-      //Si tiene empresa
-      if ( $("#input_emp").val() == 1 ){
-        $("#boton_emp").removeClass("disabled");
-      }
-      else{
-        $("#boton_emp").addClass("disabled");
-      }
-
-      //Si tiene Cliente 
-      if ( $("#input_cli").val() == 1 ){
-        $("#boton_cli").removeClass("disabled");
-      }
-      else{
-        $("#boton_cli").addClass("disabled");
-      }
-
-      //Si tiene Notario
-      if ( $("#input_not").val() == 1 ){
-         $("#Notaria_div").show();
-      
-         if( $("#Notaria").val() != "(Seleccione)" ){
-          $("#boton_not").removeClass("disabled");
-         }else{
-           $("#Notaria").val("(Seleccione)");
-         }
-      }
-      else{
-        $("#Notaria_div").hide();
-        $("#boton_not").addClass("disabled");
-      }
-      
-      //Si tiene aval 
-      if( $("#input_aval").val() == 1 ){
-        $("#avales").show();
-      }else{
-        $("#avales").hide();
-      }
-
-    }
-  }
-  
-  //Estilo del mesae de advertencia 
-  if ( $("#mensajeAd").html().length > 0 ){
-      $("#mensajeAd").addClass("callout callout-warning");
-  }
-  else{
-    $("#mensajeAd").removeClass("callout callout-warning");
-  }
-  
-  //Firmantes Empresa
-  var row_emp = $("#tabla_emp tr").length;
-  var j = 0;
-  var respuesta_2 = "";
-
-  //Firmantes Clientes
-  var row_cli = $("#tabla_cli tr").length;
-  var i = 0;
-  var respuesta = "";
-
-  if( $("#TipoFirmas").val() == 2 ){ //Si es firma electronica
-
-      for( j = 0; j < row_emp ; j++ ){
-        //Si esta pendiente por aprobacion
-        respuesta_2 = validaRut($("#emp_" + i).val());
-
-        if( respuesta_2 == false ){
-          $("#fila_emp_" + i).css("background-color","#f4f4f4");
-          $("#emp_" + i).prop("disabled", true);
-          $("#mensajeError").removeClass("callout callout-warning");
-          $("#mensajeError").html("");
-        }
-      }
-
-      for( i = 0; i < row_cli ; i++ ){
-        //Si esta pendiente por aprobacion
-        respuesta = validaRut($("#cli_" + i).val());
-
-        if( respuesta == false ){
-          $("#fila_cli_" + i).css("background-color","#f4f4f4");
-          $("#cli_" + i).prop("disabled", true);
-          $("#mensajeError").removeClass("callout callout-warning");
-          $("#mensajeError").html("");
-        }
-      }
-  }
-  else{
-    for( j = 0; j < row_emp ; j++ ){
-    
-      $("#fila_emp_" + i).css("background-color","#fff");
-      $("#emp_" + i).prop("disabled", false);
-    }
-
-    for( i = 0; i < row_cli ; i++ ){
-
-      $("#fila_cli_" + i).css("background-color","#fff");
-      $("#cli_" + i).prop("disabled", false);
-    }
-  } 
-});
-/*******************/
-/**FLUJO DE FIRMAS**/
-/*******************/
-$("#Flujo").change(function(){
-
-    $("#GENERAR").prop("disabled",true);
-
-    //Cerrar los deplegables 
-    $("#step-1").attr("aria-expanded","false");
-    $("#step-1").removeClass("in"); 
-    $("#step-2").attr("aria-expanded","false");
-    $("#step-2").removeClass("in");  
-    $("#step-3").attr("aria-expanded","false");
-    $("#step-3").removeClass("in");
-
-
-    //Enviar los datos para verificar el idProyecto
-    var url = "Generar_Manuales_ajax.php?idWF=" + $("#Flujo").val();
-
-    //Destildar los firmantes
-    $(".f_emp").prop("checked", false);
-    $(".f_cli").prop("checked", false);
-    $(".f_not").prop("checked", false);
-
-    // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-    if( window.XMLHttpRequest )
-      ajax = new XMLHttpRequest(); // No Internet Explorer
-    else
-      ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-   
-    // Almacenamos en el control al funcion que se invocara cuando la peticion
-    // cambie de estado 
-    ajax.onreadystatechange = funcionCallback;
-
-    // Enviamos la peticion
-    ajax.open( "GET", url, true );
-    ajax.send( "" );
-});
-
-/*****************/
-/***** AJAX ******/
-/*****************/
-function funcionCallback(){
-  // Comprobamos si la peticion se ha completado (estado 4)
-  if( ajax.readyState == 4 )
-  {
-    // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-    if( ajax.status == 200 )
-    {
-      // Escribimos el resultado en la pagina HTML mediante DHTML
-      //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
-      salida = ajax.responseText;
-   
-      if( salida.length > 0 ){
-        var respuesta = salida.split("|");
-        cliente = respuesta[0]; $("#input_cli").val(cliente);
-        empresa = respuesta[1]; $("#input_emp").val(empresa);
-        notario = respuesta[2]; $("#input_not").val(notario);
-        aval    = respuesta[3]; $("#input_aval").val(aval);
-
-        //Cliente
-        if( $("#input_cli").val() == 1 ){
-          $("#boton_cli").removeClass("disabled");
-        }else{
-          $("#boton_cli").addClass("disabled");
-        }
-
-        //Empresa
-        if( $("#input_emp").val() == 1 ){
-          $("#boton_emp").removeClass("disabled");
-        }else{
-          $("#boton_emp").addClass("disabled");
-        }
-
-        //Si tiene Notario
-        if ( $("#input_not").val() == 1 ){
-           $("#Notaria_div").show();
-           $("#Notaria").val("(Seleccione)");
-
-           if( $("#Notaria").val() != "(Seleccione)" ){
-            $("#boton_not").removeClass("disabled");
-           }
-        }
-        else{
-          $("#Notaria_div").hide();
-          $("#boton_not").addClass("disabled");
-        }
-
-        //Si tiene aval 
-        if( $("#input_aval").val() == 1 ){
-          $("#avales").show();
-        }else{
-          $("#avales").hide();
-        }
-      }
-    }
-  } else{
-      $("#mensajeError").removeClass("callout callout-warning");
-      $("#mensajeError").html("");
-    }
-}
-
-/**********************/
-/**MODELO DE CONTRATO**/
-/**********************/
-$("#modelo_contrato").change(function(){
-  //Prefijo del idDocumento
-    var modelo = $("#modelo_contrato").val();
-
-    switch (modelo) { 
-      case '1': //Contrato Marco    
-        $("#idDocumento_Gama").val("CtoA_");
-        break;
-      case '2': //Anexo     
-        $("#idDocumento_Gama").val("PRY");
-        break;
-      case '3': //Renting     
-        $("#idDocumento_Gama").val("CtoR_");
-        break;    
-      case '4': //Condiciones generales 
-        $("#idDocumento_Gama").val("CGR_");
-        break;
-      case '5': //Financiero
-        $("#idDocumento_Gama").val("OC_");
-        break;
-    }
-});
-
-/******************/
-/**TIPO DE FIRMAS**/
-/******************/
-$("#TipoFirmas").change(function(){
-
-  //Firmantes Empresa
-  var row_emp = $("#tabla_emp tr").length;
-  var j = 0;
-  var respuesta_2 = "";
-
-  //Firmantes Clientes
-  var row_cli = $("#tabla_cli tr").length;
-  var i = 0;
-  var respuesta = "";
-
-  //Si es de firma manual
-  if( $("#TipoFirmas").val() == 1 ){
-     $(".btn-circle-2").addClass("disabled");
-
-     for( j = 0; j < row_emp ; j++ ){
-    
-      $("#fila_emp_" + i).css("background-color","#fff");
-      $("#emp_" + i).prop("disabled", false);
-    }
-
-    for( i = 0; i < row_cli ; i++ ){
-
-      $("#fila_cli_" + i).css("background-color","#fff");
-      $("#cli_" + i).prop("disabled", false);
-    }
-  }
-
-  //Si es de firma electronica
-  if( $("#TipoFirmas").val() == 2 ){ 
-
-      for( j = 0; j < row_emp ; j++ ){
-        //Si esta pendiente por aprobacion
-        respuesta_2 = validaRut($("#emp_" + i).val());
-
-        if( respuesta_2 == false ){
-          $("#fila_emp_" + i).css("background-color","#f4f4f4");
-          $("#emp_" + i).prop("disabled", true);
-          $("#mensajeError").removeClass("callout callout-warning");
-          $("#mensajeError").html("");
-        }
-      }
-
-      for( i = 0; i < row_cli ; i++ ){
-        //Si esta pendiente por aprobacion
-        respuesta = validaRut($("#cli_" + i).val());
-
-        if( respuesta == false ){
-          $("#fila_cli_" + i).css("background-color","#f4f4f4");
-          $("#cli_" + i).prop("disabled", true);
-          $("#mensajeError").removeClass("callout callout-warning");
-          $("#mensajeError").html("");
-        }
-      }
-
-      //Cliente
-      if( $("#input_cli").val() == 1 ){
-        $("#boton_cli").removeClass("disabled");
-      }else{
-        $("#boton_cli").addClass("disabled");
-      }
-
-      //Empresa
-      if( $("#input_emp").val() == 1 ){
-        $("#boton_emp").removeClass("disabled");
-      }else{
-        $("#boton_emp").addClass("disabled");
-      }
-
-      //Si tiene Notario
-      if ( $("#input_not").val() == 1 ){
-         $("#Notaria_div").show();
-         $("#Notaria").val("(Seleccione)");
-
-         if( $("#Notaria").val() != "(Seleccione)" ){
-          $("#boton_not").removeClass("disabled");
-         }
-      }
-      else{
-        $("#Notaria_div").hide();
-        $("#boton_not").addClass("disabled");
-      }
-
-      //Si tiene aval 
-      if( $("#input_aval").val() == 1 ){
-        $("#avales").show();
-      }else{
-        $("#avales").hide();
-      }
-  }
-});
-
-/*****************/
-/*****ARCHIVO*****/
-/*****************/
-
-//Asignar nombre del archivo seleccionado al campo
-$("#archivo").change(function(){
-
-    $("#Documento").val($("#archivo").val());    
-
-     if ( $("#input_not").val() == 1 ){
-        //Habilitar firmantes 
-
-       if( ($("#RutEmp").val().length > 2) && ($("#RutCli").val().length > 1) && ($("#Flujo").val().length > 0) && ($("#TipoFirmas").val() > 0) && ( $("#Notaria").val().length > 0) && ($("#Documento").val().length > 0 ) && ($("#modelo_contrato").val() > 0)){
-
-          if( $("#TipoFirmas").val() == 2){
-            //Cliente
-            if( $("#input_cli").val() == 1 ){
-              $("#boton_cli").removeClass("disabled");
-            }else{
-              $("#boton_cli").addClass("disabled");
-            }
-
-            //Empresa
-            if( $("#input_emp").val() == 1 ){
-              $("#boton_emp").removeClass("disabled");
-            }else{
-              $("#boton_emp").addClass("disabled");
-            }
-
-            //Si tiene aval 
-            if( $("#input_aval").val() == 1 ){
-              $("#avales").show();
-            }else{
-              $("#avales").hide();
-            }
-          }
-          else{
-            $(".btn-circle-2").addClass("disabled");
-            $("#GENERAR").prop("disabled", false);
-          }
-
-       }
-       else{
-         $(".btn-circle-2").addClass("disabled");
-       }
-    }
-    else{
-        if( ($("#RutEmp").val().length > 2) && ($("#RutCli").val().length > 1) && ($("#Flujo").val().length > 0) && ($("#TipoFirmas").val() > 0 ) && ($("#Documento").val().length > 0 ) && ( $("#modelo_contrato").val() > 0 )){
-
-          if( $("#TipoFirmas").val() == 2){
-            //Cliente
-            if( $("#input_cli").val() == 1 ){
-              $("#boton_cli").removeClass("disabled");
-            }else{
-              $("#boton_cli").addClass("disabled");
-            }
-
-            //Empresa
-            if( $("#input_emp").val() == 1 ){
-              $("#boton_emp").removeClass("disabled");
-            }else{
-              $("#boton_emp").addClass("disabled");
-            }
-
-            //Si tiene Notario
-            if ( $("#input_not").val() == 1 ){
-               $("#Notaria_div").show();
-               $("#Notaria").val("(Seleccione)");
-
-               if( $("#Notaria").val() != "(Seleccione)" ){
-                $("#boton_not").removeClass("disabled");
-               }
-            }
-            else{
-              $("#Notaria_div").hide();
-              $("#boton_not").addClass("disabled");
-            }
-
-            //Si tiene aval 
-            if( $("#input_aval").val() == 1 ){
-              $("#avales").show();
-            }else{
-              $("#avales").hide();
-            }
-          }
-          else{
-            $(".btn-circle-2").addClass("disabled");
-            $("#GENERAR").prop("disabled", false);
-          }
-        }
-        else{
-          $(".btn-circle-2").addClass("disabled");
-        }
-    }
-});
-
-/*****************/
-/****FIRMANTES****/
-/*****************/
-
-//Varibles
-var num_e = 0;
-var num_c = 0;
-var num_n = 0;
-var num_a = 0;
-
-/**************************************
-** Recibe el ente que va a verificar,**
-** consulta si tiene como minimo un  **
-** firmante por ente y activa el     **
-** boton de generar.                 **
-**************************************/
-function verificarFirmante(datos){
-  
-   switch(datos) {
-    case 'input_emp': //Empresa
-          //Si tiene Notario
-          if ( $("#input_not").val() == 1 ){
-            //Si tiene aval
-            if( $("#input_aval").val() == 1 ){
-              //Si tiene Cliente 
-              if( $("#input_cli").val() == 1){
-                
-                if( num_e > 0 && num_c > 0 && num_n > 0 && num_a > 0){
-                  $("#GENERAR").attr('disabled', false);
-                }
-                else{
-                  $("#GENERAR").prop('disabled', true); 
-                }
-              }else{//Si no tiene Cliente 
-                if( num_e > 0 && num_n > 0 && num_a > 0 ){
-                  $("#GENERAR").attr('disabled', false);
-                }
-              }
-            }else{//Si no tiene aval 
-              if( num_e > 0 && num_n > 0){
-                $("#GENERAR").attr('disabled', false);
-              }
-              else{
-                $("#GENERAR").prop('disabled', true); 
-              }
-            }
-          }else{//Si no tiene Notario
-           //Si tiene aval
-            if( $("#aval").val() == 1 ){
-              //Si tiene Cliente 
-              if( $("#input_cli").val() == 1){
-                
-                if( num_e > 0 && num_c > 0 && num_a > 0 ){
-                  $("#GENERAR").attr('disabled', false);
-                }
-                else{
-                  $("#GENERAR").prop('disabled', true); 
-                }
-              }else{//Si no tiene Cliente 
-                if( num_e > 0 && num_a > 0 ){
-                  $("#GENERAR").attr('disabled', false);
-                }
-                else{
-                  $("#GENERAR").prop('disabled', true); 
-                }
-              }
-             }else{//Si no tiene aval 
-                 //Si tiene Cliente
-                 if( $("#input_cli").val() == 1){
-                    //Verificar los demas
-                    if( num_e > 0 && num_c > 0 ){
-                      $("#GENERAR").attr('disabled', false);
-                    }
-                    else{
-                      $("#GENERAR").prop('disabled', true); 
-                    }
-                  }
-                  else{//Si no tiene Cliente 
-                    if( num_e > 0){
-                      $("#GENERAR").attr('disabled', false);
-                    }
-                    else{
-                      $("#GENERAR").prop('disabled', true); 
-                    }
-                  }
-             }
-           }
-           break;
-    case 'input_cli'://Cliente 
-          //Si tiene Notario
-          if ( $("#input_not").val() == 1 ){
-            //Si tiene aval
-            if( $("#input_aval").val() == 1 ){
-              //Si tiene Empresa 
-              if( $("#input_emp").val() == 1){
-                
-                if( num_e > 0 && num_c > 0 && num_n > 0 && num_a > 0){
-                  $("#GENERAR").attr('disabled', false);
-                }
-                else{
-                  $("#GENERAR").prop('disabled', true); 
-                }
-              }else{//Si no tiene Empresa 
-                if( num_c > 0 && num_n > 0 && num_a > 0 ){
-                  $("#GENERAR").attr('disabled', false);
-                }
-              }
-            }else{//Si no tiene aval 
-              if( num_c > 0 && num_n > 0){
-                $("#GENERAR").attr('disabled', false);
-              }
-              else{
-                $("#GENERAR").prop('disabled', true); 
-              }
-            }
-          }else{//Si no tiene Notario
-           //Si tiene aval
-            if( $("#aval").val() == 1 ){
-              //Si tiene Empresa 
-              if( $("#input_emp").val() == 1){
-                
-                if( num_e > 0 && num_c > 0 && num_a > 0 ){
-                  $("#GENERAR").attr('disabled', false);
-                }
-                else{
-                  $("#GENERAR").prop('disabled', true); 
-                }
-              }else{//Si no tiene Empresa 
-                if( num_c > 0 && num_a > 0 ){
-                  $("#GENERAR").attr('disabled', false);
-                }
-                else{
-                  $("#GENERAR").prop('disabled', true); 
-                }
-              }
-             }else{//Si no tiene aval 
-                 //Si tiene Empresa
-                 if( $("#input_emp").val() == 1){
-                    //Verificar los demas
-                    if( num_e > 0 && num_c > 0 ){
-                      $("#GENERAR").attr('disabled', false);
-                    }
-                    else{
-                      $("#GENERAR").prop('disabled', true); 
-                    }
-                  }
-                  else{//Si no tiene Empresa 
-                    if( num_c > 0){
-                      $("#GENERAR").attr('disabled', false);
-                    }
-                    else{
-                      $("#GENERAR").prop('disabled', true); 
-                    }
-                  }
-             }
-           }
-           break;
-    case 'input_not'://Notario
-          //Si tiene aval 
-          if ( $("#aval").val() == 1 ){
-            //Si tiene Empresa
-            if( $("#input_emp").val() == 1 ){
-              //Si tiene Cliente 
-              if( $("#input_cli").val() == 1 ){
-                if ( num_n > 0 && num_e > 0 && num_c > 0 && num_a > 0 ){
-                   $("#GENERAR").prop('disabled', false); 
-                }
-                else{
-                    $("#GENERAR").prop('disabled', true); 
-                }
-              }else{ // Si no tiene Cliente 
-                if ( num_n > 0 && num_e > 0 && num_a > 0 ){
-                   $("#GENERAR").prop('disabled', false); 
-                }
-                else{
-                    $("#GENERAR").prop('disabled', true); 
-                }
-              }
-            }else{// Si no tiene empresa
-              if ( num_n > 0 && num_a > 0 ){
-                   $("#GENERAR").prop('disabled', false); 
-                }
-                else{
-                    $("#GENERAR").prop('disabled', true); 
-                }
-            }
-          }else{ //Si no tiene aval 
-            //Si tiene empresa
-            if( $("#input_emp").val() == 1 ){
-              //Si tiene Cliente
-              if( $("#input_cli").val() == 1 ){
-
-                if ( num_n > 0 && num_e > 0 && num_c > 0 ){
-                   $("#GENERAR").prop('disabled', false); 
-                }
-                else{
-                    $("#GENERAR").prop('disabled', true); 
-                }
-              }else{// Si no tiene Cliente 
-                if ( num_n > 0 && num_e > 0 ){
-                   $("#GENERAR").prop('disabled', false); 
-                }
-                else{
-                    $("#GENERAR").prop('disabled', true); 
-                }
-              }
-            }else{ //Si no tiene empresa 
-              if ( num_n > 0 ){
-                   $("#GENERAR").prop('disabled', false); 
-                }
-                else{
-                    $("#GENERAR").prop('disabled', true); 
-                }
-            }
-          }
-          break;
-  }
-}
-
-function verificarFirmanteAval(){
-
-  //Si al menos un esta en blanco
-  if( num_a == 0 ){
-    $("#GENERAR").prop('disabled', true);
-  }
-  else{
-    //Si tiene aval 
-    if ( $("#input_not").val() == 1 ){
-      //Si tiene Empresa
-      if( $("#input_emp").val() == 1 ){
-        //Si tiene Cliente 
-        if( $("#input_cli").val() == 1 ){
-          if ( num_n > 0 && num_e > 0 && num_c > 0 && num_a > 0 ){
-             $("#GENERAR").prop('disabled', false); 
-          }
-          else{
-              $("#GENERAR").prop('disabled', true); 
-          }
-        }else{ // Si no tiene Cliente 
-          if ( num_n > 0 && num_e > 0 && num_a > 0 ){
-             $("#GENERAR").prop('disabled', false); 
-          }
-          else{
-              $("#GENERAR").prop('disabled', true); 
-          }
-        }
-      }else{// Si no tiene empresa
-        if ( num_n > 0 && num_a > 0 ){
-             $("#GENERAR").prop('disabled', false); 
-          }
-          else{
-              $("#GENERAR").prop('disabled', true); 
-          }
-      }
-    }else{ //Si no tiene Notaria
-      //Si tiene empresa
-      if( $("#input_emp").val() == 1 ){
-        //Si tiene Cliente
-        if( $("#input_cli").val() == 1 ){
-
-          if ( num_a > 0 && num_e > 0 && num_c > 0 ){
-             $("#GENERAR").prop('disabled', false); 
-          }
-          else{
-              $("#GENERAR").prop('disabled', true); 
-          }
-        }else{// Si no tiene Cliente 
-          if ( num_a > 0 && num_e > 0 ){
-             $("#GENERAR").prop('disabled', false); 
-          }
-          else{
-              $("#GENERAR").prop('disabled', true); 
-          }
-        }
-      }else{ //Si no tiene empresa 
-        if ( num_a > 0 ){
-             $("#GENERAR").prop('disabled', false); 
-          }
-          else{
-              $("#GENERAR").prop('disabled', true); 
-          }
-      }
-    }
-  }   
-}
-
-//Firmantes de Empresa
-$(".f_emp").on( 'change', function() {
-  if( $(this).is(':checked') == true ) {
-
-    $("#mensajeError").removeClass("callout callout-warning");
-    $("#mensajeError").html("");
-
-    num_e++;
-    /*
-    var resultado = confirm( "Desea incluir la personeria del firmante en el Documento?");
-    var btn = "#btn_ver_" + i;
-
-    if( resultado == true ){
-      $("#"+ $(this).val() ).prop( "checked", true );
-      $("#"+ $(this).val() ).attr( "value", 1 );
-      $(btn).removeClass("btn-secondary").addClass("btn-success");
-    }
-    else{
-      $("#" + $(this).val() ).prop( "checked", true );
-      $("#"+ $(this).val() ).attr( "value", 0 );
-    }*/
-
-  }
-  if( $(this).is(':checked') == false ){
-    num_e--;
-    $("#"+ $(this).val() ).attr( "value", 0 );
-    $("#btn_ver_" + i).removeClass("btn-success").addClass("btn-secondary");
-  }
-  if(num_e == 0) {
-    $("#mensajeError").addClass("callout callout-warning");
-    $("#mensajeError").html("Seleccione Firmantes de Empresa");
-    $("#GENERAR").prop('disabled', true); 
-  }
-
-  verificarFirmante('input_emp');
-}); 
-
-//Firmantes de Clientes
-$(".f_cli").on( 'change', function() {
-  if( $(this).is(':checked') == true) {
-
-    $("#mensajeError").removeClass("callout callout-warning");
-    $("#mensajeError").html("");
-
-    num_c++;
-    
-    /*
-    var resultado = confirm( "Desea incluir la personeria del firmante en el Documento?");
-    var btn = "#btn_ver_cli_" + j;
-
-    if( resultado == true ){
-      $("#"+ $(this).val()+"_cli" ).prop( "checked", true );
-      $("#"+ $(this).val()+"_cli" ).attr( "value", 1 );
-      $(btn).removeClass("btn-secondary").addClass("btn-success");
-    }
-    else{
-       $("#" + $(this).val()+"_cli" ).prop( "checked", true );
-       $("#"+ $(this).val()+"_cli" ).attr( "value", 0 );
-    }*/
-  }
-   if( $(this).is(':checked') == false ){
-    num_c--;
-    $("#"+ $(this).val()+"_cli" ).attr( "value", 0 );
-    $("#btn_ver_cli_" + j).removeClass("btn-success").addClass("btn-secondary");
-  }
-  if(num_c == 0) {
-    $("#mensajeError").addClass("callout callout-warning");
-    $("#mensajeError").html("Seleccione Firmantes del Cliente");
-    $("#GENERAR").prop('disabled', true); 
-  }
-
-  verificarFirmante('input_cli');
-  $("#rut_aval").focus();
-});  
-
-//Firmantes de Notaria
-$(".f_not").on('change', function() {
-  if ( $("#input_not").val() == 1 ){
-     if( $(this).is(':checked') ) {
-        num_n++;
-        $("#mensajeError").removeClass("callout callout-warning");
-        $("#mensajeError").html("");
-        
-      }//Si seleccionaron algun firmante
-       if( $(this).is(':checked') == false ){
-        num_n--;
-      }
-      if(num_n == 0) {
-        $("#mensajeError").addClass("callout callout-warning");
-        $("#mensajeError").html("Seleccione Notario");
-      $("#GENERAR").prop('disabled', true); 
-      }
-      verificarFirmante('input_not');
-  }
-});
-
-/*****************/
-/**DATOS DE AVAL**/
-/*****************/
-
-  //Validar Rut de Aval
-  $("#rut_aval").change(function(){
-
-    if ( $("#rut_aval").val().length == 0 ){
-      num_a--;
-    }else{
-      var respuesta = validaRut($("#rut_aval").val());
-
-      if( respuesta == false ){
-        $("#mensajeError").addClass("callout callout-warning");
-        $("#mensajeError").html("El Rut del Aval no es un rut v&aacute;lido");
-        $("#rut_aval").focus();
-        return false;
-      }
-      else{
-        $("#mensajeError").removeClass("callout callout-warning");
-        $("#mensajeError").html("");
-      }
-    }
-
-   //Si todos los campos estan completos avanza
-   if( $("#rut_aval").val().length > 0 && $("#nombre_aval").val().length > 0 && $("#apellido_aval").val().length > 0 && $("#correo_aval").val().length > 0 && $("#personeria_aval").val().length > 0 ){
-      num_a++;
-    }  
-    verificarFirmanteAval();      
-  });
-
-   //Nombre
-   $("#nombre_aval").change(function(){
-
-     if ( $("#nombre_aval").val().length == 0 ){
-        num_a--;
-      }
-
-      if( $("#rut_aval").val().length > 0 && $("#nombre_aval").val().length > 0 && $("#apellido_aval").val().length > 0 && $("#correo_aval").val().length > 0 && $("#personeria_aval").val().length > 0 ){
-          num_a++;
-      }
-      verificarFirmanteAval();
-   });
-
-   //Apellido
-   $("#apellido_aval").change(function(){
-
-      if ( $("#apellido_aval").val().length == 0 ){
-        num_a--;
-      }
-
-      if( $("#nombre_aval").val().length > 0 && $("#apellido_aval").val().length > 0 && $("#correo_aval").val().length > 0 && $("#personeria_aval").val().length > 0 ){
-          num_a++;
-        }
-      verificarFirmanteAval();
-   });
-
-   //Correo
-   $("#correo_aval").change(function(){
-
-     if ( $("#correo_aval").val().length == 0 ){
-        num_a--;
-      }
-     if( $("#rut_aval").val().length > 0 && $("#nombre_aval").val().length > 0 && $("#apellido_aval").val().length > 0 && $("#correo_aval").val().length > 0 && $("#personeria_aval").val().length > 0 ){
-          num_a++;
-        }
-      verificarFirmanteAval();
-   });
-
-  //Personerias
-  $("#personeria_aval").change(function(){
-
-      if ( $("#personeria_aval").val().length == 0 ){
-        num_a--;
-      }
-
-      if( $("#rut_aval").val().length > 0 && $("#nombre_aval").val().length > 0 && $("#apellido_aval").val().length > 0 && $("#correo_aval").val().length > 0 && $("#personeria_aval").val().length > 0 ){
-          num_a++;
-        }
-      verificarFirmanteAval();
-   });
-
-
-
-</script>

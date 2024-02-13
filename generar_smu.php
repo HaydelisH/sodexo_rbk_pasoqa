@@ -627,7 +627,7 @@ class generar
 	public function crearDocumento($datos){
 
 		//Generar Documento nuevo 
-		//$datos = $_REQUEST;
+		//$datos = $_POST;
 		$dt = new DataTable();
 			
 		$datos['idEstado']    = 1; //Creado
@@ -747,7 +747,7 @@ class generar
 	//Crear Plantilla completa 
 	public function crearPlantilla($idDocumento, $TipoFirma, $empleado){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos2 = $empleado;
 		$dt = new DataTable();
 		$html = '';
@@ -1015,7 +1015,7 @@ class generar
 	//Validar si el documento tiene variables de un tipo 
 	private function buscarVariables($idDocumento,$html,$busqueda,$datos2,&$resultado){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $idDocumento;
 
 		$dt = new DataTable();
@@ -1240,7 +1240,7 @@ class generar
 	//Buscar subclausulas
 	private function buscarVariablesSubClausulas($idDocumento,$html,&$resultado){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 	
 		$dt = new DataTable();
 		$dt_doc = new DataTable();
@@ -1818,7 +1818,7 @@ class generar
 	//------             ULTIMINIO RAMOS GALÁN     ---------------
 	//------            uramos@gmail.com           ---------------
 	//------    10 de junio de 2009. México, D.F.  ---------------
-	//------    PHP Version 4.3.1 o mayores (aunque podría funcionar en versiones anteriores, tendrías que probar)
+	//------    PHP Version  o mayores (aunque podría funcionar en versiones anteriores, tendrías que probar)
 
 	{
 	    $xarray = array(0 => "Cero",

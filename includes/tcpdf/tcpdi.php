@@ -1,7 +1,7 @@
 <?php
 //  
 //  TCPDI - Version 1.0
-//  Based on FPDI - Version 1.4.4
+//  Based on FPDI -
 //
 //    Copyright 2004-2013 Setasign - Jan Slabon
 //

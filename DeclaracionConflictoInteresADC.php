@@ -86,10 +86,10 @@ class generar_fichapersonal {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -151,7 +151,7 @@ class generar_fichapersonal {
 		include("includes/opciones_menu.php");
 	
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->acceder();
@@ -162,7 +162,7 @@ class generar_fichapersonal {
 		}
 
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		/*switch ($_REQUEST["accion"])
+		/*switch ($_POST["accion"])
 		{
 			case "ENVIARFORMULARIO":
 				$this->validar();
@@ -183,7 +183,7 @@ class generar_fichapersonal {
     }
     private function acceder()
     {
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$datos["empleadoid"]=$this->seguridad->usuarioid;
 		$datos["idFormulario"] = 2;

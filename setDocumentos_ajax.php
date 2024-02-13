@@ -44,8 +44,8 @@ class personas {
         $conecc = $this->bd->obtenerConexion();
         $this->setDocumentosBD->usarConexion($conecc);
         
-        $datos = $_REQUEST;
-        switch ($_REQUEST["accion"])
+        $datos = $_POST;
+        switch ($_POST["accion"])
 		{
 			case "AGREGAR":
                 $dt = new DataTable();

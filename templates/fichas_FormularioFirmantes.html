@@ -1,8 +1,8 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax_FF/libs/handlebars.js/4.1.0/handlebars.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax_FF/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax_FF/libs/moment.js/2.24.0/moment.min.js"></script>
 
 <div class="row">
     <div class="col-md-12">
@@ -15,7 +15,8 @@
                             <a href="Fichas.php" class="btn btn-md btn-default btn_letra_azul"><i class="fa fa-home" aria-hidden="true"></i>Ir al listado</a>
                             <input type="hidden" name="fichaid" id="fichaid" value="<php:item id="fichaid" />" />
                             <button type="submit" name="accion" value="PROCESAR" class="btn btn-md btn-default btn_letra_azul"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</button>
-                       </form>
+                         <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -26,7 +27,7 @@
                     <form name="formulario" class="formulario" id="formulario"  class="form-horizontal" action="Fichas.php" method="POST">
                 
 							<input type="hidden" id="Representantes" value="<php:item id="Representantes"/>" />
-                            <div class="form-row">
+                            <div class="row">
 								<div class="col-md-2 col-xs-4" style="text-align:center;">
 									<label for="nombre">Id de Ficha</label>
 									<h5 name="nombre"><php:item id="fichaid"/></h5>
@@ -52,11 +53,11 @@
 								<div class="col-md-2 col-xs-4" style="text-align: center;">
 									<button class="btn btn-info btn-md" type="button" data-toggle="modal" data-target="#detallePostulante">Detalles</button>
 									<input type="hidden" class="form-control" id="rut" value="<php:item id="personaid"/>">
-									<button class="btn btn-default btn-md" type="button" onclick="javascript:return enrolar();">Enrolar</button>
+									<button class="btn btn-default btn-md" type="button" onclick="javascript:return enrolar_FF();">Enrolar</button>
 								</div>
 							</div>
 							
-                                <div class="form-row">
+                                <div class="row">
                                     <div class="col-md-12 col-xs-12">
                                         <h4>Listado de documentos a generar</h4>
                                     </div>
@@ -78,17 +79,18 @@
                                                         <td style="text-align: center;"><input type="text" id='estado_<php:item id="incremental" />' value='<php:item id="estado"/>' readonly style="border:none; background: white;" /></td>
                                                         <td style="text-align: center;">
                                                             <php:repeticion id="boton">
-                                                                <button class="btn btn-md btn-success generar" type="button" onclick="javascript:generar('#documentos_<php:item id="incremental" />')" id="generar_<php:item id="incremental" />" >Generar individual</button>
+                                                                <button class="btn btn-md btn-success generar" type="button" onclick="javascript:generar_FF('#documentos_<php:item id="incremental" />')" id="generar_<php:item id="incremental" />" >Generar individual</button>
                                                             </php:repeticion>
                                                             <php:repeticion id="boton_ver">
-                                                                <button class="btn btn-md btn-primary ver" id="<php:item id="incremental" />" type="button" >Ver</button>
+                                                                <button class="btn btn-md btn-primary ver_FF" id="<php:item id="incremental" />" type="button" >Ver</button>
                                                             </php:repeticion>
-                                                              <button class="btn btn-md btn-primary" id="ver_<php:item id="incremental" />" style="display:none" type="button" onclick="ver_doc(<php:item id="incremental" />);" >Ver</button>
+                                                              <button class="btn btn-md btn-primary" id="ver_<php:item id="incremental" />" style="display:none" type="button" onclick="ver_doc_FF(<php:item id="incremental" />);" >Ver</button>
                                                             <form name="formulario_ver_<php:item id="incremental" />" id="formulario_ver_<php:item id="incremental" />" action="Fichas.php" method="POST">
                                                                 <input type="hidden" name="fichaid"     value='<php:item id="fichaid" />' />
                                                                 <input type="hidden" name="documentoid" id="documentoid_ver_<php:item id="incremental" />" value="<php:item id='documentoid'/>"/>
                                                                 <input type="submit" name="accion" id="VER_DOCUMENTO_<php:item id="incremental" />" value="VER_DOCUMENTO_GENERADO" style="display:none"/>
-                                                            </form>
+                                                              <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 
                                                         </td>
                                                     </tr>
@@ -98,7 +100,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="form-row firmantes">
+                                <div class="row firmantes">
                                     <div class="col-md-12 col-xs-12">
                                         <h4>Representantes</h4>
                                     </div>
@@ -133,7 +135,7 @@
                                         </table>
                                     </div>
                                 </div>
-								 <div class="form-row firmantes">
+								 <div class="row firmantes">
                                     <div class="col-md-12 col-xs-12">
                                         <h4>Seleccione el tipo de firma</h4>
                                     </div>
@@ -153,16 +155,16 @@
 									  </div>
 									 </div>
 								</div>
-                                <div class="form-row">
+                                <div class="row">
                                     <div class="col-md-2 xs-12 pull-right">
                                         <input type="hidden" name="idEstado" id="idEstado" value="<php:item id='idEstado' />" />
-                                        <button class="btn btn-md btn-success btn-block" type="button" name="accion" id="GENERAR" value="GENERAR" style="margin-top: 10px" onclick="generarPorLotes()">Generar set Documentos</button>
+                                        <button class="btn btn-md btn-success btn-block" type="button" name="accion" id="GENERAR" value="GENERAR" style="margin-top: 10px" onclick="generarPorLotes_FF()">Generar set Documentos</button>
                                     </div>
 
                                     <div class="col-md-2 xs-12 pull-left">
                                         <input type="hidden" name="fichaid" id="fichaid" value="<php:item id='fichaid'/>" />
                                          
-                                        <button class="btn btn-md btn-default btn-block" type="submit" name="accion" id="CANCELAR" value="CANCELAR" style="margin-top: 25px"  onclick="javascript:return cambiaEstado();" data-toggle="tooltip" tittle="Cancelar el flujo" >Cancelar flujo</button> 
+                                        <button class="btn btn-md btn-default btn-block" type="submit" name="accion" id="CANCELAR" value="CANCELAR" style="margin-top: 25px"  onclick="javascript:return cambiaEstado_FF();" data-toggle="tooltip" tittle="Cancelar el flujo" >Cancelar flujo</button> 
                                     </div>
                                 </div>
                            
@@ -173,13 +175,13 @@
                                         <div class="modal-header" align="center">
                                             <h4 class="modal-title" id="ejemplo-titulo"> Informaci&oacute;n postulante</h4>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
+                                                <span aria-hidden="true" class="cerrar_modal">&times;</span>
                                             </button>
                                         </div>
                                         <!--<div class="modal-body">-->
                                         <div class="modal-body " style=" max-height:400px; overflow-y: auto;">
                                             <div class="box-body">
-                                                <div class="form-row">
+                                                <div class="row">
                                                     <div class="col-md-6 col-xs-12">
                                                         <label for="rut">R.U.T.</label>
                                                         <h5 name="rut"><php:item id="personaid"/></h5>
@@ -189,7 +191,7 @@
                                                         <h5 name="nombre"><php:item id="NombreTrabajador"/></h5>
                                                     </div>
                                                 </div>
-                                                <div class="form-row">
+                                                <div class="row">
                                                     <div class="col-md-6 col-xs-12">
                                                         <label for="nacionalidad">Nacionalidad</label>
                                                         <h5 name="nacionalidad"><php:item id="nacionalidad"/></h5>
@@ -199,7 +201,7 @@
                                                         <h5 name="direccion"><php:item id="direccion"/></h5>
                                                     </div>
                                                 </div>
-                                                <div class="form-row">
+                                                <div class="row">
                                                     <div class="col-md-6 col-xs-12">
                                                         <label for="comuna">Comuna</label>
                                                         <h5 name="comuna"><php:item id="comuna"/></h5>
@@ -209,7 +211,7 @@
                                                         <h5 name="ciudad"><php:item id="ciudad"/></h5>
                                                     </div>
                                                 </div>
-                                                <div class="form-row">
+                                                <div class="row">
                                                     <!--<div class="col-md-6 col-xs-12">
                                                         <label for="fono">Fono</label>
                                                         <h5 name="fono"><php:item id="fono"/></h5>
@@ -219,7 +221,7 @@
                                                         <h5 name="correo-electronico"><php:item id="correo"/></h5>
                                                     </div>
                                                 </div>
-                                                <div class="form-row">
+                                                <div class="row">
                                                     <div class="col-md-6 col-xs-12">
                                                         <label for="estado-civil">Estado civil</label>
                                                         <h5 name="estado-civil"><php:item id="Estado"/></h5>
@@ -232,12 +234,15 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer" style="margin-top:10px;">
-                                            <button type="button" class="btn btn-secondary btn-md" id="cerrar_lugares_pago" data-dismiss="modal">Cerrar</button>
+                                            <button type="button" class="btn btn-secondary btn-md cerrar_modal" id="cerrar_lugares_pago" data-dismiss="modal">Cerrar</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </php:repeticion>
+                       
+                      <input type="hidden" name="usuarioid_FF" id="usuarioid_FF"  value="<php:texto id='usuarioid'/>">
+                      <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </php:repeticion>
                     </form>
                 </div>
             </div>
@@ -246,384 +251,3 @@
 </div>
 </section>
 		
-
-<script>
-    $(document).ready(function(){
-	
-		var idEstado = $("#idEstado").val();
-		
-        if( idEstado == 6 || $( ".custom-radio input:checked" ).length == 0){
-            $("#GENERAR").attr("disabled",true);
-            $(".generar").attr("disabled",true);
-        }
-		
-		if( $("#Representantes").val() == 1 ){
-			$(".firmantes").css("display","block");
-		}else{
-			$(".firmantes").css("display","none");
-		}
-	       
-    });
-
-    function generacionDocumentos(data)
-    {
-        MostrarCargando();
-        
-		clearInterval(proceso);// poner esto cuando llega respuesta
-        
-		var fichaid = data['fichaid'];
-        var idplantilla = data['idplantilla'];
-        var personaid = data['personaid'];
-		var idtipofirma = $("#idTipoFirma").val();
-	
-		if( idtipofirma > 0  ){ 
-			
-			$("#mensajeError").removeClass("callout callout-warning");
-			$("#mensajeError").html("");
-			
-			var url = "Fichas_ajax.php?fichaid=" + fichaid + "&idplantilla="+ idplantilla + "&personaid=" + personaid + "&idFirma=" + idtipofirma;
-			//console.log(url);
-			// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-			if( window.XMLHttpRequest )
-				ajax = new XMLHttpRequest(); // No Internet Explorer
-			else
-				ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-			// Almacenamos en el control al funcion que se invocara cuando la peticion
-			ajax.onreadystatechange = funcionCallback_generaDocumentos;
-			ajax.addEventListener("load", transferComplete);
-			// Enviamos la peticion
-			ajax.open( "GET", url, false);
-			ajax.send( "" );
-			function transferComplete(evt) {
-				OcultarCargando();
-			}
-		}else{
-			$("#mensajeError").addClass("callout callout-warning");
-			$("#mensajeError").html("Debe seleccionar el Tipo de Firma");
-			$("#idTipoFirma").focus();
-			OcultarCargando();
-			return false;
-		}
-    }
-
-    function cambiaEstado()
-    {
-        return confirm('Desea Cancelar el Flujo de Contrataci\u00f3n?');
-    }
-    function funcionCallback_generaDocumentos()
-    {
-        // Comprobamos si la peticion se ha completado (estado 4)
-        if( ajax.readyState == 4 )
-        {
-            // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-            if( ajax.status == 200 )
-            {  	
-				salida = ajax.responseText; 
-				var datos = JSON.parse(salida);
-				//console.log(datos);
-
-				if( datos.data == ''){
-					
-					$("#mensajeError").html(datos.mensaje);
-					$("#mensajeError").addClass("callout callout-warning");
-				}else{
-					
-					//Separar el id
-					var aux_id = aux.id.split('_'); 
-					var aux_num = aux_id[1]; 
-
-					$("#estado_" + aux_num).val("Generado con el id: " + datos.data);
-					$("#documentoid_ver_" +  aux_num).val(datos.data);
-					$("#generar_" + aux_num).hide();
-					/*$("#ver_" +  aux_num).css("display","inline"); */
-					
-				   $("#mensajeError").html('');
-				   $("#mensajeError").removeClass("callout callout-warning");
-				   
-				 
-					procesaMatriz();
-				}
-				
-            }
-        }
-    }
-
-    var matriz = [];
-    var proceso;
-    var ajax;
-
-    function generar(id)
-    {	
-        var idtipofirma = $("#idTipoFirma").val();
-        if( idtipofirma > 0  )
-        { 
-            $('#GENERAR').attr('disabled', true);
-            $('.generar').attr('disabled', true);
-            var aux = [];
-            aux['id'] = id;
-            aux['idplantilla'] = $(id).data("idplantilla");
-            aux['fichaid'] = $(id).data("fichaid");
-            aux['personaid'] = $('#listadoFirmantes .custom-radio input:checked').data("personaid");
-            matriz.push(aux);
-            console.log(matriz, id);
-            this.procesaMatriz();
-        }else{
-            $("#mensajeError").addClass("callout callout-warning");
-            $("#mensajeError").html("Debe seleccionar el Tipo de Firma");
-            $("#idTipoFirma").focus();
-            OcultarCargando();
-            return false;
-        }
-    }
-
-    function generarPorLotes()
-    {
-        var idtipofirma = $("#idTipoFirma").val();
-        if( idtipofirma > 0  )
-        { 
-            $('#GENERAR').attr('disabled', true);
-            $('.generar').attr('disabled', true);
-            $('#listadoGeneracionDocumentos .datos').each(function(index){
-                if ($(this).data("estado2") == 0)
-                {
-                    var aux = [];
-                    aux['id'] = this.id;
-                    aux['idplantilla'] = $(this).data("idplantilla");
-                    aux['fichaid'] = $(this).data("fichaid");
-                    aux['idTipoFirma'] = $("#idTipoFirma").val();
-                    aux['personaid'] = $('#listadoFirmantes .custom-radio input:checked').data("personaid");
-                    matriz.push(aux);
-                }
-            });
-            this.procesaMatriz();    
-        }else{
-            $("#mensajeError").addClass("callout callout-warning");
-            $("#mensajeError").html("Debe seleccionar el Tipo de Firma");
-            $("#idTipoFirma").focus();
-            OcultarCargando();
-            return false;
-        }
-    }        
-        
-
-    var aux = [];
-    function procesaMatriz()
-    {   
-        if (matriz.length > 0)
-        {
-			aux = matriz.shift(); //console.log(aux);
-            proceso = setInterval(function(){ generacionDocumentos(aux) }, 1000);
-        }else{
-		//console.log($("#mensajeError").html().length);
-            if( $("#mensajeError").html().length == 0 ){
-                $('#GENERAR').attr('disabled', false);
-                $('.generar').attr('disabled', false);
-                //location.reload();
-            }
-        }
-    }
-
-    $(".ver").click(function(){
-	
-		 var id = this.id; //console.log(id);
-         $("#VER_DOCUMENTO_" + id).click();
-    });
-
-	function ver_doc(i){
-		 $("#VER_DOCUMENTO_" + i).click();
-	}
-
-    let general = {
-        baseUrl: "",
-        apiKey: "",
-        digitalSignature: 0,
-        session: {
-          id: "",
-          companyId: "",
-          username: ""
-        },
-        currentAction: "CREATE",
-        operator: {
-          sessionId: null
-        }
-      };
-   
-    
-    let popupPage;
-      let openCheckId = function(action) 
-    {
-    MostrarCargando();
-        general.currentAction = action;
-        // Create popup window
-        var w = 900;
-        var h = 620;
-
-        // Fixes dual-screen position                         Most browsers      Firefox
-        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
-        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
-
-        var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
-        var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
-
-        var left = ((width / 2) - (w / 2)) + dualScreenLeft;
-        var top = ((height / 2) - (h / 2)) + dualScreenTop;
-
-        var opciones = "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=" + w + ", height=" + h + ", top=" + top + ", left=" + left;
-        popupPage = window.open("checkid", "libPage", opciones);
-    
-    var timer = setInterval(function() { 
-      if(popupPage.closed) {
-        clearInterval(timer);
-        document.getElementById('cargando').style.display='none';
-      }
-    }, 1000);
-    
-        // Puts focus on the popupPage
-        if (window.focus) {
-          popupPage.focus();
-        }
-      };
-
-   
-   let getParamsCreate = function() {
-        return {
-            action: "CREATE",
-            apiKey: general.apiKey,
-            sessionId: general.session.id,
-            companyId: general.session.companyId,
-            operationId: 1,
-            baseUrl: general.baseUrl,
-            useFingerprint: true,//si pide huella al que esta enrolando
-            usePin: true,//si pide pin al que esta enrolando
-            useKBA: false,//si se utiliza la pregunta de seguridad
-            operator: {
-              sessionId: general.operator.sessionId,
-              identityDocument: {
-                  countryCode: general.countryCode,
-                  type: general.type,
-                  personalNumber: general.rutoperador 
-              }
-            },
-              digitalIdentity: {
-                  personalData: {
-                      givenNames: "desmond",
-                      surnames: "miles",
-                      dob: 20000101,
-                      gender: "NOT_KNOWN"
-                  },
-                  emailAddresses: [
-                    {
-                        type: 'BUSINESS',
-                        address: 'algo@algo.cl',
-                        primary: true
-                    },
-                    {
-                        type: 'PERSONAL',
-                        address: 'algo@algo2.cl',
-                        primary: false
-                    }
-                ],
-                contactPhones: [
-                    {
-                        number: '+56982365612',
-                        primary: false,
-                        type: 'HOME'
-                    },
-                    {
-                        number: '+56911111111',
-                        primary: true,
-                        type: 'PERSONAL'
-                    }
-
-                  ],
-                  identityDocuments: [{
-                    countryCode: general.countryCode,
-                    type: general.type,
-                    personalNumber: general.rutaenrolar 
-                  }]
-              }
-          };
-      };
-
-  window.getParams = function()
-  {
-    return getParamsCreate();
-  }
-    
-  //respuesta del formulario checkid
-  window.callback = function(result) 
-  {
-    popupPage.close();
-    console.log("callback", result);
-    document.getElementById('cargando').style.display='none';
-    
-    if (result.numError == 0) 
-    {
-      //alert ("OK")
-    }
-    else
-    {
-      alert (result.numError +  " " + result.msError);
-    }
-
-    return false;
-  }
-    
-  function enrolar()
-  {
-    consulta_sesion();
-  }
-  
-  var conexion;
-      
-  function crearXMLHttpRequest() 
-  {
-    var xmlHttp=null;
-    if (window.ActiveXObject) 
-      xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-    else 
-    if (window.XMLHttpRequest) 
-      xmlHttp = new XMLHttpRequest();
-    return xmlHttp;
-  }
-
-  function consulta_sesion()
-  {
-    conexion=crearXMLHttpRequest();
-  
-    conexion.open('POST', './consulta_sesion.php', false);
-  
-    conexion.send(null);
-    // Devolvemos el resultado
-    respuesta =  conexion.responseText;   
-    arr_resp  = respuesta.split('|');
-    if (arr_resp[0] == 'ok')
-    {
-      general.baseUrl       = arr_resp[1];
-      general.session.companyId   = arr_resp[2];
-      general.username      = arr_resp[4];
-      general.session.id      = arr_resp[6];
-      general.countryCode     = arr_resp[7];
-      general.type        = arr_resp[8];
-      general.apiKey        = arr_resp[9];
-      
-      <php:repeticion id="formulario">
-        var rut           = "<php:item id="usuarioid" />"; 
-        general.rutoperador     = rut.replace ("-","");
-      </php:repeticion>
-      
-      var rut           = document.getElementById('rut').value; 
-      general.rutaenrolar     = rut.replace ("-","");
-    
-      
-      openCheckId("CREATE");
-    }
-    else
-    {
-      alert (respuesta);
-    }
-    
-  }
- 
-</script>
-  

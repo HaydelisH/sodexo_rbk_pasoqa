@@ -49,7 +49,7 @@ class usuariosmant {
 	private $opcionnivel2="";
 	private $opciondetalle="";
 	
-	private $nroopcion=5; //número de opción este debe estar en la tabla opcionessistema
+	private $nroopcion=5; //nï¿½mero de opciï¿½n este debe estar en la tabla opcionessistema
 	private $consulta=0;
 	private $elimina=0;
 	private $crea=0;
@@ -61,10 +61,10 @@ class usuariosmant {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -138,7 +138,7 @@ class usuariosmant {
 		include("includes/opciones_menu.php");
 	
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -149,7 +149,7 @@ class usuariosmant {
 		}
 
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -175,14 +175,14 @@ class usuariosmant {
 	private function agregar()
 	{	
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "AGREGAR":
 
-					$datos = $_REQUEST;
+					$datos = $_POST;
 				
 					//Asignar Rol
 					$datos['rolprivado'] = $datos['rolid']; //Rol del usuario que se esta registrando 
@@ -226,7 +226,7 @@ class usuariosmant {
 		}
 
 		// recuperamos lo que se escribio en el formulario que va llegando si es que hubo
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		switch( GESTOR_FIRMA ){
 			case 'DEC5' : $datos['gestor'] = 1; break;
@@ -250,8 +250,8 @@ class usuariosmant {
 
 		$this->pagina->agregarDato("formulario",$formulario);
 
-		$this->pagina->agregarDato("pagina",$_REQUEST["pagina"]);
-		$this->pagina->agregarDato("nombrex",$_REQUEST["nombrex"]);
+		$this->pagina->agregarDato("pagina",$_POST["pagina"]);
+		$this->pagina->agregarDato("nombrex",$_POST["nombrex"]);
 		
 		// agregamos a la pagina el mensaje de error
 		$this->pagina->agregarDato("mensajeOK",$this->mensajeOK);
@@ -266,13 +266,13 @@ class usuariosmant {
 	{	
 
 		// si es que nos enviaron una accion
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "MODIFICAR":
 				
-					$datos = $_REQUEST; 
+					$datos = $_POST; 
 					
 					$this->empleadosBD->obtener($datos,$dt);
 					$this->mensajeError .= $this->empleadosBD->mensajeError;
@@ -357,7 +357,7 @@ class usuariosmant {
 			}
 		}
 	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$datos["tipousuarioingid"]=$this->seguridad->tipousuarioid;
 	
@@ -395,7 +395,7 @@ class usuariosmant {
 	private function detalle()
 	{	
 	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$datos["tipousuarioingid"]=$this->seguridad->tipousuarioid;
 	
@@ -432,12 +432,12 @@ class usuariosmant {
 
 	private function cambiarclave()
 	{	
-		if (!isset($_REQUEST["accion2"]))
+		if (!isset($_POST["accion2"]))
 		{
 			// creamos un contenedor de la tabla
 			$dt = new DataTable();
 			// obtenemos los datos a modificar
-			$this->empleadosBD->obtener($_REQUEST,$dt);
+			$this->empleadosBD->obtener($_POST,$dt);
 
 			// guardamos los datos en un arreglo
 			$campos=$dt->data;
@@ -447,14 +447,14 @@ class usuariosmant {
 		}
 
 		// si es que nos enviaron una accion
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "MODIFICAR":
 					// si apretaron el boton modificar obtenermos los datos desde el formulario
-					$_REQUEST["clave"] = hash('sha256', trim($_REQUEST["clave"]));
-					if ($this->empleadosBD->CambiarClave($_REQUEST))
+					$_POST["clave"] = hash('sha256', trim($_POST["clave"]));
+					if ($this->empleadosBD->CambiarClave($_POST))
 					{
 						$this->mensajeOK = "Modificaci&oacute;n realizada OK";
 						// si sale todo bien mostramos el listado
@@ -464,7 +464,7 @@ class usuariosmant {
 					// si sale todo mal leemos el error
 					$this->mensajeError=$this->empleadosBD->mensajeError;
 					// y guardamos los datos enviamos en una variable
-					$campos[0]=$_REQUEST;
+					$campos[0]=$_POST;
 					break;
 
 				case "ELIMINAR":
@@ -481,8 +481,8 @@ class usuariosmant {
 		}
 
 		// agregamos pagina actual del listado
-		$this->pagina->agregarDato("pagina",$_REQUEST["pagina"]);
-		$this->pagina->agregarDato("nombrex",$_REQUEST["nombrex"]);
+		$this->pagina->agregarDato("pagina",$_POST["pagina"]);
+		$this->pagina->agregarDato("nombrex",$_POST["nombrex"]);
 		$this->pagina->agregarDato("formulario",$campos);
 		// agregamos los posibles errores a la pagina
 		$this->pagina->agregarDato("mensajeError",$this->mensajeError);
@@ -494,13 +494,13 @@ class usuariosmant {
 	
 	private function eliminar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		// se envia a eliminar a la tabla con los datos del formulario
 		if ($this->empleadosBD->eliminar($datos)){
-			// si elimino entonces mostrar listado sin ningún filtro, o sea mostrar todo
-			$_REQUEST["pagina"]  = 1;
-			$_REQUEST["nombrex"] = "";
+			// si elimino entonces mostrar listado sin ningï¿½n filtro, o sea mostrar todo
+			$_POST["pagina"]  = 1;
+			$_POST["nombrex"] = "";
 		}
 		
 		$error = $this->empleadosBD->mensajeError;
@@ -520,7 +520,7 @@ class usuariosmant {
 	{  
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos=$_REQUEST;
+		$datos=$_POST;
 
 		//Preparamos los datos necesarios para la consulta 
 		if (!isset($datos["pagina"])) $datos["pagina"]="1";
@@ -552,7 +552,7 @@ class usuariosmant {
 
 		if ($datos["pagina_ultimo"]==0)
 		{
-			$this->mensajeOK="No hay información para la consulta realizada.";
+			$this->mensajeOK="No hay informaciï¿½n para la consulta realizada.";
 		}else{
 			$mensajeNoDatos="";
 			$this->pagina->agregarDato("pagina",$datos["pagina"]);

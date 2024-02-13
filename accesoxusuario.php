@@ -54,10 +54,10 @@ class accesoxusuario {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -126,12 +126,12 @@ class accesoxusuario {
 		$this->usuariosmantBD->usarConexion($conecc);
 		
 		
-		//print_r($_REQUEST);
+		//print_r($_POST);
 		//se construye el menu
 		include("includes/opciones_menu.php");
 		
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			//$this->inicio();
@@ -142,9 +142,9 @@ class accesoxusuario {
 			return;
 		}
 	
-		//print_r ($_REQUEST);
+		//print_r ($_POST);
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "BUSCAR":
 				$this->listadoEmpresas();
@@ -170,9 +170,9 @@ class accesoxusuario {
 	
 	private function listadoCcosto() 
 	{	
-		//print_r ($_REQUEST);
+		//print_r ($_POST);
 		// recuperamos lo que se escribio en el formulario que va llegando si es que hubo
-		$datos=$_REQUEST;
+		$datos=$_POST;
 		
 		if (!isset($datos["pagina"])) $datos["pagina"]="1";
 		if ($datos["pagina"]==1) $datos["pagina_anterior"]="1"; else $datos["pagina_anterior"]=$datos["pagina"]-1;
@@ -242,27 +242,27 @@ class accesoxusuario {
 	private function centroscosto()
 	{	
 		// si hubo algun evento
-		if (isset($_REQUEST["accion3"]))
+		if (isset($_POST["accion3"]))
 		{
 			// revisamos
-			switch ($_REQUEST["accion3"])
+			switch ($_POST["accion3"])
 			{
 			   	case "GRABAR":
-					$datos=$_REQUEST;
+					$datos=$_POST;
 					
 					$this->mensajeError = "";
 					$this->accesoxusuarioBD->GrabaEmpresa($datos);
 					$this->mensajeError.=$this->accesoxusuarioBD->mensajeError;
 					
-					for ($l = 0; $l < $_REQUEST["cantidad"]; $l++) {
-						if (isset($_REQUEST["ide_".$l])){
+					for ($l = 0; $l < $_POST["cantidad"]; $l++) {
+						if (isset($_POST["ide_".$l])){
 							
-							if (isset($_REQUEST["sel_".$l])){
-								$datos["centrocostoid"]= $_REQUEST["sel_".$l];
+							if (isset($_POST["sel_".$l])){
+								$datos["centrocostoid"]= $_POST["sel_".$l];
 								$this->accesoxusuarioBD->GrabaCentroCosto($datos);
 								$this->mensajeError.=$this->accesoxusuarioBD->mensajeError;
 							}else{
-								$datos["centrocostoid"]= $_REQUEST["ide_".$l];
+								$datos["centrocostoid"]= $_POST["ide_".$l];
 								$this->accesoxusuarioBD->EliminaCentroCosto($datos);
 								$this->mensajeError.=$this->accesoxusuarioBD->mensajeError;								
 							}
@@ -293,24 +293,24 @@ class accesoxusuario {
 	private function empresas()
 	{	
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			$datos=$_REQUEST;
+			$datos=$_POST;
 			
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "GRABAR":
 					$this->mensajeError = "";
-					for ($l = 0; $l < $_REQUEST["cantidad"]; $l++) {
-						if (isset($_REQUEST["ide_".$l])){
+					for ($l = 0; $l < $_POST["cantidad"]; $l++) {
+						if (isset($_POST["ide_".$l])){
 							
-							if (isset($_REQUEST["sel_".$l])){
-								$datos["empresaid"]= $_REQUEST["sel_".$l];
+							if (isset($_POST["sel_".$l])){
+								$datos["empresaid"]= $_POST["sel_".$l];
 								$this->accesoxusuarioBD->GrabaEmpresa($datos);
 								$this->mensajeError.=$this->accesoxusuarioBD->mensajeError;
 							}else{
-								$datos["empresaid"]= $_REQUEST["ide_".$l];
+								$datos["empresaid"]= $_POST["ide_".$l];
 								$this->accesoxusuarioBD->EliminaEmpresa($datos);
 								$this->mensajeError.=$this->accesoxusuarioBD->mensajeError;		
 							}
@@ -357,7 +357,7 @@ class accesoxusuario {
 		$dt = new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
 
 		$datos["usuarioid"]=$this->seguridad->usuarioid;
 		$datos["tipousuarioingid"]=$this->seguridad->newusuarioid;
@@ -388,7 +388,7 @@ class accesoxusuario {
 		$dt = new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
 		if ($datos["newusuarioid"] == ''){
 			$this->mensajeError = "Debe Seleccionar un Tipo de Usuario";
 			$this->inicio();
@@ -433,26 +433,26 @@ class accesoxusuario {
 	private function lugaresPago()
 	{	
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			$datos=$_REQUEST;
+			$datos=$_POST;
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 			   	case "GRABAR":
 					$this->mensajeError = "";
 					$this->accesoxusuarioBD->GrabaEmpresa($datos);
 					$this->mensajeError.=$this->accesoxusuarioBD->mensajeError;
 					
-					for ($l = 0; $l < $_REQUEST["cantidad"]; $l++) {
-						if (isset($_REQUEST["ide_".$l])){
+					for ($l = 0; $l < $_POST["cantidad"]; $l++) {
+						if (isset($_POST["ide_".$l])){
 							
-							if (isset($_REQUEST["sel_".$l])){
-								$datos["lugarpagoid"]= $_REQUEST["sel_".$l];
+							if (isset($_POST["sel_".$l])){
+								$datos["lugarpagoid"]= $_POST["sel_".$l];
 								$this->accesoxusuarioBD->GrabaLugarPago($datos);
 								$this->mensajeError.=$this->accesoxusuarioBD->mensajeError;
 							}else{
-								$datos["lugarpagoid"]= $_REQUEST["ide_".$l];
+								$datos["lugarpagoid"]= $_POST["ide_".$l];
 								$this->accesoxusuarioBD->EliminaLugarPago($datos);
 								$this->mensajeError.=$this->accesoxusuarioBD->mensajeError;								
 							}
@@ -500,7 +500,7 @@ class accesoxusuario {
 	{	
 
 		// recuperamos lo que se escribio en el formulario que va llegando si es que hubo
-		$datos=$_REQUEST;
+		$datos=$_POST;
 		
 		if (!isset($datos["pagina"])) $datos["pagina"]="1";
 		if ($datos["pagina"]==1) $datos["pagina_anterior"]="1"; else $datos["pagina_anterior"]=$datos["pagina"]-1;
@@ -559,11 +559,11 @@ class accesoxusuario {
 	/*private function departamentos()
 	{	
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			$datos=$_REQUEST;
+			$datos=$_POST;
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "GRABAR":
 					
@@ -571,15 +571,15 @@ class accesoxusuario {
 					$this->accesoxusuarioBD->GrabaEmpresa($datos);
 					$this->mensajeError.=$this->accesoxusuarioBD->mensajeError;
 					
-					for ($l = 0; $l < $_REQUEST["cantidad"]; $l++) {
-						if (isset($_REQUEST["ide_".$l])){
+					for ($l = 0; $l < $_POST["cantidad"]; $l++) {
+						if (isset($_POST["ide_".$l])){
 							
-							if (isset($_REQUEST["sel_".$l])){
-								$datos["departamentoid"]= $_REQUEST["sel_".$l];
+							if (isset($_POST["sel_".$l])){
+								$datos["departamentoid"]= $_POST["sel_".$l];
 								$this->accesoxusuarioBD->GrabaDepartamento($datos);
 								$this->mensajeError.=$this->accesoxusuarioBD->mensajeError;
 							}else{
-								$datos["departamentoid"]= $_REQUEST["ide_".$l];
+								$datos["departamentoid"]= $_POST["ide_".$l];
 								$this->accesoxusuarioBD->EliminaDepartamento($datos);
 								$this->mensajeError.=$this->accesoxusuarioBD->mensajeError;								
 							}
@@ -623,9 +623,9 @@ class accesoxusuario {
 
 	/*private function listadoDepartamentos() 
 	{	
-		//print_r ($_REQUEST);
+		//print_r ($_POST);
 		// recuperamos lo que se escribio en el formulario que va llegando si es que hubo
-		$datos=$_REQUEST;
+		$datos=$_POST;
 		
 		if (!isset($datos["pagina"])) $datos["pagina"]="1";
 		if ($datos["pagina"]==1) $datos["pagina_anterior"]="1"; else $datos["pagina_anterior"]=$datos["pagina"]-1;

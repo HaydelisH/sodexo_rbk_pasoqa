@@ -19,13 +19,13 @@
             <php:repeticion id="formulario">
               <form role="form" name="formulario" id="formulario" action="rl_flujosPorEnte.php" method="POST" autocomplete="off">
                 <!--Campos basicos-->
-                <div class="form-row">
+                <div class="row">
                   <div class="col-md-12">
                     <label style="float:right;"> (*) Campos obligatorios </label>
                   </div>
                 </div>
   
-                <div class="form-row">
+                <div class="row">
                   <div class="col-md-12">
                     <label for="rut">Descripci&oacute;n (*)</label>
                     <input type="text" class="form-control" id="nombrewf" name="nombrewf" value="<php:item id="nombrewf" />" placeholder="Descripci&oacute;n" required>
@@ -33,7 +33,7 @@
                   </div>
                 </div>
               
-                <div class="form-row">
+                <div class="row">
                   <div class="col-md-6 xs-12">
                     <label for="nombre">Seleccion Tipo de Estado (*)</label>
                     <select class= "form-control" name="idestado" id="idestado" >
@@ -65,7 +65,7 @@
                   </div>
                 </div>
   
-                <div class="form-row">
+                <div class="row">
                   <div class="col-md-12">  
                     <label for="nombre">Estados seleccionados</label>
                     <table class="table table-bordered table-hover">
@@ -94,14 +94,15 @@
                   </div>
                 </div>                         
                 
-                <div class="form-row">  
-                  <div class="col-md-2 xs-12">
+                <div class="row d-flex justify-content-start">  
+                  <div class="col-md-2 xs-12 d-grid gap-2 ">      
                     <button class="btn btn-md btn-primary btn-block" type="submit" name="accion2" value="GRABAR" style="margin-top: 10px">Guardar</button>  
                   </div>
                 </div>  
                 
                 <input type="hidden" id="idestadowfmax" name="idestadowfmax" value="<php:item id="idestadowfmax" />" >
-              </form>     
+                <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>     
             </php:repeticion>
           </div>
   
@@ -110,18 +111,3 @@
     </div>
   </div>
   
-  <script>
-      function eliminaEstado(idestadowf)
-      {
-          //alert (idestadowf);
-  
-          document.getElementById("idestadowf").value = idestadowf;
-          
-          if (!confirm("Esta seguro de eliminar?"))
-          {
-              return false;
-          }
-          
-          return true;
-      }
-  </script>	

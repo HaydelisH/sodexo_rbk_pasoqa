@@ -7,7 +7,7 @@
           <div class="form-inline ">
             <!--Nuevo-->
             <div class="form-group">
-              <form name="formulario" id="formulario_usuarios" action="Empresas.php" method="POST" autocomplete="off">
+              <form name="formulario" id="formulario" action="Empresas.php" method="POST" autocomplete="off">
               
               <php:repeticion id="formulario">
                 
@@ -18,11 +18,12 @@
               <input type="hidden" name="pagina"  value="<php:texto id="pagina" />" />    
               <input type="hidden" name="nombrex" value="<php:texto id="nombrex" />" />
 
-             </form>
+               <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
           </div>
           </div> 
         </div>
-        <div class="box-body">
+        <div class="box-body" style="padding: 30px;">
           <!--Mensaje de error-->	
           <div id="mensajeError"><php:texto id="mensajeError" /></div>
           <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
@@ -58,13 +59,15 @@
                       <button class="btn btn-default btn-sm" type="submit" name="accion" value="ELIMINAR" onclick="javascript:return preguntarPorBorrar();">Eliminar</button>
                     </php:repeticion>
 
-                  </form></td>
+                    <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form></td>
                 </tr>
               </php:repeticion>
               </tbody>
             </table>
             <form name="resultado" id="resultado" action="Respuesta_importar.php" method="POST" >  
-            </form>
+              <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
           </div>
           </php:repeticion>
           </div> 
@@ -74,78 +77,4 @@
       <!--.col-->
       </div>
     <!-- /.roe -->
-
-<script>
-   function createXMLHttp()
-    {
-        var xmlHttp = null; 
-        if(window.XMLHttpRequest)
-        {
-            xmlHttp = new XMLHttpRequest();
-        }
-        else if(window.ActiveXObject)
-        {   
-            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        return xmlHttp;
-    }
-  
-  function uploadFile( file )
-  {
-     
-      var xhr =  createXMLHttp();
-      //xhr=new ActiveXObject("Microsoft.XMLHTTP");
-
-      xhr.upload.addEventListener('loadstart',function(e){
-        document.getElementById('mensaje').innerHTML = 
-          'Cargando archivo...';
-      }, false);
-
-      xhr.upload.addEventListener('load',function(e){
-        document.getElementById('mensaje').innerHTML = '';
-      }, false);
-
-      xhr.upload.addEventListener('error',function(e){
-        alert('Ha habido un error :/');
-      }, false);
-      xhr.open('POST','importarExcel.php?IdArchivo=1');
-           
-            xhr.setRequestHeader("Cache-Control", "no-cache");
-            xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-            xhr.setRequestHeader("X-File-Name", file.name);
-
-      xhr.addEventListener('readystatechange', function(e) {
-        if( this.readyState == 4 ) {
-
-         respuesta = xhr.responseText;
-          
-       // document.getElementById("mensajeError").innerHTML = xhr.responseText;
-      
-       if (respuesta == "")//cuando sepa que fue bien sea vacio sea ok realiza el submit
-          {
-      
-           document.getElementById("resultado").submit();
-            //pasando en mensaje al formulario creado con nombre mensaje           
-         }
-         else
-         {
-            var elementoError   = document.getElementById("mensajeError");
-            elementoError.innerHTML = respuesta;
-            elementoError.className += "callout callout-danger";
-          
-         }
-        }
-    
-    document.getElementById("archivo").value = "";
-      });
-         xhr.send(file);
-}
-//revisa si hay algun cambio en el archivo
-upload_input = document.querySelectorAll('#archivo')[0];
-
-upload_input.onchange = function(){
-  //alert('2');
-  uploadFile( this.files[0] );
-};
-</script>
 

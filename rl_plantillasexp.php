@@ -81,10 +81,10 @@ class rl_plantillasexp {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -152,9 +152,9 @@ class rl_plantillasexp {
 	
 		//se construye el menu
 		include("includes/opciones_menu.php");
-//if( $this->seguridad->usuarioid == '26131316-2') print_r($_REQUEST);
+//if( $this->seguridad->usuarioid == '26131316-2') print_r($_POST);
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{	
 			// mostramos el listado
 			$this->listado();
@@ -166,7 +166,7 @@ class rl_plantillasexp {
 
 	
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -212,7 +212,7 @@ class rl_plantillasexp {
 	//Accion de agregar
 	private function agregar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		// si hubo algun evento
 		if (isset($datos["accion2"]))
@@ -250,7 +250,7 @@ class rl_plantillasexp {
 	//Agregar Clausulas a una Plantilla
 	private function agregar_clausula()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//Declaramos e instanciamos una nueva variable
 		$dt = new DataTable();
@@ -290,7 +290,7 @@ class rl_plantillasexp {
 	//Accion de modificar un registro
 	private function modificar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		if (isset($datos["accion2"]))
 		{
@@ -310,7 +310,7 @@ class rl_plantillasexp {
 						//Pasamos el error si hubo
 						$this->mensajeError.=$this->plantillasBD->mensajeError;
 					}
-					$_REQUEST["accion2"]=" ";
+					$_POST["accion2"]=" ";
 					//Me quedo en el modificar
 					$this->modificar();
 					return;
@@ -331,7 +331,7 @@ class rl_plantillasexp {
 						//Pasamos el error si hubo
 						$this->mensajeError.=$this->plantillasBD->mensajeError;
 					}
-					$_REQUEST["accion2"]=" ";
+					$_POST["accion2"]=" ";
 					$this->aprobar();
 					return;
 					break;
@@ -441,7 +441,7 @@ class rl_plantillasexp {
 	//Accion de modificar un registro
 	private function modificarClonar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		if (isset($datos["accion2"]))
 		{
@@ -461,7 +461,7 @@ class rl_plantillasexp {
 						//Pasamos el error si hubo
 						$this->mensajeError.=$this->plantillasBD->mensajeError;
 					}
-					$_REQUEST["accion2"]=" ";
+					$_POST["accion2"]=" ";
 					//Me quedo en el modificar
 					$this->modificarClonar();
 					return;
@@ -548,22 +548,22 @@ class rl_plantillasexp {
 	//Cambiar Orden de Clausulas 
 	private function cambiar_orden()
 	{
-		//$_REQUEST: 
+		//$_POST: 
 		//[table] => Array ( [0] => [1] => 1 [2] => 17 [3] => 2 [4] => 19 
 		//[idPlantilla] => 10 
 		//[accion] => CAMBIAR_ORDEN
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{    
 			//Declaramos las variables necesarias
 			$dt = new DataTable();
-			$array = $_REQUEST["table"];
+			$array = $_POST["table"];
 
 			//Total de valores del array 
-			$total = count($_REQUEST["table"]);
+			$total = count($_POST["table"]);
 			//Recorro el array
 			for ( $i = 1; $i < $total ; $i++ ){
 				//Cargo los datos que corresponden al primer cambio
-				$aux = array ( "idPlantilla" => $_REQUEST["idPlantilla"], "idClausula" => $array[$i], "Orden"=> $i );
+				$aux = array ( "idPlantilla" => $_POST["idPlantilla"], "idClausula" => $array[$i], "Orden"=> $i );
 				//LLamar al sp 
 				$this->plantillasBD->cambiarOrdenClausulas($aux,$dt);
 			}
@@ -572,7 +572,7 @@ class rl_plantillasexp {
 			$this->mensajeError.=$this->plantillasBD->mensajeError;
 			$this->pagina->agregarDato("mensajeError",$this->mensajeError);
 			//Buscamos el idCategoria que vamos a asignar
-			$this->plantillasBD->obtenerEmpresa($_REQUEST,$dt);
+			$this->plantillasBD->obtenerEmpresa($_POST,$dt);
 			$this->mensajeError.=$this->plantillasBD->mensajeError;
 			//Asignar a variable el resultado
 			$this->RutEmpresa = $dt->data[0]["RutEmpresa"];	
@@ -586,7 +586,7 @@ class rl_plantillasexp {
 	//Accion de modificar un registro
 	private function aprobar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		if (isset($datos["accion2"]))
 		{   
@@ -607,7 +607,7 @@ class rl_plantillasexp {
 						//Pasamos el error si hubo
 						$this->mensajeError.=$this->plantillasBD->mensajeError;
 					}
-					$_REQUEST["accion2"]=" ";
+					$_POST["accion2"]=" ";
 					$this->aprobar();
 					return;
 					break;
@@ -705,7 +705,7 @@ class rl_plantillasexp {
 	//Accion de clonar un registro
 	private function clonar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$dt = new DataTable();
 		$dt1 = new DataTable();
@@ -713,7 +713,7 @@ class rl_plantillasexp {
 
 		//Se Clona la plantilla
 		if( $this->plantillasBD->clonar($datos,$dt) ){
-			$_REQUEST['idPlantilla'] = $dt->data[0]['idPlantilla'];
+			$_POST['idPlantilla'] = $dt->data[0]['idPlantilla'];
 			$this->modificarClonar();
 			return;
 		}
@@ -728,7 +728,7 @@ class rl_plantillasexp {
 		//Instanciar el obtejo
 		$dt = new DataTable();
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$this->plantillasBD->eliminar($datos);
 		$this->mensajeError .= $this->plantillasBD->mensajeError;
@@ -742,7 +742,7 @@ class rl_plantillasexp {
 	//Elimnar Clausulas de una Plantilla
 	private function eliminar_clausula()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		// si hubo algun evento
 		if (isset($datos["accion3"]))
@@ -775,8 +775,8 @@ class rl_plantillasexp {
 		//Asignar resultado a una variable 
 		$lista = $dt->data;
 		//Asignar idPlantilla para tenerla disponible al asignar las Clausulas
-	    $this->pagina->agregarDato("idPlantilla",$_REQUEST["idPlantilla"]);
-	    $this->pagina->agregarDato("idCategoria",$_REQUEST["idCategoria"]);
+	    $this->pagina->agregarDato("idPlantilla",$_POST["idPlantilla"]);
+	    $this->pagina->agregarDato("idCategoria",$_POST["idCategoria"]);
 	    	//Asignar la variable al campo en html
 	    $this->pagina->agregarDato("listado_clausulas",$lista);
 		// agregamos los datos de mensaje de error
@@ -789,7 +789,7 @@ class rl_plantillasexp {
 	//Mostrar listado de todas las disponibles
 	private function listado()
 	{  
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 	    // creamos una nueva instancia de la tabla
 		$dt = new DataTable();
@@ -846,7 +846,7 @@ class rl_plantillasexp {
 	//Generar un PDF a partir un HTML
 	private function generar()
 	{
-		$datos= $_REQUEST;
+		$datos= $_POST;
 		$dt = new DataTable();
 
 		$this->plantillasBD->obtener($datos,$dt);
@@ -905,7 +905,7 @@ class rl_plantillasexp {
 		}
 
 		// Obtenemos los datos de las Clausulas relacionados
-		$this->documentosBD->obtenerClausulasPlantillas($_REQUEST,$dt);
+		$this->documentosBD->obtenerClausulasPlantillas($_POST,$dt);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 
         //Agregamos Titulo de la Plantilla
@@ -1025,7 +1025,7 @@ class rl_plantillasexp {
 
 		try { 
 			
-			$datos = $_REQUEST;	
+			$datos = $_POST;	
 	        // instancia clase dompdf
 			$dompdf = new Dompdf();
 			

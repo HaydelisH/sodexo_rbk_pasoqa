@@ -50,7 +50,8 @@
                     <!--input type="hidden" name="idTipoFirma_filtro" 		value="<php:item id="idTipoFirma_filtro" />"/-->
                     <!--input type="hidden" name="idProceso_filtro" 		value="<php:item id="idProceso_filtro"/>"/-->
                     <!--input type="hidden" name="Enviado_filtro" 			value="<php:item id="Enviado_filtro" />"/-->
-                  </form>
+                    <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
             </div>
           <!-- /.box-header -->
           <div class="box-body">
@@ -58,7 +59,7 @@
             <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
             <div id="mensajeError"><php:texto id="mensajeError" /></div>
             <!--Datos referenciales-->
-            <div class="form-row">
+            <div class="row">
               <!--Empresas-->
             
         
@@ -78,7 +79,8 @@
              
               </php:repeticion>  
              
-            </form> 
+              <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form> 
     
           </div>
         <!-- /.box -->

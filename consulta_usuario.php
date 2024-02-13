@@ -40,7 +40,7 @@ class consulta_usuario {
 		$dt = new DataTable();
 		// pedimos el listado
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 			
 		$this->firma->ObtenerEnrolado($datos,$dt);
 		$this->mensajeError.=$this->firma->mensajeError;

@@ -481,8 +481,8 @@ class ContenedorUtilidades
 			$filtro = new InputFilter();
 			$valor = $filtro->process($valor);
 
-			$buscar     = array("'", "%" , "=", "&", "<",">","&lt;","&gt;","&quot;","&amp;","%.","€");
-			$reemplazar = array('�', "%." , ".=", "","","","","","","","% ","&#8364;");
+			$buscar     = array("'", "%" , "=", "&", "<",">","&lt;","&gt;","&quot;","&amp;","%.");
+			$reemplazar = array('�', "%." , ".=", "","","","","","","","% ");
 			$valor =  str_replace($buscar, $reemplazar, $valor);
 		}
 		

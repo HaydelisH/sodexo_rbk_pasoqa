@@ -46,7 +46,7 @@ class linkPostulacion_ajax2 {
 
 		$dt = new DataTable();
 		$array = array ();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['link'] = base64_decode(urldecode($datos['link']));
         $resultado = array();
         if ( $this->postulacionBD->actualizarLink($datos) )

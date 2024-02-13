@@ -78,7 +78,7 @@ class documentos {
 		$this->firmantesBD->usarConexion($conecc);
 
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$this->firmar();
 
@@ -101,7 +101,7 @@ class documentos {
 		
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["idContrato"] = $datos["idDocumento"];
 		$datos['RutFirmante'] = $datos['usuarioid'];
 		$datos["code"] = $datos["doccode"];
@@ -136,7 +136,7 @@ class documentos {
 			}else{
 				$ejemplo = date("d-m-Y H:i:s");
 			}
-			$_REQUEST["FechaFirma"] = $ejemplo; 
+			$_POST["FechaFirma"] = $ejemplo; 
 
 		  	 //Actualizar en la BD
 			$this->actualizaDocumento($datos["DocCode"]);
@@ -150,10 +150,10 @@ class documentos {
 	//Accion de completar los datos del Firmante 
 	private function cargarFirmante(){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["idContrato"] = $datos["idDocumento"];
 
-		//Recibir $datos["idContrato"], $_REQUEST["personaid"], $this->firma = tipo de firma del firmante
+		//Recibir $datos["idContrato"], $_POST["personaid"], $this->firma = tipo de firma del firmante
 
 		//Variables para subida del Documento
 		$dt = new DataTable(); //Numero de Documento
@@ -281,8 +281,8 @@ class documentos {
 	//Accion de completar todos los datos para subir el Documento 
 	private function cargarDocumento(){
 
-		//Recibir $_REQUEST["idContrato"]
-		$datos = $_REQUEST;
+		//Recibir $_POST["idContrato"]
+		$datos = $_POST;
 		$datos["idContrato"] = $datos["idDocumento"];
 
 		//Variables para subida del Documento
@@ -380,8 +380,8 @@ class documentos {
 	//Actualiza firma en BD
 	public function actualizarFirma($FechaFirma,$documento,$RutFirmante){
 
-		//Recibir $_REQUEST["idContrato"]
-		$datos = $_REQUEST;
+		//Recibir $_POST["idContrato"]
+		$datos = $_POST;
 		$datos["idContrato"] = $datos["idDocumento"];
 		if( $FechaFirma == '' ){
 			$FechaFirma = date('d-m-Y H:i:s');
@@ -404,8 +404,8 @@ class documentos {
 	//Actualiza Documento en la BD
 	public function actualizaDocumento($code){
 
-		//Recibir $_REQUEST["idContrato"]
-		$datos = $_REQUEST;
+		//Recibir $_POST["idContrato"]
+		$datos = $_POST;
 		$datos["idContrato"] = $datos["idDocumento"];
 		$datos["DocCode"] = $code;
 
@@ -430,7 +430,7 @@ class documentos {
 	{
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["idContrato"] = $datos["idDocumento"];
 
 		// Buscamos el idCategoria que vamos a asignar
@@ -473,16 +473,16 @@ class documentos {
 		$dt1 = new DataTable(); //Firmantes
 
 		//Obtener Datos del Documento
-		$this->documentosdetBD->totalFirmantes($_REQUEST,$dt);
+		$this->documentosdetBD->totalFirmantes($_POST,$dt);
 		$this->mensajeError.=$this->documentosdetBD->mensajeError;
 		if( $this->mensajeError ) return;
 
 		//Asignamos el RUT del usuario en sesion	
-		$_REQUEST["personaid"] 		= $this->seguridad->usuarioid;
-		$_REQUEST["RutFirmante"]	= $this->seguridad->usuarioid;
+		$_POST["personaid"] 		= $this->seguridad->usuarioid;
+		$_POST["RutFirmante"]	= $this->seguridad->usuarioid;
 		
 		//Buscar Firmantes
-		$this->documentosdetBD->obtenerFirmantes($_REQUEST, $dt1);
+		$this->documentosdetBD->obtenerFirmantes($_POST, $dt1);
 		$this->mensajeError.=$this->documentosdetBD->mensajeError;
 		if( $this->mensajeError ) return;
 

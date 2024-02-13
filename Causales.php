@@ -47,10 +47,10 @@ class causales {
 	function __construct()
 	{
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -110,7 +110,7 @@ class causales {
 		include("includes/opciones_menu.php");
 	
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -121,7 +121,7 @@ class causales {
 		}
 	
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -143,14 +143,14 @@ class causales {
 	//Accion del boton agregar un nuevo registro 
 	private function agregar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["idTipoSubClausula"] = 4;
 	
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "AGREGAR":
 
@@ -193,13 +193,13 @@ class causales {
 	//Accion de modificar un registro 
 	private function modificar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["idTipoSubClausula"] = 4;
 
 		// si es que nos enviaron una accion
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "MODIFICAR":
 					// si apretaron el boton modificar obtenermos los datos desde el formulario
@@ -241,7 +241,7 @@ class causales {
 	//Accion de eliminar un registro
 	private function eliminar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["idTipoSubClausula"] = 4;
 
 		// se envia a eliminar a la tabla con los datos del formulario
@@ -257,7 +257,7 @@ class causales {
 	//Mostrar listado de los registro disponibles
 	private function listado()
 	{  
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["idTipoSubClausula"] = 4;
 		
 		// creamos una nueva instancia de la tabla

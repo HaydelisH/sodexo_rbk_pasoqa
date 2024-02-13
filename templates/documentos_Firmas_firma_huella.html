@@ -1,5 +1,5 @@
 <script type="text/javascript" src="js/libMB/json2.js"></script>     
-<script type="text/javascript" src="js/libMB/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="js/libMB/jquery.min.js"></script>
 <script type="text/javascript" src="js/libMB/blockui.js"></script>	
 <script type="text/javascript" src="js/libMB/jsrasign/ext/jsbn.js"></script>
 <script type="text/javascript" src="js/libMB/jsrasign/ext/jsbn2.js"></script>
@@ -48,19 +48,20 @@
   			<form role="form" name="formulario2" id="formulario2" action="Documentos_Firmas.php" method="POST">
   				<input type="hidden" name="idDocumento" value="<php:item id="idDocumento" />" />
   				<button type="submit" class="btn btn-default"><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
-  			</form>
+  			  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
       <!-- /.box-header -->
       <div class="box-body">
         <!--Mensajes-->
         <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
         <div id="mensajeError"><php:texto id="mensajeError" /></div>
         <!--Datos referenciales-->
-        <div class="form-row">
+        <div class="row">
           <!--Empresas-->
         
     
          <!--Formulario de datos propios de Clausulas-->
-        <form role="form" name="actionForm" id="actionForm" action="Documentos_Firmas.php" method="POST">
+        <form role="form" name="actionForm" id="formulario" action="Documentos_Firmas.php" method="POST">
 
 			<div class="row">  
 					<php:repeticion id="botonfirma">	
@@ -100,7 +101,8 @@
 				
 			  </php:repeticion>  
          </div>
-        </form> 
+          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form> 
 
       </div>
     <!-- /.box -->

@@ -7,14 +7,14 @@
                     <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
                     <table id="example2" class="table table-bordered table-hover">
                         <div class="col-md-2 xs-12">
-                            <button class="btn btn-md btn-default ocultar" type="button" style="margin-top: 10px" data-toggle="collapse" href="#collapseExample" role="button" data-parent="#accordion"><a id="a"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo</a></button>
+                            <button class="btn btn-md btn-default btnFirmantes_e" type="button" style="margin-top: 10px" data-toggle="collapse" href="#collapseExample" role="button" data-parent="#accordion"><a id="a"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo</a></button>
                         </div>
                     </table>
                     <div id="collapseExample"  class="panel-collapse collapse out">
                         <form role="form" name="formulario" id="formulario" action="rl_plantillasexp.php" method="POST" autocomplete="off">
                             <php:repeticion id="formulario">
                             <!--Campos estan fuera del formulario-->								
-                            <div class="form-row">
+                            <div class="row">
                                 <!--Categorias-->
                                 <div class="col-md-6" style="padding-bottom: 15px;">
                                     <label for="Categoria" >Empresa</label>
@@ -39,21 +39,21 @@
                                 </div>
                                 <!--Fin del row-->
                             </div>
-                            <div class="form-row">
+                            <div class="row">
                                 <!--Tipo de Documento-->
                                 <div class="col-md-6" style="padding-bottom: 15px; display:none;">
                                     <label for="TipoDeDocumento" >Tipo de Documento</label>
                                     <!--Select de Empresas disponibles-->
-                                    <select class= "form-control" name="idTipoDoc" id="idTipoDoc" required>
+                                   <select class= "form-control" name="idTipoDoc" id="idTipoDoc" required>
                                         <option value="0">(Seleccione)</option>
                                         <php:repeticion id="TipoDocumentos">
                                         <option value="<php:item id="idTipoDoc" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idTipoDoc" /><php:argumento idvalor="idTipoDoc" /></php:funcion>><php:item id="NombreTipoDoc" /></option>
                                         </php:repeticion>
                                     </select>
                                 </div>
-                            </div>
+                          
                             <!--Workflow-->
-                            <div class="form-row">
+                          
                                 <div class="col-md-6" style="padding-bottom: 15px;">
                                     <label for="Flujo" >Flujo de Firmas</label>
                                     <!--Select de Empresas disponibles-->
@@ -65,9 +65,9 @@
                                     </select>
                                 </div>
                                 <!--Fin del row-->
-                            </div>
+                           
                             <!--Tipo de Gestor-->
-                            <div class="form-row">
+                           
                                 <div class="col-md-6" style="padding-bottom: 15px;">
                                     <label for="TipoGestor" >Tipos Gestor</label>
                                     <!--Select de Empresas disponibles-->
@@ -79,20 +79,21 @@
                                     </select>
                                 </div>
                             </div>
-                            <!--  <div class="form-row">
+                            <!--  <div class="row">
                                 <div class="col-md-6">
                                 <label for="Descripcion">Descripci&oacute;n</label>
                                 <input type="text" class="form-control" id="Descripcion_Pl" name="Descripcion_Pl" value="<php:item id="Descripcion_Pl" />" placeholder="Descripcion" >
                                 </div>
                             </div>-->
-                            <div class="form-row">  
-                                <div class="col-md-2">
+                            <div class="row d-flex justify-content-start">  
+                                <div class="col-md-2 xs-12 d-grid gap-2 ">      
                                     <label for="TipoGestor" ></label>
                                     <input type="hidden" name="accion" value="AGREGAR" />
                                     <button class="btn btn-md btn-primary btn-block" type="submit"  name="accion2" value="AGREGAR" id="AGREGAR" onclick="javascript:return validarFormulario(this);"/>Guardar</button>
                                 </div>
                             </div> 	 
-                        </form> 
+                          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form> 
                     </div>
                     <div id="divtabla" class="tabla-responsiva" >
                         <!--Tabla-->
@@ -127,7 +128,8 @@
                                             <input type="hidden" name="holdingid" value="<php:item id="holdingid" />">
                                             <input type="hidden" name="idPlantilla"  value="<php:item id="idPlantilla" />">  
                                             <button class="btn btn-default btn-sm" type="submit" name="accion" id="ELIMINAR" value="ELIMINAR" onclick="return preguntarPorBorrar();">Eliminar</button>
-                                        </form>
+                                          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
                                     </td>
                                 </tr>
                                 </php:repeticion>

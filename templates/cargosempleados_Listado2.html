@@ -5,9 +5,10 @@
                 <!--Botones de cabecera-->
                 <div class="box-header">
                     <div class="form-group">
-                        <form name="formulario" id="formulario_usuarios" action="mantenedorCargos.php" method="POST" >
+                        <form name="formulario" id="formulario" action="mantenedorCargos.php" method="POST" >
                             <button type="submit" class="btn btn-default" name="accion" value="AGREGAR"><a><i class="fa fa-plus" aria-hidden="true"></i> Nuevo</a></button> 
-                        </form>
+                          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
                     </div>
                 </div> 
             </div>
@@ -41,7 +42,8 @@
                                         <input type="hidden" name="idCargoEmpleado" value="<php:item id="idCargoEmpleado" />">
                                         <button class="btn btn-primary btn-sm" type="submit" name="accion" value="MODIFICAR">Modificar</button>
                                         <button class="btn btn-default btn-sm" type="submit" name="accion" value="ELIMINAR" onclick="javascript:return preguntarPorBorrar();">Eliminar</button>
-                                    </form>
+                                      <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
                                 </td>
                             </tr>
                             </php:repeticion>

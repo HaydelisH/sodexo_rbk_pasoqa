@@ -8,11 +8,12 @@
                     </div>
                     <div class="form-inline ">
                         <div class="form-group">
-                            <form name="formulario" id="formulario_usuarios" action="Respuesta_importar_masivo.php" method="POST" autocomplete="off">
+                            <form name="formulario" id="formulario" action="Respuesta_importar_masivo.php" method="POST" autocomplete="off">
                                 <!--input type="text" name="IdArchivo"  value="<php:texto id="IdArchivo" />" /-->    
                                 <input type="hidden" name="pagina"  value="<php:texto id="pagina" />" />    
                                 <input type="hidden" name="nombrex" value="<php:texto id="nombrex" />" /> 
-                            </form>
+                              <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
                         </div>
                     </div> 
                 </div>
@@ -40,7 +41,8 @@
                                     <!--<td data-campo="Opciones">
                                     <form name="formulario" id="formulario_tipo" action="Respuesta_importar.php" method="POST">
                                         <input type="hidden" name="holdingid" value="<php:item id="holdingid" />">
-                                    </form></td>-->
+                                      <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form></td>-->
                                 </tr>
                                 </php:repeticion>
                             </tbody>
@@ -50,12 +52,14 @@
                             <input type="hidden" name="accion"        value="BUSCAR" />
                             <input type="hidden" name="holdingid"       value="<php:item id="holdingid" />" >
                             <input type="hidden" name="nombrex"       value="<php:item id="nombrex" />" >
-                        </form>
+                          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
                         <div class="col-md-2 pull-right">
                             <form action="Reportes_Excel_resultadopostulacion.php" method="POST" name="formulario" id="formulario" >
                                 <input type="hidden" id="IdArchivo" name="IdArchivo" value="3" />
                                 <button type="submit" name="accion" id="accion" value="DESCARGAR" class="form-control btn btn-md btn-primary"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Descargar</button>
-                            </form>
+                              <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
                         </div>
                     </div>
                     </php:repeticion>

@@ -8,7 +8,7 @@
 				<php:repeticion id="formulario">			
 			  	</div>
 				<div class="form-group">
-				 <form name="formulario" id="formulario_usuarios" action="PlantillasPorEmpresas.php" method="POST" >
+				 <form name="formulario" id="formulario" action="PlantillasPorEmpresas.php" method="POST" >
 					<input type="hidden" name="tipousuarioid" 	id="tipousuarioid" 	value="<php:item id="tipousuarioid" />">		
 					<input type="hidden" name="holdingid" 		id="holdingid"		value="<php:item id="holdingid" />">
 					<input type="hidden" name="cantfilas" 	 	value="<php:item id="cantfilas" />" />		
@@ -20,7 +20,8 @@
 					<button type="submit" class="btn btn-default" name="accion" value="AGREGAR"><a><i class="fa fa-plus" aria-hidden="true"></i>Agregar</a></button>
 
 					
-				</form>
+				  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 			
 				
 				</div>
@@ -34,7 +35,7 @@
 
 	<div id="divtabla" class="tabla-responsiva" >
 		
-		<div class="form-row" >
+		<div class="row" >
 			<div class="col-md-5" style="padding-bottom: 15px; padding-left: 0;">
 			  <input type="hidden" name="tipousuarioid" id="tipousuarioidx" value="<php:item id="tipousuarioid" />" />
 			  <label for="nombre">Empresa</label>
@@ -77,7 +78,8 @@
 					<input type="hidden" id="RutEmpresa_aux_<php:filamenos />" name="RutEmpresa" >
 					<input type="hidden" id="idPlantilla" name="idPlantilla" value="<php:item id="idPlantilla" />">
 					<button class="btn btn-primary btn-sm" type="submit" name="accion" id="eliminar" value="ELIMINAR" data-toggle="tooltip" title="Esta Plantilla se  desvincular&aacute; s&oacute;lo de la Empresa" onclick="javascript:return preguntarPorBorrar() && asignarRutEmpresa(<php:filamenos />);" >Eliminar</button>
-				</form>
+				  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 			</tr></php:repeticion>
 		  </tbody>
 		</table>
@@ -95,42 +97,8 @@
 			<input type="hidden" name="cantfilas" 	 	value="<php:item id="cantfilas" />" />		
 			<input type="hidden" name="pagina"	 	 	value="<php:item id="pagina" />" />	
 			<input type="hidden" id="RutEmpresa_1" name="RutEmpresa" value="<php:item id="RutEmpresa" />">
-		</form>
+		  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 		
 		</php:repeticion>
-
-		<script>
-
-		function TipoUsuarioSel()
-		{
-			document.formulario.tipousuarioid.value = document.form1.tipousuarioid.options[document.form1.tipousuarioid.selectedIndex].value;
-		}
-		
-		
-		function iraPlantillasDisponibles()
-		{
-			
-			var tipousuarioid = document.getElementById('tipousuarioid').value;
-			document.getElementById('tipousuarioidx').value = document.getElementById('tipousuarioid').value;
-			document.getElementById('holdingidx').value 	= document.getElementById('holdingid').value;
-			
-			if (document.getElementById('tipousuarioid').value == '')
-			{	
-				document.getElementById('accion').value = 'BUSCAR';
-			}else{
-				document.getElementById('accionx').value = 'MODIFICAR';
-			}
-			
-			document.formulario3.submit();				
-		}
-
-		function asignarRutEmpresa(i){
-			var rut = document.getElementById("RutEmpresa").value;
-			var id = "RutEmpresa_aux_" + i;
-			document.getElementById(id).value = rut;
-			return true;
-		}
-			</script>
-
-
 

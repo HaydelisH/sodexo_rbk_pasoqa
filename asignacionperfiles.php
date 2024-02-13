@@ -37,10 +37,10 @@ class asignacionperfiles {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -96,7 +96,7 @@ class asignacionperfiles {
 		include("includes/opciones_menu.php");
 
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -108,7 +108,7 @@ class asignacionperfiles {
 	
 		
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "BUSCAR":
 				$this->buscar();
@@ -131,7 +131,7 @@ class asignacionperfiles {
 		$dt = new DataTable();
 		$dt2 = new DataTable();
 		
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		$rut = explode("-",$datos["rut"]);
 		
@@ -189,7 +189,7 @@ class asignacionperfiles {
 		$dt = new DataTable();
 		$dt2 = new DataTable();
 		
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		$rut = explode("-",$datos["rut_agregar"]);
 			
@@ -235,7 +235,7 @@ class asignacionperfiles {
 		$dt = new DataTable();
 		$dt2 = new DataTable();
 		
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		$rut = explode("-",$datos["rut_eliminar"]);
 		

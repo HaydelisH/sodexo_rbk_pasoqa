@@ -1,7 +1,7 @@
 <?php
 //============================================================+
 // File name   : tcpdf_font_data.php
-// Version     : 1.0.001
+
 // Begin       : 2008-01-01
 // Last Update : 2013-04-01
 // Author      : Nicola Asuni - Tecnick.com LTD - www.tecnick.com - info@tecnick.com

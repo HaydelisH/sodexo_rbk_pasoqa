@@ -6,7 +6,8 @@
        <!-- <div class="box-header">
 			<form action="Supervisores.php" method="POST">
 		  		<button class="btn btn-default" name="accion" value="Volver"><a><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</a></button>
-		  	</form>
+		  	  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
         </div>
       <!-- /.box-header -->
       <div class="box-body">
@@ -16,49 +17,49 @@
 		
 		<form role="form" name="formulario" id="formulario" action="cambiodatosdec.php" method="POST" autocomplete=off>
           
-			<div class="form-row">
+			<div class="row">
 				<div class="col-md-6 xs-12">
 					<label>Rut</label>
 					<input type="contenedor" class="form-control" id="RutUsuario"  name="user_rut" placeholder="Rut de Usuario" maxlength="10" value='<php:item id="personaid"/>'>
 				</div>
 			</div>
 		
-			<div class="form-row">
+			<div class="row">
 				<div class="col-md-6 xs-12">
 					<label>Serial de Documento</label>
 					<input type="contenedor" class="form-control" id="serial"  name="serial_number" placeholder="Serial de Documento" maxlength="10"  autofocus >
 				</div>
 			</div>
 
-			<div class="form-row">
+			<div class="row">
 				<div class="col-md-6 xs-12">
 					<label>Nombre</label>
 					<input type="contenedor" class="form-control" id="nombre" name="user_name" placeholder="Nombre Completo" maxlength="50" value='<php:item id="nombre"/>'>
 				</div>
 			</div>
 							
-			<div class="form-row">
+			<div class="row">
 				<div class="col-md-6 xs-12">
 					<label>Apellido Paterno</label>
 					<input type="contenedor" class="form-control" id="appaterno" name="appaterno" placeholder="Apellido Paterno" maxlength="50" value='<php:item id="appaterno"/>'>
 				</div>
 			</div>
 
-			<div class="form-row">
+			<div class="row">
 				<div class="col-md-6 xs-12">
 					<label>Apellido Materno</label>
 					<input type="contenedor" class="form-control" id="apmaterno" name="apmaterno" placeholder="Apellido Materno" maxlength="50" value='<php:item id="apmaterno"/>'>
 				</div>
 			</div>
 			
-			<div class="form-row">
+			<div class="row">
 				<div class="col-md-6 xs-12">
 					<label >Fono</label>
 					<input type="contenedor" class="form-control" id="fono" name="user_phone" placeholder="Fono" maxlength="12" value='<php:item id="fono"/>'>
 				</div>
 			</div>
 			
-			<div class="form-row">
+			<div class="row">
 				<div class="col-md-6 xs-12">
 					<label>Correo Electr&oacute;nico</label>
 					<input type="email" class="form-control" id="correo1" placeholder="Correo electr&oacute;nico" maxlength="50" value='<php:item id="correo"/>'>
@@ -70,7 +71,7 @@
 				</div>
 			</div>
 					
-			<div class="form-row">
+			<div class="row">
 				<div class="col-md-6 xs-12">
 					<label>Pin</label>
 					<input type="password" class="form-control" id="user_pin"  name="user_pin" placeholder="Pin" maxlength="10"  >
@@ -81,13 +82,14 @@
 			<input type="hidden" id="correo" name="user_email" >
 		
 	
-			<div class="form-row">  
+			<div class="row">  
 				<div class="col-md-2 xs-12 pull-right">            
-				   <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 20px" name="accion2" value="MODIFICAR" id="MODIFICAR" onclick="javascript:return validarFormulario(this),new Array(),new Array('apmaterno') && validaRut2(document.formulario.RutUsuario) ;"/>Modificar</button>
+				   <button class="btn btn-md btn-primary btn-block MODIFICAR_CDEC" type="submit" style="margin-top: 20px" name="accion2" value="MODIFICAR" id="MODIFICAR" onclick="javascript:return validarFormulario(this),new Array(),new Array('apmaterno') && validaRut2(document.formulario.RutUsuario) ;"/>Modificar</button>
 				</div>
 			</div>   	
   
-		</form>
+		  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 	   </div>
       </div>
     <!-- /.box -->
@@ -97,74 +99,3 @@
  </div>
 
 
-<script>
-  //Validar los tipo Number 
-  $("#MODIFICAR").click(function(){
-  	//Campos vacios
-    if($("#serial").val().length == 0){
-        $("#mensajeError").addClass("callout callout-warning");
-        $("#mensajeError").html("Campo no debe estar vac&iacute;o");
-        $('#serial').focus();
-        return false;
-    }
-    if($("#nombre").val().length == 0){
-        $("#mensajeError").addClass("callout callout-warning");
-        $("#mensajeError").html("Campo no debe estar vac&iacute;o");
-        $('#nombre').focus();
-        return false;
-    }
-    if($("#appaterno").val().length == 0){
-        $("#mensajeError").addClass("callout callout-warning");
-        $("#mensajeError").html("Campo no debe estar vac&iacute;o");
-        $('#appaterno').focus();
-        return false;
-    }
-   
-    if ($("#correo1").val().length == 0 ){
-        $("#mensajeError").addClass("callout callout-warning");
-        $("#mensajeError").html("Campo no debe estar vac&iacute;o");
-        $('#correo').focus();
-        return false;
-    }
-    if ($("#correo2").val().length == 0 ){
-        $("#mensajeError").addClass("callout callout-warning");
-        $("#mensajeError").html("Campo no debe estar vac&iacute;o");
-        $('#correo').focus();
-        return false;
-    }
-  
-    if ($("#fono").val() == 0 ){
-        $("#mensajeError").addClass("callout callout-warning");
-        $("#mensajeError").html("Campo no debe estar vac&iacute;o");
-        $('#fono').focus();
-        return false;
-    }
-    //Si tiene menos numeros de lo que debe 
-	if (($("#fono").val().length > 1 ) && ($("#fono").val().length < 12)){
-        $("#mensajeError").addClass("callout callout-warning");
-        $("#mensajeError").html("Debe introducir el fono completo");
-        $('#fono').focus();
-        return false;
-    }
-    //Si no tiene el +
-    if ($("#fono").val().charAt(0) != '+'){
-    	$("#mensajeError").addClass("callout callout-warning");
-        $("#mensajeError").html("Debe introducir el fono con codigo de area iniciando con + . Ejemplo: +569 ");
-        $('#fono').focus();
-        return false;
-    }
-    //Si la confirmacion de correo es valida
-    if( $("#correo1").val() === $("#correo2").val() ){
-    	$("#correo").val($("#correo1").val());
-    }
-    else{
-    	$("#mensajeError").addClass("callout callout-warning");
-        $("#mensajeError").html("Verifique correo electr&oacute;nico");
-        $('#correo1').focus();
-        return false;
-    }
-	
-	
-	MostrarCargando();
-});
-</script>

@@ -14,7 +14,7 @@
 						<form role="form" name="formulario" id="formulario" action="excelempl.php" enctype="multipart/form-data" method="POST" autocomplete="off">
 
 							<!--Subir documento-->
-							<div class="form-row">
+							<div class="row">
 							  <div class="col-md-6" id="doc">
 								<label for="Subir" id="doc_label">Seleccione archivo Excel </label>
 								<div class="form-group" id="doc_hijo"> 
@@ -24,7 +24,7 @@
 								  <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
 									<span class="btn btn-primary btn-file">
 									  <i id="ico_upload" class="fa fa-upload" aria-hidden="true"></i>
-									  <input type="file" name="archivo" id="archivo"  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"  />
+									  <input type="file" name="archivo" id="archivo"  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" class="archivo_EListado" />
 									</span>
 								  </div>
 								  <span class="fileinput-filename"></span>
@@ -33,9 +33,9 @@
 							  </div>
 							</div>
 
-							<div class="form-row">
+							<div class="row">
 								<div class="col-md-12">
-									<button class="btn btn-primary btn-sm" type="submit" name="accion" id="IMPORTAR" value="IMPORTAR" onclick="return subirArchivo()" style="margin-top: 10px">IMPORTAR</button>
+									<button class="btn btn-primary btn-sm" type="submit" name="accion" id="IMPORTAR" value="IMPORTAR" onclick="return subirArchivo_EInicio()" style="margin-top: 10px">IMPORTAR</button>
 									<button class="btn btn-primary btn-sm" type="submit" name="accion" id="DETALLE"  value="DETALLE" onclick="MostrarCargando()" style="margin-top: 10px">DETALLE PROCESO</button>
 								</div>
 							</div>
@@ -44,7 +44,7 @@
 							<input type="hidden" name="filasprocesadas" id="filasprocesadas" 	value="<php:texto id="filasprocesadas" />" >
 							<input type="hidden" name="totalfilas"  	id="totalfilas" 		value="<php:texto id="totalfilas" />" >
 	
-							<div class="form-row">
+							<div class="row">
 								<div class="col-md-12">
 									<div id="estado"  style="display:none;">
 										<div>
@@ -55,7 +55,7 @@
 								</div>
 							</div>
 
-							<div class="form-row">
+							<div class="row">
 								<div class="col-md-12">
 									<div id="log"  style="display:none;">
 										<div>
@@ -65,7 +65,8 @@
 								</div>
 							</div>
 
-						</form>
+						  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 					</div>
 				</div> 
 			</div>
@@ -76,181 +77,3 @@
 </div>
 
 </section>
-
-<script>
-
-var archivoxls 		= document.getElementById('archivoxls').value;
-var filasprocesadas = document.getElementById("filasprocesadas").value;
-var totalfilas 		= document.getElementById('totalfilas').value;
-
-var conexion;
-var consulta;
-var aux_filasprocesadas = 0;
-var repetidos;
-var finproceso;
-var log;
-var reactivaciones = 0;
-
-if (archivoxls != "" )
-{	
-	var mensaje = document.getElementById('mensajeError').innerHTML;
-
-	if (mensaje == "")	
-	{	
-		document.getElementById('estado').style.display = "block";
-		document.getElementById("IMPORTAR").disabled = true;
-		
-		document.getElementById("progreso").max = totalfilas;
-		document.getElementById('progreso').value = filasprocesadas;
-		document.getElementById('estadodetalle').innerHTML = "Procesando fila " + filasprocesadas + " de " +  totalfilas;
-	
-		Inicio_Consulta_Estado();
-	}
-} 
-
-function crearXMLHttpRequest() 
-{
-	var xmlHttp=null;
-	if (window.ActiveXObject) 
-		xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-	else 
-	if (window.XMLHttpRequest) 
-		xmlHttp = new XMLHttpRequest();
-	return xmlHttp;
-}		
-
-
-function Inicio_Consulta_Estado()
-{	
-	consulta = setInterval(function(){ Consulta_Estado() }, 3000);
-}
-
-function Consulta_Estado()
-{	
-	conexion=crearXMLHttpRequest();
-	parametros = "?accion=ESTADO&totalfilas=" + totalfilas;
-	conexion.open('POST', 'excelempl.php' + parametros,false);
-	conexion.send(null);
-	respuesta =  conexion.responseText;	
-	//alert ("respuesta" + respuesta);
-	log_script (respuesta);
-	if (respuesta == "FIN" )
-	{
-		//document.getElementById('estado').style.display = "none";
-		document.getElementById("IMPORTAR").disabled = false;
-				
-		document.getElementById('mensajeOK').innerHTML = "Proceso Finalizado"
-		
-		
-		document.getElementById("progreso").max 	= totalfilas;
-		document.getElementById('progreso').value	= totalfilas;
-		document.getElementById('estadodetalle').innerHTML = "Fin Proceso, procesado " + totalfilas + " de " +  totalfilas;
-		clearInterval(consulta);	
-		finproceso = setInterval(function(){ mensaje_fin_proceso() }, 300);
-		return;
-	}
-			
-	if (respuesta.substring(0, 2) == "OK")
-	{
-	
-		document.getElementById('estado').style.display = "block";
-		document.getElementById("IMPORTAR").disabled = true;
-				
-		arr_respuesta = respuesta.split("|")
-		est_filasprocesadas = arr_respuesta[1]
-		est_totalfilas 		= arr_respuesta[2]
-		
-		
-		if(est_filasprocesadas == aux_filasprocesadas)
-		{
-			repetidos++;
-		}
-		else
-		{
-			repetidos = 0
-		}
-		
-		mensaje = " repetidos:" + repetidos + " fp:" + est_filasprocesadas + " tf:" + est_totalfilas;
-		log_script (mensaje);
-				
-		if (repetidos > 13)
-		{
-			if (reactivaciones > 2)
-			{
-				if (est_filasprocesadas != est_totalfilas)
-				{
-					log = document.getElementById('lbllog').innerHTML;
-					document.getElementById('lbllog').innerHTML = log + " mens";
-					
-					clearInterval(consulta);	
-					document.getElementById('estado').style.display = "none";
-					document.getElementById("IMPORTAR").disabled = false;
-
-					alert("Problemas con el proceso, Ejecute Nuevamente")
-				}
-			}	
-			else
-			{
-				reactiva();
-				repetidos = 0;
-			}
-		}
-			
-		document.getElementById("progreso").max = est_totalfilas;
-		document.getElementById('filasprocesadas').value = est_filasprocesadas
-		document.getElementById('progreso').value = est_filasprocesadas
-		document.getElementById('estadodetalle').innerHTML = "Procesando fila " + est_filasprocesadas + " de " +  est_totalfilas
-		aux_filasprocesadas = est_filasprocesadas;
-	}
-	else
-	{
-		clearInterval(consulta);	
-		document.getElementById('estado').style.display = "none";
-		document.getElementById("IMPORTAR").disabled = false;
-		alert("Problemas con el proceso, Ejecute Nuevamente " + respuesta)
-	}
-	
-}
-
-function log_script(mensaje)
-{
-	//document.getElementById('log').style.display = "block";
-	//log = document.getElementById('lbllog').innerHTML;
-	//document.getElementById('lbllog').innerHTML = log + mensaje + "<br>"
-}
-
-function mensaje_fin_proceso ()
-{
-	clearInterval(finproceso);
-	alert ("Proceso finalizado, para ver detalles dar click en boton DETALLE PROCESO");
-	
-}
-
-function reactiva()
-{
-	reactivaciones++;
-	conexion=crearXMLHttpRequest();
-	parametros = "?accion=PROCESO";
-	conexion.open('POST', 'excelempl.php' + parametros);
-	conexion.send(null);
-}
-
-function subirArchivo ()
-{
-	if (document.getElementById('Documento').value == '')
-	{
-		alert ("Debe selecionar archivo");
-		return false;
-	}
-	else
-	{
-		MostrarCargando();
-	}
-}
-
-$("#archivo").change(function()
-{
-	$("#Documento").val($("#archivo").val());
-});
-</script>
-

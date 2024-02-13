@@ -5,32 +5,29 @@
         <div class="box-header">
           <a class="btn btn-default btn_letra_azul" href="Empresas.php"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
         </div>
-      <div class="box-body">
+      <div class="box-body" style="padding: 30px;">
         <div id="mensajeError"><php:texto id="mensajeError" /></div>
         <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
      
         <form role="form" name="formulario" id="formulario" action="Empresas.php" method="POST" autocomplete="off">
           <php:repeticion id="formulario">
             <!--Campos basicos-->
-              <div class="form-row">
+              <div class="row">
                <div class="col-md-6">
                 <label for="RutEmpresa">Rut Empresa</label>
                 <input type="text" class="form-control" id="RutEmpresa" name="RutEmpresa" maxlength="10" value="<php:item id="RutEmpresa" />" placeholder="Rut Empresa" > 
                </div>
-              </div>
-              <div class="form-row">
+             
               <div class="col-md-6 xs-12">
                 <label for="RazonSocial">Razon Social</label>
                 <input type="text" class="form-control" id="RazonSocial" name="RazonSocial" maxlength="50" value="<php:item id="RazonSocial" />" placeholder="Razon Social" >
               </div>
             </div>
-            <div class="form-row">
+            <div class="row">
               <div class="col-md-12 xs-12">
                 <label for="Direccion">Direcci&oacute;n</label>
                 <input type="text" class="form-control" id="Direccion" name="Direccion" maxlength="50" value="<php:item id="Direccion" />" placeholder="Direccion" >
               </div>
-            </div>
-            <div class="form-row">
               <div class="col-md-6 xs-12">
                 <label for="Comuna">Comuna</label>
                 <input type="text" class="form-control" id="Comuna" name="Comuna" maxlength="50" value="<php:item id="Comuna" />" placeholder="Comuna" >
@@ -40,27 +37,29 @@
                 <input type="text" class="form-control" id="Ciudad" name="Ciudad" maxlength="50" value="<php:item id="Ciudad" />" placeholder="Ciudad" >
               </div>
             </div>
-           <!-- <div class="form-row">
+           <!-- <div class="row">
              <div class="col-md-12 xs-12">
                 <label for="Personeria">Personeria</label>
                 <textarea rows="10" cols="80" class="form-control"  name="Personerias"><php:item id="Personerias"/></textarea>
               </div>
             </div>
-           <!-- <div class="form-row">  
+           <!-- <div class="row">  
               <div class="col-md-6 xs-12">
                 <label for="Correo">Correo</label>
                 <input type="email" class="form-control" id="Correo" name="Correo" maxlength="50" value="<php:item id="Correo" />" placeholder="Correo" >
               </div>-->
             </php:repeticion>  
-          <div class="form-row">  
-            <div class="col-md-2 xs-12 pull-right">
+          <div class="row">  
+            <div class="row d-flex justify-content-end p-0">              
+              <div class="col-md-2 d-grid gap-2 p-0" >
               <input type="hidden" id="TipoEmpresa" name="TipoEmpresa" value="<php:texto id="TipoEmpresa" />" />
                <input type="hidden" name="accion" value="AGREGAR" />
-              <button class="btn btn-md btn-primary btn-block " type="submit" style="margin-top: 10px" name="accion2" value="AGREGAR" onclick="javascript:return validarFormulario(this) && validaRut(obtenerElemento('RutEmpresa').value );"/>Guardar</button>
-
+              <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="AGREGAR" onclick="javascript:return validarFormulario(this) && validaRut(obtenerElemento('RutEmpresa').value );"/>Guardar</button>
+                </div>
             </div> <!-- <div class="col-md-2 xs-12">-->
-          </div>    <!--<div class="form-row">  -->  
-        </form>  
+          </div>    <!--<div class="row">  -->  
+          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>  
        </div> <!--<div class="box-body">-->
       </div> <!--<div class="box-body pad table-responsive">-->
     </div> <!--<div class="box"-->

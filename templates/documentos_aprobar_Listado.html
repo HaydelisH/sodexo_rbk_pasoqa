@@ -7,14 +7,14 @@
           <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
           <div id="mensajeError"><php:texto id="mensajeError" /></div>      
 		  <div id="mensajeAd"><php:texto id="mensajeAd" /></div> 		  												   
-        </div>
-        <form name="formulario2" id="formulario_usuarios" action="Documentos_Aprobar.php" method="POST" autocomplete="off">
+       
+        <form name="formulario2" id="formulario" action="Documentos_Aprobar.php" method="POST" autocomplete="off">
           <table id="example2" class="table table-bordered table-hover">
 	          <div class="col-md-2 xs-12">
 		          <button class="btn btn-md btn-default btn-block ocultar" type="button" style="margin-top: 10px" data-toggle="collapse" href="#collapseExample" role="button" data-parent="#accordion"><a id="a">Ocultar Filtro</a></button>
 	          </div>
           </table>
-      		<div class="collapse in" id="collapseExample">
+      		<div ><!--class="collapse in" id="collapseExample">
       		<!--<div class="row">-->
       			<div class="col-md-12">
       				<div class="box">
@@ -23,21 +23,12 @@
       						  <div class="form-group">
 							 <php:repeticion id="formulario">
    
-        						   <div class="form-row">
-        						    <div class="col-md-4 xs-12">
+        						   <div class="row">
+        						      <div class="col-md-4 xs-12">
         							    <label for="idDocumento">Nro Documento</label>
         							    <input type="text" class="form-control" id="idDocumento" name="idDocumento" maxlength="10" value="<php:item id="idDocumento" />" placeholder="Nro Documento" />
         							  </div>
-        						  </div>
-
-									<!--<div class="form-row">
-										<div class="col-md-4 xs-12">
-											<label for="fichaid">C&oacute;digo de Ficha de Contrataci&oacute;n</label>
-											<input type="text" class="form-control" id="fichaid" name="fichaid" value="<php:item id="fichaid" />" placeholder="C&oacute;digo de Ficha de Contrataci&oacute;n" />
-										</div>
-									</div>-->
-
-	    							<div class="form-row">
+        						
 	    							  <div class="col-md-4 xs-12">
 	    							    <label for="NombreTipoDoc">Tipo Documento</label>
 										<select class= "form-control" name="idTipoDoc" id="idTipoDoc" >
@@ -45,13 +36,10 @@
 											<php:repeticion id="tiposdocumentos">						
 												<option value="<php:item id="idTipoDoc" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idTipoDoc" /><php:argumento idvalor="idTipoDoc" /></php:funcion>><php:item id="NombreTipoDoc" /></option>
 											</php:repeticion>
-										</select>										  
+										</select>	
+									   </div>									  
 										  
-	    							  </div>
-	    							</div>
-
-        							<!--Proceso-->
-									<div class="form-row">
+	    							 	<!--Proceso-->									
 										<div class="col-md-4 xs-12">
 											<label for="Nombre">Proceso</label>	
 											<select class="form-control" name="idProceso" id="idProceso" >
@@ -64,7 +52,7 @@
 									</div>
 									
 									<!--Tipo de firma del Documento-->
-									<div class="form-row">
+									<div class="row">
 										<div class="col-md-4 xs-12">
 											<label for="Nombre">Tipo de Firma</label>	
 											<select class="form-control" name="idTipoFirma" id="idTipoFirma" >
@@ -74,29 +62,24 @@
 												</php:repeticion>
 											</select>	
 										</div>
-									</div>
-
-
-        							<!--Empleado-->
-									<div class="form-row">
+								
+        								<!--Empleado-->
 										<div class="col-md-4 xs-12">
 									 		<label for="Rut Empleado">Rut Empleado</label>
 									  		<input type="text" class="form-control" id="RutEmpleado" name="RutEmpleado" maxlength="50" value="<php:item id="RutEmpleado" />" placeholder="Rut del Empleado" />
 										</div>
-									</div>
-
-									<!--Nombre empleado-->
-									<div class="form-row">
+								
+										<!--Nombre empleado-->
 										<div class="col-md-4 xs-12">
 									 		<label for="Nombre Empleado">Nombre Empleado</label>
 									  		<input type="text" class="form-control" id="NombreEmpleado" name="NombreEmpleado" maxlength="50" value="<php:item id="NombreEmpleado" />" placeholder="Nombre del Empleado" />
 										</div>
 									</div>
 
-				      		        <div class="form-row">
-				            			<div class="col-md-2 xs-12 pull-right"  style="margin-top: 30px;">
+				      		        <div class="row  d-flex justify-content-end">
+				            			<div class="col-md-2 xs-12 pull-right d-flex justify-content-end"  style="margin-top: 30px;">
 				            				<input type="hidden" name="accion" value="BUSCAR" />
-				            				<button class="btn btn-md btn-primary btn-block"  name="accion2" type="submit" value="BUSCAR" onclick="MostrarCargando();">Buscar</button>
+				            				<button class="btn btn-md btn-primary btn-block d-flex justify-content-end"  name="accion2" type="submit" value="BUSCAR" onclick="MostrarCargando();">Buscar</button>
 				            			</div>
 				                  	</div>
                     </div> <!-- <div class="form-group">-->
@@ -106,7 +89,8 @@
             </div> <!-- <div class="col-md-12">-->
           <!--</div> <!--<div class="row"> -->
       	</div> <!-- <div class="collapse" id="collapseExample"> -->
-      </form>
+        <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
        
     <!--Tabla-->
     <form id="formulario3" name="formulario3" method="POST" action="Documentos_Aprobar.php">
@@ -153,7 +137,8 @@
 					<td style="text-align: center;" data-campo="Estado Plazo Firmante"><php:item id="semaforodetalle" /></td>
 					<td style="text-align: center;" data-campo="Estado Plazo Flujo"><php:item id="semaforototal" /></td>
 					
-					</form>
+					  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 					<td data-campo="Detalle">
 					  <form name="formulario" id="formulario_tipo_<php:filamenos />" action="Documentos_Aprobar.php" method="POST">
 						   <input type="hidden" name="idDocumento" id="idDocumento_<php:filamenos />" value="<php:item id="idDocumento" />">
@@ -163,7 +148,8 @@
 						   <!--<button class="btn btn-primary btn-sm" name="accion" value="DETALLE" type="submit" >Detalle</button>-->
 							<button class="btn btn-info btn-sm vista" name="accion" id="vista_<php:filamenos />" value="VISTA" type="button" onclick="buscarDoc(<php:filamenos />)" data-toggle="modal" data-target="#modal_vp" >Ver Documento</button>  
 				   			<button class="btn btn-default btn-sm firmantes" name="accion"  id="firmantes_<php:filamenos />" value="FIRMANTES" type="button"  data-toggle="modal" data-target="#modal_firm">Ver Firmantes</button>
-					  </form>
+					    <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 					</td>
 				  </tr>
 				</php:repeticion>
@@ -171,23 +157,23 @@
 	
 				<th colspan=16 class="tabla_abajo">
 					<div class="col-md-12" style="font-weight: normal;">
-	                 	<php:item id="pagina_actual" /> de <php:item id="pagina_ultimo" /> - Total <php:item id="total_registros" /> Registros
+	                 	<php:item id="pagina_actual" /> de <php:item id='pagina_ultimo' /> - Total <php:item id="total_registros" /> Registros
 	              	</div>
 				  <div class="col-xs-offset-5"> 
 					<nav aria-label="nav1">
 					  <ul class="pagination justify-content-center" style="margin-top: 0px; margin-bottom: 0px;">
 						<li class="page-item ">
-						  <a id="pagina_primera" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_primera" />);" ><span><i class="fa fa-angle-double-left"></i></span></a>
+						  <a id="pagina_primera" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id='pagina_primera' />);" ><span><i class="fa fa-angle-double-left"></i></span></a>
 						</li>
 						<li class="page-item ">
-						  <a id="pagina_anterior" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_anterior" />);" ><span ><i class="fa fa-angle-left"></i></span></a>
+						  <a id="pagina_anterior" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id='pagina_anterior' />);" ><span ><i class="fa fa-angle-left"></i></span></a>
 						</li>                  
-						<li class="page-item active"><a class="page-link1" href="#"><php:item id="pagina_actual" /></a></li>                              
+						<li class="page-item active"><a class="page-link" href="#"><php:item id="pagina_actual" /></a></li>                              
 						<li class="page-item">
-						  <a id="pagina_siguente" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_siguente" />);" ><span><i class="fa fa-angle-right"></i></span></a>
+						  <a id="pagina_siguente" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id='pagina_siguente' />);" ><span><i class="fa fa-angle-right"></i></span></a>
 						</li>
 					  <li class="page-item">
-						<a id="pagina_ultimo" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_ultimo" />);" ><span><i class="fa fa-angle-double-right"></i></span></a>
+						<a id="pagina_ultimo" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id='pagina_ultimo' />);" ><span><i class="fa fa-angle-double-right"></i></span></a>
 					  </li>                                                     
 					  </ul>
 					</nav>
@@ -208,11 +194,12 @@
 				  	<!--Documentos a firmar-->
 				  	<input type="hidden" name="docs" id="docs" value="<php:item id='docs' />"/>
 				  	<input type="hidden" name="pag" id="pag"  value="<php:item id='pag' />"/>
-				</form>
+				  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 	
 			</table>
 				<input type="hidden" name="select" id="select"/>
-			    <div class="form-row">
+			    <div class="row">
 	    			<div class="col-md-2 xs-12 pull-right">
 	    				<input type="hidden" name="docs" id="docs_form" />
 	    				<input type="hidden" name="accion" value="BUSCAR"/>
@@ -226,7 +213,7 @@
 	    			</div>
 	          	</div>
 
-	          	<div class="form-row">
+	          	<div class="row">
 	          		<div class="col-md-2 xs-12 pull-left">
 	          			<php:repeticion id="modifica">
 	          			 	<button class="btn btn-md btn-primary btn-block pull-left"  name="accion" id="SELECCION_MULTIPLE_R" type="button" data-toggle="modal" data-target="#modal_pendientes_r" >Rechazar</button>
@@ -234,7 +221,8 @@
 	          		</div>
 	          	</div>
 		   </div>
-		</form>
+		  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
        </php:repeticion>
 
       
@@ -246,7 +234,7 @@
 		      <div class="modal-header" align="center">
 		        <h4 class="modal-title" id="ejemplo-titulo"> Vista Previa de Documento <h3 id="num"></h3></h4>
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
+		          <span aria-hidden="true" class="cerrar_modal">&times;</span>
 		        </button>
 		      </div>
 		      <div class="modal-body">
@@ -257,7 +245,7 @@
 			  </div>
 			  <div class="modal-footer" style="margin-top:10px;">
 				<input type="hidden" name="idDocumento" value='<php:item id="idDocumento"/>' >
-		        <button type="button" class="btn btn-secondary btn-md" id="cerrar" data-dismiss="modal">Cerrar</button>
+		        <button type="button" class="btn btn-secondary btn-md cerrar_modal" id="cerrar" data-dismiss="modal">Cerrar</button>
 		      </div>
 		    </div>
 		  </div>
@@ -270,7 +258,7 @@
 		      <div class="modal-header" align="center">
 		        <h4 class="modal-title" id="ejemplo-titulo"> Firmantes <h3 id="num_f"></h3></h4>
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
+		          <span aria-hidden="true" class="cerrar_modal">&times;</span>
 		        </button>
 		      </div>
 		      <div class="modal-body">
@@ -291,7 +279,7 @@
 			  </div>
 			  <div class="modal-footer" style="margin-top:10px;">
 			      	<input type="hidden" name="idDocumento" value='<php:item id="idDocumento"/>' >
-		        	<button type="button" class="btn btn-secondary btn-md" id="cerrar" data-dismiss="modal">Cerrar</button>
+		        	<button type="button" class="btn btn-secondary btn-md cerrar_modal" id="cerrar" data-dismiss="modal">Cerrar</button>
 		       </div>
 		    </div>
 		  </div>
@@ -304,7 +292,7 @@
 		      <div class="modal-header" align="center">
 		        <h4 class="modal-title" id="ejemplo-titulo"> Documentos Pendientes para Aprobar</h4>
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
+		          <span aria-hidden="true" class="cerrar_modal">&times;</span>
 		        </button>
 		      </div>
 		      <div class="modal-body " style=" max-height:400px; overflow-y: auto;">
@@ -324,7 +312,7 @@
 				</div>
 			  </div>
 			  <div class="modal-footer" style="margin-top:10px;">
-			      <button type="button" class="btn btn-success btn-md" id="aprobar" data-dismiss="modal">Aprobar</button>
+			      <button type="button" class="btn btn-success btn-md aprobar_aprobar_" id="aprobar" data-dismiss="modal">Aprobar</button>
 				  <button type="button" class="btn btn-default btn-md" id="cerrar_aprobar">Cerrar</button>
 			     
 		       </div>
@@ -339,7 +327,7 @@
 		      <div class="modal-header" align="center">
 		        <h4 class="modal-title" id="ejemplo-titulo"> Documentos Pendientes por Rechazar</h4>
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
+		          <span aria-hidden="true" class="cerrar_modal">&times;</span>
 		        </button>
 		      </div>
 		      <div class="modal-body " style=" max-height:400px; overflow-y: auto;">
@@ -358,7 +346,7 @@
 					</table>
 				</div>
 
-				<div class="form-row">
+				<div class="row">
 					<div class="col-md-12">
 						<label for="">Observacion </label>
 						<input type="text" class="form-control" name="observacion" id="observacion" placeholder="" />
@@ -366,7 +354,7 @@
 				</div>
 			  </div>
 			  <div class="modal-footer" style="margin-top:10px;">
-			      <button type="button" class="btn btn-primary btn-md pull-left" id="rechazar" data-dismiss="modal">Rechazar</button>
+			      <button type="button" class="btn btn-primary btn-md pull-left rechazar_" id="rechazar" data-dismiss="modal">Rechazar</button>
 				  <button type="button" class="btn btn-default btn-md" id="cerrar_rechazar">Cerrar</button>
 			     
 		       </div>
@@ -380,767 +368,5 @@
 </div> 
 </section>
 
-<script>
 
-	var array = [];
-	var docs;
-	var proceso;
 
-	//Actualizar la seleccion
-	$(document).ready(function(){
-
-		if( $("#cantidad").val() == 1 ){
-			$("#Seleccion").prop('checked', true);
-			$("#select").val(1);
-		}
-
-		//documentos de otras paginas
-		var docs = $("#docs").val();
-		if ( docs != '' ){
-			var docs_res = docs.split(",");
-
-			//Recorro el array que traje de php
-			jQuery.each( docs_res, function( key, value ) {
-				if( value != '' ){
-			  		array.push(value);
-			  	}
-			  //Recorro todos los checkbox del listado 
-			  $('.checkbox').each( function(){
-			  	 if ( value == $(this).val() ){
-			  	 	$(this).prop('checked', true);
-			  	 }
-			  });
-			});
-		}
-
-		if( $("#docs").val() != '' ){
-
-		}else{
-			$("#SELECCION_MULTIPLE").attr("disabled",true);
-			$("#SELECCION_MULTIPLE_R").attr("disabled",true);
-		}
-		if( $("#mensajeAd").html().length > 0 ) $("#mensajeAd").addClass("callout callout-warning");
-		else $("#mensajeAd").removeClass("callout callout-warning");
-
-	});
-
-	//Seleccionar todo
-	$("#Seleccion").change(function(){
-
-		var status = this.checked; 
-		var array_aux = [];
-
-		if ( $("#Seleccion").is(':checked')){
-
-			//Limpian todos los campos 
-			array = [];
-			$("#docs").val('');
-			$("#cantidad").val(1);
-			$("#select").val(1);
-			MostrarCargando();		 
-
-			//Vamos al ajax a buscar todos los documentos pendientes 
-			proceso = setInterval(function(){ buscarTodosDocumentosPorFirma() }, 100);
-
-		}else{
-			//Limpian todos los campos 
-			array = [];
-			$("#docs").val('');
-			$("#cantidad").val(0);
-			$("#select").val(0);
-			$(".checkbox").prop('checked',false);
-		}
-				
-	});
-
-	$('.checkbox').change(function(){
-		//Agregar 
-		if ( $(this).is(':checked') ){
-			array.push($(this).val());
-
-			$("#SELECCION_MULTIPLE").attr("disabled",false);
-			$("#SELECCION_MULTIPLE_R").attr("disabled",false);
-		}
-		//Eliminar
-		else{
-			var k = $(this).val();
-			jQuery.each( array, function( key, value ) {
-			  if( k == value ){
-			  	array.splice(key, 1); 
-			  }
-			});
-
-			if (array.length == 0 )
-			{
-				$("#SELECCION_MULTIPLE").attr("disabled",true);
-				$("#SELECCION_MULTIPLE_R").attr("disabled",true);
-			}
-		}
-		//Pasar al formulario
-		$("#docs").val(array);
-	});
-	
-	var id_doc = 0;
-	
-	//Vista previa del documento 
-	$(".vista").click(function(){ 
-		
-		var id = this.id;
-		var res = id.split('_'); 
-		var i = res[1];
-		var idDocumento = $("#idDocumento_" + i).val();
-		id_doc = idDocumento;
-		var url = "Documentos_aprobar4_ajax.php?idDocumento=" + idDocumento; //Descargar Documento
-
-		 // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-		if( window.XMLHttpRequest )
-		   ajax = new XMLHttpRequest(); // No Internet Explorer
-		else
-		   ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-		
-		   // Almacenamos en el control al funcion que se invocara cuando la peticion
-		ajax.onreadystatechange = funcionCallback_descargarDoc;
-
-		// Enviamos la peticion
-		ajax.open( "GET", url, false);
-		ajax.send( "" );
-	});
-	
-	//Callback de Vista previa
-	function funcionCallback_descargarDoc(){
-	  // Comprobamos si la peticion se ha completado (estado 4)
-	  if( ajax.readyState == 4 )
-	  {
-	    // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-	    if( ajax.status == 200 )
-	    {
-	      // Escribimos el resultado en la pagina HTML mediante DHTML
-	      //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
-	      salida = ajax.responseText;
-
-	      if(salida){
-	      	
-			var ruta = salida;
-			$("#viewer").attr("src",ruta);
-			$("#num").html('Documento : ' + id_doc);
-			
-	      }else{
-			
-	      	return false;
-	      }
-	    }
-	  }
-	}
-
-	var ajax;
-	var salida;
-	var fila = 0;
-	var iddoc = 0;
-	
-	//Vista previa de firmantes 
-	$(".firmantes").click(function(){
-		
-		var id = this.id;
-		var res = id.split('_'); 
-		var i = res[1];
-
-		var idDocumento = $("#idDocumento_" + i).val();
-		iddoc = idDocumento;
-		var url = "Documentos_firmaMasiva_ajax.php?idDocumento=" + idDocumento;
-
-		// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-		if( window.XMLHttpRequest )
-		ajax = new XMLHttpRequest(); // No Internet Explorer
-		else
-		ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-
-		// Almacenamos en el control al funcion que se invocara cuando la peticion
-		// cambie de estado 
-		ajax.onreadystatechange = funcionCallback;
-
-		// Enviamos la peticion
-		ajax.open( "GET", url, true );
-		ajax.send( "" );
-	});
-
-	//Callback de Vista previa
-	function funcionCallback(){
-	  // Comprobamos si la peticion se ha completado (estado 4)
-	  if( ajax.readyState == 4 )
-	  {
-	    // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-	    if( ajax.status == 200 )
-	    {
-	      // Escribimos el resultado en la pagina HTML mediante DHTML
-	      //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
-	      salida = ajax.responseText;
-
-	      if(salida){
-	      	verFirmantes(salida);
-	      }else{
-			
-	      	return false;
-	      }
-	    }
-	  }
-	}
-
-	//Construir tabla de firmantes
-	function verFirmantes(salida){
-
-		  respuesta = salida.split("|");
-	      count = 0;
-	      count = respuesta.length;
-	      j = 0; 
-	      n = 0;
-	      rep = Math.trunc(count/5);
-
-	      //Eliminar filas ateriores
-	      $(".fila").remove();
-
-	      while ( j < rep ){
-
-		      nombre='';
-		      rut='';
-		      fecha='';
-
-		      if( j != 0 ){
-		      	  m = 4;
-			      for (var i = n; i < m+n ; i++) {
-			      	if( i == (n  ) ) rut    = respuesta[i];
-			      	if( i == (1+n) ) nombre = respuesta[i];
-			      	if( i == (3+n) ) fecha  = respuesta[i];
-			      }
-			  }else{
-			  	  for (var i = 0; i < 5 ; i++) {
-			      	if( i == (n  ) ) rut    = respuesta[i];
-			      	if( i == (1+n) ) nombre = respuesta[i];
-			      	if( i == (3+n) ) fecha  = respuesta[i];
-			      }
-			  }
-
-		      $('#tabla_firm tr:last').after('<tr class="fila"><td>' + rut + '</td><td>' + nombre + '</td><td>' + fecha + '	</td></tr>');
-
-		      if( j == 0) n = 5;
-		      if( j == 1) n = 10;
-		      if( j == 2) n = 15;
-		      if( j == 3) n = 20; 
-		      
-		      j++;
-	      }
-
-	      $("#num_f").html('Documento : ' + iddoc);
-	}
-
-	//Seleccionar todo
-	function buscarTodosDocumentosPorFirma(){
-
- 		clearInterval(proceso);// poner esto cuando llega respuesta
-
-		var usuarioid = $("#usuarioid").val();
-		var ptipousuarioid = $("#ptipousuarioid").val();
-		var idDocumento = $("#idDocumento").val();
-		var idTipoDoc = $("#idTipoDoc").val();
-		var fichaid = $("#idProceso").val();
-		var RutEmpleado = $("#RutEmpleado").val();
-		var NombreEmpleado = $("#NombreEmpleado").val();
-		var fichaid = $("#fichaid").val();
-		var idProceso = $("#idProceso").val();
-		var idTipoFirma = $("#idTipoFirma").val();
-		var formulario = "usuarioid=" + usuarioid + "&ptipousuarioid=" + ptipousuarioid + '&idDocumento=' + idDocumento + '&idTipoDoc=' + idTipoDoc + '&idProceso=' + idProceso + '&fichaid=' + fichaid + '&idProceso=' + idProceso + "&idTipoFirma=" + idTipoFirma + "&RutEmpleado=" + RutEmpleado + "&NombreEmpleado=" + NombreEmpleado;
-		var url = "Documentos_aprobar5_ajax.php";
-		
-			//console.log(url);
-		// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-		if( window.XMLHttpRequest )
-			ajax = new XMLHttpRequest(); // No Internet Explorer
-		else
-			ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-
-		// Almacenamos en el control al funcion que se invocara cuando la peticion
-		// cambie de estado 
-		ajax.onreadystatechange = funcionCallback_buscarTodos;
-		
-		// Enviamos la peticion
-		ajax.open( "POST", url, true);
-		ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');		
-		ajax.send(formulario);
-	}
-
-	//Callback de Vista previa
-	function funcionCallback_buscarTodos(){
-
-	  // Comprobamos si la peticion se ha completado (estado 4)
-	  if( ajax.readyState == 4 )
-	  {
-	    // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-	    if( ajax.status == 200 )
-	    {
-	      // Escribimos el resultado en la pagina HTML mediante DHTML
-	      salida = ajax.responseText;
-	      if(salida){
-	      	docs = JSON.parse(salida); 
-	      
-	      	$.each(docs, function( index, value ) {
-			  array.push(value);
-			});
-
-	      	$("#docs").val(array);
-
-	      	$(".checkbox").prop('checked','true');
-
-	      	if( array.length > 0 ){
-				$("#SELECCION_MULTIPLE").attr("disabled",false);
-				$("#SELECCION_MULTIPLE_R").attr("disabled",false);
-	      	}
-
-	      }else{
-			
-	      	return false;
-	      }
-		  OcultarCargando();		  
-	    }
-	  }
-	}
-
-	//Pasar los datos de los documentos a firmar al formulario 
-	$("#SELECCION_MULTIPLE").click(function(){
-	
-		var documentos = $("#docs").val();
-		var resultado = documentos.split(',');
-		var j = resultado.length;
-		
-		if( documentos != '' ){
-			//Limpiamos la tabla del modal 
-		$(".fila_pendiente").remove();
-			MostrarCargando();
-			buscarDocumentos(documentos);
-		}else{
-			$("#SELECCION_MULTIPLE").attr("disabled",true);
-		}
-
-	}); 
-
-	function buscarDocumentos(documentos){
-
-		var url = "Documentos_aprobar1_ajax.php";
-		var parametros = "docs=" + documentos;
-
-		// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-		if( window.XMLHttpRequest )
-			ajax = new XMLHttpRequest(); // No Internet Explorer
-		else
-			ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-
-		// Almacenamos en el control al funcion que se invocara cuando la peticion
-		// cambie de estado 
-		ajax.onreadystatechange = funcionCallback_buscar;
-
-		// Enviamos la peticion
-		ajax.open( "POST", url, true );
-		ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		ajax.send(parametros);
-	}
-
-	//Callback de Vista previa
-	function funcionCallback_buscar(){
-
-	  // Comprobamos si la peticion se ha completado (estado 4)
-	  if( ajax.readyState == 4 )
-	  {
-	    // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-	    if( ajax.status == 200 )
-	    {
-	      // Escribimos el resultado en la pagina HTML mediante DHTML
-	      //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
-	      salida = ajax.responseText;
-	     
-	      if(salida){
-	      	docs = JSON.parse(salida); 
-		
-		 	$.each(docs, function( index, value ) {
-		 		$('#tabla_pendientes tr:last').after('<tr class="fila_pendiente" id="fila_' + docs[index].idDocumento + '"><td style="text-align: center;">' + docs[index].idDocumento + '</td><td style="text-align: center;">' + docs[index].NombreTipoDoc + '</td><td style="text-align: center;"><button style="background-color: transparent;" class="btn btn-md" type="button" id="icon_btn_' + docs[index].idDocumento + '"  onclick="eliminarDeLista(' + docs[index].idDocumento + ');"><i id="icon_' + docs[index].idDocumento + '"  class="fa fa-minus" aria-hidden="true"  title="Quitar de esta lista"></i></button></td></tr>');
-		 	});
-		 	 $("#aprobar").attr("disabled",false);
-
-	      }else{
-					 
-	      	return false;
-	      }
-		  
-		  OcultarCargando();
-	    }
-	   }
-  }
-
-  //Eliminar de la lista 
-  function eliminarDeLista(i){
-
-  	var fila = "#fila_" + i; 
-  	var cant = $('#tabla_pendientes tr').length - 1;
-  	
-	if( cant == 1 )
-  		$('#modal_pendientes').modal('hide');
-  	else
-  		$(fila).remove();
-  	
-  }
-
-  var fila = 0;
-  var documento = 0;
-  var indices;
-  var proceso;
-  var i = 0;
-
-  //Aprobar los documentos que esten en la lista 
- $("#aprobar").click(function(){
- 	
- 	if( $("#docs").val() != '' ){
-
- 		//Cantidad de filas 
-	    cant = $('#tabla_pendientes tr').length - 1;
-	    docs = $("#docs").val();
-	    indices = docs.split(","); 
-    	documento = indices[i];
-
-	    //Validar si desean firmar todo
-	    //var respuesta = confirm('Esta seguro(a) que desea aprobar estos documentos?');
-
-	   // if( respuesta ){
-	       MostrarCargando();
-	       proceso = setInterval(function(){ aprobar(documento,i) }, 1000);
-	       $("#aprobar").attr("disabled",true);
-	    //}
- 	}	
- });
-
-  //Firmar un documento
-  function aprobar(idDocumento,i){
-
-    clearInterval(proceso);// poner esto cuando llega respuesta
-
-    var url = "Documentos_aprobar2_ajax.php?idDocumento=" + idDocumento;
-
-    fila = i;
-
-     // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-    if( window.XMLHttpRequest )
-       ajax = new XMLHttpRequest(); // No Internet Explorer
-    else
-       ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-    
-       // Almacenamos en el control al funcion que se invocara cuando la peticion
-    ajax.onreadystatechange = funcionCallback_aprobar;
-
-    // Enviamos la peticion
-    ajax.open( "GET", url, false);
-    ajax.send( "" );
-  }
-
-  //Callback de Vista previa
-	function funcionCallback_aprobar(){
-
-	  // Comprobamos si la peticion se ha completado (estado 4)
-	  if( ajax.readyState == 4 )
-	  {
-	    // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-	    if( ajax.status == 200 )
-	    {
-	      // Escribimos el resultado en la pagina HTML mediante DHTML
-	      //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
-	      salida = ajax.responseText;
-	     
-		      if(salida){
-		      	mostrarEstadoAprobacion(salida,fila);
-		      }else{
-				
-		      	return false;
-		      }
-	    }
-	   }
-	}
-
-  //Mostrar estado de Firma en el modal
-  function mostrarEstadoAprobacion(salida, fila){
-
-    //Incrementar la fila de la tabla a recorrer
-    documento = indices[i];
-    i++;
-
-    //Actualizamos iconos segun la respuesta 
-
-   	//Si es otro error 
-    if( salida == 0 ){
-
-      $("#icon_" + documento).removeClass();
-      $("#icon_" + documento).addClass('fa fa-exclamation-triangle text-warning');
-      $("#icon_" + documento).prop('title','Intente nuevamente'); 
-      $("#icon_btn_" + documento).removeAttr('onclick');
-      
-       OcultarCargando();
-
-    }else {
-      $("#icon_" + documento).removeClass();
-      $("#icon_" + documento).addClass('fa fa-check-circle text-success');
-      $("#icon_" + documento).prop('title','Aprobado');
-      $("#icon_btn_" + documento).removeAttr('onclick');
-
-      //Si termino de recorrer las filas 
-      if( !(i < cant) ){
-            //Ocultar el gif de cargando
-            OcultarCargando();
-      }
-    }
-
-    //Si quedan filas que recorrer 
-    if( i < cant ){
-        //Pasar al siguiente 
-        documento = indices[i];
-        proceso = setInterval(function(){ aprobar(documento,i) }, 1000);
-    }
-
-    $("#modal_pendientes").modal("show");
-  }
-
- //Cerrar el modal 
- $("#cerrar_aprobar").click(function(){
-
-	//Limpian todos los campos 
-	array = [];
-	$("#docs").val('');
-	$("#cantidad").val(0);
-	$("#select").val(0);
-	$(".checkbox").prop('checked',false);
-
-	$("#modal_pendientes").modal('hide');
-	$("#formulario3").submit();
- });
-
- //////////////////
- /// RECHAZAR   ///
- //////////////////
-
- //Pasar los datos de los documentos a firmar al formulario 
-	$("#SELECCION_MULTIPLE_R").click(function(){
-	
-		var documentos = $("#docs").val();
-		var resultado = documentos.split(',');
-		var j = resultado.length;
-		
-		if( documentos != '' ){
-			MostrarCargando();
-			//Limpiamos la tabla del modal 
-			$(".fila_pendiente_r").remove();
-			buscarDocumentos_r(documentos);
-		}else{
-			$("#SELECCION_MULTIPLE_R").attr("disabled",true);
-		}
-
-	}); 
-
-	function buscarDocumentos_r(documentos){
-
-		var url = "Documentos_aprobar1_ajax.php";
-		var parametros = "docs=" + documentos;
-
-		// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-		if( window.XMLHttpRequest )
-			ajax = new XMLHttpRequest(); // No Internet Explorer
-		else
-			ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-
-		// Almacenamos en el control al funcion que se invocara cuando la peticion
-		// cambie de estado 
-		ajax.onreadystatechange = funcionCallback_buscar_r;
-
-		// Enviamos la peticion
-		ajax.open( "POST", url, true );
-		ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		ajax.send(parametros);
-	}
-
-	//Callback de Vista previa
-	function funcionCallback_buscar_r(){
-
-	  // Comprobamos si la peticion se ha completado (estado 4)
-	  if( ajax.readyState == 4 )
-	  {
-	    // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-	    if( ajax.status == 200 )
-	    {
-	      // Escribimos el resultado en la pagina HTML mediante DHTML
-	      //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
-	      salida = ajax.responseText;
-	     
-	      if(salida){
-	      	docs = JSON.parse(salida); 
-		
-		 	$.each(docs, function( index, value ) {
-		 		$('#tabla_pendientes_r tr:last').after('<tr class="fila_pendiente_r" id="fila_r_' + docs[index].idDocumento + '"><td style="text-align: center;">' + docs[index].idDocumento + '</td><td style="text-align: center;">' + docs[index].NombreTipoDoc + '</td><td style="text-align: center;"><button style="background-color: transparent;" id="icon_btn_' + docs[index].idDocumento + '" class="btn btn-md" type="button" onclick="eliminarDeLista_r(' + docs[index].idDocumento + ');"><i id="icon_r_' + docs[index].idDocumento + '"  class="fa fa-minus" aria-hidden="true"  title="Quitar de esta lista"></i></button></td></tr>');
-		 	});
-		 	 $("#rechazar").attr("disabled",false);
-
-	      }else{
-						  
-	      	return false;
-	      }
-		  
-		  OcultarCargando();
-	    }
-	}
-  }
-
-
-  //Eliminar de la lista 
-  function eliminarDeLista_r(i){
-
-  	var fila = "#fila_r_" + i; 
-  	var cant = $('#tabla_pendientes_r tr').length - 1;
-  	
-	if( cant == 1 )
-  		$('#modal_pendientes_r').modal('hide');
-  	else
-  		$(fila).remove();
-  	
-  }
-
-  var fila = 0;
-  var documento = 0;
-  var indices;
-  var proceso;
-  var i = 0;
-
-  //Aprobar los documentos que esten en la lista 
- $("#rechazar").click(function(){
- 	
- 	if( $("#docs").val() != '' ){
-
- 		//Cantidad de filas 
-	    cant = $('#tabla_pendientes_r tr').length - 1;
-	    docs = $("#docs").val();
-	    indices = docs.split(","); 
-    	documento = indices[i];
-
-	    //Validar si desean firmar todo
-	    var respuesta = confirm('Esta seguro(a) que desea rechazar estos documentos?');
-
-	    if( respuesta ){
-	       MostrarCargando();
-	       proceso = setInterval(function(){ rechazar(documento,i) }, 1000);
-	       $("#rechazar").attr("disabled",true);
-	    }
- 	}	
- });
-
-  //Firmar un documento
-  function rechazar(idDocumento,i){
-
-    clearInterval(proceso);// poner esto cuando llega respuesta
-    var obs = $("#observacion").val();
-    var url = "Documentos_aprobar3_ajax.php?idDocumento=" + idDocumento + "&observacion=" + obs; //Rechazar
-
-    fila = i;
-
-     // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-    if( window.XMLHttpRequest )
-       ajax = new XMLHttpRequest(); // No Internet Explorer
-    else
-       ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-    
-       // Almacenamos en el control al funcion que se invocara cuando la peticion
-    ajax.onreadystatechange = funcionCallback_rechazar;
-
-    // Enviamos la peticion
-    ajax.open( "GET", url, false);
-    ajax.send( "" );
-  }
-
-  //Callback de Vista previa
-	function funcionCallback_rechazar(){
-
-	  // Comprobamos si la peticion se ha completado (estado 4)
-	  if( ajax.readyState == 4 )
-	  {
-	    // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-	    if( ajax.status == 200 )
-	    {
-	      // Escribimos el resultado en la pagina HTML mediante DHTML
-	      //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
-	      salida = ajax.responseText;
-	     
-		      if(salida){
-		      	mostrarEstadoAprobacion_r(salida,fila);
-		      }else{
-		
-		      	return false;
-		      }
-	    }
-	   }
-	}
-
-  //Mostrar estado de Firma en el modal
-  function mostrarEstadoAprobacion_r(salida, fila){
-
-    //Incrementar la fila de la tabla a recorrer
-    documento = indices[i];
-    i++;
-
-    //Actualizamos iconos segun la respuesta 
-
-   	//Si es otro error 
-    if( salida == 0 ){
-
-      $("#icon_r_" + documento).removeClass();
-      $("#icon_r_" + documento).addClass('fa fa-exclamation-triangle text-warning');
-      $("#icon_r_" + documento).prop('title','Intente nuevamente'); 
-      $("#icon_btn_" + documento).removeAttr('onclick');
-      
-       OcultarCargando();
-
-    }else {
-      $("#icon_r_" + documento).removeClass();
-      $("#icon_r_" + documento).addClass('fa fa-check-circle text-success');
-      $("#icon_r_" + documento).prop('title','Rechazado');
-      $("#icon_btn_" + documento).removeAttr('onclick');
-
-      //Si termino de recorrer las filas 
-      if( !(i < cant) ){
-            //Ocultar el gif de cargando
-            OcultarCargando();
-      }
-    }
-
-    //Si quedan filas que recorrer 
-    if( i < cant ){
-        //Pasar al siguiente 
-        documento = indices[i];
-        proceso = setInterval(function(){ rechazar(documento,i) }, 1000);
-    }
-
-    $("#modal_pendientes_r").modal("show");
-  }
-
- //Cerrar el modal 
- $("#cerrar_rechazar").click(function(){
-
-	//Limpian todos los campos 
-	array = [];
-	$("#docs").val('');
-	$("#cantidad").val(0);
-	$("#select").val(0);
-	$(".checkbox").prop('checked',false);
-
-	$("#modal_pendientes_r").modal('hide');
-	$("#formulario3").submit();
- });
-	
-$(".ocultar").click(function(){
-
-	if ( $("#collapseExample").hasClass('in')){
-		$("#a").html('Mostrar filtros');
-	}else{
-  		$("#a").html('Ocultar filtros');
-  	}
-
- });
-</script>

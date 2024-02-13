@@ -93,10 +93,10 @@ class documentos {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -156,7 +156,7 @@ class documentos {
 		include("includes/opciones_menu.php");
 	
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -167,7 +167,7 @@ class documentos {
 		}
 	
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -229,14 +229,14 @@ class documentos {
 	private function agregar()
 	{	
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "AGREGAR":
 					// enviamos los datos del formulario a guardar
-					if ($this->documentosBD->agregar($_REQUEST))
+					if ($this->documentosBD->agregar($_POST))
 					{
 						//Pasamos el mensaje de Ok
 						$this->mensajeOK="Registro Completado! Su registro se ha guardado con exito";
@@ -262,12 +262,12 @@ class documentos {
 					$dt5 = new DataTable();
 
 					//Completamos los datos de la Empresa
-					$emp = array ("RutEmpresa" => $_REQUEST["RutEmpresa_Gama"]);
+					$emp = array ("RutEmpresa" => $_POST["RutEmpresa_Gama"]);
 					$this->documentosBD->obtenerRazonSocial($emp,$dt);
 					$this->mensajeError.=$this->documentosBD->mensajeError;
 
 					//Completamos los datos de la Empresa Cliente 
-					$cli = array ("RutEmpresaC" => $_REQUEST["RutEmpresa"]); 
+					$cli = array ("RutEmpresaC" => $_POST["RutEmpresa"]); 
 					$this->documentosBD->obtenerRazonSocialC($cli,$dt1);
 					$this->mensajeError.=$this->documentosBD->mensajeError;
 
@@ -285,8 +285,8 @@ class documentos {
 
 					//Buscamos 
 
-					if( $_REQUEST["modelo_contrato"] != 0 ){
-						$this->documentosBD->obtenerModeloContrato($_REQUEST,$dt4);
+					if( $_POST["modelo_contrato"] != 0 ){
+						$this->documentosBD->obtenerModeloContrato($_POST,$dt4);
 						$this->mensajeError.=$this->documentosBD->mensajeError;
 					}
 					else{
@@ -335,7 +335,7 @@ class documentos {
 							$FirEmpresaC = 0;
 						}
 					}
-					$dt->data[0]["fecha"] = $_REQUEST["fecha"];
+					$dt->data[0]["fecha"] = $_POST["fecha"];
 					$dt->data[0]["FirEmpresa"] = $FirEmpresa;
 					$dt->data[0]["FirEmpresaC"] = $FirEmpresaC;
 					$dt->data[0]["PlaEmpresa"] = $PlaEmpresa;
@@ -364,25 +364,25 @@ class documentos {
 					$dt5 = new DataTable();
 
 					//Completamos los datos de la Empresa
-					$this->documentosBD->obtenerRazonSocial($_REQUEST,$dt);
+					$this->documentosBD->obtenerRazonSocial($_POST,$dt);
 					$this->mensajeError.=$this->documentosBD->mensajeError;
 
 					//Completamos los datos de la Empresa Cliente 
-					$this->documentosBD->obtenerRazonSocialC($_REQUEST,$dt1);
+					$this->documentosBD->obtenerRazonSocialC($_POST,$dt1);
 					$this->mensajeError.=$this->documentosBD->mensajeError;
 
 					//Buscamos si la Empresa tiene Plantilla
-					$this->documentosBD->listadoPlantillas($_REQUEST,$dt5);
+					$this->documentosBD->listadoPlantillas($_POST,$dt5);
 					$this->mensajeError.=$this->documentosBD->mensajeError;
 
 					//Buscamos Firmantes la Empresa
-					$this->documentosBD->obtenerFirmantes($_REQUEST,$dt3);
+					$this->documentosBD->obtenerFirmantes($_POST,$dt3);
 					$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
 					//Buscamos 
 
-					if( $_REQUEST["modelo_contrato"] != 0 ){
-						$this->documentosBD->obtenerModeloContrato($_REQUEST,$dt4);
+					if( $_POST["modelo_contrato"] != 0 ){
+						$this->documentosBD->obtenerModeloContrato($_POST,$dt4);
 						$this->mensajeError.=$this->documentosBD->mensajeError;
 					}
 					else{
@@ -433,7 +433,7 @@ class documentos {
 							$FirEmpresaC = 0;
 						}
 					}
-					$dt->data[0]["fecha"] = $_REQUEST["fecha"];
+					$dt->data[0]["fecha"] = $_POST["fecha"];
 					$dt->data[0]["FirEmpresa"] = $FirEmpresa;
 					$dt->data[0]["FirEmpresaC"] = $FirEmpresaC;
 					$dt->data[0]["PlaEmpresa"] = $PlaEmpresa;
@@ -464,15 +464,15 @@ class documentos {
 					$dt5 = new DataTable();
 
 					//Completamos los datos de la Empresa
-					$this->documentosBD->obtenerRazonSocial($_REQUEST,$dt);
+					$this->documentosBD->obtenerRazonSocial($_POST,$dt);
 					$this->mensajeError.=$this->documentosBD->mensajeError;
 					
 					//Completamos los datos de la Empresa Cliente 
-					$this->documentosBD->obtenerRazonSocialC($_REQUEST,$dt1);
+					$this->documentosBD->obtenerRazonSocialC($_POST,$dt1);
 					$this->mensajeError.=$this->documentosBD->mensajeError;
 
-					if( $_REQUEST["modelo_contrato"] != 0 ){
-						$this->documentosBD->obtenerModeloContrato($_REQUEST,$dt4);
+					if( $_POST["modelo_contrato"] != 0 ){
+						$this->documentosBD->obtenerModeloContrato($_POST,$dt4);
 						$this->mensajeError.=$this->documentosBD->mensajeError;
 					}
 					else{
@@ -480,8 +480,8 @@ class documentos {
 						$this->pagina->agregarDato("DescripcionMC","(Seleccione)");
 					}
 
-					if( $_REQUEST["FormasPago"] != 0 ){
-						$this->documentosBD->obtenerFormaPago($_REQUEST,$dt5);
+					if( $_POST["FormasPago"] != 0 ){
+						$this->documentosBD->obtenerFormaPago($_POST,$dt5);
 						$this->mensajeError.=$this->documentosBD->mensajeError;
 					}
 					else{
@@ -501,8 +501,8 @@ class documentos {
 							$dt->data[0]["RutEmpresaC"] = $dt1->data[0]["RutEmpresa"];
 						    $dt->data[0]["RazonSocialC"] = $dt1->data[0]["RazonSocial"];
 						}
-						$dt->data[0]["fecha"] = $_REQUEST["fecha"];
-						$dt->data[0]["modelo_contrato"] = $_REQUEST["modelo_contrato"];
+						$dt->data[0]["fecha"] = $_POST["fecha"];
+						$dt->data[0]["modelo_contrato"] = $_POST["modelo_contrato"];
 
 						if( $dt4->data[0]["idMC"] > 0 ){
 							$dt->data[0]["idMC"] = $dt4->data[0]["idMC"];
@@ -513,24 +513,24 @@ class documentos {
 					}
 
 					//Completamos los datos del Ejecutivo 
-					if( $_REQUEST["RutEjecutivo"] != ""){
-						$this->documentosBD->obtenerNombreEjecutivo($_REQUEST,$dt2);
+					if( $_POST["RutEjecutivo"] != ""){
+						$this->documentosBD->obtenerNombreEjecutivo($_POST,$dt2);
 						$this->mensajeError.=$this->documentosBD->mensajeError;
 						$dt->data[0]["NombreEje"] = $dt2->data[0]["nombre"];
 						$dt->data[0]["ApellidoEje"] = $dt2->data[0]["appaterno"]." ".$dt2->data[0]["apmaterno"];
-						$dt->data[0]["RutEjecutivo"] = $_REQUEST["RutEjecutivo"]; 
+						$dt->data[0]["RutEjecutivo"] = $_POST["RutEjecutivo"]; 
 					}
 					//Completamos los datos del Supervisor
-					if( $_REQUEST["RutSupervisor"] != ""){
-						$this->documentosBD->obtenerNombreSupervisor($_REQUEST,$dt3);
+					if( $_POST["RutSupervisor"] != ""){
+						$this->documentosBD->obtenerNombreSupervisor($_POST,$dt3);
 						$this->mensajeError.=$this->documentosBD->mensajeError;
 						$dt->data[0]["NombreSup"] = $dt3->data[0]["nombre"];
 						$dt->data[0]["ApellidoSup"] = $dt3->data[0]["appaterno"]." ".$dt2->data[0]["apmaterno"];
-						$dt->data[0]["RutSupervisor"] = $_REQUEST["RutSupervisor"]; 
+						$dt->data[0]["RutSupervisor"] = $_POST["RutSupervisor"]; 
 					}
-					$dt->data[0]["idFormaPago"] = $_REQUEST["idFormaPago"];
-					$dt->data[0]["fechaInicio"] = $_REQUEST["fechaInicio"];
-					$dt->data[0]["fechaFin"] = $_REQUEST["fechaFin"];
+					$dt->data[0]["idFormaPago"] = $_POST["idFormaPago"];
+					$dt->data[0]["fechaInicio"] = $_POST["fechaInicio"];
+					$dt->data[0]["fechaFin"] = $_POST["fechaFin"];
 
 					//Consultamos las empresas clientes 
 					$this->documentosBD->listado($dt2);
@@ -562,11 +562,11 @@ class documentos {
 					$dt6 = new DataTable();
 
 					//Completamos los datos de la Plantilla
-					$this->documentosBD->obtenerPlantilla($_REQUEST,$dt2);
+					$this->documentosBD->obtenerPlantilla($_POST,$dt2);
 					$this->mensajeError.=$this->documentosBD->mensajeError;
 
 					//Completamos los datos de la Plantilla
-					$this->documentosBD->obtenerTipoFirma($_REQUEST,$dt4);
+					$this->documentosBD->obtenerTipoFirma($_POST,$dt4);
 					$this->mensajeError.=$this->documentosBD->mensajeError;
 
 					//Completamos los tipo de Firmas
@@ -574,7 +574,7 @@ class documentos {
 					$this->mensajeError.=$this->documentosBD->mensajeError;
 
 					//Completamos los datos de la Empresa
-					$this->documentosBD->obtenerRazonSocialN($_REQUEST,$dt5);
+					$this->documentosBD->obtenerRazonSocialN($_POST,$dt5);
 					$this->mensajeError.=$this->documentosBD->mensajeError;
 
 					//Consultar si el flujo tiene Aval
@@ -584,17 +584,17 @@ class documentos {
 					$dt->data[0]["idPlantilla"] = $dt2->data[0]["idPlantilla"];
 					$dt->data[0]["idWF"] = $dt2->data[0]["idWF"];
 					$dt->data[0]["idTipoDoc"] = $dt2->data[0]["idTipoDoc"];
-					$dt->data[0]["RutEmpresaC"] = $_REQUEST["RutEmpresaC"];
-					$dt->data[0]["RutEjecutivo"] = $_REQUEST["RutEjecutivo"];
-					$dt->data[0]["RutSupervisor"] = $_REQUEST["RutSupervisor"];
-					$dt->data[0]["fecha"] = $_REQUEST["fecha"];
-					$dt->data[0]["fechaInicio"] = $_REQUEST["fechaInicio"];
-				    $dt->data[0]["fechaFin"] = $_REQUEST["fechaFin"];
-					$dt->data[0]["modelo_contrato"] = $_REQUEST["modelo_contrato"];
-					$dt->data[0]["FormasPago"] = $_REQUEST["FormasPago"];
+					$dt->data[0]["RutEmpresaC"] = $_POST["RutEmpresaC"];
+					$dt->data[0]["RutEjecutivo"] = $_POST["RutEjecutivo"];
+					$dt->data[0]["RutSupervisor"] = $_POST["RutSupervisor"];
+					$dt->data[0]["fecha"] = $_POST["fecha"];
+					$dt->data[0]["fechaInicio"] = $_POST["fechaInicio"];
+				    $dt->data[0]["fechaFin"] = $_POST["fechaFin"];
+					$dt->data[0]["modelo_contrato"] = $_POST["modelo_contrato"];
+					$dt->data[0]["FormasPago"] = $_POST["FormasPago"];
 					$dt->data[0]["idPla"] = $dt2->data[0]["idPlantilla"]." ".strip_tags( substr($dt2->data[0]["Descripcion_Pl"], 0, 60));
 					$dt->data[0]["Notaria"] = $dt5->data[0]["RutEmpresaN"]." ".$dt5->data[0]["RazonSocialN"];
-					$dt->data[0]["idContrato"] = $_REQUEST["idContrato"];
+					$dt->data[0]["idContrato"] = $_POST["idContrato"];
 
 					//Verificar si el Flujo tiene Notaria
 					if( strpos($dt2->data[0]["NombreWF"],"Notario") > 0){
@@ -638,7 +638,7 @@ class documentos {
 					$dt7 = new DataTable();
 
 					//Completamos los datos de la Plantilla
-					$this->documentosBD->obtenerDetalle($_REQUEST,$dt1);
+					$this->documentosBD->obtenerDetalle($_POST,$dt1);
 					$this->mensajeError.=$this->documentosBD->mensajeError;
 
 					//Buscar nombre de Monedas
@@ -662,19 +662,19 @@ class documentos {
 					$this->mensajeError.=$this->documentosBD->mensajeError;
 
 					//Consultar fecha de ceracion del contrato marco
-					if( $_REQUEST["idContrato"] != "" ){
-						$this->documentosBD->obtenerDocumento($_REQUEST, $dt6);
+					if( $_POST["idContrato"] != "" ){
+						$this->documentosBD->obtenerDocumento($_POST, $dt6);
 						$this->mensajeError.=$this->documentosBD->mensajeError;
 					}
 
-					$dt->data[0]["RutEmpresaC"] = $_REQUEST["RutEmpresaC"];
-					$dt->data[0]["RutEmpresa"] = $_REQUEST["RutEmpresa"];
-					$dt->data[0]["modelo_contrato"] = $_REQUEST["modelo_contrato"];
-					$dt->data[0]["proyectos_emp"] = $_REQUEST["proyectos_emp"];
+					$dt->data[0]["RutEmpresaC"] = $_POST["RutEmpresaC"];
+					$dt->data[0]["RutEmpresa"] = $_POST["RutEmpresa"];
+					$dt->data[0]["modelo_contrato"] = $_POST["modelo_contrato"];
+					$dt->data[0]["proyectos_emp"] = $_POST["proyectos_emp"];
 					$dt1->data[0]["NombreMoneda_Tarifa"] = $dt2->data[0]["NombreMoneda"];
 					$dt1->data[0]["NombreMoneda_KmsExceso"] = $dt3->data[0]["NombreMoneda"];
 					$dt->data[0]["idProyecto"] = $dt1->data[0]["idProyecto"];
-					$dt->data[0]["band"] = $_REQUEST["band"];
+					$dt->data[0]["band"] = $_POST["band"];
 					$dt->data[0]["fechaFirma"] = $dt6->data[0]["FechaCreacion"];
 
 					//Reasignar resultados
@@ -696,15 +696,15 @@ class documentos {
 					$dt = new DataTable();
 			
 					//Buscar el listado de Deducibles
-					$array = array ( "RutEmpresa" => $_REQUEST["RutProveedor"]);
+					$array = array ( "RutEmpresa" => $_POST["RutProveedor"]);
 					$this->documentosBD->obtenerRazonSocial($array, $dt);
 					$this->mensajeError.=$this->documentosBD->mensajeError;
 
 					$dt->data[0]["RutProveedor"] = $dt->data[0]["RutEmpresa"];
-					$dt->data[0]["RutEmpresaC"] = $_REQUEST["RutEmpresaC"];
-					$dt->data[0]["RutEmpresa"] = $_REQUEST["RutEmpresaGama"];
-					$dt->data[0]["modelo_contrato"] = $_REQUEST["modelo_contrato"];
-					$dt->data[0]["fecha"] = $_REQUEST["fecha"];
+					$dt->data[0]["RutEmpresaC"] = $_POST["RutEmpresaC"];
+					$dt->data[0]["RutEmpresa"] = $_POST["RutEmpresaGama"];
+					$dt->data[0]["modelo_contrato"] = $_POST["modelo_contrato"];
+					$dt->data[0]["fecha"] = $_POST["fecha"];
 		
 					//Reasignar resultados
 					$formulario = $dt->data;
@@ -722,7 +722,7 @@ class documentos {
 			}
 		}
 		//Opcion de atras 
-	    if( $_REQUEST["RutEmpresa"] != "" ){
+	    if( $_POST["RutEmpresa"] != "" ){
 
 			//Inicializamos las variables
 			$dt = new DataTable();
@@ -731,19 +731,19 @@ class documentos {
 			$dt4 = new DataTable();
 
 			//Completamos los datos de la Empresa
-			$this->documentosBD->obtenerRazonSocial($_REQUEST,$dt);
+			$this->documentosBD->obtenerRazonSocial($_POST,$dt);
 			$this->mensajeError.=$this->documentosBD->mensajeError;
 					
 			//Completamos los datos de la Empresa Cliente 
-			$this->documentosBD->obtenerRazonSocialC($_REQUEST,$dt1);
+			$this->documentosBD->obtenerRazonSocialC($_POST,$dt1);
 			$this->mensajeError.=$this->documentosBD->mensajeError;
 
 			//Completamos los datos de los Modelos de Contrato
 			$this->documentosBD->listado($d2);
 			$this->mensajeError.=$this->documentosBD->mensajeError;
 
-			if( $_REQUEST["modelo_contrato"] != 0 ){
-				$this->documentosBD->obtenerModeloContrato($_REQUEST,$dt4);
+			if( $_POST["modelo_contrato"] != 0 ){
+				$this->documentosBD->obtenerModeloContrato($_POST,$dt4);
 				$this->mensajeError.=$this->documentosBD->mensajeError;
 			}
 			else{
@@ -762,7 +762,7 @@ class documentos {
 					$dt->data[0]["RutEmpresaC"] = $dt1->data[0]["RutEmpresa"];
 					$dt->data[0]["RazonSocialC"] = $dt1->data[0]["RazonSocial"];
 				}
-				$dt->data[0]["fecha"] = $_REQUEST["fecha"];
+				$dt->data[0]["fecha"] = $_POST["fecha"];
 
 				if( $dt4->data[0]["idMC"] > 0 ){
 					$dt->data[0]["idMC"] = $dt4->data[0]["idMC"];
@@ -793,7 +793,7 @@ class documentos {
 		$dt = new DataTable();
 		$dt1 = new DataTable();
 
-		if( $_REQUEST["modelo_contrato"] == 0 ){
+		if( $_POST["modelo_contrato"] == 0 ){
 			$this->pagina->agregarDato("idMC","0");
 			$this->pagina->agregarDato("DescripcionMC","(Seleccione)");
 		}
@@ -839,14 +839,14 @@ class documentos {
 		$dt = new DataTable();
 
 		//Listado de Empresas Disponibles 
-		$_REQUEST["TipoEmpresa"] = 1;
+		$_POST["TipoEmpresa"] = 1;
 		//Buscar todas las Empresas disponibles
-		$this->documentosBD->listadoEmpresas($_REQUEST,$dt);
+		$this->documentosBD->listadoEmpresas($_POST,$dt);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 
 		if( count($dt->data) > 0){
 			foreach ($dt->data as $key => $value) {
-				$dt->data[$key]["fecha"] = $_REQUEST["fecha"];
+				$dt->data[$key]["fecha"] = $_POST["fecha"];
 			}
 		}
 		//Enviar datos al HTML
@@ -863,16 +863,16 @@ class documentos {
 		//Declarar e instanciar variables
 		$dt = new DataTable();
 
-		$_REQUEST["TipoEmpresa"] = 2;
+		$_POST["TipoEmpresa"] = 2;
 		//Buscar todas las Empresas disponibles
-		$this->documentosBD->listadoClientesDiferente($_REQUEST,$dt);
+		$this->documentosBD->listadoClientesDiferente($_POST,$dt);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 
 		if( count($dt->data) > 0){
 			foreach ($dt->data as $key => $value) {
-				$dt->data[$key]["RutEmpresa_Gama"] = $_REQUEST["RutEmpresa"];
-				$dt->data[$key]["fecha"] = $_REQUEST["fecha"];
-				$dt->data[$key]["modelo_contrato"] = $_REQUEST["modelo_contrato"];
+				$dt->data[$key]["RutEmpresa_Gama"] = $_POST["RutEmpresa"];
+				$dt->data[$key]["fecha"] = $_POST["fecha"];
+				$dt->data[$key]["modelo_contrato"] = $_POST["modelo_contrato"];
 			}
 		}
 		
@@ -887,7 +887,7 @@ class documentos {
 	//Seleccionar el Proyecto del cual quiere generar el documento
 	private function buscar_proyecto(){
 		
-		$this->band = $_REQUEST["band"];
+		$this->band = $_POST["band"];
 
 		//Declarar e instanciar variables
 		$dt = new DataTable();
@@ -895,19 +895,19 @@ class documentos {
 		$dt2 = new DataTable();
 
 		//Listado de Empresas Disponibles 
-		$_REQUEST["TipoEmpresa"] = 1;
+		$_POST["TipoEmpresa"] = 1;
 
 		//Buscar todas los Proyectos de cada Cliente 
-		$this->documentosBD->obtenerListadoProyectos($_REQUEST,$dt);
+		$this->documentosBD->obtenerListadoProyectos($_POST,$dt);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 
 		if( count($dt->data) > 0 ){
 			foreach ($dt->data as $key => $value) {
-				$dt->data[$key]["RutEmpresa"] = $_REQUEST["RutEmpresa"];
-				$dt->data[$key]["RutEmpresaC"] = $_REQUEST["RutEmpresaC"];
-				$dt->data[$key]["modelo_contrato"] = $_REQUEST["modelo_contrato"];
-				$dt->data[$key]["proyectos_emp"] = $_REQUEST["proyectos_emp"];
-				$dt->data[$key]["band"] = $_REQUEST["band"];
+				$dt->data[$key]["RutEmpresa"] = $_POST["RutEmpresa"];
+				$dt->data[$key]["RutEmpresaC"] = $_POST["RutEmpresaC"];
+				$dt->data[$key]["modelo_contrato"] = $_POST["modelo_contrato"];
+				$dt->data[$key]["proyectos_emp"] = $_POST["proyectos_emp"];
+				$dt->data[$key]["band"] = $_POST["band"];
 
 				$this->documentosBD->obtenerSubproyectoCreado($dt->data[$key], $dt2);
 				$this->mensajeError.=$this->documentosBD->mensajeError;
@@ -939,13 +939,13 @@ class documentos {
 		$dt1 = new DataTable();
 
 		//Buscar todas los Proyectos de cada Cliente 
-		$this->documentosBD->obtenerListadoProyectos($_REQUEST,$dt1);
+		$this->documentosBD->obtenerListadoProyectos($_POST,$dt1);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 
-		$dt->data[0]["RutEmpresa"] = $_REQUEST["RutEmpresa"];
-		$dt->data[0]["RutEmpresaC"] = $_REQUEST["RutEmpresaC"];
-		$dt->data[0]["modelo_contrato"] = $_REQUEST["modelo_contrato"];
-		$dt->data[0]["proyectos_emp"] = $_REQUEST["proyectos_emp"];
+		$dt->data[0]["RutEmpresa"] = $_POST["RutEmpresa"];
+		$dt->data[0]["RutEmpresaC"] = $_POST["RutEmpresaC"];
+		$dt->data[0]["modelo_contrato"] = $_POST["modelo_contrato"];
+		$dt->data[0]["proyectos_emp"] = $_POST["proyectos_emp"];
 
 		//Reasignar resultado
 		$formulario = $dt->data;
@@ -967,18 +967,18 @@ class documentos {
 		$dt1 = new DataTable();
 
 		//Listado de Empresas Disponibles 
-		$_REQUEST["TipoEmpresa"] = 4;
+		$_POST["TipoEmpresa"] = 4;
 
 		//Buscar todas los Proyectos de cada Cliente 
-		$this->documentosBD->listadoEmpresas($_REQUEST,$dt);
+		$this->documentosBD->listadoEmpresas($_POST,$dt);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 
 		if( count($dt->data) > 0 ){
 			foreach ($dt->data as $key => $value) {
-				$dt->data[$key]["RutEmpresaGama"] = $_REQUEST["RutEmpresa"];
-				$dt->data[$key]["RutEmpresaC"] = $_REQUEST["RutEmpresaC"];
-				$dt->data[$key]["modelo_contrato"] = $_REQUEST["modelo_contrato"];
-				$dt->data[$key]["fecha"] = $_REQUEST["fecha"];
+				$dt->data[$key]["RutEmpresaGama"] = $_POST["RutEmpresa"];
+				$dt->data[$key]["RutEmpresaC"] = $_POST["RutEmpresaC"];
+				$dt->data[$key]["modelo_contrato"] = $_POST["modelo_contrato"];
+				$dt->data[$key]["fecha"] = $_POST["fecha"];
 
 			}
 		}
@@ -996,7 +996,7 @@ class documentos {
 	//Seleccionar la plantilla correspondiente al modelo de Contrato 
 	private function siguiente(){
 
-		switch ($_REQUEST["modelo_contrato"])
+		switch ($_POST["modelo_contrato"])
 		{
 			case 1: //Contrato Marco 
 				$this->contrato_marco();
@@ -1038,12 +1038,12 @@ class documentos {
 		$dt3 = new DataTable();
 
 		//Completamos los datos de la Empresa
-		$this->documentosBD->obtenerRazonSocial($_REQUEST,$dt);
+		$this->documentosBD->obtenerRazonSocial($_POST,$dt);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 		
 		//Completamos los datos de la Empresa Cliente 
 		//$cli = array( "RutEmpresa")
-		$this->documentosBD->obtenerRazonSocialC($_REQUEST,$dt1);
+		$this->documentosBD->obtenerRazonSocialC($_POST,$dt1);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 
 		//Completamos los datos de las formas de Pago
@@ -1051,7 +1051,7 @@ class documentos {
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 
 		//Consultar si la empresa tiene Proyectos 
-		$this->documentosBD->obtenerListadoProyectos($_REQUEST, $dt3);
+		$this->documentosBD->obtenerListadoProyectos($_POST, $dt3);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 		
 		if ( count($dt1->data) > 0 ){
@@ -1067,8 +1067,8 @@ class documentos {
 				$dt->data[0]["RazonSocialC"] = $dt1->data[0]["RazonSocial"];
 			}
 			
-			$dt->data[0]["modelo_contrato"] = $_REQUEST["modelo_contrato"];
-			$dt->data[0]["fecha"] = $_REQUEST["fecha"];
+			$dt->data[0]["modelo_contrato"] = $_POST["modelo_contrato"];
+			$dt->data[0]["fecha"] = $_POST["fecha"];
 			$dt->data[0]["activar_pro"] = count($dt3->data);
 		}
 
@@ -1101,18 +1101,18 @@ class documentos {
 		$dt6 = new DataTable();
 
 		//Completamos los datos de la Empresa
-		$this->documentosBD->obtenerRazonSocial($_REQUEST,$dt);
+		$this->documentosBD->obtenerRazonSocial($_POST,$dt);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 
 		//Completamos los datos de la Empresa Cliente 
-		$this->documentosBD->obtenerRazonSocialC($_REQUEST,$dt1);
+		$this->documentosBD->obtenerRazonSocialC($_POST,$dt1);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 
 		//Completamos los datos de las formas de Pago
 		$this->documentosBD->listadoFormasPago($dt2);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 
-		$this->documentosBD->obtenerListadoProyectos($_REQUEST,$dt3);
+		$this->documentosBD->obtenerListadoProyectos($_POST,$dt3);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 
 		//Buscamos el equipamiento
@@ -1141,8 +1141,8 @@ class documentos {
 			$dt5->data[0]["RutEmpresaC"] = $dt1->data[0]["RutEmpresa"];
 			$dt5->data[0]["RazonSocialC"] = $dt1->data[0]["RazonSocial"];
 		}
-		$dt5->data[0]["modelo_contrato"] = $_REQUEST["modelo_contrato"];
-		$dt5->data[0]["fecha"] = $_REQUEST["fecha"];
+		$dt5->data[0]["modelo_contrato"] = $_POST["modelo_contrato"];
+		$dt5->data[0]["fecha"] = $_POST["fecha"];
 		$dt5->data[0]["proyectos_emp"] = $proyectos_emp;
 		$dt5->data[0]["band"] = 1;
 
@@ -1173,11 +1173,11 @@ class documentos {
 		$dt2 = new DataTable();
 
 		//Completamos los datos de la Empresa
-		$this->documentosBD->obtenerRazonSocial($_REQUEST,$dt);
+		$this->documentosBD->obtenerRazonSocial($_POST,$dt);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 		
 		//Completamos los datos de la Empresa Cliente 
-		$this->documentosBD->obtenerRazonSocialC($_REQUEST,$dt1);
+		$this->documentosBD->obtenerRazonSocialC($_POST,$dt1);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 
 		//Completamos los datos de las formas de Pago
@@ -1196,8 +1196,8 @@ class documentos {
 				$dt->data[0]["RazonSocialC"] = $dt1->data[0]["RazonSocial"];
 			}
 			
-			$dt->data[0]["modelo_contrato"] = $_REQUEST["modelo_contrato"];
-			$dt->data[0]["fecha"] = $_REQUEST["fecha"];
+			$dt->data[0]["modelo_contrato"] = $_POST["modelo_contrato"];
+			$dt->data[0]["fecha"] = $_POST["fecha"];
 		}
 
 		//Reasignar resultados
@@ -1234,10 +1234,10 @@ class documentos {
 		$this->documentosBD->listadoFormasPago($dt2);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 		
-		$dt->data[0]["RutEmpresa"] = $_REQUEST["RutEmpresa"];
-		$dt->data[0]["RutEmpresaC"] = $_REQUEST["RutEmpresaC"];
-		$dt->data[0]["modelo_contrato"] = $_REQUEST["modelo_contrato"];
-		$dt->data[0]["fecha"] = $_REQUEST["fecha"];
+		$dt->data[0]["RutEmpresa"] = $_POST["RutEmpresa"];
+		$dt->data[0]["RutEmpresaC"] = $_POST["RutEmpresaC"];
+		$dt->data[0]["modelo_contrato"] = $_POST["modelo_contrato"];
+		$dt->data[0]["fecha"] = $_POST["fecha"];
 
 		//Reasignar resultados
 		$formulario = $dt->data;
@@ -1261,17 +1261,17 @@ class documentos {
 
 		if ( count($dt->data) ){
 			foreach ($dt->data as $key => $value) {
-				$dt->data[$key]["RutEmpresa"] = $_REQUEST["RutEmpresa"];
-				$dt->data[$key]["RutEmpresaC"] = $_REQUEST["RutEmpresaC"];
-				$dt->data[$key]["idFormaPago"] = $_REQUEST["idFormaPago"];
+				$dt->data[$key]["RutEmpresa"] = $_POST["RutEmpresa"];
+				$dt->data[$key]["RutEmpresaC"] = $_POST["RutEmpresaC"];
+				$dt->data[$key]["idFormaPago"] = $_POST["idFormaPago"];
 				$dt->data[$key]["RutEjecutivo"] = $dt->data[$key]["RutEjecutivo"];
-				$dt->data[$key]["RutSupervisor"] = $_REQUEST["RutSupervisor"];
-				$dt->data[$key]["fechaInicio"] = $_REQUEST["fechaInicio"];
-				$dt->data[$key]["fechaFin"] = $_REQUEST["fechaFin"];
-				$dt->data[$key]["fecha"] = $_REQUEST["fecha"];
-				$dt->data[$key]["modelo_contrato"] = $_REQUEST["modelo_contrato"];
-				$dt->data[$key]["FormasPago"] = $_REQUEST["FormasPago"];
-				$dt->data[$key]["TipoEmpresa"] = $_REQUEST["TipoEmpresa"];
+				$dt->data[$key]["RutSupervisor"] = $_POST["RutSupervisor"];
+				$dt->data[$key]["fechaInicio"] = $_POST["fechaInicio"];
+				$dt->data[$key]["fechaFin"] = $_POST["fechaFin"];
+				$dt->data[$key]["fecha"] = $_POST["fecha"];
+				$dt->data[$key]["modelo_contrato"] = $_POST["modelo_contrato"];
+				$dt->data[$key]["FormasPago"] = $_POST["FormasPago"];
+				$dt->data[$key]["TipoEmpresa"] = $_POST["TipoEmpresa"];
 			}
 		}
 		$formulario = $dt->data;
@@ -1295,17 +1295,17 @@ class documentos {
 
 		if ( count($dt->data) ){
 			foreach ($dt->data as $key => $value) {
-				$dt->data[$key]["RutEmpresa"] = $_REQUEST["RutEmpresa"];
-				$dt->data[$key]["RutEmpresaC"] = $_REQUEST["RutEmpresaC"];
-				$dt->data[$key]["idFormaPago"] = $_REQUEST["idFormaPago"];
-				$dt->data[$key]["RutEjecutivo"] = $_REQUEST["RutEjecutivo"];
+				$dt->data[$key]["RutEmpresa"] = $_POST["RutEmpresa"];
+				$dt->data[$key]["RutEmpresaC"] = $_POST["RutEmpresaC"];
+				$dt->data[$key]["idFormaPago"] = $_POST["idFormaPago"];
+				$dt->data[$key]["RutEjecutivo"] = $_POST["RutEjecutivo"];
 				$dt->data[$key]["RutSupervisor"] = $dt->data[$key]["RutSupervisor"];
-				$dt->data[$key]["fechaInicio"] = $_REQUEST["fechaInicio"];
-				$dt->data[$key]["fechaFin"] = $_REQUEST["fechaFin"];
-				$dt->data[$key]["fecha"] = $_REQUEST["fecha"];
-				$dt->data[$key]["modelo_contrato"] = $_REQUEST["modelo_contrato"];
-				$dt->data[$key]["FormasPago"] = $_REQUEST["FormasPago"];
-				$dt->data[$key]["TipoEmpresa"] = $_REQUEST["TipoEmpresa"];
+				$dt->data[$key]["fechaInicio"] = $_POST["fechaInicio"];
+				$dt->data[$key]["fechaFin"] = $_POST["fechaFin"];
+				$dt->data[$key]["fecha"] = $_POST["fecha"];
+				$dt->data[$key]["modelo_contrato"] = $_POST["modelo_contrato"];
+				$dt->data[$key]["FormasPago"] = $_POST["FormasPago"];
+				$dt->data[$key]["TipoEmpresa"] = $_POST["TipoEmpresa"];
 			}
 		}
 		$formulario = $dt->data;
@@ -1327,25 +1327,25 @@ class documentos {
 		$dt2 = new DataTable();
 
 		//Listado de Empresas Disponibles 
-		$this->documentosBD->listadoPlantillas($_REQUEST,$dt);
+		$this->documentosBD->listadoPlantillas($_POST,$dt);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 
 		//Quitar las etiquetas de HTML antes de llevar al listado
 		if ( count($dt->data) ){
 			foreach ($dt->data as $key => $value) {
-				$dt->data[$key]["RutEmpresa"] = $_REQUEST["RutEmpresa"];
-				$dt->data[$key]["RutEmpresaC"] = $_REQUEST["RutEmpresaC"];
-				$dt->data[$key]["RutEmpresaN"] = $_REQUEST["RutEmpresaN"];
-				$dt->data[$key]["RutEjecutivo"] = $_REQUEST["RutEjecutivo"];
-				$dt->data[$key]["RutSupervisor"] = $_REQUEST["RutSupervisor"];
-				$dt->data[$key]["fechaInicio"] = $_REQUEST["fechaInicio"];
-				$dt->data[$key]["fechaFin"] = $_REQUEST["fechaFin"];
-				$dt->data[$key]["fecha"] = $_REQUEST["fecha"];
-				$dt->data[$key]["modelo_contrato"] = $_REQUEST["modelo_contrato"];
-				$dt->data[$key]["FormasPago"] = $_REQUEST["FormasPago"];
-				$dt->data[$key]["TipoFirmas"] = $_REQUEST["TipoFirmas"];
-				$dt->data[$key]["pro"] = $_REQUEST["pro"];
-				$dt->data[$key]["activar_pro"] = $_REQUEST["activar_pro"];
+				$dt->data[$key]["RutEmpresa"] = $_POST["RutEmpresa"];
+				$dt->data[$key]["RutEmpresaC"] = $_POST["RutEmpresaC"];
+				$dt->data[$key]["RutEmpresaN"] = $_POST["RutEmpresaN"];
+				$dt->data[$key]["RutEjecutivo"] = $_POST["RutEjecutivo"];
+				$dt->data[$key]["RutSupervisor"] = $_POST["RutSupervisor"];
+				$dt->data[$key]["fechaInicio"] = $_POST["fechaInicio"];
+				$dt->data[$key]["fechaFin"] = $_POST["fechaFin"];
+				$dt->data[$key]["fecha"] = $_POST["fecha"];
+				$dt->data[$key]["modelo_contrato"] = $_POST["modelo_contrato"];
+				$dt->data[$key]["FormasPago"] = $_POST["FormasPago"];
+				$dt->data[$key]["TipoFirmas"] = $_POST["TipoFirmas"];
+				$dt->data[$key]["pro"] = $_POST["pro"];
+				$dt->data[$key]["activar_pro"] = $_POST["activar_pro"];
 				
 				if($dt->data[$key]["Aprobado"] == 1){
 					$dt->data[$key]["Aprobado"] = $this->verde;
@@ -1361,74 +1361,74 @@ class documentos {
 				//Cantidad de Clausulas
 				$dt->data[$key]["Cant"] = $dt2->data[0]["total"];
 
-				if( $_REQUEST["idProyecto"] != "" ){//Anexo 
-					$dt->data[$key]["idProyecto"] = $_REQUEST["idProyecto"];
-					$dt->data[$key]["fechaFirma"] = $_REQUEST["fechaFirma"];
-					$dt->data[$key]["Marca"] = $_REQUEST["Marca"];
-					$dt->data[$key]["Modelo"] = $_REQUEST["Modelo"];
-					$dt->data[$key]["CiudadEntrega"] = $_REQUEST["CiudadEntrega"];
-					$dt->data[$key]["CiudadOperacion"] = $_REQUEST["CiudadOperacion"];
-					$dt->data[$key]["CiudadDevolucion"] = $_REQUEST["CiudadDevolucion"];
-					$dt->data[$key]["PeriodoArriendo"] = $_REQUEST["PeriodoArriendo"];
-					$dt->data[$key]["FechaInicio"] = $_REQUEST["FechaInicio"];
-					$dt->data[$key]["FechaFinal"] = $_REQUEST["FechaFinal"];
-					$dt->data[$key]["Tarifa"] = $_REQUEST["Tarifa"];
-					$dt->data[$key]["idMoneda_Tarifa"] = $_REQUEST["idMoneda_Tarifa"];
-					$dt->data[$key]["idMoneda_KmsExceso"] = $_REQUEST["idMoneda_KmsExceso"];
-					$dt->data[$key]["KmsExceso"] = $_REQUEST["KmsExceso"];
-					$dt->data[$key]["KmsContratados"] = $_REQUEST["KmsContratados"];
-					$dt->data[$key]["KmsMensuales"] = $_REQUEST["KmsMensuales"];
-					$dt->data[$key]["FrecuenciaMantencion"] = $_REQUEST["FrecuenciaMantencion"];
-					$dt->data[$key]["FrecuenciaCambio"] = $_REQUEST["FrecuenciaCambio"];
-					$dt->data[$key]["Cantidad"] = $_REQUEST["Cantidad"];
-					$dt->data[$key]["Porcentaje"] = $_REQUEST["Porcentaje"];
-					$dt->data[$key]["Propuesta"] = $_REQUEST["Propuesta"];
-					$dt->data[$key]["FechaPropuesta"] = $_REQUEST["FechaPropuesta"];
-					$dt->data[$key]["GPS"] = $_REQUEST["GPS"];
-					$dt->data[$key]["seleccion"] = $_REQUEST["seleccion"];
-					$dt->data[$key]["seleccion_ded"] = $_REQUEST["seleccion_ded"];
-					$dt->data[$key]["rut_coordinador"] = $_REQUEST["rut_coordinador"];
-					$dt->data[$key]["nombre_coordinador"] = $_REQUEST["nombre_coordinador"];
+				if( $_POST["idProyecto"] != "" ){//Anexo 
+					$dt->data[$key]["idProyecto"] = $_POST["idProyecto"];
+					$dt->data[$key]["fechaFirma"] = $_POST["fechaFirma"];
+					$dt->data[$key]["Marca"] = $_POST["Marca"];
+					$dt->data[$key]["Modelo"] = $_POST["Modelo"];
+					$dt->data[$key]["CiudadEntrega"] = $_POST["CiudadEntrega"];
+					$dt->data[$key]["CiudadOperacion"] = $_POST["CiudadOperacion"];
+					$dt->data[$key]["CiudadDevolucion"] = $_POST["CiudadDevolucion"];
+					$dt->data[$key]["PeriodoArriendo"] = $_POST["PeriodoArriendo"];
+					$dt->data[$key]["FechaInicio"] = $_POST["FechaInicio"];
+					$dt->data[$key]["FechaFinal"] = $_POST["FechaFinal"];
+					$dt->data[$key]["Tarifa"] = $_POST["Tarifa"];
+					$dt->data[$key]["idMoneda_Tarifa"] = $_POST["idMoneda_Tarifa"];
+					$dt->data[$key]["idMoneda_KmsExceso"] = $_POST["idMoneda_KmsExceso"];
+					$dt->data[$key]["KmsExceso"] = $_POST["KmsExceso"];
+					$dt->data[$key]["KmsContratados"] = $_POST["KmsContratados"];
+					$dt->data[$key]["KmsMensuales"] = $_POST["KmsMensuales"];
+					$dt->data[$key]["FrecuenciaMantencion"] = $_POST["FrecuenciaMantencion"];
+					$dt->data[$key]["FrecuenciaCambio"] = $_POST["FrecuenciaCambio"];
+					$dt->data[$key]["Cantidad"] = $_POST["Cantidad"];
+					$dt->data[$key]["Porcentaje"] = $_POST["Porcentaje"];
+					$dt->data[$key]["Propuesta"] = $_POST["Propuesta"];
+					$dt->data[$key]["FechaPropuesta"] = $_POST["FechaPropuesta"];
+					$dt->data[$key]["GPS"] = $_POST["GPS"];
+					$dt->data[$key]["seleccion"] = $_POST["seleccion"];
+					$dt->data[$key]["seleccion_ded"] = $_POST["seleccion_ded"];
+					$dt->data[$key]["rut_coordinador"] = $_POST["rut_coordinador"];
+					$dt->data[$key]["nombre_coordinador"] = $_POST["nombre_coordinador"];
 				}
-				if ( $_REQUEST["Patente"] != "" ){ //Contrato Renting 
+				if ( $_POST["Patente"] != "" ){ //Contrato Renting 
 
-					$dt->data[$key]["FormasPago"] = $_REQUEST["FormasPago"];
-					$dt->data[$key]["Marca"] = $_REQUEST["Marca"];
-					$dt->data[$key]["Modelo"] = $_REQUEST["Modelo"];
-					$dt->data[$key]["Patente"] = $_REQUEST["Patente"];
-					$dt->data[$key]["Color"] = $_REQUEST["Color"];
-					$dt->data[$key]["VIN"] = $_REQUEST["VIN"];
-					$dt->data[$key]["AnnoVehiculo"] = $_REQUEST["AnnoVehiculo"];
-					$dt->data[$key]["PeriodoArriendo"] = $_REQUEST["PeriodoArriendo"];
-					$dt->data[$key]["KmsMensuales"] = $_REQUEST["KmsMensuales"];
-					$dt->data[$key]["FechaInicio"] = $_REQUEST["FechaInicio"];
-					$dt->data[$key]["FechaFinal"] = $_REQUEST["FechaFinal"];
-					$dt->data[$key]["FechaPie"] = $_REQUEST["FechaPie"];
-					$dt->data[$key]["FechaPago"] = $_REQUEST["FechaPago"];
-					$dt->data[$key]["CuotaPie"] = $_REQUEST["CuotaPie"];
-					$dt->data[$key]["MontoCuota"] = $_REQUEST["MontoCuota"];
-					$dt->data[$key]["Exceso"] = $_REQUEST["Exceso"];
-					$dt->data[$key]["KmsExceso"] = $_REQUEST["KmsExceso"];
-					$dt->data[$key]["idRentaMens"] = $_REQUEST["idRentaMens"];
-					$dt->data[$key]["RentaMens"] = $_REQUEST["RentaMens"];
+					$dt->data[$key]["FormasPago"] = $_POST["FormasPago"];
+					$dt->data[$key]["Marca"] = $_POST["Marca"];
+					$dt->data[$key]["Modelo"] = $_POST["Modelo"];
+					$dt->data[$key]["Patente"] = $_POST["Patente"];
+					$dt->data[$key]["Color"] = $_POST["Color"];
+					$dt->data[$key]["VIN"] = $_POST["VIN"];
+					$dt->data[$key]["AnnoVehiculo"] = $_POST["AnnoVehiculo"];
+					$dt->data[$key]["PeriodoArriendo"] = $_POST["PeriodoArriendo"];
+					$dt->data[$key]["KmsMensuales"] = $_POST["KmsMensuales"];
+					$dt->data[$key]["FechaInicio"] = $_POST["FechaInicio"];
+					$dt->data[$key]["FechaFinal"] = $_POST["FechaFinal"];
+					$dt->data[$key]["FechaPie"] = $_POST["FechaPie"];
+					$dt->data[$key]["FechaPago"] = $_POST["FechaPago"];
+					$dt->data[$key]["CuotaPie"] = $_POST["CuotaPie"];
+					$dt->data[$key]["MontoCuota"] = $_POST["MontoCuota"];
+					$dt->data[$key]["Exceso"] = $_POST["Exceso"];
+					$dt->data[$key]["KmsExceso"] = $_POST["KmsExceso"];
+					$dt->data[$key]["idRentaMens"] = $_POST["idRentaMens"];
+					$dt->data[$key]["RentaMens"] = $_POST["RentaMens"];
 				}
 
-				if( $_REQUEST["RutProveedor"] != "" ){ //Contrato Financiero Operativo
+				if( $_POST["RutProveedor"] != "" ){ //Contrato Financiero Operativo
 
-					$dt->data[$key]["RutProveedor"] = $_REQUEST["RutProveedor"];
-					$dt->data[$key]["FechaInicioPago"] = $_REQUEST["FechaInicioPago"];
-					$dt->data[$key]["DetalleBienes"] = $_REQUEST["DetalleBienes"];
-					$dt->data[$key]["Moneda"] = $_REQUEST["Moneda"];
-					$dt->data[$key]["MontoAdquisicion"] = $_REQUEST["MontoAdquisicion"];
-					$dt->data[$key]["CantTotal"] = $_REQUEST["CantTotal"];
-					$dt->data[$key]["CantRentas"] = $_REQUEST["CantRentas"];
-					$dt->data[$key]["ValorBallon"] = $_REQUEST["ValorBallon"];
-					$dt->data[$key]["ValorCompra"] = $_REQUEST["ValorCompra"];
-					$dt->data[$key]["DiaPagoMensual"] = $_REQUEST["DiaPagoMensual"];
-					$dt->data[$key]["DuracionContrato"] = $_REQUEST["DuracionContrato"];
-					$dt->data[$key]["FechaPrepago"] = $_REQUEST["FechaPrepago"];
-					$dt->data[$key]["ValorAsegurable"] = $_REQUEST["ValorAsegurable"];
-					$dt->data[$key]["ValorIguales"] = $_REQUEST["ValorIguales"];
+					$dt->data[$key]["RutProveedor"] = $_POST["RutProveedor"];
+					$dt->data[$key]["FechaInicioPago"] = $_POST["FechaInicioPago"];
+					$dt->data[$key]["DetalleBienes"] = $_POST["DetalleBienes"];
+					$dt->data[$key]["Moneda"] = $_POST["Moneda"];
+					$dt->data[$key]["MontoAdquisicion"] = $_POST["MontoAdquisicion"];
+					$dt->data[$key]["CantTotal"] = $_POST["CantTotal"];
+					$dt->data[$key]["CantRentas"] = $_POST["CantRentas"];
+					$dt->data[$key]["ValorBallon"] = $_POST["ValorBallon"];
+					$dt->data[$key]["ValorCompra"] = $_POST["ValorCompra"];
+					$dt->data[$key]["DiaPagoMensual"] = $_POST["DiaPagoMensual"];
+					$dt->data[$key]["DuracionContrato"] = $_POST["DuracionContrato"];
+					$dt->data[$key]["FechaPrepago"] = $_POST["FechaPrepago"];
+					$dt->data[$key]["ValorAsegurable"] = $_POST["ValorAsegurable"];
+					$dt->data[$key]["ValorIguales"] = $_POST["ValorIguales"];
 				}
 			}
 		}
@@ -1456,103 +1456,103 @@ class documentos {
 		$dt2 = new DataTable();
 
 		//Listado de Empresas Disponibles 
-		$_REQUEST["TipoEmpresa"] = 3;
+		$_POST["TipoEmpresa"] = 3;
 		//Buscar todas las Empresas disponibles
-		$this->documentosBD->listadoEmpresas($_REQUEST,$dt);
+		$this->documentosBD->listadoEmpresas($_POST,$dt);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 		
 		//Quitar las etiquetas de HTML antes de llevar al listado
 		if ( count($dt->data) ){
 			foreach ($dt->data as $key => $value) {
 
-				$dt->data[$key]["Titulo_Pl"] = $_REQUEST["Titulo_Pl"];
-				$dt->data[$key]["idWF"] = $_REQUEST["idWF"];
-				$dt->data[$key]["idTipoDoc"] = $_REQUEST["idTipoDoc"];
-				$dt->data[$key]["NombreTipoDoc"] = $_REQUEST["NombreTipoDoc"];
-				$dt->data[$key]["RutEmpresa"] = $_REQUEST["RutEmpresa"];
-				$dt->data[$key]["RutEmpresaC"] = $_REQUEST["RutEmpresaC"];
-				$dt->data[$key]["RutEjecutivo"] = $_REQUEST["RutEjecutivo"];
-				$dt->data[$key]["RutSupervisor"] = $_REQUEST["RutSupervisor"];
-				$dt->data[$key]["fechaInicio"] = $_REQUEST["fechaInicio"];
-				$dt->data[$key]["fechaFin"] = $_REQUEST["fechaFin"];
-				$dt->data[$key]["fecha"] = $_REQUEST["fecha"];
-				$dt->data[$key]["modelo_contrato"] = $_REQUEST["modelo_contrato"];
-				$dt->data[$key]["FormasPago"] = $_REQUEST["FormasPago"];
-				$dt->data[$key]["TipoFirmas"] = $_REQUEST["TipoFirmas"];
-				$dt->data[$key]["idPlantilla"] = $_REQUEST["idPlantilla"];
-				$dt->data[$key]["pro"] = $_REQUEST["pro"];
-				$dt->data[$key]["aval"] = $_REQUEST["aval"];
+				$dt->data[$key]["Titulo_Pl"] = $_POST["Titulo_Pl"];
+				$dt->data[$key]["idWF"] = $_POST["idWF"];
+				$dt->data[$key]["idTipoDoc"] = $_POST["idTipoDoc"];
+				$dt->data[$key]["NombreTipoDoc"] = $_POST["NombreTipoDoc"];
+				$dt->data[$key]["RutEmpresa"] = $_POST["RutEmpresa"];
+				$dt->data[$key]["RutEmpresaC"] = $_POST["RutEmpresaC"];
+				$dt->data[$key]["RutEjecutivo"] = $_POST["RutEjecutivo"];
+				$dt->data[$key]["RutSupervisor"] = $_POST["RutSupervisor"];
+				$dt->data[$key]["fechaInicio"] = $_POST["fechaInicio"];
+				$dt->data[$key]["fechaFin"] = $_POST["fechaFin"];
+				$dt->data[$key]["fecha"] = $_POST["fecha"];
+				$dt->data[$key]["modelo_contrato"] = $_POST["modelo_contrato"];
+				$dt->data[$key]["FormasPago"] = $_POST["FormasPago"];
+				$dt->data[$key]["TipoFirmas"] = $_POST["TipoFirmas"];
+				$dt->data[$key]["idPlantilla"] = $_POST["idPlantilla"];
+				$dt->data[$key]["pro"] = $_POST["pro"];
+				$dt->data[$key]["aval"] = $_POST["aval"];
 
 
-				if( $_REQUEST["idProyecto"] != "" ){ //Anexo
-					$dt->data[$key]["idProyecto"] = $_REQUEST["idProyecto"];
-					$dt->data[$key]["fechaFirma"] = $_REQUEST["fechaFirma"];
-					$dt->data[$key]["Marca"] = $_REQUEST["Marca"];
-					$dt->data[$key]["Modelo"] = $_REQUEST["Modelo"];
-					$dt->data[$key]["CiudadEntrega"] = $_REQUEST["CiudadEntrega"];
-					$dt->data[$key]["CiudadOperacion"] = $_REQUEST["CiudadOperacion"];
-					$dt->data[$key]["CiudadDevolucion"] = $_REQUEST["CiudadDevolucion"];
-					$dt->data[$key]["PeriodoArriendo"] = $_REQUEST["PeriodoArriendo"];
-					$dt->data[$key]["FechaInicio"] = $_REQUEST["FechaInicio"];
-					$dt->data[$key]["FechaFinal"] = $_REQUEST["FechaFinal"];
-					$dt->data[$key]["Tarifa"] = $_REQUEST["Tarifa"];
-					$dt->data[$key]["idMoneda_Tarifa"] = $_REQUEST["idMoneda_Tarifa"];
-					$dt->data[$key]["idMoneda_KmsExceso"] = $_REQUEST["idMoneda_KmsExceso"];
-					$dt->data[$key]["KmsExceso"] = $_REQUEST["KmsExceso"];
-					$dt->data[$key]["KmsContratados"] = $_REQUEST["KmsContratados"];
-					$dt->data[$key]["KmsMensuales"] = $_REQUEST["KmsMensuales"];
-					$dt->data[$key]["FrecuenciaMantencion"] = $_REQUEST["FrecuenciaMantencion"];
-					$dt->data[$key]["FrecuenciaCambio"] = $_REQUEST["FrecuenciaCambio"];
-					$dt->data[$key]["Cantidad"] = $_REQUEST["Cantidad"];
-					$dt->data[$key]["Porcentaje"] = $_REQUEST["Porcentaje"];
-					$dt->data[$key]["Propuesta"] = $_REQUEST["Propuesta"];
-					$dt->data[$key]["FechaPropuesta"] = $_REQUEST["FechaPropuesta"];
-					$dt->data[$key]["GPS"] = $_REQUEST["GPS"];
-					$dt->data[$key]["seleccion"] = $_REQUEST["seleccion"];
-					$dt->data[$key]["seleccion_ded"] = $_REQUEST["seleccion_ded"];
-					$dt->data[$key]["rut_coordinador"] = $_REQUEST["rut_coordinador"];
-					$dt->data[$key]["nombre_coordinador"] = $_REQUEST["nombre_coordinador"];
+				if( $_POST["idProyecto"] != "" ){ //Anexo
+					$dt->data[$key]["idProyecto"] = $_POST["idProyecto"];
+					$dt->data[$key]["fechaFirma"] = $_POST["fechaFirma"];
+					$dt->data[$key]["Marca"] = $_POST["Marca"];
+					$dt->data[$key]["Modelo"] = $_POST["Modelo"];
+					$dt->data[$key]["CiudadEntrega"] = $_POST["CiudadEntrega"];
+					$dt->data[$key]["CiudadOperacion"] = $_POST["CiudadOperacion"];
+					$dt->data[$key]["CiudadDevolucion"] = $_POST["CiudadDevolucion"];
+					$dt->data[$key]["PeriodoArriendo"] = $_POST["PeriodoArriendo"];
+					$dt->data[$key]["FechaInicio"] = $_POST["FechaInicio"];
+					$dt->data[$key]["FechaFinal"] = $_POST["FechaFinal"];
+					$dt->data[$key]["Tarifa"] = $_POST["Tarifa"];
+					$dt->data[$key]["idMoneda_Tarifa"] = $_POST["idMoneda_Tarifa"];
+					$dt->data[$key]["idMoneda_KmsExceso"] = $_POST["idMoneda_KmsExceso"];
+					$dt->data[$key]["KmsExceso"] = $_POST["KmsExceso"];
+					$dt->data[$key]["KmsContratados"] = $_POST["KmsContratados"];
+					$dt->data[$key]["KmsMensuales"] = $_POST["KmsMensuales"];
+					$dt->data[$key]["FrecuenciaMantencion"] = $_POST["FrecuenciaMantencion"];
+					$dt->data[$key]["FrecuenciaCambio"] = $_POST["FrecuenciaCambio"];
+					$dt->data[$key]["Cantidad"] = $_POST["Cantidad"];
+					$dt->data[$key]["Porcentaje"] = $_POST["Porcentaje"];
+					$dt->data[$key]["Propuesta"] = $_POST["Propuesta"];
+					$dt->data[$key]["FechaPropuesta"] = $_POST["FechaPropuesta"];
+					$dt->data[$key]["GPS"] = $_POST["GPS"];
+					$dt->data[$key]["seleccion"] = $_POST["seleccion"];
+					$dt->data[$key]["seleccion_ded"] = $_POST["seleccion_ded"];
+					$dt->data[$key]["rut_coordinador"] = $_POST["rut_coordinador"];
+					$dt->data[$key]["nombre_coordinador"] = $_POST["nombre_coordinador"];
 				}
 
-				if ( $_REQUEST["Patente"] != "" ){ //Contrato Renting 
+				if ( $_POST["Patente"] != "" ){ //Contrato Renting 
 
-					$dt->data[$key]["FormasPago"] = $_REQUEST["FormasPago"];
-					$dt->data[$key]["Marca"] = $_REQUEST["Marca"];
-					$dt->data[$key]["Modelo"] = $_REQUEST["Modelo"];
-					$dt->data[$key]["Patente"] = $_REQUEST["Patente"];
-					$dt->data[$key]["Color"] = $_REQUEST["Color"];
-					$dt->data[$key]["VIN"] = $_REQUEST["VIN"];
-					$dt->data[$key]["AnnoVehiculo"] = $_REQUEST["AnnoVehiculo"];
-					$dt->data[$key]["PeriodoArriendo"] = $_REQUEST["PeriodoArriendo"];
-					$dt->data[$key]["KmsMensuales"] = $_REQUEST["KmsMensuales"];
-					$dt->data[$key]["FechaInicio"] = $_REQUEST["FechaInicio"];
-					$dt->data[$key]["FechaFinal"] = $_REQUEST["FechaFinal"];
-					$dt->data[$key]["FechaPie"] = $_REQUEST["FechaPie"];
-					$dt->data[$key]["FechaPago"] = $_REQUEST["FechaPago"];
-					$dt->data[$key]["CuotaPie"] = $_REQUEST["CuotaPie"];
-					$dt->data[$key]["MontoCuota"] = $_REQUEST["MontoCuota"];
-					$dt->data[$key]["Exceso"] = $_REQUEST["Exceso"];
-					$dt->data[$key]["KmsExceso"] = $_REQUEST["KmsExceso"];
-					$dt->data[$key]["idRentaMens"] = $_REQUEST["idRentaMens"];
-					$dt->data[$key]["RentaMens"] = $_REQUEST["RentaMens"];
+					$dt->data[$key]["FormasPago"] = $_POST["FormasPago"];
+					$dt->data[$key]["Marca"] = $_POST["Marca"];
+					$dt->data[$key]["Modelo"] = $_POST["Modelo"];
+					$dt->data[$key]["Patente"] = $_POST["Patente"];
+					$dt->data[$key]["Color"] = $_POST["Color"];
+					$dt->data[$key]["VIN"] = $_POST["VIN"];
+					$dt->data[$key]["AnnoVehiculo"] = $_POST["AnnoVehiculo"];
+					$dt->data[$key]["PeriodoArriendo"] = $_POST["PeriodoArriendo"];
+					$dt->data[$key]["KmsMensuales"] = $_POST["KmsMensuales"];
+					$dt->data[$key]["FechaInicio"] = $_POST["FechaInicio"];
+					$dt->data[$key]["FechaFinal"] = $_POST["FechaFinal"];
+					$dt->data[$key]["FechaPie"] = $_POST["FechaPie"];
+					$dt->data[$key]["FechaPago"] = $_POST["FechaPago"];
+					$dt->data[$key]["CuotaPie"] = $_POST["CuotaPie"];
+					$dt->data[$key]["MontoCuota"] = $_POST["MontoCuota"];
+					$dt->data[$key]["Exceso"] = $_POST["Exceso"];
+					$dt->data[$key]["KmsExceso"] = $_POST["KmsExceso"];
+					$dt->data[$key]["idRentaMens"] = $_POST["idRentaMens"];
+					$dt->data[$key]["RentaMens"] = $_POST["RentaMens"];
 				}
 
-				if( $_REQUEST["RutProveedor"] != "" ){ //Contrato Financiero Operativo
+				if( $_POST["RutProveedor"] != "" ){ //Contrato Financiero Operativo
 
-					$dt->data[$key]["RutProveedor"] = $_REQUEST["RutProveedor"];
-					$dt->data[$key]["FechaInicioPago"] = $_REQUEST["FechaInicioPago"];
-					$dt->data[$key]["DetalleBienes"] = $_REQUEST["DetalleBienes"];
-					$dt->data[$key]["Moneda"] = $_REQUEST["Moneda"];
-					$dt->data[$key]["MontoAdquisicion"] = $_REQUEST["MontoAdquisicion"];
-					$dt->data[$key]["CantTotal"] = $_REQUEST["CantTotal"];
-					$dt->data[$key]["CantRentas"] = $_REQUEST["CantRentas"];
-					$dt->data[$key]["ValorBallon"] = $_REQUEST["ValorBallon"];
-					$dt->data[$key]["ValorCompra"] = $_REQUEST["ValorCompra"];
-					$dt->data[$key]["DiaPagoMensual"] = $_REQUEST["DiaPagoMensual"];
-					$dt->data[$key]["DuracionContrato"] = $_REQUEST["DuracionContrato"];
-					$dt->data[$key]["FechaPrepago"] = $_REQUEST["FechaPrepago"];
-					$dt->data[$key]["ValorAsegurable"] = $_REQUEST["ValorAsegurable"];
-					$dt->data[$key]["ValorIguales"] = $_REQUEST["ValorIguales"];
+					$dt->data[$key]["RutProveedor"] = $_POST["RutProveedor"];
+					$dt->data[$key]["FechaInicioPago"] = $_POST["FechaInicioPago"];
+					$dt->data[$key]["DetalleBienes"] = $_POST["DetalleBienes"];
+					$dt->data[$key]["Moneda"] = $_POST["Moneda"];
+					$dt->data[$key]["MontoAdquisicion"] = $_POST["MontoAdquisicion"];
+					$dt->data[$key]["CantTotal"] = $_POST["CantTotal"];
+					$dt->data[$key]["CantRentas"] = $_POST["CantRentas"];
+					$dt->data[$key]["ValorBallon"] = $_POST["ValorBallon"];
+					$dt->data[$key]["ValorCompra"] = $_POST["ValorCompra"];
+					$dt->data[$key]["DiaPagoMensual"] = $_POST["DiaPagoMensual"];
+					$dt->data[$key]["DuracionContrato"] = $_POST["DuracionContrato"];
+					$dt->data[$key]["FechaPrepago"] = $_POST["FechaPrepago"];
+					$dt->data[$key]["ValorAsegurable"] = $_POST["ValorAsegurable"];
+					$dt->data[$key]["ValorIguales"] = $_POST["ValorIguales"];
 				}
 			}
 		}
@@ -1584,27 +1584,27 @@ class documentos {
 		$dt9 = new DataTable();
 
 		//Buscamos Firmantes la Empresa
-		$this->documentosBD->obtenerFirmantes($_REQUEST,$dt1);
+		$this->documentosBD->obtenerFirmantes($_POST,$dt1);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 
 		//Buscamos Firmantes la Cliente
-		$this->documentosBD->obtenerFirmantesC($_REQUEST,$dt2);
+		$this->documentosBD->obtenerFirmantesC($_POST,$dt2);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 
 		//Buscamos Firmantes la Notaria
-		$this->documentosBD->obtenerFirmantesN($_REQUEST,$dt3);
+		$this->documentosBD->obtenerFirmantesN($_POST,$dt3);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 
 		//Completamos los datos de la Empresa
-		$this->documentosBD->obtenerRazonSocial($_REQUEST,$dt4);
+		$this->documentosBD->obtenerRazonSocial($_POST,$dt4);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 		
 		//Completamos los datos de la Empresa Cliente 
-		$this->documentosBD->obtenerRazonSocialC($_REQUEST,$dt5);
+		$this->documentosBD->obtenerRazonSocialC($_POST,$dt5);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 
 		//Completamos los datos de Notaria
-		$this->documentosBD->obtenerRazonSocialN($_REQUEST,$dt8);
+		$this->documentosBD->obtenerRazonSocialN($_POST,$dt8);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 
 		//Completamos los tipo de Firmas
@@ -1612,7 +1612,7 @@ class documentos {
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 
 		//Completamos los datos de la Plantilla
-		$this->documentosBD->obtenerPlantilla($_REQUEST,$dt7);
+		$this->documentosBD->obtenerPlantilla($_POST,$dt7);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 
 		//Consultar si el flujo tiene Aval
@@ -1627,7 +1627,7 @@ class documentos {
 			$dt->data[0]["aval"] = 1;
 		}
 
-		$dt->data[0]["RutEmpresa"] = $_REQUEST["RutEmpresa"];
+		$dt->data[0]["RutEmpresa"] = $_POST["RutEmpresa"];
 
 		//Tipo de modelo de contrato : Anexo
 		if( $dt5->data[0]["TipoEmpresa"] == 2 ){
@@ -1636,7 +1636,7 @@ class documentos {
 			$dt->data[0]["RutEmpresaC"] = $dt5->data[0]["RutEmpresa"];
 		}
 		
-		$dt->data[0]["RutEmpresaN"] = $_REQUEST["RutEmpresaN"];
+		$dt->data[0]["RutEmpresaN"] = $_POST["RutEmpresaN"];
 
 		//Firmantes de la Empresa
 		//Quitar Etiqutas de HTML
@@ -1669,13 +1669,13 @@ class documentos {
 		$dt->data[0]["idPlantilla"] = $dt7->data[0]["idPlantilla"];
 		$dt->data[0]["idWF"] = $dt7->data[0]["idWF"];
 		$dt->data[0]["idTipoDoc"] = $dt7->data[0]["idTipoDoc"];
-		$dt->data[0]["RutEjecutivo"] = $_REQUEST["RutEjecutivo"];
-		$dt->data[0]["RutSupervisor"] = $_REQUEST["RutSupervisor"];
-		$dt->data[0]["fechaInicio"] = $_REQUEST["fechaInicio"];
-		$dt->data[0]["fechaFin"] = $_REQUEST["fechaFin"];
-		$dt->data[0]["fecha"] = $_REQUEST["fecha"];
-		$dt->data[0]["modelo_contrato"] = $_REQUEST["modelo_contrato"];
-		$dt->data[0]["FormasPago"] = $_REQUEST["FormasPago"];
+		$dt->data[0]["RutEjecutivo"] = $_POST["RutEjecutivo"];
+		$dt->data[0]["RutSupervisor"] = $_POST["RutSupervisor"];
+		$dt->data[0]["fechaInicio"] = $_POST["fechaInicio"];
+		$dt->data[0]["fechaFin"] = $_POST["fechaFin"];
+		$dt->data[0]["fecha"] = $_POST["fecha"];
+		$dt->data[0]["modelo_contrato"] = $_POST["modelo_contrato"];
+		$dt->data[0]["FormasPago"] = $_POST["FormasPago"];
 		$dt->data[0]["RutEmpresa"] = $dt4->data[0]["RutEmpresa"];
 		$dt->data[0]["RazonSocial"] = $dt4->data[0]["RazonSocial"];
 
@@ -1691,79 +1691,79 @@ class documentos {
 		$dt->data[0]["RazonSocialN"] = $dt8->data[0]["RazonSocialN"];
 		$dt->data[0]["idPla"] = $dt7->data[0]["idPlantilla"]." ".strip_tags( substr($dt7->data[0]["Descripcion_Pl"], 0, 60));
 		$dt->data[0]["Notaria"] = $dt8->data[0]["RutEmpresaN"]." ".$dt8->data[0]["RazonSocialN"];
-		$dt->data[0]["modelo_contrato"] = $_REQUEST["modelo_contrato"];
-		$dt->data[0]["pro"] = $_REQUEST["pro"];
+		$dt->data[0]["modelo_contrato"] = $_POST["modelo_contrato"];
+		$dt->data[0]["pro"] = $_POST["pro"];
 
-		if( $_REQUEST["modelo_contrato"] == 2 ){//Si es Anexo
+		if( $_POST["modelo_contrato"] == 2 ){//Si es Anexo
 
-			$dt->data[0]["idProyecto"] = $_REQUEST["idProyecto"];
-			$dt->data[0]["fechaFirma"] = $_REQUEST["fechaFirma"];
-			$dt->data[0]["Marca"] = $_REQUEST["Marca"];
-			$dt->data[0]["Modelo"] = $_REQUEST["Modelo"];
-			$dt->data[0]["CiudadEntrega"] = $_REQUEST["CiudadEntrega"];
-			$dt->data[0]["CiudadOperacion"] = $_REQUEST["CiudadOperacion"];
-			$dt->data[0]["CiudadDevolucion"] = $_REQUEST["CiudadDevolucion"];
-			$dt->data[0]["PeriodoArriendo"] = $_REQUEST["PeriodoArriendo"];
-			$dt->data[0]["FechaInicio"] = $_REQUEST["FechaInicio"];
-			$dt->data[0]["FechaFinal"] = $_REQUEST["FechaFinal"];
-			$dt->data[0]["Tarifa"] = $_REQUEST["Tarifa"];
-			$dt->data[0]["idMoneda_Tarifa"] = $_REQUEST["idMoneda_Tarifa"];
-			$dt->data[0]["idMoneda_KmsExceso"] = $_REQUEST["idMoneda_KmsExceso"];
-			$dt->data[0]["KmsExceso"] = $_REQUEST["KmsExceso"];
-			$dt->data[0]["KmsContratados"] = $_REQUEST["KmsContratados"];
-			$dt->data[0]["KmsMensuales"] = $_REQUEST["KmsMensuales"];
-			$dt->data[0]["FrecuenciaMantencion"] = $_REQUEST["FrecuenciaMantencion"];
-			$dt->data[0]["FrecuenciaCambio"] = $_REQUEST["FrecuenciaCambio"];
-			$dt->data[0]["Cantidad"] = $_REQUEST["Cantidad"];
-			$dt->data[0]["Porcentaje"] = $_REQUEST["Porcentaje"];
-			$dt->data[0]["Propuesta"] = $_REQUEST["Propuesta"];
-			$dt->data[0]["FechaPropuesta"] = $_REQUEST["FechaPropuesta"];
-			$dt->data[0]["GPS"] = $_REQUEST["GPS"];
-			$dt->data[0]["seleccion"] = $_REQUEST["seleccion"];
-			$dt->data[0]["seleccion_ded"] = $_REQUEST["seleccion_ded"];
-			$dt->data[0]["rut_coordinador"] = $_REQUEST["rut_coordinador"];
-			$dt->data[0]["nombre_coordinador"] = $_REQUEST["nombre_coordinador"];
+			$dt->data[0]["idProyecto"] = $_POST["idProyecto"];
+			$dt->data[0]["fechaFirma"] = $_POST["fechaFirma"];
+			$dt->data[0]["Marca"] = $_POST["Marca"];
+			$dt->data[0]["Modelo"] = $_POST["Modelo"];
+			$dt->data[0]["CiudadEntrega"] = $_POST["CiudadEntrega"];
+			$dt->data[0]["CiudadOperacion"] = $_POST["CiudadOperacion"];
+			$dt->data[0]["CiudadDevolucion"] = $_POST["CiudadDevolucion"];
+			$dt->data[0]["PeriodoArriendo"] = $_POST["PeriodoArriendo"];
+			$dt->data[0]["FechaInicio"] = $_POST["FechaInicio"];
+			$dt->data[0]["FechaFinal"] = $_POST["FechaFinal"];
+			$dt->data[0]["Tarifa"] = $_POST["Tarifa"];
+			$dt->data[0]["idMoneda_Tarifa"] = $_POST["idMoneda_Tarifa"];
+			$dt->data[0]["idMoneda_KmsExceso"] = $_POST["idMoneda_KmsExceso"];
+			$dt->data[0]["KmsExceso"] = $_POST["KmsExceso"];
+			$dt->data[0]["KmsContratados"] = $_POST["KmsContratados"];
+			$dt->data[0]["KmsMensuales"] = $_POST["KmsMensuales"];
+			$dt->data[0]["FrecuenciaMantencion"] = $_POST["FrecuenciaMantencion"];
+			$dt->data[0]["FrecuenciaCambio"] = $_POST["FrecuenciaCambio"];
+			$dt->data[0]["Cantidad"] = $_POST["Cantidad"];
+			$dt->data[0]["Porcentaje"] = $_POST["Porcentaje"];
+			$dt->data[0]["Propuesta"] = $_POST["Propuesta"];
+			$dt->data[0]["FechaPropuesta"] = $_POST["FechaPropuesta"];
+			$dt->data[0]["GPS"] = $_POST["GPS"];
+			$dt->data[0]["seleccion"] = $_POST["seleccion"];
+			$dt->data[0]["seleccion_ded"] = $_POST["seleccion_ded"];
+			$dt->data[0]["rut_coordinador"] = $_POST["rut_coordinador"];
+			$dt->data[0]["nombre_coordinador"] = $_POST["nombre_coordinador"];
 		}
 		
-		if( $_REQUEST["modelo_contrato"] == 3 ){//Si es Renting
+		if( $_POST["modelo_contrato"] == 3 ){//Si es Renting
 
-			$dt->data[0]["FormasPago"] = $_REQUEST["FormasPago"];
-			$dt->data[0]["Marca"] = $_REQUEST["Marca"];
-			$dt->data[0]["Modelo"] = $_REQUEST["Modelo"];
-			$dt->data[0]["Patente"] = $_REQUEST["Patente"];
-			$dt->data[0]["Color"] = $_REQUEST["Color"];
-			$dt->data[0]["VIN"] = $_REQUEST["VIN"];
-			$dt->data[0]["AnnoVehiculo"] = $_REQUEST["AnnoVehiculo"];
-			$dt->data[0]["PeriodoArriendo"] = $_REQUEST["PeriodoArriendo"];
-			$dt->data[0]["KmsMensuales"] = $_REQUEST["KmsMensuales"];
-			$dt->data[0]["FechaInicio"] = $_REQUEST["FechaInicio"];
-			$dt->data[0]["FechaFinal"] = $_REQUEST["FechaFinal"];
-			$dt->data[0]["FechaPie"] = $_REQUEST["FechaPie"];
-			$dt->data[0]["FechaPago"] = $_REQUEST["FechaPago"];
-			$dt->data[0]["CuotaPie"] = $_REQUEST["CuotaPie"];
-			$dt->data[0]["MontoCuota"] = $_REQUEST["MontoCuota"];
-			$dt->data[0]["Exceso"] = $_REQUEST["Exceso"];
-			$dt->data[0]["KmsExceso"] = $_REQUEST["KmsExceso"];
-			$dt->data[0]["idRentaMens"] = $_REQUEST["idRentaMens"];
-			$dt->data[0]["RentaMens"] = $_REQUEST["RentaMens"];
+			$dt->data[0]["FormasPago"] = $_POST["FormasPago"];
+			$dt->data[0]["Marca"] = $_POST["Marca"];
+			$dt->data[0]["Modelo"] = $_POST["Modelo"];
+			$dt->data[0]["Patente"] = $_POST["Patente"];
+			$dt->data[0]["Color"] = $_POST["Color"];
+			$dt->data[0]["VIN"] = $_POST["VIN"];
+			$dt->data[0]["AnnoVehiculo"] = $_POST["AnnoVehiculo"];
+			$dt->data[0]["PeriodoArriendo"] = $_POST["PeriodoArriendo"];
+			$dt->data[0]["KmsMensuales"] = $_POST["KmsMensuales"];
+			$dt->data[0]["FechaInicio"] = $_POST["FechaInicio"];
+			$dt->data[0]["FechaFinal"] = $_POST["FechaFinal"];
+			$dt->data[0]["FechaPie"] = $_POST["FechaPie"];
+			$dt->data[0]["FechaPago"] = $_POST["FechaPago"];
+			$dt->data[0]["CuotaPie"] = $_POST["CuotaPie"];
+			$dt->data[0]["MontoCuota"] = $_POST["MontoCuota"];
+			$dt->data[0]["Exceso"] = $_POST["Exceso"];
+			$dt->data[0]["KmsExceso"] = $_POST["KmsExceso"];
+			$dt->data[0]["idRentaMens"] = $_POST["idRentaMens"];
+			$dt->data[0]["RentaMens"] = $_POST["RentaMens"];
 		}
 
-		if ( $_REQUEST["modelo_contrato"] == 5 ){ //Si es Operativo - Financiero
+		if ( $_POST["modelo_contrato"] == 5 ){ //Si es Operativo - Financiero
 
-			$dt->data[0]["RutProveedor"] = $_REQUEST["RutProveedor"];
-			$dt->data[0]["FechaInicioPago"] = $_REQUEST["FechaInicioPago"];
-			$dt->data[0]["DetalleBienes"] = $_REQUEST["DetalleBienes"];
-			$dt->data[0]["Moneda"] = $_REQUEST["Moneda"];
-			$dt->data[0]["MontoAdquisicion"] = $_REQUEST["MontoAdquisicion"];
-			$dt->data[0]["CantTotal"] = $_REQUEST["CantTotal"];
-			$dt->data[0]["CantRentas"] = $_REQUEST["CantRentas"];
-			$dt->data[0]["ValorBallon"] = $_REQUEST["ValorBallon"];
-			$dt->data[0]["ValorCompra"] = $_REQUEST["ValorCompra"];
-			$dt->data[0]["DiaPagoMensual"] = $_REQUEST["DiaPagoMensual"];
-			$dt->data[0]["DuracionContrato"] = $_REQUEST["DuracionContrato"];
-			$dt->data[0]["FechaPrepago"] = $_REQUEST["FechaPrepago"];
-			$dt->data[0]["ValorAsegurable"] = $_REQUEST["ValorAsegurable"];
-			$dt->data[0]["ValorIguales"] = $_REQUEST["ValorIguales"];
+			$dt->data[0]["RutProveedor"] = $_POST["RutProveedor"];
+			$dt->data[0]["FechaInicioPago"] = $_POST["FechaInicioPago"];
+			$dt->data[0]["DetalleBienes"] = $_POST["DetalleBienes"];
+			$dt->data[0]["Moneda"] = $_POST["Moneda"];
+			$dt->data[0]["MontoAdquisicion"] = $_POST["MontoAdquisicion"];
+			$dt->data[0]["CantTotal"] = $_POST["CantTotal"];
+			$dt->data[0]["CantRentas"] = $_POST["CantRentas"];
+			$dt->data[0]["ValorBallon"] = $_POST["ValorBallon"];
+			$dt->data[0]["ValorCompra"] = $_POST["ValorCompra"];
+			$dt->data[0]["DiaPagoMensual"] = $_POST["DiaPagoMensual"];
+			$dt->data[0]["DuracionContrato"] = $_POST["DuracionContrato"];
+			$dt->data[0]["FechaPrepago"] = $_POST["FechaPrepago"];
+			$dt->data[0]["ValorAsegurable"] = $_POST["ValorAsegurable"];
+			$dt->data[0]["ValorIguales"] = $_POST["ValorIguales"];
 
 		}
 				
@@ -1791,7 +1791,7 @@ class documentos {
 	//Generar el documento en PDF con los datos del formulario 
 	private function generar(){
 		
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//Instancia la clase
 		$dt = new DataTable();
@@ -1814,7 +1814,7 @@ class documentos {
 		$idContrato = $dt->data[0]["idContrato"];
 
 		//Sustituir acentos al formato de HTML 
-		$_REQUEST["personeria_aval"] = $this->TildesHtml($_REQUEST["personeria_aval"]);
+		$_POST["personeria_aval"] = $this->TildesHtml($_POST["personeria_aval"]);
 
 		$this->firmantes_completos = array();
 
@@ -2038,7 +2038,7 @@ class documentos {
 
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$array = array ( "idContrato" => $data);
 
@@ -2091,7 +2091,7 @@ class documentos {
 	   	$html = "";
 
 		// Obtenemos los datos de las Clausulas relacionados
-		$this->documentosBD->obtenerClausulasPlantillas($_REQUEST,$dt);
+		$this->documentosBD->obtenerClausulasPlantillas($_POST,$dt);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 
         //Agregamos Titulo de la Plantilla
@@ -2150,10 +2150,10 @@ class documentos {
 
 		//Recorremos los firmantes de Empresas
 		$firmantes_emp = array ();
-		$firmantes_emp = $_REQUEST["Firmantes_Emp"];
+		$firmantes_emp = $_POST["Firmantes_Emp"];
 
 		$firmantes_emp_per = array ();
-		$firmantes_emp_per = $_REQUEST["Firmantes_Emp_Per"];
+		$firmantes_emp_per = $_POST["Firmantes_Emp_Per"];
 
 		if( count($firmantes_emp) > 0 ){
 
@@ -2161,7 +2161,7 @@ class documentos {
 
 				if ( $firmantes_emp_per[$key] == 1 ){
 
-					$array = array ("RutFirmante" => $firmantes_emp[$key], "RutEmpresa" => $_REQUEST["RutEmpresa"] );	
+					$array = array ("RutFirmante" => $firmantes_emp[$key], "RutEmpresa" => $_POST["RutEmpresa"] );	
 
 					$this->documentosBD->obtenerFirmante($array,$dt);				
 			        $this->mensajeError.=$this->documentosBD->mensajeError;
@@ -2180,10 +2180,10 @@ class documentos {
 			
 		//Recorremos los firmantes de Clientes
 		$firmantes_cli = array ();
-		$firmantes_cli = $_REQUEST["Firmantes_Cli"];
+		$firmantes_cli = $_POST["Firmantes_Cli"];
 
 		$firmantes_cli_per = array ();
-		$firmantes_cli_per = $_REQUEST["Firmantes_Cli_Per"];
+		$firmantes_cli_per = $_POST["Firmantes_Cli_Per"];
 
 		if ( count($firmantes_cli) > 0 ){
 
@@ -2191,7 +2191,7 @@ class documentos {
 
 				if ( $firmantes_cli_per[$key] == 1 ){
 
-					$array = array ("RutFirmante" => $firmantes_cli[$key], "RutEmpresa" => $_REQUEST["RutEmpresaC"] );
+					$array = array ("RutFirmante" => $firmantes_cli[$key], "RutEmpresa" => $_POST["RutEmpresaC"] );
 		
 					$this->documentosBD->obtenerFirmante($array,$dt);				
 			        $this->mensajeError.=$this->documentosBD->mensajeError;
@@ -2227,19 +2227,19 @@ class documentos {
 		$dt8 = new DataTable();
 
 	    //Buscar datos que faltan de la Empresa
-       	$this->documentosBD->obtenerRazonSocial($_REQUEST,$dt4);
+       	$this->documentosBD->obtenerRazonSocial($_POST,$dt4);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar Datos que faltan del Cliente 
-       	$this->documentosBD->obtenerRazonSocialC($_REQUEST,$dt5);
+       	$this->documentosBD->obtenerRazonSocialC($_POST,$dt5);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar Datos que faltan del Notaria
-       	$this->documentosBD->obtenerRazonSocialN($_REQUEST,$dt6);
+       	$this->documentosBD->obtenerRazonSocialN($_POST,$dt6);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
     
       	//Buscar Los estados del WorkFlow 
-        $this->documentosBD->obtenerEstados($_REQUEST, $dt8);
+        $this->documentosBD->obtenerEstados($_POST, $dt8);
         $this->mensajeError.=$this->documentosBD->mensajeError;
 
         //Auxiliar para cuando tiene estado de aprobacion
@@ -2256,16 +2256,16 @@ class documentos {
 			  		$f_empresa = array();
 			  		$empresa_aux = array();
 
-			        foreach ($_REQUEST["Firmantes_Emp"] as $i => $valor) {
+			        foreach ($_POST["Firmantes_Emp"] as $i => $valor) {
 			        	//Datos faltantes 
-			        	$empresa_aux = array ( "idContrato" => $datos, "RutEmpresa" => $_REQUEST["RutEmpresa"], "RutFirmante" => $_REQUEST["Firmantes_Emp"][$i], "idEstado" => $dt8->data[$key]["idEstadoWF"],"Orden" => $dt8->data[$key]["Orden"]);	        	
+			        	$empresa_aux = array ( "idContrato" => $datos, "RutEmpresa" => $_POST["RutEmpresa"], "RutFirmante" => $_POST["Firmantes_Emp"][$i], "idEstado" => $dt8->data[$key]["idEstadoWF"],"Orden" => $dt8->data[$key]["Orden"]);	        	
 			        				        
 			        	//Agregara a la tabla
 			        	$this->documentosBD->agregarFirmantes($empresa_aux);
 			        	$this->mensajeError.=$this->documentosBD->mensajeError;
 			        	
 			        	//Buscar datos
-			        	$array = array( "RutEjecutivo" => $_REQUEST["Firmantes_Emp"][$i] );
+			        	$array = array( "RutEjecutivo" => $_POST["Firmantes_Emp"][$i] );
 			        	$this->documentosBD->obtenerPersona($array, $dt3);
 			        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
@@ -2287,7 +2287,7 @@ class documentos {
 			        	}
 			        	
 			        	//Completar el arreglo
-			        	$nuevo = array( "nombre" => $dt3->data[0]["nombre"].' '.$dt3->data[0]["appaterno"].' '.$dt3->data[0]["apmaterno"] , "rut" => $identificador.$_REQUEST["Firmantes_Emp"][$i], "nombre_emp" => "P.p ".$nombre_emp, "rut_emp" => "RUT N&deg;".$_REQUEST["RutEmpresa"]);
+			        	$nuevo = array( "nombre" => $dt3->data[0]["nombre"].' '.$dt3->data[0]["appaterno"].' '.$dt3->data[0]["apmaterno"] , "rut" => $identificador.$_POST["Firmantes_Emp"][$i], "nombre_emp" => "P.p ".$nombre_emp, "rut_emp" => "RUT N&deg;".$_POST["RutEmpresa"]);
 						
 						//Agregar al final 
 						array_push($f_empresa, $nuevo);
@@ -2301,22 +2301,22 @@ class documentos {
 		        	$f_cliente = array();
 		        	$cliente_aux = array();
 
-			        foreach ($_REQUEST["Firmantes_Cli"] as $i => $valor) {
+			        foreach ($_POST["Firmantes_Cli"] as $i => $valor) {
 			        	//Datos faltantes 
-				        $cliente_aux = array ( "idContrato" => $datos, "RutEmpresa" => $_REQUEST["RutEmpresaC"], "RutFirmante" => $_REQUEST["Firmantes_Cli"][$i], "idEstado" => $dt8->data[$key]["idEstadoWF"],"Orden" => $dt8->data[$key]["Orden"]);
+				        $cliente_aux = array ( "idContrato" => $datos, "RutEmpresa" => $_POST["RutEmpresaC"], "RutFirmante" => $_POST["Firmantes_Cli"][$i], "idEstado" => $dt8->data[$key]["idEstadoWF"],"Orden" => $dt8->data[$key]["Orden"]);
 
 			        	//Agregara a la tabla
 			        	$this->documentosBD->agregarFirmantes($cliente_aux);
 			        	$this->mensajeError.=$this->documentosBD->mensajeError;
 			        	
 			        	//Buscar datos
-			        	$array = array( "RutEjecutivo" => $_REQUEST["Firmantes_Cli"][$i] );
+			        	$array = array( "RutEjecutivo" => $_POST["Firmantes_Cli"][$i] );
 			        	$this->documentosBD->obtenerPersona($array, $dt3);
 			        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
 			        	$tipo_firmante = 0;
 			        	//Verificacion es persona natural 
-			        	if ( $_REQUEST["Firmantes_Cli"][$i] == $_REQUEST["RutEmpresaC"] ){
+			        	if ( $_POST["Firmantes_Cli"][$i] == $_POST["RutEmpresaC"] ){
 			        		$tipo_firmante = 1;
 			        	}
 			        	
@@ -2340,7 +2340,7 @@ class documentos {
 
 			        	$identificador2 = "";
 			        	//Verificacion de formato del rut de la empresa
-			        	if ( strlen($_REQUEST["RutEmpresaC"]) == 10 && strpos($_REQUEST["RutEmpresaC"],"-")){
+			        	if ( strlen($_POST["RutEmpresaC"]) == 10 && strpos($_POST["RutEmpresaC"],"-")){
 			        		$identificador2 = "RUT N&deg;";
 			        	}
 			        	else{
@@ -2349,10 +2349,10 @@ class documentos {
 
 			        	if( $tipo_firmante == 1 ){
 			        		//Completar arreglo
-			        		$nuevo = array( "nombre" => $dt3->data[0]["nombre"].' '.$dt3->data[0]["appaterno"].' '.$dt3->data[0]["apmaterno"] , "rut" => $identificador.$_REQUEST["Firmantes_Cli"][$i]);
+			        		$nuevo = array( "nombre" => $dt3->data[0]["nombre"].' '.$dt3->data[0]["appaterno"].' '.$dt3->data[0]["apmaterno"] , "rut" => $identificador.$_POST["Firmantes_Cli"][$i]);
 			        	}else{
 			        		//Completar arreglo
-			        		$nuevo = array( "nombre" => $dt3->data[0]["nombre"].' '.$dt3->data[0]["appaterno"].' '.$dt3->data[0]["apmaterno"] , "rut" => $identificador.$_REQUEST["Firmantes_Cli"][$i], "nombre_cli" => "P.p ".$nombre_cli, "rut_cli" => $identificador2.$_REQUEST["RutEmpresaC"] );
+			        		$nuevo = array( "nombre" => $dt3->data[0]["nombre"].' '.$dt3->data[0]["appaterno"].' '.$dt3->data[0]["apmaterno"] , "rut" => $identificador.$_POST["Firmantes_Cli"][$i], "nombre_cli" => "P.p ".$nombre_cli, "rut_cli" => $identificador2.$_POST["RutEmpresaC"] );
 			        	}
 			        	
 			        	//Agregar al final
@@ -2368,11 +2368,11 @@ class documentos {
 		        	$f_aval = array();
 		        	$aval_aux = array();
 
-			        if ( $_REQUEST["rut_aval"] != "" ) {
+			        if ( $_POST["rut_aval"] != "" ) {
 			        	//Datos faltantes 
-			           	$aval_aux = array ( "idContrato" => $datos, "RutEmpresa" => $_REQUEST["RutEmpresaC"], "RutFirmante" => $_REQUEST["rut_aval"], "idEstado" => $dt8->data[$key]["idEstadoWF"],"Orden" => $dt8->data[$key]["Orden"]);
+			           	$aval_aux = array ( "idContrato" => $datos, "RutEmpresa" => $_POST["RutEmpresaC"], "RutFirmante" => $_POST["rut_aval"], "idEstado" => $dt8->data[$key]["idEstadoWF"],"Orden" => $dt8->data[$key]["Orden"]);
 
-				        $datos_aval = array ("personaid" => $_REQUEST["rut_aval"], "nombre" => $_REQUEST["nombre_aval"], "apellido" => $_REQUEST["apellido_aval"], "correo" => $_REQUEST["correo_aval"]);
+				        $datos_aval = array ("personaid" => $_POST["rut_aval"], "nombre" => $_POST["nombre_aval"], "apellido" => $_POST["apellido_aval"], "correo" => $_POST["correo_aval"]);
 				      
 			        	//Agregar a la tabla
 			        	$this->documentosBD->agregarFirmantes($aval_aux);
@@ -2385,16 +2385,16 @@ class documentos {
 			 			//Verificar tipo de Firmante
 			 			$tipo_aval = 0;
 
-			 			if( $_REQUEST["rut_aval"] == $_REQUEST["RutEmpresaC"] ){
+			 			if( $_POST["rut_aval"] == $_POST["RutEmpresaC"] ){
 			 				$tipo_aval = 1;
 			 			}
 
 			 			if( $tipo_aval == 1 ){
 			 				//Completar arreglo
-			 				$nuevo = array( "nombre" => $_REQUEST["nombre_aval"].' '.$_REQUEST["apellido_aval"] , "rut" => "RUT N&deg;".$_REQUEST["rut_aval"], "nombre_cli" => "FIADOR Y CODEUDOR SOLIDARIO");
+			 				$nuevo = array( "nombre" => $_POST["nombre_aval"].' '.$_POST["apellido_aval"] , "rut" => "RUT N&deg;".$_POST["rut_aval"], "nombre_cli" => "FIADOR Y CODEUDOR SOLIDARIO");
 			 			}else{
 			 				//Completar arreglo
-			        		$nuevo = array( "nombre" => $_REQUEST["nombre_aval"].' '.$_REQUEST["apellido_aval"] , "rut" => 'RUT N&deg;'.$_REQUEST["rut_aval"], "nombre_cli" => "Por ".$nombre_cli, "rut_cli" => 'RUT N&deg;'.$_REQUEST["RutEmpresaC"]."<br>FIADOR Y CODEUDOR SOLIDARIO" );
+			        		$nuevo = array( "nombre" => $_POST["nombre_aval"].' '.$_POST["apellido_aval"] , "rut" => 'RUT N&deg;'.$_POST["rut_aval"], "nombre_cli" => "Por ".$nombre_cli, "rut_cli" => 'RUT N&deg;'.$_POST["RutEmpresaC"]."<br>FIADOR Y CODEUDOR SOLIDARIO" );
 			 			}
 			 	       	
 			        	//Agregar al final
@@ -2410,24 +2410,24 @@ class documentos {
 		        	$notaria_aux = array();
 
 			        //Si el flujo tiene Notaria 
-			        if( $_REQUEST["not"] == 1 ){
+			        if( $_POST["not"] == 1 ){
 
 			        	//Si el flujo tiene Notaria 
-			        	 foreach ($_REQUEST["Firmantes_Not"] as $i => $valor) {
+			        	 foreach ($_POST["Firmantes_Not"] as $i => $valor) {
 				        	//Datos faltantes 
-				        	$notaria_aux = array ( "idContrato" => $datos, "RutEmpresa" => $_REQUEST["RutEmpresaN"], "RutFirmante" => $_REQUEST["Firmantes_Not"][$i], "idEstado" => $dt8->data[$key]["idEstadoWF"],"Orden" => $dt8->data[$key]["Orden"]);
+				        	$notaria_aux = array ( "idContrato" => $datos, "RutEmpresa" => $_POST["RutEmpresaN"], "RutFirmante" => $_POST["Firmantes_Not"][$i], "idEstado" => $dt8->data[$key]["idEstadoWF"],"Orden" => $dt8->data[$key]["Orden"]);
 
 				        	//Agregara a la tabla
 				        	$this->documentosBD->agregarFirmantes($notaria_aux);
 				        	$this->mensajeErro.=$this->documentosBD->mensajeError;
 
 				        	//Buscar datos
-				        	$array = array( "RutEjecutivo" => $_REQUEST["Firmantes_Not"][$i] );
+				        	$array = array( "RutEjecutivo" => $_POST["Firmantes_Not"][$i] );
 				        	$this->documentosBD->obtenerPersona($array, $dt3);
 				        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
 				        	//Completar arreglo
-				        	$nuevo = array( "nombre" => $dt3->data[0]["nombre"].' '.$dt3->data[0]["appaterno"].' '.$dt3->data[0]["apmaterno"] , "rut" => 'RUT N&deg;'.$_REQUEST["Firmantes_Not"][$i], "nombre_not" => "P.p ".$dt6->data[0]["RazonSocialN"], "rut_not" => 'RUT N&deg;'.$_REQUEST["RutEmpresaN"]);
+				        	$nuevo = array( "nombre" => $dt3->data[0]["nombre"].' '.$dt3->data[0]["appaterno"].' '.$dt3->data[0]["apmaterno"] , "rut" => 'RUT N&deg;'.$_POST["Firmantes_Not"][$i], "nombre_not" => "P.p ".$dt6->data[0]["RazonSocialN"], "rut_not" => 'RUT N&deg;'.$_POST["RutEmpresaN"]);
 				        	//Agregar al final
 				        	array_push($f_notario, $nuevo);
 			        	}
@@ -2445,12 +2445,12 @@ class documentos {
 		array_push($firmantes_completos, $f_cliente);
 
 		//Si el flujo tiene Notario
-		if( $_REQUEST["not"] == 1 ){
+		if( $_POST["not"] == 1 ){
 			array_push($firmantes_completos, $f_notario);
 		}				
 
 		//Si tiene aval
-		if ( $_REQUEST["rut_aval"] != "" ){
+		if ( $_POST["rut_aval"] != "" ){
 			array_push($firmantes_completos, $f_aval);
 		} 
 
@@ -2508,54 +2508,54 @@ class documentos {
 
 		//Consultas 
 		//Buscar datos que faltan de la Empresa
-       	$this->documentosBD->obtenerRazonSocial($_REQUEST,$dt4);
+       	$this->documentosBD->obtenerRazonSocial($_POST,$dt4);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar datos que faltan de la Empresa
-       	$this->documentosBD->obtenerEmpresa($_REQUEST,$dt1);
+       	$this->documentosBD->obtenerEmpresa($_POST,$dt1);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
 		//Buscar datos del Representante 1
-		$cliente = array( "RutEjecutivo" => $_REQUEST["Firmantes_Cli"][0] );
+		$cliente = array( "RutEjecutivo" => $_POST["Firmantes_Cli"][0] );
        	$this->documentosBD->obtenerPersona($cliente,$dt11);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar datos del Representante 2
-		$cliente_1 = array( "RutEjecutivo" => $_REQUEST["Firmantes_Cli"][1] );
+		$cliente_1 = array( "RutEjecutivo" => $_POST["Firmantes_Cli"][1] );
        	$this->documentosBD->obtenerPersona($cliente_1,$dt12);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar datos del Representante 3
-		$cliente_2 = array( "RutEjecutivo" => $_REQUEST["Firmantes_Cli"][2] );
+		$cliente_2 = array( "RutEjecutivo" => $_POST["Firmantes_Cli"][2] );
        	$this->documentosBD->obtenerPersona($cliente_2,$dt13);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar datos del Representante 4
-		$cliente_3 = array( "RutEjecutivo" => $_REQUEST["Firmantes_Cli"][3] );
+		$cliente_3 = array( "RutEjecutivo" => $_POST["Firmantes_Cli"][3] );
        	$this->documentosBD->obtenerPersona($cliente_3,$dt14);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar datos del Representante 5
-		$cliente_4 = array( "RutEjecutivo" => $_REQUEST["Firmantes_Cli"][4] );
+		$cliente_4 = array( "RutEjecutivo" => $_POST["Firmantes_Cli"][4] );
        	$this->documentosBD->obtenerPersona($cliente_4,$dt15);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        //Buscar datos del Representante 6
-		$cliente_5 = array( "RutEjecutivo" => $_REQUEST["Firmantes_Cli"][5] );
+		$cliente_5 = array( "RutEjecutivo" => $_POST["Firmantes_Cli"][5] );
        	$this->documentosBD->obtenerPersona($cliente_5,$dt16);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar Datos que faltan del Cliente 
-       	$this->documentosBD->obtenerRazonSocialC($_REQUEST,$dt5);
+       	$this->documentosBD->obtenerRazonSocialC($_POST,$dt5);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar datos de la empresa Cliente 
-       	$array = array ( "RutEmpresa" => $_REQUEST["RutEmpresaC"]);
+       	$array = array ( "RutEmpresa" => $_POST["RutEmpresaC"]);
        	$this->documentosBD->obtenerEmpresa($array,$dt9);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Obtener nombre de Forma de Pago 
-       	$this->documentosBD->obtenerFormasPago($_REQUEST,$dt10);
+       	$this->documentosBD->obtenerFormasPago($_POST,$dt10);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	if( $dt5->data[0]["TipoEmpresa"] == 2 ) {
@@ -2586,7 +2586,7 @@ class documentos {
         	"Dia" =>$dia, 
         	"Mes" => $meses[$mes-1], 
         	"Anno" => $anio,
-        	"RutEmpresa" => $_REQUEST["RutEmpresa"] , 
+        	"RutEmpresa" => $_POST["RutEmpresa"] , 
         	"RazonSocial" => $dt4->data[0]["RazonSocial"], 
         	"RutEmpresaC" => $rut, 
         	"RazonSocialC" => $nombre, 
@@ -2611,15 +2611,15 @@ class documentos {
         	"Dia" => $dia, //Dia en numeros
         	"Mes" => $meses[$mes-1], //Mes en palabras 
         	"Anno" => $anio, //Año completo, ej.2018
-        	"RutEmpresa" => $_REQUEST["RutEmpresa"] , 
+        	"RutEmpresa" => $_POST["RutEmpresa"] , 
         	"RazonSocial" => $dt4->data[0]["RazonSocial"], 
         	"RutEmpresaC" => $rut, 
         	"RazonSocialC" => $nombre, 
-        	"idDocumento" => $_REQUEST["idDocumento"],
+        	"idDocumento" => $_POST["idDocumento"],
 
         	//Datos de Contrato Marco
-        	"FechaInicio" => $_REQUEST["fechaInicio"],
-        	"FechaFin" => $_REQUEST["fechaFin"],
+        	"FechaInicio" => $_POST["fechaInicio"],
+        	"FechaFin" => $_POST["fechaFin"],
         	"FormasPago" => $dt10->data[0]["FormaPago"],
 
         	//Representante del Cliente - 1
@@ -2662,10 +2662,10 @@ class documentos {
         	"MesNum" => $mes, //Numero de mes
 	
 	    	//Datos del Aval 
-	    	"Rut_Aval" => $_REQUEST["rut_aval"],
-	    	"Nombre_Aval" => $_REQUEST["nombre_aval"]." ".$_REQUEST["apellido_aval"],
-	    	"Correo_Aval" => $_REQUEST["correo_aval"],
-	    	"Personeria_Aval" => $_REQUEST["personeria_aval"]
+	    	"Rut_Aval" => $_POST["rut_aval"],
+	    	"Nombre_Aval" => $_POST["nombre_aval"]." ".$_POST["apellido_aval"],
+	    	"Correo_Aval" => $_POST["correo_aval"],
+	    	"Personeria_Aval" => $_POST["personeria_aval"]
 
 	    );
 
@@ -2761,33 +2761,33 @@ class documentos {
 
 		//Consultas 
 		//Buscar datos que faltan de la Empresa
-       	$this->documentosBD->obtenerRazonSocial($_REQUEST,$dt4);
+       	$this->documentosBD->obtenerRazonSocial($_POST,$dt4);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar datos que faltan de la Empresa
-       	$this->documentosBD->obtenerEmpresa($_REQUEST,$dt1);
+       	$this->documentosBD->obtenerEmpresa($_POST,$dt1);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
 		//Buscar Datos que faltan del Cliente 
-       	$this->documentosBD->obtenerRazonSocialC($_REQUEST,$dt5);
+       	$this->documentosBD->obtenerRazonSocialC($_POST,$dt5);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar datos de la empresa Cliente 
-       	$array = array ( "RutEmpresa" => $_REQUEST["RutEmpresaC"]);
+       	$array = array ( "RutEmpresa" => $_POST["RutEmpresaC"]);
        	$this->documentosBD->obtenerEmpresa($array,$dt9);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Obtener nombre de Forma de Pago 
-       	$this->documentosBD->obtenerFormasPago($_REQUEST,$dt10);
+       	$this->documentosBD->obtenerFormasPago($_POST,$dt10);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar datos del Representante 1
-		$cliente = array( "RutEjecutivo" => $_REQUEST["Firmantes_Cli"][0] );
+		$cliente = array( "RutEjecutivo" => $_POST["Firmantes_Cli"][0] );
        	$this->documentosBD->obtenerPersona($cliente,$dt11);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar datos del Representante 2
-		$cliente_1 = array( "RutEjecutivo" => $_REQUEST["Firmantes_Cli"][1] );
+		$cliente_1 = array( "RutEjecutivo" => $_POST["Firmantes_Cli"][1] );
        	$this->documentosBD->obtenerPersona($cliente_1,$dt12);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
@@ -2811,20 +2811,20 @@ class documentos {
 	
 		//Nombre de archivo
 		$NombreDoc = "Documento_".$datos.".pdf";
-		$Porcentaje = $_REQUEST["Porcentaje"]." %";
+		$Porcentaje = $_POST["Porcentaje"]." %";
 	
         $array = array ( 
         	"idContrato" => $datos, 
         	"Dia" =>$dia, //Dia en numeros
         	"Mes" => $meses[$mes-1],  //Mes en palabras
         	"Anno" => $anio, //Año completo , Ej. 2018
-        	"RutEmpresa" => $_REQUEST["RutEmpresa"] , 
+        	"RutEmpresa" => $_POST["RutEmpresa"] , 
         	"RazonSocial" => $dt4->data[0]["RazonSocial"], 
         	"RutEmpresaC" => $rut, 
         	"RazonSocialC" => $nombre,
         	"FormasPago" => $dt10->data[0]["FormaPago"],
-        	"Equipamiento" => $_REQUEST["seleccion"], //Equipamiento
-        	"Deducibles" => $_REQUEST["seleccion_ded"], //Deducibles 
+        	"Equipamiento" => $_POST["seleccion"], //Equipamiento
+        	"Deducibles" => $_POST["seleccion_ded"], //Deducibles 
         	"Porcentaje"=> $Porcentaje , 
         	"NombreDoc" => $NombreDoc,
 
@@ -2842,53 +2842,53 @@ class documentos {
         	"Dia" => $dia, //Dia en numeros
         	"Mes" => $meses[$mes-1], //Mes en palabras 
         	"Anno" => $anio, //Año completo, ej.2018
-        	"RutEmpresa" => $_REQUEST["RutEmpresa"] , 
+        	"RutEmpresa" => $_POST["RutEmpresa"] , 
         	"RazonSocial" => $dt4->data[0]["RazonSocial"], 
         	"RutEmpresaC" => $rut, 
         	"RazonSocialC" => $nombre, 
-        	"idDocumento" => $_REQUEST["idDocumento"],
+        	"idDocumento" => $_POST["idDocumento"],
 
         	//Datos para Anexo
-        	"idProyecto" => $_REQUEST["idProyecto"],
-        	"FechaFirma" => $_REQUEST["fechaFirma"], //Fecha firma
+        	"idProyecto" => $_POST["idProyecto"],
+        	"FechaFirma" => $_POST["fechaFirma"], //Fecha firma
         	"FormasPago" => $dt10->data[0]["FormaPago"], 
 
         	//Detalle de Anexo
-        	"Marca" => $_REQUEST["Marca"] , 
-	    	"Modelo" => $_REQUEST["Modelo"] ,
-	    	"CiudadEntrega" => $_REQUEST["CiudadEntrega"], 
-	    	"CiudadOperacion" => $_REQUEST["CiudadOperacion"] , 
-	    	"CiudadDevolucion" => $_REQUEST["CiudadDevolucion"], 
-	    	"PeriodoArriendo" => $_REQUEST["PeriodoArriendo"],
-	    	"FechaInicio" => $_REQUEST["FechaInicio"] , 
-	    	"FechaFinal" => $_REQUEST["FechaFinal"] , 
-	    	"Tarifa" => $_REQUEST["Tarifa"], 
-	    	"KmsExceso" => $_REQUEST["KmsExceso"] ,
-	    	"KmsMensuales" => $_REQUEST["KmsMensuales"] , 
-	    	"KmsContratados" => $_REQUEST["KmsContratados"], 
-	    	"FrecuenciaMantencion" => $_REQUEST["FrecuenciaMantencion"] , 
-	    	"FrecuenciaCambio" => $_REQUEST["FrecuenciaCambio"], 
-	    	"Cantidad" => $_REQUEST["Cantidad"], 
+        	"Marca" => $_POST["Marca"] , 
+	    	"Modelo" => $_POST["Modelo"] ,
+	    	"CiudadEntrega" => $_POST["CiudadEntrega"], 
+	    	"CiudadOperacion" => $_POST["CiudadOperacion"] , 
+	    	"CiudadDevolucion" => $_POST["CiudadDevolucion"], 
+	    	"PeriodoArriendo" => $_POST["PeriodoArriendo"],
+	    	"FechaInicio" => $_POST["FechaInicio"] , 
+	    	"FechaFinal" => $_POST["FechaFinal"] , 
+	    	"Tarifa" => $_POST["Tarifa"], 
+	    	"KmsExceso" => $_POST["KmsExceso"] ,
+	    	"KmsMensuales" => $_POST["KmsMensuales"] , 
+	    	"KmsContratados" => $_POST["KmsContratados"], 
+	    	"FrecuenciaMantencion" => $_POST["FrecuenciaMantencion"] , 
+	    	"FrecuenciaCambio" => $_POST["FrecuenciaCambio"], 
+	    	"Cantidad" => $_POST["Cantidad"], 
 	    	 
 	    	//Datos Variables
 	    	"Porcentaje" => $Porcentaje, //Porcentaje
-	    	"NombrePropuesta" => $_REQUEST["Propuesta"] ,//Nombre de propuesta 
-        	"FechaPropuesta" => $_REQUEST["FechaPropuesta"] , //Fecha de propuesta
-        	"GPS" => $_REQUEST["GPS"], 
-        	"Equipamiento" => $_REQUEST["seleccion"], // Equipamientos
-        	"Deducibles" => $_REQUEST["seleccion_ded"], //Deducibles
-        	"RutCoordinador" => $_REQUEST["rut_coordinador"] , //Rut Cordinador 
-        	"NombreCoordinador" => $_REQUEST["nombre_coordinador"],//Nombre coordinador
+	    	"NombrePropuesta" => $_POST["Propuesta"] ,//Nombre de propuesta 
+        	"FechaPropuesta" => $_POST["FechaPropuesta"] , //Fecha de propuesta
+        	"GPS" => $_POST["GPS"], 
+        	"Equipamiento" => $_POST["seleccion"], // Equipamientos
+        	"Deducibles" => $_POST["seleccion_ded"], //Deducibles
+        	"RutCoordinador" => $_POST["rut_coordinador"] , //Rut Cordinador 
+        	"NombreCoordinador" => $_POST["nombre_coordinador"],//Nombre coordinador
 
         	//Otros
         	"DiaSemana" => $dias[date("w")], //Dia de semana 
         	"MesNum" => $mes, //Numero de mes
 	
 	    	//Datos del Aval 
-	    	"Rut_Aval" => $_REQUEST["rut_aval"],
-	    	"Nombre_Aval" => $_REQUEST["nombre_aval"]." ".$_REQUEST["apellido_aval"],
-	    	"Correo_Aval" => $_REQUEST["correo_aval"],
-	    	"Personeria_Aval" => $_REQUEST["personeria_aval"]
+	    	"Rut_Aval" => $_POST["rut_aval"],
+	    	"Nombre_Aval" => $_POST["nombre_aval"]." ".$_POST["apellido_aval"],
+	    	"Correo_Aval" => $_POST["correo_aval"],
+	    	"Personeria_Aval" => $_POST["personeria_aval"]
 	    	);
 
         //Variables @@[RutCliente]@@
@@ -2978,54 +2978,54 @@ class documentos {
 
 		//Consultas 
 		//Buscar datos que faltan de la Empresa
-       	$this->documentosBD->obtenerRazonSocial($_REQUEST,$dt4);
+       	$this->documentosBD->obtenerRazonSocial($_POST,$dt4);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar datos que faltan de la Empresa
-       	$this->documentosBD->obtenerEmpresa($_REQUEST,$dt1);
+       	$this->documentosBD->obtenerEmpresa($_POST,$dt1);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
 		//Buscar datos del Representante 1
-		$cliente = array( "RutEjecutivo" => $_REQUEST["Firmantes_Cli"][0] );
+		$cliente = array( "RutEjecutivo" => $_POST["Firmantes_Cli"][0] );
        	$this->documentosBD->obtenerPersona($cliente,$dt11);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar datos del Representante 2
-		$cliente_1 = array( "RutEjecutivo" => $_REQUEST["Firmantes_Cli"][1] );
+		$cliente_1 = array( "RutEjecutivo" => $_POST["Firmantes_Cli"][1] );
        	$this->documentosBD->obtenerPersona($cliente_1,$dt12);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        		//Buscar datos del Representante 3
-		$cliente_2 = array( "RutEjecutivo" => $_REQUEST["Firmantes_Cli"][2] );
+		$cliente_2 = array( "RutEjecutivo" => $_POST["Firmantes_Cli"][2] );
        	$this->documentosBD->obtenerPersona($cliente_2,$dt13);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar datos del Representante 4
-		$cliente_3 = array( "RutEjecutivo" => $_REQUEST["Firmantes_Cli"][3] );
+		$cliente_3 = array( "RutEjecutivo" => $_POST["Firmantes_Cli"][3] );
        	$this->documentosBD->obtenerPersona($cliente_3,$dt14);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar datos del Representante 5
-		$cliente_4 = array( "RutEjecutivo" => $_REQUEST["Firmantes_Cli"][4] );
+		$cliente_4 = array( "RutEjecutivo" => $_POST["Firmantes_Cli"][4] );
        	$this->documentosBD->obtenerPersona($cliente_4,$dt15);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        //Buscar datos del Representante 6
-		$cliente_5 = array( "RutEjecutivo" => $_REQUEST["Firmantes_Cli"][5] );
+		$cliente_5 = array( "RutEjecutivo" => $_POST["Firmantes_Cli"][5] );
        	$this->documentosBD->obtenerPersona($cliente_5,$dt16);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar Datos que faltan del Cliente 
-       	$this->documentosBD->obtenerRazonSocialC($_REQUEST,$dt5);
+       	$this->documentosBD->obtenerRazonSocialC($_POST,$dt5);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar datos de la empresa Cliente 
-       	$array = array ( "RutEmpresa" => $_REQUEST["RutEmpresaC"]);
+       	$array = array ( "RutEmpresa" => $_POST["RutEmpresaC"]);
        	$this->documentosBD->obtenerEmpresa($array,$dt9);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Obtener nombre de Forma de Pago 
-       	$this->documentosBD->obtenerFormasPago($_REQUEST,$dt10);
+       	$this->documentosBD->obtenerFormasPago($_POST,$dt10);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	if( $dt5->data[0]["TipoEmpresa"] == 2 ) {
@@ -3050,8 +3050,8 @@ class documentos {
 		$NombreDoc = "Documento_".$datos.".pdf";;
 	
 		//Nombre de archivo
-		$Porcentaje = $_REQUEST["Porcentaje"]." %";
-		$FechaFirma = substr($_REQUEST["FechaCreacion"], 0, -8);
+		$Porcentaje = $_POST["Porcentaje"]." %";
+		$FechaFirma = substr($_POST["FechaCreacion"], 0, -8);
 
         $array = array ( 
         	
@@ -3060,7 +3060,7 @@ class documentos {
         	"Dia" =>$dia, 
         	"Mes" => $meses[$mes-1], 
         	"Anno" => $anio,
-        	"RutEmpresa" => $_REQUEST["RutEmpresa"] , 
+        	"RutEmpresa" => $_POST["RutEmpresa"] , 
         	"RazonSocial" => $dt4->data[0]["RazonSocial"], 
         	"RutEmpresaC" => $rut, 
         	"RazonSocialC" => $nombre, 
@@ -3085,33 +3085,33 @@ class documentos {
         	"Dia" => $dia, //Dia en numeros
         	"Mes" => $meses[$mes-1], //Mes en palabras 
         	"Anno" => $anio, //Año completo, ej.2018
-        	"RutEmpresa" => $_REQUEST["RutEmpresa"] , 
+        	"RutEmpresa" => $_POST["RutEmpresa"] , 
         	"RazonSocial" => $dt4->data[0]["RazonSocial"], 
         	"RutEmpresaC" => $rut, 
         	"RazonSocialC" => $nombre, 
-        	"idDocumento" => $_REQUEST["idDocumento"],
+        	"idDocumento" => $_POST["idDocumento"],
 
 			//Datos
         	"FormasPago" => $dt10->data[0]["FormaPago"], 
 
         	//Datos del Contrato Renting
-        	"Marca" => $_REQUEST["Marca"] , 
-        	"Modelo" => $_REQUEST["Modelo"], 
-        	"Patente" => $_REQUEST["Patente"], 
-        	"Color" => $_REQUEST["Color"], 
-        	"VIN" => $_REQUEST["VIN"], 
-        	"AnnoVehiculo" => $_REQUEST["AnnoVehiculo"], 
-        	"KmsMensuales" => $_REQUEST["KmsMensuales"], 
-        	"FechaInicio" => $_REQUEST["FechaInicio"], 
-        	"FechaFinal" => $_REQUEST["FechaFinal"], 
-        	"FechaPie" => $_REQUEST["FechaPie"], 
-        	"FechaPago" => $_REQUEST["FechaPago"], 
-        	"CuotaPie" => $_REQUEST["CuotaPie"], 
-        	"MontoCuota" => $_REQUEST["MontoCuota"], 
-        	"Exceso" => $_REQUEST["Exceso"] , 
-        	"KmsExceso" => $_REQUEST["KmsExceso"], 
-        	"RentaMens" => $_REQUEST["RentaMens"], 
-        	"PeriodoArriendo" => $_REQUEST["PeriodoArriendo"],
+        	"Marca" => $_POST["Marca"] , 
+        	"Modelo" => $_POST["Modelo"], 
+        	"Patente" => $_POST["Patente"], 
+        	"Color" => $_POST["Color"], 
+        	"VIN" => $_POST["VIN"], 
+        	"AnnoVehiculo" => $_POST["AnnoVehiculo"], 
+        	"KmsMensuales" => $_POST["KmsMensuales"], 
+        	"FechaInicio" => $_POST["FechaInicio"], 
+        	"FechaFinal" => $_POST["FechaFinal"], 
+        	"FechaPie" => $_POST["FechaPie"], 
+        	"FechaPago" => $_POST["FechaPago"], 
+        	"CuotaPie" => $_POST["CuotaPie"], 
+        	"MontoCuota" => $_POST["MontoCuota"], 
+        	"Exceso" => $_POST["Exceso"] , 
+        	"KmsExceso" => $_POST["KmsExceso"], 
+        	"RentaMens" => $_POST["RentaMens"], 
+        	"PeriodoArriendo" => $_POST["PeriodoArriendo"],
 
         	//Representante del Cliente - 1
         	"RutRepresentante_1" => $dt11->data[0]["personaid"],	
@@ -3153,10 +3153,10 @@ class documentos {
         	"MesNum" => $mes, //Numero de mes
 	
 	    	//Datos del Aval 
-	    	"Rut_Aval" => $_REQUEST["rut_aval"],
-	    	"Nombre_Aval" => $_REQUEST["nombre_aval"]." ".$_REQUEST["apellido_aval"],
-	    	"Correo_Aval" => $_REQUEST["correo_aval"],
-	    	"Personeria_Aval" => $_REQUEST["personeria_aval"]
+	    	"Rut_Aval" => $_POST["rut_aval"],
+	    	"Nombre_Aval" => $_POST["nombre_aval"]." ".$_POST["apellido_aval"],
+	    	"Correo_Aval" => $_POST["correo_aval"],
+	    	"Personeria_Aval" => $_POST["personeria_aval"]
 	    );
 
         //Variables 
@@ -3272,54 +3272,54 @@ class documentos {
 
 		//Consultas 
 		//Buscar datos que faltan de la Empresa
-       	$this->documentosBD->obtenerRazonSocial($_REQUEST,$dt4);
+       	$this->documentosBD->obtenerRazonSocial($_POST,$dt4);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar datos que faltan de la Empresa
-       	$this->documentosBD->obtenerEmpresa($_REQUEST,$dt1);
+       	$this->documentosBD->obtenerEmpresa($_POST,$dt1);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
 		//Buscar datos del Representante 1
-		$cliente = array( "RutEjecutivo" => $_REQUEST["Firmantes_Cli"][0] );
+		$cliente = array( "RutEjecutivo" => $_POST["Firmantes_Cli"][0] );
        	$this->documentosBD->obtenerPersona($cliente,$dt11);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar datos del Representante 2
-		$cliente_1 = array( "RutEjecutivo" => $_REQUEST["Firmantes_Cli"][1] );
+		$cliente_1 = array( "RutEjecutivo" => $_POST["Firmantes_Cli"][1] );
        	$this->documentosBD->obtenerPersona($cliente_1,$dt12);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar datos del Representante 3
-		$cliente_2 = array( "RutEjecutivo" => $_REQUEST["Firmantes_Cli"][2] );
+		$cliente_2 = array( "RutEjecutivo" => $_POST["Firmantes_Cli"][2] );
        	$this->documentosBD->obtenerPersona($cliente_2,$dt13);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar datos del Representante 4
-		$cliente_3 = array( "RutEjecutivo" => $_REQUEST["Firmantes_Cli"][3] );
+		$cliente_3 = array( "RutEjecutivo" => $_POST["Firmantes_Cli"][3] );
        	$this->documentosBD->obtenerPersona($cliente_3,$dt14);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar datos del Representante 5
-		$cliente_4 = array( "RutEjecutivo" => $_REQUEST["Firmantes_Cli"][4] );
+		$cliente_4 = array( "RutEjecutivo" => $_POST["Firmantes_Cli"][4] );
        	$this->documentosBD->obtenerPersona($cliente_4,$dt15);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        //Buscar datos del Representante 6
-		$cliente_5 = array( "RutEjecutivo" => $_REQUEST["Firmantes_Cli"][5] );
+		$cliente_5 = array( "RutEjecutivo" => $_POST["Firmantes_Cli"][5] );
        	$this->documentosBD->obtenerPersona($cliente_5,$dt16);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar Datos que faltan del Cliente 
-       	$this->documentosBD->obtenerRazonSocialC($_REQUEST,$dt5);
+       	$this->documentosBD->obtenerRazonSocialC($_POST,$dt5);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Buscar datos de la empresa Cliente 
-       	$array = array ( "RutEmpresa" => $_REQUEST["RutEmpresaC"]);
+       	$array = array ( "RutEmpresa" => $_POST["RutEmpresaC"]);
        	$this->documentosBD->obtenerEmpresa($array,$dt9);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	//Obtener nombre de Forma de Pago 
-       	$this->documentosBD->obtenerFormasPago($_REQUEST,$dt10);
+       	$this->documentosBD->obtenerFormasPago($_POST,$dt10);
        	$this->mensajeError.=$this->documentosBD->mensajeError;
 
        	if( $dt5->data[0]["TipoEmpresa"] == 2 ) {
@@ -3350,7 +3350,7 @@ class documentos {
         	"Dia" =>$dia, 
         	"Mes" => $meses[$mes-1], 
         	"Anno" => $anio,
-        	"RutEmpresa" => $_REQUEST["RutEmpresa"] , 
+        	"RutEmpresa" => $_POST["RutEmpresa"] , 
         	"RazonSocial" => $dt4->data[0]["RazonSocial"], 
         	"RutEmpresaC" => $rut, 
         	"RazonSocialC" => $nombre, 
@@ -3374,11 +3374,11 @@ class documentos {
         	"Dia" => $dia, //Dia en numeros
         	"Mes" => $meses[$mes-1], //Mes en palabras 
         	"Anno" => $anio, //Año completo, ej.2018
-        	"RutEmpresa" => $_REQUEST["RutEmpresa"] , 
+        	"RutEmpresa" => $_POST["RutEmpresa"] , 
         	"RazonSocial" => $dt4->data[0]["RazonSocial"], 
         	"RutEmpresaC" => $rut, 
         	"RazonSocialC" => $nombre,
-        	"idDocumento" => $_REQUEST["idDocumento"],
+        	"idDocumento" => $_POST["idDocumento"],
 
 			//Datos
         	"FormasPago" => $dt10->data[0]["FormaPago"], 
@@ -3386,18 +3386,18 @@ class documentos {
         	//Datos de Cntrato Financiero
              "RutProveedor" => $dt9->data[0]["RutEmpresa"] ,
 		     "NombreProveedor" => $dt9->data[0]["RazonSocial"],
-		     "FechaInicioPago" => $_REQUEST["FechaInicioPago"], 
-		     "DetalleBienes" => $_REQUEST["DetalleBienes"], 
-		     "MontoAdquisicion" => $_REQUEST["MontoAdquisicion"], 
-		     "CantTotal" => $_REQUEST["CantTotal"], 
-		     "CantRentas" => $_REQUEST["CantRentas"], 
-		     "ValorBallon" => $_REQUEST["ValorBallon"], 
-		     "ValorCompra" => $_REQUEST["ValorCompra"] , 
-		     "DiaPagoMensual" => $_REQUEST["DiaPagoMensual"], 
-		     "DuracionContrato" => $_REQUEST["DuracionContrato"], 
-		     "FechaPrepago" => $_REQUEST["FechaPrepago"], 
-		     "ValorAsegurable" => $_REQUEST["ValorAsegurable"], 
-		     "ValorIguales" => $_REQUEST["ValorIguales"], 
+		     "FechaInicioPago" => $_POST["FechaInicioPago"], 
+		     "DetalleBienes" => $_POST["DetalleBienes"], 
+		     "MontoAdquisicion" => $_POST["MontoAdquisicion"], 
+		     "CantTotal" => $_POST["CantTotal"], 
+		     "CantRentas" => $_POST["CantRentas"], 
+		     "ValorBallon" => $_POST["ValorBallon"], 
+		     "ValorCompra" => $_POST["ValorCompra"] , 
+		     "DiaPagoMensual" => $_POST["DiaPagoMensual"], 
+		     "DuracionContrato" => $_POST["DuracionContrato"], 
+		     "FechaPrepago" => $_POST["FechaPrepago"], 
+		     "ValorAsegurable" => $_POST["ValorAsegurable"], 
+		     "ValorIguales" => $_POST["ValorIguales"], 
 
 			//Representante del Cliente - 1
         	"RutRepresentante_1" => $dt11->data[0]["personaid"],	
@@ -3439,10 +3439,10 @@ class documentos {
         	"MesNum" => $mes, //Numero de mes
 	
 	    	//Datos del Aval 
-	    	"Rut_Aval" => $_REQUEST["rut_aval"],
-	    	"Nombre_Aval" => $_REQUEST["nombre_aval"]." ".$_REQUEST["apellido_aval"],
-	    	"Correo_Aval" => $_REQUEST["correo_aval"],
-	    	"Personeria_Aval" => $_REQUEST["personeria_aval"]
+	    	"Rut_Aval" => $_POST["rut_aval"],
+	    	"Nombre_Aval" => $_POST["nombre_aval"]." ".$_POST["apellido_aval"],
+	    	"Correo_Aval" => $_POST["correo_aval"],
+	    	"Personeria_Aval" => $_POST["personeria_aval"]
 	    );
 
 

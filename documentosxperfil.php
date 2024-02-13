@@ -48,10 +48,10 @@ class documentosxperfil {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -112,9 +112,9 @@ class documentosxperfil {
 		
 		//se construye el menu
 		include("includes/opciones_menu.php");
-		//print_r($_REQUEST);
+		//print_r($_POST);
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -126,7 +126,7 @@ class documentosxperfil {
 	
 		
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -155,19 +155,19 @@ class documentosxperfil {
 	private function agregar()
 	{	
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "AGREGAR":
-					$datos=$_REQUEST;
+					$datos=$_POST;
 					
 					$this->mensajeError = "";
-					for ($l = 0; $l < $_REQUEST["cantidad"]; $l++) {
-						if (isset($_REQUEST["sel_".$l])){
+					for ($l = 0; $l < $_POST["cantidad"]; $l++) {
+						if (isset($_POST["sel_".$l])){
 	
-							$datos["tipodocumentoid"]= $_REQUEST["sel_".$l];
+							$datos["tipodocumentoid"]= $_POST["sel_".$l];
 							$this->documentosxperfilBD->agregar($datos);
 							$this->mensajeError.=$this->documentosxperfilBD->mensajeError;
 						}
@@ -193,7 +193,7 @@ class documentosxperfil {
 			}
 		}
 		// recuperamos lo que se escribio en el formulario que va llegando si es que hubo
-		$datos2=$_REQUEST;
+		$datos2=$_POST;
 		$formulario[0] = $datos2;
 
 		$datos2["usuarioid"]=$this->seguridad->usuarioid;
@@ -222,12 +222,12 @@ class documentosxperfil {
 
 	private function modificar()
 	{	
-		if (!isset($_REQUEST["accion2"]))
+		if (!isset($_POST["accion2"]))
 		{
 			// creamos un contenedor de la tabla
 			$dt = new DataTable();
 			// obtenemos los datos a modificar
-			$this->documentosxperfilBD->obtener($_REQUEST,$dt);
+			$this->documentosxperfilBD->obtener($_POST,$dt);
 
 			// guardamos los datos en un arreglo
 			$campos=$dt->data;
@@ -237,13 +237,13 @@ class documentosxperfil {
 		}
 
 		// si es que nos enviaron una accion
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "MODIFICAR":
 					// si apretaron el boton modificar obtenermos los datos desde el formulario
-					if ($this->documentosxperfilBD->modificar($_REQUEST))
+					if ($this->documentosxperfilBD->modificar($_POST))
 					{
 						// si sale todo bien mostramos el listado
 						$this->listado();
@@ -252,7 +252,7 @@ class documentosxperfil {
 					// si sale todo mal leemos el error
 					$this->mensajeError=$this->documentosxperfilBD->mensajeError;
 					// y guardamos los datos enviamos en una variable
-					$campos[0]=$_REQUEST;
+					$campos[0]=$_POST;
 					break;
 
 				case "ELIMINAR":
@@ -268,13 +268,13 @@ class documentosxperfil {
 			}
 		}
 
-		$this->documentosxperfilBD->Todos($_REQUEST,$dt);
+		$this->documentosxperfilBD->Todos($_POST,$dt);
 		$this->mensajeError.=$this->documentosxperfilBD->mensajeError;
 		$campos[0]["documentosxperfil"]=$dt->data;
 		
 		// agregamos pagina actual del listado
-		$this->pagina->agregarDato("pagina",$_REQUEST["pagina"]);
-		$this->pagina->agregarDato("nombrex",$_REQUEST["nombrex"]);
+		$this->pagina->agregarDato("pagina",$_POST["pagina"]);
+		$this->pagina->agregarDato("nombrex",$_POST["nombrex"]);
 		$this->pagina->agregarDato("formulario",$campos);
 		// agregamos los posibles errores a la pagina
 		$this->pagina->agregarDato("mensajeError",$this->mensajeError);
@@ -287,7 +287,7 @@ class documentosxperfil {
 	private function eliminar()
 	{
 		// se envia a eliminar a la tabla con los datos del formulario
-		if ($this->documentosxperfilBD->eliminar($_REQUEST)){
+		if ($this->documentosxperfilBD->eliminar($_POST)){
 			// si es que hubiera error lo obtenemos
 			
 			$this->mensajeOK = 'Informacion eliminada correctamente.';
@@ -304,7 +304,7 @@ class documentosxperfil {
 		$dt = new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
 
 		$datos["usuarioid"]=$this->seguridad->usuarioid;
 		$datos["tipousuarioingid"]=$this->seguridad->tipousuarioid;
@@ -319,7 +319,7 @@ class documentosxperfil {
 		$formulariox[0]["listado"]=$dt->data;
 	
 		$mensajeNoDatos="";
-		if (isset($_REQUEST["accion"])){
+		if (isset($_POST["accion"])){
 			if (count($dt->data) == 0){$this->mensajeOK="No hay informaci�n para la consulta realizada.";}
 		}
 		$formulario[0]=$datos;
@@ -340,13 +340,13 @@ class documentosxperfil {
 	{	
 		
 		// si es que nos enviaron una accion
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "MODIFICAR":
 					// si apretaron el boton modificar obtenermos los datos desde el formulario
-					if ($this->documentosxperfilBD->modificar($_REQUEST))
+					if ($this->documentosxperfilBD->modificar($_POST))
 					{
 						// si sale todo bien mostramos el listado
 						$this->listado();
@@ -355,7 +355,7 @@ class documentosxperfil {
 					// si sale todo mal leemos el error
 					$this->mensajeError=$this->documentosxperfilBD->mensajeError;
 					// y guardamos los datos enviamos en una variable
-					$campos[0]=$_REQUEST;
+					$campos[0]=$_POST;
 					break;
 
 				case "ELIMINAR":
@@ -373,12 +373,12 @@ class documentosxperfil {
 			
 		$configid = 0;
 		
-		$datos=$_REQUEST;
+		$datos=$_POST;
 		$this->filtrocamposconfigBD->Obtener($datos,$dt);
 		$this->mensajeError.=$this->filtrocamposconfigBD->mensajeError;
 		
 		$datos2["holdingid"] 		= $dt->data[0]["holdingid"];
-		$datos2["tipousuarioid"] 	= $_REQUEST["tipousuarioid"];
+		$datos2["tipousuarioid"] 	= $_POST["tipousuarioid"];
 		$datos2["tabla"] 			= $dt->data[0]["tabla"];
 		$datos2["campoid"] 			= $dt->data[0]["campoid"];
 		$datos2["camponombre"] 		= $dt->data[0]["camponombre"];
@@ -392,11 +392,11 @@ class documentosxperfil {
 		}else{ 
 			$cantidad = count($dt->data);
 			$mensajeNoDatos="";
-			$formulario[0]=$_REQUEST;
+			$formulario[0]=$_POST;
 			$formulario[0]["listado"]=$formulariox[0]["listado"];
 			
 
-			$datos=$_REQUEST;
+			$datos=$_POST;
 			$configid = $datos["configid"];
 			$configid = $configid + 1;
 			$datos["configid"] = $configid;
@@ -411,7 +411,7 @@ class documentosxperfil {
 		
 		$this->pagina->agregarDato("cantidad",$cantidad);
 		$this->pagina->agregarDato("titulo",$titulo);
-		$this->pagina->agregarDato("tipousuarioid",$_REQUEST["tipousuarioid"]);
+		$this->pagina->agregarDato("tipousuarioid",$_POST["tipousuarioid"]);
 		$this->pagina->agregarDato("mensajeError",$this->mensajeError);
 		$this->pagina->agregarDato("mensajeOK",$mensajeNoDatos);
 		$this->pagina->agregarDato("tabla",$datos2["tabla"]);

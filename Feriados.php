@@ -50,10 +50,10 @@ class feriados {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -113,7 +113,7 @@ class feriados {
 		include("includes/opciones_menu.php");
 	
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -125,7 +125,7 @@ class feriados {
 	
 		
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica siempre va
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -147,21 +147,21 @@ class feriados {
 	//Accion del boton agregar un nuevo registro 
 	private function agregar()
 	{	
-		if (!isset($_REQUEST["accion2"]))
+		if (!isset($_POST["accion2"]))
 		{
 			// creamos un contenedor de la tabla
 			$dt = new DataTable();
 		}
 
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "AGREGAR":
 					// enviamos los datos del formulario a guardar
-					if ($this->feriadosBD->agregar($_REQUEST))
+					if ($this->feriadosBD->agregar($_POST))
 					{
 						// si resulta mostramos el listado
 						$this->mensajeOK = 'Registro Completado! Su registro se ha guardado con exito';
@@ -179,7 +179,7 @@ class feriados {
 			}
 		}
 		// recuperamos lo que se escribio en el formulario que va llegando si es que hubo
-		$datos2=$_REQUEST;
+		$datos2=$_POST;
 
 		//Asignamos los datos que recibimos del formulario
 		$this->feriadosBD->listado($dt);
@@ -188,8 +188,8 @@ class feriados {
 		$this->pagina->agregarDato("formulario",$formulario);
 		
 
-		$this->pagina->agregarDato("pagina",$_REQUEST["pagina"]);
-		$this->pagina->agregarDato("nombrex",$_REQUEST["nombrex"]);
+		$this->pagina->agregarDato("pagina",$_POST["pagina"]);
+		$this->pagina->agregarDato("nombrex",$_POST["nombrex"]);
 		// agregamos a la pagina el mensaje de error
 		$this->pagina->agregarDato("mensajeError",$this->mensajeError);
 		$this->pagina->agregarDato("mensajeOK",$this->mensajeOK);
@@ -201,12 +201,12 @@ class feriados {
 	//Accion de modificar un registro 
 	private function modificar()
 	{	
-	     /*if (!isset($_REQUEST["accion2 "]))
+	     /*if (!isset($_POST["accion2 "]))
 		{
 			// creamos un contenedor de la tabla
 			$dt = new DataTable();
 			// obtenemos los datos a modificar
-			$this->feriadosBD->obtener($_REQUEST,$dt);
+			$this->feriadosBD->obtener($_POST,$dt);
 			// guardamos los datos en un arreglo
 			$campos=$dt->data;
 			// guardamos el error por si aca hubo
@@ -215,13 +215,13 @@ class feriados {
 		}*/
 
 		// si es que nos enviaron una accion
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "MODIFICAR":
 					// si apretaron el boton modificar obtenermos los datos desde el formulario
-					if ($this->feriadosBD->modificar($_REQUEST))
+					if ($this->feriadosBD->modificar($_POST))
 					{
 						// si resulta mostramos el listado
 						//Mensaje del CallOut
@@ -233,7 +233,7 @@ class feriados {
 					// si sale todo mal leemos el error
 					$this->mensajeError=$this->feriadosBD->mensajeError;
 					// y guardamos los datos enviamos en una variable
-					$campos[0]=$_REQUEST;
+					$campos[0]=$_POST;
 					break;
 
 				case "VOLVER":
@@ -243,7 +243,7 @@ class feriados {
 			}
 		}
 
-		$datos2=$_REQUEST;
+		$datos2=$_POST;
 
 		//Asignamos los datos que recibimos del formulario
 
@@ -265,12 +265,12 @@ class feriados {
 	private function eliminar()
 	{
 		// se envia a eliminar a la tabla con los datos del formulario
-		if ($this->feriadosBD->eliminar($_REQUEST["idFeriado"])){
+		if ($this->feriadosBD->eliminar($_POST["idFeriado"])){
 			// si es que hubiera error lo obtenemos
 			
 			// si elimino entonces mostrar listado sin ningún filtro, o sea mostrar todo
-			$_REQUEST["pagina"]  = 1;
-			$_REQUEST["nombrex"] = "";
+			$_POST["pagina"]  = 1;
+			$_POST["nombrex"] = "";
 			$this->mensajeOK="Su registro se ha eliminado correctamente";
 		}
 		
@@ -287,7 +287,7 @@ class feriados {
 
 		// pedimos el listado
 
-		$datos=$_REQUEST;
+		$datos=$_POST;
 		//$datos["idCategoria"]=$this->seguridad->idCategoria;
 		//$datos["tipousuarioingid"]=$this->seguridad->tipousuarioid;
 

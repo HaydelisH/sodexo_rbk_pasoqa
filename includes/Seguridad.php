@@ -1,8 +1,29 @@
 <?php
 
+// Seguridad OWAS (INI)
+ini_set('session.cookie_secure', 'true');
+ini_set('session.cookie_httponly', 'true');
+ini_set('session.cookie_path', '/; samesite=lax');
+// Seguridad OWAS (FIN)
+
+// Anti-CSRF-Tokens (INI)
+if( strtolower($url) != 'centroscosto_ajax.php' && strtolower($url) != 'tiposdocumentos_ajax.php' && strtolower($url) != 'descargamasiva_descargatif.php' && strtolower($url) != 'tiposdocumentosagrupador_ajax.php' && strtolower($url) != 'consultaestadodescargamasiva.php'  && strtolower($url) != 'cargamenu_ajax.php' && strtolower($url) != 'descargamasiva_consulta.php' && strtolower($url) != 'descargamasiva_zip.php' && strtolower($url) != 'descargamasiva_zip.php' && strtolower($url) != 'docmasivoagestor.php' && strtolower($url) != 'logout.php' && strtolower($url) != 'regularizab64.php' && strtolower($url) != 'descargamasiva_inicio.php' && strtolower($url) != 'descargamasiva_descargar.php' && strtolower($url) != 'auditoria.php' && $url != 'DescargaMasiva_Proceso.php' && $url != 'DescargaMasiva_Proceso_2.php') {
+
+	if ( ( @is_null($_REQUEST["accion"]) ? true : $_REQUEST["accion"] != 'PROCESO' && $_REQUEST["accion"] != 'LOOP'&& $_REQUEST["accion"] != 'LOOP0' && $_REQUEST["accion"] != 'ESTADO'&& $_REQUEST["accion"] != 'LOAD' && $_REQUEST["accion"] != 'REPROCESO' && $_REQUEST["accion"] != 'SESION' && $_REQUEST["accion"] != 'KILL') ) {
+		include_once(__DIR__.'/CSRF-Protector-PHP/libs/csrf/csrfprotector.php');
+	   csrfProtector::init();		
+	}
+
+}
+// Anti-CSRF-Tokens (FIN)
+
 // incluir libreria de objectos
 include_once("includes/usuariosBD.php");
 include_once("includes/Paginas.php");
+
+// CSRF-Defender (INI)
+include_once('includes/passwordRBK.php');
+// CSRF-Defender (FIN)
 
 class Seguridad
 {
@@ -38,7 +59,11 @@ class Seguridad
 	public $fechaactual;
 	public $difminutos;
 	public $nuevoperfil = false;
-	
+
+	// Coneccion con active directory de microsoft (INI)
+	public $openIdCenter;	
+	// Coneccion con active directory de microsoft (FIN)
+		
 	// OPERACIONES ***********************************************************************************
 	// constructor de la clase, punto de entrada
 	public function Seguridad(&$pagina, &$con)
@@ -69,7 +94,7 @@ class Seguridad
 
 	public function sesionar($obligarlogear = true)
 	{	
-		$nuevasession = false;
+				$nuevasession = false;
 		// Verificamos dsi hay alguna session
 		if (!$this->obtenerSesion())
 		{
@@ -100,7 +125,7 @@ class Seguridad
 		}
 		// si quieren cerrar
 		if (!$this->cerrarSesion()) {
-			$this->mensajeError = "";
+						$this->mensajeError = "";
 			$this->datos["session"] = "";
 			$this->logear = true;
 			if ($obligarlogear) $this->imprimeLogin();
@@ -110,7 +135,7 @@ class Seguridad
 		// si hay la verificamos en la base de datos
 		if (!$this->verificarSesion())
 		{
-			// si no esta, esta session esta caducada
+						// si no esta, esta session esta caducada
 			// si es un operador debemos hacer que se loggee denuevo
 			if (!$this->obtenerRutContrasena())
 			{
@@ -135,6 +160,22 @@ class Seguridad
 		$this->session=$this->datos["session"];
 		$this->rut=$this->datos["usuarioid"];
 		$this->ip=$this->datos["ip"];
+		
+		$array_url = array();
+		$url = '';
+		$array_url = explode('/',$_SERVER["PHP_SELF"] );
+		$cantidad = count($array_url);
+		$posicion = $cantidad - 1;
+		$url = $array_url[$posicion];
+		$this->graba_log_error('Seguridad.php URL: '.$url);
+		// mostramos el encabezado
+		if( strtolower($url) != 'centroscosto_ajax.php' && strtolower($url) != 'tiposdocumentos_ajax.php' && strtolower($url) != 'descargamasiva_descargatif.php' && strtolower($url) != 'tiposdocumentosagrupador_ajax.php' && strtolower($url) != 'consultaestadodescargamasiva.php'  && strtolower($url) != 'cargamenu_ajax.php' && strtolower($url) != 'descargamasiva_consulta.php' && strtolower($url) != 'descargamasiva_zip.php' && strtolower($url) != 'descargamasiva_zip.php' && strtolower($url) != 'docmasivoagestor.php' && strtolower($url) != 'logout.php' && strtolower($url) != 'regularizab64.php' && strtolower($url) != 'descargamasiva_inicio.php' && strtolower($url) != 'descargamasiva_descargar.php' && strtolower($url) != 'auditoria.php' && $url != 'DescargaMasiva_Proceso.php' && $url != 'DescargaMasiva_Proceso_2.php') {
+			// CSRF-Defender (INI)
+			$passwordRBK = new passwordRBK(csrf_token_init_defender);
+			$this->pagina->agregarDato('antiCSRF_token', $passwordRBK->generaTokenState());
+			// CSRF-Defender (FIN)
+		}
+
 		return true;
 	}
 
@@ -371,7 +412,10 @@ class Seguridad
 			$this->datos["session"]="";
 
 			if (isset($_COOKIE["usuarioid"]))
+			$this->datos["usuarioid"]=$_COOKIE["usuarioid"];
 	
+			setcookie("session","");
+			setcookie("usuarioid","");
 			return false;
 		}
 
@@ -379,8 +423,8 @@ class Seguridad
 		$this->nuevasession=true;
 
 		// Cookie
-		setcookie("session",$this->datos["session"]);
-		setcookie("usuarioid",$this->datos["usuarioid"]);
+		setcookie("session",$this->datos["session"],time() + 86400,'','',true,true);
+		setcookie("usuarioid",$this->datos["usuarioid"],time() + 86400,'','',true,true);
 		return $this->verificarSesion();
 	}
 
@@ -415,7 +459,7 @@ class Seguridad
 			if (substr($_SERVER["PHP_SELF"],-9)!="index.php") {
 				header("Location: index.php?mensajeError=Usuario Bloqueado");
 				exit;
-			}
+						}
 			return false;
 		}
 
@@ -460,10 +504,10 @@ class Seguridad
 
 		if ($dt->obtenerItem("cambiarclave")>0 && substr($_SERVER["PHP_SELF"],-15)!="cambioclave.php") {
 
-				header('Location: cambioclave.php?mensajeError=Debe cambiar su clave para continuar');
-				exit;
+			header('Location: cambioclave.php?mensajeError=Debe cambiar su clave para continuar');
+			exit;
 		}
-
+		
 
 		return true;
 	}
@@ -471,6 +515,10 @@ class Seguridad
 	private function imprimeLogin()
 	{
 		// mostramos el encabezado
+		// CSRF-Defender (INI)
+		$passwordRBK = new passwordRBK(csrf_token_init_defender);
+		$this->pagina->agregarDato('antiCSRF_token', $passwordRBK->generaTokenState());
+		// CSRF-Defender (FIN)
 
 		// agregamos el error a la pagina
 		$this->pagina->agregarDato("mensajeError",$this->mensajeError);
@@ -485,6 +533,18 @@ class Seguridad
 		// desconectamos
 		$this->bd->desconectar();
 		exit;
+	}
+
+	private function graba_log_error($info)
+	{
+		date_default_timezone_set('America/Santiago');
+		$time = time();
+		$nomarchivo = 'logs\seguridad_error_'.@date("Ymd").'.TXT';
+		$ar=fopen($nomarchivo,"a") or
+	       die("Problemas en la creacion");
+	   	fputs($ar,@date("H:i:s",$time)." ".$info);
+	   	fputs($ar,"\n");
+  		fclose($ar);
 	}
 
 }

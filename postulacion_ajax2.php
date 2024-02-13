@@ -46,7 +46,7 @@ class postulacion {
 
 		$dt = new DataTable();
         $array = array ();
-        $datos = $_REQUEST;
+        $datos = $_POST;
         $datos = json_decode($datos['matriz'], true);
 		$ahora = date(VAR_FORMATO_FECHA);
         for ($i = 0; $i < count($datos); $i++)

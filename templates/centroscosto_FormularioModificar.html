@@ -11,7 +11,8 @@
                   <input type="hidden" name="nombrelugarpagoid" value="<php:item id="nombrelugarpagoid" />" >
                   <input type="hidden" name="descripcionlugarpago" value="<php:item id="descripcionlugarpago" />" >
                   <button class="btn btn-md btn-default btn_letra_azul" type="submit" name="accion" value="BUSCAR" /><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</button>
-              </form>
+                <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
           </div>
         </div>
         <div class="box-body">
@@ -34,7 +35,7 @@
                 </div>
                 
               <!--Cliente-->
-              <div class="form-row">
+              <div class="row">
                   <div class="col-md-12 xs-12">
                       <label class="Estructura" >Lugar de Pago (*) </label>
                       <select class= "form-control" name="lugarpagoid" id="lugarpagoid" disabled>
@@ -48,28 +49,30 @@
               </div>
               
               <!--Campos basicos-->		
-              <div class="form-row">
+              <div class="row">
                  <div class="col-md-12">
                       <label class="Estructura" for="idCentroCosto">C&oacute;digo Centro de Costo</label>
                       <input type="text" class="form-control" id="idCentroCosto" name="idCentroCosto" maxlength="10" value="<php:item id="idCentroCosto" />" placeholder="C&oacute;digo Centro de Costo"  readonly> 
                   </div>
               </div>
                
-              <div class="form-row">
+              <div class="row">
                 <div class="col-md-12 xs-12">
                   <label class="Estructura" for="nombreCentroCosto">Centro de Costo</label>
                   <input type="text" class="form-control" id="nombreCentroCosto" name="nombreCentroCosto" maxlength="50" value="<php:item id="nombreCentroCosto" />" placeholder="Nombre Centro de Costo" >
                 </div>
-              </div>
-              
-  
-              <input type="hidden" name="accion" value="MODIFICAR" />
-              <div class="col-md-2 xs-12 pull-right">
+              </div>  
+             
+              <div class="row d-flex justify-content-end">              
+                <div class="col-md-2 d-grid gap-2" >
+                  <input type="hidden" name="accion" value="MODIFICAR" />
                   <input type="hidden" name="pagina" value="<php:item id="pagina_actual" />" id="pagina" >
-                <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="MODIFICAR" onclick="javascript: return validarFormulario(this,new Array(),new Array('descripcionlugarpago'))"  />Guardar</button>
+                  <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="MODIFICAR" onclick="javascript: return validarFormulario(this,new Array(),new Array('descripcionlugarpago'))"  />Guardar</button>
+                </div>
               </div>  
           </php:repeticion>
-          </form>      
+            <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>      
         </div>  
       </div>
       <!-- /.box -->
@@ -84,7 +87,7 @@
         <div class="modal-header" align="center">
           <h4 class="Estructura" id="ejemplo-titulo"> Lugares de Pago </h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            <span aria-hidden="true" class="cerrar_modal">&times;</span>
           </button>
         </div>
         <div class="modal-body">
@@ -102,79 +105,9 @@
            </table>
         </div>
         <div class="modal-footer" style="margin-top:10px;">
-          <button type="button" class="btn btn-secondary btn-md" id="cerrar_lugares_pago" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-secondary btn-md cerrar_modal" id="cerrar_lugares_pago" data-dismiss="modal">Cerrar</button>
         </div>
       </div>
     </div>
   </div>
   
-  <script>
-   //Modal de Lugares de pago 
-    $("#btn_lugares_pago").click(function(){
-      
-        //var RutEmpresa = $("#RutEmpresa").val();
-        //$(".fila_lp").remove();
-  
-        /*if( RutEmpresa == 0 ){
-          
-            $("#mensajeError").addClass("callout callout-warning");
-            $("#mensajeError").html("Debe seleccionar la Empresa");
-            return false;
-  
-        }else{*/
-          
-            $("#mensajeError").html("");
-            $("#mensajeError").removeClass("callout callout-warning");
-            
-  
-          //var url  = "Generar_Documento_PorFicha_ajax1.php?RutEmpresa=" + RutEmpresa;
-          var url  = "Generar_Documento_PorFicha_ajax1.php";
-  
-          // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-          if( window.XMLHttpRequest )
-            ajax = new XMLHttpRequest(); // No Internet Explorer
-          else
-            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-         
-          // Almacenamos en el control al funcion que se invocara cuando la peticion
-          // cambie de estado 
-          ajax.onreadystatechange = funcionCallback_lugarespago;
-  
-          // Enviamos la peticion
-          ajax.open( "GET", url, true );
-          ajax.send( "" );
-      //}
-    });
-  
-    function funcionCallback_lugarespago()
-    {
-      // Comprobamos si la peticion se ha completado (estado 4)
-      if( ajax.readyState == 4 )
-      {
-        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-        if( ajax.status == 200 )
-        {
-          // Escribimos el resultado en la pagina HTML mediante DHTML
-          salida = ajax.responseText;
-          listado = JSON.parse(salida);
-           num = listado.length;
-  
-           if( num > 0 ){
-                 $.each(listado, function( index, value ) {
-                   $('#tabla_lugares_pago tr:last').after('<tr class="fila_lp"><td>' + listado[index].lugarpagoid + '</td><td><div id="' + listado[index].lugarpagoid + '">' + listado[index].nombrelugarpago + ' </div></td><td ><button type="button" style="background-color: transparent;" class="btn" name="btn_agregar_lp" id="btn_agregar_lp" onclick="agregarLp(' + listado[index].lp + ');"><i class="fa fa-plus" aria-hidden="true"></i></button></td></tr>');
-               });
-          }
-          else{
-              $('#tabla_lugares_pago tr:last').after('<tr class="fila_lp"><td colspan = 3>No existen Lugares de pago para la Empresa seleccionada</td></tr>');
-          }
-        }
-      }
-    }
-  
-    function agregarLp(i){
-        $("#lugarpagoid").val(i);
-    //$("#idCentroCosto").val(i);
-        $("#nombrelugarpago").val($("#" + i ).html());
-        $("#cerrar_lugares_pago").click();
-    }
-  </script>

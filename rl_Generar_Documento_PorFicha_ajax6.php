@@ -46,7 +46,7 @@ class clientes {
 
 		$dt = new DataTable();
 		$array = array ();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["tipousuarioid"] = $this->seguridad->tipousuarioid;
 		$datos["decuantos"] = "10";
 		$datos["pagina"] = 1;

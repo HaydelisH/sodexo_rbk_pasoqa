@@ -1,7 +1,6 @@
 <?php
 //============================================================+
 // File name   : tcpdf_import.php
-// Version     : 1.0.001
 // Begin       : 2011-05-23
 // Last Update : 2013-09-17
 // Author      : Nicola Asuni - Tecnick.com LTD - www.tecnick.com - info@tecnick.com

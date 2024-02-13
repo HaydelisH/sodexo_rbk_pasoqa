@@ -6,11 +6,12 @@
           <div class="form-group">
 
             <php:repeticion id="formulario">
-              <form name="formulario" id="formulario_usuarios" action="tiposusuarios.php" method="POST" >
+              <form name="formulario" id="formulario" action="tiposusuarios.php" method="POST" >
                 <php:repeticion id="crear">
                   <button type="submit" class="btn btn-default" name="accion" value="AGREGAR"><a><i class="fa fa-plus" aria-hidden="true"></i> Nuevo</a></button> 
                 </php:repeticion>
-              </form>
+                <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
           </div>
         </div> 
 
@@ -45,7 +46,8 @@
                           <button class="btn btn-default btn-sm" type="submit" name="accion" value="ELIMINAR" onclick="javascript:return preguntarPorBorrar();">Eliminar</button>
                         </php:repeticion>
 
-                      </form>
+                        <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
                     </td>
                   </tr>
                 </php:repeticion>

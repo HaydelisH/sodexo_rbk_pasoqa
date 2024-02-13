@@ -31,10 +31,10 @@ class checkListDocumentos {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -88,7 +88,7 @@ class checkListDocumentos {
 		include("includes/opciones_menu.php");
 
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -106,7 +106,7 @@ class checkListDocumentos {
 	//Mostrar listado de los registro disponibles
 	private function listado()
 	{  
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		/*$dt = new DataTable;
 		$dt2 = new DataTable;

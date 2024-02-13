@@ -85,10 +85,10 @@ class generar_manuales {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -148,7 +148,7 @@ class generar_manuales {
 		include("includes/opciones_menu.php");
 	
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -159,7 +159,7 @@ class generar_manuales {
 		}
 	
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -191,14 +191,14 @@ class generar_manuales {
 	private function agregar()
 	{	
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "AGREGAR":
 					// enviamos los datos del formulario a guardar
-					if ($this->generar_manualesBD->agregar($_REQUEST,$dt))
+					if ($this->generar_manualesBD->agregar($_POST,$dt))
 					{
 						//Pasamos el mensaje de Ok
 						$this->mensajeOK="Registro Completado! Su registro se ha guardado con exito";
@@ -228,18 +228,18 @@ class generar_manuales {
 					$dt8 = new DataTable();
 
 					//Completamos los datos de la Empresa
-					if ( $_REQUEST["RutEmpresa_Gama"] != "" ){
-						$emp = array ("RutEmpresa" => $_REQUEST["RutEmpresa_Gama"]);
+					if ( $_POST["RutEmpresa_Gama"] != "" ){
+						$emp = array ("RutEmpresa" => $_POST["RutEmpresa_Gama"]);
 					}
 					else{
-						$emp = array ("RutEmpresa" => $_REQUEST["RutEmpresa"]);
+						$emp = array ("RutEmpresa" => $_POST["RutEmpresa"]);
 					}
 					
 					$this->generar_manualesBD->obtenerRazonSocial($emp,$dt);
 					$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
 					//Completamos los datos de la Empresa Cliente 
-					$cli = array ("RutEmpresaC" => $_REQUEST["RutEmpresa"]); 
+					$cli = array ("RutEmpresaC" => $_POST["RutEmpresa"]); 
 					$this->generar_manualesBD->obtenerRazonSocialC($cli,$dt1);
 					$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
@@ -268,8 +268,8 @@ class generar_manuales {
 					$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
 					//Buscamos 
-					if( $_REQUEST["modelo_contrato"] != 0 ){
-						$this->generar_manualesBD->obtenerModeloContrato($_REQUEST,$dt4);
+					if( $_POST["modelo_contrato"] != 0 ){
+						$this->generar_manualesBD->obtenerModeloContrato($_POST,$dt4);
 						$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 					}
 					else{
@@ -346,8 +346,8 @@ class generar_manuales {
 						}
 					}
 
-					$dt->data[0]["input_not"] = $_REQUEST["input_not"];
-					$dt->data[0]["input_aval"] = $_REQUEST["input_aval"];
+					$dt->data[0]["input_not"] = $_POST["input_not"];
+					$dt->data[0]["input_aval"] = $_POST["input_aval"];
 
 					//Consultamos las empresas clientes 
 					$this->generar_manualesBD->listado($dt2);
@@ -388,34 +388,34 @@ class generar_manuales {
 					$dt11 = new DataTable();
 
 					//Completamos los datos de la Empresa
-					$this->generar_manualesBD->obtenerRazonSocial($_REQUEST,$dt);
+					$this->generar_manualesBD->obtenerRazonSocial($_POST,$dt);
 					$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
 					//Completamos los datos de la Empresa Cliente 
-					$this->generar_manualesBD->obtenerRazonSocialC($_REQUEST,$dt1);
+					$this->generar_manualesBD->obtenerRazonSocialC($_POST,$dt1);
 					$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
 					//Completamos los datos de la Notaria
-					$this->generar_manualesBD->obtenerRazonSocialN($_REQUEST,$dt2);
+					$this->generar_manualesBD->obtenerRazonSocialN($_POST,$dt2);
 					$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
 					//Buscamos Firmantes la Empresa
-					$this->generar_manualesBD->obtenerFirmantes($_REQUEST,$dt3);
+					$this->generar_manualesBD->obtenerFirmantes($_POST,$dt3);
 					$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
 					//Buscamos Firmantes la Cliente
-					$this->generar_manualesBD->obtenerFirmantesC($_REQUEST,$dt4);
+					$this->generar_manualesBD->obtenerFirmantesC($_POST,$dt4);
 					$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
 					//Buscamos Firmantes la Notaria
-					$this->generar_manualesBD->obtenerFirmantesN($_REQUEST,$dt5);
+					$this->generar_manualesBD->obtenerFirmantesN($_POST,$dt5);
 					$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
 					//Buscamos flujos de firmas 
 					$this->generar_manualesBD->listadoFlujos($dt6); 
 					$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
-					$flu = array ("idWF" => $_REQUEST["Flujo"]);
+					$flu = array ("idWF" => $_POST["Flujo"]);
 					$this->generar_manualesBD->obteneFlujoFirma($flu,$dt7); 
 					$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
@@ -423,7 +423,7 @@ class generar_manuales {
 					$this->generar_manualesBD->listadoTipoFirmas($dt8);
 					$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
-					$this->generar_manualesBD->obtenerTipoFirma($_REQUEST,$dt9);
+					$this->generar_manualesBD->obtenerTipoFirma($_POST,$dt9);
 					$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
 					//Buscamos Modelos de Contratos 
@@ -431,7 +431,7 @@ class generar_manuales {
 					$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
 					//Buscamos Modelos de Contratos 
-					$this->generar_manualesBD->obtenerModeloContrato($_REQUEST,$dt11);
+					$this->generar_manualesBD->obtenerModeloContrato($_POST,$dt11);
 					$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
 					//Reasignamos datos
@@ -455,10 +455,10 @@ class generar_manuales {
 					$dt->data[0]["TipoFirmas"] = $dt8->data;
 					$dt->data[0]["idTipoFirma"] = $dt9->data[0]["idTipoFirma"];
 					$dt->data[0]["Descripcion"] = $dt9->data[0]["Descripcion"];
-					$dt->data[0]["input_not"] = $_REQUEST["input_not"];
-					$dt->data[0]["input_aval"] = $_REQUEST["input_aval"];
-					$dt->data[0]["input_emp"] = $_REQUEST["input_emp"];
-					$dt->data[0]["input_cli"] = $_REQUEST["input_cli"];
+					$dt->data[0]["input_not"] = $_POST["input_not"];
+					$dt->data[0]["input_aval"] = $_POST["input_aval"];
+					$dt->data[0]["input_emp"] = $_POST["input_emp"];
+					$dt->data[0]["input_cli"] = $_POST["input_cli"];
 					$dt->data[0]["idMC"] = $dt11->data[0]["idMC"];
 					$dt->data[0]["DescripcionMC"] = $dt11->data[0]["DescripcionMC"];
 
@@ -467,7 +467,7 @@ class generar_manuales {
 					$formulario[0]["Flujo"] = $dt6->data;
 					$formulario[0]["TipoFirmas"] = $dt8->data;
 					$formulario[0]["Modelo_Contrato"] = $dt10->data;
-					$formulario[0]["idDocumento_Gama"] = $_REQUEST["idDocumento_Gama"];
+					$formulario[0]["idDocumento_Gama"] = $_POST["idDocumento_Gama"];
 
 					//Firmantes
 					$formulario[0]["firmantes_empresa"] = $dt3->data;
@@ -494,23 +494,23 @@ class generar_manuales {
 					$dt8 = new DataTable();
 
 					//Completamos los datos de la Empresa
-					$this->generar_manualesBD->obtenerRazonSocial($_REQUEST,$dt);
+					$this->generar_manualesBD->obtenerRazonSocial($_POST,$dt);
 					$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
 					//Completamos los datos de la Empresa Cliente 
-					$this->generar_manualesBD->obtenerRazonSocialC($_REQUEST,$dt1);
+					$this->generar_manualesBD->obtenerRazonSocialC($_POST,$dt1);
 					$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
 					//Buscamos Firmantes la Empresa
-					$this->generar_manualesBD->obtenerFirmantes($_REQUEST,$dt3);
+					$this->generar_manualesBD->obtenerFirmantes($_POST,$dt3);
 					$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
 					//Buscamos Firmantes la Cliente
-					$this->generar_manualesBD->obtenerFirmantesC($_REQUEST,$dt4);
+					$this->generar_manualesBD->obtenerFirmantesC($_POST,$dt4);
 					$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
 					//Buscamos si la Empresa tiene Plantilla
-					$this->generar_manualesBD->listadoPlantillas($_REQUEST,$dt5);
+					$this->generar_manualesBD->listadoPlantillas($_POST,$dt5);
 					$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
 					//Buscamos flujos de firmas 
@@ -527,8 +527,8 @@ class generar_manuales {
 
 					//Buscamos 
 
-					if( $_REQUEST["modelo_contrato"] != 0 ){
-						$this->generar_manualesBD->obtenerModeloContrato($_REQUEST,$dt4);
+					if( $_POST["modelo_contrato"] != 0 ){
+						$this->generar_manualesBD->obtenerModeloContrato($_POST,$dt4);
 						$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 					}
 					else{
@@ -600,7 +600,7 @@ class generar_manuales {
 						}
 					}
 					else{
-						if ( $_REQUEST["RutEmpresaC"] != "" ){
+						if ( $_POST["RutEmpresaC"] != "" ){
 							if ( $dt1->data[0]["TipoEmpresa"] == 1 ){
 								$this->mensajeAd= "La Empresa ".$dt1->data[0]["RazonSocial"]." seleccionada no tiene firmantes";
 							}else{
@@ -609,7 +609,7 @@ class generar_manuales {
 						}
 					}
 
-					$dt->data[0]["fecha"] = $_REQUEST["fecha"];
+					$dt->data[0]["fecha"] = $_POST["fecha"];
 					$dt->data[0]["FirEmpresa"] = $FirEmpresa;
 					$dt->data[0]["FirEmpresaC"] = $FirEmpresaC;
 					$dt->data[0]["PlaEmpresa"] = $PlaEmpresa;
@@ -705,10 +705,10 @@ class generar_manuales {
 		$dt = new DataTable();
 
 		//Listado de Empresas Disponibles 
-		$_REQUEST["TipoEmpresa"] = 1;
+		$_POST["TipoEmpresa"] = 1;
 		
 		//Buscar todas las Empresas disponibles
-		$this->generar_manualesBD->listadoEmpresas($_REQUEST,$dt);
+		$this->generar_manualesBD->listadoEmpresas($_POST,$dt);
 		$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
 		//Enviar datos al HTML
@@ -725,14 +725,14 @@ class generar_manuales {
 		//Declarar e instanciar variables
 		$dt = new DataTable();
 
-		$_REQUEST["TipoEmpresa"] = 2;
+		$_POST["TipoEmpresa"] = 2;
 		//Buscar todas las Empresas disponibles
-		$this->generar_manualesBD->listadoClientesDiferente($_REQUEST,$dt);
+		$this->generar_manualesBD->listadoClientesDiferente($_POST,$dt);
 		$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
 		if( count($dt->data) > 0){
 			foreach ($dt->data as $key => $value) {
-				$dt->data[$key]["RutEmpresa_Gama"] = $_REQUEST["RutEmpresa"];
+				$dt->data[$key]["RutEmpresa_Gama"] = $_POST["RutEmpresa"];
 			}
 		}
 		
@@ -753,25 +753,25 @@ class generar_manuales {
 		$dt2 = new DataTable();
 
 		//Listado de Empresas Disponibles 
-		$_REQUEST["TipoEmpresa"] = 3;
+		$_POST["TipoEmpresa"] = 3;
 		//Buscar todas las Empresas disponibles
-		$this->generar_manualesBD->listadoEmpresas($_REQUEST,$dt);
+		$this->generar_manualesBD->listadoEmpresas($_POST,$dt);
 		$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 		
 		//Quitar las etiquetas de HTML antes de llevar al listado
 		if ( count($dt->data) ){
 			foreach ($dt->data as $key => $value) {
 
-				$dt->data[$key]["RutEmpresa"] = $_REQUEST["RutEmpresa"];
-				$dt->data[$key]["RutEmpresaC"] = $_REQUEST["RutEmpresaC"];
-				$dt->data[$key]["TipoFirmas"] = $_REQUEST["TipoFirmas"];
-				$dt->data[$key]["Flujo"] = $_REQUEST["Flujo"];
-				$dt->data[$key]["input_not"] = $_REQUEST["input_not"];
-				$dt->data[$key]["input_aval"] = $_REQUEST["input_aval"];
-				$dt->data[$key]["input_emp"] = $_REQUEST["input_emp"];
-				$dt->data[$key]["input_cli"] = $_REQUEST["input_cli"];
-				$dt->data[$key]["modelo_contrato"] = $_REQUEST["modelo_contrato"];
-				$dt->data[$key]["idDocumento_Gama"] = $_REQUEST["idDocumento_Gama"];
+				$dt->data[$key]["RutEmpresa"] = $_POST["RutEmpresa"];
+				$dt->data[$key]["RutEmpresaC"] = $_POST["RutEmpresaC"];
+				$dt->data[$key]["TipoFirmas"] = $_POST["TipoFirmas"];
+				$dt->data[$key]["Flujo"] = $_POST["Flujo"];
+				$dt->data[$key]["input_not"] = $_POST["input_not"];
+				$dt->data[$key]["input_aval"] = $_POST["input_aval"];
+				$dt->data[$key]["input_emp"] = $_POST["input_emp"];
+				$dt->data[$key]["input_cli"] = $_POST["input_cli"];
+				$dt->data[$key]["modelo_contrato"] = $_POST["modelo_contrato"];
+				$dt->data[$key]["idDocumento_Gama"] = $_POST["idDocumento_Gama"];
 			}
 		}
 		
@@ -789,7 +789,7 @@ class generar_manuales {
 	//Generar el documento en PDF con los datos del formulario 
 	private function generar(){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//Instanciar la clase
 		$dt = new DataTable();
@@ -920,7 +920,7 @@ class generar_manuales {
 	//Construir Arreglos de los Firmantes
 	private function construirFirmantes($datos,&$resultado){
 
-		$datos_1 = $_REQUEST;
+		$datos_1 = $_POST;
 
 		//Variables que faltan 
 		$dt3 = new DataTable();
@@ -960,21 +960,21 @@ class generar_manuales {
 			  		$f_empresa = array();
 			  		$empresa_aux = array();
 
-			        foreach ($_REQUEST["Firmantes_Emp"] as $i => $valor) {
+			        foreach ($_POST["Firmantes_Emp"] as $i => $valor) {
 			        	//Datos faltantes 
-			        	$empresa_aux = array ( "idContrato" => $datos, "RutEmpresa" => $_REQUEST["RutEmpresa"], "RutFirmante" => $_REQUEST["Firmantes_Emp"][$i], "idEstado" => $dt8->data[$key]["idEstadoWF"],"Orden" => $dt8->data[$key]["Orden"]);	        	
+			        	$empresa_aux = array ( "idContrato" => $datos, "RutEmpresa" => $_POST["RutEmpresa"], "RutFirmante" => $_POST["Firmantes_Emp"][$i], "idEstado" => $dt8->data[$key]["idEstadoWF"],"Orden" => $dt8->data[$key]["Orden"]);	        	
 			        				        
 			        	//Agregara a la tabla
 			        	$this->generar_manualesBD->agregarFirmantes($empresa_aux);
 			        	$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 			        	
 			        	//Buscar datos
-			        	$array = array( "RutEjecutivo" => $_REQUEST["Firmantes_Emp"][$i] );
+			        	$array = array( "RutEjecutivo" => $_POST["Firmantes_Emp"][$i] );
 			        	$this->generar_manualesBD->obtenerPersona($array, $dt3);
 			        	$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 			        	
 			        	//Completar el arreglo
-			        	$nuevo = array( "nombre" => $dt3->data[0]["nombre"].' '.$dt3->data[0]["appaterno"] , "rut" => 'RUT '.$_REQUEST["Firmantes_Emp"][$i], "nombre_emp" => "P.p ".$dt4->data[0]["RazonSocial"], "rut_emp" => "RUT ".$_REQUEST["RutEmpresa"]);
+			        	$nuevo = array( "nombre" => $dt3->data[0]["nombre"].' '.$dt3->data[0]["appaterno"] , "rut" => 'RUT '.$_POST["Firmantes_Emp"][$i], "nombre_emp" => "P.p ".$dt4->data[0]["RazonSocial"], "rut_emp" => "RUT ".$_POST["RutEmpresa"]);
 						
 						//Agregar al final 
 						array_push($f_empresa, $nuevo);
@@ -988,21 +988,21 @@ class generar_manuales {
 		        	$f_cliente = array();
 		        	$cliente_aux = array();
 
-			        foreach ($_REQUEST["Firmantes_Cli"] as $i => $valor) {
+			        foreach ($_POST["Firmantes_Cli"] as $i => $valor) {
 			        	//Datos faltantes 
-				        $cliente_aux = array ( "idContrato" => $datos, "RutEmpresa" => $_REQUEST["RutEmpresaC"], "RutFirmante" => $_REQUEST["Firmantes_Cli"][$i], "idEstado" => $dt8->data[$key]["idEstadoWF"],"Orden" => $dt8->data[$key]["Orden"]);
+				        $cliente_aux = array ( "idContrato" => $datos, "RutEmpresa" => $_POST["RutEmpresaC"], "RutFirmante" => $_POST["Firmantes_Cli"][$i], "idEstado" => $dt8->data[$key]["idEstadoWF"],"Orden" => $dt8->data[$key]["Orden"]);
 
 			        	//Agregara a la tabla
 			        	$this->generar_manualesBD->agregarFirmantes($cliente_aux);
 			        	$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 			        	
 			        	//Buscar datos
-			        	$array = array( "RutEjecutivo" => $_REQUEST["Firmantes_Cli"][$i] );
+			        	$array = array( "RutEjecutivo" => $_POST["Firmantes_Cli"][$i] );
 			        	$this->generar_manualesBD->obtenerPersona($array, $dt3);
 			        	$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
 			        	//Completar arreglo
-			        	$nuevo = array( "nombre" => $dt3->data[0]["nombre"].' '.$dt3->data[0]["appaterno"] , "rut" => 'RUT '.$_REQUEST["Firmantes_Cli"][$i], "nombre_cli" => "P.p ".$dt5->data[0]["RazonSocialC"], "rut_cli" => 'RUT '.$_REQUEST["RutEmpresaC"]);
+			        	$nuevo = array( "nombre" => $dt3->data[0]["nombre"].' '.$dt3->data[0]["appaterno"] , "rut" => 'RUT '.$_POST["Firmantes_Cli"][$i], "nombre_cli" => "P.p ".$dt5->data[0]["RazonSocialC"], "rut_cli" => 'RUT '.$_POST["RutEmpresaC"]);
 			        	//Agregar al final
 			        	array_push($f_cliente, $nuevo);
 			        }
@@ -1016,25 +1016,25 @@ class generar_manuales {
 		        	$notaria_aux = array();
 
 			        //Si el flujo tiene Notaria 
-			        //if( $_REQUEST["not"] == 1 ){
-					if( $_REQUEST["input_not"] == 1 ){
+			        //if( $_POST["not"] == 1 ){
+					if( $_POST["input_not"] == 1 ){
 
 			        	//Si el flujo tiene Notaria 
-			        	 foreach ($_REQUEST["Firmantes_Not"] as $i => $valor) {
+			        	 foreach ($_POST["Firmantes_Not"] as $i => $valor) {
 				        	//Datos faltantes 
-				        	$notaria_aux = array ( "idContrato" => $datos, "RutEmpresa" => $_REQUEST["RutEmpresaN"], "RutFirmante" => $_REQUEST["Firmantes_Not"][$i], "idEstado" => $dt8->data[$key]["idEstadoWF"],"Orden" => $dt8->data[$key]["Orden"]);
+				        	$notaria_aux = array ( "idContrato" => $datos, "RutEmpresa" => $_POST["RutEmpresaN"], "RutFirmante" => $_POST["Firmantes_Not"][$i], "idEstado" => $dt8->data[$key]["idEstadoWF"],"Orden" => $dt8->data[$key]["Orden"]);
 
 				        	//Agregara a la tabla
 				        	$this->generar_manualesBD->agregarFirmantes($notaria_aux);
 				        	$this->mensajeErro.=$this->generar_manualesBD->mensajeError;
 
 				        	//Buscar datos
-				        	$array = array( "RutEjecutivo" => $_REQUEST["Firmantes_Not"][$i] );
+				        	$array = array( "RutEjecutivo" => $_POST["Firmantes_Not"][$i] );
 				        	$this->generar_manualesBD->obtenerPersona($array, $dt3);
 				        	$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
 				        	//Completar arreglo
-				        	$nuevo = array( "nombre" => $dt3->data[0]["nombre"].' '.$dt3->data[0]["appaterno"] , "rut" => 'RUT '.$_REQUEST["Firmantes_Not"][$i], "nombre_not" => "P.p ".$dt6->data[0]["RazonSocialN"], "rut_not" => 'RUT '.$_REQUEST["RutEmpresaN"]);
+				        	$nuevo = array( "nombre" => $dt3->data[0]["nombre"].' '.$dt3->data[0]["appaterno"] , "rut" => 'RUT '.$_POST["Firmantes_Not"][$i], "nombre_not" => "P.p ".$dt6->data[0]["RazonSocialN"], "rut_not" => 'RUT '.$_POST["RutEmpresaN"]);
 				        	//Agregar al final
 				        	array_push($f_notario, $nuevo);
 			        	}
@@ -1049,11 +1049,11 @@ class generar_manuales {
 		        	$f_aval = array();
 		        	$aval_aux = array();
 
-			        if ( $_REQUEST["rut_aval"] != "" ) {
+			        if ( $_POST["rut_aval"] != "" ) {
 			        	//Datos faltantes 
-			           	$aval_aux = array ( "idContrato" => $datos, "RutEmpresa" => $_REQUEST["RutEmpresaC"], "RutFirmante" => $_REQUEST["rut_aval"], "idEstado" => $dt8->data[$key]["idEstadoWF"],"Orden" => $dt8->data[$key]["Orden"]);
+			           	$aval_aux = array ( "idContrato" => $datos, "RutEmpresa" => $_POST["RutEmpresaC"], "RutFirmante" => $_POST["rut_aval"], "idEstado" => $dt8->data[$key]["idEstadoWF"],"Orden" => $dt8->data[$key]["Orden"]);
 
-				        $datos_aval = array ("personaid" => $_REQUEST["rut_aval"], "nombre" => $_REQUEST["nombre_aval"], "apellido" => $_REQUEST["apellido_aval"], "correo" => $_REQUEST["correo_aval"]);
+				        $datos_aval = array ("personaid" => $_POST["rut_aval"], "nombre" => $_POST["nombre_aval"], "apellido" => $_POST["apellido_aval"], "correo" => $_POST["correo_aval"]);
 				      
 			        	//Agregar a la tabla
 			        	$this->generar_manualesBD->agregarFirmantes($aval_aux);
@@ -1064,7 +1064,7 @@ class generar_manuales {
 			        	$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 			 
 			        	//Completar arreglo
-			        	$nuevo = array( "nombre" => $_REQUEST["nombre_aval"].' '.$_REQUEST["apellido_aval"] , "rut" => 'RUT '.$_REQUEST["rut_aval"], "nombre_cli" => "P.p ".$dt5->data[0]["RazonSocialC"], "rut_cli" => 'RUT '.$_REQUEST["RutEmpresaC"]);
+			        	$nuevo = array( "nombre" => $_POST["nombre_aval"].' '.$_POST["apellido_aval"] , "rut" => 'RUT '.$_POST["rut_aval"], "nombre_cli" => "P.p ".$dt5->data[0]["RazonSocialC"], "rut_cli" => 'RUT '.$_POST["RutEmpresaC"]);
 			        	//Agregar al final
 			        	array_push($f_aval, $nuevo);
 			        }
@@ -1079,12 +1079,12 @@ class generar_manuales {
 		array_push($firmantes_completos, $f_cliente);
 
 		//Si el flujo tiene Notario
-		if( $_REQUEST["input_not"] == 1 ){
+		if( $_POST["input_not"] == 1 ){
 			array_push($firmantes_completos, $f_notario);
 		}				
 
 		//Si tiene aval
-		if ( $_REQUEST["rut_aval"] != "" ){
+		if ( $_POST["rut_aval"] != "" ){
 			array_push($firmantes_completos, $f_aval);
 		} 
 
@@ -1104,10 +1104,10 @@ class generar_manuales {
 		$dt3 = new DataTable();
 		$dt4 = new DataTable();
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//Completamos los datos de la Empresa
-		$emp = array ("RutEmpresa" => $_REQUEST["RutEmpresa"]);
+		$emp = array ("RutEmpresa" => $_POST["RutEmpresa"]);
 		$this->generar_manualesBD->obtenerRazonSocial($emp,$dt);
 		$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 
@@ -1120,7 +1120,7 @@ class generar_manuales {
 		}
 
 		//Completamos los datos de la Empresa Cliente 
-		$cli = array ("RutEmpresaC" => $_REQUEST["RutEmpresa"]); 
+		$cli = array ("RutEmpresaC" => $_POST["RutEmpresa"]); 
 		$this->generar_manualesBD->obtenerRazonSocialC($cli,$dt1);
 		$this->mensajeError.=$this->generar_manualesBD->mensajeError;
 

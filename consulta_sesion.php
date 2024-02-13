@@ -41,7 +41,7 @@ class consulta_sesion {
 		$dt = new DataTable();
 		// pedimos el listado
 		
-		$datos=$_REQUEST;
+		$datos=$_POST;
 		
 		$this->firma->Login($dt);
 		$this->mensajeError.=$this->firma->mensajeError;

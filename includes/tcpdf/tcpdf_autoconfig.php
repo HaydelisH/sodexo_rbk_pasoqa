@@ -1,7 +1,6 @@
 <?php
 //============================================================+
 // File name   : tcpdf_autoconfig.php
-// Version     : 1.1.1
 // Begin       : 2013-05-16
 // Last Update : 2014-12-18
 // Authors     : Nicola Asuni - Tecnick.com LTD - www.tecnick.com - info@tecnick.com

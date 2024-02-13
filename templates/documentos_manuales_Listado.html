@@ -7,7 +7,7 @@
           <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
           <div id="mensajeError"><php:texto id="mensajeError" /></div>      
         </div>
-        <form name="formulario2" id="formulario_usuarios" action="Documentos_manuales.php" method="POST" autocomplete="off">
+        <form name="formulario2" id="formulario" action="Documentos_manuales.php" method="POST" autocomplete="off">
           <table id="example2" class="table table-bordered table-hover">
 	          <div class="col-md-2 xs-12">
 		          <button class="btn btn-md btn-default btn-block " type="button" style="margin-top: 10px" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" ><a href="" >Mostrar Filtro</a></button>
@@ -22,28 +22,28 @@
       						  <div class="form-group">
 							 <php:repeticion id="formulario">
    
-        						  <div class="form-row">
+        						  <div class="row">
         						    <div class="col-md-4">
         							    <label for="idDocumento">Nro Contrato</label>
         							    <input type="text" class="form-control" id="idDocumento" name="idDocumento" maxlength="10" value="<php:item id="idDocumento" />"">
         							  </div>
         						  </div>
 
-        							<div class="form-row">
+        							<div class="row">
         							  <div class="col-md-4 xs-5">
         							    <label for="idProyecto">Proyecto</label>
         							    <input type="text" class="form-control" id="idProyecto" name="idProyecto" maxlength="50" value="<php:item id="idProyecto" />"">
         							  </div>
         						  </div>
 
-        						  <div class="form-row">
+        						  <div class="row">
         						    <div class="col-md-4">
         							      <label for="Descripcion_Pl">Nombre Plantilla</label>
         							      <input type="text" class="form-control" id="Descripcion_Pl" name="Descripcion_Pl" maxlength="50" value="<php:item id="Descripcion_Pl" />"">
         							  </div>
         						  </div>
 
-        							<div class="form-row">
+        							<div class="row">
         							  <div class="col-md-4 xs-5">
         							      <label for="NombreTipoDoc">Tipo Documento</label>
         							      <!--<input type="text" class="form-control" id="NombreTipoDoc" name="NombreTipoDoc" maxlength="50" value="<php:item id="NombreTipoDoc" />"">-->
@@ -57,14 +57,14 @@
         							  </div>
         							</div>
 
-        							<div class="form-row">
+        							<div class="row">
         							  <div class="col-md-4 xs-5">
         							    <label for="RazonSocialCliente">Cliente</label>
         							    <input type="text" class="form-control" id="RazonSocialCliente" name="RazonSocialCliente" maxlength="50" value="<php:item id="RazonSocialCliente" />"">
         							  </div>
         							</div>
 
-        							<div class="form-row">
+        							<div class="row">
         							  <div class="col-md-4 xs-5">
         							    <label for="RazonSocialGama">Empresa</label>
         							   <!-- <input type="text" class="form-control" id="RazonSocialGama" name="RazonSocialGama" maxlength="50" value="<php:item id="RazonSocialGama" />"">-->
@@ -80,7 +80,7 @@
         							  </div>
         							</div>
 
-        							<div class="form-row">
+        							<div class="row">
         							  <div class="col-md-4 xs-5">
         							    <label for="Nombre">Estado Contrato</label>	
         							    <!--<input type="text" class="form-control" id="Nombre" name="Nombre" maxlength="50" value="<php:item id="Nombre" />"">-->
@@ -93,7 +93,7 @@
         							  </div>
         							</div>
       						  
-      		        <div class="form-row">
+      		        <div class="row">
             				<div class="col-md-2 xs-12 pull-right">
                       <label ></label>
             					<input type="hidden" name="accion" value="BUSCAR" />
@@ -108,7 +108,8 @@
             </div> <!-- <div class="col-md-12">-->
           </div> <!--<div class="row"> -->
       	</div> <!-- <div class="collapse" id="collapseExample"> -->
-      </form>
+        <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
        
        
         <!--Tabla-->		  
@@ -156,7 +157,8 @@
 						   <input type="hidden" name="pagina" value="<php:texto id="pagina" />">
 						   <input type="hidden" name="nombrex" value="<php:texto id="nombrex" />">
 						   <button class="btn btn-primary btn-sm" type="submit" name="accion" value="DETALLE" >Detalle</button>
-					  </form>
+					    <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 					</td>
 				  </tr>
 				</php:repeticion>
@@ -167,17 +169,17 @@
 					<nav aria-label="nav1">
 					  <ul class="pagination justify-content-center">
 						<li class="page-item ">
-						  <a id="pagina_primera" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_primera" />);" ><span><i class="fa fa-angle-double-left"></i></span></a>
+						  <a id="pagina_primera" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id='pagina_primera' />);" ><span><i class="fa fa-angle-double-left"></i></span></a>
 						</li>
 						<li class="page-item ">
-						  <a id="pagina_anterior" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_anterior" />);" ><span ><i class="fa fa-angle-left"></i></span></a>
+						  <a id="pagina_anterior" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id='pagina_anterior' />);" ><span ><i class="fa fa-angle-left"></i></span></a>
 						</li>                  
-						<li class="page-item active"><a class="page-link1" href="#"><php:item id="pagina_actual" /></a></li>                              
+						<li class="page-item active"><a class="page-link" href="#"><php:item id="pagina_actual" /></a></li>                              
 						<li class="page-item">
-						  <a id="pagina_siguente" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_siguente" />);" ><span><i class="fa fa-angle-right"></i></span></a>
+						  <a id="pagina_siguente" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id='pagina_siguente' />);" ><span><i class="fa fa-angle-right"></i></span></a>
 						</li>
 					  <li class="page-item">
-						<a id="pagina_ultimo" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_ultimo" />);" ><span><i class="fa fa-angle-double-right"></i></span></a>
+						<a id="pagina_ultimo" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id='pagina_ultimo' />);" ><span><i class="fa fa-angle-double-right"></i></span></a>
 					  </li>                                                     
 					  </ul>
 					</nav>
@@ -193,7 +195,8 @@
 					  <input type="hidden" name="Nombre"       value="<php:item id="Nombre" />" >
 					  <input type="hidden" name="Descripcion_Pl"       value="<php:item id="Descripcion_Pl" />" >
 					  <input type="hidden" name="holdingid"       value="<php:item id="holdingid" />" >
-				</form>
+				  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 	
 			</table>
 		</tbody>

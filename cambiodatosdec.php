@@ -35,17 +35,17 @@ class registrodec {
 	function __construct()
 	{
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
 				return;
 			}
 		}
-		if (isset($_REQUEST["mensajeError"])) $this->mensajeError.=$_REQUEST["mensajeError"];
+		if (isset($_POST["mensajeError"])) $this->mensajeError.=$_POST["mensajeError"];
 
 		// hacemos una instacia del manejo de plantillas (templates)
 		$this->pagina = new Paginas();
@@ -109,13 +109,13 @@ class registrodec {
 	{
 		
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
 
 			//reasignamos los datos 
-			$_REQUEST["user_lastname"] = $_REQUEST["appaterno"]." ".$_REQUEST["apmaterno"];
+			$_POST["user_lastname"] = $_POST["appaterno"]." ".$_POST["apmaterno"];
 					
-			$this->dec5->ModificarDatos($_REQUEST,$dt);
+			$this->dec5->ModificarDatos($_POST,$dt);
 			$this->mensajeError.=$this->dec5->mensajeError;
 			if ($this->mensajeError == "")
 			{
@@ -126,9 +126,9 @@ class registrodec {
 			}
 		}
 		
-		$_REQUEST["usuarioid"] = $this->seguridad->usuarioid;
+		$_POST["usuarioid"] = $this->seguridad->usuarioid;
 
-		$this->pagina->agregarDato("personaid",$_REQUEST["usuarioid"]);
+		$this->pagina->agregarDato("personaid",$_POST["usuarioid"]);
 
 		$this->pagina->agregarDato("mensajeError",$this->mensajeError);
 		$this->pagina->agregarDato("mensajeOK",$this->mensajeOK);

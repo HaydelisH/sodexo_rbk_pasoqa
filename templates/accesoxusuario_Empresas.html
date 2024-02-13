@@ -8,7 +8,7 @@
 							<php:repeticion id="formulario">			
 						</div>
 						<div class="form-group">
-							<form name="formulario1" id="formulario_usuarios" action="accesoxusuario.php" method="POST" >
+							<form name="formulario1" id="formulario" action="accesoxusuario.php" method="POST" >
 								<input type="hidden" name="accion" value="EMPRESAS" />
 								<input type="hidden" name="tipousuarioid" 	id="tipousuarioid" 	value="<php:item id="tipousuarioid" />">		
 								<input type="hidden" name="holdingid" 		id="holdingid"		value="<php:item id="holdingid" />">
@@ -17,7 +17,8 @@
 								<input type="hidden" name="nombre"	 	 	value="<php:item id="nombre" />" />	
 								<input type="hidden" name="newusuarioid" 	value="<php:item id="newusuarioid" />">
 								<a class="btn btn-default btn_letra_azul" href="#" onclick="javascript:formulario3.submit();"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</a>			
-							</form>		
+							  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>		
 						</div>
 					</div> 
 				</div>	
@@ -25,9 +26,9 @@
 					<!--Mensajes-->
 					<div id="mensajeOK"><php:texto id="mensajeOK" /></div>
 					<div id="mensajeError"><php:texto id="mensajeError" /></div>
-					<form name="formulario" id="formulario_usuarios" action="accesoxusuario.php" method="POST" >
+					<form name="formulario" id="formulario" action="accesoxusuario.php" method="POST" >
 						<div id="divtabla" class="tabla-responsiva" >
-							<div class="form-row" >
+							<div class="row" >
 								<php:repeticion id="usuario">
 								<div class="col-md-4" style="padding-bottom: 15px; padding-left: 0;">
 									<input type="hidden" name="tipousuarioid" id="tipousuarioidx" value="<php:item id="tipousuarioid" />" />
@@ -64,7 +65,8 @@
 												<input type="hidden" name="nropaginaini" 	value="<php:item id="nropaginaini" />" />	
 												<button class="btn btn-primary btn-sm" data-toggle="tooltip" title="DAR PERMISOS EN SIGUIENTE NIVEL" type="submit" name="accion2" value="SIGUIENTE NIVEL" >Siguiente Nivel</button>
 												<button class="btn btn-primary btn-sm" data-toggle="tooltip" title="OTORGA PERMISOS A LOS SIGUIENTES NIVELES" type="submit" name="accion2" value="ACCESO A TODO" onclick="javascript:IniMensajes(),MostrarCargando();">Acceso a Todo</button>
-											</form>		
+											  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>		
 										</td>
 									</tr>
 									</php:repeticion>
@@ -75,12 +77,13 @@
 						<input type="hidden" name="newusuarioid" id="tipousuario" value="<php:item id="newusuarioid" />" />		
 						<input type="hidden" name="cantidad" 	  id="cantidad"    value="<php:texto id="cantidad" />" />
 						<input type="hidden" name="accion" value="EMPRESAS" />	
-						<div class="form-row">  
-							<div class="col-md-2 xs-12 pull-right">
-								<button class="btn btn-md btn-primary btn-block" type="button" name="accion2" value="GRABAR" style="margin-top: 10px" onclick="javascript:IniGraba();" >Guardar</button>  
+						<div class="row d-flex justify-content-end">  
+							<div class="col-md-2 xs-12 d-grid gap-2 ">           
+								<button class="btn btn-md btn-primary btn-block" type="button" name="accion2" value="GRABAR" style="margin-top: 10px" onclick="javascript:IniGrabaEmpresas();" >Guardar</button>  
 							</div>
 						</div>  
-					</form>
+					  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 					<form name="formulario3" id="formulario3" action="usuariosmant.php" method="POST" >
 						<input type="hidden" name="pagina" 			value="<php:item id="pagina" />" />		
 						<input type="hidden" name="holdingid" 		value="<php:item id="holdingid" />" />		
@@ -88,136 +91,11 @@
 						<input type="hidden" name="tipousuarioid" 	value="<php:item id="tipousuarioid" />" >
 						<input type="hidden" name="newusuarioid" value="<php:item id="newusuarioid" />" />	
 						<input type="hidden" name="accion" 		value="MODIFICAR" >
-					</form>
+					  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 				</div>  
 				</php:repeticion>
 			</div>  
 		</div>  
 	</div>  
 </div>  
-<script>
-
-	var conexion;
-	var error;
-	var elementoOK 		= document.getElementById("mensajeOK");
-	var elementoError 	= document.getElementById("mensajeError");
-
-	function IniMensajes ()
-	{
-		mensajeError.innerHTML 	= "";
-		mensajeOK.innerHTML 	= "";	
-
-	}
-	
-	function IniGraba()
-	{	
-		IniMensajes ();
-		error = 0;
-		
-		var cantidad = document.getElementById("cantidad").value;
-		MostrarCargando();
-		for (var b=0; b<cantidad; b++)
-		{
-			checknew 	= document.getElementById("sel_" + b).checked;
-			checkorig 	= document.getElementById("selori_" + b).checked;
-			
-			if (checknew != checkorig)
-			{
-				empresaid 		= document.getElementById("ide_" + b).value;
-				newusuarioid 	= document.getElementById("tipousuario").value;
-				
-				if (checknew == false )
-				{
-					accion = "elimina";
-				}
-				else
-				{
-					accion = "graba";
-				}
-			
-				phpyparametros = "accesoxusuarioempresas.php?accion=" + accion + "&" + "newusuarioid=" + newusuarioid + "&empresaid=" + empresaid;
-				Grabar (phpyparametros);
-				
-			}
-			
-		}
-
-		if (error > 0)
-		{
-			mensajeError.innerHTML 	= "Problemas al grabar, Intente Nuevamente.";
-			mensajeOK.innerHTML 	= '';
-		}
-		else
-		{	
-
-			for (var b=0; b<cantidad; b++)
-			{
-				document.getElementById("selori_" + b).checked = document.getElementById("sel_" + b).checked;
-			}
-			mensajeOK.innerHTML = 'Acci&oacute;n realizada con &eacute;xito';
-		}
-		
-		refrescaMensaje();
-		
-		OcultarCargando();
-	}
-	
-	function refrescaMensaje()
-	{
-		
-		var elementoOK 		= document.getElementById("mensajeOK");
-		var elementoError 	= document.getElementById("mensajeError");
-
-		if (elementoOK.innerHTML !="")
-		{
-				elementoOK.className += "callout callout-success";
-				elementoError.innerHTML = "";
-				elementoError.className = "";
-		}
-
-		if (elementoError.innerHTML !="")
-		{
-			elementoError.className += "callout callout-danger";
-			elementoOK.innerHTML = "";
-			elementoOK.className = "";
-		}
-	}
-	
-	function crearXMLHttpRequest() 
-	{
-	  var xmlHttp=null;
-	  if (window.ActiveXObject) 
-		xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-	  else 
-		if (window.XMLHttpRequest) 
-		  xmlHttp = new XMLHttpRequest();
-	  return xmlHttp;
-	}	
-	
-	function Grabar(phpyparametros)
-	{  
-		conexion=crearXMLHttpRequest();
-		conexion.onreadystatechange = procesarEventos;
-		conexion.open('GET', phpyparametros, false);
-		conexion.send(null);
-		
-	}
-
-	function procesarEventos()
-	{
-	  if(conexion.readyState == 4)
-	  {
-		
-		respuesta = conexion.responseText; 
-
-		if (respuesta != "OK")
-		{
-			error++;
-		}
-	  } 
-	  else 
-	  {
-		mensajeOK.innerHTML = 'Procesando...';
-	  }
-	}
-</script>

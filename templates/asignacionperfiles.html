@@ -15,25 +15,26 @@
 		<form name="formulario"  id="formulario" class="form-horizontal" method="POST" action="asignacionperfiles.php" autocomplete=off>
 		<div class="nav-tabs-custom">
 			<ul class="nav nav-tabs">
-				<li <php:item id="classconsultar" />"><a data-toggle="tab" id="href_persona" href="#consultar_perfiles">Consultar perfiles</a></li>
-				<li <php:item id="classagregar" />"><a data-toggle="tab" id="href_contrato" href="#agregar_perfiles">Agregar perfiles</a></li>
-				<li <php:item id="classeliminar" />"><a data-toggle="tab" id="href_anexo" href="#eliminar_perfiles">Eliminar perfiles</a></li>
+				<li class="nav-item" <php:item id="classconsultar" /> ><a data-toggle="tab" id="href_persona" href="#consultar_perfiles" data-toggle="pill" role="tab"  class="nav-link clicktab active">Consultar perfiles</a></li>
+				<li class="nav-item" <php:item id="classagregar" /> ><a data-toggle="tab" id="href_contrato" href="#agregar_perfiles" data-toggle="pill" role="tab"  class="nav-link clicktab">Agregar perfiles</a></li>
+				<li class="nav-item" <php:item id="classeliminar" /> ><a data-toggle="tab" id="href_anexo" href="#eliminar_perfiles" data-toggle="pill" role="tab"  class="nav-link clicktab">Eliminar perfiles</a></li>
 			</ul>
 				
-			
 			<div class="tab-content">
-				<div id="consultar_perfiles" class="tab-pane fade <php:item id="activarconsultar" />">
+				<div id="consultar_perfiles" class="tab-pane fade active show <php:item id="activarconsultar" />">
 								 
-					<div class="form-group">
+					<div class="row">
 						 <div class="col-md-4">
 							<label for="rut">Rut</label>
 							<input type="text" class="form-control" id="rut"  name="rut" placeholder="Rut v&aacute;lido" maxlength="10" value="<php:item id="rut" />" autofocus >
 						</div>
 					</div>
 								
-								
-					<button type="submit" name="accion" value="BUSCAR"  onclick="javascript:return verificar_rut(document.formulario.rut)" class="btn btn-primary">Buscar</button>
-					
+					<div class="row p-2">
+						<div class="col-sm-2 p-2 ">		
+							<button type="submit" name="accion" value="BUSCAR"  onclick="javascript:return verificar_rut(document.formulario.rut)" class="btn btn-primary">Buscar</button>
+						</div>
+					</div>
 					
 					<div id="divtabla" class="tabla-responsiva" style="margin-top:10px" >
 					<!--Tabla-->
@@ -60,14 +61,14 @@
 			
 			<div id="agregar_perfiles" class="tab-pane fade <php:item id="activaragregar" />">
 								 
-					<div class="form-group">
+					<div class="row">
 						 <div class="col-md-4">
 							<label for="rut">Rut</label>
 							<input type="text" class="form-control" id="rut_agregar"  name="rut_agregar" placeholder="Rut v&aacute;lido" maxlength="10" value="<php:item id="rut_agregar" />" autofocus >
 						</div>
 					</div>
 					
-					<div class="form-group">
+					<div class="row">
 						<div class="col-sm-4">
 							<label for="perfiles">perfiles</label>
 							<select class= "form-control" name="perfilagregar" id="perfilagregar">
@@ -77,20 +78,22 @@
 							</select>				
 						</div>				
 					</div>
-										
-					<button type="submit" name="accion" value="AGREGAR"  onclick="javascript:return verificar_rut_agregar(document.formulario.rut_agregar)" class="btn btn-primary">Agregar</button>
-					
+					<div class="row p-2">
+						<div class="col-sm-2 p-2 ">
+							<button type="submit" name="accion" value="AGREGAR"  onclick="javascript:return verificar_rut_agregar(document.formulario.rut_agregar)" class="btn btn-primary">Agregar</button>
+						</div>
+					</div>
 			</div><!--<div id="agregar_perfiles" class="tab-pane fade">-->
 			
 			<div id="eliminar_perfiles" class="tab-pane fade <php:item id="activareliminar" />">
-				<div class="form-group">
+				<div class="row">
 						 <div class="col-md-4">
 							<label for="rut">Rut</label>
 							<input type="text" class="form-control" id="rut_eliminar"  name="rut_eliminar" placeholder="Rut v&aacute;lido" maxlength="10" value="<php:item id="rut_eliminar" />" autofocus >
 						</div>
 					</div>
 					
-					<div class="form-group">
+					<div class="row">
 					<div class="col-sm-4">
 						<label for="perfiles">Perfiles</label>
 						<select class= "form-control" name="perfilaeliminar" id="perfilaeliminar">
@@ -101,16 +104,19 @@
 					</div>				
 					</div>
 					
-					
-					<button type="submit" name="accion" value="ELIMINAR"  onclick="javascript:return verificar_rut_eliminar(document.formulario.rut_eliminar)" class="btn btn-primary">Eliminar</button>
-					
+					<div class="row p-2">
+						<div class="col-sm-2 p-2">
+							<button type="submit" name="accion" value="ELIMINAR"  onclick="javascript:return verificar_rut_eliminar(document.formulario.rut_eliminar)" class="btn btn-primary">Eliminar</button>
+						</div>
+					</div>
 			</div><!--<div id="eliminar_perfiles" class="tab-pane fade">-->
 		
 			 </php:repeticion>
 		
 		</div><!--<div class="tab-content">-->
 </div>
-		</form>
+		  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 	   </div>
       </div>
     <!-- /.box -->
@@ -123,97 +129,3 @@
    
 </body>
 </html>
-
-<script>
-  
-  function verificar_rut(id)
-  { 
-	var rut_usuario = id.value;
-	limpiar_ad();
-	
-	if( rut_usuario.length == 0 ){
-		$("#mensajeError").addClass("callout callout-warning");
-		$("#mensajeError").html("El campo rut no puede ser vac&iacute;o");
-		
-		return false;
-	}
-	
-	$("#mensajeError").removeClass("callout callout-warning");
-	$("#mensajeError").html("");
-	
-	if ( validaRut2(id)){
-	   consulta_sesion();
-	}else{
-		return false;
-	}
-  }
-  
-  function verificar_rut_agregar(id)
-  { 
-	var rut_usuario = id.value;
-	var perfilagregar = $("#perfilagregar").val();
-	limpiar_ad();
-	
-	if( rut_usuario.length === 0 ){
-		$("#mensajeError").addClass("callout callout-warning");
-		$("#mensajeError").html("El campo rut no puede ser vac&iacute;o");
-		return false;
-	}
-	
-	var respuesta = validaRut2(id);
-
-	if( perfilagregar == '(Seleccione)' ){
-		$("#mensajeError").addClass("callout callout-warning");
-		$("#mensajeError").html("Debe seleccionar el perfil");
-		return false;
-	}
-	
-	if( respuesta ){
-		consulta_sesion();
-	}else{
-		return false;
-	}
-  }
-  
-  function verificar_rut_eliminar(id)
-  { 
-	var rut_usuario = id.value;
-	var perfilaeliminar = $("#perfilaeliminar").val();
-	limpiar_ad();
-	
-	if( rut_usuario.length == 0 ){
-		$("#mensajeError").addClass("callout callout-warning");
-		$("#mensajeError").html("El campo rut no puede ser vac&iacute;o");
-		return false;
-	}
-	
-	var respuesta = validaRut2(id);
-	
-	if( perfilaeliminar == '(Seleccione)' ){
-		$("#mensajeError").addClass("callout callout-warning");
-		$("#mensajeError").html("Debe seleccionar el perfil a eliminar");
-		return false;
-	}
-	
-	if( respuesta ){
-		consulta_sesion();
-	}else{
-		return false;
-	}
-  }
-  
-  $(document).ready(function(){ 
-	if ( $("#mensajeAd").html().length > 0 ){
-		$("#mensajeAd").addClass("callout callout-warning");
-	}else{
-		$("#mensajeAd").removeClass("callout callout-warning");
-		$("#mensajeAd").html("");
-	}
-  });
-  
-  function limpiar_ad(){
-	$("#mensajeAd").removeClass("callout callout-warning");
-	$("#mensajeAd").html("");
-  }
-   
-</script>

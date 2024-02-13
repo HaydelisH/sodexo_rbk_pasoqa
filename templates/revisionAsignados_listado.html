@@ -69,7 +69,7 @@ h2 {
             <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
             <div id="mensajeError"><php:texto id="mensajeError" /></div>      
           </div>
-          <form name="formulario2" id="formulario_usuarios" action="revisionAsignados.php" method="POST" autocomplete="off">
+          <form name="formulario2" id="formulario" action="revisionAsignados.php" method="POST" autocomplete="off">
   
             <table id="example2" class="table table-bordered table-hover">
                 <div class="col-md-2 xs-12">
@@ -77,7 +77,7 @@ h2 {
                 </div>
             </table>
                 
-                <div id="collapseExample"  class="panel-collapse collapse in">
+                <div><!--id="collapseExample"  class="panel-collapse collapse in">-->		
                     <div class="col-md-12">
                         <div class="box">
                             <div class="box-body pad table-responsive">
@@ -87,7 +87,7 @@ h2 {
                                    <php:repeticion id="formulario">
                                              
                                       <!--Numero e Documento>
-                                      <div class="form-row">
+                                      <div class="row">
                                           <div class="col-md-3 xs-12">
                                           <label for="idDocumento">Nro Documento</label>
                                           <input type="text" class="form-control" id="idDocumento" name="idDocumento_filtro" maxlength="10" value="<php:item id="idDocumento" />" placeholder="Nro Documento" />
@@ -95,7 +95,7 @@ h2 {
                                       </div-->
                                       
                                       <!--Rut de creador>
-                                      <div class="form-row" style="display:none">
+                                      <div class="row" style="display:none">
                                           <div class="col-md-3 xs-12">
                                               <label for="RutCreador">Rut del Creador</label>
                                               <input type="text" class="form-control" id="RutCreador" name="RutCreador" value="<php:item id="RutCreador" />" placeholder="Rut del Creador" />
@@ -103,7 +103,7 @@ h2 {
                                       </div-->
                                       
                                       <!--Nombre del creador>
-                                      <div class="form-row" style="display:none">
+                                      <div class="row" style="display:none">
                                           <div class="col-md-3 xs-12">
                                               <label for="NombreCreador">Nombre del Creador</label>
                                               <input type="text" class="form-control" id="NombreCreador" name="NombreCreador" value="<php:item id="NombreCreador" />" placeholder="Nombre del Creador" />
@@ -111,7 +111,7 @@ h2 {
                                       </div-->
   
                                       <!--idPlantilla>
-                                      <div class="form-row">
+                                      <div class="row">
                                           <div class="col-md-3 xs-12">
                                             <label for="idPlantilla">idPlantilla</label>
                                               <input type="text" class="form-control" id="idPlantilla" name="idPlantilla" value="<php:item id="idPlantilla" />" placeholder="idPlantilla" />
@@ -119,7 +119,7 @@ h2 {
                                       </div-->
                                       
                                       <!--Descripcion de la plantila>
-                                      <div class="form-row">
+                                      <div class="row">
                                           <div class="col-md-3 xs-12">
                                             <label for="idPlantilla">Descripcion de Plantilla</label>
                                               <input type="text" class="form-control" id="Descripcion_Pl" name="Descripcion_Pl" value="<php:item id="Descripcion_Pl" />" placeholder="Descripcion_Pl" />
@@ -127,7 +127,7 @@ h2 {
                                       </div-->
                                       
                                       <!--Rut de empresa>
-                                      <div class="form-row">
+                                      <div class="row">
                                           <div class="col-md-3 xs-12">
                                           <label for="RutEmpresa">RutEmpresa</label>	
                                               <select class="form-control" name="RutEmpresa" id="RutEmpresa" >
@@ -140,7 +140,7 @@ h2 {
                                       </div-->
                                       
                                       <!--idCentro de Costo>
-                                      <div class="form-row">
+                                      <div class="row">
                                           <div class="col-md-3 xs-12">
                                             <label for="centrocostoid">idCentroCosto</label>
                                               <input type="text" class="form-control" id="centrocostoid" name="centrocostoid" value="<php:item id="centrocostoid" />" placeholder="centrocostoid" />
@@ -148,7 +148,7 @@ h2 {
                                       </div-->
                                       
                                       <!--Nombre del centro de costo>
-                                      <div class="form-row" style="display:none">
+                                      <div class="row" style="display:none">
                                           <div class="col-md-3 xs-12">
                                             <label for="nombrecentrocosto">Nombre del centro de costo</label>
                                               <input type="text" class="form-control" id="nombrecentrocosto" name="nombrecentrocosto" value="<php:item id="nombrecentrocosto" />" placeholder="Nombre del centro de costo" />
@@ -156,7 +156,7 @@ h2 {
                                       </div-->
                                       
                                       <!--Nombre del casino>
-                                      <div class="form-row" style="display:none">
+                                      <div class="row" style="display:none">
                                           <div class="col-md-3 xs-12">
                                             <label for="nombrecentrocosto">Nombre de Casino</label>
                                               <input type="text" class="form-control" id="NombreCasino" name="NombreCasino" value="<php:item id="NombreCasino" />" placeholder="Nombre de Casino" />
@@ -164,7 +164,7 @@ h2 {
                                       </div-->
                                       
                                       <!--Codigo de cargo>
-                                      <div class="form-row" style="display:none">
+                                      <div class="row" style="display:none">
                                           <div class="col-md-3 xs-12">
                                             <label for="CodCargo">CodCargo</label>
                                               <input type="text" class="form-control" id="CodCargo" name="CodCargo" value="<php:item id="CodCargo" />" placeholder="CodCargo" />
@@ -172,7 +172,7 @@ h2 {
                                       </div-->
                                       
                                       <!--Cargo>
-                                      <div class="form-row" >
+                                      <div class="row" >
                                           <div class="col-md-3 xs-12">
                                             <label for="nombrecentrocosto">Cargo</label>
                                               <input type="text" class="form-control" id="Cargo" name="Cargo" value="<php:item id="Cargo" />" placeholder="Cargo" />
@@ -180,7 +180,7 @@ h2 {
                                       </div-->
   
                                       <!--Proceso>
-                                      <div class="form-row" style="display:none">
+                                      <div class="row" style="display:none">
                                           <div class="col-md-3 xs-12">
                                               <label for="Nombre">Proceso</label>	
                                               <select class="form-control" name="idProceso" id="idProceso" >
@@ -193,23 +193,22 @@ h2 {
                                       </div-->
                                                                           
                                       <!--Rut del empleado-->
-                                      <div class="form-row">
+                                      <div class="row">
                                           <div class="col-md-3 xs-12">
                                             <label for="RutEmpleado">RutEmpleado</label>
                                               <input type="text" class="form-control" id="RutEmpleado" name="RutEmpleado" value="<php:item id="RutEmpleado" />" placeholder="RutEmpleado" />
                                           </div>
-                                      </div>
-                                      
+                                     
                                       <!--Nombre del empleado-->
-                                      <div class="form-row">
+                                     
                                           <div class="col-md-3 xs-12">
                                             <label for="NombreEmpleado">Nombre del Empleado</label>
                                               <input type="text" class="form-control" id="NombreEmpleado" name="NombreEmpleado" value="<php:item id="NombreEmpleado" />" placeholder="Nombre del Empleado" />
                                           </div>
-                                      </div>
+                                     
                                       
                                       <!--Enviado>
-                                      <div class="form-row" style="display:none">
+                                      <div class="row" style="display:none">
                                           <div class="col-md-3 xs-12">
                                           <label for="Enviado">Enviado</label>	
                                               <select class="form-control" name="Enviado" id="Enviado" >
@@ -222,7 +221,7 @@ h2 {
                                       </div-->
                                                                           
                                       <!--Estado de gestion de formularios-->
-                                      <div class="form-row">
+                                     
                                           <div class="col-md-3 xs-12">
                                           <label for="Nombre">Estados de Formulario</label>	
                                               <select class="form-control" name="idEstadoGestion" id="idEstadoGestion" >
@@ -232,10 +231,10 @@ h2 {
                                                   </php:repeticion>
                                               </select>	
                                           </div>
-                                      </div>
+                                     
                                       
                                       <!--Estado de gestion de flujo de firmas-->
-                                      <div class="form-row">
+                                     
                                           <div class="col-md-3 xs-12">
                                           <label for="Nombre">Estados de Flujo de Firma</label>	
                                               <select class="form-control" name="idEstadoFujoFirma" id="idEstadoFujoFirma" >
@@ -248,7 +247,7 @@ h2 {
                                       </div>
 
                                       <!--Estado de firma de Documento>
-                                      <div class="form-row">
+                                      <div class="row">
                                           <div class="col-md-3 xs-12">
                                           <label for="Nombre">Estado Documento</label>	
                                               <select class="form-control" name="idEstado" id="idEstado" >
@@ -261,7 +260,7 @@ h2 {
                                       </div-->
   
                                       <!--Tipo de firma del Documento>
-                                      <div class="form-row">
+                                      <div class="row">
                                           <div class="col-md-3 xs-12">
                                               <label for="Nombre">Tipo de Firma</label>	
                                               <select class="form-control" name="idTipoFirma" id="idTipoFirma" >
@@ -273,38 +272,38 @@ h2 {
                                           </div>
                                       </div-->
                                       
-                                      <!--Fecha de inicio>
-                                      <div class="form-row">
+                                      <!--	 de inicio>
+                                      <div class="row">
                                               <div class="col-md-3 xs-12" >
-                                            <label for="">Fechas de incio</label>
+                                            <label for="">	s de incio</label>
                                              <div class="form-group">
                                               <div class="input-group date">
                                                 <div class="input-group-addon">
                                                   <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="datetime" style="background-color: white;" class="form-control pull-right" id="fechaInicio" name="fechaInicio" placeholder="Fecha de inicio" value="<php:item id="fechaInicio"/>"  />
+                                                <input type="datetime" style="background-color: white;" class="form-control pull-right" id="	Inicio" name="	Inicio" placeholder="	 de inicio" value="<php:item id="	Inicio"/>"  />
                                               </div>
                                             </div>
                                           </div>
                                           </div-->
                                       
-                                      <!--Fecha de Fin>
-                                          <div class="form-row">
+                                      <!--	 de Fin>
+                                          <div class="row">
                                               <div class="col-md-3 xs-12">
-                                            <label for="">Fecha de fin</label>
+                                            <label for="">	 de fin</label>
                                            <div class="form-group">
                                               <div class="input-group date">
                                                 <div class="input-group-addon">
                                                   <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="datetime" class="form-control pull-right"  style="background-color: white;"id="fechaFin" name="fechaFin" placeholder="Fecha de fin" value="<php:item id="fechaFin"/>"/>
+                                                <input type="datetime" class="form-control pull-right"  style="background-color: white;"id="	Fin" name="	Fin" placeholder="	 de fin" value="<php:item id="	Fin"/>"/>
                                               </div>
                                             </div>
                                           </div>
                                           </div-->
                                       
                                       <!--Estado de firma de Documento-->
-                                      <div class="form-row">
+                                      <div class="row">
                                         <div class="col-md-3 xs-12">
                                         <label for="Nombre">Formularios</label>	
                                             <select class="form-control" name="idFormulario" id="idFormulario" >
@@ -314,40 +313,37 @@ h2 {
                                                 </php:repeticion>
                                             </select>	
                                         </div>
-                                    </div>
 									
-										<!--Fecha de inicio-->
-									<div class="form-row">
+										<!--	 de inicio-->
+									
       						  		    <div class="col-md-3 xs-12" >
-							              <label for="">Fecha de Carga Desde</label>
-							               <div class="form-group">
-							                <div class="input-group date">
-							                  <div class="input-group-addon">
-							                    <i class="fa fa-calendar"></i>
-							                  </div>
-							                  <input type="datetime" style="background-color: white;" class="form-control pull-right" id="fechaCargaDesde" name="fechaCargaDesde" placeholder="Fecha de Carga Desde" value="<php:item id="fechaCargaDesde"/>"  />
-							                </div>
-							              </div>
-							            </div>
-      						  		</div>
+                              <label for="">Fecha de Carga Desde</label>
+                              <div class="form-group">
+                                <div class="input-group mb-3 date">
+                                  <div class="input-group-prepend date"><span class="input-group-text" style="padding-bottom: 12px;padding-top: 12px;"><i class="fa fa-calendar"></i></span></div>
+                                  
+                                  <input type="datetime" style="background-color: white;" class="form-control pull-right" id="fechaCargaDesde" name="fechaCargaDesde" placeholder="Fecha de Carga Desde" value="<php:item id="fechaCargaDesde"/>"  />
+                            </div>
+                              </div>
+                            </div>
+      						  	
 									
-									<!--Fecha de Fin-->
-      						  		<div class="form-row">
+									<!--	 de Fin-->
+      						  	
       						  		    <div class="col-md-3 xs-12">
-							              <label for="">Fecha de Carga Hasta</label>
-							             <div class="form-group">
-							                <div class="input-group date">
-							                  <div class="input-group-addon">
-							                    <i class="fa fa-calendar"></i>
-							                  </div>
-							                  <input type="datetime" class="form-control pull-right"  style="background-color: white;"id="fechaCargaHasta" name="fechaCargaHasta" placeholder="Fecha de Documento Hasta" value="<php:item id="fechaCargaHasta"/>"/>
-							                </div>
-							              </div>
-							            </div>
+                              <label for="">Fecha de Carga Hasta</label>
+                              <div class="form-group">
+                                <div class="input-group mb-3 date">
+                                  <div class="input-group-prepend date"><span class="input-group-text" style="padding-bottom: 12px;padding-top: 12px;"><i class="fa fa-calendar"></i></span></div>
+                                  
+                                  <input type="datetime" class="form-control pull-right"  style="background-color: white;"id="fechaCargaHasta" name="fechaCargaHasta" placeholder="Fecha de Documento Hasta" value="<php:item id="fechaCargaHasta"/>"/>
+                                </div>
+                              </div>
+                            </div>
       						  		</div>
 									
-                                    <div class="form-row">
-                                          <div class="col-md-2 xs-12 pull-right"  style="margin-top: 15px;">
+                                          <div class="row d-flex justify-content-end">  
+                                            <div class="col-md-2 xs-12 d-grid gap-2 ">  
                                               <input type="hidden" name="accion" value="BUSCAR" />
                                               <button class="btn btn-md btn-primary btn-block"  name="accion2" type="submit" value="BUSCAR">Buscar</button>
                                           </div>
@@ -359,7 +355,8 @@ h2 {
                   </div> <!-- <div class="col-md-12">-->
                     <!--</div><div class="row"> -->
                 </div> <!-- <div class="collapse" id="collapseExample"> -->
-          </form>
+            <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
          
          
              <!--Tabla-->
@@ -376,12 +373,12 @@ h2 {
                           <!--th style="text-align: center;" data-campo="RutEmpresa">RutEmpresa</th-->
                           <!--th style="text-align: center;" data-campo="idCentroCosto">idCentroCosto</th-->
                           <!--th style="text-align: center;" data-campo="Cargo">Cargo</th-->
-                          <!--th style="text-align: center;" data-campo="Fecha ultima firma">Fecha ultima firma</th-->	
+                          <!--th style="text-align: center;" data-campo="	 ultima firma">	 ultima firma</th-->	
                           <th style="text-align: center;" data-campo="Rut Empleado">Rut Empleado</th>	
                           <th style="text-align: center;" data-campo="Nombre Empleado">Nombre Empleado</th>	
                           <th style="text-align: center;" data-campo="estadoFujoFirma">Estado flujo firma</th>	
                           <th style="text-align: center;" data-campo="idEstadoGestion">Estado formulario</th>	
-						  <th style="text-align: center;" data-campo="fechaCarga">Fecha Carga</th>	
+						  <th style="text-align: center;" data-campo="	Carga">	 Carga</th>	
                           <!--th style="text-align: center;" data-campo="idEstado">idEstado</th-->		
                           <th style="text-align: center;" data-campo="Opciones">Opciones</th>
                       </tr>
@@ -398,12 +395,12 @@ h2 {
                       <!--td style="text-align: center;" data-campo="RutEmpresa"><php:item id="RutEmpresa" /></td-->
                       <!--td style="text-align: center;" data-campo="centrocostoid"><php:item id="centrocostoid" /></td-->
                       <!--td style="text-align: center;" data-campo="Cargo"><php:item id="Cargo" /></td-->
-                      <!--td style="text-align: center;" data-campo="FechaUltimaFirma"><php:item id="FechaUltimaFirma" /></td-->
+                      <!--td style="text-align: center;" data-campo="	UltimaFirma"><php:item id="	UltimaFirma" /></td-->
                       <td style="text-align: center;" data-campo="RutEmpleado"><php:item id="RutEmpleado" /></td>
                       <td style="text-align: center;" data-campo="NombreEmpleado"><php:item id="NombreEmpleado" /></td>
                       <td style="text-align: center;" data-campo="estadoFujoFirma"><php:item id="estadoFujoFirma" /></td>
                       <td style="text-align: center;" data-campo="idEstadoGestion"><php:item id="EstadoGestion" /></td>
-					  <td style="text-align: center;" data-campo="fechaCarga"><php:item id="fechaCarga" /></td>
+					  <td style="text-align: center;" data-campo="	Carga"><php:item id="	Carga" /></td>
                       <!--td style="text-align: center;" data-campo="idEstado"><php:item id="EstadoContrato" /></td-->
                       <td data-campo="Opciones">
                         <form name="formulario" id="formulario_tipo<php:filamenos />" action="revisionAsignados.php" method="POST">
@@ -411,13 +408,14 @@ h2 {
                           <input type="hidden" name="idDocumento" 			value="<php:item id="idDocumento" />"/>
                           <input type="hidden" name="RutEmpleado_filtro" 		class="RutEmpleado_filtro" />
                           <input type="hidden" name="NombreEmpleado_filtro" 	class="NombreEmpleado_filtro" />
-                          <input type="hidden" name="fechaInicio_filtro" 		class="fechaInicio_filtro" />
-                          <input type="hidden" name="fechaFin_filtro"			class="fechaFin_filtro" />
+                          <input type="hidden" name="	Inicio_filtro" 		class="	Inicio_filtro" />
+                          <input type="hidden" name="	Fin_filtro"			class="	Fin_filtro" />
                           <input type="hidden" name="idEstadoGestion_filtro"  class="idEstadoGestion_filtro" /> 
                           <input type="hidden" name="empleadoFormularioid" 			value="<php:item id="empleadoFormularioid" />"/-->
                           <!--button class="btn btn-primary btn-sm" type="submit" name="accion" value="DETALLE" onclick="MostrarCargando();">Detalle</button-->
                           <php:item id="estadoFormulario" />
-                        </form>
+                          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
                       </td>
                     </tr>
                   </php:repeticion>
@@ -425,23 +423,23 @@ h2 {
                   
                   <th colspan=14 class="tabla_abajo">
                       <div class="col-md-12" style="font-weight: normal;">
-                           <php:item id="pagina_actual" /> de <php:item id="pagina_ultimo" /> - Total <php:item id="total_registros" /> Registros
+                           <php:item id="pagina_actual" /> de <php:item id='pagina_ultimo' /> - Total <php:item id="total_registros" /> Registros
                         </div>
                     <div class="col-xs-offset-5"> 
                       <nav aria-label="nav1">
                         <ul class="pagination justify-content-center" style="margin-top: 0px; margin-bottom: 0px;">
                           <li class="page-item ">
-                            <a id="pagina_primera" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_primera" />);" ><span><i class="fa fa-angle-double-left"></i></span></a>
+                            <a id="pagina_primera" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id='pagina_primera' />);" ><span><i class="fa fa-angle-double-left"></i></span></a>
                           </li>
                           <li class="page-item ">
-                            <a id="pagina_anterior" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_anterior" />);" ><span ><i class="fa fa-angle-left"></i></span></a>
+                            <a id="pagina_anterior" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id='pagina_anterior' />);" ><span ><i class="fa fa-angle-left"></i></span></a>
                           </li>                  
-                          <li class="page-item active"><a class="page-link1" href="#"><php:item id="pagina_actual" /></a></li>                              
+                          <li class="page-item active"><a class="page-link" href="#"><php:item id="pagina_actual" /></a></li>                              
                           <li class="page-item">
-                            <a id="pagina_siguente" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_siguente" />);" ><span><i class="fa fa-angle-right"></i></span></a>
+                            <a id="pagina_siguente" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id='pagina_siguente' />);" ><span><i class="fa fa-angle-right"></i></span></a>
                           </li>
                         <li class="page-item">
-                          <a id="pagina_ultimo" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_ultimo" />);" ><span><i class="fa fa-angle-double-right"></i></span></a>
+                          <a id="pagina_ultimo" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id='pagina_ultimo' />);" ><span><i class="fa fa-angle-double-right"></i></span></a>
                         </li>                                                     
                         </ul>
                       </nav>
@@ -453,8 +451,8 @@ h2 {
                               <!--input type="hidden" name="idDocumento" value="<php:item id="idDocumento" />" -->
                               <input type="hidden" name="RutEmpleado" value="<php:item id="RutEmpleado" />" >
                               <input type="hidden" name="NombreEmpleado" value="<php:item id="NombreEmpleado" />" >
-                              <!--input type="hidden" name="fechaInicio" value="<php:item id="fechaInicio" />" -->
-                              <!--input type="hidden" name="fechaFin"    value="<php:item id="fechaFin" />" -->
+                              <!--input type="hidden" name="	Inicio" value="<php:item id="	Inicio" />" -->
+                              <!--input type="hidden" name="	Fin"    value="<php:item id="	Fin" />" -->
                               <input type="hidden" name="idEstadoGestion"    value="<php:item id="idEstadoGestion" />" >
                               <input type="hidden" name="idEstadoFujoFirma"    value="<php:item id="idEstadoFujoFirma" />" >
                               <input type="hidden" name="empleadoFormularioid"    value="<php:item id="empleadoFormularioid" />"  >
@@ -476,7 +474,8 @@ h2 {
                               <!--input type="hidden" name="idProceso" value="<php:item id="idProceso" />" -->
                               <!--input type="hidden" name="Enviado"    value="<php:item id="Enviado" />" -->
                               <button type="submit" name="accion" id="accion" value="DESCARGAR" class="form-control btn btn-md btn-primary"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Descargar</button>
-                          </form>
+                            <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
                       </div>
   
                     </th>
@@ -486,8 +485,8 @@ h2 {
                       <!--input type="hidden" name="idDocumento" value="<php:item id="idDocumento" />" -->
                       <input type="hidden" name="RutEmpleado" value="<php:item id="RutEmpleado" />" >
                       <input type="hidden" name="NombreEmpleado" value="<php:item id="NombreEmpleado" />" >
-                      <!--input type="hidden" name="fechaInicio" value="<php:item id="fechaInicio" />" -->
-                      <!--input type="hidden" name="fechaFin"    value="<php:item id="fechaFin" />" -->
+                      <!--input type="hidden" name="	Inicio" value="<php:item id="	Inicio" />" -->
+                      <!--input type="hidden" name="	Fin"    value="<php:item id="	Fin" />" -->
                       <input type="hidden" name="idEstadoGestion"    value="<php:item id="idEstadoGestion" />" >
                       <input type="hidden" name="idFormulario"    value="<php:item id="idFormulario" />" 
                       <!--input type="hidden" name="holdingid" value="<php:item id="holdingid" />" -->
@@ -505,7 +504,8 @@ h2 {
                       <!--input type="hidden" name="idTipoFirma" value="<php:item id="idTipoFirma" />" -->
                       <!--input type="hidden" name="idProceso" value="<php:item id="idProceso" />" -->
                       <!--input type="hidden" name="Enviado"    value="<php:item id="Enviado" />" -->
-                  </form>
+                    <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
       
               </table>
           </div>
@@ -516,119 +516,3 @@ h2 {
     </div>
   </div> 
   </section>
-      
-  
-  <script >
-          
-    /*$('#fechaInicio').datepicker({
-      language: "es",
-      orientation: "bottom",
-      autoclose: true,
-      todayHighlight: true,
-      format: 'dd-mm-yyyy'
-    });
-  
-    $('#fechaFin').datepicker({
-      language: "es",
-      orientation: "bottom",
-      autoclose: true,
-      todayHighlight: true,
-      format: 'dd-mm-yyyy'
-    });*/
-	
-	 $('#fechaCargaDesde').datepicker({
-    language: "es",
-    orientation: "bottom",
-    autoclose: true,
-    todayHighlight: true,
-    format: 'dd-mm-yyyy'
-  });
-
-  $('#fechaCargaHasta').datepicker({
-    language: "es",
-    orientation: "bottom",
-    autoclose: true,
-    todayHighlight: true,
-    format: 'dd-mm-yyyy'
-  });
-	
-	
-	
-	
-	
-	
-	
-	
-  
-	var ajax;
-	var salida;
-    function cambioEstado(empleadoFormularioid, estadoFormularioid){
-        var url  = "revisionAsignados_ajax.php?empleadoFormularioid=" + empleadoFormularioid + '&estadoFormularioid=' + estadoFormularioid;
-        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-        if( window.XMLHttpRequest )
-            ajax = new XMLHttpRequest(); // No Internet Explorer
-        else
-            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-        // Almacenamos en el control al funcion que se invocara cuando la peticion
-        // cambie de estado 
-        ajax.onreadystatechange = funcionCallback_cambioEstado;
-        // Enviamos la peticion
-        ajax.open( "GET", url, false );
-        ajax.send( "" );
-    }
-	function funcionCallback_cambioEstado() {
-		if( ajax.readyState == 4 ) {
-			if( ajax.status == 200 ) {
-				salida = ajax.responseText;
-				if( salida != '' ) {
-					/*datosDocumento = JSON.parse(salida);
-					for(var i = 0; i < datosDocumento.length; i++) {
-						$('#' + datosDocumento[i].Variable).show();
-					}*/
-                    $('#formulario_usuarios').submit();
-				}
-				else {
-					$("#mensajeError").removeClass("callout callout-warning");
-					$("#mensajeError").html("");
-				}
-			}
-		}
-	} 
-
-  $(".ocultar").click(function(){
-  
-      if ( $("#collapseExample").hasClass('in')){
-          $("#a").html('Mostrar filtros');
-      }else{
-            $("#a").html('Ocultar filtros');
-        }
-  
-   });
-   
-   //Asignar datos si hay filtros llenos 
-                          
-      $(document).ready(function(){
-      
-          //if( $("#idDocumento").val() != '' ) 	$(".idDocumento_filtro").val($("#idDocumento").val()); 
-          //if( $("#RutCreador").val() != '' ) 		$(".RutCreador_filtro").val($("#RutCreador").val()); 
-          //if( $("#NombreCreador").val() != '' ) 	$(".NombreCreador_filtro").val($("#NombreCreador").val()); 
-          //if( $("#idPlantilla").val() != '' ) 	$(".idPlantilla_filtro").val($("#idPlantilla").val());
-          //if( $("#Descripcion_Pl").val() != '' ) 	$(".Descripcion_Pl_filtro").val($("#Descripcion_Pl").val()); 
-          //if( $("#RutEmpresa").val() != '' ) 		$(".RutEmpresa_filtro").val($("#RutEmpresa").val()); 
-          //if( $("#centrocostoid").val() != '' ) 	$(".centrocostoid_filtro").val($("#centrocostoid").val()); 
-          //if( $("#nombrecentrocosto").val() != '') $(".nombrecentrocosto_filtro").val($("#nombrecentrocosto").val()); 
-          //if( $("#NombreCasino").val() != '' ) 	$(".NombreCasino_filtro").val($("#NombreCasino").val()); 
-          //if( $("#CodCargo").val() != '' ) 		$(".CodCargo_filtro").val($("#CodCargo").val()); 
-          //if( $("#Cargo").val() != '' ) 			$(".Cargo_filtro").val($("#Cargo").val()); 
-          if( $("#RutEmpleado").val() != '' ) 	$(".RutEmpleado_filtro").val($("#RutEmpleado").val()); 
-          if( $("#NombreEmpleado").val() != '' ) 	$(".NombreEmpleado_filtro").val($("#NombreEmpleado").val()); 
-          //if( $("#idEstado").val() != 0 ) 	 	$(".idEstado_filtro").val($("#idEstado").val());
-          //if( $("#idTipoFirma").val() != 0 ) 		$(".idTipoFirma_filtro").val($("#idTipoFirma").val()); 
-          //if( $("#idProceso").val() != 0 ) 		$(".idProceso_filtro").val($("#idProceso").val()); 
-          //if( $("#fechaInicio").val() != '' ) 	$(".fechaInicio_filtro").val($("#fechaInicio").val()); 
-          //if( $("#fechaFin").val() != '' ) 		$(".fechaFin_filtro").val($("#fechaFin").val()); 
-          //if( $("#Enviado").val() != '-1' ) 		$(".Enviado_filtro").val($("#Enviado").val()); 
-          if( $("#idEstadoGestion").val() != 0 ) $(".idEstadoGestion_filtro").val($("#idEstadoGestion").val()); 
-          
-      });
-  </script>

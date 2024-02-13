@@ -1,7 +1,7 @@
 <?php
 require_once('config.php');
 // CAPTCHA INI
-if ($_REQUEST['accion'] == 'Ingresar')
+/*if ($_POST['accion'] == 'Ingresar')
 {
 	function realIP()
 	{
@@ -46,8 +46,8 @@ if ($_REQUEST['accion'] == 'Ingresar')
 	
 	if($IP!='20.25.96.211' && $IP!='20.172.155.117')
 	{
-		if (isset($_REQUEST['g-recaptcha-response'])) {
-			$captcha = $_REQUEST['g-recaptcha-response'];
+		if (isset($_POST['g-recaptcha-response'])) {
+			$captcha = $_POST['g-recaptcha-response'];
 		} else {
 			$captcha = false;
 		}
@@ -68,15 +68,15 @@ if ($_REQUEST['accion'] == 'Ingresar')
 			}
 		}
 		if ($response->success==true && $response->score < 0.1) {
-			graba_log('puntaje validacion score : '.$response->score.' '.'usuario: '.$_REQUEST['usuarioid'].' '.'IP: '.realIP());
+			graba_log('puntaje validacion score : '.$response->score.' '.'usuario: '.$_POST['usuarioid'].' '.'IP: '.realIP());
 			//Do something to denied access
 			return false;
 		}
 			
-		graba_log('puntaje: '.$response->score.' '.'usuario: '.$_REQUEST['usuarioid'].' '.'IP: '.realIP());
+		graba_log('puntaje: '.$response->score.' '.'usuario: '.$_POST['usuarioid'].' '.'IP: '.realIP());
 	}
 	
-}
+}*/
 // CAPTCHA FIN
 
 error_reporting(E_ALL & ~E_NOTICE);
@@ -139,12 +139,12 @@ class usuarios {
 
 		// si no funciona hay que logearse
 		if (!$this->seguridad->sesionar()) return;
-		$_REQUEST["index"]="index"; //marca para evitar doble sesion
+		$_POST["index"]="index"; //marca para evitar doble sesion
 	
 		//if ($this->seguridad->administrador){
-			if (isset($_REQUEST["mensajeError"]))
-				//$_REQUEST["mensajeError"]=rawurldecode(urldecode($_REQUEST["mensajeError"]));
-				header('Location:inicio.php?mensajeError='.rawurlencode($_REQUEST["mensajeError"]));
+			if (isset($_POST["mensajeError"]))
+				//$_POST["mensajeError"]=rawurldecode(urldecode($_POST["mensajeError"]));
+				header('Location:inicio.php?mensajeError='.rawurlencode($_POST["mensajeError"]));
 				
 			//print ("xxx".$this->seguridad->tipousuarioid);
 			if ($this->seguridad->tipousuarioid == 11)

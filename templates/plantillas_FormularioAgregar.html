@@ -14,7 +14,7 @@
           <php:repeticion id="formulario">
             <!--Campos estan fuera del formulario-->
        
-            <div class="form-row">
+            <div class="row">
             
               <!--Categorias-->
               <div class="col-md-6" style="padding-bottom: 15px;">
@@ -29,9 +29,9 @@
                   </select>
               </div>
             <!--Fin del row-->
-            </div>
+            
              
-             <div class="form-row">
+            
               <!--Tipo de Documento-->
               <div class="col-md-6" style="padding-bottom: 15px;">
                   <label for="TipoDeDocumento" >Tipo de Documento</label>
@@ -45,7 +45,7 @@
               </div>
 			 </div>
               <!--Workflow-->
-			<div class="form-row">
+			<div class="row">
               <div class="col-md-6" style="padding-bottom: 15px;">
                
                   <label for="Flujo" >Flujo de Firmas</label>
@@ -58,10 +58,10 @@
                   </select>
               </div>
             <!--Fin del row-->
-            </div>
+           
         
          <!--Tipo de Gestor-->
-			<div class="form-row">
+			
               <div class="col-md-6" style="padding-bottom: 15px;">
                   <label for="TipoGestor" >Tipos Gestor</label>
                   <!--Select de Empresas disponibles-->
@@ -74,29 +74,30 @@
               </div>
             </div>
             <!--Titulo-->
-            <div class="form-row">
+            <div class="row">
               <div class="col-md-12">
                 <label for="Titulo" >T&iacute;tulo</label>
                 <textarea id="TextoTxt" name="Titulo_Pl" rows="5" cols="80"><php:item id="Titulo_Pl"/>Titulo de Plantilla</textarea>
               </div>
             </div> 
             <!--Descripcion-->
-            <div class="form-row">
+            <div class="row">
               <div class="col-md-12">
                 <label for="Descripcion">Descripci&oacute;n</label>
                 <input type="text" class="form-control" id="Descripcion_Pl" name="Descripcion_Pl" value="<php:item id="Descripcion_Pl" />" placeholder="Descripcion" >
               </div>
             </div>
 
-          <div class="form-row">  
-            <div class="col-md-2 xs-12 pull-right">
+            <div class="row d-flex justify-content-end">  
+              <div class="col-md-2 xs-12 d-grid gap-2 ">      
               <input type="hidden" name="accion" value="AGREGAR" />
               <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="AGREGAR" id="AGREGAR" onclick="javascript:return validarFormulario(this);"/>Guardar</button>
             </div>
           </div> 
            
           </php:repeticion>      
-        </form> 
+          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form> 
       </div>
     </div>
   </div>

@@ -17,35 +17,34 @@
             <!--Campos basicos-->
             <input type="hidden" class="form-control" id="idFeriados" name="idFeriados" value="<php:texto id="idFeriados"/>"/>
             <!--Fecha-->
-            <div class="form-row">
+            <div class="row">
               <div class="col-md-12">
                 <label for="Fecha">Fecha</label>
-                  <div class="input-group date">
-                    <div class="input-group-addon">
-                      <i class="fa fa-calendar"></i>
-                    </div>
+                <div class="input-group mb-3 date">
+                  <div class="input-group-prepend date"><span class="input-group-text" style="padding-bottom: 12px;padding-top: 12px;"><i class="fa fa-calendar"></i></span></div>
                     <input type="datetime" class="form-control" id="Fecha" name="Fecha"  readonly="readonly" value="<php:item id="Fecha" />" placeholder="Fecha" >
                   </div>
               </div>
             </div>
 
             <!--Descripcion-->
-            <div class="form-row">
+            <div class="row">
               <div class="col-md-12">
                 <label for="Descripcion">Descripcion</label>
                 <input type="text" class="form-control" id="Descripcion" name="Descripcion"  maxlength="100" value="<php:item id="Descripcion" />" placeholder="Descripcion" >
               </div>
             </div>
             </php:repeticion>  
-          <div class="form-row">  
-            <div class="col-md-2 xs-12 pull-right">
+          	<div class="row d-flex justify-content-end">  
+              <div class="col-md-2 xs-12 d-grid gap-2 ">      
                <input type="hidden" id="idFeriados" name="idFeriados" value="<php:texto id="idFeriados" />" />
                <input type="hidden" name="accion" value="AGREGAR" />
               <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="AGREGAR" onclick="javascript:return validarFormulario(this);"/>Guardar</button>
             </div>
           </div> 
                     
-        </form>  
+          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>  
       </div>
       </div>
     <!-- /.box -->
@@ -53,13 +52,3 @@
   </div>
   <!-- /.col -->
   </div>
-  <!-- calendario -->
- <script>
-	$('#Fecha').datepicker({
-	    language: "es",
-	    orientation: "bottom",
-	    autoclose: true,
-	    todayHighlight: true,
-	    format: 'dd-mm-yyyy'
-    });
-</script>

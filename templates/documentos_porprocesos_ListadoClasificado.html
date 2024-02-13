@@ -12,7 +12,7 @@
 			</div>   
 
         </div>
-        <form name="formulario2" id="formulario_usuarios" action="Documentos_PorProcesos.php" method="POST" autocomplete="off">
+        <form name="formulario2" id="formulario" action="Documentos_PorProcesos.php" method="POST" autocomplete="off">
 
           <table id="example2" class="table table-bordered table-hover">
 	          <div class="col-md-2 xs-12">
@@ -20,7 +20,7 @@
 	          </div>
           </table>
   			
-  		    <div id="collapseExample"  class="panel-collapse collapse in">
+  		    <div><!--id="collapseExample"  class="panel-collapse collapse in">-->		
       			<div class="col-md-12">
       				<div class="box">
       					<div class="box-body pad table-responsive">
@@ -30,7 +30,7 @@
 							 	<php:repeticion id="formulario">
    										
 									<!--Numero e Contrato-->
-									<div class="form-row">
+									<div class="row">
 										<div class="col-md-4 xs-12">
 										<label for="idDocumento">Nro Documento</label>
 										<input type="text" class="form-control" id="idDocumento" name="idDocumento" maxlength="10" value="<php:item id="idDocumento" />" placeholder="Nro Documento"/>
@@ -38,7 +38,7 @@
 									</div>
 
 									<!--Tipo de Documento-->
-									<div class="form-row">
+									<div class="row">
 										<div class="col-md-4 xs-12">
 									 	 <label for="NombreTipoDoc">Tipo Documento</label>
 											<select class= "form-control" name="idTipoDoc" id="idTipoDoc" >
@@ -51,7 +51,7 @@
 									</div>
 
 									<!--Proceso-->
-									<div class="form-row" style="display:none;">
+									<div class="row" style="display:none;">
 										<div class="col-md-4 xs-12">
 											<label for="Nombre">Proceso</label>	
 											<select class="form-control" name="idProceso" id="idProceso" >
@@ -65,7 +65,7 @@
 
 
 									<!--Estado de firma de Documento-->
-									<div class="form-row">
+									<div class="row">
 										<div class="col-md-4 xs-12">
 										<label for="Nombre">Estado Documento</label>	
 											<select class="form-control" name="idEstado" id="idEstado" >
@@ -78,7 +78,7 @@
 									</div>
 
 									<!--Tipo de firma del Documento-->
-									<div class="form-row">
+									<div class="row">
 										<div class="col-md-4 xs-12">
 											<label for="Nombre">Tipo de Firma</label>	
 											<select class="form-control" name="idTipoFirma" id="idTipoFirma" >
@@ -92,7 +92,7 @@
 
 									
 									<!--Firmante-->
-									<div class="form-row">
+									<div class="row">
 										<div class="col-md-4 xs-12">
 									 		<label for="Firmante">Firmante ( Rut o Nombre )</label>
 									  		<input type="text" class="form-control" id="Firmante" name="Firmante" maxlength="50" value="<php:item id="Firmante" />" placeholder="Firmante ( Rut o Nombre )" />
@@ -103,7 +103,7 @@
 									<div class="col-md-4" style="padding-bottom: 15px;">
 										<label for="Empresa" >Empresa (*)</label>
 										<!--Select de Empresas disponibles-->
-										<select class= "form-control" name="RutEmpresa" id="RutEmpresa">
+										<select class= "form-control RutEmpresa_PEMod" name="RutEmpresa" id="RutEmpresa">
 											<option value="0">( Seleccione )</option>
 											<php:repeticion id="Empresas">
 											<option value="<php:item id="RutEmpresa" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEmpresa" /><php:argumento idvalor="RutEmpresa" /></php:funcion>><php:item id="RazonSocial" /></option>
@@ -111,10 +111,10 @@
 										</select>
 									</div>
 									<!--Gerencia-->
-									<div class="form-row">
+									<div class="row">
 										<div class="col-md-4 xs-12">
 											<label>Gerencia (*) </label>
-											<select class= "form-control" name="lugarpagoid" id="lugarpagoid" disabled>
+											<select class= "form-control lugarpagoid_PEMod" name="lugarpagoid" id="lugarpagoid" disabled>
 												<option value="0">( Seleccione )</option>
 												<php:repeticion id="lugarespago">
 												<option class="fila_lp" value="<php:item id="lugarpagoid" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="lugarpagoid" /><php:argumento idvalor="lugarpagoid" /></php:funcion>><php:item id="nombrelugarpago" /></option>
@@ -123,10 +123,10 @@
 										</div>
 									</div>
 									<!--Campos basicos-->		
-									<div class="form-row">
+									<div class="row">
 										<div class="col-md-4 xs-12">
 											<label>Centro costo (*) </label>
-											<select class= "form-control" name="idCentroCosto" id="idCentroCosto" disabled>
+											<select class= "form-control idCentroCosto_PEMod" name="idCentroCosto" id="idCentroCosto" disabled>
 												<option value="0">( Seleccione )</option>
 												<php:repeticion id="centrocosto">
 												<option class="fila_cc" value="<php:item id="idCentroCosto" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idCentroCosto" /><php:argumento idvalor="idCentroCosto" /></php:funcion>><php:item id="nombrecentrocosto" /></option>
@@ -134,14 +134,14 @@
 											</select>
 										</div>
 									</div>
-									<!--div class="form-row">
+									<!--div class="row">
 										<div class="col-md-4 xs-12">
 											<label for="idCentroCosto">Centro costo</label>
 											<input type="text" class="form-control" id="idCentroCosto" name="idCentroCosto" maxlength="10" value="<php:item id="idCentroCosto" />" placeholder="Centro costo"  disabled> 
 										</div>
 									</div-->
 
-									<div class="form-row">
+									<div class="row">
 										<div class="col-md-2 xs-12 pull-right"  style="margin-top: 15px;">
 											<input type="hidden" name="accion" value="DOCUMENTOS" />
 											<button class="btn btn-md btn-primary btn-block"  name="accion2" type="submit" value="DOCUMENTOS">Buscar</button>
@@ -154,7 +154,8 @@
 	            </div> <!-- <div class="col-md-12">-->
 	          	<!--</div><div class="row"> -->
 	      	</div> <!-- <div class="collapse" id="collapseExample"> -->
-	    </form>
+	      <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
        
        
            <!--Tabla-->
@@ -200,7 +201,8 @@
 						   <input type="hidden" name="pagina" value="<php:texto id="pagina" />">
 						   <input type="hidden" name="nombrex" value="<php:texto id="nombrex" />">
 						   <button class="btn btn-primary btn-sm" type="submit" name="accion" value="DETALLE" >Detalle</button>
-					  </form>
+					    <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 					</td>
 				  </tr>
 				</php:repeticion>
@@ -208,23 +210,23 @@
 				
 				<th colspan=13 class="tabla_abajo">
 					<div class="col-md-12" style="font-weight: normal;">
-                     	<php:item id="pagina_actual" /> de <php:item id="pagina_ultimo" /> - Total <php:item id="total_registros" /> Registros
+                     	<php:item id="pagina_actual" /> de <php:item id='pagina_ultimo' /> - Total <php:item id="total_registros" /> Registros
                   	</div>
 				  <div class="col-xs-offset-5"> 
 					<nav aria-label="nav1">
 					  <ul class="pagination justify-content-center" style="margin-top: 0px; margin-bottom: 0px;">
 						<li class="page-item ">
-						  <a id="pagina_primera" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_primera" />);" ><span><i class="fa fa-angle-double-left"></i></span></a>
+						  <a id="pagina_primera" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id='pagina_primera' />);" ><span><i class="fa fa-angle-double-left"></i></span></a>
 						</li>
 						<li class="page-item ">
-						  <a id="pagina_anterior" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_anterior" />);" ><span ><i class="fa fa-angle-left"></i></span></a>
+						  <a id="pagina_anterior" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id='pagina_anterior' />);" ><span ><i class="fa fa-angle-left"></i></span></a>
 						</li>                  
-						<li class="page-item active"><a class="page-link1" href="#"><php:item id="pagina_actual" /></a></li>                              
+						<li class="page-item active"><a class="page-link" href="#"><php:item id="pagina_actual" /></a></li>                              
 						<li class="page-item">
-						  <a id="pagina_siguente" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_siguente" />);" ><span><i class="fa fa-angle-right"></i></span></a>
+						  <a id="pagina_siguente" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id='pagina_siguente' />);" ><span><i class="fa fa-angle-right"></i></span></a>
 						</li>
 					  <li class="page-item">
-						<a id="pagina_ultimo" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_ultimo" />);" ><span><i class="fa fa-angle-double-right"></i></span></a>
+						<a id="pagina_ultimo" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id='pagina_ultimo' />);" ><span><i class="fa fa-angle-double-right"></i></span></a>
 					  </li>                                                     
 					  </ul>
 					</nav>
@@ -242,7 +244,8 @@
 							<input type="hidden" name="Firmante"    value="<php:item id="Firmante" />" >
 							
 							<button type="submit" name="accion" id="accion" value="DESCARGAR" class="form-control btn btn-md btn-primary"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Descargar</button>
-						</form>
+						  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 					</div>
 
 				  </th>
@@ -257,7 +260,8 @@
 					<input type="hidden" name="idProceso" value="<php:item id="idProceso" />" >
 					<input type="hidden" name="Firmante"    value="<php:item id="Firmante" />" >
 					<input type="hidden" name="accion" value="DOCUMENTOS">
-				</form>
+				  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 	
 			</table>
 		</div>
@@ -269,138 +273,3 @@
 </div> 
 </section>
     
-<script>
-	
-	$(".ocultar").click(function(){
-
-	if ( $("#collapseExample").hasClass('in')){
-		$("#a").html('Mostrar filtros');
-	}else{
-  		$("#a").html('Ocultar filtros');
-  	}
-
- });
- $(document).ready(function(){
-		var lugarpagoid = $("#lugarpagoid").val();
-		var RutEmpresa = $("#RutEmpresa").val();
-		var centrocostoid = $("#idCentroCosto").val();
-		//console.log(RutEmpresa);
-		if( RutEmpresa != '' ) {
-			$("#lugarpagoid").attr("disabled",false);
-		}
-		if( RutEmpresa == 0 ){
-			$("#lugarpagoid").attr("disabled",true);
-		}
-		if ( lugarpagoid != 0 ){
-			$("#idCentroCosto").attr("disabled", false);
-			//llamaCambioLugarPago();
-		}else{
-			$("#idCentroCosto").attr("disabled", true);
-		}
-	});
-	
-	$("#RutEmpresa").change(function(){ 
-		$(".fila_lp").remove();
-		$(".fila_cc").remove();
-		ActualizarLugaresPago(); 
-	});
-	
-	function ActualizarLugaresPago(){
-		var RutEmpresa = $("#RutEmpresa").val();
-		if( RutEmpresa == 0 ){
-			//$("#mensajeError").addClass("callout callout-warning");
-			//$("#mensajeError").html("Debe seleccionar la Empresa");
-			$("#lugarpagoid").attr("disabled",true);
-			return false;
-		}else{
-			$("#mensajeError").html("");
-			$("#mensajeError").removeClass("callout callout-warning");
-			var url  = "CentroCosto_ajax.php?RutEmpresa=" + RutEmpresa;
-			// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-			if( window.XMLHttpRequest )
-				ajaxLugarPago = new XMLHttpRequest(); // No Internet Explorer
-			else
-				ajaxLugarPago = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-			// Almacenamos en el control al funcion que se invocara cuando la peticion
-			// cambie de estado 
-			ajaxLugarPago.onreadystatechange = funcionCallback_rutempresa;
-			// Enviamos la peticion
-			ajaxLugarPago.open( "GET", url, false );
-			ajaxLugarPago.send( "" );
-		}
-	}
-
-	function funcionCallback_rutempresa()
-  	{
-		// Comprobamos si la peticion se ha completado (estado 4)
-		if( ajaxLugarPago.readyState == 4 )
-		{
-			// Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-			if( ajaxLugarPago.status == 200 )
-			{
-				// Escribimos el resultado en la pagina HTML mediante DHTML
-				salida = ajaxLugarPago.responseText;
-				listado = JSON.parse(salida);
-				num = listado.length;
-				if( num > 0 ){
-					$.each(listado, function( index, value ) {
-						$('#lugarpagoid').append('<option class="fila_lp" value=' + listado[index].lugarpagoid + '>' + listado[index].nombrelugarpago + ' </option>');    
-					});
-					$("#lugarpagoid").attr("disabled", false);
-				}
-			}
-		}
-	}
-  
-	$("#lugarpagoid").change(function(){
-		$(".fila_cc").remove();
-		llamaCambioLugarPago();
-	});
-
-	function llamaCambioLugarPago()
-	{
-		var lugarpagoid = $("#lugarpagoid").val();
-		var RutEmpresa = $("#RutEmpresa").val();
-		if ( lugarpagoid != 0 ){
-			$("#mensajeError").html("");
-			$("#mensajeError").removeClass("callout callout-warning");
-			var url  = "LugarPago_ajax.php?lugarpagoid=" + lugarpagoid + '&RutEmpresa=' + RutEmpresa;
-			// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-			if( window.XMLHttpRequest )
-				ajaxCentroCosto = new XMLHttpRequest(); // No Internet Explorer
-			else
-				ajaxCentroCosto = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-			// Almacenamos en el control al funcion que se invocara cuando la peticion
-			// cambie de estado 
-			ajaxCentroCosto.onreadystatechange = funcionCallback_lugarpago;
-			// Enviamos la peticion
-			ajaxCentroCosto.open( "GET", url, false );
-			ajaxCentroCosto.send( "" );
-		}else{
-			$("#idCentroCosto").attr("disabled", true);
-			//$("#nombreCentroCosto").attr("disabled", true);
-		}
-	}
-	function funcionCallback_lugarpago()
-	{
-		// Comprobamos si la peticion se ha completado (estado 4)
-		if( ajaxCentroCosto.readyState == 4 )
-		{
-			// Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-			if( ajaxCentroCosto.status == 200 )
-			{
-				// Escribimos el resultado en la pagina HTML mediante DHTML
-				salida = ajaxCentroCosto.responseText;
-				listado = JSON.parse(salida);
-				num = listado.length;
-				//$('#idCentroCosto').append('<option value="0">( Seleccione )</option>');    
-				if( num > 0 ){
-					$.each(listado, function( index, value ) {
-						$('#idCentroCosto').append('<option class="fila_cc" value=' + listado[index].idCentroCosto + '>' + listado[index].nombrecentrocosto + ' </option>');    
-					});
-					$("#idCentroCosto").attr("disabled", false);
-				}
-			}
-		}
-	}
-</script>

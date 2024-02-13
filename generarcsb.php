@@ -583,7 +583,7 @@ class generarcsb
 	public function crearDocumento($datos){
 
 		//Generar Documento nuevo 
-		//$datos = $_REQUEST;
+		//$datos = $_POST;
 		$dt = new DataTable();
 			
 		$datos['idEstado']    = 1; //Creado
@@ -700,7 +700,7 @@ class generarcsb
 	//Crear Plantilla completa 
 	public function crearPlantilla($idDocumento, $TipoFirma, $empleado){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$dt = new DataTable();
 		$html = '';
@@ -757,7 +757,7 @@ class generarcsb
 	//Construir Arreglos de los Firmantes
 	private function crearFirmantes($idDocumento,$empleado,&$resultado){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//Variables que faltan 
 		$dt3 = new DataTable();
@@ -919,7 +919,7 @@ class generarcsb
 	//Validar si el documento tiene variables de un tipo 
 	private function buscarVariables($idDocumento,$html, $busqueda,&$resultado){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $idDocumento;
 
 		$dt = new DataTable();
@@ -1102,7 +1102,7 @@ class generarcsb
 	//Buscar subclausulas
 	private function buscarVariablesSubClausulas($idDocumento,$html,&$resultado){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 	
 		$dt = new DataTable();
 		$var_busqueda = '';
@@ -1570,7 +1570,7 @@ class generarcsb
 	//------             ULTIMINIO RAMOS GALÁN     ---------------
 	//------            uramos@gmail.com           ---------------
 	//------    10 de junio de 2009. México, D.F.  ---------------
-	//------    PHP Version 4.3.1 o mayores (aunque podría funcionar en versiones anteriores, tendrías que probar)
+	//------    PHP Version o mayores (aunque podría funcionar en versiones anteriores, tendrías que probar)
 
 	{
 	    $xarray = array(0 => "Cero",

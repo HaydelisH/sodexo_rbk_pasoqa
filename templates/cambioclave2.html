@@ -2,7 +2,7 @@
 
 		<div id="mensajeError"><php:texto id="mensajeError" /></div>
 		<div id="mensajeOK"><php:texto id="mensajeOK" /></div>
-		<form name="formulario" class="formularioAgregar" id="formulario_solicitudes" action="cambioclave.php" method="POST" onsubmit="javascript:return validarFormulario(this) && ValidarNuevaClave();" >
+		<form name="formulario" class="formularioAgregar" id="formulario" action="cambioclave.php" method="POST" onsubmit="javascript:return validarFormulario(this) && ValidarNuevaClave();" >
 		
 		<php:repeticion id="solicitudes">
 		<div class="box box-primary">
@@ -41,4 +41,5 @@
 		<input type="hidden" name="accion" value="Cambiar" />
 		<input class="btn btn-primary" type="submit" name="accion2" value="Cambiar" conclick="javascript:return ValidarNuevaClave();" />
 
-		</form>
+		  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>

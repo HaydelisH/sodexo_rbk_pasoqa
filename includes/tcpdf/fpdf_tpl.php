@@ -1,6 +1,6 @@
 <?php
 //
-//  FPDF_TPL - Version 1.2.3
+//  FPDF_TPL - 
 //
 //    Copyright 2004-2013 Setasign - Jan Slabon
 //

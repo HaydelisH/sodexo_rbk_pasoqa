@@ -7,20 +7,20 @@
                         <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
                         <div id="mensajeError"><php:texto id="mensajeError" /></div>      
                     </div>
-                    <form name="formulario2" id="formulario_usuarios" action="BuscarReportePostulacion2.php" method="POST" autocomplete="off">
+                    <form name="formulario2" id="formulario" action="BuscarReportePostulacion2.php" method="POST" autocomplete="off">
                         <table id="example2" class="table table-bordered table-hover">
                             <div class="col-md-2 xs-12">
                                 <button class="btn btn-md btn-default btn-block ocultar" type="button" style="margin-top: 10px" data-toggle="collapse" href="#collapseExample" role="button" data-parent="#accordion"><a id="a">Ocultar Filtro</a></button>
                             </div>
                         </table>
-                        <div id="collapseExample"  class="panel-collapse collapse in">
+                        <div><!--id="collapseExample"  class="panel-collapse collapse in">-->		
                             <div class="col-md-12">
                                 <div class="box">
                                     <div class="box-body pad table-responsive">
                                         <div class="box-header">
                                             <div class="form-group">
                                                 <php:repeticion id="formulario">
-                                                <div class="form-row">
+                                                <div class="row">
                                                     <!--Postulante rut-->
                                                     <div class="col-md-4 xs-12">
                                                         <label for="rutPostulante">R.U.T. postulante</label>
@@ -67,7 +67,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="form-row">
+                                                <div class="row">
                                                     <div class="col-md-4 xs-12">
                                                         <label for="contenedorid" >Empresa</label>
                                                         <select class= "form-control" name="RutEmpresa" id="RutEmpresa">
@@ -98,29 +98,27 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-row">
-                                                    <!--Fecha de inicio-->
+                                                <div class="row">
+                                                    <!--	 de inicio-->
                                                     <div class="col-md-4 xs-12" >
                                                         <label for="">Fechas de inicio (postulaci&oacute;n)</label>
                                                         <div class="form-group">
-                                                            <div class="input-group date">
-                                                                <div class="input-group-addon">
-                                                                    <i class="fa fa-calendar"></i>
-                                                                </div>
+                                                            <div class="input-group mb-3 date">
+                                                                <div class="input-group-prepend date"><span class="input-group-text" style="padding-bottom: 12px;padding-top: 12px;"><i class="fa fa-calendar"></i></span></div>
+                                                                
                                                                 <input type="datetime" style="background-color: white;" class="form-control pull-right" id="fechaInicio" name="fechaInicio" placeholder="Fecha de inicio" value="<php:item id="fechaInicio"/>"  />
-                                                            </div>
+                                                       </div>
                                                         </div>
                                                     </div>
-                                                    <!--Fecha de Fin-->
+                                                    <!--	 de Fin-->
                                                     <div class="col-md-4 xs-12">
                                                         <label for="">Fecha de fin (postulaci&oacute;n)</label>
                                                         <div class="form-group">
-                                                            <div class="input-group date">
-                                                                <div class="input-group-addon">
-                                                                    <i class="fa fa-calendar"></i>
-                                                                </div>
+                                                            <div class="input-group mb-3 date">
+                                                                <div class="input-group-prepend date"><span class="input-group-text" style="padding-bottom: 12px;padding-top: 12px;"><i class="fa fa-calendar"></i></span></div>
+                                                                
                                                                 <input type="datetime" class="form-control pull-right"  style="background-color: white;"id="fechaFin" name="fechaFin" placeholder="Fecha de fin" value="<php:item id="fechaFin"/>"/>
-                                                            </div>
+                                                       </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2 xs-12 pull-right"  style="margin-top: 15px;">
@@ -135,6 +133,7 @@
                             </div> <!-- <div class="col-md-12">-->
                             <!--</div><div class="row"> -->
                         </div> <!-- <div class="collapse" id="collapseExample"> -->
+                      <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
                     </form>
                     <!--Tabla-->
                     <div id="divtabla" class="tabla-responsiva" >
@@ -142,7 +141,7 @@
                             <table id="example" class="table table-bordered table-hover " name="tbltabla">
                                 <thead>
                                     <tr>
-                                        <th style="text-align: center;" data-campo="Fecha postulacion">Fecha postulaci&oacute;n</th>
+                                        <th style="text-align: center;" data-campo="	 postulacion">	 postulaci&oacute;n</th>
                                         <th style="text-align: center;" data-campo="RUT">R.U.T.</th>
                                         <th style="text-align: center;" data-campo="nombre">Nombre</th>
                                         <th style="text-align: center;" data-campo="telefono">Telefono</th>
@@ -160,7 +159,7 @@
                                     <!--Contenido de Tabla-->
                                     <php:repeticion id="listado">
                                     <tr>
-                                        <td style="text-align: center;" data-campo="Fecha postulacion"><php:item id="fechaPostulacion" /></td>
+                                        <td style="text-align: center;" data-campo="	 postulacion"><php:item id="	Postulacion" /></td>
                                         <td style="text-align: center;" data-campo="RUT"><php:item id="rut" /></td>
                                         <td style="text-align: center;" data-campo="nombre"><php:item id="nombre" /></td>
                                         <td style="text-align: center;" data-campo="telefono"><php:item id="telefono" /></td>
@@ -177,23 +176,23 @@
                                 </tbody>
                                 <th colspan=14 class="tabla_abajo">
                                     <div class="col-md-12" style="font-weight: normal;">
-                                        <php:item id="pagina_actual" /> de <php:item id="pagina_ultimo" /> - Total <php:item id="total_registros" /> Registros
+                                        <php:item id="pagina_actual" /> de <php:item id='pagina_ultimo' /> - Total <php:item id="total_registros" /> Registros
                                     </div>
                                     <div class="col-xs-offset-5"> 
                                         <nav aria-label="nav1">
                                             <ul class="pagination justify-content-center" style="margin-top: 0px; margin-bottom: 0px;">
                                                 <li class="page-item ">
-                                                    <a id="pagina_primera" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_primera" />);" ><span><i class="fa fa-angle-double-left"></i></span></a>
+                                                    <a id="pagina_primera" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id='pagina_primera' />);" ><span><i class="fa fa-angle-double-left"></i></span></a>
                                                 </li>
                                                 <li class="page-item ">
-                                                    <a id="pagina_anterior" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_anterior" />);" ><span ><i class="fa fa-angle-left"></i></span></a>
+                                                    <a id="pagina_anterior" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id='pagina_anterior' />);" ><span ><i class="fa fa-angle-left"></i></span></a>
                                                 </li>                  
-                                                <li class="page-item active"><a class="page-link1" href="#"><php:item id="pagina_actual" /></a></li>                              
+                                                <li class="page-item active"><a class="page-link" href="#"><php:item id="pagina_actual" /></a></li>                              
                                                 <li class="page-item">
-                                                    <a id="pagina_siguente" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_siguente" />);" ><span><i class="fa fa-angle-right"></i></span></a>
+                                                    <a id="pagina_siguente" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id='pagina_siguente' />);" ><span><i class="fa fa-angle-right"></i></span></a>
                                                 </li>
                                                 <li class="page-item">
-                                                    <a id="pagina_ultimo" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_ultimo" />);" ><span><i class="fa fa-angle-double-right"></i></span></a>
+                                                    <a id="pagina_ultimo" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id='pagina_ultimo' />);" ><span><i class="fa fa-angle-double-right"></i></span></a>
                                                 </li>                                                     
                                             </ul>
                                         </nav>
@@ -203,7 +202,8 @@
                                     <!-- Filtro de busqueda y navegacion -->
                                     <php:texto id="autoFiltroPaginado" />
                                     <!-- Filtro de busqueda y navegacion -->
-                                </form>
+                                  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
                             </table>
                         </div>
                         </php:repeticion>
@@ -215,7 +215,8 @@
                             <!-- Filtro de busqueda y navegacion -->
 
                             <button type="submit" name="accion" id="accion" value="DESCARGAR" class="form-control btn btn-md btn-primary"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Descargar</button>
-                        </form>
+                          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
                    </div>
                     <!--Modal de Centros de Costo-->
 					<div class="modal fade" id="modal_cargoEmpleado" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -224,7 +225,7 @@
                                 <div class="modal-header" align="center">
                                     <h4 class="modal-title" id="ejemplo-titulo"> Cargos </h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
+                                        <span aria-hidden="true" class="cerrar_modal">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
@@ -242,7 +243,7 @@
                                     </table>
                                 </div>
                                 <div class="modal-footer" style="margin-top:10px;">
-                                    <button type="button" class="btn btn-secondary btn-md" id="cerrar_cargoEmpleado" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-secondary btn-md cerrar_modal" id="cerrar_cargoEmpleado" data-dismiss="modal">Cerrar</button>
                                 </div>
                             </div>
                         </div>
@@ -254,7 +255,7 @@
                                 <div class="modal-header" align="center">
                                     <h4 class="modal-title" id="ejemplo-titulo"> Divisi&oacute;n personal </h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
+                                        <span aria-hidden="true" class="cerrar_modal">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
@@ -272,7 +273,7 @@
                                     </table>
                                 </div>
                                 <div class="modal-footer" style="margin-top:10px;">
-                                    <button type="button" class="btn btn-secondary btn-md" id="cerrar_centro_costo" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-secondary btn-md cerrar_modal" id="cerrar_centro_costo" data-dismiss="modal">Cerrar</button>
                                 </div>
                             </div>
                         </div>
@@ -282,145 +283,3 @@
         </div> 
     </div> 
 </section>
-<script>
-	$("#RutEmpresa").change(function(){
-		$("#nombrecargoempleado").val('');
-		$("#idCargoEmpleado").val('');
-		$("#nombrecentrocosto").val('');
-		$("#centrocostoid").val('');
-	});
-
-	//Modal de Cargos empleado
-	$("#btn_cargoEmpleado").click(function(){
-		var RutEmpresa = $("#RutEmpresa").val();
-		$(".fila_ce").remove();
-		if( RutEmpresa == 0 ){
-			$("#mensajeError").addClass("callout callout-warning");
-			$("#mensajeError").html("Debe seleccionar la Empresa");
-			return false;
-		}
-		$("#mensajeError").html("");
-		$("#mensajeError").removeClass("callout callout-warning");
-		var url  = "postulacion_ajax3.php?RutEmpresa=" + RutEmpresa;
-		// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-		if( window.XMLHttpRequest )
-			ajax = new XMLHttpRequest(); // No Internet Explorer
-		else
-			ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-		// Almacenamos en el control al funcion que se invocara cuando la peticion
-		// cambie de estado 
-		ajax.onreadystatechange = funcionCallback_cargoEmpleado;
-		// Enviamos la peticion
-		ajax.open( "GET", url, true );
-		ajax.send( "" );
-	});
-
-	function funcionCallback_cargoEmpleado()
-	{
-		// Comprobamos si la peticion se ha completado (estado 4)
-		if( ajax.readyState == 4 )
-		{
-			// Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-			if( ajax.status == 200 )
-			{
-				// Escribimos el resultado en la pagina HTML mediante DHTML
-				salida = ajax.responseText;
-				listado = JSON.parse(salida); 
-				num = listado.length;
-				if( num > 0 ){
-					//[{"0":"cc1","centrocostoid":"cc1","1":"cc1","nombrecentrocosto":"cc1","2":"'cc1'","lp":"'cc1'"},{"0":"cc2","centrocostoid":"cc2","1":"c2","nombrecentrocosto":"c2","2":"'cc2'","lp":"'cc2'"}]
-					$.each(listado, function( index, value ) {
-						$('#tabla_cargoEmpleado tr:last').after('<tr class="fila_ce"><td>' + listado[index].idCargoEmpleado + '</td><td><div id="' + listado[index].idCargoEmpleado + '">' + listado[index].nombrecargoempleado + ' </div></td><td ><button type="button" style="background-color: transparent;" class="btn" name="btn_agregar_ce" id="btn_agregar_ce" onclick="agregarCE(\'' + listado[index].idCargoEmpleado + '\');"><i class="fa fa-plus" aria-hidden="true"></i></button></td></tr>');
-					});
-				}else{
-					$('#tabla_cargoEmpleado tr:last').after('<tr class="fila_ce"><td colspan=3 >No existen Relaciones laborales para la Empresa y el cargo seleccionado</td></tr>');
-				}
-			}
-		}
-	}
-
-	function agregarCE(i){
-		$("#idCargoEmpleado").val(i);
-		$("#nombrecargoempleado").val($("#"+i).html());
-		$("#cerrar_cargoEmpleado").click();
-	}
-
-	//Modal de Centros de Costo
-	$("#btn_centro_costo").click(function(){
-		var RutEmpresa = $("#RutEmpresa").val();
-		$(".fila_cc").remove();
-		if( RutEmpresa == 0 ){
-			$("#mensajeError").addClass("callout callout-warning");
-			$("#mensajeError").html("Debe seleccionar la Empresa");
-			return false;
-		}
-		$("#mensajeError").html("");
-		$("#mensajeError").removeClass("callout callout-warning");
-		var url  = "Generar_Documento_PorFicha_ajax1.php?RutEmpresa=" + RutEmpresa;
-		// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-		if( window.XMLHttpRequest )
-			ajax = new XMLHttpRequest(); // No Internet Explorer
-		else
-			ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-		// Almacenamos en el control al funcion que se invocara cuando la peticion
-		// cambie de estado 
-		ajax.onreadystatechange = funcionCallback_centrocosto;
-		// Enviamos la peticion
-		ajax.open( "GET", url, true );
-		ajax.send( "" );
-	});
-
-	function funcionCallback_centrocosto()
-	{
-		// Comprobamos si la peticion se ha completado (estado 4)
-		if( ajax.readyState == 4 )
-		{
-			// Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-			if( ajax.status == 200 )
-			{
-				// Escribimos el resultado en la pagina HTML mediante DHTML
-				salida = ajax.responseText;
-				listado = JSON.parse(salida); 
-				num = listado.length;
-				if( num > 0 ){
-					//[{"0":"cc1","centrocostoid":"cc1","1":"cc1","nombrecentrocosto":"cc1","2":"'cc1'","lp":"'cc1'"},{"0":"cc2","centrocostoid":"cc2","1":"c2","nombrecentrocosto":"c2","2":"'cc2'","lp":"'cc2'"}]
-					$.each(listado, function( index, value ) {
-						$('#tabla_centro_costo tr:last').after('<tr class="fila_cc"><td>' + listado[index].centrocostoid + '</td><td><div id="' + listado[index].centrocostoid + '">' + listado[index].nombrecentrocosto + ' </div></td><td ><button type="button" style="background-color: transparent;" class="btn" name="btn_agregar_cc" id="btn_agregar_cc" onclick="agregarCC(' + listado[index].lp + ');"><i class="fa fa-plus" aria-hidden="true"></i></button></td></tr>');
-					});
-				}else{
-					$('#tabla_centro_costo tr:last').after('<tr class="fila_cc"><td colspan=3 >No existen Relaciones laborales para la Empresa y el Centro de Costo seleccionado</td></tr>');
-				}
-			}
-		}
-	}
-
-	function agregarCC(i){
-		$("#centrocostoid").val(i);
-		$("#nombrecentrocosto").val($("#"+i).html());
-		$("#cerrar_centro_costo").click();
-	}
-
-    $('#fechaInicio').datepicker({
-        language: "es",
-        orientation: "bottom",
-        autoclose: true,
-        todayHighlight: true,
-        format: 'dd-mm-yyyy'
-    });
-
-    $('#fechaFin').datepicker({
-        language: "es",
-        orientation: "bottom",
-        autoclose: true,
-        todayHighlight: true,
-        format: 'dd-mm-yyyy'
-    });
-
-    $(".ocultar").click(function(){
-        if ( $("#collapseExample").hasClass('in')){
-            $("#a").html('Mostrar filtros');
-        }else{
-            $("#a").html('Ocultar filtros');
-        }
-    });
-</script>

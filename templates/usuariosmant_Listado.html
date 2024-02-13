@@ -3,30 +3,33 @@
 		<div class="box">
 		  <div class="box-body pad table-responsive">
 			 <div class="box-header">
-			  <form name="formulario" id="formulario_usuarios" action="usuariosmant.php" method="POST" >
-			  	<input type="hidden" name="tipousuarioid" 	id="tipousuarioid" 	value="<php:item id="tipousuarioid" />">		
-				<input type="hidden" name="holdingid" 		id="holdingid"		value="<php:item id="holdingid" />">
-				<input type="hidden" name="cantfilas" 	 	value="<php:item id="cantfilas" />" />		
-				<input type="hidden" name="pagina"	 	 	value="<php:item id="pagina" />" />	
-				<input type="hidden" name="nombre"	 	 	value="<php:item id="nombre" />" />	
-				
+			  <form name="formulario" id="formulario" action="usuariosmant.php" method="POST" >
+					<input type="hidden" name="tipousuarioid" 	id="tipousuarioid" 	value="<php:item id="tipousuarioid" />">		
+					<input type="hidden" name="holdingid" 		id="holdingid"		value="<php:item id="holdingid" />">
+					<input type="hidden" name="cantfilas" 	 	value="<php:item id="cantfilas" />" />		
+					<input type="hidden" name="pagina"	 	 	value="<php:item id="pagina" />" />	
+					<input type="hidden" name="nombre"	 	 	value="<php:item id="nombre" />" />	
 
-				  <php:repeticion id="formulario">
-                
-                    <php:repeticion id="crear">
-						<button type="submit" class="btn btn-default" name="accion" value="AGREGAR"><a><i class="fa fa-plus" aria-hidden="true"></i>Nuevo</a></button> 
+					<php:repeticion id="formulario">				
+						<php:repeticion id="crear">
+							<button type="submit" class="btn btn-default" name="accion" value="AGREGAR"><a><i class="fa fa-plus" aria-hidden="true"></i>Nuevo</a></button> 
 					</php:repeticion>
-			
-				 <div class="form-inline">
-		          <div class="col-md-3 pull-right">
-		              <label for="">Buscar:</label>
-		              <input type="text" name="buscar" id="buscar" class="form-control form-control-sm" autocomplete="off" />
-		              <button type="button" class="btn btn-sm btn-primary" style="padding-top: 8px;padding-bottom: 8px;" id="btn-buscar"> <i class="fa fa-search" aria-hidden="true"></i></button>
-		          </div>
-		        </div>
-	          </form>
+									
+					<div class="d-flex justify-content-end">
+						<label for="" id="doc_label">Buscar:</label>
+						<div class="box-body" id="doc_hijo" style="padding-right: 0px;padding-left: 0px;padding-top: 0px;padding-bottom: 0px;"> 
+							<div class="input-group input-group-md" >
+							<input type="text" name="buscar" id="buscar" class="form-control form-control-sm" autocomplete="off" />
+							<span class="input-group-append">      
+								<button type="button" class="btn btn-sm btn-primary" style="padding-top: 8px;padding-bottom: 8px;" id="btn-buscar"> <i class="fa fa-search" aria-hidden="true"></i></button>
+							</span>
+						</div>							
+					</div>				
+				
+					<input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                </form>
 			</div>	
-			<div class="box-body">
+			<div class="box-body" style="padding-left: 0px; padding-right: 0px;">
 				<!--Mensajes-->
 				<div id="mensajeOK"><php:texto id="mensajeOK" /></div>
 				<div id="mensajeError"><php:texto id="mensajeError" /></div>
@@ -65,7 +68,8 @@
 													<button class="btn btn-default btn-sm" type="submit" name="accion" value="ELIMINAR" onclick="javascript:return preguntarPorBorrar();">Eliminar</button>
 												</php:repeticion>
 												
-											</form>
+											  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 										</td>
 									</tr>
 								</php:repeticion>
@@ -73,23 +77,23 @@
 							<tr>  
 			                  <th colspan=5 class="tabla_abajo">
 			                  <div class="col-md-12" style="font-weight: normal;">
-			                     <php:item id="pagina_actual" /> de <php:item id="pagina_ultimo" /> - Total <php:item id="total_registros" /> Registros
+			                     <php:item id="pagina_actual" /> de <php:item id='pagina_ultimo' /> - Total <php:item id="total_registros" /> Registros
 			                  </div>
 			                    <div class="col-xs-offset-5"> 
 			                    <nav aria-label="nav1">
 			                      <ul class="pagination justify-content-center" style="margin-top: 0px; margin-bottom: 0px;">
-			                      <li class="page-item ">
-			                        <a id="pagina_primera" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_primera" />);" ><span><i class="fa fa-angle-double-left"></i></span></a>
+			                      <li class="page-item">
+			                        <a id="pagina_primera" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id='pagina_primera' />);" ><span><i class="fa fa-angle-double-left"></i></span></a>
 			                      </li>
-			                      <li class="page-item ">
-			                        <a id="pagina_anterior" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_anterior" />);" ><span ><i class="fa fa-angle-left"></i></span></a>
+			                      <li class="page-item">
+			                        <a id="pagina_anterior" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id='pagina_anterior' />);" ><span ><i class="fa fa-angle-left"></i></span></a>
 			                      </li>                  
-			                      <li class="page-item active"><a class="page-link1" href="#"><php:item id="pagina_actual" /></a></li>                              
+			                      <li class="page-item active"><a class="page-link" href="#"><php:item id="pagina_actual" /></a></li>                              
 			                      <li class="page-item">
-			                        <a id="pagina_siguente" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_siguente" />);"  title="<php:item id="pagina_siguente" />"><span><i class="fa fa-angle-right"></i></span></a>
+			                        <a id="pagina_siguente" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id='pagina_siguente' />);"  title="<php:item id='pagina_siguente' />"><span><i class="fa fa-angle-right"></i></span></a>
 			                      </li>
 			                      <li class="page-item">
-			                      <a id="pagina_ultimo" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_ultimo" />);" title="<php:item id="pagina_ultimo" />"><span><i class="fa fa-angle-double-right"></i></span></a>
+			                      <a id="pagina_ultimo" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id='pagina_ultimo' />);" title="<php:item id='pagina_ultimo' />"><span><i class="fa fa-angle-double-right"></i></span></a>
 			                      </li>                                                     
 			                      </ul>
 			                    </nav>
@@ -102,7 +106,8 @@
 							<input type="hidden" name="accion" 				value="BUSCAR" />
 							<input type="hidden" name="holdingid" 			value="<php:item id="holdingid" />" >
 							<input type="hidden" name="nombrex" id="nombrex" value="<php:item id="nombrex" />" >
-						</form>
+						  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 					</div>
 				</php:repeticion>
 			</div>
@@ -111,23 +116,4 @@
 	  </div>
 	</div>
 </section>
-
-<script>
- $('#buscar').keypress(function(e) {
-    var key = e.which;
-    if (key == 13) {
-      return false;
-    }
-  });
-
-  $('#btn-buscar').click(function(){
-    $("#nombrex").val($("#buscar").val());
-    $("#pagina").val(1);
-    $("#paginado").submit();
-  });
-</script>
-
-
-
-
 

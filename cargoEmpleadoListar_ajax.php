@@ -45,7 +45,7 @@ class personas {
 
 		$dt = new DataTable();
 		$array = array ();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
         //Consultar el tipo de firma que tiene asociada el usuario
 		$this->cargoEmpleadoBD->listado($datos,$dt);

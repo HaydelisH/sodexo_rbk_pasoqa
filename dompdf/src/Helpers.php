@@ -641,7 +641,7 @@ class Helpers
             return false;
         }
 
-        // version 1.00
+      
         if (!($fh = fopen($filename, 'rb'))) {
             trigger_error('imagecreatefrombmp: Can not open ' . $filename, E_USER_WARNING);
             return false;

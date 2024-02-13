@@ -39,7 +39,7 @@ class documentosxperfil {
 	private $opcionnivel2="";
 	private $opciondetalle="";
 	
-	private $nroopcion=4; //número de opción este debe estar en la tabla opcionessistema
+	private $nroopcion=4; //nï¿½mero de opciï¿½n este debe estar en la tabla opcionessistema
 	private $consulta=0;
 	private $elimina=0;
 	private $crea=0;
@@ -51,10 +51,10 @@ class documentosxperfil {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -122,7 +122,7 @@ class documentosxperfil {
 		include("includes/opciones_menu.php");
 
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->inicio();
@@ -133,7 +133,7 @@ class documentosxperfil {
 		}
 			
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "BUSCAR":
 				$this->listadoEmpresas();
@@ -156,24 +156,24 @@ class documentosxperfil {
 	private function empresas()
 	{	
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			$datos=$_REQUEST;
+			$datos=$_POST;
 			
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "GRABAR":
 					$this->mensajeError = "";
-					for ($l = 0; $l < $_REQUEST["cantidad"]; $l++) {
-						if (isset($_REQUEST["ide_".$l])){
+					for ($l = 0; $l < $_POST["cantidad"]; $l++) {
+						if (isset($_POST["ide_".$l])){
 							
-							if (isset($_REQUEST["sel_".$l])){
-								$datos["empresaid"]= $_REQUEST["sel_".$l];
+							if (isset($_POST["sel_".$l])){
+								$datos["empresaid"]= $_POST["sel_".$l];
 								$this->accesodocxperfilBD->GrabaEmpresa($datos);
 								$this->mensajeError.=$this->accesodocxperfilBD->mensajeError;
 							}else{
-								$datos["empresaid"]= $_REQUEST["ide_".$l];
+								$datos["empresaid"]= $_POST["ide_".$l];
 								$this->accesodocxperfilBD->EliminaEmpresa($datos);
 								$this->mensajeError.=$this->accesodocxperfilBD->mensajeError;		
 							}
@@ -238,7 +238,7 @@ class documentosxperfil {
 		$dt = new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
 
 		if ($datos["tipousuarioid"] == 0){
 			$this->mensajeError = "Debe Seleccionar un Tipo de Usuario";
@@ -281,24 +281,24 @@ class documentosxperfil {
 	private function lugarespago()
 	{
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			$datos=$_REQUEST;
+			$datos=$_POST;
 			
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "GRABAR":
 					$this->mensajeError = "";
-					for ($l = 0; $l < $_REQUEST["cantidad"]; $l++) {
-						if (isset($_REQUEST["ide_".$l])){
+					for ($l = 0; $l < $_POST["cantidad"]; $l++) {
+						if (isset($_POST["ide_".$l])){
 							
-							if (isset($_REQUEST["sel_".$l])){
-								$datos["empresaid"]= $_REQUEST["sel_".$l];
+							if (isset($_POST["sel_".$l])){
+								$datos["empresaid"]= $_POST["sel_".$l];
 								$this->accesodocxperfilBD->GrabaEmpresa($datos);
 								$this->mensajeError.=$this->accesodocxperfilBD->mensajeError;
 							}else{
-								$datos["empresaid"]= $_REQUEST["ide_".$l];
+								$datos["empresaid"]= $_POST["ide_".$l];
 								$this->accesodocxperfilBD->EliminaEmpresa($datos);
 								$this->mensajeError.=$this->accesodocxperfilBD->mensajeError;		
 							}
@@ -343,7 +343,7 @@ class documentosxperfil {
 	{	
 		
 		// recuperamos lo que se escribio en el formulario que va llegando si es que hubo
-		$datos=$_REQUEST;
+		$datos=$_POST;
 		$datos['RutEmpresa'] = $datos['empresaid'];
 		
 		if (!isset($datos["pagina"])) $datos["pagina"]="1";
@@ -401,7 +401,7 @@ class documentosxperfil {
 	private function listadoLugaresPago() 
 	{	
 		// recuperamos lo que se escribio en el formulario que va llegando si es que hubo
-		$datos=$_REQUEST;
+		$datos=$_POST;
 		$datos['RutEmpresa'] = $datos['empresaid'];
 		
 		if (!isset($datos["pagina"])) $datos["pagina"]="1";
@@ -464,27 +464,27 @@ class documentosxperfil {
 	private function centroscosto()
 	{	
 		// si hubo algun evento
-		if (isset($_REQUEST["accion3"]))
+		if (isset($_POST["accion3"]))
 		{
 			// revisamos
-			switch ($_REQUEST["accion3"])
+			switch ($_POST["accion3"])
 			{
 			   case "GRABAR":
-					$datos=$_REQUEST;
+					$datos=$_POST;
 					
 					$this->mensajeError = "";
 					$this->accesodocxperfilBD->GrabaEmpresa($datos);
 					$this->mensajeError.=$this->accesodocxperfilBD->mensajeError;
 					
-					for ($l = 0; $l < $_REQUEST["cantidad"]; $l++) {
-						if (isset($_REQUEST["ide_".$l])){
+					for ($l = 0; $l < $_POST["cantidad"]; $l++) {
+						if (isset($_POST["ide_".$l])){
 							
-							if (isset($_REQUEST["sel_".$l])){
-								$datos["centrocostoid"]= $_REQUEST["sel_".$l];
+							if (isset($_POST["sel_".$l])){
+								$datos["centrocostoid"]= $_POST["sel_".$l];
 								$this->accesodocxperfilBD->GrabaCentroCosto($datos);
 								$this->mensajeError.=$this->accesodocxperfilBD->mensajeError;
 							}else{
-								$datos["centrocostoid"]= $_REQUEST["ide_".$l];
+								$datos["centrocostoid"]= $_POST["ide_".$l];
 								$this->accesodocxperfilBD->EliminaCentroCosto($datos);
 								$this->mensajeError.=$this->accesodocxperfilBD->mensajeError;								
 							}
@@ -519,7 +519,7 @@ class documentosxperfil {
 		$dt = new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
 
 		$datos["usuarioid"]=$this->seguridad->usuarioid;
 		$datos["tipousuarioingid"]=$this->seguridad->tipousuarioid;

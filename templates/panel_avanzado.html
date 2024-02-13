@@ -117,10 +117,9 @@
           </div>
           <div class="col-md-3 col-sm-12" >
            <div class="form-group" >
-              <div class="input-group date" style="margin-right: 10px" >
-                <div class="input-group-addon">
-                  <i class="fa fa-calendar"></i>
-                </div>
+            <div class="input-group mb-3 date">
+              <div class="input-group-prepend date"><span class="input-group-text" style="padding-bottom: 12px;padding-top: 12px;"><i class="fa fa-calendar"></i></span></div>
+              
                   <input type="datetime" style="background-color: white;" class="form-control pull-right" id="anno" name="anno" readonly /> 
               </div>
             </div>
@@ -241,7 +240,8 @@
             <!--Ver todos los documentos-->
             <form action="Reportes.php" method="POST" role="form" id="formulario3" name="formulario3">
               <button name="accion" id="accion" value="BUSCAR" class="btn" style="background-color: transparent;"><a>Ver Todos</a></button>
-            </form>
+              <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
           </div>
         </div>
    
@@ -338,7 +338,8 @@
           <!--Ver todos los documentos-->
           <form action="Reportes.php" method="POST" role="form" id="formulario3" name="formulario3">
             <button name="accion" id="accion" value="BUSCAR" class="btn" style="background-color: transparent;"><a>Ver Todos</a></button>
-          </form>
+            <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
         </div>
    
         <!-- /.box-footer -->
@@ -367,7 +368,7 @@
     $("#ejecutivo_emp").hide();
 
     //Tooltips
-    $('[data-toggle="tooltip"]').tooltip(); 
+    //$('[data-toggle="tooltip"]').tooltip(); 
     
   });
 

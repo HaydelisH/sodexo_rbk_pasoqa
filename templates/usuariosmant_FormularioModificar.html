@@ -7,13 +7,13 @@
 					<a class="btn btn-default btn_letra_azul" href="usuariosmant.php"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</a>
 				</div>
 				<!-- /.box-header -->
-				<div class="box-body">
+				<div class="box-body" style="padding: 30px;">
 					<!--Mensajes-->
 					<div id="mensajeError"><php:texto id="mensajeError" /></div>
 					<div id="mensajeOK"><php:texto id="mensajeOK" /></div>	
 					<form name="formulario" class="formularioModificar" id="formulario"  class="form-horizontal" action="usuariosmant.php" method="POST" autocomplete="off">
 						<php:repeticion id="formulario">
-						<div class="form-row">
+						<div class="row">
 							<div class="col-md-6">
 								<div style="float:left;">
 									<input type="checkbox" id="forzarCambioContrasena" name="forzarCambioContrasena" value="cambioContrasena"> <b>Forzar cambio de contrase&ntilde;a</b>
@@ -23,38 +23,35 @@
 								<label style="float:right;"> (*) Campos obligatorios </label>
 							</div>
 						</div>
-						<div class="form-row">
+						<div class="row">
 							<div class="col-md-6 col-xs-12">
 								<label for="tipousuarioid" class="col-sm-4 control-label">Rut (*)</label>
 								<input type="contenedor" class="form-control" id="newusuarioid"  name="newusuarioid" placeholder="" maxlength="11" value="<php:item id="newusuarioid" />" disabled >
 								<input type="hidden" name="newusuarioid" value="<php:item id="newusuarioid" />" />
 							</div>
-						</div>
-						<div class="form-row">
+						
 							<div class="col-md-6 col-xs-12">
 								<label for="contenedorid" class="col-sm-4 control-label">Nombre (*)</label>
 								<input type="contenedor" class="form-control" id="nombre" name="nombre" placeholder="" maxlength="50" value="<php:item id="nombre" />">
 							</div>
 						</div>
-						<div class="form-row">
+						<div class="row">
 							<div class="col-md-6 col-xs-12">
 								<label for="contenedorid" class="col-sm-4 control-label">Apellido Paterno (*)</label>
 								<input type="contenedor" class="form-control" id="appaterno" name="appaterno" placeholder="" maxlength="50" value="<php:item id="appaterno" />">
 							</div>
-						</div>
-						<div class="form-row">
+						
 							<div class="col-md-6 col-xs-12">
 								<label for="contenedorid" class="col-sm-4 control-label">Apellido Materno</label>
 								<input type="contenedor" class="form-control" id="apmaterno" name="apmaterno" placeholder="" maxlength="50" value="<php:item id="apmaterno" />">
 							</div>
 						</div>
-						<div class="form-row">
+						<div class="row">
 							<div class="col-md-6 col-xs-12">
 								<label for="contenedorid" class="col-sm-4 control-label">Correo Electr&oacute;nico (*)</label>
 								<input type="contenedor" class="form-control" id="correo" name="correo" placeholder="" maxlength="50" value="<php:item id="correo" />">
 							</div>
-						</div>
-						<div class="form-row">
+						
 							<div class="col-md-6 col-xs-12">
 								<label for="contenedorid" class="col-sm-4 control-label">Perfil (*)</label>
 								<select class= "form-control" name="tipousuarioid" id="tipousuarioid">
@@ -65,7 +62,7 @@
 								</select>
 							</div>
 						</div>	
-						<div class="form-row" >
+						<div class="row" >
 							<div class="col-md-6 xs-12">
 								<label for="">Tipo de Firma (*)</label>
 								<select class= "form-control" name="idFirma" id="idFirma">
@@ -75,8 +72,7 @@
 									</php:repeticion>
 								</select>
 							</div>
-						</div>
-						<div class="form-row">
+						
 							<div class="col-md-6 col-xs-12">
 								<label for="contenedorid" >Rol (*)</label>
 								<select class= "form-control" name="rolid" id="rolid">
@@ -88,75 +84,59 @@
 							</div>
 						</div>
 						<!--Empresas-->
-						<div class="col-md-6" >
-							<label for="contenedorid">Empresa (*) </label>
-							<!--Select de Empresas disponibles-->
-							<select class= "form-control" name="RutEmpresa" id="RutEmpresa">
-								<option value="0">( Seleccione )</option>
-								<php:repeticion id="Empresas">
-								<option value="<php:item id="RutEmpresa" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEmpresa" /><php:argumento idvalor="RutEmpresa" /></php:funcion>><php:item id="RazonSocial" /></option>
-								</php:repeticion>
-							</select>
-						</div>
-						<div class="col-md-6" >
-							<label for="contenedorid">Estado usuario (*) </label>
-							<!--Select de Empresas disponibles-->
-							<select class= "form-control" name="idEstadoUsuario" id="idEstadoUsuario">
-								<option value="0">( Seleccione )</option>
-								<php:repeticion id="EstadoUsuario">
-								<option value="<php:item id="idEstadoUsuario" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idEstadoUsuario" /><php:argumento idvalor="idEstadoUsuario" /></php:funcion>><php:item id="nombreEstadoUsuario" /></option>
-								</php:repeticion>
-							</select>
-						</div>
-						<div class="col-md-6" >
-							<label for="contenedorid">Bloqueado (*) </label>
-							<!--Select de Empresas disponibles-->
-							<select class= "form-control" name="idUsuarioBloqueado" id="idUsuarioBloqueado">
-								<option value="0">( Seleccione )</option>
-								<php:repeticion id="UsuarioBloqueado">
-								<option value="<php:item id="idUsuarioBloqueado" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idUsuarioBloqueado" /><php:argumento idvalor="idUsuarioBloqueado" /></php:funcion>><php:item id="nombreUsuarioBloqueado" /></option>
-								</php:repeticion>
-							</select>
-						</div>
-						<!--SOLO SMU LO USA
-						<div class="col-md-6 xs-12">
-							<label>Divisi&oacute;n de Personal</label>
-							<div class="col-md-11 xs-12 box-body" style="padding-left: 0px;padding-top: 0px;">
-								<input class="form-control" type="text" name="nombrecentrocosto" id="nombrecentrocosto" placeholder="(Seleccione)" value="<php:item id="nombrecentrocosto"/>" readonly="readonly" />
-								<input type="hidden" name="centrocostoid" id="centrocostoid" placeholder="(Seleccione)" value="<php:item id="centrocostoid"/>" />
-							</div>
-							<div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
-								<button class="btn btn-md btn-primary btn-block" type="button" id="btn_centro_costo" data-toggle="modal" data-target="#modal_centro_costo"><i class="fa fa-search"></i></button>  
-							</div>
-						</div>-->
-						<!--<div class="form-check form-check-inline" >
-							<div class="col-md-6 xs-12">
-								<label class="form-check-label" >Login con PIN  </label>
-								<select class= "form-control" name="idloginExterno" id="idloginExterno">          
-									<option value="0">(Seleccione)</option>
-									<php:repeticion id="LoginExterno">
-									<option value="<php:item id="idloginExterno" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idloginExterno"" /><php:argumento idvalor="idloginExterno" /></php:funcion>><php:item id="Descripcion" /></option>
+						<div class="row">
+							<div class="col-md-6" >
+								<label for="contenedorid">Empresa (*) </label>
+								<!--Select de Empresas disponibles-->
+								<select class= "form-control" name="RutEmpresa" id="RutEmpresa">
+									<option value="0">( Seleccione )</option>
+									<php:repeticion id="Empresas">
+									<option value="<php:item id="RutEmpresa" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEmpresa" /><php:argumento idvalor="RutEmpresa" /></php:funcion>><php:item id="RazonSocial" /></option>
 									</php:repeticion>
 								</select>
 							</div>
-						</div>-->
-						<div class="form-row">  
-							<div class="col-md-2 xs-12 pull-right" style="margin-top:15px;">            
-								<input type="hidden" name="accion" value="MODIFICAR" />
-							<button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="MODIFICAR" onclick="javascript:return validarFormulario(this,new Array(),new Array('apmaterno','idloginExterno','nombrecentrocosto')) && validarRutEmpresa();"/>Guardar</button>
+							<div class="col-md-6" >
+								<label for="contenedorid">Estado usuario (*) </label>
+								<!--Select de Empresas disponibles-->
+								<select class= "form-control" name="idEstadoUsuario" id="idEstadoUsuario">
+									<option value="0">( Seleccione )</option>
+									<php:repeticion id="EstadoUsuario">
+									<option value="<php:item id="idEstadoUsuario" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idEstadoUsuario" /><php:argumento idvalor="idEstadoUsuario" /></php:funcion>><php:item id="nombreEstadoUsuario" /></option>
+									</php:repeticion>
+								</select>
 							</div>
-						</div>	
-						<div class="form-row">  	
-							<div class="col-md-2 xs-12 pull-left" style="margin-top:15px;">            
-								<input class="btn btn-primary" type="button" style="margin-top: 10px"  onclick="javascript:iraccesoxusuario();" name="accion2" value="PERMISOS" />
+						</div>
+						<div class="row">
+							<div class="col-md-6" >
+								<label for="contenedorid">Bloqueado (*) </label>
+								<!--Select de Empresas disponibles-->
+								<select class= "form-control" name="idUsuarioBloqueado" id="idUsuarioBloqueado">
+									<option value="0">( Seleccione )</option>
+									<php:repeticion id="UsuarioBloqueado">
+									<option value="<php:item id="idUsuarioBloqueado" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idUsuarioBloqueado" /><php:argumento idvalor="idUsuarioBloqueado" /></php:funcion>><php:item id="nombreUsuarioBloqueado" /></option>
+									</php:repeticion>
+								</select>
+							</div>
+						
+						
+							<div class="col-md-6 d-flex justify-content-between">
+								<div class="col-md-2 xs-12" style="margin-top:15px;">            
+									<input class="btn btn-primary btn-block" type="button" style="margin-top: 10px"  onclick="javascript:iraccesoxusuario();" name="accion2" value="PERMISOS" />
+								</div>
+								<div class="col-md-2 xs-12 d-flex justify-content-end" style="margin-top:15px;">
+									<input type="hidden" name="accion" value="MODIFICAR" />
+									<button class="btn btn-md btn-primary" type="submit" style="margin-top: 10px" name="accion2" value="MODIFICAR" onclick="javascript:return validarFormulario(this,new Array(),new Array('apmaterno','idloginExterno','nombrecentrocosto')) && validarRutEmpresa();"/>Guardar</button>	
+								</div>
 							</div>
 						</div>   
-					</form>
+					  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 					<form name="formulario2" id="formulario2" action="accesoxusuario.php" method="POST">
 						<input type="hidden" name="newusuarioid" 	value="<php:item id="newusuarioid" />" >		
 						<input type="hidden" name="nombre"    		value="<php:item id="nombre" />" >
 						<input type="hidden" name="nropaginaini"    value="<php:texto id="pagina" />" >
-					</form>
+					  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 					</php:repeticion>
 					<!--SOLO SMU LO USA Modal de Centros de Costo
 					<div class="modal fade" id="modal_centro_costo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -165,7 +145,7 @@
 								<div class="modal-header" align="center">
 									<h4 class="modal-title" id="ejemplo-titulo"> Divisi&oacute;n personal </h4>
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
+										<span aria-hidden="true" class="cerrar_modal">&times;</span>
 									</button>
 								</div>
 								<div class="modal-body">
@@ -195,86 +175,3 @@
 	</div>
 	<!-- /.col -->
 </div>
-<script>
-	$(document).ready(function() {
-		<php:texto id="CambiarContrasenaCheked" />
-	});
-
-	function iraccesoxusuario()
-	{
-		formulario2.submit();
-	}
-	function validarRutEmpresa(){
-
-  		if( $("#RutEmpresa").val() == 0 ){
-  			$("#mensajeError").html("Debe seleccionar");
-  			$("#mensajeError").addClass("callout callout-warning");
-  			$("#RutEmpresa").focus();
-  			return false;
-  		}else{
-  			$("#mensajeError").html("");
-  			$("#mensajeError").removeClass("callout callout-warning");
-  			return true;
-  		}
-  	}
-	/* SOLO SMU LO USA
-	$("#RutEmpresa").change(function(){
-		$("#nombrecentrocosto").val('');
-		$("#centrocostoid").val('');
-	});
-
-	//Modal de Centros de Costo
-	$("#btn_centro_costo").click(function(){
-		var RutEmpresa = $("#RutEmpresa").val();
-		$(".fila_cc").remove();
-		if( RutEmpresa == 0 ){
-			$("#mensajeError").addClass("callout callout-warning");
-			$("#mensajeError").html("Debe seleccionar la Empresa");
-			return false;
-		}
-		$("#mensajeError").html("");
-		$("#mensajeError").removeClass("callout callout-warning");
-		var url  = "Generar_Documento_PorFicha_ajax1.php?RutEmpresa=" + RutEmpresa;
-		// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-		if( window.XMLHttpRequest )
-			ajax = new XMLHttpRequest(); // No Internet Explorer
-		else
-			ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-		// Almacenamos en el control al funcion que se invocara cuando la peticion
-		// cambie de estado 
-		ajax.onreadystatechange = funcionCallback_centrocosto;
-		// Enviamos la peticion
-		ajax.open( "GET", url, true );
-		ajax.send( "" );
-	});
-
-	function funcionCallback_centrocosto()
-	{
-		// Comprobamos si la peticion se ha completado (estado 4)
-		if( ajax.readyState == 4 )
-		{
-			// Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-			if( ajax.status == 200 )
-			{
-				// Escribimos el resultado en la pagina HTML mediante DHTML
-				salida = ajax.responseText;
-				listado = JSON.parse(salida); 
-				num = listado.length;
-				if( num > 0 ){
-					//[{"0":"cc1","centrocostoid":"cc1","1":"cc1","nombrecentrocosto":"cc1","2":"'cc1'","lp":"'cc1'"},{"0":"cc2","centrocostoid":"cc2","1":"c2","nombrecentrocosto":"c2","2":"'cc2'","lp":"'cc2'"}]
-					$.each(listado, function( index, value ) {
-						$('#tabla_centro_costo tr:last').after('<tr class="fila_cc"><td>' + listado[index].centrocostoid + '</td><td><div id="' + listado[index].centrocostoid + '">' + listado[index].nombrecentrocosto + ' </div></td><td ><button type="button" style="background-color: transparent;" class="btn" name="btn_agregar_cc" id="btn_agregar_cc" onclick="agregarCC(' + listado[index].lp + ');"><i class="fa fa-plus" aria-hidden="true"></i></button></td></tr>');
-					});
-				}else{
-					$('#tabla_centro_costo tr:last').after('<tr class="fila_cc"><td colspan=3 >No existen Relaciones laborales para la Empresa y el Centro de Costo seleccionado</td></tr>');
-				}
-			}
-		}
-	}
-
-	function agregarCC(i){
-		$("#centrocostoid").val(i);
-		$("#nombrecentrocosto").val($("#"+i).html());
-		$("#cerrar_centro_costo").click();
-	}*/
-</script>

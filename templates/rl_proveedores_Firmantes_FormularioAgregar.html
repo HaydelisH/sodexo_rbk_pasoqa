@@ -10,6 +10,7 @@
                       <input type="hidden" class="form-control" id="RutProveedor" name="RutProveedor" value="<php:item id="RutProveedor"/>"/>
                       <input type="hidden" class="form-control" id="RutEmpresa" name="RutEmpresa" value="<php:item id="RutEmpresa"/>"/>
                       <button type="submit" name="accion" value="MODIFICAR" class="btn btn-default btn_letra_azul"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</button>
+                      <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
                     </form>
 
                   </div>
@@ -37,21 +38,21 @@
 							   <input type="text" name="RutUsuario" id="RutUsuario" class="form-control" placeholder="Numero de identificador" maxlength="10">
 						<!-- </div>-->
 					  </div>
-					  <div class="form-row">
+					  <div class="row">
 						  <div class="col-md-6 xs-12">
 							  <label for="nacionalidad">Nacionalidad</label>
 							  <input type="text" class="form-control" id="nacionalidad" name= "nacionalidad" placeholder="Nacionalidad" value="<php:item id="nacionalidad"/>">
 						  </div>
 					  </div>
 						
-						<div class="form-row">
+						<div class="row">
 							<div class="col-md-6 xs-12">
 								<label for="nombre">Nombre</label>
 								<input type="text" class="form-control" id="nombre" name= "nombre" placeholder="Nombres " value="<php:item id="nombre"/>">
 							</div>
 						</div>
 					
-						<div class="form-row">  
+						<div class="row">  
 							<div class="col-md-6 xs-12">
 								<label for="appaterno">Apellido Paterno</label>
 								<input type="text" class="form-control" id="appaterno" name= "appaterno" placeholder="Apellido Paterno" value="<php:item id="appaterno"/>" >
@@ -62,7 +63,7 @@
 							</div>
 						</div>
 					  
-					 <!-- <div class="form-row" style="">
+					 <!-- <div class="row" style="">
 						  <div class="col-md-6 xs-12">
 							  <label for="idFirma">Rol</label>
 							  <select class= "form-control" name="idCargo" id="idCargo">
@@ -74,14 +75,14 @@
 						  </div>
 					  </div>-->
 					  
-					   <div class="form-row">  
+					   <div class="row">  
 						  <div class="col-md-6 xs-12">
 							<label for="correo">Correo</label>
 							<input type="text" class="form-control" id="correo" name= "correo" placeholder="correo" value="<php:item id="correo"/>">
 						  </div>
 						</div>
 												
-						<div class="form-row" >
+						<div class="row" >
 						  <div class="col-md-6 xs-12">
 							<label for="">Tipo de Firma</label>
 							<select class= "form-control" name="idFirma" id="idFirma">
@@ -93,20 +94,21 @@
 						  </div>
 						</div>
 						
-						<div class="form-row">  
+						<div class="row">  
 							<div class="col-md-6 xs-12">
 								<label for="Cargo">Cargo</label>
 								<input type="text" class="form-control" id="Cargo" name= "Cargo" placeholder="Cargo" value="<php:item id="cargo"/>" >
 							</div>
 						</div>
 				
-					<div class="form-row">  
+					<div class="row">  
 					  <div class="col-md-2 xs-12 pull-right" style="margin-top:15px;">
 						<input type="hidden" name="accion" value="AGREGAR_R" />
 						<button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="AGREGAR_R" onclick="javascript: return validarFormulario(this,new Array(),new Array('apmaterno','Personeria')) && validar();"/>Guardar</button>
 					  </div> 
 					</div>
-					</form>   
+					  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>   
                 </php:repeticion>   
                </div>  
             </div>
@@ -115,12 +117,3 @@
       </div>
    </section>
    
-<script>
-	//Buscar datos de la persona, si existe
-	$("#RutUsuario").change(function(){
-		var respuesta = validaRut2(document.formulario.RutUsuario);
-		if( respuesta ){
-			buscarDatosEmpleado($("#RutUsuario").val());
-		}
-	});
-</script>

@@ -51,7 +51,7 @@ class plantillas {
 		
 		$dt = new DataTable();
 		// pedimos el listado
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$this->plantillasBD->obtenerPlantillaPorEmpresas($datos,$dt);
 		$this->mensajeError = $this->plantillasBD->mensajeError;

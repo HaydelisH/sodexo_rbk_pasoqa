@@ -48,7 +48,7 @@ class empresas {
 		$this->formularioPlantillaBD->usarConexion($conecc);
 		
 		//Consultar las empresas que se tengan disponibles de ese tipo de contrato y esa empresa
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$dt = new DataTable();
 		$array = array ();

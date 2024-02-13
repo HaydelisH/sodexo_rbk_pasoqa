@@ -51,7 +51,7 @@ class usuariosmant {
 	private $opcionnivel2="";
 	private $opciondetalle="";
 	
-	private $nroopcion=5; //número de opción este debe estar en la tabla opcionessistema
+	private $nroopcion=5; //nï¿½mero de opciï¿½n este debe estar en la tabla opcionessistema
 	private $consulta=0;
 	private $elimina=0;
 	private $crea=0;
@@ -63,10 +63,10 @@ class usuariosmant {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -142,7 +142,7 @@ class usuariosmant {
 		include("includes/opciones_menu.php");
 
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -153,7 +153,7 @@ class usuariosmant {
 		}
 
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "BUSCAR":
 				$this->listado();
@@ -171,7 +171,7 @@ class usuariosmant {
 	{  
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos=$_REQUEST;
+		$datos=$_POST;
 
 		$datos['ptipousuarioid'] = $this->seguridad->tipousuarioid;
 
@@ -221,7 +221,7 @@ class usuariosmant {
 
 		if ($datos["pagina_ultimo"]==0)
 		{
-			$this->mensajeOK="No hay información para la consulta realizada.";
+			$this->mensajeOK="No hay informaciï¿½n para la consulta realizada.";
 		}else{
 			$mensajeNoDatos="";
 			$this->pagina->agregarDato("pagina",$datos["pagina"]);
@@ -260,7 +260,7 @@ class usuariosmant {
 		$dt = new DataTable();
 		$dt1 = new DataTable();
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		$this->personasBD->obtenerPIC($datos,$dt);
 		$this->mensajeError.=$this->personasBD->mensajeError;

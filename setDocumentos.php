@@ -57,10 +57,10 @@ class setDocumentos {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -133,7 +133,7 @@ class setDocumentos {
 		include("includes/opciones_menu.php");
 
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -144,7 +144,7 @@ class setDocumentos {
 		}
 	
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		/*switch ($_REQUEST["accion"])
+		/*switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -189,8 +189,8 @@ class setDocumentos {
 /*
     private function setFirmantes()
 	{
-		//var_dump($_REQUEST);
-		$datos = $_REQUEST;
+		//var_dump($_POST);
+		$datos = $_POST;
 
 		$datos['fichaid'] = 11;
 
@@ -225,11 +225,11 @@ class setDocumentos {
 	//Accion del boton agregar un nuevo registro 
 	private function agregar()
 	{	
-		switch ($_REQUEST["accion2"])
+		switch ($_POST["accion2"])
 		{
 			case "AGREGAR":
 
-				$datos = $_REQUEST;
+				$datos = $_POST;
 				$datos["personaid"] = $datos["empleadoid"] = $datos["newusuarioid"];
 				$datos["tipousuarioid"] = 5;
 				$datos["empresaid"] = $datos["RutEmpresa"];
@@ -294,7 +294,7 @@ class setDocumentos {
 				break;
 		}
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$dt = new DataTable();
 
 		$formulario[0] = $datos;	
@@ -338,9 +338,9 @@ class setDocumentos {
 	//Agregar docuemntos 
 	private function agregar_doc()
 	{	
-		if ( isset ($_REQUEST['accion2'])){
+		if ( isset ($_POST['accion2'])){
 		
-			$datos = $_REQUEST; 
+			$datos = $_POST; 
 
 			$this->validar();
 
@@ -363,7 +363,7 @@ class setDocumentos {
 			}
 		}
 
-		$datos=$_REQUEST;
+		$datos=$_POST;
 
 		$dt = new DataTable();
 		$dt1 = new DataTable();
@@ -436,9 +436,9 @@ class setDocumentos {
 
 			$this->pagina->agregarDato("formulario",$formulario);
 			
-			$this->pagina->agregarDato("fichaid",$_REQUEST["fichaid"]);
-			$this->pagina->agregarDato("pagina",$_REQUEST["pagina"]);
-			$this->pagina->agregarDato("nombrex",$_REQUEST["nombrex"]);
+			$this->pagina->agregarDato("fichaid",$_POST["fichaid"]);
+			$this->pagina->agregarDato("pagina",$_POST["pagina"]);
+			$this->pagina->agregarDato("nombrex",$_POST["nombrex"]);
 			
 		}
 		else{
@@ -464,7 +464,7 @@ class setDocumentos {
 	//Validar subida de archivo
 	private function validar()
 	{	
-		$datos=$_REQUEST;
+		$datos=$_POST;
 		
 		$this->carpeta 	= CARPETA_ARCHIVOS_SUBIDAS;
 		$this->crear_carpeta ($this->carpeta);
@@ -511,7 +511,7 @@ class setDocumentos {
 	//Mostrar listado de los registro disponibles
 	private function listado()
 	{  
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$dt = new DataTable;
 		$dt2 = new DataTable;
@@ -534,7 +534,7 @@ class setDocumentos {
 	//Generar un documento individual 
 	private function generar(){
 				
-		$datos = $_REQUEST;
+		$datos = $_POST;
 	
 		$generar = new generar();
 
@@ -560,7 +560,7 @@ class setDocumentos {
 	{
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$fecha = date("dmY_hms");
 
 		//Llenar Select de Empresas registradas
@@ -610,11 +610,11 @@ class setDocumentos {
 	//Ver detalle de ficha 
 	private function modificar()
 	{	
-		switch ($_REQUEST["accion2"])
+		switch ($_POST["accion2"])
 		{
 			case "MODIFICAR":
 
-				$datos = $_REQUEST;
+				$datos = $_POST;
 				$datos["personaid"] = $datos["empleadoid"] = $datos["newusuarioid"];
 				$datos["tipousuarioid"] = 5;
 				$datos["estadocivil"] = $datos["idEstadoCivil"];
@@ -638,7 +638,7 @@ class setDocumentos {
 	//Elimina Ficha
 	private function elimina()
 	{			
-		$datos=$_REQUEST;
+		$datos=$_POST;
 		$dt = new DataTable;
 
 		$datos["usuarioid"]=$this->seguridad->usuarioid;
@@ -663,7 +663,7 @@ class setDocumentos {
 	//Elimina un documento de una Ficha
 	private function elimina_documento()
 	{			
-		$datos=$_REQUEST;
+		$datos=$_POST;
 		$dt = new DataTable;
 		$datos["usuarioid"]=$this->seguridad->usuarioid;
 		
@@ -694,7 +694,7 @@ class setDocumentos {
 	//Confirmar ficha 
 	private function confirmar(){
 		
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$dt = new Datatable();
 		
 		//Buscar el ultimo documento generado 
@@ -728,7 +728,7 @@ class setDocumentos {
 	
 	private function vista_modificar(){
 	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$dt = new DataTable();
 		$dt1 = new DataTable();
 
@@ -800,9 +800,9 @@ class setDocumentos {
 
 			$this->pagina->agregarDato("formulario",$formulario);
 			
-			$this->pagina->agregarDato("fichaid",$_REQUEST["fichaid"]);
-			$this->pagina->agregarDato("pagina",$_REQUEST["pagina"]);
-			$this->pagina->agregarDato("nombrex",$_REQUEST["nombrex"]);
+			$this->pagina->agregarDato("fichaid",$_POST["fichaid"]);
+			$this->pagina->agregarDato("pagina",$_POST["pagina"]);
+			$this->pagina->agregarDato("nombrex",$_POST["nombrex"]);
 			
 		}
 		else{

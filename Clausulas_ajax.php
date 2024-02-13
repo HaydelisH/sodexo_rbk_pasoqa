@@ -60,9 +60,9 @@ class clausulas {
 		
 		$dt = new DataTable();
 		// pedimos el listado
-		//print_r ($_REQUEST);
+		//print_r ($_POST);
 
-		$this->clausulasBD->obtener($_REQUEST,$dt);
+		$this->clausulasBD->obtener($_POST,$dt);
 
 		if($dt->leerFila())
 		{

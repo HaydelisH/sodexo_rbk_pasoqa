@@ -47,7 +47,7 @@ class olvidoclave {
 		$this->usuariosBD->usarConexion($conecc);
 		
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$largo = 10;
 		$cl = '' ;
 		

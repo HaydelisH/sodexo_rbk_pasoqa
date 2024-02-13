@@ -7,7 +7,7 @@
             <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
             <div id="mensajeError"><php:texto id="mensajeError" /></div>      
           </div>
-          <form name="formulario2" id="formulario_usuarios" action="rl_Documentos_Pendientes.php" method="POST" autocomplete="off">
+          <form name="formulario2" id="formulario" action="rl_Documentos_Pendientes.php" method="POST" autocomplete="off">
   
                <table id="example2" class="table table-bordered table-hover">
                   <div class="col-md-2 xs-12">
@@ -15,7 +15,7 @@
                   </div>
               </table>
                 
-                <div id="collapseExample"  class="panel-collapse collapse in">
+                <div><!--id="collapseExample"  class="panel-collapse collapse in">-->		
                     <div class="col-md-12">
                         <div class="box">
                             <div class="box-body pad table-responsive">
@@ -25,15 +25,15 @@
                                    <php:repeticion id="formulario">
                                              
                                       <!--Numero e Documento-->
-                                      <div class="form-row">
+                                      <div class="row">
                                           <div class="col-md-4 xs-12">
                                           <label for="idDocumento">Nro Documento</label>
                                           <input type="text" class="form-control" id="idDocumento" name="idDocumento" maxlength="10" value="<php:item id="idDocumento" />" placeholder="Nro Documento" />
                                           </div>
-                                      </div>
+                                      
   
                                       <!--Tipo de Documento>
-                                      <div class="form-row">
+                                      <div class="row">
                                           <div class="col-md-4 xs-12">
                                             <label for="NombreTipoDoc">Tipo Documento</label>
                                               <select class= "form-control" name="idTipoDoc" id="idTipoDoc" >
@@ -46,7 +46,7 @@
                                       </div-->
   
                                       <!--Proceso>
-                                      <div class="form-row">
+                                      <div class="row">
                                           <div class="col-md-4 xs-12">
                                               <label for="Nombre">Proceso</label>	
                                               <select class="form-control" name="idProceso" id="idProceso" >
@@ -60,7 +60,7 @@
   
   
                                       <!--Estado de firma de Documento>
-                                      <div class="form-row">
+                                      <div class="row">
                                           <div class="col-md-4 xs-12">
                                           <label for="Nombre">Estado Documento</label>	
                                               <select class="form-control" name="idEstado" id="idEstado" >
@@ -73,15 +73,15 @@
                                       </div-->
   
                                       <!--Nombre Documento-->
-                                      <div class="form-row">
+                                      
                                         <div class="col-md-4 xs-12">
                                              <label for="rlTipoDocumento">Nombre Documento</label>
                                               <input type="text" class="form-control" id="rlTipoDocumento" name="rlTipoDocumento" value="<php:item id="rlTipoDocumento" />" placeholder="Nombre Documento" />
                                         </div>
-                                      </div>
+                                      
 
                                       <!--Tipo de firma del contrato-->
-                                      <!--<div class="form-row">
+                                      <!--<div class="row">
                                           <div class="col-md-4 xs-12">
                                               <label for="Nombre">Tipo de Firma</label>	
                                               <select class="form-control" name="idTipoFirma" id="idTipoFirma" >
@@ -94,46 +94,40 @@
                                       </div>-->
                                       
                                       <!--Firmante-->
-                                      <!--<div class="form-row">
+                                      <!--<div class="row">
                                           <div class="col-md-4 xs-12">
                                                <label for="Firmante">Firmante</label>
                                                 <input type="text" class="form-control" id="Firmante" name="Firmante" maxlength="50" value="<php:item id="Firmante" />"">
                                           </div>
                                       </div>-->
   
-                                      <!--Fecha de inicio-->
-                                      <div class="form-row">
+                                      <!--	 de inicio-->
+                                   
                                         <div class="col-md-4 xs-12" >
-                                          <label for="">Fechas de Creaci&oacute;n (incio)</label>
-                                          <div class="form-group">
-                                            <div class="input-group date">
-                                              <div class="input-group-addon">
-                                                <i class="fa fa-calendar"></i>
-                                              </div>
+                                          <label for="">Fecha de Creaci&oacute;n (incio)</label>
+                                          <div class="input-group mb-3 date">
+                                            <div class="input-group-prepend date"><span class="input-group-text" style="padding-bottom: 12px;padding-top: 12px;"><i class="fa fa-calendar"></i></span></div>
                                               <input type="datetime" style="background-color: white;" class="form-control pull-right" id="fechaInicio" name="fechaInicio" placeholder="Fecha de inicio" value="<php:item id="fechaInicio"/>"  />
-                                            </div>
+                                         
                                           </div>
                                         </div>
                                       </div>
                                 
-                                      <!--Fecha de Fin-->
-                                      <div class="form-row">
+                                      <!--	 de Fin-->
+                                      <div class="row">
                                         <div class="col-md-4 xs-12">
                                           <label for="">Fecha de Creaci&oacute;n (fin)</label>
-                                          <div class="form-group">
-                                            <div class="input-group date">
-                                              <div class="input-group-addon">
-                                                <i class="fa fa-calendar"></i>
-                                              </div>
+                                          <div class="input-group mb-3 date">
+                                            <div class="input-group-prepend date"><span class="input-group-text" style="padding-bottom: 12px;padding-top: 12px;"><i class="fa fa-calendar"></i></span></div>
                                               <input type="datetime" class="form-control pull-right"  style="background-color: white;"id="fechaFin" name="fechaFin" placeholder="Fecha de fin" value="<php:item id="fechaFin"/>"/>
-                                            </div>
+                                   
                                           </div>
                                         </div>
                                       </div>
-                                      <div class="form-row">
-                                          <div class="col-md-2 xs-12 pull-right"  style="margin-top: 15px;">
+                                      <div class="row d-flex justify-content-end">
+                                          <div class="col-md-2 xs-12 pull-right d-flex justify-content-end"  style="margin-top: 15px;">
                                               <input type="hidden" name="accion" value="BUSCAR" />
-                                              <button class="btn btn-md btn-primary btn-block"  name="accion2" type="submit" value="BUSCAR">Buscar</button>
+                                              <button class="btn btn-md btn-primary btn-block d-flex justify-content-end"  name="accion2" type="submit" value="BUSCAR">Buscar</button>
                                           </div>
                                       </div>
                                   </div> <!-- <div class="form-group">-->
@@ -143,7 +137,8 @@
                   </div> <!-- <div class="col-md-12">-->
                     <!--</div><div class="row"> -->
                 </div> <!-- <div class="collapse" id="collapseExample"> -->
-          </form>
+            <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
          
          
              <!--Tabla-->
@@ -159,7 +154,7 @@
                           <!--th style="text-align: center;" bdata-campo="Proceso">Proceso </th-->
                           <!--th style="text-align: center;" data-campo="Estado">Estado</th-->
                           <!--th style="text-align: center;" data-campo="TipoFirma">Tipo de Firma</th-->
-                          <th style="text-align: center;" data-campo="Fecha Creacion">Fecha de creaci&oacute;n</th>		
+                          <th style="text-align: center;" data-campo="	 Creacion">	 de creaci&oacute;n</th>		
                           <th style="text-align: center;" data-campo="Plazo Firmante">Plazo Firmante</th>
                           <th style="text-align: center;" data-campo="Plazo Flujo">Plazo Flujo</th>
                           <th style="text-align: center;" data-campo="Detalle">Detalle</th>
@@ -176,7 +171,7 @@
                       <!--td style="text-align: center;" data-campo="Proceso"><php:item id="Proceso" /></td-->
                       <!--td style="text-align: center;" data-campo="Estado"><php:item id="Estado" /></td-->
                       <!--td style="text-align: center;" data-campo="TipoFirma"><php:item id="Firma" /></td-->
-                      <td style="text-align: center;" data-campo="Fecha Creacion"><php:item id="FechaCreacion" /></td>
+                      <td style="text-align: center;" data-campo="	 Creacion"><php:item id="	Creacion" /></td>
                       <td style="text-align: center;" data-campo="Estado Plazo Firmante"><php:item id="semaforodetalle" /></td>
                       <td style="text-align: center;" data-campo="Estado Plazo Flujo"><php:item id="semaforototal" /></td>
                       
@@ -189,7 +184,8 @@
                               <php:repeticion id="firmar">
                                 <button class="btn btn-sm btn-primary" type="submit" name="accion" value="INICIOFIRMA" />Ver y Firmar</button>
                               </php:repeticion> 
-                        </form>
+                          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
                       </td>
                     </tr>
                   </php:repeticion>
@@ -197,23 +193,23 @@
                   
                   <th colspan=13 class="tabla_abajo">
                       <div class="col-md-12" style="font-weight: normal;">
-                           <php:item id="pagina_actual" /> de <php:item id="pagina_ultimo" /> - Total <php:item id="total_registros" /> Registros
+                           <php:item id="pagina_actual" /> de <php:item id='pagina_ultimo' /> - Total <php:item id="total_registros" /> Registros
                         </div>
                     <div class="col-xs-offset-5"> 
                       <nav aria-label="nav1">
                         <ul class="pagination justify-content-center" style="margin-top: 0px; margin-bottom: 0px;">
                           <li class="page-item ">
-                            <a id="pagina_primera" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_primera" />);" ><span><i class="fa fa-angle-double-left"></i></span></a>
+                            <a id="pagina_primera" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id='pagina_primera' />);" ><span><i class="fa fa-angle-double-left"></i></span></a>
                           </li>
                           <li class="page-item ">
-                            <a id="pagina_anterior" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_anterior" />);" ><span ><i class="fa fa-angle-left"></i></span></a>
+                            <a id="pagina_anterior" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id='pagina_anterior' />);" ><span ><i class="fa fa-angle-left"></i></span></a>
                           </li>                  
-                          <li class="page-item active"><a class="page-link1" href="#"><php:item id="pagina_actual" /></a></li>                              
+                          <li class="page-item active"><a class="page-link" href="#"><php:item id="pagina_actual" /></a></li>                              
                           <li class="page-item">
-                            <a id="pagina_siguente" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_siguente" />);" ><span><i class="fa fa-angle-right"></i></span></a>
+                            <a id="pagina_siguente" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id='pagina_siguente' />);" ><span><i class="fa fa-angle-right"></i></span></a>
                           </li>
                         <li class="page-item">
-                          <a id="pagina_ultimo" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_ultimo" />);" ><span><i class="fa fa-angle-double-right"></i></span></a>
+                          <a id="pagina_ultimo" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id='pagina_ultimo' />);" ><span><i class="fa fa-angle-double-right"></i></span></a>
                         </li>                                                     
                         </ul>
                       </nav>
@@ -231,7 +227,8 @@
                       <input type="hidden" name="Firmante"    value="<php:item id="Firmante" />" >
                       <input type="hidden" name="fechaInicio" value="<php:item id="fechaInicio" />" >
                       <input type="hidden" name="fechaFin"    value="<php:item id="fechaFin" />" >
-                  </form>
+                    <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
       
               </table>
           </div>
@@ -243,30 +240,3 @@
   </div> 
   </section>
      
-  <script>
-  
-  $('#fechaInicio').datepicker({
-      language: "es",
-      orientation: "bottom",
-      autoclose: true,
-      todayHighlight: true,
-      format: 'dd-mm-yyyy'
-    });
-  
-    $('#fechaFin').datepicker({
-      language: "es",
-      orientation: "bottom",
-      autoclose: true,
-      todayHighlight: true,
-      format: 'dd-mm-yyyy'
-    });
-
-    $(".ocultar").click(function(){
-          if ( $("#collapseExample").hasClass('in')){
-              $("#a").html('Mostrar filtros');
-          }else{
-              $("#a").html('Ocultar filtros');
-          }
-      });
-  
-  </script>

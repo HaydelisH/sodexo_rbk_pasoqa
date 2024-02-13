@@ -5,21 +5,23 @@
             <div class="box-body pad table-responsive">
                 <div class="box-header">
                     <div class="box-header">
-                        <form name="formulario" id="formulario_usuarios" action="loadUserFormulario.php" method="POST" autocomplete="off">
+                        <form name="formulario" id="formulario" action="loadUserFormulario.php" method="POST" autocomplete="off">
                             <input type="hidden" id="RutEmpresa" name="RutEmpresa" value="<php:item id="RutEmpresa" />" />
                             <input type="hidden" id="idFormulario" name="idFormulario" value="<php:item id="idFormulario" />" />
                             <input type="hidden" id="IdArchivo" name="IdArchivo" value="<php:item id="IdArchivo" />" />
                             <button class="btn btn-default btn_letra_azul" type="submit" name="accion" id="VOLVER" value="VOLVER" style="margin-top: 10px">Volver</button>  
                             <!--a class="btn btn-default btn_letra_azul" href="#" onclick="window.history.go(-1)"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a-->
-                        </form>
+                          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
                     </div>
                 <div class="form-inline ">
                     <div class="form-group">
-                        <form name="formulario" id="formulario_usuarios" action="Respuesta_importar_masivo.php" method="POST" autocomplete="off">
+                        <form name="formulario" id="formulario" action="Respuesta_importar_masivo.php" method="POST" autocomplete="off">
                             <!--input type="text" name="IdArchivo"  value="<php:texto id="IdArchivo" />" /-->    
                             <input type="hidden" name="pagina"  value="<php:texto id="pagina" />" />    
                             <input type="hidden" name="nombrex" value="<php:texto id="nombrex" />" /> 
-                        </form>
+                          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
                     </div>
                 </div> 
             </div>
@@ -46,29 +48,30 @@
                                 <!--<td data-campo="Opciones">
                                 <form name="formulario" id="formulario_tipo" action="Respuesta_importar.php" method="POST">
                                     <input type="hidden" name="holdingid" value="<php:item id="holdingid" />">
-                                </form></td>-->
+                                  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form></td>-->
                             </tr>
                             </php:repeticion>
                         </tbody>
                         <th colspan=13 class="tabla_abajo">
                             <div class="col-md-12" style="font-weight: normal;">
-                                 <php:item id="pagina_actual" /> de <php:item id="pagina_ultimo" /> - Total <php:item id="total_registros" /> Registros
+                                 <php:item id="pagina_actual" /> de <php:item id='pagina_ultimo' /> - Total <php:item id="total_registros" /> Registros
                               </div>
                           <div class="col-xs-offset-5"> 
                             <nav aria-label="nav1">
                               <ul class="pagination justify-content-center" style="margin-top: 0px; margin-bottom: 0px;">
                                 <li class="page-item ">
-                                  <a id="pagina_primera" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_primera" />);" ><span><i class="fa fa-angle-double-left"></i></span></a>
+                                  <a id="pagina_primera" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id='pagina_primera' />);" ><span><i class="fa fa-angle-double-left"></i></span></a>
                                 </li>
                                 <li class="page-item ">
-                                  <a id="pagina_anterior" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_anterior" />);" ><span ><i class="fa fa-angle-left"></i></span></a>
+                                  <a id="pagina_anterior" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id='pagina_anterior' />);" ><span ><i class="fa fa-angle-left"></i></span></a>
                                 </li>                  
-                                <li class="page-item active"><a class="page-link1" href="#"><php:item id="pagina_actual" /></a></li>                              
+                                <li class="page-item active"><a class="page-link" href="#"><php:item id="pagina_actual" /></a></li>                              
                                 <li class="page-item">
-                                  <a id="pagina_siguente" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_siguente" />);" ><span><i class="fa fa-angle-right"></i></span></a>
+                                  <a id="pagina_siguente" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id='pagina_siguente' />);" ><span><i class="fa fa-angle-right"></i></span></a>
                                 </li>
                               <li class="page-item">
-                                <a id="pagina_ultimo" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_ultimo" />);" ><span><i class="fa fa-angle-double-right"></i></span></a>
+                                <a id="pagina_ultimo" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id='pagina_ultimo' />);" ><span><i class="fa fa-angle-double-right"></i></span></a>
                               </li>                                                     
                               </ul>
                             </nav>
@@ -83,6 +86,7 @@
                         <!--input type="hidden" name="accion"        value="BUSCAR" /-->
                         <!--input type="hidden" name="holdingid"       value="<php:item id="holdingid" />" -->
                         <!--input type="hidden" name="nombrex"       value="<php:item id="nombrex" />" -->
+                      <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
                     </form>
                     <div class="col-md-2 pull-right">
                         <form action="Reportes_Excel_asignacionFormulario.php" method="POST" name="formulario" id="formulario" >
@@ -90,7 +94,8 @@
                             <input type="hidden" name="idFormulario" value="<php:item id="idFormulario" />" />
                             <input type="hidden" name="IdArchivo" value="<php:item id="IdArchivo" />" />
                             <button type="submit" name="accion" id="accion" value="DESCARGAR" class="form-control btn btn-md btn-primary"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Descargar</button>
-                        </form>
+                          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
                     </div>
                 </div>
                 </php:repeticion>

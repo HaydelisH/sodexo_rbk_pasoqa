@@ -32,17 +32,17 @@ class cambioclave {
 	function __construct()
 	{
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
 				return;
 			}
 		}
-		if (isset($_REQUEST["mensajeError"])) $this->mensajeError.=$_REQUEST["mensajeError"];
+		if (isset($_POST["mensajeError"])) $this->mensajeError.=$_POST["mensajeError"];
 
 		// hacemos una instacia del manejo de plantillas (templates)
 		$this->pagina = new Paginas();
@@ -110,15 +110,15 @@ class cambioclave {
 	{
 		
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "Cambiar":
 					// enviamos los datos del formulario a guardar
 
-					$datos=$_REQUEST;
+					$datos=$_POST;
 					$datos["usuarioid"]=$this->seguridad->usuarioid;
 					
 					$this->parametrosBD->obtener(array('idparametro'=>'claveRobusta'), $dt);
@@ -214,7 +214,7 @@ class cambioclave {
 
 		// recuperamos lo que se escribio en el formulario que va llegando si es que hubo
 	
-		$campos[0]=$_REQUEST;
+		$campos[0]=$_POST;
 
 		$this->parametrosBD->obtener(array('idparametro'=>'largoClaveMin'), $dt);
 		$this->mensajeError.=$this->parametrosBD->mensajeError;

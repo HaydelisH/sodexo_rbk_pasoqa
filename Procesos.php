@@ -49,10 +49,10 @@ class procesos {
 	function __construct()
 	{
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -112,7 +112,7 @@ class procesos {
 		include("includes/opciones_menu.php");
 	
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -123,7 +123,7 @@ class procesos {
 		}
 	
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -146,20 +146,20 @@ class procesos {
 	private function agregar()
 	{	
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "AGREGAR":
 					$dt = new DataTable();
 					// enviamos los datos del formulario a guardar
-					if ($this->procesosBD->agregar($_REQUEST,$dt))
+					if ($this->procesosBD->agregar($_POST,$dt))
 					{
 						//Pasamos el mensaje de Ok
 						$this->mensajeOK="Registro Completado! Su registro se ha guardado con exito";
 						$this->pagina->agregarDato("mensajeOK",$this->mensajeOK);
-						$_REQUEST["idProceso"] = $dt->data[0]["idProceso"];
+						$_POST["idProceso"] = $dt->data[0]["idProceso"];
 						$this->modificar();
 						return;
 					}
@@ -191,27 +191,27 @@ class procesos {
 	//Accion de modificar un registro 
 	private function modificar()
 	{	
-		if (!isset($_REQUEST["accion2 "]))
+		if (!isset($_POST["accion2 "]))
 		{
 			// creamos un contenedor de la tabla
 			$dt = new DataTable();
-			$this->procesosBD->obtener($_REQUEST,$dt);
+			$this->procesosBD->obtener($_POST,$dt);
 			$campos=$dt->data;
 			$this->mensajeError.=$this->procesosBD->mensajeError;
 		}
 
 		// si es que nos enviaron una accion
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "MODIFICAR":
 					// si apretaron el boton modificar obtenermos los datos desde el formulario
-					if ($this->procesosBD->modificar($_REQUEST))
+					if ($this->procesosBD->modificar($_POST))
 					{
 						$this->mensajeOK="Registro Completado! Su registro se ha modificado con exito";
 						$this->pagina->agregarDato("mensajeOK",$this->mensajeOK);
-						$_REQUEST["accion2"]=" ";
+						$_POST["accion2"]=" ";
 						//Nos vamos a modificar
 						$this->modificar();
 						return;
@@ -220,7 +220,7 @@ class procesos {
 					$this->pagina->agregarDato("mensajeError",$this->mensajeError);
 					//Nos vamos a modificar
 					$this->modificar();
-					$campos[0]=$_REQUEST;
+					$campos[0]=$_POST;
 					break;
 
 				case "VOLVER":
@@ -229,7 +229,7 @@ class procesos {
 					return;
 			}
 		}
-		$datos2=$_REQUEST;
+		$datos2=$_POST;
 
 		//Asignamos los datos que recibimos del formulario
 		$this->procesosBD->listado($dt);
@@ -249,7 +249,7 @@ class procesos {
 	private function eliminar()
 	{	
 		// se envia a eliminar a la tabla con los datos del formulario
-		if ($this->procesosBD->eliminar($_REQUEST)){
+		if ($this->procesosBD->eliminar($_POST)){
 			$this->mensajeOK="Registro Elimnado! Su registro se ha eliminado con exito";
 			$this->pagina->agregarDato("mensajeOK",$this->mensajeOK);
 			//Pasamos al listado actualizado
@@ -269,12 +269,12 @@ class procesos {
 	{  
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$conTipoMovimiento = 0;
 		$TipoMovimiento = new DataTable();
 
 		// pedimos el listado
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["idProceso"]=$this->seguridad->idProceso;
 		$datos["tipousuarioingid"]=$this->seguridad->tipousuarioid;
 

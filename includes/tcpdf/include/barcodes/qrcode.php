@@ -1,7 +1,6 @@
 <?php
 //============================================================+
 // File name   : qrcode.php
-// Version     : 1.0.010
 // Begin       : 2010-03-22
 // Last Update : 2012-07-25
 // Author      : Nicola Asuni - Tecnick.com LTD - www.tecnick.com - info@tecnick.com

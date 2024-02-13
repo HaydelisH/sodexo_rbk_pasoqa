@@ -1,5 +1,5 @@
 <!-- saved from url=(0046)http://200.0.156.150/Multibrowser2/FirmaToken/ -->
-<script type="text/javascript" src="js/libMB/jquery-1.11.2.js"></script>
+<script type="text/javascript" src="js/libMB/jquery.js"></script>
 <script type="text/javascript" src="js/libMB/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/libMB/jquery-ui.min.js"></script>
 <script type="text/javascript" src="js/libMB/jsrasign/ext/jsbn.js"></script>
@@ -40,7 +40,8 @@
 				<form role="form" name="formulario2" id="formulario2" action="Documentos_FirmaMasiva.php" method="POST">
 					<input type="hidden" name="idDocumento" value="<php:item id="idDocumento" />" />
 					<button type="submit" class="btn btn-default"><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
-				</form>
+				  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 				
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -49,9 +50,9 @@
 					<div id="mensajeError"><php:texto id="mensajeError" /></div>
 					
 					<!--Datos referenciales-->
-					<div class="form-row">
+					<div class="row">
 					 <!--Formulario para procesamiento-->
-		              <div class="form-row">
+		              <div class="row">
 		               <!-- <form role="form" name="formulario2" id="formulario2" action="Documentos_FirmaMasiva.php" method="POST">-->
 		                  
 		                  <input type="hidden" name="usuarioid" id="usuarioid" value="<php:item id='usuarioid'/>" /> 
@@ -75,7 +76,7 @@
 		                          <td style="text-align: center;"  data-campo="Tipo Documento"><php:item id="NombreTipoDoc" /></td>
 		                          <td style="text-align: center;" data-campo="Estado Contrato"><php:item id="Nombre" /></td>
 		                          <td style="text-align: center;" data-campo="Estado">
-		                              <button style="background-color: transparent;" class="btn btn-md" type="button" class="borrar" id="borrar_<php:filamenos />" onclick="eliminarDoc('<php:filamenos />');" ><i id="icon_<php:filamenos />"  class="fa fa-minus" aria-hidden="true"  title="Quitar de esta lista"></i></button>
+		                              <button style="background-color: transparent;" class="btn btn-md" type="button" class="borrar" id="borrar_<php:filamenos />" onclick="eliminarDoc_token('<php:filamenos />');" ><i id="icon_<php:filamenos />"  class="fa fa-minus" aria-hidden="true"  title="Quitar de esta lista"></i></button>
 		                          </td>
 
 		                          <!--DocCode-->
@@ -90,11 +91,12 @@
 		                      </th>
 		                    </tfoot>
 		                  </table>
-		                <!--</form>-->
+		                <!--  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>-->
 		              </div>
 		        
 					<!--Formulario de datos propios de Clausulas-->
-					<form role="form" name="actionForm" id="actionForm" action="Documentos_FirmaMasiva.php" method="POST" autocomplete="off">
+					<form role="form" name="actionForm" id="formulario" action="Documentos_FirmaMasiva.php" method="POST" autocomplete="off">
 
 						<div class="row">  
 							<php:repeticion id="botonfirma">	
@@ -102,7 +104,7 @@
 								<input   type="password" class="form-control" id="pin" name="pin" placeholder="Ingrese PIN"  >
 							</div>					
 							<div class="col-lg-2 col-md-2">
-								<button class="btn btn-md btn-primary btn-block" type="button" onclick="firmar();" name="accion" id="FIRMATOKEN" value="FIRMATOKEN" />Firmar</button>
+								<button class="btn btn-md btn-primary btn-block" type="button" onclick="firmar_token();" name="accion" id="FIRMATOKEN" value="FIRMATOKEN" />Firmar</button>
 							</div>
 							</php:repeticion>  
 						</div>	
@@ -117,10 +119,11 @@
 						<input type="hidden" name="status" id="status" value="<php:item id="status" />" />
 						<input type="hidden" name="message" id="message" value="<php:item id="message" />" />
 						
-					</form> 
+					  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form> 
 
 					</php:repeticion>  
-					<!--<div class="form-row">-->
+					<!--<div class="row">-->
 					</div>
 				<!--<div class="box-body -->
 				</div>
@@ -132,219 +135,3 @@
 	</div>
  <!-- <div class="row"> -->
 </div>
-
-<script>
-
-  var ajax;
-  var salida;
-  var fila = 0;
-  var proceso;
-  var cant = 0;
-  var i = 0;
-  var documento = 0;
-  var indices = [];
-  var band = 0;
-
-  //Datos necesarios para firmar con Token
-  var uri;
-  var session_id;
-  var doccode;
-  var institucion;
-  var status;
-  var message;
-
-  window.onload = function() {
-
-    var cant_docs  = document.getElementById('cant_docs');
-    var cant_filas = document.getElementById('example').rows.length;
-
-    if ( cant_docs.innerHTML === '' ){
-      cant_docs.innerHTML = cant_filas - 2;
-    }
-  };
-
-  //Eliminar documentos de la lista 
-  function eliminarDoc(i){
-
-    var cant_filas = document.getElementById('example').rows.length;
-    var form = document.getElementById('formulario');
-    var cant_docs = document.getElementById('cant_docs');
-    
-    if( cant_filas == 3 ){
-      form.submit();
-    }else if( cant_filas > 3){
-      document.getElementById('fila_' + i).remove();
-      var fil = 0;
-      fil = document.getElementById('example').rows.length;
-      cant_docs.innerHTML = fil - 2;
-    }        
-  }
-
-  function mostrarMensaje(mensaje){
-    var error  = document.getElementById('mensajeError');
-    error.classList.add("callout callout-warning");
-    error.innerHTML = mensaje;
-  }
-
-  function limpiarMensajesError(){
-    var error  = document.getElementById('mensajeError');
-    var clase = 'callout callout-warning';
-    var clase_error = document.getElementsByClassName('mensajeError');
-
-    if( clase_error === clase ){
-      error.classList.remove("callout");
-      error.classList.remove("callout-warning");
-      error.innerHTML = '';
-    }   
-  }
-
-  function firmar(){
-
-    var btn_firmar = document.getElementById('FIRMATOKEN');
-    var cant_filas = document.getElementById('example').rows.length;
-    var tabla      = document.getElementById('example');
-    var result = '';
-
-    cant = cant_filas - 2; 
-
-    limpiarMensajesError();
-    btn_firmar.disabled = true;
-
-    //LLenar el arreglo de los indices de los documentos
-    var n;
-    for( n = 0; n < cant_filas; n++ ){     
-      var indice = tabla.rows[n].id;
-      var res = indice.split("_");
-      if ( isInteger(res[1]) ){
-         indices.push(res[1]);
-      }
-    }
-
-    //Se verifica si desea firmar
-    var respuesta = confirm('Esta seguro(a) que desea firmar estos documentos?');
-
-    if ( respuesta ){
-      //Parametros necesarios
-      uri = document.getElementById('uri').value;
-      institucion = document.getElementById('institucion').value;    
-      doccode = document.getElementById('doccode_' + indices[i]).value;
-      //Firmar con autentia
-      firmarToken_fm(uri, institucion, doccode, indices[i]);
-
-    }else{
-      btn_firmar.disabled = false;
-      return false;
-    }
-  }
-
-   //Firma token, va al ajax
-  function firmar_token(i){
-
-    var usuarioid = document.getElementById('rut').value;
-    var doccode = document.getElementById('doccode_' + i).value;
-    var idDocumento = document.getElementById('doc_' + i).value;
-
-    var url = "Documentos_firmaMasiva7_ajax.php?idDocumento=" + idDocumento + "&usuarioid=" + usuarioid + "&doccode=" + doccode;
-
-    fila = i;
-
-     // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-    if( window.XMLHttpRequest )
-       ajax = new XMLHttpRequest(); // No Internet Explorer
-    else
-       ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-
-    // Almacenamos en el control al funcion que se invocara cuando la peticion
-    ajax.onreadystatechange = funcionCallback_firma_token;
-    ajax.addEventListener("load", transferComplete);
-
-    // Enviamos la peticion
-    ajax.open( "GET", url, false);
-    ajax.send( "" );
-
-    function transferComplete(evt) {
-      mostrarEstadoFirma(salida,fila);
-    }
-  }
-
-  function funcionCallback_firma_token(){
-
-    // Comprobamos si la peticion se ha completado (estado 4)
-    if( ajax.readyState == 4 )
-    {
-      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-      if( ajax.status == 200 )
-      {
-        // Escribimos el resultado en la pagina HTML mediante DHTML
-        salida = '';
-        salida = ajax.responseText;
-      }
-    }
-  }
-
-  //Mostrar estado de Firma en el modal
-  function mostrarEstadoFirma(salida, fila){
-
-    var icono = 'icon_' + fila; 
-    var clase_minus = "fa fa-minus";
-    var clase_error = 'fa fa-exclamation-triangle text-warning';
-    var clase_ok    = 'fa fa-check-circle text-success';
-    var resultado = document.getElementById(icono);
- 
-    //Error de login
-    var error = salida.substring(0, 33);
-
-    //Incrementar la fila de la tabla a recorrer
-    i++;
-
-    //Actualizamos iconos segun la respuesta 
-    //Si es otro error 
-    if( salida != 0 ){
-    
-      resultado.classList.remove("fa-minus");
-      resultado.classList.add("fa-exclamation-triangle");
-      resultado.classList.add("text-warning");
-      resultado.title = salida;
-      resultado.onclick = '';
-
-      //Si termino de recorrer las filas 
-      if( i >= cant ){
-
-          //Ocultar el gif de cargando
-          OcultarCargando();
-          document.getElementById('pin').value = '';
-      }//Si no, que continue con los siguientes documentos 
-
-    }else if (salida){
-
-      resultado.classList.remove("fa-minus");
-      resultado.classList.add("fa-check-circle"); 
-      resultado.classList.add("text-success");
-      resultado.title = 'Firmado correctamente';
-      resultado.onclick = '';
-
-      //Si termino de recorrer las filas 
-      if( i >= cant ){
-        //Ocultar el gif de cargando
-        OcultarCargando();
-        document.getElementById('pin').value = '';
-      }
-      //Continua con los siguientes documentos 
-    }
-
-    //Si quedan filas que recorrer 
-    if( i < cant ){
-
-      //Pasar al siguiente
-      //Datos necesarios
-      uri = document.getElementById('uri').value;
-      institucion = document.getElementById('institucion').value;  
-      doccode = document.getElementById('doccode_' + indices[i]).value;
-   
-      //Firma con autentia
-      firmarToken_fm(uri, institucion, doccode, indices[i]);
-    }
-  }
-
-
- </script>

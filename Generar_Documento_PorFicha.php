@@ -133,10 +133,10 @@ class generar_fichapersonal {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -226,7 +226,7 @@ class generar_fichapersonal {
 		include("includes/opciones_menu.php");
 	
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->agregar();
@@ -237,7 +237,7 @@ class generar_fichapersonal {
 		}
 
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -259,7 +259,7 @@ class generar_fichapersonal {
 	//Accion del boton agregar un nuevo registro 
 	private function agregar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		if(strlen($datos["Jornada"]))$datos["idSubClausula"]=$datos["Jornada"];
 		if(isset($datos["Firmantes_Emp"])){		
 			$datos["ordenfirmantes"] =array();
@@ -347,7 +347,7 @@ class generar_fichapersonal {
 	//Mostrar listado de los registro disponibles
 	private function listado()
 	{  
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$dt = new DataTable;
 
@@ -422,7 +422,7 @@ class generar_fichapersonal {
 	//Generar un documento individual 
 	private function generar(){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		//Agregar el estado a empleado
 		$datos['estado'] = $datos['idEstadoEmpleado'];
@@ -503,7 +503,7 @@ class generar_fichapersonal {
 		
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $idDocumento;
 
 		//Llenar Select de Empresas registradas

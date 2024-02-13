@@ -68,7 +68,7 @@ class EnvioFormulario {
 		$dt = new DataTable();
 		// pedimos el listado
 
-        $datos = $_REQUEST;
+        $datos = $_POST;
         $data['idPlantilla'] = $datos['idPlantilla'];
         $data['idProceso'] = $datos['idProceso'];
 
@@ -394,13 +394,13 @@ class EnvioFormulario {
 		$data['cbox2'] = '';
 		$data['cbox3'] = '';
 		
-		if (isset($_REQUEST['cbox1']))
+		if (isset($_POST['cbox1']))
 			 $data['cbox1'] = 'X';
 		 
-		if (isset($_REQUEST['cbox2']))
+		if (isset($_POST['cbox2']))
 			 $data['cbox2'] = 'X';
 		 
-		if (isset($_REQUEST['cbox3']))
+		if (isset($_POST['cbox3']))
 			 $data['cbox3'] = 'X';
 
         //var_dump($data);
@@ -417,7 +417,7 @@ class EnvioFormulario {
         }
         if( $respuesta['estado'] )
         {
-            if (isset($_REQUEST['empleadoFormularioid']))
+            if (isset($_POST['empleadoFormularioid']))
             {
                 $datos['idDocumento'] = $respuesta['data'];
                 $this->formularioPlantillaBD->setIdDocumento($datos, $dt);

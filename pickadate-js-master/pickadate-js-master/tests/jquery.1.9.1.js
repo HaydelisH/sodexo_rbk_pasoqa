@@ -1,5 +1,5 @@
 /*!
- * jQuery JavaScript Library v1.9.1
+ * jQuery JavaScript Library 
  * http://jquery.com/
  *
  * Includes Sizzle.js

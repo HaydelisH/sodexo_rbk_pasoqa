@@ -32,7 +32,7 @@ require_once __DIR__ . '/lib/php-svg-lib/src/autoload.php';
 
 
 /*
- * New PHP 5.3.0 namespaced autoloader
+ * New PHP  namespaced autoloader
  */
 require_once __DIR__ . '/src/Autoloader.php';
 

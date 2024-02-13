@@ -6,7 +6,8 @@
        <!-- <div class="box-header">
 			<form action="RegistroDec.php" method="POST">
 		  		<button class="btn btn-default" name="accion" value="Volver"><a><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</a></button>
-		  	</form>
+		  	  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
         </div>
       <!-- /.box-header -->
       <div class="box-body">
@@ -15,41 +16,42 @@
 		<div id="mensajeOK"><php:texto id="mensajeOK" /></div>	
 		
 		<form role="form" name="formulario" id="formulario" action="cambiopin.php" method="POST" autocomplete=off>	
-			<div class="form-row">
+			<div class="row">
 				<div class="col-md-12">
 					<label>Rut</label>
 					<input type="contenedor" class="form-control" id="RutUsuario"  name="user_rut" placeholder="Rut de Usuario" maxlength="10" value='<php:texto id="personaid"/>'>
 				  </div>
 			</div>
 		
-			<div class="form-row">
+			<div class="row">
 				<div class="col-md-12">
 					<label>Serial de Documento</label>
 					<input type="contenedor" class="form-control" id="serial"  name="serial_number" placeholder="Serial de Documento" maxlength="10" autofocus  >
 				  </div>
 			</div>
 			
-			<div class="form-row">
+			<div class="row">
 				<div class="col-md-12">
 					<label>Pin</label>
 					<input type="password" class="form-control" id="pin"  name="pin" placeholder="pin" maxlength="12"  >
 				  </div>
 			</div>
 			
-			<div class="form-row">
+			<div class="row">
 				<div class="col-md-12">
 					<label>Confirmaci&oacute;n Pin</label>
 					<input type="password" class="form-control" id="confipin"  name="confipin" placeholder="pin" maxlength="12" onpaste="return false" >
 				  </div>
 			</div>
 
-			<div class="form-row">  
+			<div class="row">  
 				<div class="col-md-2 xs-12 pull-right">            
 				   <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 20px" name="accion2" value="AGREGAR" id="AGREGAR" onclick="javascript:return validarFormulario(this) && validaRut2(document.formulario.RutUsuario) && ValidaPin();"/>Cambio de Pin</button>
 				</div>
 			</div>  
 		
-		</form>
+		  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 	   </div>
       </div>
     <!-- /.box -->
@@ -58,20 +60,3 @@
   <!-- /.col -->
  </div>
 
-<script>
- function ValidaPin()
- {
-	var pin 	= document.getElementById("pin").value;
-	var confpin = document.getElementById("confipin").value;
-	
-	if (pin != confpin)
-	{
-		alert ("el pin y la confirmacion del pin son distintos, favor ingresar nuevamente")
-		document.getElementById("pin").value = "";
-		document.getElementById("confipin").value = "";
-		return false;
-	}
-	
-	MostrarCargando();
- }
-</script>

@@ -16,21 +16,21 @@
 					<php:repeticion id="formulario">
 					<form role="form" name="formulario" id="formulario" action="tiposusuarios.php" method="POST" autocomplete="off">
 						<!--Campos basicos-->
-						<div class="form-row">
+						<div class="row">
 							<label for="contenedorid" class="col-md-4 control-label">Nombre</label>
 							<div class="col-md-8">
 								<input type="text" class="form-control" id="nombre" name="nombre" value="<php:item id="nombre" />" placeholder="Nombre Perfil" required>
 							</div>
 						</div>
-						<div class="form-row">
+						<div class="row">
 							<label for="contenedorid" class="col-md-4 control-label">Puede re-notificar documentos</label>
 							<div class="col-md-8">
 								<input type="checkbox"  id="renotificar" name="renotificar" >
 							</div>
 						</div>
-						<div class="form-row">
+						<div class="row">
 							<div class="col-md-12">  
-								<table class="table table-bordered table-hover">
+								<table class="table table-bordered table-hover" id="tabla_switch">
 									<thead>
 										<th data-campo="Opciones" >Opciones</th>
 										<th data-campo="Consulta" class="text-center">Consulta</th>
@@ -54,16 +54,17 @@
 								</table>
 							</div>
 						</div>                         
-						<div class="form-row">  
-							<div class="col-md-2 xs-12 pull-right">
+						<div class="row d-flex justify-content-end ">              
+							<div class="col-md-2 d-grid gap-2 " >
 								<input type="hidden" name="cantfilas" value="<php:texto id="cantfilas" />" />		
 								<input type="hidden" name="pagina" value="<php:texto id="pagina" />" />		
 								<input type="hidden" name="nombrex" value="<php:texto id="nombrex" />" />		
 								<input type="hidden" name="accion" value="AGREGAR" />
-								<button class="btn btn-md btn-primary btn-block pull-right" type="submit" name="accion2" value="AGREGAR" style="margin-top: 10px">Guardar</button>  
+								<button class="btn btn-md btn-primary btn-block" type="submit" name="accion2" value="AGREGAR" style="margin-top: 10px">Guardar</button>  
 							</div>
 						</div>                  
-					</form>     
+					  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>     
 					</php:repeticion>
 				</div>
 				<!-- /.box-body -->

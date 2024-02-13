@@ -62,10 +62,10 @@ class usuariosmant {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -142,7 +142,7 @@ class usuariosmant {
 		include("includes/opciones_menu.php");
 	
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -153,7 +153,7 @@ class usuariosmant {
 		}
 
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -179,14 +179,14 @@ class usuariosmant {
 	private function agregar()
 	{	
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "AGREGAR":
 
-					$datos = $_REQUEST;
+					$datos = $_POST;
 				
 					$datos["TipoCorreo"] = CODIGO_CORREO_USUARIO_NUEVO;
 										
@@ -293,7 +293,7 @@ class usuariosmant {
 			}
 		}
 		// recuperamos lo que se escribio en el formulario que va llegando si es que hubo
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$datos["tipousuarioingid"]=$this->seguridad->tipousuarioid;
 		
@@ -330,8 +330,8 @@ class usuariosmant {
 		
 		$this->pagina->agregarDato("formulario",$formulario);
 
-		$this->pagina->agregarDato("pagina",$_REQUEST["pagina"]);
-		$this->pagina->agregarDato("nombrex",$_REQUEST["nombrex"]);
+		$this->pagina->agregarDato("pagina",$_POST["pagina"]);
+		$this->pagina->agregarDato("nombrex",$_POST["nombrex"]);
 		
 		// agregamos a la pagina el mensaje de error
 		$this->pagina->agregarDato("mensajeOK",$this->mensajeOK);
@@ -346,13 +346,13 @@ class usuariosmant {
 	{	
 	
 		// si es que nos enviaron una accion
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "MODIFICAR":
 				
-					$datos = $_REQUEST; 
+					$datos = $_POST; 
 					//var_dump($datos);
 					$datos['forzarCambioContrasena'] = isset($datos['forzarCambioContrasena']) ? 1 : 0;
 					$datos['idEstadoUsuario'] = $datos['idEstadoUsuario'] == 2 ? 0 : $datos['idEstadoUsuario'];
@@ -443,7 +443,7 @@ class usuariosmant {
 			}
 		}
 		
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$datos["tipousuarioingid"]=$this->seguridad->tipousuarioid;
 	
@@ -545,12 +545,12 @@ class usuariosmant {
 
 	private function cambiarclave()
 	{	
-		if (!isset($_REQUEST["accion2"]))
+		if (!isset($_POST["accion2"]))
 		{
 			// creamos un contenedor de la tabla
 			$dt = new DataTable();
 			// obtenemos los datos a modificar
-			$this->usuariosmantBD->obtener($_REQUEST,$dt);
+			$this->usuariosmantBD->obtener($_POST,$dt);
 
 			// guardamos los datos en un arreglo
 			$campos=$dt->data;
@@ -560,9 +560,9 @@ class usuariosmant {
 		}
 
 		// si es que nos enviaron una accion
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "MODIFICAR":
 					// si apretaron el boton modificar obtenermos los datos desde el formulario
@@ -576,7 +576,7 @@ class usuariosmant {
 					$this->mensajeError.=$this->parametrosBD->mensajeError;
 					$largoClaveMax = $dt->data[0]['parametro'];
 
-					$valid = ContenedorUtilidades::checkLongitudClave(trim($_REQUEST["clave"]), $largoClaveMin, $largoClaveMax);
+					$valid = ContenedorUtilidades::checkLongitudClave(trim($_POST["clave"]), $largoClaveMin, $largoClaveMax);
 					if ($valid['exito'])
 					{
 						
@@ -601,11 +601,11 @@ class usuariosmant {
 						
 						$this->parametrosBD->obtener(array('idparametro'=>'claveRobusta'), $dt);
 						$this->mensajeErrorr.=$this->parametrosBD->mensajeError;
-						$valid = ContenedorUtilidades::checkClaveRobusta(trim($_REQUEST["clave"]), $dt->data[0]['parametro'],$minimos);
+						$valid = ContenedorUtilidades::checkClaveRobusta(trim($_POST["clave"]), $dt->data[0]['parametro'],$minimos);
 						if ($valid['exito'])
 						{
-							$_REQUEST["clave"] = hash('sha256', trim($_REQUEST["clave"]));
-							if ($this->usuariosmantBD->CambiarClave($_REQUEST))
+							$_POST["clave"] = hash('sha256', trim($_POST["clave"]));
+							if ($this->usuariosmantBD->CambiarClave($_POST))
 							{
 								$this->mensajeOK = "Modificaci&oacute;n realizada OK";
 								// si sale todo bien mostramos el listado
@@ -639,7 +639,7 @@ class usuariosmant {
 					{
 						$this->mensajeError .= $valid['mensaje'];
 					}
-					$campos[0]=$_REQUEST;
+					$campos[0]=$_POST;
 					break;
 
 				case "ELIMINAR":
@@ -682,8 +682,8 @@ class usuariosmant {
 		$this->pagina->agregarDato("minNumber",$dtMinNumber->data[0]['parametro']);
 		
 		// agregamos pagina actual del listado
-		$this->pagina->agregarDato("pagina",$_REQUEST["pagina"]);
-		$this->pagina->agregarDato("nombrex",$_REQUEST["nombrex"]);
+		$this->pagina->agregarDato("pagina",$_POST["pagina"]);
+		$this->pagina->agregarDato("nombrex",$_POST["nombrex"]);
 		$this->pagina->agregarDato("formulario",$campos);
 		// agregamos los posibles errores a la pagina
 		$this->pagina->agregarDato("mensajeError",$this->mensajeError);
@@ -695,13 +695,13 @@ class usuariosmant {
 	
 	private function eliminar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		// se envia a eliminar a la tabla con los datos del formulario
 		if ($this->usuariosmantBD->eliminar($datos)){
 			// si elimino entonces mostrar listado sin ning�n filtro, o sea mostrar todo
-			$_REQUEST["pagina"]  = 1;
-			$_REQUEST["nombrex"] = "";
+			$_POST["pagina"]  = 1;
+			$_POST["nombrex"] = "";
 			$this->mensajeOK = 'El usuario se elimino correctamente.';
 		}
 		
@@ -714,7 +714,7 @@ class usuariosmant {
 	{  
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos=$_REQUEST;
+		$datos=$_POST;
 
 		//Preparamos los datos necesarios para la consulta 
 		if (!isset($datos["pagina"])) $datos["pagina"]="1";

@@ -16,7 +16,7 @@
             <php:repeticion id="formulario">
 
               <!--idSubClausula-->
-              <div class="form-row">
+              <div class="row">
                 <div class="col-md-12">
                   <label for="idSubClausula" >C&oacute;digo</label>
                   <input type="text" class="form-control" id="idSubClausula" name="idSubClausula" value="<php:item id="idSubClausula" />" placeholder="C&oacute;digo de SubClausula">
@@ -24,7 +24,7 @@
               </div> 
 
               <!--Titulo-->
-              <div class="form-row">
+              <div class="row">
                 <div class="col-md-12">
                   <label for="Titulo">T&iacute;tulo</label>
                   <input type="text" class="form-control" id="Titulo" name="Titulo" value="<php:item id="Titulo" />" placeholder="T&iacute;tulo" >
@@ -32,7 +32,7 @@
               </div>
 
               <!--Descripcion-->
-              <div class="form-row">
+              <div class="row">
                 <div class="col-md-12">
                   <label for="Descripcion">Descripci&oacute;n</label>
                   <input type="text" class="form-control" id="Descripcion" name="Descripcion" value="<php:item id="Descripcion" />" placeholder="Descripci&oacute;n" >
@@ -40,14 +40,14 @@
               </div>
 
               <!--Editor de texto--> 
-             <div class="form-row">
+             <div class="row">
                <div class="col-md-12">
                   <label for="SubClausula">Texto</label>
                    <textarea id="TextoTxt_Clausulas" name="SubClausula" rows="10" cols="80" ><php:item id="SubClausula"/></textarea>
                </div>
              </div>  
 
-              <div class="form-row">  
+              <div class="row">  
                 <div class="col-md-2 xs-12 pull-right">
                    <input type="hidden" name="accion" value="AGREGAR" />
                    <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="AGREGAR" id="AGREGAR" onclick="javascript:return validarFormulario(this);"/>Guardar</button>
@@ -55,7 +55,8 @@
               </div> 
               
             </php:repeticion>        
-        </form>  
+          <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>  
       </div>
       </div>
     <!-- /.box -->

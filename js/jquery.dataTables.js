@@ -4902,7 +4902,7 @@
 						plugin.fnUpdate( settings, redraw );
 					}
 				},
-				"sName": "pagination"
+				"sName": "pagination" 
 			} );
 		}
 	
@@ -14340,7 +14340,7 @@
 		"sNoFooter": "no-footer",
 	
 		/* Paging buttons */
-		"sPageButton": "paginate_button",
+		"sPageButton": "page-item",
 		"sPageButtonActive": "current",
 		"sPageButtonDisabled": "disabled",
 	
@@ -14355,7 +14355,7 @@
 		"sWrapper": "dataTables_wrapper",
 		"sFilter": "dataTables_filter",
 		"sInfo": "dataTables_info",
-		"sPaging": "dataTables_paginate paging_", /* Note that the type is postfixed */
+		"sPaging": "dataTables_paginate d-flex justify-content-start paging_", /* Note that the type is postfixed */
 		"sLength": "dataTables_length",
 		"sProcessing": "dataTables_processing",
 	

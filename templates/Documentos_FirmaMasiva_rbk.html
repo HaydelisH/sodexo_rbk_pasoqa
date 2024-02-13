@@ -1,8 +1,8 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax_FM/libs/handlebars.js/4.1.0/handlebars.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax_FM/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax_FM/libs/moment.js/2.24.0/moment.min.js"></script>
 
 <style type="text/css">
 .responsiveContent {
@@ -34,7 +34,8 @@
 					<input type="hidden" name="idTipoDoc" value="<php:item id="idTipoDoc" />" />
 					<input type="hidden" name="idTipoFirma" value="<php:item id="idTipoFirma" />" />
     				<button class="btn btn-default" type="submit" ><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
-    			</form>
+    			  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
       
           <div class="box-body">
             
@@ -44,7 +45,7 @@
 			<div id="mensajeAd"><php:texto id="mensajeAd" /></div> 
         
             <!--Datos referenciales-->
-            <div class="form-row">
+            <div class="row">
             
               <form role="form" name="formulario" id="formulario" action="Documentos_FirmaMasiva.php" method="POST">
 
@@ -62,7 +63,7 @@
                     <input type="hidden"   name="inVerifyDocPersonalNumber" id="inVerifyDocPersonalNumber" value="<php:item id="usuarioid"/>">
                     <input type="hidden"   name="inVerifyType" id="inVerifyType" value="<php:item id="TipoFirma"/>">
                     <input type="hidden" name="accion" value="FIRMAR" />
-                		<button class="btn btn-md btn-primary btn-block " onclick="verificar()" type="button" name="accion" id="btn-verify" value="FIRMAR" />Firmar</button>
+                		<button class="btn btn-md btn-primary btn-block " onclick="verificar_FM()" type="button" name="accion" id="btn-verify" value="FIRMAR" />Firmar</button>
                     <br>
 
                 	</div>
@@ -85,7 +86,7 @@
                       <td style="text-align: center;"  data-campo="Tipo Documento"><php:item id="NombreTipoDoc" /></td>
                       <td style="text-align: center;" data-campo="Estado Contrato"><php:item id="Estado" /></td>
                       <td style="text-align: center;" data-campo="Estado">
-                          <button style="background-color: transparent;" class="btn btn-md" type="button" class="borrar" id="borrar_<php:filamenos />" onclick="eliminarDoc('<php:filamenos />');" ><i id="icon_<php:filamenos />"  class="fa fa-minus" aria-hidden="true"  title="Quitar de esta lista"></i></button>
+                          <button style="background-color: transparent;" class="btn btn-md" type="button" class="borrar" id="borrar_<php:filamenos />" onclick="eliminarDoc_FM('<php:filamenos />');" ><i id="icon_<php:filamenos />"  class="fa fa-minus" aria-hidden="true"  title="Quitar de esta lista"></i></button>
                       </td>
                     </tr>
                   </php:repeticion>
@@ -98,7 +99,8 @@
                 </tfoot>
               </table>
         
-              </form> 
+                <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form> 
 
             </div>
           </div>
@@ -108,392 +110,3 @@
   </div>
 </div>
 </section>
-
- <script type="text/javascript">
-  var swpopup = 0;
-  
-   let general = {
-        baseUrl: "",
-        apiKey: "",
-        digitalSignature: 0,
-        session: {
-          id: "",
-          companyId: "",
-          username: ""
-        },
-        currentAction: "VERIFY",
-        operator: {
-          sessionId: null
-        }
-      };
-   
-    
-    let popupPage;
-      let openCheckId = function(action) 
-    {
-		MostrarCargando();
-        general.currentAction = action;
-        // Create popup window
-        var w = 850;
-        var h = 580;
-
-        // Fixes dual-screen position                         Most browsers      Firefox
-        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
-        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
-
-        var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
-        var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
-
-        var left = ((width / 2) - (w / 2)) + dualScreenLeft;
-        var top = ((height / 2) - (h / 2)) + dualScreenTop;
-
-        var opciones = "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=" + w + ", height=" + h + ", top=" + top + ", left=" + left;
-        popupPage = window.open("checkid/index.html?v12", "libPage", opciones);
-
-        var timer = setInterval(function() { 
-          if(popupPage.closed) {
-            clearInterval(timer);
-			if( swpopup == 0 )
-			{
-				document.getElementById('cargando').style.display='none';
-			}
-          }
-        }, 1000);
-        
-        // Puts focus on the popupPage
-        if (window.focus) {
-          popupPage.focus();
-        }
-      };
-
-   
-      let getParamsVerify = function() {
-        return {
-          action: "VERIFY",
-          method: general.method,
-          apiKey: general.apiKey,
-          sessionId: general.session.id,
-          companyId: general.session.companyId,
-          operationId: 1,
-          baseUrl: general.baseUrl,
-		  pinRestore: true,//cambio de pin
-		  pinRestoreMethod:'ACEP',//pide nro documento
-          operator: {
-            sessionId: general.operator.sessionId,
-            identityDocument: {
-                countryCode: general.countryCode,
-                type: general.type,
-                personalNumber: general.rutaverificar
-            }
-          },
-          digitalIdentity: {
-            identityDocuments: [{
-              countryCode: general.countryCode,
-              type: general.type,
-              personalNumber: general.rutaverificar
-            }]
-          }
-          };
-      };
-    
-    
-  window.getParams = function()
-  {
-    return getParamsVerify();
-  }
-    
-  //respuesta del formulario checkid
-  window.callback = function(result) 
-  {
-	swpopup = 1;
-    popupPage.close();
-    console.log("callback", result);
-    document.getElementById('cargando').style.display='none';
-
-    if (result.numError == 0) 
-    {
-      if (result.action == "VERIFY") 
-      {
-		try{
-			let resultMessage = "Validación Errónea";
-			if (result.data.authenticated)
-			{
-			  resultMessage = "Validación Exitosa!";
-		  
-			  general.lastVerify = result.data;
-	  
-			  document.getElementById('id').value       = general.lastVerify.id;
-			  document.getElementById('type').value       = general.lastVerify.type;
-			  document.getElementById('subtype').value      = general.lastVerify.subtype;
-			  document.getElementById('authenticated').value  = general.lastVerify.authenticated;
-			  document.getElementById('sign').value       = general.lastVerify.sign;      
-			  //document.getElementById("formulario").submit(); 
-			  MostrarCargando();			  
-			  firmaMasiva();
-			}
-			else
-				{
-					document.getElementById('cargando').style.display='none';
-				}
-		}catch(err){
-			//alert(err);
-			document.getElementById('cargando').style.display='none';
-		}
-		
-      }
-    }
-	
-	if (result.numError == 0) 
-	{
-		//alert ("OK")
-	}
-	else
-	{
-		alert (result.numError +  " " + result.msError);
-		document.getElementById('cargando').style.display='none';
-	}
-
-    return false;
-  }
-    
-  function verificar()
-  { 
-	MostrarCargando();
-    consulta_sesion();
-  }
-    
-    
-  var conexion;
-      
-  function crearXMLHttpRequest() 
-  {
-    var xmlHttp=null;
-    if (window.ActiveXObject) 
-      xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-    else 
-    if (window.XMLHttpRequest) 
-      xmlHttp = new XMLHttpRequest();
-    return xmlHttp;
-  }
-
-
-  function consulta_sesion()
-  {
-    conexion=crearXMLHttpRequest();
-  
-    conexion.open('POST', 'consulta_sesion.php', false);
-  
-    conexion.send(null);
-    // Devolvemos el resultado
-    respuesta =  conexion.responseText;   
-    arr_resp  = respuesta.split('|'); 
-    if (arr_resp[0] == 'ok')
-    {
-      general.baseUrl       = arr_resp[1];
-      general.session.companyId   = arr_resp[2];
-      general.username      = arr_resp[4];
-      general.session.id      = arr_resp[6];
-      general.countryCode     = arr_resp[7];
-      general.type        = arr_resp[8];
-      general.apiKey        = arr_resp[9];
-
-      document.getElementById('sessionid').value =   general.session.id; //token de la sesion
-
-      var rut           = document.getElementById('inVerifyDocPersonalNumber').value;
-      general.rutaverificar   = rut.replace ("-","");
-      
-      general.method        = document.getElementById('inVerifyType').value;
-
-      openCheckId("VERIFY");
-    }
-    else
-    {
-      alert (respuesta);
-    }
-    
-  }
-
-  var ajax;
-  var salida;
-  var fila = 0;
-  var proceso;
-  var cant = 0;
-  var i = 0;
-  var documento = 0;
-  var indices = [];
-
-  $(document).ready(function(){
-
-    $("#pin").val("");
-    $("#pin").css("display","block");
-    $("#FIRMAR").prop("disabled",false);
-
-    if( $("#cant_docs").html() == '' ){
-      var fil = 0;
-      fil = parseInt($("#example tr").length);
-      $("#cant_docs").html(fil-2);
-    }
-
- });
-
-    function eliminarDoc(i){
-
-        var fila = $("#example tr").length;
-        if( fila == 3 ){
-          $("#formulario").submit();
-        }else if( fila > 3){
-          $("#fila_" + i).remove();
-
-          var fil = 0;
-          fil = parseInt($("#example tr").length);
-          $("#cant_docs").html(fil-2);
-         }        
-    }
-
-   function firmaMasiva(){
-      
-    //Limpiamos errores anteriores
-    $("#mensajeError").removeClass("callout callout-warning");
-    $("#mensajeError").html("");
-
-    //Bloquear
-    $("#btn-verify").prop("disabled",true);
-
-    //Cantidad de filas 
-    cant = $("#example tr").length;
-    cant = cant - 2;
-
-    //Buscar los indices de las filas de la tabla 
-    $('#example tbody tr').each(function () {
-       var indice = $(this).attr("id");
-       var res = indice.split("_");
-       indices.push(res[1]);
-    });
-	
-    documento = $("#doc_" + indices[i]).val();
-  
-    //Buscamos los datos que falten
-    proceso = setInterval(function(){ firma_pin(documento,indices[i]) }, 1000);
-   
-  };
-
-   //Firmar un documento
-  function firma_pin(idDocumento,i){
-	
-	MostrarCargando();
-    clearInterval(proceso);// poner esto cuando llega respuesta
-
-    var usuarioid = $("#inVerifyDocPersonalNumber").val();
-    var formulario = $("#formulario").serialize();
-
-    var url = "Documentos_firmaMasiva3_ajax.php?idDocumento=" + idDocumento + "&formulario="+ formulario + "&usuarioid=" + usuarioid;
-
-    fila = i;
-    console.log(url);
-
-     // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-    if( window.XMLHttpRequest )
-       ajax = new XMLHttpRequest(); // No Internet Explorer
-    else
-       ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-    
-       // Almacenamos en el control al funcion que se invocara cuando la peticion
-    ajax.onreadystatechange = funcionCallback_firma_pin;
-    ajax.addEventListener("load", transferComplete);
-
-    // Enviamos la peticion
-    ajax.open( "GET", url, false);
-    ajax.send( "" );
-
-    function transferComplete(evt) {
-      mostrarEstadoFirma(salida,fila);
-    }
-  }
-
-  function funcionCallback_firma_pin(){
-
-    // Comprobamos si la peticion se ha completado (estado 4)
-    if( ajax.readyState == 4 )
-    {
-      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-      if( ajax.status == 200 )
-      {
-        // Escribimos el resultado en la pagina HTML mediante DHTML
-        salida = '';
-        salida = ajax.responseText;
-      }
-    }
-  }
-
-  //Mostrar estado de Firma en el modal
-  function mostrarEstadoFirma(salida, fila){
-
-    //Error de login
-    var error = salida.substring(0, 33);
-
-    //Incrementar la fila de la tabla a recorrer
-    i++;
-
-    //Actualizamos iconos segun la respuesta 
-
-    //Si es error de login
-    if ( error == 'Error en Login del Usuario400 Rut' ){
-      
-      //Desbloquear boton de firma 
-      $("#btn-verify").prop("disabled",false);
-
-      //Enviamos mensaje
-      $("#mensajeError").addClass("callout callout-warning");
-      $("#mensajeError").html(salida);
-
-      //Asignar el mismo valor y se cancela la firma para los proximos documentos
-      i = cant;
-      //Ocultar el gif de cargando
-      OcultarCargando();
-
-    }
-
-    //Si es otro error 
-    else if( salida != 0 ){
-
-      $("#icon_" + fila).removeClass();
-      $("#icon_" + fila).addClass('fa fa-exclamation-triangle text-warning');
-      $("#icon_" + fila).prop('title',salida); 
-      $("#borrar_" + fila).removeAttr('onclick');
-      
-      //Si termino de recorrer las filas 
-      if( !(i < cant) ){
-          //Ocultar el gif de cargando
-          OcultarCargando();
-
-      }//Si no, no se limpia el campo pin, para que continue con los siguientes documentos 
-
-    }else if (salida){
-      $("#icon_" + fila).removeClass();
-      $("#icon_" + fila).addClass('fa fa-check-circle text-success');
-      $("#icon_" + fila).prop('title','Firmado correctamente');
-      $("#borrar_" + fila).removeAttr('onclick');
-	  
-      //Si termino de recorrer las filas 
-      if( !(i < cant) ){
-          //Limpiar campo de pin
-          $("#pin").val("");
-
-            //Ocultar el gif de cargando
-            OcultarCargando();
-
-      }//Si no, no se limpia el campo pin, para que continue
-      //Continua con los siguientes documentos 
-    }
-
-    //Si quedan filas que recorrer 
-    if( i < cant ){
-        //Pasar al siguiente 
-        documento = $("#doc_"+ indices[i]).val();
-        proceso = setInterval(function(){ firma_pin(documento,indices[i]) }, 1000);
-    }
-  }
- 
-  
-  </script>
-   

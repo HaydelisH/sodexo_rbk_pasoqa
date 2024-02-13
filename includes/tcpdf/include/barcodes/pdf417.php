@@ -1,7 +1,6 @@
 <?php
 //============================================================+
 // File name   : pdf417.php
-// Version     : 1.0.005
 // Begin       : 2010-06-03
 // Last Update : 2014-04-25
 // Author      : Nicola Asuni - Tecnick.com LTD - www.tecnick.com - info@tecnick.com

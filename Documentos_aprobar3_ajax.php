@@ -47,7 +47,7 @@ class documentos {
 		$this->docvigentesBD->usarConexion($conecc);
 
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['estado'] = 8;
 
 		//Separar los idDocumentos

@@ -55,10 +55,10 @@ class descargas {
 	function __construct()
 	{
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -118,7 +118,7 @@ class descargas {
 		include("includes/opciones_menu.php");
 	
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -128,7 +128,7 @@ class descargas {
 			return;
 		}
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -154,15 +154,15 @@ class descargas {
 	private function agregar()
 	{	
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "AGREGAR":
 
 					$dt = new DataTable();
-					$datos = $_REQUEST;
+					$datos = $_POST;
 
 					if( is_uploaded_file($_FILES['archivo']["tmp_name"]) ){
 						 //Revision del archivo subido 
@@ -235,15 +235,15 @@ class descargas {
 	private function modificar()
 	{	
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "MODIFICAR":
 
 					$dt = new DataTable();
-					$datos = $_REQUEST;
+					$datos = $_POST;
 
 					if( $_FILES['archivo']["name"] != '' ){
 
@@ -316,7 +316,7 @@ class descargas {
 			}
 		}
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//Asignamos los datos que recibimos del formulario
 		$this->descargasBD->obtener($datos, $dt);
@@ -336,7 +336,7 @@ class descargas {
 	private function eliminar()
 	{		
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		// se envia a eliminar a la tabla con los datos del formulario
 		if ( $this->descargasBD->eliminar($datos)) {
@@ -356,7 +356,7 @@ class descargas {
 	//Accion de descargar un registro
 	private function descargar()
 	{		
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		// se envia a eliminar a la tabla con los datos del formulario
 		$this->descargasBD->obtener($datos,$dt);
@@ -382,7 +382,7 @@ class descargas {
 		$dt = new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
 		$datos["idCategoria"]=$this->seguridad->idCategoria;
 		$datos["tipousuarioingid"]=$this->seguridad->tipousuarioid;
 

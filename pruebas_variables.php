@@ -162,7 +162,7 @@
 	//Validar si el documento tiene variables de un tipo 
 	private function buscarVariables($idDocumento,$html,$busqueda,$datos2,&$resultado){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $idDocumento;
 
 		$dt = new DataTable();

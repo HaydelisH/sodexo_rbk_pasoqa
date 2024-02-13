@@ -50,7 +50,7 @@ class plantillas {
 		$dt = new DataTable();
 		// pedimos el listado
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$array = array ();
 
 		$this->plantillasBD->obtenerDatosFirmantesPlantilla($datos,$dt);

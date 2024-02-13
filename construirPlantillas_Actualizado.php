@@ -80,7 +80,7 @@ p { orphans: 3; widows: 1}</style>
 		}
 
 		// Obtenemos los datos de las Clausulas relacionados
-		$this->documentosBD->obtenerClausulasPlantillas($_REQUEST,$dt);
+		$this->documentosBD->obtenerClausulasPlantillas($_POST,$dt);
 		$this->mensajeError.=$this->documentosBD->mensajeError;
 
         //Agregamos Titulo de la Plantilla

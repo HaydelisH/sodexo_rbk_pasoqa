@@ -17,7 +17,7 @@ if (!defined('PHPEXCEL_ROOT')) {
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
+
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -7311,7 +7311,6 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 
     /**
      * Read byte string (8-bit string length)
-     * OpenOffice documentation: 2.5.2
      *
      * @param string $subData
      * @return array
@@ -7333,7 +7332,6 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 
     /**
      * Read byte string (16-bit string length)
-     * OpenOffice documentation: 2.5.2
      *
      * @param string $subData
      * @return array
@@ -7356,7 +7354,6 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 
     /**
      * Extracts an Excel Unicode short string (8-bit string length)
-     * OpenOffice documentation: 2.5.3
      * function will automatically find out where the Unicode string ends.
      *
      * @param string $subData
@@ -7380,7 +7377,6 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 
     /**
      * Extracts an Excel Unicode long string (16-bit string length)
-     * OpenOffice documentation: 2.5.3
      * this function is under construction, needs to support rich text, and Asian phonetic settings
      *
      * @param string $subData

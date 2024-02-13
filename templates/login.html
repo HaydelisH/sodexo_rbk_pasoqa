@@ -28,7 +28,7 @@
         <![endif]-->
 
         <!-- Re-captcha v3-->
-		<script src="https://www.google.com/recaptcha/api.js?render=<php:texto id="RECAPTCHA" />"></script>
+		<!--<script src="https://www.google.com/recaptcha/api.js?render=<php:texto id="RECAPTCHA" />"></script>-->
 
 
         <!-- Favicon and touch icons -->
@@ -50,19 +50,17 @@
         	
             <div class="inner-bg">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-sm-8 col-sm-offset-2 text">
-                            <h1><strong>RUBRIKA DOCUFLOW RRHH</strong></h1>
-                            <div class="description">
-                            	<p>
-	                            	Bienvenido
-                            	</p>
-                            </div>
-                        </div>
+                    <div class="row d-flex justify-content-center" style="padding: 15px;" >
+						<h1 style="color:white"><strong>RUBRIKA DOCUFLOW RRHH</strong></h1>
+						<div class="description" style="color:white">
+							<p>
+								Bienvenido
+							</p>
+						</div>
                     </div>
-                    <div class="row">
+                    <div class="row d-flex justify-content-center">
 						<php:repeticion id="login">
-                        <div class="col-sm-4 col-sm-offset-4 form-box">
+                        <div class="col-sm-4 form-box" style="padding-left: 40px;padding-right: 40px;">
                         	<div class="form-top">
                         		<div class="form-top-left">
                         			<h3>Para ingresar al sitio</h3>
@@ -78,13 +76,13 @@
 			                    <form role="form"action="index.php" name="formularioLogin" id="formularioLogin" method="post" class="login-form" >
 									<input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
 									<input type="hidden" name="action" value="validate_captcha">
-									<div class="form-group">
-			                    		<label class="sr-only" for="form-username">Nombre de usuario</label>
-			                        	<input type="text" name="usuarioid" placeholder="Usuario..." class="form-username form-control" id="usuarioid" value="<php:item id="usuarioid" />" >
+									<div class="row">
+										<div class="input-group" style="padding-bottom: 12px;">
+			                    			<input type="text" name="usuarioid" placeholder="Usuario..." class="form-username form-control" id="usuarioid" value="<php:item id="usuarioid" />" >
+										</div>
 			                        </div>
-									<div class="form-group">
-										<div class="input-group">
-											<label class="sr-only" for="form-password">Clave</label>											
+									<div class="row">
+										<div class="input-group" style="padding-bottom: 12px;">
 											<input type="password" name="clave" placeholder="Clave..." class="form-password form-control" style="border-right:0" autocomplete="new-password" id="clave">
 												<span class="input-group-btn">
 													<button type="button" class="btn btn-info btn-flat" id="show_password" style="background: #f8f8f8;border:3px solid #ddd;border-left:0" onclick="mostrarPassword()"><i class="fa fa-eye-slash icon" style="color:#888" aria-hidden="true"></i>
@@ -102,14 +100,16 @@
 									<input type="hidden" name="accion"    	value="Ingresar">
 									<input type="hidden" name="javascriptok" id="javascriptok" >
 									<input type="hidden" name="cookiesok"    id="cookiesok" >
+									<input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
 			                    </form>
 		                    </div>
                         </div>
 						</php:repeticion>
                     </div>
-                    <div class="row">
+
+                    <div class="row d-flex justify-content-center">
                         <div class="col-sm-6 col-sm-offset-3 social-login">
-                        	<h3>Vis&iacute;tanos</h3>
+                        	<h3 style="margin-top: 20px; margin-bottom: 10px;">Vis&iacute;tanos</h3>
                         	<div class="social-login-buttons">
 	                        	<a class="btn btn-link-1 btn-link-1-facebook" target="_blank" href="https://www.facebook.com/Rubrika-Carpeta-y-Documentos-Digitales-461354434035041/?hc_location=ufi">
 	                        		<i class="fa fa-facebook"></i> Facebook
@@ -134,21 +134,22 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
+                  <span aria-hidden="true" class="cerrar_modal">&times;</span></button>
                 <h4 class="modal-title">Recupera tu cuenta</h4>
               </div>
               <div class="modal-body">
 				<form role="form" id="formulario" action="OlvidoClave.php"  method="post" class="login-form" autocomplete="off" onKeypress="if(event.keyCode == 13) event.returnValue = false;">
-					<div class="form-group">
+					<div class="row">
 						<label class="sr-only" for="form-username">Usuario</label>
 						<input type="text" name="usuarioid" placeholder="Ingrese su RUT sin puntos (ejemplo 12345678-0)" class="form-username form-control" id="usuarioid_1" value="<php:item id="usuarioid" />" >
 						<input name="accion" type="hidden" value="RECUPERAR_PIN" />
  					</div>
-				</form>
+				  	<input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                </form>
               </div>
               <div class="modal-footer">
                 <button id="enviar" type="button" class="btn btn-sm" data-dismiss="modal" onclick="javascript:return enviar();">Enviar</button>
-				<button type="button" class="btn pull-left btn-sm" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn pull-left btn-sm cerrar_modal" data-dismiss="modal">Cerrar</button>
               </div>
             </div>
             <!-- /.modal-content -->
@@ -159,10 +160,11 @@
 
 
         <!-- Javascript -->
-        <script src="assets/js/jquery-1.11.1.min.js"></script>
+        <script src="assets/js/jquery.min.js"></script>
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="assets/js/jquery.backstretch.min.js"></script>
         <script src="assets/js/scripts.js"></script>
+		<script src="js/flg23.js"></script>
         
         <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>
@@ -236,15 +238,15 @@
 		}
 	});
 	$('#hacerlogin').on('click', function(){
-		grecaptcha.ready(function() {
+		/*grecaptcha.ready(function() {
         // do request for recaptcha token
         // response is promise with passed token
 			var RECAPTCHA = document.getElementById("RECAPTCHA").value; 
-			grecaptcha.execute(RECAPTCHA, {action:'validate_captcha'}).then(function(token) {	
-				$('#g-recaptcha-response').val(token);
+			/*grecaptcha.execute(RECAPTCHA, {action:'validate_captcha'}).then(function(token) {	
+				$('#g-recaptcha-response').val(token);*/
 				$('#formularioLogin').submit();
-			});
-		});
+			/*});*/
+		/*});*/
 	});
 
 	function funcionCallback()

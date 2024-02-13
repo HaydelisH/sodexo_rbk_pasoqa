@@ -1,7 +1,6 @@
 /*!
  * Chart.js
  * http://chartjs.org/
- * Version: 2.7.3
  *
  * Copyright 2018 Chart.js Contributors
  * Released under the MIT license

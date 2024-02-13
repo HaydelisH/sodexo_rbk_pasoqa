@@ -5,7 +5,7 @@
           <div class="box-header">
            <form role="form" name="formulario" id="formulario" action="Empresas.php" method="POST" autocomplete="off">
             <php:repeticion id="formulario">
-              <div class="form-row">
+              <div class="row">
                   <div class="col-md-1">
                       <button type="submit" class="btn btn-md btn-default btn-block" id="accion" name="accion" value="MODIFICAR" ><a><i class="fa fa-arrow-left" aria-hidden="true" ></i> Volver</a></button>
                       <input type="hidden" class="form-control" id="RutEmpresa" name="RutEmpresa" value="<php:item id="RutEmpresa" />" />
@@ -13,18 +13,19 @@
                   </div>
               </div>
             </php:repeticion>
-           </form>
+             <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
           </div>
         <div class="box-body">
           <div id="mensajeError"><php:texto id="mensajeError" /></div>
           <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
        
-          <form role="form" name="formualrio_proveedor" id="formualrio_proveedor" action="rl_Proveedores.php" method="POST" autocomplete="off">
+          <form role="form" name="formulario_proveedor" id="formulario_proveedor" action="rl_Proveedores.php" method="POST" autocomplete="off">
             <php:repeticion id="formulario">
               <!--Campos basicos-->
               
                       <!--Rut de Empresa-->
-                      <div class="form-row">
+                      <div class="row">
                           <div class="col-md-6">
                               <label for="RutEmpresa">Rut Empresa</label>
                               <input type="text" class="form-control" id="RutEmpresa" name="RutEmpresa" maxlength="10"  readonly="readonly" value="<php:item id="RutEmpresa" />">
@@ -32,25 +33,25 @@
                       </div>
                       
               
-                <div class="form-row">
+                <div class="row">
                  <div class="col-md-6">
                   <label for="RutCliente">Rut del Proveedor</label>
                   <input type="text" class="form-control" id="RutProveedor" name="RutProveedor" maxlength="10" value="<php:item id='RutProveedor' />" placeholder="Rut del Proveedor" /> 
                  </div>
                 </div>
-                <div class="form-row">
+                <div class="row">
                 <div class="col-md-6 xs-12">
                   <label for="NombreProveedor">Nombre del Proveedor</label>
                   <input type="text" class="form-control" id="RazonSocial" name="NombreProveedor" maxlength="50" value="<php:item id='NombreProveedor' />" placeholder="Nombre del Proveedor" />
                 </div>
               </div>
-              <div class="form-row">
+              <div class="row">
                 <div class="col-md-6 xs-12">
                   <label for="Direccion">Direcci&oacute;n</label>
                   <input type="text" class="form-control" id="Direccion" name="Direccion" maxlength="50" value="<php:item id="Direccion" />" placeholder="Direcci&oacute;n" >
                 </div>
               </div>
-              <div class="form-row">
+              <div class="row">
                 <div class="col-md-6 xs-12">
                   <label for="Comuna">Comuna</label>
                   <input type="text" class="form-control" id="Comuna" name="Comuna" maxlength="50" value="<php:item id="Comuna" />" placeholder="Comuna" >
@@ -62,26 +63,18 @@
               </div>
             
               </php:repeticion>  
-            <div class="form-row">  
+            <div class="row">  
               <div class="col-md-2 xs-12 pull-right">
                 <input type="hidden" name="accion" value="AGREGAR" />
                 <button class="btn btn-md btn-primary btn-block " type="submit" style="margin-top: 10px" name="accion2" value="AGREGAR" onclick="javascript:return validarFormulario(this) && validaRut(obtenerElemento('RutCliente').value );"/>Guardar</button>
   
               </div> <!-- <div class="col-md-2 xs-12">-->
-            </div>    <!--<div class="form-row">  -->  
-          </form>  
+            </div>    <!--<div class="row">  -->  
+            <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>  
          </div> <!--<div class="box-body">-->
         </div> <!--<div class="box-body pad table-responsive">-->
       </div> <!--<div class="box"-->
     </div> <!-- <div class="col-md-12">-->
   </div> <!--<div class="row">-->
   
-  <script>
-    //Buscar datos de la persona, si existe
-    $("#RutProveedor").change(function(){
-      var respuesta = validaRut2(document.formualrio_proveedor.RutProveedor); 
-      if( respuesta ){
-       buscarDatosCliente($("#RutEmpresa").val(),$("#RutProveedor").val()); 
-      }
-    });
-  </script>

@@ -46,10 +46,10 @@ class importacion_firma_split {
 	{
 			
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -69,7 +69,7 @@ class importacion_firma_split {
 		}
 		
 		
-		if (!isset($_REQUEST["usuarioid"]))
+		if (!isset($_POST["usuarioid"]))
 		{
 			// creamos la seguridad
 			$this->seguridad = new Seguridad($this->pagina,$this->bd);
@@ -83,9 +83,9 @@ class importacion_firma_split {
 		}
 		
 		/*
-		$infovariables 	= array_keys($_REQUEST); 	// obtiene los nombres de las variables
-		$infovalores 	= array_values($_REQUEST);	// obtiene los valores de las variables
-		$cantparametros = count($_REQUEST);
+		$infovariables 	= array_keys($_POST); 	// obtiene los nombres de las variables
+		$infovalores 	= array_values($_POST);	// obtiene los valores de las variables
+		$cantparametros = count($_POST);
 		for($i=0;$i<$cantparametros;$i++){
 			$infoconsulta.= $infovariables[$i].'='.$infovalores[$i].'|';
 			$this->graba_log ("del request:".$infovariables[$i].' - '.$infovalores[$i]);
@@ -104,13 +104,13 @@ class importacion_firma_split {
 		$ruta = str_replace("\\","/",$ruta);
 		$this->rutasitio = $ruta;				
 		
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			$this->proceso();
 			return;
 		}
 		
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "ESTADO":
 				$this->estado();
@@ -184,7 +184,7 @@ class importacion_firma_split {
 	
 	private function proceso()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		$this->graba_log("PROCESO INICIO");
 	
@@ -517,7 +517,7 @@ class importacion_firma_split {
 	private function reproceso()
 	{
 		$this->graba_log("INICIO REPROCESO ".$this->seguridad->rut);
-		$datos=$_REQUEST;
+		$datos=$_POST;
 		/*
 		$infovariables 	= array_keys($datos); 	// obtiene los nombres de las variables
 		$infovalores 	= array_values($datos);	// obtiene los valores de las variables
@@ -767,7 +767,7 @@ class importacion_firma_split {
 	private function validar()
 	{	
 	
-		$datos=$_REQUEST;
+		$datos=$_POST;
 		
 		$this->carpetaproceso = 'liq_'.$this->seguridad->usuarioid;
 		$this->graba_log("carpeta proceso ".$this->carpetaproceso);

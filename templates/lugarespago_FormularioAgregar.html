@@ -5,22 +5,23 @@
           <div class="box-header">
             <a class="btn btn-default btn_letra_azul" href="LugaresPago.php"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
           </div>
-        <div class="box-body">
+        <div class="box-body" style="padding: 30px;">
           <div id="mensajeError"><php:texto id="mensajeError" /></div>
           <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
        
           <form role="form" name="formulario" id="formulario" action="LugaresPago.php" method="POST" autocomplete="off">
             <php:repeticion id="formulario">
             
-              <div class="form-row">
+              <div class="row">
                 <div class="col-md-12">
                   <label style="float:right;"> (*) Campos obligatorios </label>
                 </div>
               </div>
                           
               <!--Campos basicos-->
+              <div class="row">
                 <!--Empresas-->
-                <div class="col-md-12 xs-12" >
+               
                   <label for="Empresa" >Empresa (*) </label>
                   <!--Select de Empresas disponibles-->
                   <select class= "form-control" name="RutEmpresa" id="RutEmpresa">
@@ -29,35 +30,32 @@
                       <option value="<php:item id="RutEmpresa" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEmpresa" /><php:argumento idvalor="RutEmpresa" /></php:funcion>><php:item id="RazonSocial" /></option>
                     </php:repeticion>
                   </select>
-                </div>
-                
-              <div class="form-row">
-                 <div class="col-md-12">
+               </div>
+               <div class="row"> 
+         
                   <label class="Estructura" for="lugarpagoid">C&oacute;digo Lugar de Pago (*)</label>
                   <input type="text" class="form-control" id="lugarpagoid" name="lugarpagoid" maxlength="10" value="<php:item id="lugarpagoid" />" placeholder="C&oacute;digo" > 
                  </div>
-                </div>
-                <div class="form-row">
-                <div class="col-md-12 xs-12">
+
+                 <div class="row">
                   <label class="Estructura" for="nombrelugarpago">Lugar de Pago (*)</label>
                   <input type="text" class="form-control" id="nombrelugarpago" name="nombrelugarpago" maxlength="50" value="<php:item id="nombrelugarpago" />" placeholder="Nombre Lugar de Pago" >
                 </div>
-              </div>
-              <!--<div class="form-row">
+           
+              <!--<div class="row">
                 <div class="col-md-12 xs-12">
                   <label for="Direccion">Descripci&oacute;n</label>
                   <input type="text" class="form-control" id="descripcionlugarpago" name="descripcionlugarpago" maxlength="50" value="<php:item id="descripcionlugarpago" />" placeholder="Descripci&oacute;n" >
                 </div>
               </div>-->
-              <div class="form-row">
-                <div class="col-md-12 xs-12">
-                   <div class="col-md-2 xs-12 pull-right">
+              <div class="row d-flex justify-content-end p-0">              
+                <div class="col-md-2 d-grid gap-2 p-0" >
                     <input type="hidden" name="accion" value="AGREGAR" />
                     <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="AGREGAR" onclick="javascript: return validarFormulario(this,new Array(),new Array('descripcionlugarpago'))" />Guardar</button>
-                   </div>
-                </div>
+                  </div>
               </div>
-            </php:repeticion>  
+              <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+           </php:repeticion>  
           </form>  
          </div> <!--<div class="box-body">-->
         </div> <!--<div class="box-body pad table-responsive">-->

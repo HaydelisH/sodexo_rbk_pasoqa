@@ -12,21 +12,30 @@
 				<a class="btn btn-default btn_letra_azul" href="usuariosmant.php"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</a>
 			  </div>
 			<!-- /.box-header -->
-			<div class="box-body">
+			<div class="box-body" style="padding: 30px;">
 			   <!--Mensajes-->
 			  <div id="mensajeError"><php:texto id="mensajeError" /></div>
 			  <div id="mensajeOK"><php:texto id="mensajeOK" /></div>	
 			  <form name="formulario" class="formularioCambiarClave" id="formulario"  class="form-horizontal" action="usuariosmant.php" method="POST" autocomplete="off">
 				  <php:repeticion id="formulario">
-				  
+				  		<div class="row">
 							<div class="col-md-7">
 								<div class="form-group">	
-										  <label for="tipousuarioid"  class="col-sm-3 control-label " ><strong>Rut</strong></label>								
-										  <input type="contenedor" class="form-control" id="newusuarioid"  name="newusuarioid" placeholder="" maxlength="11" value="<php:item id="newusuarioid" />" disabled >
-										  <input type="hidden" name="newusuarioid" value="<php:item id="newusuarioid" />" />
+									<label for="tipousuarioid"  class="col-sm-3 control-label " ><strong>Rut</strong></label>								
+									<input type="contenedor" class="form-control" id="newusuarioid"  name="newusuarioid" placeholder="" maxlength="11" value="<php:item id="newusuarioid" />" disabled >
+									<input type="hidden" name="newusuarioid" value="<php:item id="newusuarioid" />" />
 								</div>
+							</div>
+							<div class="col-md-5">
+								<label for="claverep"  class="control-label " style="margin: 2px;"><strong>La contrase&ntilde;a debe contener al menos:</strong></label>				
+								<br>
+								<p id="caracterPass" class="callout callout-danger" style="padding: 7px;margin: 2px;"><php:texto id='largoClaveMin'/> c&aacute;racteres</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-7">
 								<div class="form-group">
-									<label for="clavenew">Contrase&ntilde;a Nueva</label>	
+									<label for="clavenew"><strong>Contrase&ntilde;a Nueva</strong></label>	
 									<div class="input-group ">										
 										<input type="password" class="form-control" name="clave" style="border-right:0" id="clave" size="<php:texto id="largoClaveMax" />" minlength="<php:texto id="largoClaveMin" />" maxlength="<php:texto id="largoClaveMax" />" value="<php:item id="clavenew" />" autocomplete="off" />
 											<span class="input-group-btn">
@@ -36,16 +45,19 @@
 									</div>		
 								</div>
 							</div>
-					
 							<div class="col-md-5">
-							  <label for="claverep"  class="control-label " style="margin: 2px;"><strong>La contrase&ntilde;a debe contener al menos:</strong></label>				
-							  <br>
-							  <p id="caracterPass" class="callout callout-danger" style="padding: 7px;margin: 2px;"><php:texto id='largoClaveMin'/> c&aacute;racteres</p>
-							  <div id="numeroPass" class="callout callout-danger" style="padding: 7px;margin: 2px;"><php:texto id='minNumber'/> c&aacute;racter num&eacute;rico</div>
-							  <div id="mayusculaPass" class="callout callout-danger" style="padding: 7px;margin: 2px;"><php:texto id='minMayus'/> letra may&uacute;scula</div>
+								<div id="numeroPass" class="callout callout-danger" style="padding: 7px;margin: 2px;"><php:texto id='minNumber'/> c&aacute;racter num&eacute;rico</div>
+								<div id="mayusculaPass" class="callout callout-danger" style="padding: 7px;margin: 2px;"><php:texto id='minMayus'/> letra may&uacute;scula</div>
+							</div>
+						</div>	
+							
+						<div class="row d-flex justify-content-end">
+							<div class="col-md-5">							 
 							  <div id ="minusculaPass" class="callout callout-danger" style="padding: 7px;margin: 2px;"><php:texto id='minMinus'/> letra min&uacute;scula</div>	
 							  <div id ="especialPass" class="callout callout-danger" style="padding: 7px;margin: 2px;"><php:texto id='minCaracterEspecial'/> c&aacute;racter especial</div>	
 							</div>
+						</div>
+
 							<input type="hidden" name="minMayus" id="minMayus"  value="<php:texto id='minMayus'/>">
 							<input type="hidden" name="minMinus" id="minMinus"  value="<php:texto id='minMinus'/>">
 							<input type="hidden" name="minNumber" id="minNumber"  value="<php:texto id='minNumber'/>">
@@ -54,19 +66,16 @@
 							<input type="hidden" name="largoClaveMin" id="largoClaveMin"  value="<php:texto id='largoClaveMin'/>">
 							<input type="hidden" name="minCaracterEspecial" id="minCaracterEspecial"  value="<php:texto id='minCaracterEspecial'/>">
 							<input type="hidden" name="Robustes" id="Robustes"  value="<php:texto id='Robustes'/>">
-							  <!-- <label for="claverep"  class="col-sm-3 control-label " ><strong>Repita Nueva Contrase&ntilde;a</strong></label> -->
-							  <!-- <input type="password" class="form-control" name="claverep" id="claverep" size="<php:texto id="largoClaveMax" />" minlength="<php:texto id="largoClaveMin" />" maxlength="<php:texto id="largoClaveMax" />" value="<php:item id="claverep" />" autocomplete="off" /> -->
-						  
-				  
-							  
+							 							  
 				  </php:repeticion> 
-				  <div class="form-row">  
-					  <div class="col-md-2 xs-12 pull-right">            
+				  <div class="row d-flex justify-content-end">  
+					  <div class="col-md-2 xs-12 d-grid gap-2 ">            
 						 <input type="hidden" name="accion" value="CAMBIAR CLAVE" />
 						 <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="MODIFICAR" onclick="javascript:return validarFormulario(this);"/>Guardar</button>
 					  </div>
 				  </div>     
-			  </form>
+			    <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 			 </div>
 			</div>
 		  <!-- /.box -->
@@ -74,110 +83,3 @@
 		</div>
 		<!-- /.col -->
 	</div>
-	   
-	<script>
-	  
-	  var numeros="0123456789";
-	  var letras="abcdefghijklmnñopqrstuvwxyz";	
-	  $('#clave').keyup(function(e) {
-	  var enoughRegex = new RegExp("(?=.{<php:texto id='largoClaveMin'/>,}).*", "g");
-	  if(tiene_numeros($('#clave').val(),$('#minNumber').val())){
-		$('#numeroPass').removeClass('callout callout-danger');
-		$('#numeroPass').addClass('callout callout-success');
-	  }else{		
-		$('#numeroPass').removeClass('callout callout-success');
-		$('#numeroPass').addClass('callout callout-danger');
-	  }
-	  if(tiene_minusculas($('#clave').val(),$('#minMinus').val())){
-		$('#minusculaPass').removeClass('callout callout-danger');
-		$('#minusculaPass').addClass('callout callout-success');
-	  }else{		
-		$('#minusculaPass').removeClass('callout callout-success');
-		$('#minusculaPass').addClass('callout callout-danger');
-	  }
-	  if(tiene_mayusculas($('#clave').val(),$('#minMayus').val())){
-		$('#mayusculaPass').removeClass('callout callout-danger');
-		$('#mayusculaPass').addClass('callout callout-success');
-	  }else{		
-		$('#mayusculaPass').removeClass('callout callout-success');
-		$('#mayusculaPass').addClass('callout callout-danger');
-	  }
-	  if (true == enoughRegex.test($(this).val())) {
-		$('#caracterPass').removeClass('callout callout-danger');
-		$('#caracterPass').addClass('callout callout-success');
-	  }else{		
-		$('#caracterPass').removeClass('callout callout-success');
-		$('#caracterPass').addClass('callout callout-danger');
-	  }
-	  if (tiene_caracter_especial($('#clave').val(),$('#minCaracterEspecial').val())) {
-		  $('#especialPass').removeClass('callout callout-danger');
-		  $('#especialPass').addClass('callout callout-success');
-	  } else {
-		  $('#especialPass').removeClass('callout callout-success');
-		  $('#especialPass').addClass('callout callout-danger');
-	  }
-	  
-	  });
-	  function tiene_caracter_especial(valor, cantidadMinima) {
-		  
-		  var expresionRegular = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/g;
-	  
-		   // Utilizar el método match para encontrar todas las coincidencias
-		   var coincidencias = valor.match(expresionRegular);
-		   // Calcular la cantidad total de caracteres especiales
-		   var cantidadTotal = coincidencias ? coincidencias.length : 0;
-		   // alert(cantidadTotal);
-		 return expresionRegular.test(valor) && cantidadTotal >= cantidadMinima;
-	  }
-	  function tiene_mayusculas(texto, minMayusculas) {
-	  var contadorMayusculas = 0;
-	
-	  for (var i = 0; i < texto.length; i++) {
-		if ((letras.toUpperCase()).indexOf(texto.charAt(i), 0) !== -1) {
-		  contadorMayusculas++;
-		}
-	  }
-	
-	  return contadorMayusculas >= minMayusculas;
-	}
-	
-	function tiene_minusculas(texto, minMinusculas) {
-	  var contadorMinusculas = 0;
-	
-	  for (var i = 0; i < texto.length; i++) {
-		if (letras.indexOf(texto.charAt(i), 0) !== -1) {
-		  contadorMinusculas++;
-		}
-	  }
-	
-	  return contadorMinusculas >= minMinusculas;
-	}
-	
-	function tiene_numeros(texto, minNumeros) {
-	  var contadorNumeros = 0;
-	
-	  for (var i = 0; i < texto.length; i++) {
-		if (numeros.indexOf(texto.charAt(i), 0) !== -1) {
-		  contadorNumeros++;
-		}
-	  }
-	
-	  return contadorNumeros >= minNumeros;
-	}
-	
-	function showPassword(button)
-	{
-		var idPass = "clave"
-		var suffix = button.id.replace("show_password_", "");
-		idPass = idPass+suffix;
-		
-		var cambio = document.getElementById(idPass);
-		if(cambio.type == "password"){
-			cambio.type = "text";
-			$('.icon_'+suffix).removeClass('fa fa-eye-slash').addClass('fa fa-eye');
-		}else{
-			cambio.type = "password";
-			$('.icon_'+suffix).removeClass('fa fa-eye').addClass('fa fa-eye-slash');
-		}	
-	}
-	  </script>

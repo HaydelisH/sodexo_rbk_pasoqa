@@ -1,5 +1,5 @@
 /*!
- * jQuery JavaScript Library v1.7
+ * jQuery JavaScript Library
  * http://jquery.com/
  *
  * Copyright 2011, John Resig

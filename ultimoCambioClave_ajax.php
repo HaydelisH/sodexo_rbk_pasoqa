@@ -36,7 +36,7 @@ class ultimoCambioClave {
 		// creamos la seguridad
 		$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		// si no funciona hay que logearse
-		if (isset($_REQUEST['accion']) ? !($_REQUEST['accion'] == 'WEB') : true )
+		if (isset($_POST['accion']) ? !($_POST['accion'] == 'WEB') : true )
 		{
 			if (!$this->seguridad->sesionar()) 
 			{
@@ -51,7 +51,7 @@ class ultimoCambioClave {
 
 		$dt = new DataTable();
         $array = array();
-        $datos = $_REQUEST;
+        $datos = $_POST;
         $datos["usuarioid"]=$this->seguridad->usuarioid;
 		//var_dump($datos);
 		//$this->cambioclaveBD->deshabiliarCuentasInactivas();

@@ -57,10 +57,10 @@ class empresas {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -91,7 +91,7 @@ class empresas {
 			// y nos vamos
 			return;
 		}
-        //print_r($_REQUEST);
+        //print_r($_POST);
 		// creamos la seguridad
 		$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		// si no funciona hay que logearse
@@ -124,9 +124,9 @@ class empresas {
 		
 		//se construye el menu
 		include("includes/opciones_menu.php");
-		//print_r($_REQUEST);
+		//print_r($_POST);
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -138,7 +138,7 @@ class empresas {
 	
 		
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica siempre va
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "AGREGAR":
 				$this->agregar();
@@ -172,16 +172,16 @@ class empresas {
 
 	private function verModificarCentroCosto()
 	{
-		//var_dump($_REQUEST);
+		//var_dump($_POST);
 		/*
 		// si es que nos enviaron una accion
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "MODIFICAR_R":
 
-				$datos = $_REQUEST;
+				$datos = $_POST;
 				$datos["TipoEmpresa"] = 1;
 					// si apretaron el boton modificar obtenermos los datos desde el formulario
 					if ($this->empresasBD->modificarRepresentantePersoneria($datos))
@@ -190,7 +190,7 @@ class empresas {
 					}else{
 						$this->mensajeError=$this->empresasBD->mensajeError;
 					}
-					$campos[0]=$_REQUEST;
+					$campos[0]=$_POST;
 					break;
 
 				case "VOLVER":
@@ -200,7 +200,7 @@ class empresas {
 			}
 		}
         */ 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		//$dt = new DataTable();
 		
 		
@@ -241,7 +241,7 @@ class empresas {
 	//Accion del boton agregar un nuevo registro 
 	private function agregar()
 	{	
-		$datos = $_REQUEST;
+		$datos = $_POST;
 	
 		if (isset($datos["accion2"]))
 		{
@@ -292,15 +292,15 @@ class empresas {
 	private function agregarRepresentantePersoneria()
 	{
 		// si hubo algun evento
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
 			// revisamos
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "AGREGAR_R":
 					// enviamos los datos del formulario a guardar
 
-					$datos = $_REQUEST;
+					$datos = $_POST;
 		 
 					$rut_arr 	= explode("-",$datos["RutUsuario"]);
 					$rut_sindv 	= $rut_arr[0];		
@@ -329,7 +329,7 @@ class empresas {
 			}
 		}
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$dt = new DataTable();
 
 		$formulario[0] = $datos;	
@@ -367,7 +367,7 @@ class empresas {
 	private function modificar()
 	{	
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		// si es que nos enviaron una accion
 		if (isset($datos["accion2"]))
@@ -386,7 +386,7 @@ class empresas {
 						$this->mensajeError=$this->empresasBD->mensajeError;
 					}
 					// y guardamos los datos enviamos en una variable
-					$campos[0]=$_REQUEST;
+					$campos[0]=$_POST;
 					break;
 
 				case "VOLVER":
@@ -424,15 +424,15 @@ class empresas {
 
 	private function modificarRepresentantePersoneria()
 	{
-		//var_dump($_REQUEST);
+		//var_dump($_POST);
 		// si es que nos enviaron una accion
-		if (isset($_REQUEST["accion2"]))
+		if (isset($_POST["accion2"]))
 		{
-			switch ($_REQUEST["accion2"])
+			switch ($_POST["accion2"])
 			{
 				case "MODIFICAR_R":
 
-					$datos = $_REQUEST;
+					$datos = $_POST;
 										
 					// si apretaron el boton modificar obtenermos los datos desde el formulario
 					if ($this->empresasBD->modificarRepresentantePersoneria($datos))
@@ -441,7 +441,7 @@ class empresas {
 					}else{
 						$this->mensajeError=$this->empresasBD->mensajeError;
 					}
-					$campos[0]=$_REQUEST;
+					$campos[0]=$_POST;
 					break;
 
 				case "VOLVER":
@@ -451,7 +451,7 @@ class empresas {
 			}
 		}
          
-      	$datos = $_REQUEST;
+      	$datos = $_POST;
 		$dt = new DataTable();
 	
         // aqui se obtienen los datos del representante
@@ -488,15 +488,15 @@ class empresas {
 	private function eliminar()
 	{
 		// se envia a eliminar a la tabla con los datos del formulario
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["TipoEmpresa"] = 1;
 
  		if ($this->empresasBD->eliminar($datos)){
 			// si es que hubiera error lo obtenemos
 			
 			// si elimino entonces mostrar listado sin ningún filtro, o sea mostrar todo
-			$_REQUEST["pagina"]  = 1;
-			$_REQUEST["nombrex"] = "";
+			$_POST["pagina"]  = 1;
+			$_POST["nombrex"] = "";
 		}
 		
 		$this->mensajeError=$this->empresasBD->mensajeError;
@@ -512,7 +512,7 @@ class empresas {
     private function eliminarRepresentante()
 	{
 	
-		$this->empresasBD->eliminarRepresentante($_REQUEST);
+		$this->empresasBD->eliminarRepresentante($_POST);
 		$this->mensajeError=$this->empresasBD->mensajeError;
 		if ($this->mensajeError == '')
 		{

@@ -14,13 +14,15 @@
 					<input type="hidden" class="form-control" id="RutEmpresadin" name="RutEmpresadin" value="<php:texto id="RutEmpresadin" />" />
 					<input type="hidden" class="form-control" id="collapse_clientes" name="collapse_clientes" />
 
-           </form>
+             <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 		   
 			<form name="importacion" id="importacion" action="rl_importacionpdf_proveedores.php" method="POST" >
 				<input type="hidden" name="RutEmpresa" value="<php:texto id="RutEmpresadin" />" />
 				<input type="hidden" name="RutProveedor" id="RutProveedor" value="<php:item id="RutProveedor"/>" >
 				<input type="hidden" name="NombreProveedor" id="NombreProveedor" value="<php:item id="NombreProveedor" />">
-			</form>
+			  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 		   </php:repeticion>
          </div>
       <div class="box-body">
@@ -32,7 +34,7 @@
  
           <php:repeticion id="formulario">
 					<!--Rut de Empresa-->
-					<!--<div class="form-row">
+					<!--<div class="row">
 						<div class="col-md-6">
 							<label for="RutEmpresa">Rut Empresa</label>
 							<input type="text" class="form-control" id="RutEmpresa" name="RutEmpresa" maxlength="10"  readonly="readonly" value="<php:item id="RutEmpresa" />">
@@ -45,7 +47,7 @@
 					
 					<input type="hidden" class="form-control" id="RutProveedor" name="RutProveedor" value="<php:item id="RutProveedor"/>"/>
 				
-                     <div class="form-row">
+                     <div class="row">
                       <div class="col-md-6">
                         <label for="RutProveedor">Rut</label>
                         <input type="text" class="form-control" id="RutProveedor" name="RutProveedor" maxlength="10"  readonly="readonly" value="<php:item id="RutProveedor" />">
@@ -55,13 +57,13 @@
                         <input type="text" class="form-control" id="NombreProveedor" name="NombreProveedor" maxlength="50" value="<php:item id="NombreProveedor" />"autofocus required="">
                       </div>
                     </div>
-                    <div class="form-row">
+                    <div class="row">
                       <div class="col-md-6">
                         <label for="Direccion">Direcci&oacute;n</label>
                         <input type="text" class="form-control" id="Direccion" name="Direccion" maxlength="50" value="<php:item id="Direccion" />" placeholder="Direcci&oacute;n" />
                       </div>
                     </div>
-                    <div class="form-row">
+                    <div class="row">
                       <div class="col-md-6 xs-12">
                         <label for="Comuna">Comuna</label>
                         <input type="text" class="form-control" id="Comuna" name="Comuna" maxlength="50" value="<php:item id="Comuna" />" placeholder="Comuna" />
@@ -71,9 +73,9 @@
                         <input type="text" class="form-control" id="Ciudad" name="Ciudad" maxlength="50" value="<php:item id="Ciudad" />" placeholder="Ciudad" />
                       </div>
                     </div>
-                    <div class="form-row">
+                    <div class="row">
                 
-                    <div class="form-row">  
+                    <div class="row">  
                       <div class="col-md-2 xs-12">
                           <button class="btn btn-md btn-default btn-block" type="submit" style="margin-top: 10px" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"  id="btn_proveedor"><a href="" >Representantes</a></button>
                       </div>
@@ -83,7 +85,8 @@
                        <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="MODIFICAR" onclick="javascript:return validarFormulario(this);"/>Guardar</button>
                      </div>
                     </div>   
-                 </form>      
+                   <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>      
                 </div>  
               </div>
               <!-- /.box -->
@@ -97,12 +100,13 @@
            <div class="box">
             <div class="box-body pad table-responsive">
                  <div class="form-group">
-                   <form name="formulario2" id="formulario_usuarios" action="rl_Proveedores.php" method="POST" autocomplete="off">
+                   <form name="formulario2" id="formulario" action="rl_Proveedores.php" method="POST" autocomplete="off">
                     <input type="hidden" name="RutProveedor" id="RutProveedor" value ="<php:item id="RutProveedor" />" />
 				    <input type="hidden" id="RutEmpresa" name="RutEmpresa" value="<php:item id="RutEmpresa" />" />
                     <button type="button" class="btn btn-default" name="accion" data-toggle="modal"  onclick="inicio_firmate_proveedor()" data-target="#modal_creafirmanteproveedor" value="AGREGAR_R"><a><i class="fa fa-plus" class="fa fa-plus" aria-hidden="true"></i> Agregar</a></button>
                   </div>
-                  </form>
+                    <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
                 </php:repeticion>    
             </div>
            <div class="box-body">
@@ -134,7 +138,8 @@
 					<input type="hidden" class="form-control" id="pagina" name="pagina" value="<php:texto id="pagina" />" />
                     <!--<button class="btn btn-primary btn-sm" type="submit" name="accion" value="MODIFICAR_R">Modificar</button>-->
                     <button class="btn btn-default btn-sm" type="submit" name="accion" value="ELIMINAR_R" onclick="javascript:return preguntarPorBorrar();">Eliminar</button>
-                 </form></td>
+                   <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form></td>
                 </tr>
                 </php:repeticion> <!-- repeticion de representantes -->
               </tbody>
@@ -151,63 +156,63 @@
 		      <div class="modal-header" align="center">
 		        <h4 class="modal-title" id="ejemplo-titulo"> Crea Firmante Empresa Externa</h4>
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
+		          <span aria-hidden="true" class="cerrar_modal">&times;</span>
 		        </button>
 		      </div>
 		      <div class="modal-body">
 		      	<div id="mensajeError_modal"></div>
 		         <form name="formulario3" id="formulario3"  >
 				 
-					<div class="form-row">
+					<div class="row">
 						<div class="col-md-6">
 							<label for="RutRepresentante">Rut Empresa Externa</label>
 							<input type="text" class="form-control" id="rutempresa_fp" name="rutempresa_fp" maxlength="10" value="" placeholder="" readonly>
 						</div>
 					</div>
 					
-					<div class="form-row">
+					<div class="row">
 						<div class="col-md-6">
 							<label for="RutRepresentante">Rut Representante</label>
 							<input type="text" class="form-control" id="rutrepresentate_fp" name="rutrepresentate_fp" maxlength="10" value="" placeholder="" >
 						</div>
 					</div>
 					
-					<div class="form-row">
+					<div class="row">
 						<div class="col-md-6">
 							<label for="Nacionalidad">Nacionalidad</label>
 							<input type="text" class="form-control" id="nacionalidad_fp" name="nacionalidad_fp" maxlength="20 value="" placeholder="" >
 						</div>
 					</div>
 					
-					<div class="form-row">
+					<div class="row">
 						<div class="col-md-6">
 							<label for="Nombre">Nombre</label>
 							<input type="text" class="form-control" id="nombre_fp" name="nombre_fp" maxlength="50" value="" placeholder="" > 
 						</div>
 					</div>
 					
-					<div class="form-row">
+					<div class="row">
 						<div class="col-md-6 xs-12">
 							<label for="ApPaterno">Apellido Paterno</label>
 							<input type="text" class="form-control" id="paterno_fp" name="paterno_fp" maxlength="50" value="" placeholder="" >
 						</div>
 					</div>
 					
-					<div class="form-row">
+					<div class="row">
 						<div class="col-md-6 xs-12">
 							<label for="ApMaterno">Apellido Materno</label>
 							<input type="text" class="form-control" id="materno_fp" name="materno_fp" maxlength="50" value="" placeholder="" >
 						</div>
 					</div>	
 
-					<div class="form-row">
+					<div class="row">
 						<div class="col-md-6 xs-12">
 							<label for="Correo">Correo</label>
 							<input type="text" class="form-control" id="email" name="email" maxlength="60" value="" placeholder="" >
 						</div>
 					</div>	
 				
-					<div class="form-row" >
+					<div class="row" >
 					  <div class="col-md-6 xs-12">
 						<label for="">Tipo de Firma</label>
 						<select class= "form-control" name="idFirma" id="idFirma">
@@ -220,14 +225,14 @@
 					  </div>
 					</div>					
 					
-					<div class="form-row">
+					<div class="row">
 						<div class="col-md-6 xs-12">
 							<label for="Cargo">Cargo</label>
 							<input type="text" class="form-control" id="cargo_fp" name="cargo_fp" maxlength="60" value="" placeholder="" >
 						</div>
 					</div>				
 					
-					<div class="form-row">
+					<div class="row">
 						<div class="col-md-6 xs-12" style="margin-top:10px">
 							<button type="button" class="btn btn-secondary btn-md" onclick="javascript:return validarFormulario3(this,new Array(),new Array('materno_fp')) && validaRut3(obtenerElemento('rutrepresentate_fp').value,'rutrepresentate_fp') && graba_firmante_proveedor();" name="grabar_creaproveedor" id="grabar_creaproveedor" >Grabar</button>
 						</div>
@@ -236,7 +241,8 @@
 			  </div>
 			  
 			  <div class="modal-footer" style="margin-top:10px;">
-			  </form>
+			    <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 		      </div>
 		    </div>
 		  </div>

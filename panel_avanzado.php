@@ -44,17 +44,17 @@ class panel_avanzado {
 	{
 
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
 				return;
 			}
 		}
-		if (isset($_REQUEST["mensajeError"])) $this->mensajeError.=$_REQUEST["mensajeError"];
+		if (isset($_POST["mensajeError"])) $this->mensajeError.=$_POST["mensajeError"];
 
 		// hacemos una instacia del manejo de plantillas (templates)
 		$this->pagina = new Paginas();
@@ -115,7 +115,7 @@ class panel_avanzado {
 		include("includes/opciones_menu.php");
 
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -126,7 +126,7 @@ class panel_avanzado {
 		}
 	
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "DETALLE_EJECUTIVO":
 				$this->detalle_ejecutivo();
@@ -142,7 +142,7 @@ class panel_avanzado {
 		$dt_eje = new DataTable();
 		$dt_emp = new DataTable();
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["TipoEmpresa"] = 1;
 
 		//Ejecutivos 

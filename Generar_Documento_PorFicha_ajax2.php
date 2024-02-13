@@ -46,7 +46,7 @@ class personas {
 
 		$dt = new DataTable();
 		$array = array ();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos["tipousuarioid"] = $this->seguridad->tipousuarioid;
 
 		//Consultar el tipo de firma que tiene asociada el usuario

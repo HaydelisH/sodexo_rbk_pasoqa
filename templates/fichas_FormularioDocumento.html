@@ -31,21 +31,21 @@
                   <div class="tab-pane <php:texto id="active_datos" />" id="datos_f">
                     <div class="box-body">
                       
-                       <div class="form-row">
+                       <div class="row">
                         <div class="col-md-6 col-xs-12">
                           <label for="fichaid">C&oacute;digo de ficha</label>
                           <input type="text" class="form-control" id="fichaid"  name="fichaid" value="<php:item id="fichaid" />" readonly >
                         </div>
                       </div> 
 
-                      <div class="form-row">
+                      <div class="row">
                         <div class="col-md-6 col-xs-12">
                           <label for="tipousuarioid">Fecha de creaci&oacute;n</label>
-                          <input type="text" class="form-control" id="fechacreacion"  name="fechacreacion" value="<php:item id="fechacreacion" />" readonly>
+                          <input type="datetime" class="form-control" id="fechacreacion"  name="fechacreacion" value="<php:item id="fechacreacion" />" readonly>
                         </div>
                       </div>
 
-                      <div class="form-row">
+                      <div class="row">
                         <div class="col-md-6 col-xs-12">
                           <label for="tipousuarioid">Estado</label>
                           <input type="text" class="form-control" id="estadoid"  name="estadoid" value="<php:item id="nombreestado" />" readonly>
@@ -58,63 +58,63 @@
                   <div class="tab-pane" id="datos_p">
                     <div class="box-body">
 										
-                      <div class="form-row">
+                      <div class="row">
               					<div class="col-md-6 col-xs-12">
               						<label for="tipousuarioid">Rut</label>
-              						<input type="text" class="form-control" id="newusuarioid"  name="newusuarioid" placeholder="Rut v&aacute;lido" maxlength="10" value="<php:item id="personaid" />" readonly >
+              						<input type="text" class="form-control newusuarioid_FDocumento" id="newusuarioid"  name="newusuarioid" placeholder="Rut v&aacute;lido" maxlength="10" value="<php:item id="personaid" />" readonly >
               					</div>
               				</div> 
 
-              				<div class="form-row">
+              				<div class="row">
               					<div class="col-md-6 col-xs-12">
               						<label for="contenedorid" >Nombre Completo</label>
               						<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre completo" maxlength="110" value="<php:item id="nombre" />" >
               					</div>
               				</div>
 
-              				<div class="form-row">
+              				<div class="row">
               					<div class="col-md-6 col-xs-12">
               						<label for="contenedorid" >Nacionalidad</label>
               						<input type="text" class="form-control" id="nacionalidad" name="nacionalidad" placeholder="Nacionalidad" maxlength="50" value="<php:item id="nacionalidad" />">
               					</div>
               				</div>			
 
-              				<div class="form-row">
+              				<div class="row">
               					<div class="col-md-6 col-xs-12">
               						<label for="contenedorid" >Direcci&oacute;n</label>
               						<input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion" maxlength="110" value="<php:item id="direccion" />">
               					</div>
               				</div>		
 
-              				<div class="form-row">
+              				<div class="row">
               					<div class="col-md-6 col-xs-12">
               						<label for="contenedorid" >Comuna</label>
               						<input type="text" class="form-control" id="comuna" name="comuna" placeholder="Comuna" value="<php:item id="comuna" />">
               					</div>
               				</div>	
 
-              				<div class="form-row">
+              				<div class="row">
               					<div class="col-md-6 col-xs-12">
               						<label for="contenedorid" >Ciudad</label>
               						<input type="text" class="form-control" id="ciudad" name="ciudad" placeholder="Ciudad" value="<php:item id="ciudad" />">
               					</div>
               				</div>				
 
-              				<div class="form-row">
+              				<div class="row">
               					<div class="col-md-6 col-xs-12">
               						<label for="contenedorid" >Fono (+56123456789)</label>
               						<input type="text" class="form-control" id="fono" name="fono" placeholder="Fono" maxlength="12" value="<php:item id="fono" />" />
               					</div>
               				</div>
 
-              				<div class="form-row">
+              				<div class="row">
               					<div class="col-md-6 col-xs-12">
               						<label for="contenedorid" >Correo Electr&oacute;nico</label>
               						<input type="text" class="form-control" id="correo" name="correo" placeholder="Correo electr&oacute;nico" maxlength="50" value="<php:item id="correo" />">
               					</div>
               				</div>
 
-              				<div class="form-row">
+              				<div class="row">
               					<div class="col-md-6 col-xs-12">
               						<label for="contenedorid" >Estado civ&iacute;l</label>
               						<select class= "form-control" name="idEstadoCivil" id="idEstadoCivil">
@@ -126,21 +126,20 @@
               					</div>
               				</div>	
 
-              				<div class="form-row">
+              				<div class="row">
               					<div class="col-md-6 col-xs-12">
               						<label for="contenedorid" >Fecha de nacimiento</label>
               						<div class="form-group">
-              				            <div class="input-group date">
-              				              <div class="input-group-addon">
-              				                <i class="fa fa-calendar"></i>
-              				              </div>
-              								<input type="text" class="form-control" id="fechanacimiento" name="fechanacimiento" placeholder="Fecha de nacimiento"  value="<php:item id="fechanacimiento" />"/>
+                            <div class="input-group mb-3 date">
+                              <div class="input-group-prepend date"><span class="input-group-text" style="padding-bottom: 12px;padding-top: 12px;"><i class="fa fa-calendar"></i></span></div>
+                              
+              								<input type="datetime" class="form-control" id="fechanacimiento" name="fechanacimiento" placeholder="Fecha de nacimiento"  value="<php:item id="fechanacimiento" />"/>
               							</div>
               						</div>
               				  	</div>
               				</div>
 
-                      <div class="form-row" >
+                      <div class="row" >
                         <div class="col-md-6 xs-12">
                           <label for="idFirma">Tipo de Firma</label>
                           <select class= "form-control" name="idFirma" id="idFirma">
@@ -160,12 +159,12 @@
                     <div class="box-body">
 
 												 <!--Empresas-->
-                          <div class="form-row" >
+                          <div class="row" >
                             <div class="col-md-6 xs-12" >
                               <label for="Empresa" >Empresa</label>
                               <div class="box-body">
                                 <!--Select de Empresas disponibles-->
-                                <select class= "form-control" name="RutEmpresa" id="RutEmpresa" disabled="">
+                                <select class= "form-control RutEmpresa_FAgregar" name="RutEmpresa" id="RutEmpresa" disabled="">
                                 <option value="0">( Seleccione )</option>
                                   <php:repeticion id="Empresas">
                                     <option value="<php:item id="RutEmpresa" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEmpresa" /><php:argumento idvalor="RutEmpresa" /></php:funcion>><php:item id="RazonSocial" /></option>
@@ -176,7 +175,7 @@
                             </div>	
                           </div>
 
-                          <div class="form-row" >
+                          <div class="row" >
                             <div class="col-md-6 xs-12">
                              <label>Centro de Costo</label>
                               <div class="box-body">
@@ -185,13 +184,13 @@
                                     <input class="form-control" type="hidden" name="lugarpagoid" id="lugarpagoid" value="<php:item id="lugarpagoid" />" /> 
                                   </div>
                                   <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
-                                     <button class="btn btn-md btn-primary btn-block lugares_pago"  type="button" id="btn_lugares_pago" data-toggle="modal" data-target="#modal_lugares_pago" disabled=""><i class="fa fa-search"></i></button>
+                                     <button class="btn btn-md btn-primary btn-block lugares_pago btn_lugares_pago_FAgregar"  type="button" id="btn_lugares_pago" data-toggle="modal" data-target="#modal_lugares_pago" disabled=""><i class="fa fa-search"></i></button>
                                   </div>
                                 </div>
                               </div>
                           </div>
 
-                          <div class="form-row">
+                          <div class="row">
                             <div class="col-md-6 xs-12">
                              <label>Relaci&oacute;n Laboral</label>
                               <div class="box-body">
@@ -200,7 +199,7 @@
                                     <input type="hidden" name="centrocostoid" id="centrocostoid" value="<php:item id="centrocostoid"/>"/>
                                   </div>
                                   <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
-                                     <button class="btn btn-md btn-primary btn-block" type="button" id="btn_centro_costo" data-toggle="modal" data-target="#modal_centro_costo" disabled=""><i class="fa fa-search"></i></button>  
+                                     <button class="btn btn-md btn-primary btn-block btn_centro_costo_FAgregar" type="button" id="btn_centro_costo" data-toggle="modal" data-target="#modal_centro_costo" disabled=""><i class="fa fa-search"></i></button>  
                                   </div>
                                 </div>
                               </div>
@@ -211,7 +210,7 @@
                   <div class="tab-pane <php:texto id="active_docs" />" id="datos_doc">
                     <div class="box-body">
                         <!--Subir documento-->
-                        <div class="form-row">
+                        <div class="row">
                           <div class="col-md-6" id="doc">
                             <label for="Subir" id="doc_label">Seleccione archivos PDF</label>
                             <div class="form-group" id="doc_hijo"> 
@@ -221,7 +220,7 @@
                               <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
                                 <span class="btn btn-primary btn-file">
                                   <i class="fa fa-upload" aria-hidden="true"></i>
-                                  <input type="file" name="archivo" id="archivo"  accept="application/pdf"  />
+                                  <input type="file" name="archivo" id="archivo"  accept="application/pdf" class="archivo_FAgregar"  />
                                 </span>
                               </div>
                               <span class="fileinput-filename"></span>
@@ -230,7 +229,7 @@
                           </div>
                         </div>
 
-                       <div class="form-row">
+                       <div class="row">
                         <div class="col-md-2 col-md-offset-4">
                           <button type="submit" name="accion" value="AGREGAR_DOC" class="btn btn-primary btn-block" style="margin-top: 25px">
                            Agregar Documentos</button>
@@ -238,7 +237,7 @@
                        </div>
 
                       <!--Documento subidos-->
-                       <div class="form-row">
+                       <div class="row">
                         <div class="col-md-12" style="margin-top: 10px;">
                           <label for="Documentos subidos"> Documentos subidos </label>
                             <div id="tabla_doc_subidos" class="tabla-responsiva" >
@@ -278,7 +277,7 @@
                     <div class="box-body">
                         <!--Documentos Generados-->
 
-                       <div class="form-row">
+                       <div class="row">
                         <div class="col-md-12" >
                             <div id="tabla_doc_subidos" class="tabla-responsiva" >
                               <table id="tabla_doc" class="table table-bordered table-hover " >
@@ -312,7 +311,7 @@
                   </div>        
                 </div>
               </div>
-  		        <div class="form-row">  
+  		        <div class="row">  
   		            <div class="col-md-2 xs-12 pull-right">  
                       <input type="hidden" name="accion2" value="MODIFICAR"/>
   		                <button class="btn btn-md btn-success btn-block" type="submit" name="accion" id="MODIFICAR" value="MODIFICAR" style="margin-top: 25px" onclick="javascript:return validarFormulario(this,new Array(),new Array('Documento')) && validaRut2(document.formulario.newusuarioid);"/>Modificar</button> 
@@ -320,7 +319,8 @@
   		        </div>
 
 			</php:repeticion>
-		</form>
+		  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 	</div>
 </div>
 </div>
@@ -336,7 +336,7 @@
       <div class="modal-header" align="center">
         <h4 class="modal-title" id="ejemplo-titulo"> Centro de Costo </h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true" class="cerrar_modal">&times;</span>
         </button>
       </div>
       <!--<div class="modal-body">-->
@@ -355,7 +355,7 @@
          </table>
     </div>
     <div class="modal-footer" style="margin-top:10px;">
-        <button type="button" class="btn btn-secondary btn-md" id="cerrar_lugares_pago" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-secondary btn-md cerrar_modal" id="cerrar_lugares_pago" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
@@ -369,7 +369,7 @@
       <div class="modal-header" align="center">
         <h4 class="modal-title" id="ejemplo-titulo"> Relaci&oacute;n Laboral </h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true" class="cerrar_modal">&times;</span>
         </button>
       </div>
       <!--<div class="modal-body">-->
@@ -389,237 +389,8 @@
          </table>
     </div>
     <div class="modal-footer" style="margin-top:10px;">
-        <button type="button" class="btn btn-secondary btn-md" id="cerrar_centro_costo" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-secondary btn-md cerrar_modal" id="cerrar_centro_costo" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
 </div>
-
-<script>
-	
-	$('#fechanacimiento').datepicker({
-	    language: "es",
-	    orientation: "bottom",
-	    autoclose: true,
-	    todayHighlight: true,
-	    format: 'dd-mm-yyyy'
-    });
-
-  $("#newusuarioid").change(function(){
-
-  		var RutUsuario = $("#newusuarioid").val();
-  		var url  = "Generar_Documento_PorFicha_ajax.php?personaid=" + RutUsuario;
-
-        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-        if( window.XMLHttpRequest )
-          ajax = new XMLHttpRequest(); // No Internet Explorer
-        else
-          ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-       
-        // Almacenamos en el control al funcion que se invocara cuando la peticion
-        // cambie de estado 
-        ajax.onreadystatechange = funcionCallback_rutusuario;
-
-        // Enviamos la peticion
-        ajax.open( "GET", url, true );
-        ajax.send( "" );
-  });
-
-  function funcionCallback_rutusuario()
-  {
-    // Comprobamos si la peticion se ha completado (estado 4)
-    if( ajax.readyState == 4 )
-    {
-      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-      if( ajax.status == 200 )
-      {
-        // Escribimos el resultado en la pagina HTML mediante DHTML
-        salida = ajax.responseText;
-        datos = JSON.parse(salida);
-
-        if( salida != '' ){ 
-
-        	$("#nombre").val( datos.nombre + ' ' + datos.appaterno + ' ' + datos.apmaterno);
-        	$("#fechanacimiento").val( datos.fechanacimiento );
-        	$("#correo").val(datos.correo);
-        	$("#nacionalidad").val(datos.nacionalidad);
-        	$("#direccion").val(datos.direccion); 
-        	$("#comuna").val(datos.comuna);
-        	$("#ciudad").val(datos.ciudad);
-        	$("#idEstadoCivil").val(datos.estadocivil);
-          $("#fono").val(datos.fono);
-          $("#idFirma").val(datos.idFirma);
-
-        	var idestado = '#idEstadoCivil option[value="'+ datos.estadocivil + '"]';
-        	$(idestado).attr("selected",true);
-
-        	var rolid = '#rolid option[value="'+ datos.rolid +'"]'; 
-        	$(rolid).attr("selected", true);
-
-        }else{
-            $("#mensajeError").removeClass("callout callout-warning");
-            $("#mensajeError").html("");
-        }
-      }
-    }
-  }
-
-   //Modal de Lugares de pago 
-  $("#btn_lugares_pago").click(function(){
-
-    var RutEmpresa = $("#RutEmpresa").val();
-    $(".fila_lp").remove();
-    $("#nombrecentrocosto").val('');
-    $("#centrocostoid").val('');
-
-    if( RutEmpresa == 0 ){
-
-      $("#mensajeError").addClass("callout callout-warning");
-      $("#mensajeError").html("Debe seleccionar la Empresa");
-      return false;
-
-    }else{
-
-      $("#mensajeError").html("");
-      $("#mensajeError").removeClass("callout callout-warning");
-      
-
-    var url  = "Generar_Documento_PorFicha_ajax1.php?RutEmpresa=" + RutEmpresa;
-
-      // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-      if( window.XMLHttpRequest )
-        ajax = new XMLHttpRequest(); // No Internet Explorer
-      else
-        ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-     
-      // Almacenamos en el control al funcion que se invocara cuando la peticion
-      // cambie de estado 
-      ajax.onreadystatechange = funcionCallback_lugarespago;
-
-      // Enviamos la peticion
-      ajax.open( "GET", url, true );
-      ajax.send( "" );
-  }
-
-  });
-
-  function funcionCallback_lugarespago()
-  {
-    // Comprobamos si la peticion se ha completado (estado 4)
-    if( ajax.readyState == 4 )
-    {
-      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-      if( ajax.status == 200 )
-      {
-        // Escribimos el resultado en la pagina HTML mediante DHTML
-        salida = ajax.responseText;
-        listado = JSON.parse(salida);
-      num = listado.length;
-
-      if( num > 0 ){
-          $.each(listado, function( index, value ) {
-        $('#tabla_lugares_pago tr:last').after('<tr class="fila_lp"><td>' + listado[index].lugarpagoid + '</td><td><div id="' + listado[index].lugarpagoid + '">' + listado[index].nombrelugarpago + ' </div></td><td ><button type="button" style="background-color: transparent;" class="btn" name="btn_agregar" id="btn_agregar" onclick="agregarLp(' + listado[index].lp + ');"><i class="fa fa-plus" aria-hidden="true"></i></button></td></tr>');
-      });
-    }
-    else{
-      $('#tabla_lugares_pago tr:last').after('<tr class="fila_lp"><td colspan = 3>No existen Centros de Costo de la Empresa seleccionada</td></tr>');
-    }
-      }
-    }
-  }
-
-  function agregarLp(i){
-    $("#lugarpagoid").val(i);
-    $("#nombrelugarpago").val($("#"+i).html());
-    $("#cerrar_lugares_pago").click();
-  }
-  
-
-  //Modal de Centros de Costo
-  $("#btn_centro_costo").click(function(){
-
-    var RutEmpresa = $("#RutEmpresa").val();
-    var LugarPagoid = $("#lugarpagoid").val();
-    $(".fila_cc").remove();
-
-    if( RutEmpresa == 0 ){
-
-      $("#mensajeError").addClass("callout callout-warning");
-      $("#mensajeError").html("Debe seleccionar la Empresa");
-      return false;
-
-    }
-
-    if( LugarPagoid == '' ){
-
-      $("#mensajeError").addClass("callout callout-warning");
-      $("#mensajeError").html("Debe seleccionar Lugar de Pago");
-      return false;
-
-    }
-
-  $("#mensajeError").html("");
-  $("#mensajeError").removeClass("callout callout-warning");
-  
-
-  var url  = "Generar_Documento_PorFicha_ajax2.php?RutEmpresa=" + RutEmpresa + "&lugarpagoid=" + LugarPagoid;
-
-    // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-    if( window.XMLHttpRequest )
-      ajax = new XMLHttpRequest(); // No Internet Explorer
-    else
-      ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-   
-    // Almacenamos en el control al funcion que se invocara cuando la peticion
-    // cambie de estado 
-    ajax.onreadystatechange = funcionCallback_centrocosto;
-
-    // Enviamos la peticion
-    ajax.open( "GET", url, true );
-    ajax.send( "" );
-
-
-  });
-
-  function funcionCallback_centrocosto()
-  {
-    // Comprobamos si la peticion se ha completado (estado 4)
-    if( ajax.readyState == 4 )
-    {
-      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
-      if( ajax.status == 200 )
-      {
-        // Escribimos el resultado en la pagina HTML mediante DHTML
-        salida = ajax.responseText;
-        listado = JSON.parse(salida); 
-      num = listado.length;
-
-      if( num > 0 ){
-          $.each(listado, function( index, value ) {
-        $('#tabla_centro_costo tr:last').after('<tr class="fila_cc"><td>' + listado[index].centrocostoid + '</td><td><div id="' + listado[index].centrocostoid + '">' + listado[index].nombre + ' </div></td><td ><button type="button" style="background-color: transparent;" class="btn" name="btn_agregar" id="btn_agregar" onclick="agregarCC(' + listado[index].centrocostoid + ');"><i class="fa fa-plus" aria-hidden="true"></i></button></td></tr>');
-      });
-     }else{
-      $('#tabla_centro_costo tr:last').after('<tr class="fila_cc"><td colspan=3 >No existen Relaciones laborales para la Empresa y el Centro de Costo seleccionado</td></tr>');
-    }
-      }
-    }
-  }
-
-  function agregarCC(i){
-    $("#centrocostoid").val(i);
-    $("#nombrecentrocosto").val($("#"+i).html());
-    $("#cerrar_centro_costo").click();
-  }
-  
-  $("#archivo").change(function(){
-    $("#Documento").val($("#archivo").val());
-  });
-
-  $("#RutEmpresa").change(function(){
-      $("#centrocostoid").val('');
-      $("#nombrecentrocosto").val('');
-      $("#lugarpagoid").val('');
-      $("#nombrelugarpago").val('');
-  });
-
- </script>

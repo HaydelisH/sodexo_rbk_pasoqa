@@ -2,7 +2,6 @@
 <?php
 //============================================================+
 // File name   : tcpdf_addfont.php
-// Version     : 1.0.002
 // Begin       : 2013-05-13
 // Last Update : 2013-08-05
 // Authors     : Nicola Asuni - Tecnick.com LTD - www.tecnick.com - info@tecnick.com
@@ -38,7 +37,6 @@
  * @file
  * This is a command line script to generate TCPDF fonts.<br>
  * @package com.tecnick.tcpdf
- * @version 1.0.000
  */
 
 if (php_sapi_name() != 'cli') {

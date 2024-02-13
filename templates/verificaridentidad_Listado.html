@@ -29,7 +29,8 @@
           <form role="form" name="formulario2" id="formulario2" action="Documentos_Firmas.php" method="POST">
     				<input type="hidden" name="idDocumento" value="<php:item id="idDocumento" />" />
     				<button type="button" class="btn btn-default" onclick="history.back(-1)"><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
-    			</form>
+    			  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
         </div>
       
           <div class="box-body">
@@ -39,7 +40,7 @@
             <div id="mensajeError"><php:texto id="mensajeError" /></div>
         
             <!--Datos referenciales-->
-            <div class="form-row">
+            <div class="row">
             
               <form role="form" name="formulario" id="formulario" action="Documentos_Firmas.php" method="POST">
 
@@ -65,9 +66,9 @@
                 </div>
                 <br>
 
-                <div class="row">
-                  <div class="col-md-2 xs-12 pull-right">
-                     <button class="btn btn-md btn-primary btn-block " onclick="verificar()" type="button" name="accion" id="btn-verify" value="Verificar" />Verificar</button>
+                <div class="row d-flex justify-content-end">  
+                  <div class="col-md-2 xs-12 d-grid gap-2 ">  
+                     <button class="btn btn-md btn-primary btn-block " onclick="verificar_VerificacionId()" type="button" name="accion" id="btn-verify" value="Verificar" />Verificar</button>
                   </div>
                 </div>
                 
@@ -79,7 +80,8 @@
                 <input type="hidden" name="sessionid"        id="sessionid" /> 
           			
 		           
-              </form> 
+                <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form> 
 
             </div>
           </div>
@@ -90,203 +92,3 @@
 </div>
 </section>
 
- <script type="text/javascript">
-  
-   let general = {
-        baseUrl: "",
-        apiKey: "",
-        digitalSignature: 0,
-        session: {
-          id: "",
-          companyId: "",
-          username: ""
-        },
-        currentAction: "VERIFY",
-        operator: {
-          sessionId: null
-        }
-      };
-   
-    
-    let popupPage;
-      let openCheckId = function(action) 
-    {
-        general.currentAction = action;
-        // Create popup window
-        var w = 900;
-        var h = 620;
-
-        // Fixes dual-screen position                         Most browsers      Firefox
-        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
-        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
-
-        var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
-        var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
-
-        var left = ((width / 2) - (w / 2)) + dualScreenLeft;
-        var top = ((height / 2) - (h / 2)) + dualScreenTop;
-
-        var opciones = "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=" + w + ", height=" + h + ", top=" + top + ", left=" + left;
-        popupPage = window.open("checkid/index.html?v12", "libPage", opciones);
-        // Puts focus on the popupPage
-        if (window.focus) {
-          popupPage.focus();
-        }
-      };
-
-   
-      let getParamsVerify = function() {
-        return {
-          action: "VERIFY",
-          method: general.method,
-          apiKey: general.apiKey,
-          sessionId: general.session.id,
-          companyId: general.session.companyId,
-          operationId: 1,
-          baseUrl: general.baseUrl,
-		useFingerprint: true,//si pide huella al que esta enrolando
-		usePin: false,//si pide pin al que esta enrolando
-		pinRestore: true,//cambio de pin
-		pinRestoreMethod:'ACEP',
-          operator: {
-			useFingerprint:true,
-			usePin:false,
-			pinRestore: true,//cambio de pin
-			pinRestoreMethod:'ACEP',
-            sessionId: general.operator.sessionId,
-            identityDocument: {
-                countryCode: general.countryCode,
-                type: general.type,
-                personalNumber: general.rutoperador
-            }
-          },
-          digitalIdentity: {
-            identityDocuments: [{
-              countryCode: general.countryCode,
-              type: general.type,
-              personalNumber: general.rutaverificar
-            }]
-          }
-          };
-      };
-    
-    
-  window.getParams = function()
-  {
-    return getParamsVerify();
-  }
-    
-  //respuesta del formulario checkid
-  window.callback = function(result) 
-  {
-    popupPage.close();
-    console.log("callback", result);
-
-    if (result.numError == 0) 
-    {
-      if (result.action == "VERIFY") 
-      {
-        let resultMessage = "Validación Errónea";
-        if (result.data.authenticated)
-        {
-          resultMessage = "Validación Exitosa!";
-      
-          general.lastVerify = result.data;
-          
-          //Limpiar campos
-          document.getElementById('inVerifyDocPersonalNumber').value = '';
-          document.getElementById('inVerifyType').value = 0;
-        }
-      }
-    }else{
-		alert (result.numError +  " " + result.msError);
-	}
-
-    return false;
-  }
-    
-  function verificar()
-  { 
-	var rut_usuario = $("#inVerifyDocPersonalNumber").val();
-	var tipo = $("#inVerifyType").val();
-	
-	if( rut_usuario.length == 0 ){
-		$("#mensajeError").addClass("callout callout-warning");
-		$("#mensajeError").html("El campo rut no puede ser vac&iacute;o");
-		return false;
-	}
-	if( tipo == 0 ){
-		$("#mensajeError").addClass("callout callout-warning");
-		$("#mensajeError").html("Debe seleccionar el tipo de firma");
-		return false;
-	}
-	
-	$("#mensajeError").removeClass("callout callout-warning");
-	$("#mensajeError").html("");
-	
-	if ( (validaRut2(document.formulario.inVerifyDocPersonalNumber)) && (document.getElementById("inVerifyType").value != 0 ) ){
-	   consulta_sesion();
-	}
-  }
-    
-    
-  var conexion;
-      
-  function crearXMLHttpRequest() 
-  {
-    var xmlHttp=null;
-    if (window.ActiveXObject) 
-      xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-    else 
-    if (window.XMLHttpRequest) 
-      xmlHttp = new XMLHttpRequest();
-    return xmlHttp;
-  }
-
-
-  function consulta_sesion()
-  {
-    conexion=crearXMLHttpRequest();
-  
-    conexion.open('POST', 'consulta_sesion.php', false);
-  
-    conexion.send(null);
-    // Devolvemos el resultado
-    respuesta =  conexion.responseText;  
-
-    arr_resp  = respuesta.split('|'); 
-    if (arr_resp[0] == 'ok')
-    {
-      general.baseUrl       		= arr_resp[1];
-      general.session.companyId   	= arr_resp[2];
-      general.username      		= arr_resp[4];
-      general.session.id     		= arr_resp[6];
-      general.countryCode     		= arr_resp[7];
-      general.type        			= arr_resp[8];
-      general.apiKey        		= arr_resp[9];
-	  general.rutoperador       = arr_resp[10];
-
-      document.getElementById('sessionid').value =   general.session.id; //token de la sesion
-
-      var rut           = document.getElementById('inVerifyDocPersonalNumber').value;
-      general.rutaverificar   = rut.replace ("-","");
-      
-      var tipo = document.getElementById('inVerifyType').value;
-      
-      if ( tipo == 'ANY')
-        tipo = '';
-      
-      general.method        = tipo;
-
-      openCheckId("VERIFY");
-    }
-    else
-    {
-      alert (respuesta);
-    }
-    
-  }
- 
-  
-  </script>
-   

@@ -15,7 +15,8 @@
 					 <input type="hidden" name="pagina" value="<php:item id="pagina" />" id="pagina" >
 					 <input type="hidden" name="holdingid" value="<php:item id="holdingid" />" >
 					 <input type="hidden" name="volver" />
-				</form>
+				  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 	        </div>
       <!-- /.box-header -->
       <div class="box-body">
@@ -25,7 +26,7 @@
         <div id="mensajeError"><php:texto id="mensajeError" /></div>
        
         <!--Datos referenciales-->
-        <div class="form-row">
+        <div class="row">
           
           <div class="col-md-6" style="padding-bottom: 15px;">
     		<h3>Datos del trabajador</h3>
@@ -81,7 +82,8 @@
 		    </div>
 
 				</php:repeticion>
-		 	</form>
+		 	  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 	      </div>
         </div>
       </div>

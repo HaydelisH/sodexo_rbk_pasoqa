@@ -14,7 +14,7 @@
 		
 		<form name="formulario" class="formularioModificar" id="formulario"  class="form-horizontal" action="Empleados.php" method="POST" autocomplete="off">
 				<php:repeticion id="formulario">
-					<div class="form-row">
+					<div class="row">
 						<div class="col-md-6">
 							<label for="tipousuarioid">Rut </label>
 							<div class="input-group col-xs-12" style="padding-left: 20px;">
@@ -29,7 +29,7 @@
 						</div>
 					</div>
 
-					<div class="form-row">
+					<div class="row">
 						<div class="col-md-6">
 							<label for="contenedorid" >Nacionalidad </label>
 							<div class="input-group col-xs-12" style="padding-left: 20px;">
@@ -44,7 +44,7 @@
 					  	</div>
 					</div>			
 					
-					<div class="form-row">
+					<div class="row">
 						<div class="col-md-6">
 							<label for="contenedorid" >Estado civil </label>
 							<div class="input-group col-xs-12" style="padding-left: 20px;">
@@ -65,7 +65,7 @@
 						</div>
 					</div>		
 
-					<div class="form-row">
+					<div class="row">
 						<div class="col-md-6">
 							<label for="contenedorid" >Comuna </label>
 							<div class="input-group col-xs-12" style="padding-left: 20px;">
@@ -80,7 +80,7 @@
 						</div>
 					</div>	
 
-					<div class="form-row">
+					<div class="row">
 						<div class="col-md-6">
 							<label for="contenedorid" >Rol </label>
 								<div class="input-group col-xs-12" style="padding-left: 20px;">
@@ -101,7 +101,7 @@
 						</div>
 					</div>	
 
-					<div class="form-row">
+					<div class="row">
 						<div class="col-md-6 col-xs-12">
 							<label for="contenedorid" >Estado del Empleado</label>
 							<div class="input-group col-xs-12" style="padding-left: 20px;">
@@ -119,7 +119,8 @@
 			</php:repeticion>
 				
 			
-		</form>
+		  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 	   </div>
       </div>
     <!-- /.box -->

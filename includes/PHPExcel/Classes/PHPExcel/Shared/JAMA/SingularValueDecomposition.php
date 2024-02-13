@@ -14,7 +14,7 @@
  *    rank can be computed from this decomposition.
  *
  *    @author  Paul Meagher
- *    @license PHP v3.0
+
  *    @version 1.1
  */
 class SingularValueDecomposition

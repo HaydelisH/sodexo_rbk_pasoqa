@@ -57,7 +57,7 @@ class clausulas {
 		$this->clausulasBD->usarConexion($conecc);
 		
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$this->clausulasBD->obtenerIdPlantillas($datos,$dt);
 		$this->mensajeError = $this->clausulasBD->mensajeError;

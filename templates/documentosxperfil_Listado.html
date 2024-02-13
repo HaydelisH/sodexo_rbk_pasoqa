@@ -8,7 +8,7 @@
 				<php:repeticion id="formulario">			
 			  	</div>
 				<div class="form-group">
-				  <form name="formulario" id="formulario_usuarios" action="documentosxperfil.php" method="POST" >
+				  <form name="formulario" id="formulario" action="documentosxperfil.php" method="POST" >
 					<input type="hidden" name="tipousuarioid" 	id="tipousuarioid" 	value="<php:item id="tipousuarioid" />">		
 					<input type="hidden" name="holdingid" 		id="holdingid"		value="<php:item id="holdingid" />">
 					<input type="hidden" name="cantfilas" 	 	value="<php:item id="cantfilas" />" />		
@@ -18,7 +18,8 @@
 					<a class="btn btn-default btn_letra_azul" href="#" onclick="javascript:irtipousuarios();"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</a>
 					<button type="submit" class="btn btn-default" name="accion" value="AGREGAR"><a><i class="fa fa-plus" aria-hidden="true"></i>Agregar</a></button>
 					
-					  </form>
+					    <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 			
 				
 				</div>
@@ -32,7 +33,7 @@
 
 	<div id="divtabla" class="tabla-responsiva" >
 		
-		<div class="form-row" >
+		<div class="row" >
 			<div class="col-md-5" style="padding-bottom: 15px; padding-left: 0;">
 			  <input type="hidden" name="tipousuarioid" id="tipousuarioidx" value="<php:item id="tipousuarioid" />" />
 			  <label for="nombre">Nombre Perfil</label>
@@ -65,7 +66,8 @@
 					<input type="hidden" name="pagina" value="<php:item id="<php:item id="pagina" />" >
 					<input type="hidden" name="cantfilas" value="<php:item id="<php:item id="cantfilas" />" >
 					<button class="btn btn-default btn-sm" type="submit" name="accion" value="ELIMINAR" onclick="javascript:return preguntarPorBorrar();">Eliminar</button>
-				</form>
+				  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 			</tr></php:repeticion>
 		  </tbody>
 		</table>
@@ -82,35 +84,9 @@
 			<input type="hidden" name="accion" 			id="accionx"			value="<php:item id="accion" />">
 			<input type="hidden" name="cantfilas" 	 	value="<php:item id="cantfilas" />" />		
 			<input type="hidden" name="pagina"	 	 	value="<php:item id="pagina" />" />	
-		</form>
+		  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
 		
 		</php:repeticion>
 
-		<script>
-		function TipoUsuarioSel()
-		{
-			document.formulario.tipousuarioid.value = document.form1.tipousuarioid.options[document.form1.tipousuarioid.selectedIndex].value;
-		}
-		
-		
-		function irtipousuarios()
-		{
-			
-		
-			var tipousuarioid = document.getElementById('tipousuarioid').value;
-			document.getElementById('tipousuarioidx').value = document.getElementById('tipousuarioid').value;
-			document.getElementById('holdingidx').value 	= document.getElementById('holdingid').value;
-			
-			if (document.getElementById('tipousuarioid').value == '')
-			{	
-				document.getElementById('accion').value = 'BUSCAR';
-			}else{
-				document.getElementById('accionx').value = 'MODIFICAR';
-			}
-			
-			document.formulario3.submit();				
-		}
-		</script>
-
-
-
+	

@@ -81,10 +81,10 @@ class firmasdoc {
 	function __construct()
 	{
 		// revisamos si la accion es volver desde el listado principal
-		if (isset($_REQUEST["accion"]))
+		if (isset($_POST["accion"]))
 		{
 			// si lo es
-			if ($_REQUEST["accion"]=="Volver")
+			if ($_POST["accion"]=="Volver")
 			{
 				// nos devolvemos al lugar especificado
 				header('Location: index.php');
@@ -172,7 +172,7 @@ class firmasdoc {
 		include("includes/opciones_menu.php");
 
 		// si no hay accion entonces mostramos el listado
-		if (!isset($_REQUEST["accion"]))
+		if (!isset($_POST["accion"]))
 		{
 			// mostramos el listado
 			$this->listado();
@@ -183,7 +183,7 @@ class firmasdoc {
 		}
 	
 		// ahora revisamos que accion se quiere ejecutar y ejecutamos la funcion especifica
-		switch ($_REQUEST["accion"])
+		switch ($_POST["accion"])
 		{
 			case "BUSCAR":
 				$this->listado();
@@ -227,7 +227,7 @@ class firmasdoc {
 		$dt3 	= new DataTable();
 
 		// pedimos el listado
-		$datos=$_REQUEST;
+		$datos=$_POST;
  
         $datos["usuarioid"]=$this->seguridad->usuarioid;
         //print_r($datos);
@@ -530,7 +530,7 @@ class firmasdoc {
 		$dt = new DataTable();
 		$dt2 = new DataTable();
 		$dt3 = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 	
 		$this->documentosdetBD->Obtener($datos,$dt);
 		$this->mensajeError.=$this->documentosdetBD->mensajeError;
@@ -618,7 +618,7 @@ class firmasdoc {
 	{
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$fecha = date('dmY_hms');
 
 		//Llenar Select de Empresas registradas
@@ -672,7 +672,7 @@ class firmasdoc {
 	//Rechazar
 	private function rechazar()
 	{ 
-		$datos = $_REQUEST;	
+		$datos = $_POST;	
 		$datos["estado"] = 8; //cambiar a estado de rechazo
 		$datos['RutUsuario'] = $this->seguridad->usuarioid;
 		
@@ -682,7 +682,7 @@ class firmasdoc {
 		{
 			$this->mensajeOK = "Grabado exitosamente";
 		}
-		$_REQUEST["idDocumento"] = '';
+		$_POST["idDocumento"] = '';
 		$this->listado();
 		return;
 	}
@@ -772,7 +772,7 @@ class firmasdoc {
 	{ 
 		$dt = new DataTable();
 		$dt1 = new DataTable();
-		$datos = $_REQUEST;	
+		$datos = $_POST;	
 
 		//consulta para deducir tipo de firma pin, token o huella
 		$usuarioid = $this->seguridad->usuarioid;
@@ -848,7 +848,7 @@ class firmasdoc {
 	{
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//Llenar Select de Empresas registradas
 		$this->documentosdetBD->obtenerb64($datos,$dt);
@@ -925,10 +925,10 @@ class firmasdoc {
 	
 	private function InicioFirmaPin()
 	{
-		//print_r ($_REQUEST);
+		//print_r ($_POST);
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		//Llenar Select de Empresas registradas
 		// Buscamos el idCategoria que vamos a asignar
 		$this->documentosdetBD->obtenerb64($datos,$dt);//print_r($dt);
@@ -974,10 +974,10 @@ class firmasdoc {
 	private function InicioFirmaToken()
 	{
 		
-		//print_r ($_REQUEST);
+		//print_r ($_POST);
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		$formulario[0] = $datos;	
 		
@@ -1024,7 +1024,7 @@ class firmasdoc {
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
 		$dt1 = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$this->orden = 0;
 		
 		//Buscar el orden de firmante 	
@@ -1059,8 +1059,8 @@ class firmasdoc {
 
 			if ($dt["status"] == "200")
 			{
-				$_REQUEST["DocCode"] 	= $dt["result"][0]["code"];
-				$_REQUEST["documento"]	= $dt["result"][0]["file"];
+				$_POST["DocCode"] 	= $dt["result"][0]["code"];
+				$_POST["documento"]	= $dt["result"][0]["file"];
 				
 				$res = array();
 				$res = $dt["result"][0]["signers"];
@@ -1080,8 +1080,8 @@ class firmasdoc {
 				}else{
 					$ejemplo = date("d-m-Y H:i:s");
 				}
-				$_REQUEST["FechaFirma"] = $ejemplo; 
-				$_REQUEST["RutFirmante"] = $this->seguridad->usuarioid;
+				$_POST["FechaFirma"] = $ejemplo; 
+				$_POST["RutFirmante"] = $this->seguridad->usuarioid;
 				
 				$this->actualizaDocumento();
 				$this->actualizarFirma();
@@ -1122,10 +1122,10 @@ class firmasdoc {
 
 	private function InicioFirmaHuella()
 	{
-		//print_r ($_REQUEST);
+		//print_r ($_POST);
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		$nombrearchivo = $this->ObtenerDocBase64();
 		
@@ -1152,7 +1152,7 @@ class firmasdoc {
 	{
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$this->band = 0;
 		$formulario[0] = $datos;	
 		
@@ -1169,8 +1169,8 @@ class firmasdoc {
 
 				if($dt["status"] == 200)
 				{
-					$_REQUEST["DocCode"] 	= $dt["result"][0]["code"];
-					$_REQUEST["documento"]	= $dt["result"][0]["file"];
+					$_POST["DocCode"] 	= $dt["result"][0]["code"];
+					$_POST["documento"]	= $dt["result"][0]["file"];
 			
 					$res = array();
 					$res = $dt["result"][0]["signers"];
@@ -1192,7 +1192,7 @@ class firmasdoc {
 						//$this->pagina->agregarDato("mensajeError",$this->mensajeError);
 						$ejemplo = date("d-m-Y H:i:s");
 					}
-					$_REQUEST["FechaFirma"] = $ejemplo; 
+					$_POST["FechaFirma"] = $ejemplo; 
 
 					$this->actualizaDocumento();
 				  	$this->actualizarFirma();
@@ -1205,7 +1205,7 @@ class firmasdoc {
 					
 					if ($dt["result"]["code"] != "")
 					{
-						$_REQUEST["DocCode"] = $dt["result"]["code"];
+						$_POST["DocCode"] = $dt["result"]["code"];
 						$this->actualizaDocumento();
 
 						$this->buscarDatosDec($dt["result"]["code"]);
@@ -1235,7 +1235,7 @@ class firmasdoc {
 	
 	private function firmahuella()
 	{
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		//si todo ok en la firma, mostramos el inicio para que nos muestre el documento con el ladrillo
 		if ($datos["accion"] == "FIRMAHUELLA")
 		{
@@ -1274,16 +1274,16 @@ class firmasdoc {
 		$dt1 = new DataTable(); //Firmantes
 
 		//Obtener Datos del Documento
-		$this->documentosdetBD->totalFirmantes($_REQUEST,$dt);
+		$this->documentosdetBD->totalFirmantes($_POST,$dt);
 		$this->mensajeError.=$this->documentosdetBD->mensajeError;
 		$this->pagina->agregarDato("mensajeError",$this->mensajeError);
 
 		//Asignamos el RUT del usuario en sesion	
-		$_REQUEST["personaid"] 		= $this->seguridad->usuarioid;
-		$_REQUEST["RutFirmante"]	= $this->seguridad->usuarioid;
+		$_POST["personaid"] 		= $this->seguridad->usuarioid;
+		$_POST["RutFirmante"]	= $this->seguridad->usuarioid;
 		
 		//Buscar Firmantes
-		$this->documentosdetBD->obtenerFirmantes($_REQUEST, $dt1);
+		$this->documentosdetBD->obtenerFirmantes($_POST, $dt1);
 		$this->mensajeError.=$this->documentosdetBD->mensajeError;
 		$this->pagina->agregarDato("mensajeError",$this->mensajeError);
 
@@ -1301,7 +1301,7 @@ class firmasdoc {
 	private function ObtenerDocBase64()
 	{
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		//vamos a buscar el documento que debe contener la firma adicional del token
 		$this->documentosdetBD->obtenerb64($datos,$dt);//print_r($dt);
 		$this->mensajeError.=$this->documentosdetBD->mensajeError;
@@ -1333,7 +1333,7 @@ class firmasdoc {
 	private function firmar(){
 
 		$firma = new firma();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$usuarioid = $this->seguridad->usuarioid;
 		switch (GESTOR_FIRMA) {
 
@@ -1376,7 +1376,7 @@ class firmasdoc {
 		
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		$datos['idDocumento'] = $idDocumento;
 		$fecha = date('dmY_hms');
 		
@@ -1433,7 +1433,7 @@ class firmasdoc {
 	//Accion de completar los datos del Firmante 
 	private function cargarFirmante(){
 
-		//Recibir $_REQUEST["idContrato"], $_REQUEST["personaid"], $this->firma = tipo de firma del firmante
+		//Recibir $_POST["idContrato"], $_POST["personaid"], $this->firma = tipo de firma del firmante
 
 		//Variables para subida del Documento
 		$dt = new DataTable(); //Numero de Documento
@@ -1443,15 +1443,15 @@ class firmasdoc {
 	    $dt4= new DataTable(); //Tipo de firma
 		
 		//Seleccionar Documento 
-		$this->documentosdetBD->obtener($_REQUEST, $dt);
+		$this->documentosdetBD->obtener($_POST, $dt);
 		$this->mensajeError.=$this->documentosdetBD->mensajeError;
 		
 		//Buscar Firmantes
-		$this->documentosdetBD->obtenerFirmantes($_REQUEST, $dt1);
+		$this->documentosdetBD->obtenerFirmantes($_POST, $dt1);
 		$this->mensajeError.=$this->documentosdetBD->mensajeError;
 	
 		//Obtener Datos del Documento
-		$this->documentosdetBD->obtenerDatosDocumento($_REQUEST,$dt2);
+		$this->documentosdetBD->obtenerDatosDocumento($_POST,$dt2);
 		$this->mensajeError.=$this->documentosdetBD->mensajeError;
         //print_r($dt2->data);
 
@@ -1516,7 +1516,7 @@ class firmasdoc {
 			$this->datos["user_rut"] = strtoupper($this->seguridad->usuarioid);//usuario de la persona que firma
 
 			$usuarioid = strtoupper($this->seguridad->usuarioid);
-			$array = array ( "personaid" => $usuarioid,"idDocumento"=>$_REQUEST["idDocumento"]);
+			$array = array ( "personaid" => $usuarioid,"idDocumento"=>$_POST["idDocumento"]);
 
 			//Consultar el tipo de firma que tiene asociadael usuario
 			$this->documentosdetBD->obtenerTipoFirma($array,$dt4);
@@ -1533,7 +1533,7 @@ class firmasdoc {
 			}
 
 			if( $tipofirma =="Pin"){
-				$this->datos["user_pin"] = $_REQUEST["pin"];//clave del usuario que firma
+				$this->datos["user_pin"] = $_POST["pin"];//clave del usuario que firma
 			}
 			else{
 				$this->datos["user_pin"] = "";
@@ -1553,18 +1553,18 @@ class firmasdoc {
 	//Accion de completar todos los datos para subir el Documento 
 	private function cargarDocumento(){
 
-		//Recibir $_REQUEST["idContrato"]
+		//Recibir $_POST["idContrato"]
 
 		//Variables para subida del Documento
 	    $dt1= new DataTable(); //Firmantes 
 	    $dt2= new DataTable(); //Datos del Documento
 	  
 		//Buscar Firmantes
-		$this->documentosdetBD->obtenerFirmantes($_REQUEST, $dt1);
+		$this->documentosdetBD->obtenerFirmantes($_POST, $dt1);
 		$this->mensajeError.=$this->documentosdetBD->mensajeError;
 
 		//Obtener Datos del Documento
-		$this->documentosdetBD->obtenerDatosDocumento($_REQUEST,$dt2);
+		$this->documentosdetBD->obtenerDatosDocumento($_POST,$dt2);
 		$this->mensajeError.=$this->documentosdetBD->mensajeError;
 
 		//Declarar arreglos necesarios
@@ -1646,7 +1646,7 @@ class firmasdoc {
 	//Actualiza firma en BD
 	public function actualizarFirma(){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 		
 		if( $datos["FechaFirma"] == ''){
 			$datos["FechaFirma"] = date("d-m-Y H:i:s");
@@ -1667,7 +1667,7 @@ class firmasdoc {
 	//Actualiza Documento en la BD
 	public function actualizaDocumento(){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		if ( $datos['DocCode'] != '' ){
 			//Actualizar el codigo del documento
@@ -1680,7 +1680,7 @@ class firmasdoc {
 	//Consultar fsi firmo el documento 
 	private function buscarDatosDec($docCode){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		//Consulto los datos del documento en Acepta 
 		$datos["code"] = $docCode;
@@ -1689,8 +1689,8 @@ class firmasdoc {
 
 		if ($dt["status"] == "200"){
 
-			$_REQUEST["DocCode"] 	= $dt["result"][0]["code"];
-			$_REQUEST["documento"]	= $dt["result"][0]["file"];
+			$_POST["DocCode"] 	= $dt["result"][0]["code"];
+			$_POST["documento"]	= $dt["result"][0]["file"];
 
 			$res = array();
 			$res = $dt["result"][0]["signers"];
@@ -1715,8 +1715,8 @@ class firmasdoc {
 			if( $fecha_actual != '' ){ //Si tiene fecha de firma
 
 				$ejemplo = str_replace('/','-', $fecha_actual); 
-				$_REQUEST["FechaFirma"] = $ejemplo; 
-				$_REQUEST["RutFirmante"] = $this->seguridad->usuarioid;
+				$_POST["FechaFirma"] = $ejemplo; 
+				$_POST["RutFirmante"] = $this->seguridad->usuarioid;
 				
 				$this->actualizaDocumento();
 				$this->actualizarFirma();
@@ -1734,7 +1734,7 @@ class firmasdoc {
 
 	private function envioGestor(){
 
-		$datos = $_REQUEST;
+		$datos = $_POST;
 
 		$dt = new DataTable();
 

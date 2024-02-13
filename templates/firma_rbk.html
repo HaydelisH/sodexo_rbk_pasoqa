@@ -30,7 +30,8 @@
           <form role="form" name="formulario2" id="formulario2" action="firma.php" method="POST">
     				<input type="hidden" name="idDocumento" value="<php:item id="idDocumento" />" />
     				<button type="button" class="btn btn-default" onclick="history.back(-1)"><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
-    			</form>
+    			  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form>
       
           <div class="box-body">
             
@@ -39,7 +40,7 @@
             <div id="mensajeError"><php:texto id="mensajeError" /></div>
         
             <!--Datos referenciales-->
-            <div class="form-row">
+            <div class="row">
             
               <form role="form" name="formulario" id="formulario" action="firma.php" method="POST">
 
@@ -56,7 +57,7 @@
                     <input type="hidden"   name="inVerifyDocPersonalNumber" id="inVerifyDocPersonalNumber" value="<php:item id="RutUsuario"/>">
                     <input type="hidden"   name="inVerifyType" id="inVerifyType" value="<php:item id="TipoFirma"/>">
                     <input type="hidden" name="accion" value="FIRMA_RBK" />
-                		<button class="btn btn-md btn-primary btn-block " onclick="verificar()" type="button" name="accion" id="btn-verify" value="FIRMAR" />Firmar</button>
+                		<button class="btn btn-md btn-primary btn-block " onclick="verificar_FirmaRBK()" type="button" name="accion" id="btn-verify" value="FIRMAR" />Firmar</button>
 
                 	</div>
                 </div>
@@ -74,7 +75,8 @@
           					</div>
           				</div>
                 </div>
-              </form> 
+                <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+                    </form> 
 
             </div>
           </div>
@@ -85,173 +87,3 @@
 </div>
 </section>
 
- <script type="text/javascript">
-  
-   let general = {
-        baseUrl: "",
-        apiKey: "",
-        digitalSignature: 0,
-        session: {
-          id: "",
-          companyId: "",
-          username: ""
-        },
-        currentAction: "VERIFY",
-        operator: {
-          sessionId: null
-        }
-      };
-   
-    
-    let popupPage;
-      let openCheckId = function(action) 
-    {
-        general.currentAction = action;
-        // Create popup window
-        var w = 850;
-        var h = 580;
-
-        // Fixes dual-screen position                         Most browsers      Firefox
-        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
-        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
-
-        var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
-        var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
-
-        var left = ((width / 2) - (w / 2)) + dualScreenLeft;
-        var top = ((height / 2) - (h / 2)) + dualScreenTop;
-
-        var opciones = "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=" + w + ", height=" + h + ", top=" + top + ", left=" + left;
-        popupPage = window.open("checkid/checkid/", "libPage", opciones);
-        // Puts focus on the popupPage
-        if (window.focus) {
-          popupPage.focus();
-        }
-      };
-
-   
-      let getParamsVerify = function() {
-        return {
-          action: "VERIFY",
-          method: general.method,
-          apiKey: general.apiKey,
-          sessionId: general.session.id,
-          companyId: general.session.companyId,
-          operationId: 1,
-          baseUrl: general.baseUrl,
-		useFingerprint: true,//si pide huella al que esta enrolando
-		usePin: true,//si pide pin al que esta enrolando
-		useKBA: false,//si se utiliza la pregunta de seguridad
-          operator: {
-            sessionId: general.operator.sessionId,
-            identityDocument: {
-                countryCode: general.countryCode,
-                type: general.type,
-                personalNumber: general.rutaverificar
-            }
-          },
-          digitalIdentity: {
-            identityDocuments: [{
-              countryCode: general.countryCode,
-              type: general.type,
-              personalNumber: general.rutaverificar
-            }]
-          }
-          };
-      };
-    
-    
-  window.getParams = function()
-  {
-    return getParamsVerify();
-  }
-    
-  //respuesta del formulario checkid
-  window.callback = function(result) 
-  {
-    popupPage.close();
-    console.log("callback", result);
-
-    if (result.numError == 0) 
-    {
-      if (result.action == "VERIFY") 
-      {
-        let resultMessage = "Validación Errónea";
-        if (result.data.authenticated)
-        {
-          resultMessage = "Validación Exitosa!";
-      
-          general.lastVerify = result.data;
-      
-          document.getElementById('id').value       = general.lastVerify.id;
-          document.getElementById('type').value       = general.lastVerify.type;
-          document.getElementById('subtype').value      = general.lastVerify.subtype;
-          document.getElementById('authenticated').value  = general.lastVerify.authenticated;
-          document.getElementById('sign').value       = general.lastVerify.sign;
-      
-          document.getElementById("formulario").submit();
-          //alert (verif_id + " " + verif_type + " " + verif_subtype + " " + verif_authenticated + " " + verif_sign);
-        }
-      }
-    }
-
-    return false;
-  }
-    
-  function verificar()
-  { 
-    consulta_sesion();
-  }
-    
-    
-  var conexion;
-      
-  function crearXMLHttpRequest() 
-  {
-    var xmlHttp=null;
-    if (window.ActiveXObject) 
-      xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-    else 
-    if (window.XMLHttpRequest) 
-      xmlHttp = new XMLHttpRequest();
-    return xmlHttp;
-  }
-
-
-  function consulta_sesion()
-  {
-    conexion=crearXMLHttpRequest();
-  
-    conexion.open('POST', 'consulta_sesion.php', false);
-  
-    conexion.send(null);
-    // Devolvemos el resultado
-    respuesta =  conexion.responseText;   
-    arr_resp  = respuesta.split('|'); 
-    if (arr_resp[0] == 'ok')
-    {
-      general.baseUrl       = arr_resp[1];
-      general.session.companyId   = arr_resp[2];
-      general.username      = arr_resp[4];
-      general.session.id      = arr_resp[6];
-      general.countryCode     = arr_resp[7];
-      general.type        = arr_resp[8];
-      general.apiKey        = arr_resp[9];
-      
-      var rut           = document.getElementById('inVerifyDocPersonalNumber').value;
-      general.rutaverificar   = rut.replace ("-","");
-      
-      general.method        = document.getElementById('inVerifyType').value;
-
-      openCheckId("VERIFY");
-    }
-    else
-    {
-      alert (respuesta);
-    }
-    
-  }
- 
-  
-  </script>
-   

@@ -17,14 +17,14 @@
 				  <php:repeticion id="formulario">
                   <form role="form" name="formulario" id="formulario" action="flujofirma.php" method="POST" autocomplete="off">
                       <!--Campos basicos-->
-                      <div class="form-row">
+                      <div class="row">
                         <div class="col-md-12">
                           <label for="rut">Descripci&oacute;n</label>
                           <input type="text" class="form-control" id="nombrewf" name="nombrewf" value="<php:item id="nombrewf" />" placeholder="Descripci&oacute;n" required>
 						  <input type="hidden" id="idwf" name="idwf" value="<php:item id="idwf" />" >
                         </div>
                       </div>
-                       <div class="form-row">
+                       <div class="row">
                         <div class="col-md-8 xs-12">
                           <label for="nombre">Seleccion Tipo de Estado</label>
 							<select class= "form-control" name="idestado" id="idestado" >
@@ -44,7 +44,7 @@
                            <button class="btn btn-md btn-primary" type="submit" name="accion2" value="MODIFICAR" onclick="javascript:return validarFormulario(this,new Array('diasmax'));" style="margin-top: 25px"><i class="fa fa-plus" aria-hidden="true"></i></button>  
                         </div>
                       </div>
-                      <div class="form-row">
+                      <div class="row">
                         <div class="col-md-12">  
                           <label for="nombre">Estados seleccionados</label>
                           <table class="table table-bordered table-hover">
@@ -64,7 +64,7 @@
 							  
 							  
 									
-									<button class="btn btn-default btn-sm" type="submit" name="accion2" value="ELIMINAR" onclick="javascript:return eliminaEstado(<php:item id="idestadowf" />);">Eliminar</button>
+									<button class="btn btn-default btn-sm" type="submit" name="accion2" value="ELIMINAR" onclick="javascript:return eliminaEstado(<php:item id='idestadowf' />);">Eliminar</button>
 
 							   </td>
 							  </tr>
@@ -74,12 +74,13 @@
                           </table>
                         </div>
                       </div>                         
-					  <div class="form-row">  
-                        <div class="col-md-2 xs-12">
+                      <div class="row d-flex justify-content-start">  
+                        <div class="col-md-2 xs-12 d-grid gap-2 ">      
                             <button class="btn btn-md btn-primary btn-block" type="submit" name="accion2" value="GRABAR" style="margin-top: 10px">Guardar</button>  
                         </div>
                       </div>  
 					  <input type="hidden" id="idestadowfmax" name="idestadowfmax" value="<php:item id="idestadowfmax" />" >
+                      <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
                     </form>     
 					</php:repeticion>
                   </div>
@@ -91,18 +92,3 @@
           <!-- /.col -->
         </div>
 		
-		<script>
-			function eliminaEstado(idestadowf)
-			{
-				//alert (idestadowf);
-		
-				document.getElementById("idestadowf").value = idestadowf;
-				
-				if (!confirm("Esta seguro de eliminar?"))
-				{
-					return false;
-				}
-				
-				return true;
-			}
-		</script>	
