@@ -1,0 +1,22 @@
+<div class="row">
+	  <div class="col-md-12">
+	    <div class="box">
+	      <div class="box-body pad table-responsive">
+		      <div class="box-body">
+				<!--Header necesario para la generacion del Word -->
+				<div id="encabezado"><php:texto id="encabezado"/></div>
+					
+				<!--Datos de la Plantilla-->
+				<div id="Titulo_Pl" align="center"><php:texto id="Titulo_Pl"/></div>
+
+				<!--Clausulas de la Plantilla-->
+				<php:repeticion id="clausulas">
+				  <!--Ordinal--><!--Titulo-->
+				  <p><span id="Descripcion_Cl"><strong><php:item id="Descripcion_Cl"/></strong></span><span id="Titulo_Cl"><php:item id="Titulo_Cl"/></span></p>
+				  <!--Texto-->
+				  <p><div id="Texto"><php:item id="Texto" /></div></p>
+				</php:repeticion>
+			</div>
+		</div>
+	</div>
+</div>

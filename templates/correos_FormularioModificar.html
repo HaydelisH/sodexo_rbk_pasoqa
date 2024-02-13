@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <div class="box-header">
+         <a class="btn btn-default btn_letra_azul" href="Correo.php"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
+        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+     
+        <form role="form" name="formulario" id="formulario" action="Correo.php" method="POST" autocomplete="off">
+          <php:repeticion id="formulario">
+          <!--idCategoria-->
+            <input type="hidden" class="form-control" id="CodCorreo" name="CodCorreo" value="<php:item id="CodCorreo"/>"/>
+			
+			<div class="form-row">
+			  <div class="col-md-12">
+				<label style="float:right;"> (*) Campos obligatorios </label>
+			  </div>
+			</div>
+			
+            <!--Campos basicos-->
+            <div class="form-row">
+              <div class="col-md-12">
+                <label for="Descripcion" >Descripci&oacute;n (*)</label>
+                <input type="contenedor" class="form-control" id="Descripcion" name="Descripcion" maxlength="200" value="<php:item id="Descripcion" />" autofocus >
+              </div>
+            </div> 
+          <div class="form-row">
+            <div class="col-md-12">
+              <label for="Asunto">Asunto (*)</label>
+              <input type="contenedor" class="form-control" id="Asunto" name="Asunto"  maxlength="50" value="<php:item id="Asunto" />" >
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-6 xs-12">
+              <label for="CC">CC (*)</label>
+              <input type="contenedor" class="form-control" id="CC" name="CC"  maxlength="150" value="<php:item id="CC" />" >
+            </div>
+          </div>
+          <div class="col-md-6 xs-12">
+            <div class="col-md-12">
+              <label for="CCo">CCo</label>
+              <input type="contenedor" class="form-control" id="CCo" name="CCo"  maxlength="100" value="<php:item id="CCo" />" >
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-12">
+              <label for="Cuerpo">Contenido del Correo </label>
+              <textarea id="TextoTxt" name="Cuerpo" rows="10" cols="80" >
+              <php:item id="Cuerpo" /></textarea>
+            </div>
+          </div>
+          </php:repeticion> 
+          <div class="form-row">  
+            <div class="col-md-2 xs-12 pull-right">
+               <input type="hidden" name="accion" value="MODIFICAR" />
+			   <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="MODIFICAR" onclick="javascript:return validarFormulario(this,new Array(),new Array('CC','CCo')) && validarcorreo();"/>Guardar</button>
+            </div>
+          </div> 
+                     
+        </form>  
+       </div>
+      </div>
+    <!-- /.box -->
+    </div>
+   </div>
+  <!-- /.col -->
+</div>
+  <script type="text/javascript">
+    function validarcorreo(){
+      var resultado = validarEmail(obtenerElemento('CC').value);
+	  var cc = obtenerElemento('CC').value;
+	  
+	  if( cc != ''  ){
+		   if (resultado == false) 
+			{ 
+			  document.getElementById('mensajeError').innerHTML ;
+			  mensajeValidacion("Campo debe ser un email");
+			  return false;
+			}
+	  }
+	  
+      var resultado = validarEmail(obtenerElemento('CCo').value);
+	  var cco = obtenerElemento('CCo').value;
+	  
+	  if( cco != ''  ){
+		   if (resultado == false) 
+			{ 
+			  document.getElementById('mensajeError').innerHTML;
+			  mensajeValidacion("Campo debe ser un email");
+			  return false;
+			}
+	  }
+      return true;
+    }
+  </script>

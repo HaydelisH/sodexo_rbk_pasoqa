@@ -1,0 +1,132 @@
+/*Botones de paginacion de Tablas*/
+.paginacion{
+	width: 100%;
+	padding: 25px 0;
+	margin: 0;
+	text-align: center;
+}
+
+.btn-pagina{
+	padding: 5px;
+	margin: 5px;
+	display: inline-block;
+}
+
+
+.btn_letra_azul{
+	color:#337ab7;
+}
+
+.btn_letra_azul:hover{
+	color:#337ab7;
+}
+
+#cargando {
+	width: 100%;
+	height: 100%;
+	overflow: hidden; 
+	top: 0px;
+	left: 0px;
+	z-index: 10000;
+	text-align: center;
+	position:absolute; 
+	background-color: #FFFFFF;
+	opacity:0.3;
+	filter:alpha(opacity=40);
+}
+#cargandoImagen {
+	position: fixed;
+	top: 30%;
+
+	right: 40%;
+	z-index: 100;
+}
+
+
+/*Opciones cuando la pantalla sea más pequeña*/
+
+@media screen and (max-width: 600px) {
+   #divtabla table {
+	   width:100%;
+   }
+   
+    /* Force table to not be like tables anymore */
+    #divtabla table, #divtabla thead, #divtabla tbody, #divtabla tfoot, #divtabla th, #divtabla td, #divtabla tr, #divtabla caption { 
+        display: block; 
+    }
+ 
+    #divtabla thead tr { 
+        position: absolute;
+		top: -9999px;
+		left: -9999px;
+		background-color: #ddd;
+		text-align: center;
+		font-weight: bold;
+    }
+ 
+    #divtabla tr { 
+    	border: 1px solid #ccc; 
+    }
+ 
+    #divtabla tbody td { 
+		border: none;
+		position: relative;
+		padding-left: 50% !important; 
+		text-align:center;
+    }
+ 
+    #divtabla tbody td:before { 
+		position: absolute;
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+		text-align:center;
+    }
+ 
+    #divtabla tbody td:before { 
+    	content: attr(data-heading); 
+    }
+
+    #divtabla tr td:first-child {
+       background: #f0f0f0;
+       font-weight:bold;
+       font-size:1.3em;
+   }
+
+
+	#cargando {
+		width: 100%;
+		height: 100%;
+		overflow: hidden; 
+		top: 0px;
+		left: 0px;
+		z-index: 10000;
+		text-align: center;
+		position:absolute; 
+		background-color: #FFFFFF;
+		opacity:0.3;
+		filter:alpha(opacity=40);
+	}
+	#cargandoImagen {
+		position: fixed;
+		top: 30%;
+
+		right: 40%;
+		z-index: 100;
+	}
+
+
+	@media 
+	only screen and (max-width: 760px),
+	(min-device-width: 768px) and (max-device-width: 1024px) and (max-device-width: 480px)   {
+	#cargandoImagen {
+		position: fixed;
+		top: 30%;
+		left: 25%;
+		z-index: 100;
+	}
+}
+
+

@@ -1,0 +1,195 @@
+<div class="row">
+    <div class="col-md-12">
+      <div class="box">
+        <div class="box-body pad table-responsive">
+          <div class="box-header">
+            <a class="btn btn-default btn_letra_azul" href="CentrosCosto.php"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
+          </div>
+        <div class="box-body">
+          <div id="mensajeError"><php:texto id="mensajeError" /></div>
+          <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+       
+          <form role="form" name="formulario" id="formulario" action="CentrosCosto.php" method="POST" autocomplete="off">
+            <php:repeticion id="formulario">
+              
+               <!--Empresas-->
+                <div class="col-md-12 xs-12" >
+                  <label for="Empresa" >Empresa (*) </label>
+                  <!--Select de Empresas disponibles-->
+                  <select class= "form-control" name="RutEmpresa" id="RutEmpresa">
+                  <option value="0">( Seleccione )</option>
+                    <php:repeticion id="Empresas">
+                      <option value="<php:item id="RutEmpresa" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEmpresa" /><php:argumento idvalor="RutEmpresa" /></php:funcion>><php:item id="RazonSocial" /></option>
+                    </php:repeticion>
+                  </select>
+                </div>
+              <!--Cliente-->
+              <div class="form-row">
+                  <div class="col-md-12 xs-12">
+                      <label class="Estructura">Lugar de Pago (*) </label>
+                      <input type="hidden" id="lpid" value="<php:item id="lugarpagoid" />">
+                      <select class= "form-control" name="lugarpagoid" id="lugarpagoid" disabled>
+                          <option value="0">( Seleccione )</option>
+                          
+                      </select>
+                  </div>
+              </div>
+              
+              <!--Campos basicos-->		
+              <div class="form-row">
+                 <div class="col-md-12">
+                      <label class="Estructura" for="idCentroCosto">C&oacute;digo Centro de Costo</label>
+                      <input type="text" class="form-control" id="idCentroCosto" name="idCentroCosto" maxlength="10" value="<php:item id="idCentroCosto" />" placeholder="C&oacute;digo Centro de Costo"  disabled> 
+                  </div>
+              </div>
+               
+              <div class="form-row">
+                <div class="col-md-12 xs-12">
+                  <label class="Estructura" for="nombreCentroCosto">Centro de Costo</label>
+                  <input type="text" class="form-control" id="nombreCentroCosto" name="nombreCentroCosto" maxlength="50" value="<php:item id="nombreCentroCosto" />" placeholder="Nombre Centro de Costo" disabled>
+                </div>
+              </div>
+              
+              
+               
+              <div class="form-row">
+                <div class="col-md-12 xs-12">
+                   <div class="col-md-2 xs-12 pull-right">
+                    <input type="hidden" name="accion" value="AGREGAR" />
+                   
+                    <button class="btn btn-md btn-primary btn-block" id="accion2" type="submit" style="margin-top: 10px" name="accion2" value="AGREGAR" onclick="javascript: return validarFormulario(this,new Array(),new Array('lpid'))" />Guardar</button>
+                   </div>
+                </div>
+              </div>
+            </php:repeticion>  
+          </form>  
+         </div> <!--<div class="box-body">-->
+        </div> <!--<div class="box-body pad table-responsive">-->
+      </div> <!--<div class="box"-->
+    </div> <!-- <div class="col-md-12">-->
+  </div> <!--<div class="row">-->
+  <!--Modal de Lugares de pago-->
+  <div class="modal fade" id="modal_lugares_pago" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+      <div class="modal-content">
+        <div class="modal-header" align="center">
+          <h4 class="Estructura" id="ejemplo-titulo"> Lugares de Pago  </h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="mensajeError_modal"></div>
+           <table id="tabla_lugares_pago" class="table table-bordered table-hover" style="text-align: center">
+              <thead >
+                  <tr>
+                      <th  style="text-align: center" >C&oacute;digo</th>
+                      <th  style="text-align: center" >Nombre</th>
+                      <th  style="text-align: center" >Selecci&oacute;n</th>
+                  </tr>
+              </thead>
+              <tbody>
+              </tbody>
+           </table>
+        </div>
+        <div class="modal-footer" style="margin-top:10px;">
+          <button type="button" class="btn btn-secondary btn-md" id="cerrar_lugares_pago" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+  //Modal de Lugares de pago 
+    $("#RutEmpresa").change(function(){
+          fnChangeEmpresa();
+    });
+    function fnChangeEmpresa()
+    {
+      var RutEmpresa = $("#RutEmpresa").val();
+        $(".fila_lp").remove();
+  
+        if( RutEmpresa == 0 ){
+          
+            $("#mensajeError").addClass(" callout callout-warning");
+            $("#mensajeError").html("Debe seleccionar la Empresa");
+          $("#lugarpagoid").attr("disabled",true);		
+          $("#accion2").attr("disabled", true);
+            return false;
+  
+        }else{
+          
+        //	$("#mensajeError").html("");
+            //$("#mensajeError").removeClass(" callout callout-warning");
+            
+          var url  = "CentroCosto_ajax.php?RutEmpresa=" + RutEmpresa;
+  
+          // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+          if( window.XMLHttpRequest )
+            ajax = new XMLHttpRequest(); // No Internet Explorer
+          else
+            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+         
+          // Almacenamos en el control al funcion que se invocara cuando la peticion
+          // cambie de estado 
+          ajax.onreadystatechange = funcionCallback_rutempresa;
+  
+          // Enviamos la peticion
+          ajax.open( "GET", url, false );
+          ajax.send( "" );
+      }
+    }
+    function funcionCallback_rutempresa()
+    {
+      // Comprobamos si la peticion se ha completado (estado 4)
+      if( ajax.readyState == 4 )
+      {
+        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+        if( ajax.status == 200 )
+        {
+          // Escribimos el resultado en la pagina HTML mediante DHTML
+          salida = ajax.responseText;
+          listado = JSON.parse(salida);
+           num = listado.length;
+  
+           if( num > 0 ){
+                 $.each(listado, function( index, value ) {
+                   $('#lugarpagoid').append('<option class="fila_lp" value=' + listado[index].lugarpagoid + '>' + listado[index].nombrelugarpago + ' </option>');    
+              });
+              $("#lugarpagoid").attr("disabled", false);
+              
+          }
+          
+        }
+      }
+    }
+    
+    $("#lugarpagoid").change(function(){
+    
+          var lugarpagoid = $("#lugarpagoid").val();
+          
+          if ( lugarpagoid != 0 ){
+              $("#idCentroCosto").attr("disabled", false);
+              $("#nombreCentroCosto").attr("disabled", false);			
+              $("#accion2").attr("disabled", false);
+          }else{
+              $("#idCentroCosto").attr("disabled", true);
+              $("#nombreCentroCosto").attr("disabled", true);
+              $("#accion2").attr("disabled", true);
+          }
+    });
+    
+   $( document ).ready(function() {
+      var lpid = $("#lpid").val();
+      
+      if(lpid>0){
+          fnChangeEmpresa();
+          $("#lugarpagoid").val(lpid);
+          $("#idCentroCosto").attr("disabled", false);
+          $("#nombreCentroCosto").attr("disabled", false);			
+          $("#accion2").attr("disabled", false);
+      }
+  });
+  
+  </script>
+  

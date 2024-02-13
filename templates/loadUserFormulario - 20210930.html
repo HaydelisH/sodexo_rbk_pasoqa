@@ -1,0 +1,1206 @@
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <!--Mensajes-->
+                    <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+                    <div id="mensajeError"><php:texto id="mensajeError" /></div>
+                    <div id="mensajeAd"><php:texto id="mensajeAd" /></div>
+                    <!--Formulario de los datos propios de Categoria-->   
+                    <form role="form" name="formulario" id="formulario" action="Generar_Documentos_Masivo.php" method="POST" autocomplete="off" enctype="multipart/form-data">
+                        <php:repeticion id="formulario">
+                        <!--div class="form-row">
+                            <div class="col-md-12">
+                                <label style="float:right;"> (*) Campos obligatorios </label>
+                            </div>
+                        </div-->
+                        <!--Subir documento-->
+                        <div class="form-row">
+                            <div class="col-md-6 xs-6">
+                                <label for="contenedorid" >Empresa (*)</label>
+                                <select class= "form-control" name="RutEmpresa" id="RutEmpresa">
+                                    <option value="0">(Seleccione)</option>
+                                    <php:repeticion id="Empresas">
+                                    <option value="<php:item id="RutEmpresa" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEmpresa" /><php:argumento idvalor="RutEmpresa" /></php:funcion>><php:item id="RazonSocial" /></option>
+                                    </php:repeticion>
+                                </select>
+                            <!--/div>
+                            <div class="col-md-6 xs-6">
+                                <label>Cargo (*)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                <div class="col-md-10 xs-12 " style="padding-left: 0px;padding-top: 0px;">
+                                    <input class="form-control" type="text" name="nombrecargoempleado" id="nombrecargoempleado" placeholder="(Seleccione)" value="<php:item id="nombrecargoempleado"/>" readonly="readonly" />
+                                    <input type="hidden" name="idCargoEmpleado" id="idCargoEmpleado" placeholder="(Seleccione)" value="<php:item id="idCargoEmpleado"/>" />
+                                </div>
+                                <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                                    <button class="btn btn-md btn-primary btn-block" type="button" id="btn_cargoEmpleado" data-toggle="modal" data-target="#modal_cargoEmpleado"><i class="fa fa-search"></i></button>  
+                                </div>
+                            </div-->
+                        </div>
+                        <!--div class="col-md-6 xs-12">
+                            <label>Lugar de pago (*) </label>
+                            <div class="box-body" style="padding-left: 0px;padding-top: 0px;">
+                                <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                                    <input class="form-control" type="text" name="nombrelugarpago" id="nombrelugarpago" placeholder="(Seleccione)" readonly/>
+                                    <input class="form-control" type="hidden" name="LugarPagoid" id="lugarpagoid" />
+                                </div>
+                                <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                                    <button class="btn btn-md btn-primary btn-block lugares_pago"  type="button" id="btn_lugares_pago" data-toggle="modal" data-target="#modal_lugares_pago"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div-->
+                        <!--div class="col-md-6 xs-12">
+                            <label>Centro de costo (*)</label>
+                            <div class="box-body" style="padding-left: 0px;padding-top: 0px;">
+                                <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                                <input class="form-control" type="text" name="nombrecentrocosto" id="nombrecentrocosto" placeholder="(Seleccione)" readonly/>
+                                <input type="hidden" name="idCentroCosto" id="centrocostoid" placeholder="(Seleccione)"/>
+                                </div>
+                                <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                                    <button class="btn btn-md btn-primary btn-block" type="button" id="btn_centro_costo" data-toggle="modal" data-target="#modal_centro_costo"><i class="fa fa-search"></i></button>  
+                                </div>
+                            </div>
+                        </div-->
+                        <div class="form-row" id="meVeo">
+                            <!--div class="col-md-12">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="soloUno" checked>
+                                    <label class="form-check-label" for="soloUno">Utilizar planilla electronica</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row"-->
+                            <div class="col-md-6 xs-12" >
+                                <label for="contenedorid" >Formulario (*)</label>
+                                <select class= "form-control" name="idFormulario" id="idFormulario" disabled>
+                                    <option value="0">(Seleccione)</option>
+                                    <!--php:repeticion id="Formularios">
+                                    <option data-idarchivo="<php:item id="IdArchivo" />" value="<php:item id="idFormulario" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idFormulario" /><php:argumento idvalor="idFormulario" /></php:funcion>><php:item id="nombreFormulario" /></option>
+                                    </php:repeticion-->
+                                </select>
+                            </div>
+                        </div>
+                        <!--div class="form-row" id="soloUnoFull">
+                            <div class="col-md-12">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="soloUno" checked>
+                                    <label class="form-check-label" for="soloUno">Utilizar planilla electronica</label>
+                                </div>
+                            </div>
+                        </div-->
+                        <div class="form-row" id="con_planilla">
+                            <div class="col-md-12" id="doc">
+                                <label for="Subir" id="doc_label">Seleccione archivo de carga (*)</label>
+                                <div class="form-group" id="doc_hijo"> 
+                                    <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                                        <input type="text" class="form-control" placeholder="Seleccione archivo de carga" name="Documento" id="Documento" readonly>
+                                    </div>
+                                    <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                                        <span class="btn btn-primary btn-file">
+                                            <i class="fa fa-upload" aria-hidden="true"></i>
+                                            <input type="file" name="archivo" id="archivo"  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"  />
+                                        </span>
+                                    </div>
+                                    <span class="fileinput-filename"></span>
+                                    <span class="fileinput-new"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row" id="sin_planilla" style="display:none">
+                            <div class="col-md-12">
+                                <label for="newusuarioid">Rut (*)</label>
+                                <div class="input-group col-xs-12">
+                                    <input type="text" class="form-control" id="newusuarioid"  name="newusuarioid" placeholder="Rut v&aacute;lido" maxlength="10" value="<php:item id="newusuarioid" />" autofocus >
+                                </div>
+                            </div>
+                        </div>
+                        <!--Seleccione Representantes Documentos Primarios -->
+                        <div class="form-row muestraFirmantes" style="display:none;" >
+                            <div class="col-md-12">
+                                <h5></h5>
+                            </div>
+                        </div>
+                        <div class="form-row muestraFirmantes" style="display:none;" >
+                            <div class="col-md-12">
+                                <label id="labelFirmantesPrimarios">Seleccione Representantes</label>
+                                <!-- Pasos-->
+                                <div class="steps-form-2">
+                                    <div class="steps-row-2 setup-panel-2 d-flex justify-content-between">
+                                        <div class="steps-step-2" id="iconoFirmantesPrimarios">
+                                            <a href="#verFirmantesPrimarios" id="botonFirmantesPrimarios" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0" data-placement="top" title="Empresa"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-building" aria-hidden="true"></i></a>
+                                            <div class="text">Firmantes</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Firmantes de Empresas-->
+                                <div class="collapse" id="verFirmantesPrimarios">
+                                    <table id="tabla_emp" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <h4> Firmantes </h4>
+                                            </tr> 
+                                            <tr>
+                                                <th style="text-align: center;">Selecci&oacute;n</th>
+                                                <th style="text-align: center;">Rut</th>
+                                                <th style="text-align: center;">Nombre y Apellido</th>
+                                                <th style="text-align: center;">Cargo</th>
+                                                <th style="text-align: center;">Orden</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!--php:repeticion id="listadoFirmantesPrimarios">
+                                            <tr class="odd" role="row">
+                                                <td style="text-align: center;">
+                                                    <div class="custom-control">
+                                                        <input data-personaid="<php:item id="personaid"/>" type="checkbox" name='firmantesPrimarios[]' value='<php:item id="personaid"/>' class='checkbox firmantesPrimarios' <php:item id="pordefecto"/>>
+                                                        <label class="custom-control-label" for='firmantesgrupoPrimarios_<php:item id="incremental" />'></label>
+                                                    </div>
+                                                </td>
+                                                <td style="text-align: center;"><php:item id="personaid"/></td>
+                                                <td style="text-align: center;"><php:item id="nombrecompleto"/></td>
+                                                <td style="text-align: center;"><php:item id="descripcion"/></td>
+                                            </tr>
+                                            </php:repeticion-->
+                                        </tbody>                 
+                                    </table>
+                                    <div class="form-row firmantes">
+                                        <div class="col-md-12 col-xs-12">
+                                            <h4>Seleccione el tipo de firma</h4>
+                                        </div>
+                                    </div>
+                                    <!--div class="tabla-responsiva firmantes">
+                                        <div class="col-md-12">
+                                            <div class="col-md-6" style="padding-bottom: 15px;">
+                                                <select class= "form-control" name="idTipoFirma" id="idTipoFirma" required>
+                                                    <option value="0">(Seleccione)</option>
+                                                    <php:repeticion id="tipoFirma">
+                                                    <option value="<php:item id="idTipoFirma" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idTipoFirma" /><php:argumento idvalor="idTipoFirma" /></php:funcion>><php:item id="Descripcion" /></option>
+                                                    </php:repeticion>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div-->
+                                </div>
+                                <!--Fin de firmantes-->
+                            </div>
+                        </div>
+                        <!--Fin de Firmantes-->
+                        <div class="form-row">  
+                            <div class="col-md-2 xs-12 pull-left">  
+                                <button class="btn btn-md btn-success btn-block" type="button" name="accion" id="VER" value="VER" onclick="ver()" style="margin-top: 10px">Ver &uacute;ltima generaci&oacute;n</button>  
+                            </div>
+                            <div class="col-md-4 xs-12">  
+                                <div id="estado" style="display:none;">
+                                    <div>
+                                        <label id="estadodetalle">Estado proceso</label>
+                                    </div>
+                                    <progress value="0" id="progreso" max="<php:item id="highestRow" />">	</progress>
+                                </div>
+                            </div>
+                            <div class="col-md-2 xs-12 pull-right">  
+                                <!--input type="hidden" id="idWF" name="idWF"/>
+                                <input type="hidden" id="input_empleado" name="input_empleado" value="<php:item id="input_empleado"/>"/>
+                                <input type="hidden" id="ACTIVAR" name="ACTIVAR"/-->
+                                <button class="btn btn-md btn-success btn-block" type="button" name="accion" id="GENERAR" value="GENERAR" style="margin-top: 10px" onclick="subirArchivo()" disabled>Enviar</button>  
+                            </div>
+                        </div>
+                        <!--Fin del repeticion de formulario-->
+                        </php:repeticion>  
+                    </form>
+                    <form name="resultado" id="resultado" action="Respuesta_asignacioFormulario.php" method="POST" >
+                        <input type="hidden" id="IdArchivo" name="IdArchivo" value="" />
+                    </form>
+                    <!--Modal de Centros de Costo>
+                    <div class="modal fade" id="modal_cargoEmpleado" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" >
+                            <div class="modal-content">
+                                <div class="modal-header" align="center">
+                                    <h4 class="modal-title" id="ejemplo-titulo"> Cargos </h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="mensajeError_modal"></div>
+                                    <table id="tabla_cargoEmpleado" class="table table-bordered table-hover" style="text-align: center">
+                                        <thead >
+                                            <tr>
+                                                <th  style="text-align: center" >C&oacute;digo</th>
+                                                <th  style="text-align: center" >Nombre</th>
+                                                <th  style="text-align: center" >Selecci&oacute;n</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer" style="margin-top:10px;">
+                                    <button type="button" class="btn btn-secondary btn-md" id="cerrar_cargoEmpleado" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal de Lugares de pago-->
+    <!--div class="modal fade" id="modal_lugares_pago" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" >
+            <div class="modal-content">
+                <div class="modal-header" align="center">
+                    <h4 class="modal-title" id="ejemplo-titulo"> Lugar de pago </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="mensajeError_modal"></div>
+                    <table id="tabla_lugares_pago" class="table table-bordered table-hover" style="text-align: center">
+                        <thead>
+                            <tr>
+                                <th  style="text-align: center" >C&oacute;digo</th>
+                                <th  style="text-align: center" >Nombre</th>
+                                <th  style="text-align: center" >Selecci&oacute;n</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer" style="margin-top:10px;">
+                    <button type="button" class="btn btn-secondary btn-md" id="cerrar_lugares_pago" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div-->
+    <!--Modal de Centros de Costo-->
+    <!--div class="modal fade" id="modal_centro_costo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" >
+            <div class="modal-content">
+                <div class="modal-header" align="center">
+                    <h4 class="modal-title" id="ejemplo-titulo"> Centro de costo </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="mensajeError_modal"></div>
+                    <table id="tabla_centro_costo" class="table table-bordered table-hover" style="text-align: center">
+                        <thead>
+                            <tr>
+                                <th  style="text-align: center" >C&oacute;digo</th>
+                                <th  style="text-align: center" >Nombre</th>
+                                <th  style="text-align: center" >Selecci&oacute;n</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer" style="margin-top:10px;">
+                    <button type="button" class="btn btn-secondary btn-md" id="cerrar_centro_costo" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div-->
+</section>
+<script>
+
+//$('#idFormulario').val(1);
+$('#soloUno').click(function()
+{
+    $('#GENERAR').attr('disabled', true);
+    if ($("#soloUno").is(':checked'))
+    {
+        $('#sin_planilla').hide();
+        $('#con_planilla').show();
+        $('#newusuarioid').val('');
+        //$("#idFormulario").prop("selectedIndex", 0).val(); 
+    }
+    else
+    {
+        $('#con_planilla').hide();
+        $('#sin_planilla').show();
+        $("#Documento").val('');
+        $("#archivo").val('');
+    }
+});
+
+$('#idFormulario').on('change', function(){
+    $('#soloUno').prop('checked', true);
+    $('#sin_planilla').hide();
+    $('#con_planilla').show();
+    $('#newusuarioid').val();
+    //$('#soloUno').trigger('click');
+    //$('#soloUno').click();
+    var IdArchivo = $(this).find(':selected').data('idarchivo');
+    $('#IdArchivo').val(IdArchivo);
+    switch(IdArchivo)
+    {
+        case 1: // Se permite la carga unitaria
+        {
+            $('#soloUnoFull').show();
+            break;
+        }
+        case 2: // Utiliza solo carga masiva
+        case 3: // Utiliza solo carga masiva
+        case 4: // Utiliza solo carga masiva
+        {
+            $('#soloUnoFull').hide();
+            break;
+        }
+    }
+    resetMemoryCount();
+    $("#Documento").val('');
+    $("#archivo").val('');
+    habilitaBoton();
+    getEstadoSubida();
+    $(".fila").remove();
+    if ($('#idFormulario').find(':selected').data('numerorepresentantes') > 0)
+    {
+        $('.muestraFirmantes').show();
+        getFirmantes($('#RutEmpresa').val());
+    }
+    else{
+        $('.muestraFirmantes').hide();
+    }
+    //alert($(this).find(':selected').data('idarchivo'));
+});
+
+function getFirmantes(RutEmpresa)
+{
+    var url  = "Generar_Documentos_Masivos2_ajax.php?RutEmpresa=" + RutEmpresa;
+    if( window.XMLHttpRequest )
+        ajaxFirmantes = new XMLHttpRequest(); // No Internet Explorer
+    else
+        ajaxFirmantes = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+    // Almacenamos en el control al funcion que se invocara cuando la peticion
+    // cambie de estado 
+    ajaxFirmantes.onreadystatechange = funcionCallback_getFirmantes;
+    // Enviamos la peticion
+    ajaxFirmantes.open( "GET", url, true );
+    ajaxFirmantes.send( "" );
+}
+
+function seleccion(id){
+    //console.log(id);
+    var num = $('.f_emp:checked').length;//$('input[type=checkbox]:checked').length;
+    console.log(num);
+    var cantidad_firmantes = $('#idFormulario').find(':selected').data('numerorepresentantes');//$("#Cantidad_Firmantes").val(); 
+    //var representantes = $('#idFormulario').find(':selected').data('numerorepresentantes');
+    //console.log(representantes);
+    //console.log(cantidad_firmantes);
+   if ( cantidad_firmantes == '' ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Debe seleccionar un formulario" );
+        $("#idPlantilla").focus();
+        habilitaBoton();//$("#GENERAR").attr('disabled', true);
+        return false;
+    }
+    if ( num < cantidad_firmantes ){
+        habilitaBoton();//$("#GENERAR").attr('disabled',true);
+    }
+    if ( num > cantidad_firmantes ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Debe seleccionar solo " + cantidad_firmantes + " Firmante, seg&uacute;n el flujo de firma del Formulario seleccionado" );
+        habilitaBoton();//$("#GENERAR").attr('disabled', true);
+    }
+    if( num == cantidad_firmantes ){
+        $("#mensajeError").removeClass("callout callout-warning");
+        $("#mensajeError").html("");
+        habilitaBoton();//$("#GENERAR").attr('disabled', false);
+    }
+    if( $("#orden_" + id ).val() == '' ){ //Seleccionado
+        if ( cantidad_firmantes > 1 ){
+            $("#orden_" + id).val(num);
+        }
+    }else{//Deseleccionado
+        if ( cantidad_firmantes > 1 ){
+            if( confirm(' Desea reiniciar el orden de los firmantes ?')){
+                $(".orden").val('');
+                $(".f_emp").prop('checked',false);
+            }else{	
+                $("#orden_" + id).val('');
+                //Colocar orden 
+                var rutfirmante = $("#emp_" + id).val();
+                convertirArreglo_emp();
+                nuevo_emp = convertirItem(arreglo_emp, orden_emp);
+                var items = nuevo_emp;
+                items.sort(function (a, b) {
+                    if (a.orden > b.orden) {
+                        return 1;
+                    }
+                    if (a.orden < b.orden) {
+                        return -1;
+                    }
+                    // a must be equal to b
+                    return 0;
+                });
+                reasignarOrden(items,'');
+            }
+        }
+    }
+}
+
+/****************************/
+/**OPERACIONES DE SELECCION**/
+/****************************/
+
+function reasignarOrden(items,emp){
+    for ( i = 0; i < items.length ; i++ ){
+        var rut = $("#" + items[i].id).val(); 
+        if( emp != '' )
+            $("#orden_" + emp + rut).val(i+1);
+        else
+            $("#orden_" + rut).val(i+1);
+    }
+}
+
+/*function convertirArreglo(){
+  
+  arreglo = [];
+  var rut = '';
+  var orden_id = '';
+
+  $(".f_cli").each(function (index) {  
+      
+      if( $(this).is(':checked') ){
+          rut = this.id;
+          orden_id = $("#orden_"+ $("#" + this.id).val()).val();
+          arreglo.push(this.id);
+          orden.push(orden_id);
+      }
+  });
+}*/
+
+function convertirArreglo_emp(){
+    arreglo_emp = [];
+    orden_emp = [];
+    var rut = '';
+    var orden_id = '';
+    $(".f_emp").each(function (index) {  
+        if( $(this).is(':checked') ){
+            rut = this.id;
+            orden_id = $("#orden_" + $("#" + this.id).val()).val();
+            arreglo_emp.push(this.id);
+            orden_emp.push(orden_id);
+        }
+    });
+}
+
+function convertirItem(arreglo1,arreglo2){
+    var data = new Object();
+    var array = new Array();
+    $.each(arreglo1, function (ind, elem){ 
+        var data = new Object();
+        data.id = elem;
+        data.orden = arreglo2[ind];
+        array[ind] = data;
+    }); 	
+    return array;
+}
+
+function funcionCallback_getFirmantes()
+{
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajaxFirmantes.readyState == 4 )
+    {
+        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+        if( ajaxFirmantes.status == 200 )
+        {
+            // Escribimos el resultado en la pagina HTML mediante DHTML
+            //document.all.salida.innerHTML = "<b>"+ajaxFirmantes.responseText+"</b>"; 
+            var salida = ajaxFirmantes.responseText;
+            if( salida != '' ){ 
+                var datos = JSON.parse(salida);
+                var x = "";
+                $.each(datos,function(key, registro) {
+                    x = "onclick=\"seleccion(\'" + registro.personaid + "\');\"";
+                    $("#tabla_emp tr:last ").after("<tr align='center' class='fila'><td ><input type='checkbox' name='Firmantes_Emp[]' class='f_emp' value='" + registro.personaid + "'id='emp_"+ registro.personaid +"' " + x + "/> </td><td>" + registro.personaid + "</td><td>" + registro.nombrecompleto +"</td><td>" +  registro.descripcion + "</td><td><input name='orden_" + registro.personaid + "' id='orden_" + registro.personaid + "' class='orden' style='text-align:center; border: none;' /></td></tr>");                                 
+                });
+                /*$('#idFormulario').append('<option value="0">(Seleccione)</option>');
+                $.each(datos,function(key, registro) {
+                    //console.log(key, registro);
+                    $('#idFormulario').append('<option data-numerorepresentantes="' + registro.NumeroRepresentantes + '" data-idarchivo="' + registro.IdArchivo + '" value="' + registro.idFormulario + '" >' + registro.nombreFormulario + '</option>');
+                });
+                $('#idFormulario').attr('disabled', false);*/
+            }else{
+                //$('#idFormulario').attr('disabled', true);
+                $("#mensajeError").addClass("callout callout-warning");
+                $("#mensajeError").html("La empresa seleccionada no posee Firmantes.");
+            }
+        }
+    }
+}
+
+
+function resetMemoryCount()
+{
+    memoryCount = 0;
+}
+
+/*
+$("#RutEmpresa").change(function(){
+    $("#nombrecargoempleado").val('');
+    $("#idCargoEmpleado").val('');
+});
+
+//Modal de Cargos empleado
+$("#btn_cargoEmpleado").click(function()
+{
+    var RutEmpresa = $("#RutEmpresa").val();
+    $(".fila_ce").remove();
+    if( RutEmpresa == 0 )
+    {
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Debe seleccionar la Empresa");
+        return false;
+    }
+    $("#mensajeError").html("");
+    $("#mensajeError").removeClass("callout callout-warning");
+    var url  = "postulacion_ajax3.php?RutEmpresa=" + RutEmpresa;
+    // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+    if( window.XMLHttpRequest )
+        ajax = new XMLHttpRequest(); // No Internet Explorer
+    else
+        ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+    // Almacenamos en el control al funcion que se invocara cuando la peticion
+    // cambie de estado 
+    ajax.onreadystatechange = funcionCallback_cargoEmpleado;
+    // Enviamos la peticion
+    ajax.open( "GET", url, true );
+    ajax.send( "" );
+});
+
+function funcionCallback_cargoEmpleado()
+{
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+        if( ajax.status == 200 )
+        {
+            // Escribimos el resultado en la pagina HTML mediante DHTML
+            salida = ajax.responseText;
+            listado = JSON.parse(salida); 
+            num = listado.length;
+            if( num > 0 ){
+                //[{"0":"cc1","centrocostoid":"cc1","1":"cc1","nombrecentrocosto":"cc1","2":"'cc1'","lp":"'cc1'"},{"0":"cc2","centrocostoid":"cc2","1":"c2","nombrecentrocosto":"c2","2":"'cc2'","lp":"'cc2'"}]
+                $.each(listado, function( index, value ) {
+                    $('#tabla_cargoEmpleado tr:last').after('<tr class="fila_ce"><td>' + listado[index].idCargoEmpleado + '</td><td><div id="' + listado[index].idCargoEmpleado + '">' + listado[index].nombrecargoempleado + ' </div></td><td ><button type="button" style="background-color: transparent;" class="btn" name="btn_agregar_ce" id="btn_agregar_ce" onclick="agregarCE(\'' + listado[index].idCargoEmpleado + '\');"><i class="fa fa-plus" aria-hidden="true"></i></button></td></tr>');
+                });
+            }else{
+                $('#tabla_cargoEmpleado tr:last').after('<tr class="fila_ce"><td colspan=3 >No existen Relaciones laborales para la Empresa y el cargo seleccionado</td></tr>');
+            }
+        }
+    }
+}
+
+function agregarCE(i){
+    $("#idCargoEmpleado").val(i);
+    $("#nombrecargoempleado").val($("#"+i).html());
+    habilitaBoton();
+    $("#cerrar_cargoEmpleado").click();
+}
+
+$("#RutEmpresa").change(function()
+{
+    habilitaBoton();
+});
+*/
+
+var ajax;
+var ajax2;
+var ajaxFirmantes;
+$(document).ready(function(){
+    if ($('#progreso').attr('max') != '')
+    {
+        estadoGeneracionMasiva();
+    }
+});
+
+function ver()
+{
+    document.getElementById("resultado").submit();
+}
+
+var consulta;
+function estadoGeneracionMasiva()
+{
+    $('#estado').show();
+    consultaEstado();
+    consulta = setInterval(function(){ consultaEstado() }, 10000);
+}
+
+function consultaEstado()
+{
+    conexion=crearXMLHttpRequest();
+    conexion.open('POST', 'loadUserFormularioProcessEstado.php?accion=ESTADO&IdArchivo='+$('#IdArchivo').val() ,false);
+    conexion.send(null);
+    try
+    {
+        respuesta = JSON.parse(conexion.responseText);
+    }
+    catch (e)
+    {
+        respuesta.actual = 0;
+    }
+    respuesta.actual = respuesta.actual == null ? 0 : respuesta.actual;
+    $('#progreso').val(respuesta.actual);
+    $('#estadodetalle').html(respuesta.actual + " filas procesadas de un total de " +  ($('#progreso').attr('max')) + " filas.");
+    if (controlMemory(respuesta.actual))
+    {
+        if (respuesta.actual == $('#progreso').attr('max'))
+        {
+            clearInterval(consulta);
+            $('#estado').hide();
+            alert('El proceso de generacion masiva de documentos ha finalizado.');
+        }
+    }
+    else
+    {
+        matarProceso();
+        clearInterval(consulta);
+        $('#estado').hide();
+        alert('Ha ocurrio un error, revise detalle y ejecute nuevamene las filas no procesadas.');
+    }
+}
+
+function matarProceso()
+{
+    conexion=crearXMLHttpRequest();
+    conexion.open('POST', 'loadUserFormularioProcess.php?accion=KILL&IdArchivo='+$('#IdArchivo').val(),false);
+    conexion.send(null);
+    memoryCount = 0;
+}
+
+var memory = '';
+var memoryTop = 10;
+var memoryCount = 0;
+function controlMemory(dato)
+{
+    var respuesta = true;
+    if (memory == dato)
+    {
+     memoryCount++;
+    }
+    else
+    {
+        memoryCount = 0;
+    }
+    if (memoryCount >= memoryTop)
+    {
+        respuesta = false;
+    }
+    memory = dato;
+    console.log(dato, memory, memoryCount, memoryTop, respuesta);
+    return respuesta;
+}
+
+$("#newusuarioid").change(function(){
+    $("#Documento").val('');
+    $("#archivo").val('');
+    var respuesta = validaRut2(document.formulario.newusuarioid);
+    habilitaBoton();
+});
+
+/*$("#idFormulario").change(function(){
+    $("#Documento").val('');
+    $("#archivo").val('');
+    habilitaBoton();
+});*/
+
+
+function getEstadoSubida()
+{
+    //parametros = '?accion=UNO' + '&IdArchivo=2&rut=' + $('#newusuarioid').val() + '&idFormulario=' + $('#idFormulario').val() + '&RutEmpresa=' + $('#RutEmpresa').val() + '&idCargoEmpleado=' + $('#idCargoEmpleado').val();
+    parametros = '?accion=ESTADO' + '&IdArchivo='+$('#IdArchivo').val();
+    var url  = "loadUserFormularioProcess.php" + parametros;
+    // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+    if( window.XMLHttpRequest )
+        ajax = new XMLHttpRequest(); // No Internet Explorer
+    else
+        ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+    // Almacenamos en el control al funcion que se invocara cuando la peticion
+    // cambie de estado 
+    ajax.onreadystatechange = funcionCallback_getEstadoSubida;
+    // Enviamos la peticion
+    ajax.open( "GET", url, true );
+    ajax.send( "" );
+}
+
+function funcionCallback_getEstadoSubida()
+{
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+        if( ajax.status == 200 )
+        {
+            var salida = ajax.responseText;
+            respuesta = JSON.parse(salida);
+            $('#mensajeOK').removeClass();
+            clearInterval(consulta);
+            if (respuesta.highestRow)
+            {
+                $('#progreso').attr('max', respuesta.highestRow);
+                estadoGeneracionMasiva();
+            }
+            else
+            {
+                $('#estado').hide();
+            }
+        }
+    }
+}
+/*function habilitaGenerar()
+	{$("#GENERAR").attr('disabled', habilitaGenerar());
+		console.log($('input[type=checkbox]:checked').length == $("#Cantidad_Firmantes").val(), $('input[type=checkbox]:checked').length, $("#Cantidad_Firmantes").val());
+		return !($("#RutEmpresa").val() != 0 && $("#FechaDocumento").val() != '' && $("#lugarpagoid").val() != '' && $("#centrocostoid").val() != '' && $("#idTipoDoc").val() != 0 && $("#idProceso").val() != 0 && $("#idPlantilla").val() != 0 && $("#idFirma").val() != 0 && $('input[type=checkbox]:checked').length == $("#Cantidad_Firmantes").val());
+	}*/
+
+
+function habilitaBoton()
+{
+    //if( ($("#Documento").val() != '' || ($('#newusuarioid').val() != '' && $('#idFormulario').val() != 0 )) && ($("#RutEmpresa").val() != 0 && $("#idCargoEmpleado").val() != 0) )
+    //if( ($("#Documento").val() != '' || ($('#newusuarioid').val() != '' && $('#idFormulario').val() != 0 )) )
+    //if( ($("#Documento").val() != '' || $('#newusuarioid').val() != '') && ($('#idFormulario').val() != 0 && $('#RutEmpresa').val() != 0 && $('#lugarpagoid').val() != 0 && $('#centrocostoid').val() != 0 && $('.f_emp:checked').length == $('#idFormulario').find(':selected').data('numerorepresentantes') )  )//&& $('#idTipoFirma').val() != 0)  )
+    if( ($("#Documento").val() != '' || $('#newusuarioid').val() != '') && ($('#idFormulario').val() != 0 && $('#RutEmpresa').val() != 0 && $('.f_emp:checked').length == $('#idFormulario').find(':selected').data('numerorepresentantes') )  )//&& $('#idTipoFirma').val() != 0)  )
+    {
+        $("#GENERAR").attr('disabled', false);
+    }
+    else
+    {
+        $("#GENERAR").attr('disabled', true);
+    }
+}
+
+$("#archivo").change(function()
+{
+    $("#Documento").val($("#archivo").val());
+    $('#newusuarioid').val('');
+    //$("#idFormulario").prop("selectedIndex", 0).val(); 
+    habilitaBoton();
+});
+
+function subirArchivo()
+{
+    if( $("#Documento").val() != '')
+    {
+        //revisa si hay algun cambio en el archivo
+        $("#mensajeError").removeClass("callout callout-warning");
+        $("#mensajeError").html("");
+        MostrarCargando();
+        if (validar() == true)
+        {
+            upload_input = document.querySelectorAll('#archivo')[0];
+            uploadFile( upload_input.files[0] );
+        }
+    }
+    else if ($('#newusuarioid').val() != '')
+    {
+        procesarUno();
+    }
+}
+
+function validar()
+{
+    /*if ( $("#RutEmpresa").val() == 0 ){
+        $("#RutEmpresa").focus();
+        return false;
+    }
+    if ( $("#idTipoDoc").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Seleccione el tipo de documento");
+        $("#idTipoDoc").focus();
+        return false;
+    }
+    if( $("#idProceso").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Seleccione un Proceso");
+        $("#idProceso").focus();
+        return false;
+    }
+    if( $("#idPlantilla").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Seleccione la plantilla");
+        $("#idPlantilla").focus();
+        return false;
+    }
+    if( $("#idFirma").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Seleccione el tipo de firma del documento");
+        $("#idFirma").focus();
+        return false;
+    }
+    if( $("#Documento").val().length == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Seleccione el archivo de carga que necesita");
+        $("#Documento").focus();
+        return false;
+    }*/
+    return true;
+}
+
+function uploadFile(file)
+{
+    $("#GENERAR").attr('disabled', true);
+    importar(file,$('#IdArchivo').val()); //IdArchivo
+}
+
+function importar(file,IdArchivo)
+{
+    var xhr =  createXMLHttp();
+    xhr.upload.addEventListener('loadstart',function(e)
+    {
+        document.getElementById('mensaje').innerHTML = 'Cargando archivo...';
+    }, false);
+    xhr.upload.addEventListener('load',function(e)
+    {
+        document.getElementById('mensaje').innerHTML = '';
+    }, false);
+    xhr.upload.addEventListener('error',function(e)
+    {
+        alert('Ha habido un error :/');
+    }, false);
+    var datos = $('#formulario').serialize();
+    var url  = 'loadUserFormularioProcess.php?accion=LOAD&datos=' + datos + '&IdArchivo='+ IdArchivo;
+    //var url  = 'loadResultadoPostulacion.php?accion=LOAD&IdArchivo='+ IdArchivo + '&RutEmpresa=' + rutempresa + '&datos=' + datos;
+    xhr.open('POST',url,false);//se le agrego false para que sea sincrono, para que espere antes de comenzar a cargar el otro archivo.
+    xhr.setRequestHeader("Cache-Control", "no-cache");
+    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+    xhr.setRequestHeader("X-File-Name", file.name);
+    xhr.addEventListener('readystatechange', function(e) 
+    {
+        if( this.readyState == 4 ) 
+        {
+            try
+            {
+                respuesta = JSON.parse(xhr.responseText);
+                //if(IdArchivo == 2 )
+                if(IdArchivo == $('#IdArchivo').val() )
+                {
+                    $('#progreso').attr('max', respuesta.highestRow);
+                    procesar(IdArchivo);
+                    estadoGeneracionMasiva();
+                }
+            }
+            catch (e)
+            {
+                respuesta = xhr.responseText;
+                var elementoError   = document.getElementById("mensajeError");
+                elementoError.innerHTML = respuesta;
+                elementoError.className += "callout callout-danger";
+            }
+        }
+        //if( IdArchivo == 2 )
+        if( IdArchivo == $('#IdArchivo').val() )
+        {
+            document.getElementById("Documento").value = "";
+            document.getElementById("archivo").value = "";
+            OcultarCargando();
+        } 
+    });
+    xhr.send(file);
+}
+
+function createXMLHttp()
+{
+    var xmlHttp = null; 
+    if(window.XMLHttpRequest)
+    {
+        xmlHttp = new XMLHttpRequest();
+    }
+    else if(window.ActiveXObject)
+    {   
+        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    return xmlHttp;
+}
+
+function procesarUno()
+{
+    //parametros = '?accion=UNO' + '&IdArchivo=2&rut=' + $('#newusuarioid').val() + '&idFormulario=' + $('#idFormulario').val() + '&RutEmpresa=' + $('#RutEmpresa').val() + '&idCargoEmpleado=' + $('#idCargoEmpleado').val();
+    parametros = '?accion=UNO' + '&IdArchivo='+$('#IdArchivo').val()+'&rut=' + $('#newusuarioid').val() + '&idFormulario=' + $('#idFormulario').val();
+    var url  = "loadUserFormularioProcess.php" + parametros;
+    // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+    if( window.XMLHttpRequest )
+        ajax = new XMLHttpRequest(); // No Internet Explorer
+    else
+        ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+    // Almacenamos en el control al funcion que se invocara cuando la peticion
+    // cambie de estado 
+    ajax.onreadystatechange = funcionCallback_soloUNO;
+    // Enviamos la peticion
+    ajax.open( "GET", url, true );
+    ajax.send( "" );
+}
+
+function funcionCallback_soloUNO()
+{
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+        if( ajax.status == 200 )
+        {
+            var salida = ajax.responseText;
+            respuesta = JSON.parse(salida);
+            $('#mensajeOK').removeClass();
+            if (respuesta.exito)
+            {
+                alert(respuesta.mensaje);
+            }
+        }
+    }
+}
+
+function procesar(IdArchivo)
+{
+    conexion=crearXMLHttpRequest();
+    var firmantes = $('.f_emp').serialize();
+    var ordenFirmantes = $('.orden').serialize();
+    //console.log(firmantes);
+    //parametros = '?accion=LOOP0' + '&IdArchivo='+ IdArchivo + '&RutEmpresa=' + $('#RutEmpresa').val() + '&idCargoEmpleado=' + $('#idCargoEmpleado').val();
+    //parametros = '?accion=LOOP0' + '&IdArchivo='+ IdArchivo + '&idFormulario=' + $('#idFormulario').val() + '&RutEmpresa=' + $('#RutEmpresa').val() + '&LugarPagoid=' + $('#lugarpagoid').val() + '&idCentroCosto=' + $('#centrocostoid').val() + '&' + firmantes + '&' + ordenFirmantes;
+    parametros = '?accion=LOOP0' + '&IdArchivo='+ IdArchivo + '&idFormulario=' + $('#idFormulario').val() + '&RutEmpresa=' + $('#RutEmpresa').val() + '&' + firmantes + '&' + ordenFirmantes;
+    conexion.open('POST', 'loadUserFormularioProcess.php' + parametros);
+    conexion.send(null);
+    respuesta =  conexion.responseText;	
+}
+
+function crearXMLHttpRequest() 
+{
+    var xmlHttp=null;
+    if (window.ActiveXObject) 
+        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+    else 
+        if (window.XMLHttpRequest) 
+            xmlHttp = new XMLHttpRequest();
+    return xmlHttp;
+}
+
+/*$("#idTipoFirma").change(function(){
+    habilitaBoton();
+});*/
+
+$("#RutEmpresa").change(function(){
+    var RutEmpresa = $("#RutEmpresa").val();
+    $("#mensajeError").removeClass("callout callout-warning");
+    $("#mensajeError").html("");
+    habilitaBoton();
+    $('#idFormulario').empty();
+    /*$("#idTipoDoc").attr("disabled",true);
+    $("#idProceso").attr("disabled",true);
+    $("#idPlantilla").attr("disabled",true);
+    $("#idFirma").attr("disabled",true);
+    $("#Documento").attr("disabled",true);
+    $(".btn-file").attr("disabled",true);
+    $("#archivo").attr("disabled",true);
+    $("#FechaDocumento").attr("disabled",true);
+    $("#idTipoDoc").val(0);
+    $("#idProceso").val(0);
+    $("#idPlantilla").val(0);
+    $("#idFirma").val(0);
+    $("#Documento").val('');
+    $("#archivo").val();
+    $("#idWF").val(0);
+    $(".plan").remove();
+    $("#rut_orden").val('');
+    $("#ordenx").val('');
+    $(".orden").val('');
+    $("#nombrelugarpago").val("");
+    $("#lugarpagoid").val("");
+    $("#nombrecentrocosto").val('');
+    $("#idCentroCosto").val('');
+    */
+    //Limpiar tabla 
+    $(".fila").remove();
+    //Ocultar firmantes 
+    /*$("#icono_representante").hide();
+    $("#label").hide();
+    $("#step-1").collapse('hide');*/
+
+    if( RutEmpresa != 0 ){
+        /*$("#idTipoDoc").attr("disabled",false);
+        $("#idTipoDoc").val(0);*/
+        //var url  = "Generar_Documentos_Masivos2_ajax.php?RutEmpresa=" + RutEmpresa;
+        var url  = "formularioPlantilla_ajax.php?RutEmpresa=" + RutEmpresa;
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+            ajax = new XMLHttpRequest(); // No Internet Explorer
+        else
+            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajax.onreadystatechange = funcionCallback_Empresa;
+        // Enviamos la peticion
+        ajax.open( "GET", url, true );
+        ajax.send( "" );
+    }
+});
+    
+function funcionCallback_Empresa()
+{
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+        if( ajax.status == 200 )
+        {
+            // Escribimos el resultado en la pagina HTML mediante DHTML
+            //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
+            salida = ajax.responseText;
+            if( salida != '' ){ 
+                var datos = JSON.parse(salida);
+                var x = "";
+                /*$.each(datos,function(key, registro) {
+                    x = "onclick=\"seleccion(\'" + registro.personaid + "\');\"";
+                    $("#tabla_emp tr:last ").after("<tr align='center' class='fila'><td ><input type='checkbox' name='Firmantes_Emp[]' class='f_emp' value='" + registro.personaid + "'id='emp_"+ registro.personaid +"' " + x + "/> </td><td>" + registro.personaid + "</td><td>" + registro.nombrecompleto +"</td><td>" +  registro.descripcion + "</td><td><input name='orden_" + registro.personaid + "' id='orden_" + registro.personaid + "' class='orden' style='text-align:center; border: none;' /></td></tr>");                                 
+                }); */
+                $('#idFormulario').append('<option value="0">(Seleccione)</option>');
+                $.each(datos,function(key, registro) {
+                    //console.log(key, registro);
+                    $('#idFormulario').append('<option data-numerorepresentantes="' + registro.NumeroRepresentantes + '" data-idarchivo="' + registro.IdArchivo + '" value="' + registro.idFormulario + '" >' + registro.nombreFormulario + '</option>');
+                });
+                $('#idFormulario').attr('disabled', false);
+            }else{
+                $('#idFormulario').attr('disabled', true);
+                $("#mensajeError").addClass("callout callout-warning");
+                $("#mensajeError").html("La empresa seleccionada no posee Formularios.");
+            }
+        }
+    }
+}
+
+
+//Modal de Lugares de pago 
+/*$("#btn_lugares_pago").click(function(){
+    var RutEmpresa = $("#RutEmpresa").val();
+    $(".fila_lp").remove();
+    if( RutEmpresa == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Debe seleccionar la Empresa");
+        return false;
+    }else{
+        $("#mensajeError").html("");
+        $("#mensajeError").removeClass("callout callout-warning");
+        var url  = "Generar_Documento_PorFicha_ajax1.php?RutEmpresa=" + RutEmpresa;
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+            ajax = new XMLHttpRequest(); // No Internet Explorer
+        else
+            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajax.onreadystatechange = funcionCallback_lugarespago;
+        // Enviamos la peticion
+        ajax.open( "GET", url, true );
+        ajax.send( "" );
+    }
+});*/
+
+/*function funcionCallback_lugarespago()
+{
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+        if( ajax.status == 200 )
+        {
+            // Escribimos el resultado en la pagina HTML mediante DHTML
+            salida = ajax.responseText;
+            listado = JSON.parse(salida);
+            num = listado.length;
+            if( num > 0 ){
+                $.each(listado, function( index, value ) {
+                    $('#tabla_lugares_pago tr:last').after('<tr class="fila_lp"><td>' + listado[index].lugarpagoid + '</td><td><div id="' + listado[index].lugarpagoid + '">' + listado[index].nombrelugarpago + ' </div></td><td ><button type="button" style="background-color: transparent;" class="btn" name="btn_agregar_lp" id="btn_agregar_lp" onclick="agregarLp(' + listado[index].lp + ');"><i class="fa fa-plus" aria-hidden="true"></i></button></td></tr>');
+                });
+            }
+            else{
+                $('#tabla_lugares_pago tr:last').after('<tr class="fila_lp"><td colspan = 3>No existen Plantas asociadas a la Empresa seleccionada</td></tr>');
+            }
+        }
+    }
+}*/
+
+/*function agregarLp(i){
+	$("#lugarpagoid").val(i);
+	$("#nombrelugarpago").val($("#" + i ).html());
+    $("#centrocostoid").val('');
+    $("#nombrecentrocosto").val('(Seleccione)');
+	$("#cerrar_lugares_pago").click();
+    habilitaBoton();
+}*/
+
+//Modal de Centros de Costo
+/*$("#btn_centro_costo").click(function(){
+    var RutEmpresa = $("#RutEmpresa").val();
+    //var departamento = $("#departamentoid").val();
+    var lugarpago = $("#lugarpagoid").val();
+    $(".fila_cc").remove();
+    if( RutEmpresa == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Debe seleccionar la Empresa");
+        return false;
+    }
+    if( lugarpago == '' ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Debe seleccionar una Lugar de pago");
+        return false;
+    }
+    //if( departamento == '' ){
+    //    $("#mensajeError").addClass("callout callout-warning");
+    //    $("#mensajeError").html("Debe seleccionar una Divisi&oacuten");
+    //    return false;
+    //}
+    $("#mensajeError").html("");
+    $("#mensajeError").removeClass("callout callout-warning");
+    var url  = "Generar_Documento_PorFicha_ajax2.php?RutEmpresa=" + RutEmpresa + '&lugarpagoid=' + lugarpago;
+    // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+    if( window.XMLHttpRequest )
+        ajax = new XMLHttpRequest(); // No Internet Explorer
+    else
+        ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+    // Almacenamos en el control al funcion que se invocara cuando la peticion
+    // cambie de estado 
+    ajax.onreadystatechange = funcionCallback_centrocosto;
+    // Enviamos la peticion
+    ajax.open( "GET", url, true );
+    ajax.send( "" );
+});*/
+
+/*function funcionCallback_centrocosto()
+{
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+        if( ajax.status == 200 )
+        {
+            // Escribimos el resultado en la pagina HTML mediante DHTML
+            salida = ajax.responseText;
+            listado = JSON.parse(salida); 
+            num = listado.length;
+            if( num > 0 ){
+                //[{"0":"cc1","centrocostoid":"cc1","1":"cc1","nombrecentrocosto":"cc1","2":"'cc1'","lp":"'cc1'"},{"0":"cc2","centrocostoid":"cc2","1":"c2","nombrecentrocosto":"c2","2":"'cc2'","lp":"'cc2'"}]
+                $.each(listado, function( index, value ) {
+                    $('#tabla_centro_costo tr:last').after('<tr class="fila_cc"><td>' + listado[index].centrocostoid + '</td><td><div id="' + listado[index].centrocostoid + '">' + listado[index].nombre + ' </div></td><td ><button type="button" style="background-color: transparent;" class="btn" name="btn_agregar_cc" id="btn_agregar_cc" onclick="agregarCC(' + listado[index].cc + ');"><i class="fa fa-plus" aria-hidden="true"></i></button></td></tr>');
+                });
+            }else{
+                $('#tabla_centro_costo tr:last').after('<tr class="fila_cc"><td colspan=3 >No existen Relaciones laborales para la Empresa y el Centro de Costo seleccionado</td></tr>');
+            }
+        }
+    }
+}*/
+
+/*function agregarCC(i){
+    $("#centrocostoid").val(i);
+    $("#nombrecentrocosto").val($("#"+i).html());
+    $("#cerrar_centro_costo").click();
+    //$("#idTipoDoc").attr("disabled",false);
+    //$("#idTipoDoc").val(0);
+    habilitaBoton();
+}*/
+</script>

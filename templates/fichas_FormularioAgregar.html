@@ -1,0 +1,915 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box ">
+      <div class="box-body pad table-responsive">
+      <!--Botones de cabecera-->
+        <div class="box-header">
+		  <a class="btn btn-default btn_letra_azul" href="Fichas.php"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</a>
+		  
+        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+         <!--Mensajes-->
+		<div id="mensajeError"><php:texto id="mensajeError" /></div>
+		<div id="mensajeOK"><php:texto id="mensajeOK" /></div>	
+		<div id="mensajeAd"><php:texto id="mensajeAd" /></div>	
+		
+		<form name="formulario" class="formulario" id="formulario"  class="form-horizontal" action="Fichas.php" method="POST" autocomplete=off enctype="multipart/form-data">
+			
+			<php:repeticion id="formulario">
+
+           <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                  <li id="ficha_datos_p"  <php:texto id="class_active" />><a href="#datos_p" data-toggle="tab">Datos personales</a></li>
+                  <li id="ficha_datos_e" ><a href="#datos_e" data-toggle="tab">Datos de Empresa</a></li>
+                  <li id="ficha_datos_doc" ><a href="#datos_doc" data-toggle="tab">Subida de Documentos</a></li>
+                  <!--<li><a href="#datos_doc_g" data-toggle="tab">Documentos Generados</a></li>-->
+                </ul>
+
+                <div class="tab-content">
+                  <div class="tab-pane <php:texto id="active_datos" />" id="datos_p">
+                    <div class="box-body">
+						
+						<div class="form-row">
+				              <div class="col-md-12">
+								<label style="float:right;"> (*) Campos obligatorios </label>
+							  </div>
+							</div>
+							
+                      <div class="form-row">
+              					<div class="col-md-6 col-xs-12">
+              						<label for="tipousuarioid">Rut (*)</label>
+              						<input type="text" class="form-control" id="newusuarioid"  name="newusuarioid" placeholder="Rut v&aacute;lido" maxlength="10" value="<php:item id="newusuarioid" />" autofocus >
+              					</div>
+              				</div>
+
+              				<div class="form-row">
+              					<div class="col-md-6 col-xs-12">
+              						<label for="contenedorid" >Nombre Completo (*)</label>
+              						<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre completo" maxlength="110" value="<php:item id="nombre" />" >
+              					</div>
+              				</div>
+
+              				<div class="form-row">
+              					<div class="col-md-6 col-xs-12">
+              						<label for="contenedorid" >Nacionalidad</label>
+              						<input type="text" class="form-control" id="nacionalidad" name="nacionalidad" placeholder="Nacionalidad" maxlength="50" value="<php:item id="nacionalidad" />">
+              					</div>
+              				</div>			
+
+              				<div class="form-row">
+              					<div class="col-md-6 col-xs-12">
+              						<label for="contenedorid" >Direcci&oacute;n (*)</label>
+              						<input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion" maxlength="110" value="<php:item id="direccion" />">
+              					</div>
+              				</div>		
+
+              				<div class="form-row">
+              					<div class="col-md-6 col-xs-12">
+              						<label for="contenedorid" >Comuna (*)</label>
+              						<input type="text" class="form-control" id="comuna" name="comuna" placeholder="Comuna" value="<php:item id="comuna" />">
+              					</div>
+              				</div>	
+
+              				<div class="form-row">
+              					<div class="col-md-6 col-xs-12">
+              						<label for="contenedorid" >Ciudad (*)</label>
+              						<input type="text" class="form-control" id="ciudad" name="ciudad" placeholder="Ciudad" value="<php:item id="ciudad" />">
+              					</div>
+              				</div>				
+
+              				<div class="form-row">
+              					<div class="col-md-6 col-xs-12">
+              						<label for="contenedorid" >Fono (+56123456789) (*)</label>
+              						<input type="text" class="form-control" id="fono" name="fono" placeholder="Fono" maxlength="12"/>
+              					</div>
+              				</div>
+
+              				<div class="form-row">
+              					<div class="col-md-6 col-xs-12">
+              						<label for="contenedorid" >Correo Electr&oacute;nico</label>
+              						<input type="text" class="form-control" id="correo" name="correo" placeholder="Correo electr&oacute;nico" maxlength="50" value="<php:item id="correo" />">
+              					</div>
+              				</div>
+
+              				<div class="form-row">
+              					<div class="col-md-6 col-xs-12">
+              						<label for="contenedorid" >Estado civil (*)</label>
+              						<select class= "form-control" name="idEstadoCivil" id="idEstadoCivil">
+              							<option value="0">(Seleccione)</option>
+              							<php:repeticion id="EstadoCivil">
+              								<option value="<php:item id="idEstadoCivil" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idEstadoCivil" /><php:argumento idvalor="idEstadoCivil" /></php:funcion>><php:item id="Descripcion" /></option>
+              							</php:repeticion>
+              						</select>
+              					</div>
+              				</div>	
+
+              				<div class="form-row">
+              					<div class="col-md-6 col-xs-12">
+              						<label for="contenedorid" >Fecha de nacimiento (*)</label>
+              						<div class="form-group">
+              				            <div class="input-group date">
+              				              <div class="input-group-addon">
+              				                <i class="fa fa-calendar"></i>
+              				              </div>
+              								<input type="text" class="form-control" id="fechanacimiento" name="fechanacimiento" placeholder="Fecha de nacimiento"  />
+              							</div>
+              						</div>
+              				  	</div>
+              				</div>
+
+                      <div class="form-row" >
+                        <div class="col-md-6 xs-12">
+                          <label for="idFirma">Tipo de Firma (*)</label>
+                          <select class= "form-control" name="idFirma" id="idFirma">
+                          <option value="0">(Seleccione)</option>
+                          <php:repeticion id="Firmas">
+                            <option value="<php:item id="idFirma" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idFirma"" /><php:argumento idvalor="idFirma" /></php:funcion>><php:item id="Descripcion" /></option>
+                          </php:repeticion>
+                          </select>
+                        </div>
+                      </div>
+                  
+                    </div>
+                  </div>
+
+                  <div class="tab-pane" id="datos_e">
+                    <div class="box-body">
+							
+							<div class="form-row">
+				              <div class="col-md-12">
+								<label style="float:right;"> (*) Campos obligatorios </label>
+							  </div>
+							</div>
+							
+												 <!--Empresas-->
+                          <div class="form-row" >
+                            <div class="col-md-6 xs-12" >
+                              <label for="Empresa" >Empresa (*)</label>
+                              <div class="box-body">
+                                <!--Select de Empresas disponibles-->
+                                <select class= "form-control" name="RutEmpresa" id="RutEmpresa">
+                                <option value="0">( Seleccione )</option>
+                                  <php:repeticion id="Empresas">
+                                    <option value="<php:item id="RutEmpresa" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEmpresa" /><php:argumento idvalor="RutEmpresa" /></php:funcion>><php:item id="RazonSocial" /></option>
+                                  </php:repeticion>
+                                </select>
+                              </div>
+                            </div>	
+                          </div>
+
+                          <div class="form-row" >
+                            <div class="col-md-6 xs-12">
+                             <label>Centro de Costo (*)</label>
+                              <div class="box-body">
+                                  <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                                    <input class="form-control" type="text" name="nombrelugarpago" id="nombrelugarpago" placeholder="(Seleccione)" readonly />
+                                    <input class="form-control" type="hidden" name="lugarpagoid" id="lugarpagoid" /> 
+                                  </div>
+                                  <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                                     <button class="btn btn-md btn-primary btn-block lugares_pago"  type="button" id="btn_lugares_pago" data-toggle="modal" data-target="#modal_lugares_pago"><i class="fa fa-search"></i></button>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+
+                          <!--<div class="form-row">
+                            <div class="col-md-6 xs-12">
+                             <label>Relaci&oacute;n Laboral (*)</label>
+                              <div class="box-body">
+                                  <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                                    <input class="form-control" type="text" name="nombrecentrocosto" id="nombrecentrocosto" placeholder="(Seleccione)" readonly />
+                                    <input type="hidden" name="centrocostoid" id="centrocostoid" placeholder="(Seleccione)"/>
+                                  </div>
+                                  <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                                     <button class="btn btn-md btn-primary btn-block" type="button" id="btn_centro_costo" data-toggle="modal" data-target="#modal_centro_costo"><i class="fa fa-search"></i></button>  
+                                  </div>
+                                </div>
+                              </div>
+                          </div>-->								
+                    </div>
+                  </div>
+
+                  <div class="tab-pane <php:texto id="active_docs" />" id="datos_doc">
+                    <div class="box-body">
+					
+					<div class="form-row">
+				              <div class="col-md-12">
+								<label style="float:right;"> (*) Campos obligatorios </label>
+							  </div>
+							</div>
+							
+                        <!--Subir documento-->
+                        <div class="form-row">
+                          <div class="col-md-6" id="doc">
+                            <label for="Subir" id="doc_label">Seleccione archivos PDF (*)</label>
+                            <div class="form-group" id="doc_hijo"> 
+                              <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                                <input type="text" class="form-control" placeholder="Seleccione archivo de carga" name="Documento" id="Documento" readonly >
+                              </div>
+                              <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                                <span class="btn btn-primary btn-file">
+                                  <i class="fa fa-upload" aria-hidden="true"></i>
+                                  <input type="file" name="archivo" id="archivo"  accept="application/pdf"  />
+                                </span>
+                              </div>
+                              <span class="fileinput-filename"></span>
+                              <span class="fileinput-new"></span>
+                            </div>
+                          </div>
+                        </div>  
+
+                      <!--Documento subidos-->
+                       <div class="form-row">
+                        <div class="col-md-12" style="margin-top: 10px;">
+                          <label for="Documentos subidos"> Documentos subidos </label>
+                            <div id="tabla_doc_subidos" class="tabla-responsiva" >
+                              <table id="tabla_doc" class="table table-bordered table-hover " >
+                                  <thead>
+                                  <tr>
+                                    <th style="text-align: center;" data-campo="idDocumento">Nro de Documento</th>
+                                    <th style="text-align: center;" data-campo="NombreDocumento">Nombre de Documento</th>
+                                    <th style="text-align: center;" data-campo="Fecha de creaci&oacute;n">Fecha de creaci&oacute;n</th>
+                                    <th style="text-align: center;" data-campo="Tipo de documento">Tipo de Documento</th>
+                                    <th style="text-align: center;" data-campo="Opciones">Opciones</th>
+                                  </tr>
+                                  </thead>
+                                <tbody>
+                                    <!--Contenido de Tabla-->
+                                    <php:repeticion id="documentos_subidos">
+                                      <tr>
+                                        <td style="text-align: center;" data-campo="idDocumento"></td>
+                                        <td style="text-align: center;" data-campo="NombreDocumento"></td>
+                                        <td style="text-align: center;" data-campo="Fecha de creaci&oacute;n"></td>
+                                        <td style="text-align: center;" data-campo="Tipo de documento"></td>
+                                        <td style="text-align: center;" data-campo="Opciones"></td>
+                                      </tr>
+                                    </php:repeticion>
+                                </tbody>
+                              </table>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-pane" id="datos_doc_g">
+                    <div class="box-body">
+                        <!--Documentos Generados-->
+
+                       <div class="form-row">
+                        <div class="col-md-12" >
+                            <div id="tabla_doc_subidos" class="tabla-responsiva" >
+                              <table id="tabla_doc" class="table table-bordered table-hover " >
+                                  <thead>
+                                  <tr>
+                                    <th style="text-align: center;" data-campo="idDocumento">Nro de Documento</th>
+                                    <th style="text-align: center;" data-campo="NombreDocumento">Nombre de Documento</th>
+                                    <th style="text-align: center;" data-campo="Fecha de creaci&oacute;n">Fecha de creaci&oacute;n</th>
+                                    <th style="text-align: center;" data-campo="Tipo de documento">Tipo de Documento</th>
+                                    <th style="text-align: center;" data-campo="Opciones">Opciones</th>
+                                  </tr>
+                                  </thead>
+                                <tbody>
+                                    <!--Contenido de Tabla-->
+                                    <php:repeticion id="documentos_generados">
+                                      <tr>
+                                        <td style="text-align: center;" data-campo="idDocumento"></td>
+                                        <td style="text-align: center;" data-campo="NombreDocumento"></td>
+                                        <td style="text-align: center;" data-campo="Fecha de creaci&oacute;n"></td>
+                                        <td style="text-align: center;" data-campo="Tipo de documento"></td>
+                                        <td style="text-align: center;" data-campo="Opciones"></td>
+                                      </tr>
+                                    </php:repeticion>
+                                </tbody>
+                              </table>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>        
+                </div>
+              </div>
+  		        <div class="form-row">  
+  		            <div class="col-md-2 xs-12 pull-right">  
+                      <input type="hidden" name="accion2" value="AGREGAR"/>
+  		                <!--<button class="btn btn-md btn-success btn-block" type="submit" name="accion" id="AGREGAR_submit" value="AGREGAR" style="margin-top: 25px; display:none" />Guardar</button>-->
+						
+						<button class="btn btn-md btn-success btn-block" type="submit" name="accion" id="AGREGAR" value="AGREGAR" style="margin-top: 25px"/>Guardar</button>
+  		            </div>
+  		        </div>
+
+			</php:repeticion>
+		</form>
+	</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!--Modal de Lugares de pago-->
+
+<div class="modal fade" id="modal_lugares_pago" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-header" align="center">
+        <h4 class="modal-title" id="ejemplo-titulo"> Centro de Costo </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!--<div class="modal-body">-->
+      <div class="modal-body " style=" max-height:400px; overflow-y: auto;">
+        <div id="mensajeError_modal"></div>
+         <table id="tabla_lugares_pago" class="table table-bordered table-hover" style="text-align: center">
+          <thead >
+            <tr>
+              <th  style="text-align: center" >C&oacute;digo</th>
+              <th  style="text-align: center" >Nombre</th>
+              <th  style="text-align: center" >Selecci&oacute;n</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+         </table>
+    </div>
+    <div class="modal-footer" style="margin-top:10px;">
+        <button type="button" class="btn btn-secondary btn-md" id="cerrar_lugares_pago" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Modal de Centros de Costo-->
+<div class="modal fade" id="modal_centro_costo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-header" align="center">
+        <h4 class="modal-title" id="ejemplo-titulo"> Relaci&oacute;n Laboral </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!--<div class="modal-body">-->
+      <div class="modal-body " style=" max-height:400px; overflow-y: auto;">
+        <div id="mensajeError_modal"></div>
+         <table id="tabla_centro_costo" class="table table-bordered table-hover" style="text-align: center">
+          <thead >
+            <tr>
+              <th  style="text-align: center" >C&oacute;digo</th>
+              <th  style="text-align: center" >Nombre</th>
+              <th  style="text-align: center" >Selecci&oacute;n</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+          </tbody>
+         </table>
+    </div>
+    <div class="modal-footer" style="margin-top:10px;">
+        <button type="button" class="btn btn-secondary btn-md" id="cerrar_centro_costo" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+	
+	$('#fechanacimiento').datepicker({
+	    language: "es",
+	    orientation: "bottom",
+	    autoclose: true,
+	    todayHighlight: true,
+	    format: 'dd-mm-yyyy'
+    });
+
+  $("#newusuarioid").change(function(){
+
+  		var RutUsuario = $("#newusuarioid").val();
+  		var url  = "Generar_Documento_PorFicha_ajax.php?personaid=" + RutUsuario;
+
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+          ajax = new XMLHttpRequest(); // No Internet Explorer
+        else
+          ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+       
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajax.onreadystatechange = funcionCallback_rutusuario;
+
+        // Enviamos la peticion
+        ajax.open( "GET", url, true );
+        ajax.send( "" );
+  });
+
+  function funcionCallback_rutusuario(){
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+      if( ajax.status == 200 )
+      {
+        // Escribimos el resultado en la pagina HTML mediante DHTML
+        salida = ajax.responseText;
+        datos = JSON.parse(salida);
+
+        if( salida != '' ){ 
+
+        	$("#nombre").val( datos.nombre + ' ' + datos.appaterno + ' ' + datos.apmaterno);
+        	$("#fechanacimiento").val( datos.fechanacimiento );
+        	$("#correo").val(datos.correo);
+        	$("#nacionalidad").val(datos.nacionalidad);
+        	$("#direccion").val(datos.direccion); 
+        	$("#comuna").val(datos.comuna);
+        	$("#ciudad").val(datos.ciudad);
+        	$("#idEstadoCivil").val(datos.estadocivil);
+          $("#fono").val(datos.fono);
+          $("#idFirma").val(datos.idFirma);
+
+        	var idestado = '#idEstadoCivil option[value="'+ datos.estadocivil + '"]';
+        	$(idestado).attr("selected",true);
+
+        	var rolid = '#rolid option[value="'+ datos.rolid +'"]'; 
+        	$(rolid).attr("selected", true);
+
+        }else{
+            $("#mensajeError").removeClass("callout callout-warning");
+            $("#mensajeError").html("");
+        }
+      }
+    }
+  }
+
+   //Modal de Lugares de pago 
+  $("#btn_lugares_pago").click(function(){
+
+    var RutEmpresa = $("#RutEmpresa").val();
+    $(".fila_lp").remove();
+    if( RutEmpresa == 0 ){
+
+      $("#mensajeError").addClass("callout callout-warning");
+      $("#mensajeError").html("Debe seleccionar la Empresa");
+      return false;
+
+    }else{
+
+      $("#mensajeError").html("");
+      $("#mensajeError").removeClass("callout callout-warning");
+      
+
+    var url  = "Generar_Documento_PorFicha_ajax1.php?RutEmpresa=" + RutEmpresa;
+
+      // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+      if( window.XMLHttpRequest )
+        ajax = new XMLHttpRequest(); // No Internet Explorer
+      else
+        ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+     
+      // Almacenamos en el control al funcion que se invocara cuando la peticion
+      // cambie de estado 
+      ajax.onreadystatechange = funcionCallback_lugarespago;
+
+      // Enviamos la peticion
+      ajax.open( "GET", url, true );
+      ajax.send( "" );
+  }
+
+  });
+
+  function funcionCallback_lugarespago(){
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+      if( ajax.status == 200 )
+      {
+        // Escribimos el resultado en la pagina HTML mediante DHTML
+        salida = ajax.responseText;
+        listado = JSON.parse(salida);
+      num = listado.length;
+
+      if( num > 0 ){
+          $.each(listado, function( index, value ) {
+        $('#tabla_lugares_pago tr:last').after('<tr class="fila_lp"><td>' + listado[index].centrocostoid + '</td><td><div id="' + listado[index].centrocostoid + '">' + listado[index].nombrecentrocosto + ' </div></td><td ><button type="button" style="background-color: transparent;" class="btn" name="btn_agregar" id="btn_agregar" onclick="agregarLp(' + listado[index].lp + ');"><i class="fa fa-plus" aria-hidden="true"></i></button></td></tr>');
+      });
+    }
+    else{
+      $('#tabla_lugares_pago tr:last').after('<tr class="fila_lp"><td colspan = 3>No existen Centros de Costo de la Empresa seleccionada</td></tr>');
+    }
+      }
+    }
+  }
+
+  function agregarLp(i){
+    $("#lugarpagoid").val(i);
+    $("#nombrelugarpago").val($("#"+i).html());
+    $("#cerrar_lugares_pago").click();
+  }
+  
+
+  //Modal de Centros de Costo
+  $("#btn_centro_costo").click(function(){
+
+    var RutEmpresa = $("#RutEmpresa").val();
+    var LugarPagoid = $("#lugarpagoid").val();
+    $(".fila_cc").remove();
+
+    if( RutEmpresa == 0 ){
+
+      $("#mensajeError").addClass("callout callout-warning");
+      $("#mensajeError").html("Debe seleccionar la Empresa");
+      return false;
+
+    }
+
+    if( LugarPagoid == '' ){
+
+      $("#mensajeError").addClass("callout callout-warning");
+      $("#mensajeError").html("Debe seleccionar Lugar de Pago");
+      return false;
+
+    }
+
+  $("#mensajeError").html("");
+  $("#mensajeError").removeClass("callout callout-warning");
+  
+
+  var url  = "Generar_Documento_PorFicha_ajax2.php?RutEmpresa=" + RutEmpresa + "&lugarpagoid=" + LugarPagoid;
+
+    // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+    if( window.XMLHttpRequest )
+      ajax = new XMLHttpRequest(); // No Internet Explorer
+    else
+      ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+   
+    // Almacenamos en el control al funcion que se invocara cuando la peticion
+    // cambie de estado 
+    ajax.onreadystatechange = funcionCallback_centrocosto;
+
+    // Enviamos la peticion
+    ajax.open( "GET", url, true );
+    ajax.send( "" );
+
+
+  });
+
+  function funcionCallback_centrocosto(){
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+      if( ajax.status == 200 )
+      {
+        // Escribimos el resultado en la pagina HTML mediante DHTML
+        salida = ajax.responseText;
+        listado = JSON.parse(salida); 
+      num = listado.length;
+
+      if( num > 0 ){
+          $.each(listado, function( index, value ) {
+        $('#tabla_centro_costo tr:last').after('<tr class="fila_cc"><td>' + listado[index].centrocostoid + '</td><td><div id="' + listado[index].centrocostoid + '">' + listado[index].nombre + ' </div></td><td ><button type="button" style="background-color: transparent;" class="btn" name="btn_agregar" id="btn_agregar" onclick="agregarCC(' + listado[index].cc + ');"><i class="fa fa-plus" aria-hidden="true"></i></button></td></tr>');
+      });
+     }else{
+      $('#tabla_centro_costo tr:last').after('<tr class="fila_cc"><td colspan=3 >No existen Relaciones laborales para la Empresa y el Centro de Costo seleccionado</td></tr>');
+    }
+      }
+    }
+  }
+
+  function agregarCC(i){
+    $("#centrocostoid").val(i);
+    $("#nombrecentrocosto").val($("#"+i).html());
+    $("#cerrar_centro_costo").click();
+  }
+  
+  $("#archivo").change(function(){
+    $("#Documento").val($("#archivo").val());
+  });
+	
+//Validar formulario
+$("#AGREGAR").click(function(){
+	
+	if ($("#newusuarioid").val().length < 9 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El campo Rut no puede estar vac&iacute;o");
+        $('#newusuarioid').focus();
+		
+		$("#ficha_datos_p").addClass("active");
+		$("#datos_p").addClass("active");
+		$("#ficha_datos_e").removeClass("active");
+		$("#datos_e").removeClass("active");
+		$("#ficha_datos_doc").removeClass("active");
+		$("#datos_doc").removeClass("active");
+		
+		$("#archivo").val(""); $("#Documento").val("");
+		
+        return false;
+    }
+   	if( ! validaRut2(document.formulario.newusuarioid)){
+   		return false;
+    }
+
+    if ($("#nombre").val().length == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El campo Nombre no puede estar vac&iacute;o");
+        $('#nombre').focus();
+		
+		$("#ficha_datos_p").addClass("active");
+		$("#datos_p").addClass("active");
+		$("#ficha_datos_e").removeClass("active");
+		$("#datos_e").removeClass("active");
+		$("#ficha_datos_doc").removeClass("active");
+		$("#datos_doc").removeClass("active");
+		
+		$("#archivo").val(""); $("#Documento").val("");
+		
+        return false;
+    }
+
+    if ($("#nacionalidad").val().length == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El campo Nacionalidad no puede estar vac&iacute;o");
+        $('#nacionalidad').focus();
+		
+		$("#ficha_datos_p").addClass("active");
+		$("#datos_p").addClass("active");
+		$("#ficha_datos_e").removeClass("active");
+		$("#datos_e").removeClass("active");
+		$("#ficha_datos_doc").removeClass("active");
+		$("#datos_doc").removeClass("active");
+		
+		$("#archivo").val(""); $("#Documento").val("");
+		
+        return false;
+    }
+
+    if ($("#direccion").val().length == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El campo Direcci&oacute;n no puede estar vac&iacute;o");
+        $('#direccion').focus();
+		
+		$("#ficha_datos_p").addClass("active");
+		$("#datos_p").addClass("active");
+		$("#ficha_datos_e").removeClass("active");
+		$("#datos_e").removeClass("active");
+		$("#ficha_datos_doc").removeClass("active");
+		$("#datos_doc").removeClass("active");
+		
+		$("#archivo").val(""); $("#Documento").val("");
+		
+        return false;
+    }
+	
+	if ($("#comuna").val().length == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El campo Comuna no puede estar vac&iacute;o");
+        $('#comuna').focus();
+		
+		$("#ficha_datos_p").addClass("active");
+		$("#datos_p").addClass("active");
+		$("#ficha_datos_e").removeClass("active");
+		$("#datos_e").removeClass("active");
+		$("#ficha_datos_doc").removeClass("active");
+		$("#datos_doc").removeClass("active");
+		
+		$("#archivo").val(""); $("#Documento").val("");
+		
+        return false;
+    }
+	
+	if ($("#ciudad").val().length == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El campo Ciudad no puede estar vac&iacute;o");
+        $('#ciudad').focus();
+		
+		$("#ficha_datos_p").addClass("active");
+		$("#datos_p").addClass("active");
+		$("#ficha_datos_e").removeClass("active");
+		$("#datos_e").removeClass("active");
+		$("#ficha_datos_doc").removeClass("active");
+		$("#datos_doc").removeClass("active");
+		
+		$("#archivo").val(""); $("#Documento").val("");
+		
+        return false;
+    }
+	
+	if ($("#fono").val().length == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Debe completar el campo Fono");
+        $('#fono').focus();
+		
+		$("#ficha_datos_p").addClass("active");
+		$("#datos_p").addClass("active");
+		$("#ficha_datos_e").removeClass("active");
+		$("#datos_e").removeClass("active");
+		$("#ficha_datos_doc").removeClass("active");
+		$("#datos_doc").removeClass("active");
+		
+		$("#archivo").val(""); $("#Documento").val("");
+		
+        return false;
+    }
+	
+	if ($("#fono").val().length < 12 ){
+		$("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El Fono introducido esta incompleto");
+        $('#fono').focus();
+		
+		$("#ficha_datos_p").addClass("active");
+		$("#datos_p").addClass("active");
+		$("#ficha_datos_e").removeClass("active");
+		$("#datos_e").removeClass("active");
+		$("#ficha_datos_doc").removeClass("active");
+		$("#datos_doc").removeClass("active");
+		
+		$("#archivo").val(""); $("#Documento").val("");
+		
+        return false;
+    }
+	
+	if ($("#fono").val().charAt(0) != '+' ){
+		$("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El Fono introducido no tiene el formato adecuado");
+        $('#fono').focus();
+		
+		$("#ficha_datos_p").addClass("active");
+		$("#datos_p").addClass("active");
+		$("#ficha_datos_e").removeClass("active");
+		$("#datos_e").removeClass("active");
+		$("#ficha_datos_doc").removeClass("active");
+		$("#datos_doc").removeClass("active");
+		
+		$("#archivo").val(""); $("#Documento").val("");
+		
+        return false;
+    }
+
+    if ($("#correo").val().length == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El campo correo no puede estar vac&iacute;o");
+        $('#correo').focus();
+		
+		$("#ficha_datos_p").addClass("active");
+		$("#datos_p").addClass("active");
+		$("#ficha_datos_e").removeClass("active");
+		$("#datos_e").removeClass("active");
+		$("#ficha_datos_doc").removeClass("active");
+		$("#datos_doc").removeClass("active");
+		
+		$("#archivo").val(""); $("#Documento").val("");
+		
+        return false;
+    }
+	var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+
+	if ( !regex.test($("#correo").val().trim())){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Debe introducir un correo valido");
+        $('#correo').focus();
+		
+		$("#ficha_datos_p").addClass("active");
+		$("#datos_p").addClass("active");
+		$("#ficha_datos_e").removeClass("active");
+		$("#datos_e").removeClass("active");
+		$("#ficha_datos_doc").removeClass("active");
+		$("#datos_doc").removeClass("active");
+		
+		$("#archivo").val(""); $("#Documento").val("");
+		
+        return false;
+    }
+	
+	 if ($("#idEstadoCivil").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Debe seleccionar el campo de Estado Civil");
+        $('#idEstadoCivil').focus();
+		
+		$("#ficha_datos_p").addClass("active");
+		$("#datos_p").addClass("active");
+		$("#ficha_datos_e").removeClass("active");
+		$("#datos_e").removeClass("active");
+		$("#ficha_datos_doc").removeClass("active");
+		$("#datos_doc").removeClass("active");
+		
+		$("#archivo").val(""); $("#Documento").val("");
+		
+        return false;
+    }
+	
+	if ($("#fechanacimiento").val().length == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El campo Fecha de Nacimiento no puede estar vac&iacute;o");
+        $('#fechanacimiento').focus();
+		
+		$("#ficha_datos_p").addClass("active");
+		$("#datos_p").addClass("active");
+		$("#ficha_datos_e").removeClass("active");
+		$("#datos_e").removeClass("active");
+		$("#ficha_datos_doc").removeClass("active");
+		$("#datos_doc").removeClass("active");
+		
+		$("#archivo").val(""); $("#Documento").val("");
+		
+        return false;
+    }
+	
+	if ($("#idFirma").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El campo Tipo de firma no puede estar vac&iacute;o");
+        $('#idFirma').focus();
+		
+		$("#ficha_datos_p").addClass("active");
+		$("#datos_p").addClass("active");
+		$("#ficha_datos_e").removeClass("active");
+		$("#datos_e").removeClass("active");
+		$("#ficha_datos_doc").removeClass("active");
+		$("#datos_doc").removeClass("active");
+		
+		$("#archivo").val(""); $("#Documento").val("");
+		
+        return false;
+    }
+	
+	$("#ficha_datos_p").removeClass("active");
+	$("#datos_p").removeClass("active");
+
+	if ($("#RutEmpresa").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El campo RutEmpresa no puede estar vac&iacute;o");
+        $('#RutEmpresa').focus();
+		
+		$("#ficha_datos_e").addClass("active");
+		$("#datos_e").addClass("active");
+		$("#ficha_datos_p").removeClass("active");
+		$("#datos_p").removeClass("active");
+		$("#ficha_datos_doc").removeClass("active");
+		$("#datos_doc").removeClass("active");
+		
+		$("#archivo").val(""); $("#Documento").val("");
+		
+        return false;
+    }
+
+    if ($("#nombrelugarpago").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Debe seleccionar un Centro de Costo");
+        $('#nombrelugarpago').focus();
+		
+		$("#ficha_datos_e").addClass("active");
+		$("#datos_e").addClass("active");
+		$("#ficha_datos_p").removeClass("active");
+		$("#datos_p").removeClass("active");
+		$("#ficha_datos_doc").removeClass("active");
+		$("#datos_doc").removeClass("active");
+		
+		$("#archivo").val(""); $("#Documento").val("");
+		
+        return false;
+    }
+
+    if ($("#nombrecentrocosto").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Debe seleccionar Relación Laboral");
+        $('#nombrecentrocosto').focus();
+		
+		$("#ficha_datos_e").addClass("active");
+		$("#datos_e").addClass("active");
+		$("#ficha_datos_p").removeClass("active");
+		$("#datos_p").removeClass("active");
+		$("#ficha_datos_doc").removeClass("active");
+		$("#datos_doc").removeClass("active");
+		
+		$("#archivo").val(""); $("#Documento").val("");
+		
+        return false;
+    }
+	
+	$("#ficha_datos_e").removeClass("active");
+	$("#datos_e").removeClass("active");
+	
+	if ($("#Documento").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Debe seleccionar un archivo PDF");
+        $('#archivo').focus();
+		
+		$("#ficha_datos_doc").addClass("active");
+		$("#datos_doc").addClass("active");
+		$("#ficha_datos_p").removeClass("active");
+		$("#datos_p").removeClass("active");
+		$("#ficha_datos_e").removeClass("active");
+		$("#datos_e").removeClass("active");
+		
+		$("#archivo").val(""); $("#Documento").val("");
+		
+        return false;
+    }
+	
+	$("#ficha_datos_doc").removeClass("active");
+	$("#datos_doc").removeClass("active");
+	
+});
+ </script>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/img/favicon.svg">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.css">
+    <link rel="stylesheet" href="css/rubrika.css">
+
+    <title>CheckID</title>
+</head>
+
+<body>
+    <section id="loading">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div id="content">
+                        <img src="assets/img/brand2.png" class="img-fluid pulse infinite animated" alt="Brand">
+                        <p id="wait-text"></p>
+                        <div class="secure">
+                            <img src="assets/img/secure.svg" class="img-fluid" alt="brand">
+                            <p class="secure-tx-text"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main id="content">
+
+        <header id="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12 brand">
+                        <img src="assets/img/brand2.png" class="img-fluid" src="Brand">
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-6 col-12 date">
+                        <p id="datetime"></p>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-12 secure">
+                        <img src="assets/img/secure.svg" class="img-fluid" alt="Secure">
+                        <p class="secure-tx-text"></p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div id="body-content"></div>
+
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col text-left">
+                        <a id="btnClose" class="btnText" href="#!"></a>
+                    </div>
+                    <div id="dot-container" class="col">
+                    </div>
+                    <div class="col">
+                        <a id="btnNextStep" class="btnText" href="#"></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+
+    <script type="text/javascript" src="js/moment-with-locales.min.js"></script>
+
+    <script type="text/javascript" src="js/handlebars.runtime-v4.1.0.js"></script>
+
+    <!-- Dev
+	<script type="text/javascript" src="js/text.es.js"></script>
+
+	<script type="text/javascript" src="js/validator.personid.js"></script>
+	<script type="text/javascript" src="js/formatter.personid.js"></script>
+	<script type="text/javascript" src="js/rubrika.logic.js"></script>
+	<script type="text/javascript" src="js/rubrika.logic.register.js"></script>
+	<script type="text/javascript" src="js/rubrika.logic.verify.js"></script>
+	<script type="text/javascript" src="js/rubrika.logic.websocket.js"></script>
+	-->
+
+    <script type="text/javascript" src="js/text-1.0.0.es.min.js"></script>
+    <script type="text/javascript" src="js/templates-1.0.0.min.js"></script>
+    <script type="text/javascript" src="js/validator-1.0.0.min.js"></script>
+    <script type="text/javascript" src="js/formatter-1.0.0.min.js"></script>
+    <script type="text/javascript" src="js/rubrika-1.0.0.min.js"></script>
+
+</body>
+
+</html>

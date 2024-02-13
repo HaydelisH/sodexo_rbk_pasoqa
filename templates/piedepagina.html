@@ -1,0 +1,43 @@
+
+
+<!-- /.content-wrapper -->
+    <footer class="main-footer">
+      <div class="pull-right hidden-xs">
+        <b>Versi&oacute;n</b> 2.4.0
+      </div>
+      <strong>Copyright &copy; 2018 <a href="#" style="color: #B6112F;">Rubrika</a>.</strong>
+    </footer>
+  <!-- Fin de Wrapper -->
+
+<!--Scripts necesarios-->
+    <!-- jQuery 3 -->
+    <script src="js/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="js/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+      $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="js/adminlte.min.js"></script>
+    <!-- DataTables -->
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/dataTables.bootstrap.min.js"></script>
+   
+    <script>
+    $(function () {
+      $('#example1').DataTable()
+      $('#example2').DataTable({
+        'paging'      : true,
+        'lengthChange': false,
+        'searching'   : false,
+        'ordering'    : true,
+        'info'        : true,
+        'autoWidth'   : false
+        })
+      })
+    </script>
+  </body>
+</html>

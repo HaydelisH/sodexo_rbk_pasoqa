@@ -1,0 +1,291 @@
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+<style type="text/css">
+.responsiveContent {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+ padding-bottom: 50.2%;
+  margin-bottom: 20px;
+}
+.responsiveContent iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+</style>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <!--Formulario para volver-->
+        <php:repeticion id="formulario">
+  			<form role="form" name="formulario" id="formulario" action="Documentos_FirmaMasiva.php" method="POST" autocomplete="off">
+  				<button type="submit" class="btn btn-default"><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
+  			</form>
+
+        <div class="box-body">
+          <!--Mensajes-->
+          <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+          <div id="mensajeError"><php:texto id="mensajeError" /></div>
+        
+          <!--Formulario para procesamiento-->
+          <div class="form-row">
+            <form role="form" name="formulario2" id="formulario2" action="Documentos_FirmaMasiva.php" method="POST">
+              
+              <input type="text" name="inVerifyDocPersonalNumber" id="inVerifyDocPersonalNumber" value="<php:item id="usuarioid" />" />
+              
+              <div class="row">  
+                       
+                <div class="col-md-2 pull-right">
+                  <button class="btn btn-md btn-primary btn-block" onclick="verificar()" type="button"  name="accion" value="FIRMAR_PIN" id="btn-verify" />Firmar</button>
+
+
+                </div>
+
+                <input type="text" name="idDocumento" value="<php:item id="idDocumento" />" />
+                <input type="text" name="id"            id="id"           />   
+                <input type="text" name="type"          id="type"         /> 
+                <input type="text" name="subtype"       id="subtype"      /> 
+                <input type="text" name="authenticated" id="authenticated"/> 
+                <input type="text" name="sign"          id="sign"         /> 
+                <input type="text" name="sessionid"        id="sessionid"         /> 
+
+                
+                <input type="text"   name="inVerifyType" id="inVerifyType" value="<php:item id="TipoFirma"/>">
+                <input type="hidden" name="accion" value="FIRMAR" />
+
+              </div>
+              <br>
+
+              <table id="example" class="table table-bordered table-hover " name="tbltabla">
+                <thead>
+                  <tr>
+                    <th style="text-align: center;" data-campo="Nro Contrato">Nro Contrato</th>
+                    <th style="text-align: center;" data-campo="Tipo Documento">Tipo Documento </th>
+                    <th style="text-align: center;" data-campo="Estado Contrato">Estado Contrato</th> 
+                    <th style="text-align: center;" data-campo="Opciones">Opciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <!--Contenido de Tabla-->
+                  <php:repeticion id="listado">
+                    <tr id="fila_<php:filamenos />">
+                      <td style="text-align: center;" data-campo="Nro Contrato"><input type="text" name="doc_<php:filamenos />" id="doc_<php:filamenos />" style="border:0; text-align: center;" value='<php:item id="idDocumento" />' /></td>
+                      <td style="text-align: center;"  data-campo="Tipo Documento"><php:item id="NombreTipoDoc" /></td>
+                      <td style="text-align: center;" data-campo="Estado Contrato"><php:item id="Estado" /></td>
+                      <td style="text-align: center;" data-campo="Estado">
+                          <button style="background-color: transparent;" class="btn btn-md" type="button" class="borrar" id="borrar_<php:filamenos />" onclick="eliminarDoc('<php:filamenos />');" ><i id="icon_<php:filamenos />"  class="fa fa-minus" aria-hidden="true"  title="Quitar de esta lista"></i></button>
+                      </td>
+                    </tr>
+                  </php:repeticion>
+                </tbody>
+                 <tfoot>
+                  <th colspan=5 class="tabla_abajo"><div class="col-md-12" style="font-weight: normal;">
+                   <span id="cant_docs"><php:item id="total_registros" /></span> Documentos a firmar 
+                  </div></td>
+                  </th>
+                </tfoot>
+              </table>
+        
+        		
+            </form>
+          </div>
+        </php:repeticion>
+
+      </div>
+    </div>
+  </div>
+</div>
+			 
+<script type="text/javascript">
+   
+
+   let general = {
+        baseUrl: "",
+        apiKey: "",
+        digitalSignature: 0,
+        session: {
+          id: "",
+          companyId: "",
+          username: ""
+        },
+        currentAction: "VERIFY",
+        operator: {
+          sessionId: null
+        }
+      };
+   
+    
+    let popupPage;
+      let openCheckId = function(action) 
+    {
+        general.currentAction = action;
+        // Create popup window
+        var w = 900;
+        var h = 620;
+
+        // Fixes dual-screen position                         Most browsers      Firefox
+        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+
+        var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+        var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+        var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+        var top = ((height / 2) - (h / 2)) + dualScreenTop;
+
+        var opciones = "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=" + w + ", height=" + h + ", top=" + top + ", left=" + left;
+        popupPage = window.open("checkid/checkid/", "libPage", opciones);
+        // Puts focus on the popupPage
+        if (window.focus) {
+          popupPage.focus();
+        }
+      };
+
+   
+      let getParamsVerify = function() {
+        return {
+          action: "VERIFY",
+          method: general.method,
+          apiKey: general.apiKey,
+          sessionId: general.session.id,
+          companyId: general.session.companyId,
+          operationId: 1,
+          baseUrl: general.baseUrl,
+          operator: {
+            sessionId: general.operator.sessionId,
+            identityDocument: {
+                countryCode: general.countryCode,
+                type: general.type,
+                personalNumber: general.rutaverificar
+            }
+          },
+          digitalIdentity: {
+            identityDocuments: [{
+              countryCode: general.countryCode,
+              type: general.type,
+              personalNumber: general.rutaverificar
+            }]
+          }
+          };
+      };
+    
+    
+  window.getParams = function()
+  {
+    return getParamsVerify();
+  }
+    
+  //respuesta del formulario checkid
+  window.callback = function(result) 
+  {
+    popupPage.close();
+    console.log("callback", result);
+
+    if (result.numError == 0) 
+    {
+      if (result.action == "VERIFY") 
+      {
+        let resultMessage = "Validación Errónea";
+        if (result.data.authenticated)
+        {
+          resultMessage = "Validación Exitosa!";
+      
+          general.lastVerify = result.data;
+  
+          document.getElementById('id').value       = general.lastVerify.id;
+          document.getElementById('type').value       = general.lastVerify.type;
+          document.getElementById('subtype').value      = general.lastVerify.subtype;
+          document.getElementById('authenticated').value  = general.lastVerify.authenticated;
+          document.getElementById('sign').value       = general.lastVerify.sign;     
+alert("hola");
+         // document.getElementById("formulario").submit();
+    
+        }
+      }
+    }
+
+    return false;
+  }
+    
+  function verificar()
+  { 
+    //Validar si desean firmar todo
+    var respuesta = confirm('Esta seguro(a) que desea firmar estos documentos?');
+
+    if( respuesta ){
+      //Buscamos los datos que falten
+        consulta_sesion();
+        firmaMasiva();
+    }else{
+      
+      //Bloquear
+      $("#btn-verify").prop("disabled",false);
+      return false;
+    }
+
+   
+  }
+    
+    
+  var conexion;
+      
+  function crearXMLHttpRequest() 
+  {
+    var xmlHttp=null;
+    if (window.ActiveXObject) 
+      xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+    else 
+    if (window.XMLHttpRequest) 
+      xmlHttp = new XMLHttpRequest();
+    return xmlHttp;
+  }
+
+
+  function consulta_sesion()
+  {
+    conexion = crearXMLHttpRequest();
+
+    conexion.open('POST', 'consulta_sesion.php', false);
+  
+    conexion.send(null);
+   
+    // Devolvemos el resultado
+    respuesta =  conexion.responseText;   
+    arr_resp  = respuesta.split('|');  console.log(arr_resp);
+    if (arr_resp[0] == 'ok')
+    {
+      general.baseUrl       = arr_resp[1];
+      general.session.companyId   = arr_resp[2];
+      general.username      = arr_resp[4];
+      general.session.id      = arr_resp[6];
+      general.countryCode     = arr_resp[7];
+      general.type        = arr_resp[8];
+      general.apiKey        = arr_resp[9];
+     
+      document.getElementById('sessionid').value =   general.session.id; //token de la sesion
+
+      var rut           = document.getElementById('inVerifyDocPersonalNumber').value;
+      general.rutaverificar   = rut.replace ("-","");
+      verif
+      general.method        = document.getElementById('inVerifyType').value;
+
+      openCheckId("VERIFY");
+    }
+    else
+    {
+      alert(respuesta);
+    }
+  }
+
+
+
+</script>

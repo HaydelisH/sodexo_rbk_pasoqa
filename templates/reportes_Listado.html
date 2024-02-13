@@ -1,0 +1,236 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive"> 
+        <div class="box-body">
+           <!--Mensajes-->
+          <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+          <div id="mensajeError"><php:texto id="mensajeError" /></div>      
+        </div>
+        <form name="formulario2" id="formulario_usuarios" action="Reportes.php" method="POST" autocomplete="off">
+          <table id="example2" class="table table-bordered table-hover">
+	          <div class="col-md-2 xs-12">
+		          <button class="btn btn-md btn-default btn-block " type="button" style="margin-top: 10px" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"  data-parent="#accordion"><a href="" >Ocultar Filtro</a></button>
+	          </div>
+          </table>
+      	<div class="collapse in" id="collapseExample">
+      		<!--<div class="row">-->
+      			<div class="col-md-12">
+      				<div class="box">
+      					<div class="box-body pad table-responsive">
+      					  <div class="box-header">
+      						  <div class="form-group">
+							 <php:repeticion id="formulario">
+   
+        						  <div class="form-row">
+        						    <div class="col-md-4 xs-12">
+        							    <!--<label for="idDocumento">Nro Contrato</label>-->
+        							    <input type="hidden" class="form-control" id="idDocumento" name="idDocumento" maxlength="10" value="<php:item id="idDocumento" />"">
+        							  </div>
+        						  </div>
+
+        							<div class="form-row">
+        							  <div class="col-md-4 xs-12">
+        							    <!--<label for="idDocumento">idDocumento</label>-->
+        							    <input type="hidden" class="form-control" id="idProyecto" name="idProyecto" maxlength="50" value="<php:item id="idProyecto" />"">
+        							  </div>
+        						  </div>
+
+        						  <div class="form-row">
+        						    <div class="col-md-4 xs-12">
+        							      <!--<label for="Descripcion_Pl">Nombre Plantilla</label>-->
+        							      <input type="hidden" class="form-control" id="Descripcion_Pl" name="Descripcion_Pl" maxlength="50" value="<php:item id="Descripcion_Pl" />"">
+        							  </div>
+        						  </div>
+
+        							<div class="form-row">
+        							  <div class="col-md-4 xs-12">
+        							      <label for="NombreTipoDoc">Tipo Documento</label>
+        							      <!--<input type="text" class="form-control" id="NombreTipoDoc" name="NombreTipoDoc" maxlength="50" value="<php:item id="NombreTipoDoc" />"">-->
+											<select class= "form-control" name="idTipoDoc" id="idTipoDoc" >
+											<option value="0">(Seleccionar)</option>
+											<php:repeticion id="tiposdocumentos">						
+												<option value="<php:item id="idTipoDoc" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idTipoDoc" /><php:argumento idvalor="idTipoDoc" /></php:funcion>><php:item id="NombreTipoDoc" /></option>
+											</php:repeticion>
+											</select>										  
+										  
+        							  </div>
+        							</div>
+
+        							<div class="form-row">
+        							  <div class="col-md-4 xs-12">
+        							    <label for="RazonSocialCliente">Cliente</label>
+        							    <input type="text" class="form-control" id="RazonSocialCliente" name="RazonSocialCliente" maxlength="50" value="<php:item id="RazonSocialCliente" />"">
+        							  </div>
+        							</div>
+
+        							<div class="form-row">
+        							  <div class="col-md-4 xs-12">
+        							    <label for="Ejecutivo">Ejecutivo</label>
+        							    <input type="text" class="form-control" id="RutEjecutivo" name="RutEjecutivo" maxlength="50" value="<php:item id="RutEjecutivo" />"">
+        							  </div>
+        							</div>
+
+        							<div class="form-row">
+        							  <div class="col-md-4 xs-12">
+        							    <label for="RazonSocialGama">Empresa</label>
+        							   <!-- <input type="text" class="form-control" id="RazonSocialGama" name="RazonSocialGama" maxlength="50" value="<php:item id="RazonSocialGama" />"">-->
+										<select class= "form-control" name="RutEmpresa" id="RutEmpresa" >
+										<option value="">(Seleccionar)</option>
+										<php:repeticion id="empresas">						
+											<option value="<php:item id="RutEmpresa" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEmpresa" /><php:argumento idvalor="RutEmpresa" /></php:funcion>><php:item id="RazonSocial" /></option>
+										</php:repeticion>
+										</select>	
+        							  </div>
+        							</div>
+
+        							<div class="form-row">
+        							  <div class="col-md-4 xs-12">
+        							    <label for="Nombre">Estado Contrato</label>	
+        							    <!--<input type="text" class="form-control" id="Nombre" name="Nombre" maxlength="50" value="<php:item id="Nombre" />"">-->
+										<select class="form-control" name="idEstado" id="idEstado" >
+										<option value="0">(Seleccionar)</option>
+										<php:repeticion id="estadocontratos">						
+											<option value="<php:item id="idEstado" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idEstado" /><php:argumento idvalor="idEstado" /></php:funcion>><php:item id="Descripcion" /></option>
+										</php:repeticion>
+										</select>	
+        							  </div>
+        							</div>
+
+        							<div class="form-row">
+        							  <div class="col-md-4 xs-12">
+        							    <label for="Nombre">Tipo de Firma</label>	
+        							 
+										<select class="form-control" name="idTipoFirma" id="idTipoFirma" >
+										<option value="0">(Seleccionar)</option>
+										<php:repeticion id="TipoFirmas">						
+											<option value="<php:item id="idTipoFirma" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idTipoFirma" /><php:argumento idvalor="idTipoFirma" /></php:funcion>><php:item id="Descripcion" /></option>
+										</php:repeticion>
+										</select>	
+        							  </div>
+        							</div>
+
+        							<!--Tipo de subida-->
+        							<div class="form-row">
+        							  <div class="col-md-4 xs-12">
+        							    <label for="Nombre">Tipo de Generaci&oacute;n</label>	
+        							 
+										<select class="form-control" name="idTipoGeneracion" id="idTipoGeneracion" >
+										<option value="0">(Seleccionar)</option>
+										<php:repeticion id="TipoGeneracion">						
+											<option value="<php:item id="idTipoGeneracion" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idTipoGeneracion" /><php:argumento idvalor="idTipoGeneracion" /></php:funcion>><php:item id="Descripcion" /></option>
+										</php:repeticion>
+										</select>	
+        							  </div>
+        							</div>
+      						  
+				      		        <div class="form-row">
+				            			<div class="col-md-2 xs-12 pull-right"  style="margin-top: 15px;">
+				            				<input type="hidden" name="accion" value="BUSCAR" />
+				            				<button class="btn btn-md btn-primary btn-block"  name="accion2" type="submit" value="BUSCAR">Buscar</button>
+				            			</div>
+				                  	</div>
+                    </div> <!-- <div class="form-group">-->
+                  </div> <!--<div class="box-header">-->
+                </div> <!-- <div class="box-body pad table-responsive">-->
+              </div> <!-- <div class="box">-->
+            </div> <!-- <div class="col-md-12">-->
+          <!--</div> <!--<div class="row"> -->
+      	</div> <!-- <div class="collapse" id="collapseExample"> -->
+      </form>
+       
+       
+                  <!--Tabla-->
+				  
+		<div id="divtabla" class="tabla-responsiva" >
+		  <div class="col-md-12">
+			<table id="example" class="table table-bordered table-hover " name="tbltabla">
+				  <thead>
+					<tr>
+						<th style="text-align: center;" data-campo="Nro Contrato">Nro Contrato</th>
+						<th style="text-align: center;" data-campo="idDocumento">idDocumento</th>
+						<th style="text-align: center;" data-campo="Tipo Documento">Tipo Documento </th>
+						<th style="text-align: center;"bdata-campo="Cliente">Cliente </th>
+						<th style="text-align: center;" data-campo="Empresa">Empresa</th>
+						<th style="text-align: center;" data-campo="Tipo de Firma">Tipo de Firma</th>
+						<th style="text-align: center;" data-campo="Estado Contrato">Estado Contrato</th>
+						<th style="text-align: center;" data-campo="Ejecutivo">Ejecutivo</th>
+					</tr>
+				  </thead>
+				<tbody>
+					  <!--Contenido de Tabla-->
+				<php:repeticion id="listado">
+				  <tr>
+					<td style="text-align: center;" data-campo="Nro Contrato"><php:item id="idDocumento" /></td>
+					<td style="text-align: center;" data-campo="Documento"><php:item id="idDocumento_Gama" /></td>
+					<td style="text-align: center;"  data-campo="Tipo Documento"><php:item id="NombreTipoDoc" /></td>
+					<td style="text-align: center;" data-campo="Cliente"><php:item id="RazonSocialCliente" /></td>
+					<td style="text-align: center;" data-campo="Empresa"><php:item id="RazonSocialGama" /></td>
+					<td style="text-align: center;" data-campo="Estado Contrato"><php:item id="TipoFirma" /></td>
+					<td style="text-align: center;" data-campo="Estado Contrato"><php:item id="Nombre" /></td>
+					<td style="text-align: center;" data-campo="Ejecutivo"><php:item id="Nombre_Ejecutivo" /> <php:item id="ApellidoP_Ejecutivo" /></td>
+				  </tr>
+				</php:repeticion>
+				</tbody>
+				
+				<th colspan=10 class="tabla_abajo">
+				  <div class="col-xs-offset-5"> 
+					<nav aria-label="nav1">
+					  <ul class="pagination justify-content-center">
+						<li class="page-item ">
+						  <a id="pagina_primera" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_primera" />);" ><span><i class="fa fa-angle-double-left"></i></span></a>
+						</li>
+						<li class="page-item ">
+						  <a id="pagina_anterior" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_anterior" />);" ><span ><i class="fa fa-angle-left"></i></span></a>
+						</li>                  
+						<li class="page-item active"><a class="page-link1" href="#"><php:item id="pagina_actual" /></a></li>                              
+						<li class="page-item">
+						  <a id="pagina_siguente" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_siguente" />);" ><span><i class="fa fa-angle-right"></i></span></a>
+						</li>
+					  <li class="page-item">
+						<a id="pagina_ultimo" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_ultimo" />);" ><span><i class="fa fa-angle-double-right"></i></span></a>
+					  </li>                                                     
+					  </ul>
+					</nav>
+				  </div>
+					<div class="col-md-2 pull-right">
+						<form action="Reportes_Excel.php" method="POST" name="formulario4" id="formulario4" >
+
+							<!--Datos necesarios para generar reportes-->
+							<input type="hidden" name="RutEjecutivo" id="RutEjecutivo" value='<php:item id="RutEjecutivo" />'>
+							 <input type="hidden" name="idProyecto"       value="<php:item id="idProyecto" />" >
+						  	<input type="hidden" name="idDocumento"       value="<php:item id="idDocumento" />" >
+						  	<input type="hidden" name="NombreTipoDoc"       value="<php:item id="NombreTipoDoc" />" >
+						  	<input type="hidden" name="RazonSocialGama"       value="<php:item id="RazonSocialGama" />" >
+						  	<input type="hidden" name="RazonSocialCliente"       value="<php:item id="RazonSocialCliente" />" >
+						  	<input type="hidden" name="Nombre"       value="<php:item id="Nombre" />" >
+						  	<input type="hidden" name="Descripcion_Pl"       value="<php:item id="Descripcion_Pl" />" >
+						  	<input type="hidden" name="holdingid"       value="<php:item id="holdingid" />" >
+							
+							<button type="submit" name="accion" id="accion" value="DESCARGAR" class="form-control btn btn-md btn-primary"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Descargar</button>
+						</form>
+					</div>
+				 </th>
+				<form name="paginado" id="paginado" action="Reportes.php" method="POST" >
+					  <input type="hidden" name="idProyecto"       value="<php:item id="idProyecto" />" >
+					  <input type="hidden" name="pagina"        value="" id="pagina" >
+					  <input type="hidden" name="idDocumento"       value="<php:item id="idDocumento" />" >
+					  <input type="hidden" name="NombreTipoDoc"       value="<php:item id="NombreTipoDoc" />" >
+					  <input type="hidden" name="RazonSocialGama"       value="<php:item id="RazonSocialGama" />" >
+					  <input type="hidden" name="RazonSocialCliente"       value="<php:item id="RazonSocialCliente" />" >
+					  <input type="hidden" name="Nombre"       value="<php:item id="Nombre" />" >
+					  <input type="hidden" name="Descripcion_Pl"       value="<php:item id="Descripcion_Pl" />" >
+					  <input type="hidden" name="holdingid"       value="<php:item id="holdingid" />" >
+					  <input type="hidden" name="idTipoGeneracion"    value="<php:item id="idTipoGeneracion" />" >
+				</form>
+			</table>
+			
+		</div>
+       </php:repeticion>
+
+      </div>
+    </div>
+  </div>
+</div> 
+</section>
+    

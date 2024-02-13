@@ -1,0 +1,143 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-body pad table-responsive">
+                <div class="box-body">
+                    <div id="mensajeError"><php:texto id="mensajeError" /></div>
+                    <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+                    <table id="example2" class="table table-bordered table-hover">
+                        <div class="col-md-2 xs-12">
+                            <button class="btn btn-md btn-default ocultar" type="button" style="margin-top: 10px" data-toggle="collapse" href="#collapseExample" role="button" data-parent="#accordion"><a id="a"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo</a></button>
+                        </div>
+                    </table>
+                    <div id="collapseExample"  class="panel-collapse collapse out">
+                        <form role="form" name="formulario" id="formulario" action="rl_plantillasexp.php" method="POST" autocomplete="off">
+                            <php:repeticion id="formulario">
+                            <!--Campos estan fuera del formulario-->								
+                            <div class="form-row">
+                                <!--Categorias-->
+                                <div class="col-md-6" style="padding-bottom: 15px;">
+                                    <label for="Categoria" >Empresa</label>
+                                    <!--Select de Empresas disponibles-->
+                                    <select class= "form-control" name="RutEmpresa" id="RutEmpresa" required>
+                                        <option value="0">(Seleccione)</option>
+                                        <php:repeticion id="Empresas">
+                                        <option value="<php:item id="RutEmpresa" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEmpresa" /><php:argumento idvalor="RutEmpresa" /></php:funcion>><php:item id="RazonSocial" /></option>
+                                        </php:repeticion>
+                                    </select>
+                                </div>
+                                <!--Fin del row-->
+                                <!--Categorias-->
+                                <div class="col-md-6" style="padding-bottom: 15px;">
+                                    <label for="Categoria" >Categoria</label>
+                                    <!--Select de Empresas disponibles-->
+                                    <select class= "form-control" name="idCategoria" id="idCategoria" required>
+                                        <php:repeticion id="Categorias">
+                                        <option value="<php:item id="idCategoria" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idCategoria" /><php:argumento idvalor="idCategoria" /></php:funcion>><php:item id="Titulo" /></option>
+                                        </php:repeticion>
+                                    </select>
+                                </div>
+                                <!--Fin del row-->
+                            </div>
+                            <div class="form-row">
+                                <!--Tipo de Documento-->
+                                <div class="col-md-6" style="padding-bottom: 15px; display:none;">
+                                    <label for="TipoDeDocumento" >Tipo de Documento</label>
+                                    <!--Select de Empresas disponibles-->
+                                    <select class= "form-control" name="idTipoDoc" id="idTipoDoc" required>
+                                        <option value="0">(Seleccione)</option>
+                                        <php:repeticion id="TipoDocumentos">
+                                        <option value="<php:item id="idTipoDoc" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idTipoDoc" /><php:argumento idvalor="idTipoDoc" /></php:funcion>><php:item id="NombreTipoDoc" /></option>
+                                        </php:repeticion>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--Workflow-->
+                            <div class="form-row">
+                                <div class="col-md-6" style="padding-bottom: 15px;">
+                                    <label for="Flujo" >Flujo de Firmas</label>
+                                    <!--Select de Empresas disponibles-->
+                                    <select class= "form-control" name="idWF" id="idWF" required>
+                                        <option value="0">(Seleccione)</option>
+                                        <php:repeticion id="Flujos">
+                                        <option value="<php:item id="idWF" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idWF" /><php:argumento idvalor="idWF" /></php:funcion>><php:item id="NombreWF" /></option>
+                                        </php:repeticion>
+                                    </select>
+                                </div>
+                                <!--Fin del row-->
+                            </div>
+                            <!--Tipo de Gestor-->
+                            <div class="form-row">
+                                <div class="col-md-6" style="padding-bottom: 15px;">
+                                    <label for="TipoGestor" >Tipos Gestor</label>
+                                    <!--Select de Empresas disponibles-->
+                                    <select class= "form-control" name="idTipoGestor" id="idTipoGestor" required>
+                                        <option value="0">(Seleccione)</option>
+                                        <php:repeticion id="TipoGestor">
+                                        <option value="<php:item id="idTipoGestor" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idTipoGestor" /><php:argumento idvalor="idTipoGestor" /></php:funcion>><php:item id="Nombre" /></option>
+                                        </php:repeticion>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--  <div class="form-row">
+                                <div class="col-md-6">
+                                <label for="Descripcion">Descripci&oacute;n</label>
+                                <input type="text" class="form-control" id="Descripcion_Pl" name="Descripcion_Pl" value="<php:item id="Descripcion_Pl" />" placeholder="Descripcion" >
+                                </div>
+                            </div>-->
+                            <div class="form-row">  
+                                <div class="col-md-2">
+                                    <label for="TipoGestor" ></label>
+                                    <input type="hidden" name="accion" value="AGREGAR" />
+                                    <button class="btn btn-md btn-primary btn-block" type="submit"  name="accion2" value="AGREGAR" id="AGREGAR" onclick="javascript:return validarFormulario(this);"/>Guardar</button>
+                                </div>
+                            </div> 	 
+                        </form> 
+                    </div>
+                    <div id="divtabla" class="tabla-responsiva" >
+                        <!--Tabla-->
+                        <table id="example2" class="table table-bordered table-hover" name="tbltabla">
+                            <thead>
+                                <tr>
+                                    <th data-campo="EMPRESA" style="text-align: center;">EMPRESA </th>
+                                    <th data-campo="IDPLANTILLA" style="text-align: center;">C&oacute;digo Plantilla </th>
+                                    <th data-campo="DECRIPCION_PL" style="text-align: center;">Descripci&oacute;n </th>
+                                    <th data-campo="TIPODOCUMENTO" style="text-align: center;">Tipo de Documento </th>
+                                    <th data-campo="FLUJODEFIRMA" style="text-align: center;">Flujo </th>
+                                    <th data-campo="CATEGORIA" style="text-align: center;">Categoria </th>
+                                    <th data-campo="TIPO GESTOR" style="text-align: center;">Tipo Gestor</th>
+                                    <th data-campo="APROBADO" style="text-align: center;"><div style="text-align: center;">Aprobado </div></th>
+                                    <th data-campo="ACCIONES" style="text-align: center;">Opciones </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--Contenido de Tabla-->
+                                <php:repeticion id="listado">
+                                <tr>
+                                    <td data-campo="EMPRESA" style="text-align: center;"><php:item id="RazonSocial"/></td>
+                                    <td data-campo="IDPLANTILLA" style="text-align: center;"><php:item id="idPlantilla"/></td>
+                                    <td data-campo="DESCRIPCION_PL"><php:item id="Descripcion_Pl"/></td>
+                                    <td data-campo="TIPODOCUMENTO" style="text-align: center;"><php:item id="NombreTipoDoc"/></td>
+                                    <td data-campo="FLUJODEFIRMA"><php:item id="NombreWF"/></td>
+                                    <td data-campo="CATEGORIA" style="text-align: center;"><php:item id="Titulo"/></td>
+                                    <td data-campo="TIPO GESTOR" style="text-align: center;"><php:item id="Nombre"/></td>
+                                    <td data-campo="APROBADO"><div style="text-align: center;" id="Aprobado_<php:filamenos />"><php:item id="Aprobado"/></div></td>
+                                    <td data-campo="ACCIONES">
+                                        <form name="formulario" id="formulario_tipo" action="rl_plantillasexp.php" method="POST">
+                                            <input type="hidden" name="holdingid" value="<php:item id="holdingid" />">
+                                            <input type="hidden" name="idPlantilla"  value="<php:item id="idPlantilla" />">  
+                                            <button class="btn btn-default btn-sm" type="submit" name="accion" id="ELIMINAR" value="ELIMINAR" onclick="return preguntarPorBorrar();">Eliminar</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                </php:repeticion>
+                            </tbody>
+                        </table>
+                    </div>
+                    </php:repeticion>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>

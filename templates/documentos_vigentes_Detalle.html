@@ -1,0 +1,242 @@
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box">
+				<div class="box-body pad table-responsive">
+					<php:repeticion id="formulario">
+					<!--Botones de cabecera-->
+					<div class="box-header">
+						<form role="form" name="formulario3" id="formulario3" action="Documentos_Vigentes.php" method="POST">
+							<input type="hidden" name="accion" value="BUSCAR">
+							<button type="submit" class="btn btn-default"><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
+							<input type="hidden" name="fichaid" id="fichaid" value="<php:item id='fichaid'/>" />
+							<input type="hidden" name="Firmante" id="Firmante" value="<php:item id='Firmante'/>" />
+							<input type="hidden" name="fechaInicio" id="fechaInicio" value="<php:item id='fechaInicio'/>" />
+							<input type="hidden" name="fechaFin" id="fechaFin" value="<php:item id='fechaFin'/>" />
+						</form>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+					<!--Mensajes-->
+					<div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+					<div id="mensajeError"><php:texto id="mensajeError" /></div>
+					<!--Datos referenciales-->
+					<form role="form" name="formulario" id="formulario" action="Documentos_Vigentes.php" method="POST" enctype="multipart/form-data">
+						<div class="form-row">
+							<div class="col-md-6" style="padding-bottom: 15px;">
+								<h3>Datos del documento</h3>
+								<table class="table table-striped">
+									<tbody>
+										<tr>
+											<td valign="center"><label for="idDocument" class="col-md-6">Nro Documento:</label></td>
+											<td valign="center"> <php:item id="idDocumento" /></td>
+										</tr>
+										<tr>
+											<td valign="center"><label for="idDocument" class="col-md-6">C&oacute;digo de Documento</label></td>
+											<td valign="center"> <php:item id="DocCode" /></td>
+										</tr>	      
+										<tr>
+											<td valign="center"><label for="FechaCreacion" class="col-md-6">Fecha de Creaci&oacute;n:</label></td>
+											<td valign="center"><php:item id="FechaCreacion" /></td>
+										</tr>
+										<tr>
+											<td valign="center"><label for="Titulo" class="col-md-6">Tipo Documento:</label></td>
+											<td valign="center"><php:item id="NombreTipoDoc" /></td>
+										</tr>
+										<tr>
+											<td valign="center"><label for="idPlantilla" class="col-md-6">idPlantilla:</label></td>
+											<td valign="center"><php:item id="idPlantilla" /></td>
+										</tr>
+										<tr>
+											<td valign="center"><label for="Estado" class="col-md-6">Estado:</label></td>
+											<td valign="center"><php:item id="Estado" /></td>
+										</tr>
+										<tr>
+											<td valign="center"><label for="Estado" class="col-md-6">Flujo de firma:</label></td>
+											<td valign="center"><php:item id="NombreWF" /></td>
+										</tr>
+										<tr>
+											<td valign="center"><label for="Proceso" class="col-md-6">Proceso:</label></td>
+											<td valign="center"><php:item id="Proceso" /></td>
+										</tr>
+										<tr>
+											<td valign="center"><label for="Observacion" class="col-md-6">Observacion:</label></td>
+											<td valign="center"><php:item id="Observacion" /></td>
+										</tr>
+										<tr>
+											<td valign="center"><label for="Enviado" class="col-md-6">Enviado:</label></td>
+											<td valign="center"><php:item id="Enviado" /></td>
+										</tr>
+											<tr class="fichaid">
+											<td valign="center"><label for="Ficha" class="col-md-6">C&oacute;digo de Ficha de Contrataci&oacute;n:</label></td>
+											<td valign="center"><input id="ficha" type="text" class="form-control" value="<php:item id="fichaid" />" style="border:0" /></td>
+										</tr>
+									</tbody>
+								</table>
+								<input type="hidden" name="idDocumento" id="idDocumento" value="<php:item id="idDocumento" />" />
+								<div class="form-row">  
+									<php:repeticion id="ver">
+									<div class="col-md-4 xs-12">
+										<input type="hidden" name="idDocumento_vd" id="idDocumento_vd"/>
+										<button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion" value="VERDOCUMENTO" /> <i class="fa fa-search-plus" aria-hidden="true"></i> Ver Documento</button>
+									</div>
+									</php:repeticion>
+									<php:repeticion id="rechazo">
+									<div class="col-md-4 xs-12">
+										<input type="hidden" name="idDocumento_ac" id="idDocumento_ac"/>
+										<button class="btn btn-md btn-primary btn-block" type="button" data-toggle="modal" data-target="#myModal" style="margin-top: 10px"  /><i class="fa fa-ban" aria-hidden="true"></i> Rechazar</button>
+									</div>
+									</php:repeticion>
+									<php:repeticion id="elimina">
+									<div class="col-md-4 xs-12">
+										<input type="hidden" name="idDocumento_el" id="idDocumento_el" />
+										<button class="btn btn-md btn-primary btn-block" type="submit" onclick="javascript : return confirm('Esta seguro que desea eliminar este Documento?');" name="accion" id="ELIMINAR" value="ELIMINAR" style="margin-top: 10px"  /><i class="fa fa-trash-o" aria-hidden="true"></i> Eliminar</button>
+									</div>
+									</php:repeticion>
+									<!--Opcion de actualizar documento, descargando de nuevo el documento de Acepta-->
+									<php:repeticion id="actualizar">
+									<div class="col-md-4 xs-12">
+										<input type="hidden" name="idDocumento_ac" id="idDocumento_ac" />
+										<button class="btn btn-md btn-primary btn-block" type="submit"  onclick="MostrarCargando();" style="margin-top: 10px" name="accion" id="ACTUALIZAR" value="ACTUALIZAR"/><i class="fa fa-refresh" aria-hidden="true"></i> Actualizar</button>
+									</div>
+									</php:repeticion>
+									<!--Opcion de enviar Documento al Gestor-->
+									<php:repeticion id="envioagestor">
+									<div class="col-md-4 xs-12">
+											<input type="hidden" name="idDocumento_eg" id="idDocumento_eg" />
+											<button class="btn btn-md btn-primary btn-block" type="submit"  onclick="MostrarCargando();" style="margin-top: 10px" name="accion" id="ENVIO" value="ENVIO"/><i class="fa fa-share-square-o" aria-hidden="true"></i> Envio al Gestor</button>
+									</div>
+									</php:repeticion>																   
+									<php:repeticion id="renotificar">
+									<div class="col-md-4 xs-12">
+										<input type="hidden" name="idDocumento_rn" id="idDocumento_rn" />
+										<button class="btn btn-md btn-primary btn-block" type="button" onclick="javascript : return (confirm('Esta seguro que desea re-notificar este Documento?') ? renotificar('') : false );" style="margin-top: 10px"  /><i class="fa fa-envelope-o" aria-hidden="true"></i> Re-Notificar</button>
+									</div>
+									</php:repeticion>																   
+								</div>  
+							</div>
+							<div class="col-md-6">
+								<h3>Firmantes</h3>
+								<div id="divtabla" class="tabla-responsiva" >
+									<table id="example" class="table table-bordered table-hover " name="tbltabla">
+										<thead>
+											<tr>
+												<th style="text-align: center;" data-campo="Rut">Rut</th>
+												<th style="text-align: center;" data-campo="Nombre">Nombre</th>
+												<th style="text-align: center;" data-campo="Fecha Firma">Fecha Firma</th>
+												<th style="text-align: center;" data-campo="Opciones">Opciones</th>
+											</tr>
+										</thead>
+										<tbody>
+											<!--Contenido de Tabla-->
+											<php:repeticion id="contratofirmantes">
+											<tr>
+												<td style="text-align: center;" data-campo="Rut"><php:item id="RutFirmante" /></td>
+												<td style="text-align: center;" data-campo="Nombre"><php:item id="nombre" /></td>
+												<td style="text-align: center;" data-campo=""FechaFirma"><php:item id="FechaFirma" /></td>
+												<php:repeticion id="renotificar">
+												<td style="text-align: center;" data-campo="renotificar">
+													<button class="btn btn-md btn-primary btn-block" type="button" onclick="javascript : return (confirm('Esta seguro que desea re-notificar al usuario?') ? renotificar('<php:item id="RutFirmante" />') : false );" style="margin-top: 10px"  /><i class="fa fa-envelope-o" aria-hidden="true"></i></button>
+												</td>
+												</php:repeticion>																   
+											</tr>
+											</php:repeticion>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<!-- Modal de Rechazo-->
+							<div class="modal fade" id="myModal" role="dialog">
+								<div class="modal-dialog">
+								<!-- Modal content-->
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">Rechazo del Documento</h4>
+									</div>
+									<div class="modal-body">
+										<div class="col-md-12">
+											<label for="Descripcion">Observaci&oacute;n</label>
+											<input type="text" class="form-control" id="observacion" maxlength="200" name="observacion" value="<php:item id="observacion" />" placeholder="observacion" >
+										</div>
+									</div>					
+									<div class="modal-footer" style="margin-top:30px">
+										<br>
+										<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+										<button type="submit" name="accion" value="RECHAZAR" class="btn btn-default" >Aceptar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--fin  Modal de Rechazo -->  
+						</php:repeticion>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<script>
+	$(document).ready(function(){
+		$("#idDocumento_vd").val($("#idDocumento").val());
+		$("#idDocumento_ac").val($("#idDocumento").val());
+		$("#idDocumento_el").val($("#idDocumento").val());
+		$("#idDocumento_ac").val($("#idDocumento").val());
+		$("#idDocumento_eg").val($("#idDocumento").val());											
+		$("#idDocumento_rn").val($("#idDocumento").val());
+		if( $("#ficha").val().length > 0 ){
+			$(".fichaid").show();
+		}
+		else{
+			$(".fichaid").hide();
+		}
+	});
+	function renotificar($RutUsuario){
+		//alert($('#idDocumento').val());
+		var url  = "renotificarDocumentos_ajax.php?idDocumento=" + $('#idDocumento').val() + ($RutUsuario != '' ? "&RutUsuario=" + $RutUsuario : '');
+		// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+		if( window.XMLHttpRequest )
+			ajaxRenotificar = new XMLHttpRequest(); // No Internet Explorer
+		else
+			ajaxRenotificar = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+		// Almacenamos en el control al funcion que se invocara cuando la peticion
+		// cambie de estado 
+		ajaxRenotificar.onreadystatechange = funcionCallback_renotificar;
+		// Enviamos la peticion
+		ajaxRenotificar.open( "GET", url, false );
+		ajaxRenotificar.send( "" );
+	}
+	function funcionCallback_renotificar()
+  	{
+		// Comprobamos si la peticion se ha completado (estado 4)
+		if( ajaxRenotificar.readyState == 4 )
+		{
+			// Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+			if( ajaxRenotificar.status == 200 )
+			{
+				// Escribimos el resultado en la pagina HTML mediante DHTML
+				salida = ajaxRenotificar.responseText;
+				listado = JSON.parse(salida);
+				console.log(listado);
+				if (listado.estado){
+					$("#mensajeOK").addClass("callout callout-success");
+					$("#mensajeOK").html("Las notificaciones se realizaron exitosamente");
+				}
+				else{
+					$("#mensajeError").addClass("callout callout-warning");
+					$("#mensajeError").html("Hubo un error intente mas tarde");
+				}
+				/*
+				num = listado.length;
+				if( num > 0 ){
+					$.each(listado, function( index, value ) {
+						$('#lugarpagoid').append('<option class="fila_lp" value=' + listado[index].lugarpagoid + '>' + listado[index].nombrelugarpago + ' </option>');    
+					});
+					$("#lugarpagoid").attr("disabled", false);
+				}*/
+			}
+		}
+	}
+	/*function renotificarUsuario(RutUsuario){
+		alert(RutUsuario);
+	}*/
+</script>

@@ -1,0 +1,168 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <!--Botones de cabecera-->
+        <div class="box-header">
+          <a href="Documentos_Firmas.php" class="btn btn-default btn_letra_azul"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
+        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <!--Mensajes-->
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+        <!--Datos referenciales-->
+        <div class="form-row">
+          <!--Empresas-->
+          <div class="col-md-6" style="padding-bottom: 15px;">
+    		<h3>Datos del documento</h3>
+	        <!--Formulario de datos propios de Clausulas-->
+	        <form role="form" name="formulario" id="formulario" action="Documentos_Firmas.php" method="POST">
+	          <php:repeticion id="formulario">
+	          	<table class="table table-striped">
+		            <tbody>
+			            <tr>
+			              <td valign="center"><label for="idDocument" class="col-md-6">Nro Documento:</label></td>
+			              <td valign="center"> <php:item id="idDocumento" /></td>
+			            </tr>
+			            <tr>
+			              <td valign="center"><label for="idDocument" class="col-md-6">C&oacute;digo de Documento</label></td>
+			              <td valign="center"> <php:item id="DocCode" /></td>
+			            </tr>		      
+			            <tr>
+			              <td valign="center"><label for="FechaCreacion" class="col-md-6">Fecha de Creaci&oacute;n:</label></td>
+			              <td valign="center"><php:item id="FechaCreacion" /></td>
+			            </tr>
+			            <tr>
+			              <td valign="center"><label for="Titulo" class="col-md-6">Tipo Documento:</label></td>
+			              <td valign="center"><php:item id="NombreTipoDoc" /></td>
+			            </tr>
+						<tr>
+			              <td valign="center"><label for="idPlantilla" class="col-md-6">idPlantilla:</label></td>
+			              <td valign="center"><php:item id="idPlantilla" /></td>
+			            </tr>
+						
+			            <tr>
+			              <td valign="center"><label for="Estado" class="col-md-6">Estado:</label></td>
+			              <td valign="center"><php:item id="Estado" /></td>
+			            </tr>
+			            <tr>
+			              <td valign="center"><label for="Estado" class="col-md-6">Flujo de firma:</label></td>
+			              <td valign="center"><php:item id="NombreWF" /></td>
+			            </tr>
+			            <tr>
+			              <td valign="center"><label for="Proceso" class="col-md-6">Proceso:</label></td>
+			              <td valign="center"><php:item id="Proceso" /></td>
+			            </tr>
+						<tr class="fichaid">
+						  <td valign="center"><label for="Ficha" class="col-md-6">C&oacute;digo de Ficha de Contrataci&oacute;n:</label></td>
+						  <td valign="center"><input id="ficha" type="text" class="form-control" value="<php:item id="fichaid" />" style="border:0" /></td>
+						</tr>
+		            </tbody>
+		        </table>
+				 <input type="hidden" name="accion" value="visualizar" />
+				 <input type="hidden" name="idDocumento" id="idDocumento" value="<php:item id="idDocumento" />" />
+				 
+			
+			 
+	          <div class="form-row">  
+				 <php:repeticion id="firmar">
+	            <div class="col-md-4 xs-12">
+					<button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion" value="INICIOFIRMA" /> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Firmar</button>
+	            </div>
+				</php:repeticion>  
+				
+				<php:repeticion id="aprobar">
+	            <div class="col-md-4 xs-12">
+	               <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion" value="APROBAR" /><i class="fa fa-check-square-o" aria-hidden="true"></i> Aprobar</button>
+	            </div>
+				</php:repeticion>
+				
+			   <php:repeticion id="rechazar">
+	           <div class="col-md-4 xs-12">
+	               <button class="btn btn-md btn-primary btn-block" type="button" data-toggle="modal" data-target="#myModal" style="margin-top: 10px"  /><i class="fa fa-ban" aria-hidden="true"></i> Rechazar</button>
+	            </div>
+				</php:repeticion>
+								
+				<!--<div class="col-md-4 xs-12">
+	               <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion" value="VERDOCUMENTO" /> <i class="fa fa-search-plus" aria-hidden="true"></i> Ver Documento</button>
+	            </div>-->
+				
+	          </div>   
+
+			 <!-- Modal -->
+			  <div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog">
+				  <!-- Modal content-->
+				  <div class="modal-content">
+					<div class="modal-header">
+					  <button type="button" class="close" data-dismiss="modal">&times;</button>
+					  <h4 class="modal-title">Rechazo del Documento</h4>
+					</div>
+					<div class="modal-body">
+						<div class="col-md-12">
+							<label for="Descripcion">Observaci&oacute;n</label>
+							<input type="text" class="form-control" id="observacion" maxlength="200" name="observacion" value="<php:item id="observacion" />" placeholder="observacion" >
+						</div>
+					</div>					
+					<div class="modal-footer" style="margin-top:30px">
+						 <br>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						<button type="submit" name="accion" value="RECHAZAR" class="btn btn-default" >Aceptar</button>
+					</div>
+				  </div>
+				</div>
+			  </div>
+	
+			<!--fin -->  
+        	</form> 
+      	</div>
+      	<div class="col-md-6">
+      		<h3>Firmantes</h3>
+			<div id="divtabla" class="tabla-responsiva" >
+				<table id="example" class="table table-bordered table-hover " name="tbltabla">
+					  <thead>
+						<tr>
+							<th style="text-align: center;" data-campo="Rut">Rut</th>
+							<th style="text-align: center;" data-campo="Nombre">Nombre</th>
+							<th style="text-align: center;" data-campo="Fecha Firma">Fecha Firma</th>
+		
+						</tr>
+					  </thead>
+					<tbody>
+						  <!--Contenido de Tabla-->
+					<php:repeticion id="contratofirmantes">
+					  <tr>
+						<td style="text-align: center;" data-campo="Rut"><php:item id="RutFirmante" /></td>
+						<td style="text-align: center;" data-campo="Nombre"><php:item id="nombre" /></td>
+						<td style="text-align: center;" data-campo=""FechaFirma"><php:item id="FechaFirma" /></td>
+					</php:repeticion>
+					</tbody>
+				</table>
+			</div>
+			
+			 </php:repeticion>  
+      	</div>
+		</div>
+		</div>
+
+		</div>
+		<!-- /.box -->
+		</div>
+	</div>
+<!-- /.col -->
+</div>
+<!--Tomar datos con ajax y reasigna datos de un selec a un input hidden-->
+
+<script>
+	$(document).ready(function(){
+		
+		if( $("#ficha").val().length > 0 ){
+			$(".fichaid").show();
+		}
+		else{
+			$(".fichaid").hide();
+		}
+
+	});
+</script>

@@ -1,0 +1,498 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <php:repeticion id="formulario">
+        <!--Botones de cabecera-->
+        <div class="box-header">
+          <a class="btn btn-default btn_letra_azul" onClick="history.back(-1)" ><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
+        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <!--Mensajes-->
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+
+       <!--Formulario de los datos propios de Categoria-->   
+      <form role="form" name="formulario" id="formulario" action="Documentos.php" method="POST" autocomplete="off">
+    
+      <!--Seleccion del Proveedor-->
+       <div class="form-row">
+        <div class="col-md-4 xs-12" >
+          <label for=""> Datos de Proveedores</label>
+          <div class="col-md-11 xs-12" style=" padding-left: 0px; padding-right: 0px;" >
+            <input class="form-control" type="text" name="Proveedor" id="Proveedor" value='<php:item id="RutProveedor"/> <php:item id="RazonSocial"/>' readonly style="background-color:white;"/>
+            <input type="hidden" name="RutProveedor" id="RutProveedor" value='<php:item id="RutProveedor"/>'>
+            <input type="hidden" name="RazonSocial" id="RazonSocial" value='<php:item id="RazonSocial"/>'>
+          </div>
+          <div class="col-md-1 xs-12" style="padding-right: 0px; padding-left: 2px;">
+             <button class="btn btn-md btn-primary btn-block" type="submit" name="accion" value="BUSCAR_PROVEEDOR" id="btn_proveedor" style="padding-left: 0px;padding-right: 0px;" ><i class="fa fa-search"></i></button>  
+          </div>
+          </div>
+        </div>
+
+        <!--Detalle de los bienes adquiridos-->
+        <div class="form-row">
+         <div class="col-md-4"  style="padding-top: 5px; ">
+          <label for=""></label>
+          <input type="text" class="form-control" id="DetalleBienes" name="DetalleBienes" maxlength="600"  placeholder="Detalle de bienes adquiridos" /> 
+         </div>
+        </div>
+
+        <!--Valor de adquision-->
+        <div class="form-row"> 
+          <div class="col-md-3 xs-8" style="padding-top: 5px; ">
+            <label for=""></label>
+            <input type="number" min="0" step="any" class="form-control" id="MontoAdquisicion" name="MontoAdquisicion" placeholder="Valor de adquisicion" value='<php:item id="MontoAdquisicion"/>'/>
+          </div>
+       </div>
+
+       <div class="form-row">
+         <div class="col-md-1" style="padding-top: 25px;">
+           <button class="btn btn-md btn-primary" type="button" id="btn_proveedores" ><i class="fa fa-plus" aria-hidden="true"></i></button>  
+
+         </div>
+       </div>
+
+       <div class="form-row">
+         <div class="col-md-12" style="padding-top: 25px;">
+            <label for="">Proveedores seleccionados</label>
+         
+             <table id="tabla_proveedores" class="table table-bordered table-hover">
+               <thead>
+                 <tr>
+                   <th style="text-align:center;">Rut</th>
+                   <th style="text-align:center;">Razon Social</th>
+                   <th style="text-align:center;">Bienes Adquiridos</th>
+                   <th style="text-align:center;">Valor del Bien</th>
+                   <th style="text-align:center;">Opciones</th>
+                 </tr>
+               </thead>
+               <tbody>
+               
+               </tbody>
+             </table>
+        </div>
+      </div>
+    
+       <div class="form-row">
+         <div class="col-md-12" style="padding-top: 25px;">
+            <label for="">Datos del Documento</label>
+          </div>
+        </div>
+
+       
+        <!--Inicio Pago Mensual-->
+        <div class="form-row ">
+         <div class="col-md-6 xs-12">
+          <label for="Inicio">Inicio de pago mensual</label>
+          <div class="input-group date">
+            <div class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </div>
+            <input type="datetime" class="form-control" id="FechaInicioPago" name="FechaInicioPago"  readonly="readonly" placeholder="Fecha de pago mensual" style="background-color:white;" >
+          </div>
+         </div>
+        </div>
+
+      <!--Fecha de opción de prepago-->
+      <div class="form-row">
+       <div class="col-md-6 xs-12">
+        <label for="opcion_prepago">Fecha de opcion Prepago</label>
+        <div class="input-group date">
+          <div class="input-group-addon">
+            <i class="fa fa-calendar"></i>
+          </div>
+          <input type="datetime" class="form-control" id="FechaPrepago" name="FechaPrepago"  readonly="readonly" placeholder="Fecha de prepago" value='<php:item id="FechaPrepago"/>' style="background-color:white;"/>
+        </div>
+       </div>
+      </div>
+
+       <!--Cantidad total de arrendamientos-->
+        <div class="form-row">
+          <div class="col-md-6 xs-12">
+            <label >Cantidad total de rentas</label>
+            <input type="number" min="0" class="form-control" id="CantTotal" name="CantTotal" placeholder="Cantidad" />
+          </div>
+        </div>
+  
+        <!--Cantidad de arrendamientos de igual valor-->
+        <div class="form-row">
+          <div class="col-md-6 xs-12">
+            <label >Cantidad de rentas de igual valor</label>
+            <input type="number" min="0" class="form-control" id="CantRentas" name="CantRentas" placeholder="Cantidad" />
+          </div>
+        </div>
+  
+        <!--Valor del Ballon-->
+        <div class="form-row ">
+          <div class="col-md-6 xs-12 ">
+            <label >Valor del Ballon</label>
+            <input type="number" min="0" step="any" class="form-control" id="ValorBallon" name="ValorBallon" placeholder="Valor del Ballon" />
+          </div>
+        </div>
+
+        <!--Valor del Operacion de compra -->
+        <div class="form-row">
+          <div class="col-md-6 xs-12">
+            <label>Valor de la Opci&oacute;n de Compra</label>
+            <input type="number" min="0" step="any" class="form-control" id="ValorCompra" name="ValorCompra" placeholder="Valor de Compra" />
+          </div>
+        </div>
+
+       <!--Dia de pago mensual-->
+       <div class="form-row">  
+        <div class="col-md-6 xs-12">
+          <label>Dia de pago Mensual</label>
+          <select name="DiaPagoMensual" id="DiaPagoMensual" class="form-control">
+            <option value="">(Seleccione)</option>
+            <option value="Enero">Enero</option>
+            <option value="Febrero">Febrero</option>
+            <option value="Marzo">Marzo</option>
+            <option value="Abril">Abril</option>
+            <option value="Mayo">Mayo</option>
+            <option value="Junio">Junio</option>
+            <option value="Julio">Julio</option>
+            <option value="Agosto">Agosto</option>
+            <option value="Septiembre">Septiembre</option>
+            <option value="Octubre">Octubre</option>
+            <option value="Noviembre">Noviembre</option>
+            <option value="Diciembre">Diciembre</option>
+          </select>
+        </div>
+       </div>
+
+      <!--Duración (meses) Contrato Financiamiento -->
+      <div class="form-row">
+        <div class="col-md-6 xs-12">
+          <label >Duraci&oacute;n Contrato Financiamiento</label>
+          <input type="number" min="0" class="form-control" id="DuracionContrato" name="DuracionContrato" placeholder="Duracion de contrato"/>
+        </div>
+      </div>
+
+      <!--Valor Asegurable-->
+      <div class="form-row">
+        <div class="col-md-6 xs-12">
+          <label >Valor Asegurable</label>
+          <input type="number" min="0" step="any" class="form-control" id="ValorAsegurable" name="ValorAsegurable" placeholder="Valor asegurable"/>
+        </div>
+      </div>
+
+      <!--Valor Rentas iguales-->
+      <div class="form-row">
+        <div class="col-md-6 xs-12">
+          <label >Valor Rentas iguales</label>
+          <input type="number" min="0" step="any" class="form-control" id="ValorIguales" name="ValorIguales" placeholder="Valor de rentas iguales"/>
+        </div>
+      </div>
+  
+      <div class="form-row">  
+        <div class="col-md-12">
+          <h5></h5>
+        </div>
+      </div>
+  
+       <div class="form-row">  
+        <div class="col-md-2 xs-12 pull-right">
+           <input type="hidden" name="RutEmpresa" id="RutEmpresa" value="<php:item id="RutEmpresa"/>" >
+           <input type="hidden" name="RutEmpresaC" id="RutEmpresaC" value="<php:item id="RutEmpresaC"/>" >
+           <input type="hidden" name="modelo_contrato" id="modelo_contrato" value="<php:item id="modelo_contrato"/>" >
+           <input type="hidden" name="fecha" id="fecha" value="<php:item id="fecha"/>" >
+
+            <!--Proveedores seleccionados-->
+
+            <input type="hidden" name="rut_p_0"     id="rut_p_0"     value='<php:item id="rut_p_0" />' />
+            <input type="hidden" name="nombre_p_0"  id="nombre_p_0"  value='<php:item id="nombre_p_0" />' />
+            <input type="hidden" name="detalle_p_0" id="detalle_p_0" value='<php:item id="detalle_p_0" />' />
+            <input type="hidden" name="monto_p_0"   id="monto_p_0"   value='<php:item id="monto_p_0" />' />
+
+            <input type="hidden" name="rut_p_1"     id="rut_p_1"     value='<php:item id="rut_p_1" />' />
+            <input type="hidden" name="nombre_p_1"  id="nombre_p_1"  value='<php:item id="nombre_p_1" />' />
+            <input type="hidden" name="detalle_p_1" id="detalle_p_1" value='<php:item id="detalle_p_1" />' />
+            <input type="hidden" name="monto_p_1"   id="monto_p_1"   value='<php:item id="monto_p_1" />' />
+            
+            <input type="hidden" name="rut_p_2"     id="rut_p_2"     value='<php:item id="rut_p_2" />' />
+            <input type="hidden" name="nombre_p_2"  id="nombre_p_2"  value='<php:item id="nombre_p_2" />' />
+            <input type="hidden" name="detalle_p_2" id="detalle_p_2" value='<php:item id="detalle_p_2" />' />
+            <input type="hidden" name="monto_p_2"   id="monto_p_2"   value='<php:item id="monto_p_2" />' />
+
+           <button class="btn btn-md btn-primary btn-block borrar" type="submit" style="margin-top: 10px" name="accion" id="FIRMANTES" value="FIRMANTES">Siguiente</button>  
+        </div>
+       </div> 
+
+       </form>
+     </div>
+    </php:repeticion>
+     </div>
+    </div>
+  </div>
+</div>
+    
+<!--Calendarios-->
+<script>
+
+  $('#FechaInicioPago').datepicker({
+    language: "es",
+    orientation: "bottom",
+    autoclose: true,
+    todayHighlight: true,
+    format: 'dd-mm-yyyy'
+  });
+
+  $('#FechaPrepago').datepicker({
+    language: "es",
+    orientation: "bottom",
+    autoclose: true,
+    todayHighlight: true,
+    format: 'dd-mm-yyyy'
+  });
+
+  var fila = 0;
+  var numero = 0;
+
+  $(document).ready(function(){
+
+    if( $("#Proveedor").val().length == 1 ){
+      $("#Proveedor").val("(Seleccione)");  
+    }
+
+    if( $("#rut_p_0").val().length != 0 ){
+      $('#tabla_proveedores tr:last').after('<tr id="fila_0" style="text-align:center;"><td>'+ $("#rut_p_0").val() + '</td><td>'+ $("#nombre_p_0").val() + '</td><td>' + $("#detalle_p_0").val() +'</td><td>' + $("#monto_p_0").val() + '</td><td style="text-align: center;"><button style="background-color: transparent;" class="btn btn-md" type="button" id="borrar_0" ><i class="fa fa-trash-o" aria-hidden="true"></i></button></td></tr>');
+    }
+
+    if( $("#rut_p_1").val().length != 0 ){
+      $('#tabla_proveedores tr:last').after('<tr id="fila_1" style="text-align:center;"><td>'+ $("#rut_p_1").val() + '</td><td>'+ $("#nombre_p_1").val() + '</td><td>' + $("#detalle_p_1").val() +'</td><td>' + $("#monto_p_1" ).val() + '</td><td style="text-align: center;"><button style="background-color: transparent;" class="btn btn-md" type="button" id="borrar_1"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td></tr>');
+    }
+
+    if( $("#rut_p_2").val().length != 0 ){
+      $('#tabla_proveedores tr:last').after('<tr id="fila_2" style="text-align:center;"><td>'+ $("#rut_p_2").val() + '</td><td>'+ $("#nombre_p_2").val() + '</td><td>' + $("#detalle_p_2").val() +'</td><td>' + $("#monto_p_2").val() + '</td><td style="text-align: center;"><button style="background-color: transparent;" class="btn btn-md" type="button" id="borrar_2"  ><i class="fa fa-trash-o" aria-hidden="true"></i></button></td></tr>');
+    }
+
+      //Borrar primera fila 
+    $("#borrar_0").click(function(){
+
+      //Remover la fila 
+      $("#fila_0").remove();
+
+      //Limpiar el campo
+      $("#rut_p_0").val("");
+      $("#nombre_p_0").val("");
+      $("#detalle_p_0").val("");
+      $("#monto_p_0").val("");
+
+      if ($("#tabla_proveedores tr").length < 4 ){
+        $("#btn_proveedores").prop("disabled", false);
+        $("#btn_proveedor").prop("disabled",false);
+      }
+    });
+
+    $("#borrar_1").click(function(){
+
+      //Remover la fila 
+      $("#fila_1").remove();
+
+      //Limpiar el campo
+      $("#rut_p_1").val("");
+      $("#nombre_p_1").val("");
+      $("#detalle_p_1").val("");
+      $("#monto_p_1").val("");
+
+      if ($("#tabla_proveedores tr").length < 4 ){
+        $("#btn_proveedores").prop("disabled", false);
+        $("#btn_proveedor").prop("disabled",false);
+      }
+    });
+
+    $("#borrar_2").click(function(){
+
+      //Remover la fila 
+      $("#fila_2").remove();
+    
+      //Limpiar el campo
+      $("#rut_p_2").val("");
+      $("#nombre_p_2").val("");
+      $("#detalle_p_2").val("");
+      $("#monto_p_2").val("");
+ 
+      if ($("#tabla_proveedores tr").length < 4 ){
+        $("#btn_proveedores").prop("disabled", false);
+        $("#btn_proveedor").prop("disabled",false);
+      }
+    });
+
+  });
+
+  //Validar los tipo Number 
+  $("#FIRMANTES").click(function(){
+
+   //Validar los datos del Proyecto
+   if($("#rut_p_0").val().length == 0 && $("#rut_p_1").val().length == 0 && $("#rut_p_2").val().length == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Debe seleccionar al menos un Proveedor");
+        $("#Proveedor").focus();
+        return false;
+    }
+    if($("#FechaInicioPago").val().length == 0){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#FechaInicioPago').focus();
+        return false;
+    } 
+    if($("#Moneda").val() == 0){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Seleccione para continuar");
+        $('#Moneda').focus();
+        return false;
+    }
+    if($("#CantTotal").val() == 0){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#CantTotal').focus();
+        return false;
+    }
+     if($("#CantRentas").val() == 0){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#CantRentas').focus();
+        return false;
+    }
+    if ($("#ValorBallon").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#ValorBallon').focus();
+        return false;
+    }
+    if ($("#ValorCompra").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#ValorCompra').focus();
+        return false;
+    }
+   /* if ($("#DiaPagoMensual").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#DiaPagoMensual').focus();
+        return false;
+    }*/
+    if ($("#DuracionContrato").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#DuracionContrato').focus();
+        return false;
+    }
+    if ($("#FechaPrepago").val().length == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#FechaPrepago').focus();
+        return false;
+    }
+    if ($("#ValorAsegurable").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#ValorAsegurable').focus();
+        return false;
+    }
+    if ($("#ValorIguales").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#ValorIguales').focus();
+        return false;
+    }
+  });
+
+  $("#btn_proveedores").click(function(){
+
+   if($("#rut_p_0").val().length > 0 ){
+
+      if($("#rut_p_1").val().length > 0 ){
+        fila = 2;
+      }else{
+        fila = 1;
+      }
+   }
+   else{
+      fila = 0;
+   }
+
+   if ( $("#tabla_proveedores tr").length < 4){
+
+      if ( $("#Proveedor").val() != "(Seleccione)" && $("#DetalleBienes").val().length > 0 && $("#MontoAdquisicion").val().length > 0 ){
+        $('#tabla_proveedores tr:last').after('<tr id="fila_' + fila + '" style="text-align:center;"><td>' + $("#RutProveedor").val() + '</td><td>' + $("#RazonSocial").val() + '</td><td>' + $("#DetalleBienes").val() +'</td><td>'+ $("#MontoAdquisicion").val() + '</td><td style="text-align: center;"><button style="background-color: transparent;" class="btn btn-md" type="button" id="borrar_' + fila + '" ><i class="fa fa-trash-o" aria-hidden="true"></i></button> </td></tr>');
+        $("#rut_p_" + fila).val($("#RutProveedor").val());
+        $("#nombre_p_" + fila).val($("#RazonSocial").val());
+        $("#detalle_p_" + fila).val($("#DetalleBienes").val());
+        $("#monto_p_" + fila).val($("#MontoAdquisicion").val());
+        fila++;
+      } 
+    }
+    else{
+      $("#mensajeError").addClass("callout callout-warning");
+      $("#mensajeError").html("No puede agregar m&aacute;s Proveedores para este documento");
+    }
+
+    if ( $("#tabla_proveedores tr").length == 4 ){
+      $("#btn_proveedores").prop("disabled", true);
+      $("#btn_proveedores").prop("title", "Solo puede agregar hasta tres (3) Proveedores al Documento");
+      $("#Proveedor").val("(Seleccione)");  
+      $("#RutProveedor").val("");
+      $("#RazonSocial").val("");
+      $("#DetalleBienes").val("");
+      $("#MontoAdquisicion").val("");
+      $("#btn_proveedor").prop("disabled",true);
+
+    }
+    
+    //Borrar primera fila 
+    $("#borrar_0").click(function(){
+
+      //Remover la fila 
+      $("#fila_0").remove();
+
+      //Limpiar el campo
+      $("#rut_p_0").val("");
+      $("#nombre_p_0").val("");
+      $("#detalle_p_0").val("");
+      $("#monto_p_0").val("");
+
+      if ($("#tabla_proveedores tr").length < 4 ){
+        $("#btn_proveedores").prop("disabled", false);
+        $("#btn_proveedor").prop("disabled",false);
+      }
+    });
+
+    $("#borrar_1").click(function(){
+
+      //Remover la fila 
+      $("#fila_1").remove();
+
+      //Limpiar el campo
+      $("#rut_p_1").val("");
+      $("#nombre_p_1").val("");
+      $("#detalle_p_1").val("");
+      $("#monto_p_1").val("");
+
+      if ($("#tabla_proveedores tr").length < 4 ){
+        $("#btn_proveedores").prop("disabled", false);
+        $("#btn_proveedor").prop("disabled",false);
+      }
+    });
+
+    $("#borrar_2").click(function(){
+
+      //Remover la fila 
+      $("#fila_2").remove();
+    
+      //Limpiar el campo
+      $("#rut_p_2").val("");
+      $("#nombre_p_2").val("");
+      $("#detalle_p_2").val("");
+      $("#monto_p_2").val("");
+ 
+      if ($("#tabla_proveedores tr").length < 4 ){
+        $("#btn_proveedores").prop("disabled", false);
+        $("#btn_proveedor").prop("disabled",false);
+      }
+    });
+
+  });
+</script>

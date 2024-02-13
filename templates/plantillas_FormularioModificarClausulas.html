@@ -1,0 +1,251 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <div class="box-header">
+         <form role="form" name="formulario2" id="formulario2" action="Plantillas.php" method="POST" >
+              <input type="hidden" name="RutEmpresa" value='<php:texto id="RutEmpresa"/>'/>
+              <button type="submit" name="accion" value="BUSCAR" class="btn btn-default"/><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
+          </form>
+        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+       
+        <div class="form-row">
+          <!--Empresas-->
+          <div class="col-md-6" style="padding-bottom: 15px;">
+              <label for="Empresa" >Empresa</label>
+              <!--Select de Empresas disponibles-->
+              <select class= "form-control" name="Empresa" id="Empresa" onchange='envia();' required disabled>
+                <option value="<php:texto id="RutEmpresa"/>"><php:texto id="RazonSocial"/></option>
+                <php:repeticion id="Empresa">
+                  <option value="<php:item id="RutEmpresa" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEmpresa" /><php:argumento valor="RutEmpresa" /></php:funcion>><php:item id="RazonSocial" /></option>
+                </php:repeticion>
+              </select>
+          </div>
+          <!--Categorias-->
+          <div class="col-md-6" style="padding-bottom: 15px;">
+           
+              <label for="Categoria" >Categoria</label>
+              <!--Select de Empresas disponibles-->
+              <select class= "form-control" name="Categoria" id="Categoria" onchange='envia2();' disabled>
+              <option value="<php:texto id="idCategoria"/>"><php:texto id="Titulo"/></option>
+                <php:repeticion id="Categoria">
+                  <option value="<php:item id="idCategoria" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idCategoria" /><php:argumento valor="idCategoria" /></php:funcion>><php:item id="Titulo" /></option>
+                </php:repeticion>
+              </select>
+          </div>
+        <!--Fin del row-->
+        </div>
+         
+         <div class="form-row">
+          <!--Tipo de Documento-->
+          <div class="col-md-6" style="padding-bottom: 15px;">
+              <label for="TipoDeDocumento" >Tipo de Documento</label>
+              <!--Select de Empresas disponibles-->
+              <select class= "form-control" name="TipoDeDocumento" id="TipoDeDocumento" onchange='envia3();' required disabled="">
+              <option value="<php:texto id="idTipoDoc"/>"><php:texto id="NombreTipoDoc"/></option>
+                <php:repeticion id="TipoDeDocumento">
+                  <option value="<php:item id="idTipoDoc" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idTipoDoc" /><php:argumento valor="idTipoDoc" /></php:funcion>><php:item id="NombreTipoDoc" /></option>
+                </php:repeticion>
+              </select>
+          </div>
+          <!--Workflow-->
+          <div class="col-md-6" style="padding-bottom: 15px;">
+           
+              <label for="Flujo" >Flujo de Firmas</label>
+              <!--Select de Empresas disponibles-->
+              <select class= "form-control" name="Flujo" id="Flujo" onchange='envia4();' required>
+                 <option value="<php:texto id="idWF"/>"><php:texto id="NombreWF"/></option>
+                <php:repeticion id="Flujo">
+                  <option value="<php:item id="idWF" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idWF" /><php:argumento valor="idWF" /></php:funcion>><php:item id="NombreWF" /></option>
+                </php:repeticion>
+              </select>
+          </div>
+        <!--Fin del row-->
+        </div>
+        <form role="form" name="formulario" id="formulario" action="Plantillas.php" method="POST" autocomplete="off">
+          <php:repeticion id="formulario">
+            <!--Campos estan fuera del formulario-->
+            <!--RutEmpresa-->
+            <input type="hidden" id="RutEmpresa" name="RutEmpresa" value="<php:texto id="RutEmpresa"/>"/>
+            <!--idCategporia-->
+            <input type="hidden" id="idCategoria" name="idCategoria" value="<php:texto id="idCategoria"/>"/>
+            <!--idPlantilla-->
+            <input type="hidden" id="idPlantilla" name="idPlantilla" value="<php:texto id="idPlantilla"/>"/>
+             <!--idFlujos-->
+            <input type="hidden" id="idWF" name="idWF" value="<php:texto id="idWF"/>"/>
+             <!--idTipoDocumento-->
+            <input type="hidden" id="idTipoDoc" name="idTipoDoc" value="<php:texto id="idTipoDoc"/>"/>
+            <!--Titulo-->
+            <div class="form-row">
+              <div class="col-md-12">
+                <label for="Titulo" >T&iacute;tulo</label>
+                <input type="text" class="form-control" id="Titulo_Pl" name="Titulo_Pl" value="<php:item id="Titulo_Pl" />" autofocus placeholder="Titulo de Plantilla">
+              </div>
+            </div> 
+            <!--Descripcion-->
+            <div class="form-row">
+              <div class="col-md-12">
+                <label for="Descripcion">Descripci&oacute;n</label>
+                 <textarea id="TextoTxt" name="Titulo_Pl" rows="5" cols="80" ><php:item id="Titulo_Pl" /></textarea>
+              </div>
+            </div>
+                                       
+          </php:repeticion>  
+          <div class="form-row"> 
+            <!--Datos ocultos--> 
+            <input type="hidden" name="accion" value="MODIFICAR" />
+            <!--Boton de Clusulas-->
+            <div class="col-md-2 xs-12">
+              <button class="btn btn-md btn-default btn-block" type="submit" style="margin-top: 10px" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample" name="accion2" value="CLAUSULAS"><a href="" >Clausulas</a></button>
+            </div>
+            <!--Boton de Generar-->
+            <div class="col-md-2 xs-12 pull-right">
+              <button class="btn btn-md btn-success btn-block" type="submit" style="margin-top: 10px" name="accion2" value="GENERAR" >Previsualizar</button>
+            </div>
+            <!--Boton para Modificar-->
+            <div class="col-md-2 xs-12 pull-right">
+               <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="MODIFICAR" onclick="javascript:return validarFormulario(this);"/>Guardar</button>
+            </div>           
+          </div> 
+                 
+        </form> 
+        
+      </div>
+      </div>
+    <!-- /.box -->
+    </div>
+  </div>
+  <!-- /.col -->
+  </div>
+
+  <!--Clausulas-->
+  <div class="collapse show" id="collapseExample" >
+    <section class="content" style="padding-left: 0px; padding-right: 0px;">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-body pad table-responsive">
+              <div class="box-header">
+                <form role="form" name="formulario" id="formulario" action="Plantillas.php" method="POST">
+                  <!--idCategoria-->
+                  <input type="hidden" id="idCategoria" name="idCategoria" value="<php:texto id="idCategoria"/>"/>
+                  <!--idPlantilla-->
+                  <input type="hidden" id="idPlantilla" name="idPlantilla" value="<php:texto id="idPlantilla"/>"/>
+                  <!--Boton de Agregar Clausulas-->
+                  <button class="btn btn-md btn-default" style="margin-top: 10px" type="submit" name="accion" id="AGREGAR_CLAUSULA" value="AGREGAR_CLAUSULA"><a><i class="fa fa-plus" aria-hidden="true"></i>Agregar Clausula</a></button></form>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body">
+                <div class="box-body pad table-responsive">
+                  <div class="box-body">
+
+                  <div id="divtabla" class="tabla-responsiva" >
+                    <table id="example3" class="table table-bordered table-hover pagin-table">
+                      <thead>
+                       <tr>
+                        <th data-campo="SELECCION" style="text-align: center;">Seleccion </th>
+                        <th data-campo="IDCLAUSULA" style="text-align: center;">Id Clausula </th>
+                        <th data-campo="TITULO">Titulo </th>
+                        <th data-campo="APROBADO">Revision </th>
+                      </tr>
+                      </thead>
+                      <tbody >
+                        <php:repeticion id="listado_clausulas">
+                          <tr id="fila_<php:filamenos />">
+                            <td > 
+                              <div style="text-align: center">
+                              <!--Formulario de Elimmnar del Listado de Clausulas-->
+                               <form role="form" name="formulario" id="formulario" action="Plantillas.php" method="POST"> 
+                                  <input type="hidden" name="accion" value="ELIMINAR_CLAUSULA" />
+                                  <input type="hidden" id="idCategoria" name="idCategoria" value="<php:item id="idCategoria"/>"/>
+                                  <input type="hidden" id="idClausula" name="idClausula" value="<php:item id="idClausula"/>"/>
+                                  <input type="hidden" id="idPlantilla" name="idPlantilla" value="<php:texto id="idPlantilla"/>"/>
+                                  <button type="submit" style="background-color: transparent;" class="btn" name="accion3" id="boton" value="ELIMINAR_CLAUSULA" ><i class="fa fa-minus" aria-hidden="true"></i></button>
+                               </form> 
+                                </div>
+                            </td>
+                            <td data-campo="IDCLAUSULA"><div style="text-align: center;"><php:item id="idClausula"/></div></td>
+                            <td data-campo="TITULO" style="text-align: justify; padding: 20px;">
+                              <h4 style="margin-top: 0;">Titulo: <php:item id="Titulo_Cl"/></h4></tr>
+                              <p><h4 style="margin-top: 0;"> Contenido: </h4><php:item id="Texto"/></p>
+                            </td>
+                            <td data-campo="APROBADO" style="text-align: center;"><div style="text-align: center;" id="Aprobado_<php:filamenos />"><php:item id="Aprobado"/></div></td>
+                          </tr>
+                        </php:repeticion>
+                      </tbody>
+                    </table> 
+                   </div>
+                   <!--./tabla-responsive--> 
+                  </div>
+                </div>
+              </div>
+              <!--/.box-body-->
+             </div>  
+             <!--/.box-body pad table-responsive-->
+          </div>
+          <!--./box-->
+        </div>
+      </div>
+    </section>
+  </div>
+  <!--Fin de seccion de Clausulas-->
+
+<script>
+  //Script para asignar iconos a un div y bloqueaar boton
+  window.onload = function() {
+    //Variables
+    var aprobado = "";
+    var icono = "";
+    var fila = "";
+    var total = example3.rows.length;
+
+    //Valor del DIV en estado pendiente
+    var pendiente  = '<i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:orange;" title="Pendiente por aprobacion" alt="Pendiente por aprobacion"></i>';
+    //Valor del DIV en estado Aprobado 
+    var listo = '<i class="fa fa-check DisBtn" aria-hidden="true" style="color:green;" title="Registro Aprobado" alt="Registro Aprobado"></i>';
+
+   for (var i=0; i < total; i++){
+
+      aprobado = "Aprobado_" + i;
+      icono = document.getElementById(aprobado);
+
+      if( icono.innerHTML == 0 ){
+        //Agregar icono
+        document.getElementById("Aprobado_" + i).innerHTML = pendiente;
+      }
+      if( icono.innerHTML == 1 ){
+        //Agregar icono
+        document.getElementById("Aprobado_" + i).innerHTML = listo;
+      }
+    }
+  }
+</script>
+<!--Tomar datos con ajax y reasigna datos de un selec a un input hidden-->
+<script>
+  //Reasigna valores de campos 
+  function envia(){ 
+   document.getElementById('RutEmpresa').value=document.getElementById('Empresa').value;
+  }
+  //Reasignas valores de campos 
+  function envia2(){ 
+   document.getElementById('idCategoria').value=document.getElementById('Categoria').value;
+  }
+  //Reasignas valores de campos 
+  function envia4(){ 
+   document.getElementById('idWF').value=document.getElementById('Flujo').value;
+  }
+  //Reasignas valores de campos 
+  function envia3(){ 
+   document.getElementById('idTipoDoc').value=document.getElementById('TipoDeDocumento').value;
+  }
+</script>
+
+
+
+
+  
+

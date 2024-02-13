@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CheckId Verificar</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+</head>
+<body>
+		<div id="cargandof" >
+			<img id="cargandoImagenf" src="images/cargando.gif" alt="cargando" height="242" width="242" >
+		</div>
+  <div class="container-fluid">
+   
+        <div class="container-view" id="verify">
+          <div class="row">
+            <div class="col-sm-8">
+              <div class="card">
+                <div class="card-header">
+                   Crear o Modificar Pin
+                </div>
+				
+				
+				
+
+       
+  </div>
+  
+	<php:repeticion id="formulario">
+		<!-- Tipo de firma del operador -->
+		<input type="hidden" name="Operador_huella" id="Operador_huella" value="<php:item id="Operador_huella" />" />
+		<input type="hidden" name="Operador_pin" id="Operador_pin" value="<php:item id="Operador_pin" />" />
+	</php:repeticion>
+  	
+	<style>
+	#cargandof {
+	width: 100%;
+	height: 100%;
+	overflow: hidden; 
+	top: 0px;
+	left: 0px;
+	z-index: 10000;
+	text-align: center;
+	position:absolute; 
+	background-color: #FFFFFF;
+	opacity:0.3;
+	filter:alpha(opacity=40);
+	}
+	#cargandoImagenf {
+	position: fixed;
+	top: 30%;
+
+	right: 40%;
+	z-index: 100;
+	}
+
+	@media 
+	only screen and (max-width: 760px),
+	(min-device-width: 768px) and (max-device-width: 1024px) and (max-device-width: 480px)   {
+	#cargandoImagen {
+	position: fixed;
+	top: 30%;
+	left: 25%;
+	z-index: 100;
+	}
+	}
+	</style>
+	
+  
+   <script type="text/javascript">
+	
+	var operador_huella =  document.getElementById('Operador_huella').value; 
+	var operador_pin =  document.getElementById('Operador_pin').value; 
+	
+	 let general = {
+        baseUrl: "",
+        apiKey: "",
+        digitalSignature: 0,
+        session: {
+          id: "",
+          companyId: "",
+          username: ""
+        },
+        currentAction: "CREATE",
+        operator: {
+          sessionId: null
+        }
+      };
+   
+	  
+	  let popupPage;
+      let openCheckId = function(action) 
+	  {
+        general.currentAction = action;
+        // Create popup window
+        var w = 900;
+        var h = 620;
+
+        // Fixes dual-screen position                         Most browsers      Firefox
+        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+
+        var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+        var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+        var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+        var top = ((height / 2) - (h / 2)) + dualScreenTop;
+
+        var opciones = "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=" + w + ", height=" + h + ", top=" + top + ", left=" + left;
+        popupPage = window.open("checkid/index.html?v13", "libPage", opciones);
+		
+	
+		var timer = setInterval(function() { 
+			if(popupPage.closed) {
+				clearInterval(timer);
+				document.getElementById('cargandof').style.display='none';
+			}
+		}, 1000);
+	
+		
+        // Puts focus on the popupPage
+        if (window.focus) {
+          popupPage.focus();
+        }
+      };
+
+	 
+   let getParamsCreate = function() {
+        return {
+            action: "CREATE",
+	          apiKey: general.apiKey,
+	          sessionId: general.session.id,
+	          companyId: general.session.companyId,
+	          operationId: 1,
+	          baseUrl: general.baseUrl,
+		//useFingerprint: true,//si pide huella al que esta enrolando
+		//usePin: false,//si pide pin al que esta enrolando
+		useFingerprint: operador_huella == 1 ? true : false,
+		usePin: operador_pin == 1 ? true : false,
+		pinRestore: true,//cambio de pin
+		//pinRestoreMethod:'ACEP',
+		pinRestoreMethod: false,
+            operator: {
+              sessionId: general.operator.sessionId,
+              identityDocument: {
+                  countryCode: general.countryCode,
+                  type: general.type,
+                  personalNumber: general.rutoperador	
+              }
+            },
+              digitalIdentity: {
+                  personalData: {
+                      givenNames: "desmond",
+                      surnames: "miles",
+                      dob: 20000101,
+                      gender: "NOT_KNOWN"
+                  },
+                  emailAddresses: [
+                    {
+                        type: 'BUSINESS',
+                        address: '',
+                        primary: true
+                    },
+                    {
+                        type: 'PERSONAL',
+                        address: '',
+                        primary: false
+                    }
+                ],
+                contactPhones: [
+                    {
+                        number: '',
+                        primary: false,
+                        type: 'HOME'
+                    },
+                    {
+                        number: '',
+                        primary: true,
+                        type: 'PERSONAL'
+                    }
+
+                  ],
+                  identityDocuments: [{
+                    countryCode: general.countryCode,
+                    type: general.type,
+                    personalNumber: general.rutaenrolar	
+                  }]
+              }
+          };
+      };
+
+	  
+	  
+	window.getParams = function()
+	{
+	  return getParamsCreate();
+	}
+	  
+	//respuesta del formulario checkid
+	window.callback = function(result) 
+	{
+		popupPage.close();
+		console.log("callback", result);
+		document.getElementById('cargandof').style.display='none';
+		if (result.numError == 0) 
+		{
+			//alert ("OK")
+			
+		}
+		else
+		{
+			
+			alert (result.numError +  " " + result.msError);
+			document.getElementById('cargandof').style.display='none';
+		}
+
+		return false;
+	}
+	  
+	function crearpin()
+	{
+		consulta_sesion();
+	}
+	  
+	  
+	var conexion;
+			
+	function crearXMLHttpRequest() 
+	{
+		var xmlHttp=null;
+		if (window.ActiveXObject) 
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+		else 
+		if (window.XMLHttpRequest) 
+			xmlHttp = new XMLHttpRequest();
+		return xmlHttp;
+	}
+
+
+	function consulta_sesion()
+	{
+		conexion=crearXMLHttpRequest();
+	
+		conexion.open('POST', './consulta_sesion.php', false);
+	
+		conexion.send(null);
+		// Devolvemos el resultado
+		respuesta =  conexion.responseText;		
+		arr_resp  = respuesta.split('|');
+		if (arr_resp[0] == 'ok')
+		{
+			general.baseUrl 			= arr_resp[1];
+			general.session.companyId 	= arr_resp[2];
+			general.username 			= arr_resp[4];
+			general.session.id 			= arr_resp[6];
+			general.countryCode 		= arr_resp[7];
+			general.type 				= arr_resp[8];
+			general.apiKey 				= arr_resp[9];
+			
+			<php:repeticion id="formulario">
+			var rut						= "<php:item id="usuarioid" />"
+			general.rutoperador			= rut.replace ("-","");
+			
+			var rut						= "<php:item id="usuarioid" />"
+			general.rutaenrolar			= rut.replace ("-","");
+			</php:repeticion>
+			
+			openCheckId("CREATE");
+			
+		}
+		else
+		{
+			alert (respuesta);
+		}
+		
+		 
+		
+	}
+	
+	crearpin();
+	
+  </script>
+</body>
+</html>

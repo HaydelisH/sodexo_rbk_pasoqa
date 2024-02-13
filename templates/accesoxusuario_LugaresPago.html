@@ -1,0 +1,277 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="box">
+			<div class="box-body pad table-responsive">
+				<php:repeticion id="formulario">			
+				<div class="box-header">
+					<div class="form-inline ">
+						<div class="form-group">
+							<form name="formulario_usuarios" id="formulario_usuarios" action="accesoxusuario.php" method="POST" >
+								<input type="hidden" name="tipousuarioid" 	id="tipousuarioid" 	value="<php:item id="tipousuarioid" />">		
+								<input type="hidden" name="holdingid" 		id="holdingid"		value="<php:item id="holdingid" />">
+								<input type="hidden" name="cantfilas" 	 	value="<php:item id="cantfilas" />" />		
+								<input type="hidden" name="pagina"	 	 	value="<php:item id="pagina" />" />	
+								<input type="hidden" name="nombre"	 	 	value="<php:item id="nombre" />" />	
+								<input type="hidden" name="newusuarioid" 		value="<php:item id="newusuarioid" />" >
+								<input type="hidden" name="accion" value="LUGARESPAGO" />
+								<!--<a class="btn btn-default btn_letra_azul" href="#" onclick="javascript:formulario3.submit();"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</a>-->
+								<button type="submit" class="btn btn-default btn_letra_azul" name="accion2" value="VOLVER" ><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</button>
+							</form>		
+						</div>
+					</div> 
+				</div>	
+				<div class="box-body">
+					<!--Mensajes-->
+					<div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+					<div id="mensajeError"><php:texto id="mensajeError" /></div>
+	  				<form name="formulario" id="formulario" action="accesoxusuario.php" method="POST" >
+						<div id="divtabla" class="tabla-responsiva" >
+							<div class="form-row" >
+								<php:repeticion id="usuario">
+								<div class="col-md-6" style="padding-bottom: 15px; padding-left: 0;">
+									<input type="hidden" name="tipousuarioid" id="tipousuarioidx" value="<php:item id="tipousuarioid" />" />
+									<label for="nombre">Nombre Usuario</label>
+									<input type="text" class="form-control" id="nombre" name="nombre" value="<php:item id="nombre" />" placeholder="Nombre Perfil" readonly>
+								</div>
+								</php:repeticion>
+							</div>
+							<div class="form-row" >
+								<php:repeticion id="empresas">
+								<div class="col-md-6" style="padding-bottom: 15px; padding-left: 0;">
+									<input type="hidden" name="RutEmpresa" id="RutEmpresa" value="<php:item id="RutEmpresa" />" />
+									<label for="nombre">Nombre de Empresa</label>
+									<input type="text" class="form-control" id="nombre" name="RazonSocial" value="<php:item id="RazonSocial" />" placeholder="Nombre de Empresa" readonly>
+								</div>
+								</php:repeticion>
+							</div>
+							
+							<div class="col-sm-1">
+											<input type="hidden" name="accion" 	value="LUGARESPAGO" >
+											<input class="btn btn-primary btnbuscar" type="submit" name="accion2" value="BUSCAR" />
+											
+							</div>	
+										
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="lugarpago" name="lugarpago" maxlength="50" value="<php:item id="lugarpago" />"  >
+							</div>
+							
+								
+							<table id="example1" class="table table-bordered table-hover" name="tbltabla">  
+								<thead>
+									<tr>
+										<th style="text-align:center" data-campo="SELECCION"><input id="SelAll" name="accion2" style="margin-top: 10px" onclick="SelectAllCheck(formulario)" type="checkbox"></th>
+										<th style="text-align:center" data-campo="LUGARPAGOID">C&oacute;digo</th>
+										<th style="text-align:center" data-campo="NOMBRELUGARPAGO">Gerencia</th>
+										<th style="text-align:center" data-campo="OPCIONES">Opciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<php:repeticion id="lugarespago">
+									<tr>
+										<td align="center" data-campo="SELECCI&Oacute;N">
+											<input type="hidden"    name="lugarpago_<php:filamenos />" id="lugarpago_<php:filamenos />" value="<php:item id="lugarpagoid" />" >
+											<input type="hidden"    name="ide_<php:filamenos />" id="ide_<php:filamenos />" value="<php:item id="empresaid" />" >
+											<input type="checkbox"  name="sel_<php:filamenos />" id="sel_<php:filamenos />" value="<php:item id="empresaid" />" <php:item id="checkconsulta" /> onclick="javascript:IniMensajes()">
+											<input type="checkbox"  name="selori_<php:filamenos />" id="selori_<php:filamenos />" value="<php:item id="empresaid" />" <php:item id="checkconsulta" /> style="display:none">
+										</td>
+										<td align="center" data-campo="LUGARPAGOID"><php:item id="lugarpagoid" /></td>
+										<td align="center" data-campo="NOMBRELUGARPAGO"><php:item id="nombrelugarpago" /></td>
+										<td align="center">
+											<form name="formulario_tipo" id="formulario_tipo" action="accesoxusuario.php" method="POST">
+												<input type="hidden" name="empresaid" value="<php:texto id="empresaid" />" >
+												<!--<input type="hidden" name="nombre" value="<php:item id="nombre" />" >
+												<input type="hidden" name="nombre" value="<php:texto id="nombre" />" >-->
+												<input type="hidden" name="accion" value="LUGARESPAGO">
+												<input type="hidden" name="tipousuarioid" value="<php:item id="tipousuarioid" />" />
+												<input type="hidden" name="lugarpagoid" value="<php:item id="lugarpagoid" />" />	
+												<input type="hidden" name="newusuarioid"   value="<php:texto id="newusuarioid" />" />	
+												<button class="btn btn-primary btn-sm" data-toggle="tooltip" title="DAR PERMISOS EN SIGUIENTE NIVEL" type="submit" name="accion2" value="SIGUIENTE NIVEL" >Siguiente Nivel</button>
+												<button class="btn btn-primary btn-sm" data-toggle="tooltip" title="OTORGA PERMISOS A LOS SIGUIENTES NIVELES" type="submit" name="accion2" value="ACCESO A TODO" onclick="javascript:IniMensajes(),MostrarCargando();">Acceso a Todo</button>
+											</form>		
+										</td>
+									</tr>
+									</php:repeticion>
+								</tbody>	
+                                <th colspan=13 class="tabla_abajo">
+                                    <div class="col-md-12" style="font-weight: normal;">
+                                        <php:item id="pagina_actual" /> de <php:item id="pagina_ultimo" /> - Total <php:item id="total_registros" /> Registros
+                                    </div>
+                                    <div class="col-xs-offset-5"> 
+                                        <nav aria-label="nav1">
+                                            <ul class="pagination justify-content-center" style="margin-top: 0px; margin-bottom: 0px;">
+                                                <li class="page-item ">
+                                                    <a id="pagina_primera" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_primera" />);" ><span><i class="fa fa-angle-double-left"></i></span></a>
+                                                </li>
+                                                <li class="page-item ">
+                                                    <a id="pagina_anterior" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_anterior" />);" ><span ><i class="fa fa-angle-left"></i></span></a>
+                                                </li>                  
+                                                <li class="page-item active"><a class="page-link1" href="#"><php:item id="pagina_actual" /></a></li>                              
+                                                <li class="page-item">
+                                                    <a id="pagina_siguente" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_siguente" />);" ><span><i class="fa fa-angle-right"></i></span></a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a id="pagina_ultimo" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_ultimo" />);" ><span><i class="fa fa-angle-double-right"></i></span></a>
+                                                </li>                                                     
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </th>
+                                <form name="paginado" id="paginado" action="accesoxusuario.php" method="POST" >
+                                    <input type="hidden" name="pagina" value="" id="pagina" >
+                                    <input type="hidden" name="empresaid" value="<php:item id="empresaid" />" />		
+                                    <input type="hidden" name="accion" value="EMPRESAS" />	
+                                    <input type="hidden" name="newusuarioid" 	id="newusuarioid" 	value="<php:item id="newusuarioid" />" />		
+                                    <input type="hidden" name="accion2" value="SIGUIENTE NIVEL" />	
+                                </form>
+                            </table>
+						</div>		
+						<br>
+						<input type="hidden" name="tipousuarioid" id="tipousuario" value="<php:item id="tipousuarioid" />" />		
+						<input type="hidden" name="cantidad" 	  id="cantidad"    value="<php:texto id="cantidad" />" />
+						<input type="hidden" name="newusuarioid" 	id="newusuarioid" 	value="<php:item id="newusuarioid" />" />		
+						<input type="hidden" name="accion" value="LUGARESPAGO" />	
+						<div class="form-row">  
+							<div class="col-md-2 xs-12 pull-right">
+								<button class="btn btn-md btn-primary btn-block" type="button" name="accion2" value="GRABAR" style="margin-top: 10px" onclick="javascript:IniGraba();" >Guardar</button>  
+							</div>
+						</div>  
+					</form>
+					<form name="formulario3" id="formulario3" action="accesoxusuario.php" method="POST" >
+						<input type="hidden" name="pagina" 			value="<php:item id="pagina" />" />		
+						<input type="hidden" name="holdingid" 		value="<php:item id="holdingid" />" />		
+						<input type="hidden" name="nombrex" 		value="<php:item id="nombre" />" >
+						<input type="hidden" name="tipousuarioid" 	value="<php:item id="tipousuarioid" />" >
+						<input type="hidden" name="empresaid" 		id="empresaid" 		value="<php:item id="empresaid" />" />		
+						<input type="hidden" name="accion" 		value="BUSCAR" >
+					</form>
+				</div>	
+				</php:repeticion>
+			</div>	
+		</div>	
+	</div>	
+</div>	
+<script>
+
+	var conexion;
+	var error;
+	var elementoOK 		= document.getElementById("mensajeOK");
+	var elementoError 	= document.getElementById("mensajeError");
+
+	function IniMensajes ()
+	{
+		mensajeError.innerHTML 	= "";
+		mensajeOK.innerHTML 	= "";	
+	}
+	
+	function IniGraba()
+	{	
+		//alert ("ini");
+		IniMensajes ();
+		error = 0;
+		
+		var cantidad = document.getElementById("cantidad").value; //alert( "CANTIDAD " + cantidad);
+		MostrarCargando();
+
+		for (var b=0; b<cantidad; b++)
+		{  //alert(b + " < " + cantidad );
+			checknew 	= document.getElementById("sel_" + b).checked; //alert("NUEVO " + checknew);
+			checkorig 	= document.getElementById("selori_" + b).checked; //alert("ANTES :" + checkorig);
+		
+			if (checknew != checkorig)
+			{
+				lugarpagoid 	= document.getElementById("lugarpago_" + b).value;//alert ("lugarpagoid:" + lugarpagoid);
+				newusuarioid 	= document.getElementById("newusuarioid").value;//alert ("newusuarioid:" + newusuarioid);
+				empresaid 		= document.getElementById("empresaid").value;//alert ("empresaid:" + empresaid);
+				
+				if (checknew == false )
+				{
+					accion = "elimina";
+				}
+				else
+				{
+					accion = "graba";
+				}
+			
+				phpyparametros = "accesoxusuariolugares.php?accion=" + accion + "&" + "newusuarioid=" + newusuarioid + "&empresaid=" + empresaid + "&lugarpagoid=" + lugarpagoid;//alert ("phpyparametros" + phpyparametros);
+
+				Grabar (phpyparametros);
+			}
+			
+		}
+		//alert("Error :" + error );
+		if (error > 0)
+		{
+			mensajeError.innerHTML 	= "Problemas al grabar, Intente Nuevamente.";
+			mensajeOK.innerHTML 	= '';
+		}
+		else
+		{	//alert("hola");
+			for (var b=0; b<cantidad; b++)
+			{	//alert(b);alert(cantidad);
+				document.getElementById("selori_" + b).checked = document.getElementById("sel_" + b).checked;
+			}
+			
+			mensajeOK.innerHTML = 'Acci&oacute;n realizada con &eacute;xito';
+		}
+		
+		refrescaMensaje();
+		
+		OcultarCargando();
+	}
+	
+	function refrescaMensaje()
+	{
+		
+		var elementoOK 		= document.getElementById("mensajeOK");
+		var elementoError 	= document.getElementById("mensajeError");
+
+		if (elementoOK.innerHTML !="")
+		{
+				elementoOK.className += "callout callout-success";
+				elementoError.innerHTML = "";
+				elementoError.className = "";
+		}
+
+		if (elementoError.innerHTML !="")
+		{
+			elementoError.className += "callout callout-danger";
+			elementoOK.innerHTML = "";
+			elementoOK.className = "";
+		}
+	}
+	
+	function crearXMLHttpRequest() 
+	{
+	  var xmlHttp=null;
+	  if (window.ActiveXObject) 
+		xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	  else 
+		if (window.XMLHttpRequest) 
+		  xmlHttp = new XMLHttpRequest();
+	  return xmlHttp;
+	}	
+	
+	function Grabar(phpyparametros)
+	{  
+		conexion=crearXMLHttpRequest();
+		conexion.onreadystatechange = procesarEventos;
+		conexion.open('GET', phpyparametros, false);
+		conexion.send(null);
+	}
+
+	function procesarEventos()
+	{
+	  if(conexion.readyState == 4)
+	  {
+		respuesta = conexion.responseText; //alert(respuesta);
+		if (respuesta != "OK")
+		{
+			error++;
+		}
+	  } 
+	  else 
+	  {
+		mensajeOK.innerHTML = 'Procesando...';
+	  }
+	}
+</script>

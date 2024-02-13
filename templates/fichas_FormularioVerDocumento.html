@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box ">
+      <div class="box-body pad table-responsive">
+		  <php:repeticion id="formulario">
+		  <!--Botones de cabecera-->
+			<div class="box-header">
+			<form role="form" name="formulario" id="formulario" action="Fichas.php" method="POST">
+			  <input type="hidden" name="fichaid" value="<php:item id="fichaid" />" />
+			  <button class="btn btn-default btn_letra_azul" name="accion" value="AGREGAR_DOC"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</button>
+			</div>
+      
+		  <div class="box-body">
+				 <!--Mensajes-->
+				<div id="mensajeError"><php:texto id="mensajeError" /></div>
+				<div id="mensajeOK"><php:texto id="mensajeOK" /></div>	
+			
+				<!--Formulario de datos propios de Clausulas-->
+					<div class="row">  
+						<div class="col-xs-4 col-sm-offset-0 col-xs-offset-0 col-md-2 col-lg-2">
+								<span >Nro Documento : <php:item id="documentoid" /></span>										
+						</div>					
+					</div>
+					<div class="responsiveContent">
+						<iframe id="ifrmArch" name="ifrmArch"  width="100%" height="600px" src="<php:item id="ruta" />" ></iframe>
+					</div>
+			  </php:repeticion>  
+			</form> 
+		  </div>
+	  </div>
+	  </div>
+	 </div>
+	</div>
+</section>
+	
+	
+	

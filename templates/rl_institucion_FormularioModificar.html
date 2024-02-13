@@ -1,0 +1,138 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-body pad table-responsive">
+                <div class="box-header">
+                    <a class="btn btn-default btn_letra_azul" href="rl_institucion.php"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
+                </div>
+            </div>
+            <div class="box-body">
+                <div id="mensajeError"><php:texto id="mensajeError" /></div>
+                <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+                <form role="form" name="formulario" id="formulario" action="rl_institucion.php" method="POST">
+                    <php:repeticion id="formulario">
+                    <php:repeticion id="Proveedores">
+                    <input type="hidden" class="form-control" name="RutEmpresa" value=""/>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <label for="RutProveedor">RutProveedor</label>
+                            <input type="text" class="form-control" id="RutProveedor" name="RutProveedor" maxlength="10"  readonly="readonly" value="<php:item id="RutProveedor" />" onkeyup="mayus(this);" />
+                        </div>
+                        <div class="col-md-6 xs-12">
+                            <label for="NombreProveedor">Raz&oacute;n Social</label>
+                            <input type="text" class="form-control" id="NombreProveedor" name="NombreProveedor" maxlength="50" value="<php:item id="NombreProveedor" />"autofocus required="">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <label for="Direccion">Direcci&oacute;n</label>
+                            <input type="text" class="form-control" id="Direccion" name="Direccion" maxlength="50" value="<php:item id="Direccion" />">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 xs-12">
+                            <label for="Comuna">Comuna</label>
+                            <input type="text" class="form-control" id="Comuna" name="Comuna" maxlength="50" value="<php:item id="Comuna" />">
+                        </div>
+                        <div class="col-md-6 xs-12">
+                            <label for="Ciudad">Ciudad</label>
+                            <input type="text" class="form-control" id="Ciudad" name="Ciudad" maxlength="50" value="<php:item id="Ciudad" />">
+                        </div>
+                    </div>
+                    <!-- 
+                    <div class="form-row">
+                        <div class="col-md-12 xs-12">
+                            <label for="Personeria">Personeria</label>
+                            <textarea rows="10" cols="80" class="form-control" name="Personerias"><php:item id="Personerias"/></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">  
+                        <div class="col-md-12 xs-12">
+                            <label for="Correo">Correo</label>
+                            <input type="email" class="form-control" id="Correo" name="Correo" maxlength="50" value="<php:item id="Correo" />">
+                        </div>
+                    </div>-->
+                    <div class="form-row">  
+                        <div class="col-md-2 xs-12">
+                            <button class="btn btn-md btn-default btn-block" type="submit" style="margin-top: 10px" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" ><a href="" >Representantes</a></button>
+                        </div>
+                        <input type="hidden" name="accion" value="MODIFICAR" />
+                        <div class="col-md-2 xs-12 pull-right">
+                            <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="MODIFICAR" onclick="javascript:return validarFormulario(this);"/>Guardar</button>
+                        </div>
+                    </div>   
+                </form>      
+            </div>  
+        </div>
+        <!-- /.box -->
+    </div>
+    <!--.col-->
+</div> 
+<!--Seccion para mostrar firmantes de Notaria-->
+<div class="collapse" id="collapseExample">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="box">
+                <div class="box-body pad table-responsive">
+                    <div class="form-group">
+                        <form name="formulario2" id="formulario_usuarios" action="rl_institucion.php" method="POST" autocomplete="off">
+                            <input type="hidden" name="RutProveedor" id="RutProveedor" value ="<php:item id="RutProveedor" />">
+                            <button type="submit" class="btn btn-default" name="accion" value="AGREGAR_R"><a><i class="fa fa-plus" class="fa fa-plus" aria-hidden="true"></i> Agregar</a></button>
+                        </form>
+                    </div>
+                    </php:repeticion>    
+                </div>
+                <div class="box-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;" >Rut</th>
+                                <th style="text-align: center;" >Nombre del Firmante</th>
+                                <th style="text-align: center;" >Tipo Firma</th>
+                                <!--th style="text-align: center;" >Rol</th-->
+                                <th style="text-align: center;" >Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <php:repeticion id="representantes">
+                            <tr align="center">
+                                <td data-campo="Rut"><php:item id="RutUsuario" /></td>
+                                <td data-campo="nombre"><php:item id="nombre" /> <php:item id="appaterno" /> <php:item id="apmaterno" /> </td>
+                                <td data-campo="TipoFirma"><php:item id="Descripcion" /></td>
+                                <!--td data-campo="Cargo"><php:item id="descripcion" /></td-->
+                                <td data-campo="Opciones">
+                                    <form name="formulario3" id="formulario_tipo" action="rl_institucion.php" method="POST">
+                                        <input type="hidden" name="RutEmpresa" value="<php:item id="RutEmpresa" />">
+                                        <input type="hidden" name="RutUsuario" value="<php:item id="RutUsuario" />">
+                                        <input type="hidden" name="RutProveedor" value="<php:item id="RutProveedor" />">
+                                        <!--button class="btn btn-primary btn-sm" type="submit" name="accion" value="MODIFICAR_R">Modificar</button-->
+                                        <button class="btn btn-default btn-sm" type="submit" name="accion" value="ELIMINAR_R" onclick="javascript:return preguntarPorBorrar_1();">Eliminar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            </php:repeticion> <!-- repeticion de representantes -->
+                            </php:repeticion> <!-- repeticion del formulario -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function validarcorreo()
+    {
+        var resultado = validarEmail(obtenerElemento('Correo').value);
+        if (resultado == false) 
+        { 
+            document.getElementById('mensajeError').innerHTML = 'Correo invalido'; 
+            return false;
+        }
+    } 
+    
+    function preguntarPorBorrar_1()
+    {
+        return confirm("Esta seguro de eliminar?");
+    }
+</script>
+  

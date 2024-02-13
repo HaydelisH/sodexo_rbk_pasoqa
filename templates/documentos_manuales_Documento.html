@@ -1,0 +1,73 @@
+<style type="text/css">
+.responsiveContent {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+ padding-bottom: 50.2%;
+  margin-bottom: 20px;
+}
+.responsiveContent iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+</style>
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <!--Botones de cabecera-->
+        <div class="box-header">
+		   <php:repeticion id="formulario">
+  			<form role="form" name="formulario2" id="formulario2" action="Documentos_manuales.php" method="POST">
+  				<input type="hidden" name="idDocumento" value="<php:item id="idDocumento" />" />
+          <input type="hidden" name="idEstado" value="<php:item id="idEstado" />" />
+  				<button type="submit" class="btn btn-default"><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
+          
+  			</form>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <!--Mensajes-->
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+        <div class="form-row">
+
+        <form role="form" name="formulario" id="formulario" action="Documentos_manuales.php" method="POST">
+          <div class="form-row">  
+             <div class="col-md-4 ">
+             <label >Nro Contrato : <php:item id="idDocumento" /></label>                    
+            </div>          
+           </div>
+            <div class="form-row">
+              <div class="col-md-4 xs-5">
+                    <label for="Nombre">Estado Contrato</label>
+                    <select class="form-control" name="idEstado" id="idEstado" >
+                    <option value="0">(Seleccionar)</option>
+                    <php:repeticion id="estadocontratos">           
+                      <option value="<php:item id="idEstado" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idEstado" /><php:argumento idvalor="idEstado" /></php:funcion>><php:item id="Descripcion" /></option>
+                    </php:repeticion>
+                    </select> 
+              </div>
+            </div>
+            <div class="form-row">  
+            <div class="col-md-2 xs-12 pull-right">
+             <input type="hidden" name="accion" value="MODIFICAR" />
+              <input type="hidden" name="idDocumento" value="<php:item id="idDocumento" />" />
+             <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="MODIFICAR" onclick="javascript:return validarFormulario(this);"/>Guardar</button>
+          </div>
+        </div>
+		    <div class="form-row">  
+          <div class="col-md-12 ">
+			     <div class="responsiveContent">
+				    <iframe id="ifrmArch" name="ifrmArch"  width="100%" height="600px" src="<php:item id="ruta" />" ></iframe>
+			     </div>
+          </div>
+        </div>
+          </php:repeticion>
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,707 @@
+<style type="text/css">
+    hr{
+        margin-top:10px;
+        margin-bottom:10px;
+        height:1px;
+        width:100%;
+        border-top:1px solid gray;
+    }
+</style>
+<div class="noacceso" style="display:<php:texto id="noacceso" />;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box" style="background-color:#dd4b39; color:#ffffff">
+                <div class="box-body pad table-responsive">
+                    <!--Botones de cabecera>
+                    <div class="box-header">
+                        <a class="btn btn-default btn_letra_azul" href="DeclaracionConflictoInteres.php"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</a>
+                    </div-->
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <!--Mensajes-->
+                        <div id="mensajeError2"><php:texto id="mensajeError" /></div>
+                        <div id="mensajeOK2"><php:texto id="mensajeOK" /></div>	
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="acceso" style="display:<php:texto id="acceso" />;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-body pad table-responsive">
+                    
+                    <div class="box-body">
+                        <!--Mensajes-->
+                        <div id="mensajeError" class="callout caluot-danger" style="display:none; background-color:#dd4b39; color:#ffffff"><php:texto id="mensajeError" /></div>
+                        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>	
+                    </div>
+                    <div class="box-body">
+                        <input type="hidden" class="form-control" id="empleadoFormularioid" value="<php:texto id="empleadoFormularioid" />" >
+                        <form name="formulario" class="formulario" id="formulario"  class="form-horizontal" action="DeclaracionConflictoInteresclc-2022.php" method="POST" autocomplete=off>
+                            <php:repeticion id="formulario">
+                            <div class="box-body">
+                                <div class="form-row esteFormulario" style="display:<php:texto id="esteFormulario" />;">
+                                    <div class="col-md-12">
+                                        <label style="float:right;"> (*) Campos obligatorios </label>
+                                    </div>
+                                </div>
+                               
+                                <div class="form-row esteFormulario" style="display:<php:texto id="esteFormulario" />;">
+                                    <h3><p style="text-align:center"><strong>ANEXO DE CONTRATO DE TRABAJO Y DECLARACI&Oacute;N ANUAL</strong></p></h3>
+                                    <h4><p style="text-align:center"><strong>Pol&iacute;tica de Conflicto de Inter&eacute;s, C&oacute;digo de &Eacute;tica SODEXO</strong></p></h4>
+                                    <br />
+                                    <p>En <php:texto id="DATOS_CiudadFirma" />, a <php:texto id="DATOS_FechaDocumento" />, entre <b><php:texto id="EMPRESA_RazonSocial" /></b>, sociedad comercial, rol &uacute;nico tributario N&ordm;  <b><php:texto id="EMPRESA_RutEmpresa" /></b>, representada por don <b><php:texto id="REPRESENTANTE_Nombre" /></b>, ambos domiciliados en <php:texto id="EMPRESA_Direccion" />; en adelante, por su raz&oacute;n social o el "empleador"; y, don (a) <b><php:texto id="EMPLEADO_NombreTrabajador" /></b> , c&eacute;dula de identidad N&ordm; <b><php:texto id="EMPLEADO_RutTrabajador" /></b> en adelante, el "trabajador", se ha convenido en el siguiente anexo de contrato de trabajo, que viene a regular las condiciones de la Pol&iacute;tica de Conflicto de Inter&eacute;s de Sodexo.</p>
+                                    <p>Las partes con fecha <b><php:texto id="DATOS_FechaIngreso" /></b> han suscrito un contrato de trabajo que regula la relaci&oacute;n laboral entre ellas. As&iacute; mismo se indica que el trabajador actualmente desarrolla funciones asociadas al cargo de <b><php:texto id="DATOS_Cargo" />.</b></p>
+                                    <p><b>PRIMERO:</b>El trabajador/a declara que ha tomado conocimiento y acepta la pol&iacute;tica de conflicto de inter&eacute;s que la Compa&ntilde;&iacute;a ha dispuesto y actualmente vigente, habiendo recibido un ejemplar de la misma.</p>
+                                    <p><b>SEGUNDO:</b>El trabajador/a declara tomar conocimiento y aceptar el C&oacute;digo de &Eacute;tica que la Compa&ntilde;&iacute;a ha dispuesto y actualmente vigente, habiendo recibido un ejemplar de aquella y &eacute;ste. </p>
+                                    <p>Adem&aacute;s, las partes dejan constancia que la pol&iacute;tica de Conflicto de Inter&eacute;s y el C&oacute;digo de &Eacute;tica se encuentran publicadas en la Intranet corporativa.</p>
+                                    <p><b>TERCERO:</b> Conforme con lo dispuesto en la Pol&iacute;tica relativa a conflictos de inter&eacute;s, se dispone para ciertos cargos, entre los que se cuenta el del "Trabajador", la realizaci&oacute;n anual de una declaraci&oacute;n indicando si &eacute;ste se encuentra o no afecto a alg&uacute;n tipo de conflicto de inter&eacute;s conforme lo regulado en dicha pol&iacute;tica.</p>
+                                    <p>En virtud de lo anterior, a continuaci&oacute;n el trabajador formula la siguiente declaraci&oacute;n anual respecto de conflicto de inter&eacute;s. </p>
+                                    <br />
+                                    
+                                        <div>
+                                            <input type="checkbox" id="cbox1" name="cbox1" >
+                                            <label for="cbox1"> He le&iacute;do, entendido, apoyado y acepto cumplir con el esp&iacute;ritu, los valores y los requisitos de la Declaraci&oacute;n de Conducta Empresarial Responsable de Sodexo. </label><br>
+                                            <input type="checkbox" id="cbox2" name="cbox2" >
+                                            <label for="cbox2"> He le&iacute;do, entendido, apoyado y acepto cumplir con el esp&iacute;ritu, los valores y los requisitos de la Declaraci&oacute;n de Integridad Empresarial de Sodexo. </label><br>
+                                            <input type="checkbox" id="cbox3" name="cbox3" >
+                                            <label for="cbox3"> Entiendo que el incumplimiento del esp&iacute;ritu, los valores y bajo las pol&iacute;ticas y procedimientos de Sodexo puede llevar a una acci&oacute;n disciplinaria hasta e incluyendo el despido. </label><br>
+                                           
+                    
+                                        </div>
+                                        <p>Es usted un director, supervisor o comisionado (o equivalente), propietario, socio, accionista, consultor, asesor, empleado de cualquier entidad comercial que, seg&uacute;n su conocimiento:</p>
+                                        <ol type="a">
+                                            <li>&iquest;Suministra bienes o servicios a Sodexo o a cualquiera de sus subsidiarias de propiedad total&#63;</li>
+                                            <li>&iquest;Participa en cualquier negocio que pueda estar en competencia con Sodexo o cualquiera de sus subsidiarias de propiedad total&#63;
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs1" id="querySiNoObs1_NO" value="no">
+                                                    <label class="form-check-label querySiNoObs1" for="querySiNoObs1">NO - No tengo conflictos de intereses adicionales que declarar.</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs1" id="querySiNoObs1_SI" value="si">
+                                                    <label class="form-check-label querySiNoObs1" for="querySiNoObs1">S&Iacute; - Me comprometo a proporcionar informaci&oacute;n completa de todos los posibles conflictos de intereses.</label>
+                                                </div>
+                                                <br />
+                                                <div id="querySiNoObs1_show" style="display:none;">
+                                                    
+                                                    <label id="querySiNoObs1_etiqueta" for="contenedorid">Describa el conflicto de inter&eacute;s existente:</label>
+                                                    <div class="input-group col-xs-12">
+                                                        <textarea class="form-control" id="querySiNoObs1_texto" name="querySiNoObs1_texto-R" rows="2" placeholder="Escriba y explique" value="<php:item id="querySiNoObs1_texto" />" disabled  onkeyup="pinta(this)"></textarea>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            
+                                        </ol>
+
+                                        <p>Tiene un inter&eacute;s financiero en alguna entidad comercial que, seg&uacute;n su conocimiento</p>
+                                        <ol type="a">
+                                            <li>&iquest;Suministra bienes o servicios a Sodexo o a cualquiera de sus subsidiarias de propiedad total&#63;</li>
+                                            <li>&iquest;Participa en cualquier negocio que pueda estar en competencia con Sodexo o cualquiera de sus subsidiarias de propiedad total&#63;
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs2" id="querySiNoObs2_NO" value="no">
+                                                    <label class="form-check-label querySiNoObs2" for="querySiNoObs2">NO - No tengo conflictos de intereses adicionales que declarar.</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs2" id="querySiNoObs2_SI" value="si">
+                                                    <label class="form-check-label querySiNoObs2" for="querySiNoObs2">S&Iacute; - Me comprometo a proporcionar informaci&oacute;n completa de todos los posibles conflictos de intereses.</label>
+                                                </div>
+                                                <br />
+                                                <div id="querySiNoObs2_show" style="display:none;">
+                                                    
+                                                    <label id="querySiNoObs2_etiqueta" for="contenedorid">Describa el conflicto de inter&eacute;s existente:</label>
+                                                    <div class="input-group col-xs-12">
+                                                        <textarea class="form-control" id="querySiNoObs2_texto" name="querySiNoObs2_texto-R" rows="2" placeholder="Escriba y explique" value="<php:item id="querySiNoObs2_texto" />" disabled  onkeyup="pinta(this)"></textarea>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            
+                                        </ol>
+
+                                        <p>&iquest;Ha recibido o se ha beneficiado de pagos, bienes o servicios de cualquier tipo entregados por clientes o proveedores de Sodexo (pasados, actuales o potenciales) o podr&iacute;a haberse percibido que se ha beneficiado de los mismos como resultado de su empleo en Sodexo&#63;</p>
+                                        
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs3" id="querySiNoObs3_NO" value="no">
+                                                    <label class="form-check-label querySiNoObs3" for="querySiNoObs3">NO - No tengo conflictos de intereses adicionales que declarar.</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs3" id="querySiNoObs3_SI" value="si">
+                                                    <label class="form-check-label querySiNoObs3" for="querySiNoObs3">S&Iacute; - Me comprometo a proporcionar informaci&oacute;n completa de todos los posibles conflictos de intereses.</label>
+                                                </div>
+                                                <br />
+                                                <div id="querySiNoObs3_show" style="display:none;">
+                                                   
+                                                    <label id="querySiNoObs3_etiqueta" for="contenedorid">Describa el conflicto de inter&eacute;s existente:</label>
+                                                    <div class="input-group col-xs-12">
+                                                        <textarea class="form-control" id="querySiNoObs3_texto" name="querySiNoObs3_texto-R" rows="2" placeholder="Escriba y explique" value="<php:item id="querySiNoObs3_texto" />" disabled  onkeyup="pinta(this)"></textarea>
+                                                    </div>
+                                                </div>
+                                            
+                                            
+                                      
+
+                                        <p>&iquest;Es cualquier miembro de su familia, incluidos aquellos a trav&eacute;s del matrimonio o una relaci&oacute;n civil o de hecho, un director, supervisor o comisionado (o equivalente), propietario, socio, accionista, consultor, asesor, empleado de cualquier entidad comercial que,  seg&uacute;n su conocimiento&#63;</p>
+                                        <ol type="a">
+                                            <li>&iquest;Suministra bienes o servicios a Sodexo o a cualquiera de sus subsidiarias de propiedad total&#63;</li>
+                                            <li>&iquest;Participa en cualquier negocio que pueda estar en competencia con Sodexo o cualquiera de sus subsidiarias de propiedad total&#63;
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs4" id="querySiNoObs4_NO" value="no">
+                                                    <label class="form-check-label querySiNoObs4" for="querySiNoObs4">NO - No tengo conflictos de intereses adicionales que declarar.</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs4" id="querySiNoObs4_SI" value="si">
+                                                    <label class="form-check-label querySiNoObs4" for="querySiNoObs4">S&Iacute; - Me comprometo a proporcionar informaci&oacute;n completa de todos los posibles conflictos de intereses.</label>
+                                                </div>
+                                                <br />
+                                                <div id="querySiNoObs4_show" style="display:none;">
+                                                   
+                                                    <label id="querySiNoObs4_etiqueta" for="contenedorid">Describa el conflicto de inter&eacute;s existente:</label>
+                                                    <div class="input-group col-xs-12">
+                                                        <textarea class="form-control" id="querySiNoObs4_texto" name="querySiNoObs4_texto-R" rows="2" placeholder="Escriba y explique" value="<php:item id="querySiNoObs4_texto" />" disabled  onkeyup="pinta(this)"></textarea>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            
+                                        </ol>
+
+                                        <p>&iquest;Alg&uacute;n miembro de su familia, incluidos aquellos a trav&eacute;s del matrimonio o una relaci&oacute;n civil o de hecho, tiene un inter&eacute;s financiero en alguna entidad comercial  que, seg&uacute;n su conocimiento&#63;</p>
+                                        <ol type="a">
+                                            <li>&iquest;Suministra bienes o servicios a Sodexo o a cualquiera de sus subsidiarias de propiedad total&#63;</li>
+                                            <li>&iquest;Participa en cualquier negocio que pueda estar en competencia con Sodexo o cualquiera de sus subsidiarias de propiedad total&#63;
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs5" id="querySiNoObs5_NO" value="no">
+                                                    <label class="form-check-label querySiNoObs5" for="querySiNoObs5">NO - No tengo conflictos de intereses adicionales que declarar.</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs5" id="querySiNoObs5_SI" value="si">
+                                                    <label class="form-check-label querySiNoObs5" for="querySiNoObs5">S&Iacute; - Me comprometo a proporcionar informaci&oacute;n completa de todos los posibles conflictos de intereses.</label>
+                                                </div>
+                                                <br />
+                                                <div id="querySiNoObs5_show" style="display:none;">
+                                                   
+                                                    <label id="querySiNoObs5_etiqueta" for="contenedorid">Describa el conflicto de inter&eacute;s existente:</label>
+                                                    <div class="input-group col-xs-12">
+                                                        <textarea class="form-control" id="querySiNoObs5_texto" name="querySiNoObs5_texto-R" rows="2" placeholder="Escriba y explique" value="<php:item id="querySiNoObs5_texto" />" disabled  onkeyup="pinta(this)"></textarea>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            
+                                        </ol>
+
+                                        <p>&iquest;Alg&uacute;n miembro de su familia, incluidos aquellos a trav&eacute;s del matrimonio o una relaci&oacute;n civil o de hecho,  ha recibido o se ha beneficiado de pagos, bienes o servicios de cualquier tipo de clientes o proveedores de Sodexo (pasados, actuales o potenciales), o podr&iacute;a haberse percibido que se ha beneficiado de los mismos como resultado de su empleo en Sodexo&#63;</p>
+                                        
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs6" id="querySiNoObs6_NO" value="no">
+                                                    <label class="form-check-label querySiNoObs6" for="querySiNoObs6">NO - No tengo conflictos de intereses adicionales que declarar.</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs6" id="querySiNoObs6_SI" value="si">
+                                                    <label class="form-check-label querySiNoObs6" for="querySiNoObs6">S&Iacute; - Me comprometo a proporcionar informaci&oacute;n completa de todos los posibles conflictos de intereses.</label>
+                                                </div>
+                                                <br />
+                                                <div id="querySiNoObs6_show" style="display:none;">
+                                                   
+                                                    <label id="querySiNoObs6_etiqueta" for="contenedorid">Describa el conflicto de inter&eacute;s existente:</label>
+                                                    <div class="input-group col-xs-12">
+                                                        <textarea class="form-control" id="querySiNoObs6_texto" name="querySiNoObs6_texto-R" rows="2" placeholder="Escriba y explique" value="<php:item id="querySiNoObs6_texto" />" disabled  onkeyup="pinta(this)"></textarea>
+                                                    </div>
+                                                </div>
+                                           
+                                            
+                                        
+
+                                        <p>&iquest;Tiene alg&uacute;n otro conflicto de intereses directo, indirecto o potencial que declarar&#63;</p>
+                                       
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs7" id="querySiNoObs7_NO" value="no">
+                                                    <label class="form-check-label querySiNoObs7" for="querySiNoObs7">NO - No tengo conflictos de intereses adicionales que declarar.</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs7" id="querySiNoObs7_SI" value="si">
+                                                    <label class="form-check-label querySiNoObs7" for="querySiNoObs7">S&Iacute; - Me comprometo a proporcionar informaci&oacute;n completa de todos los posibles conflictos de intereses.</label>
+                                                </div>
+                                                <br />
+                                                <div id="querySiNoObs7_show" style="display:none;">
+                                                   
+                                                    <label id="querySiNoObs7_etiqueta" for="contenedorid">Describa el conflicto de inter&eacute;s existente:</label>
+                                                    <div class="input-group col-xs-12">
+                                                        <textarea class="form-control" id="querySiNoObs7_texto" name="querySiNoObs7_texto-R" rows="2" placeholder="Escriba y explique" value="<php:item id="querySiNoObs7_texto" />" disabled  onkeyup="pinta(this)"></textarea>
+                                                    </div>
+                                                </div>
+                                           
+                                            
+                                        
+
+
+                                        <p>Describa a continuaci&oacute;n cualquier relaci&oacute;n, transacci&oacute;n, posici&oacute;n que detenta o cualquier otra circunstancia que usted considera podr&iacute;a dar lugar a un conflicto de inter&eacute;s en el marco de sus funciones en Sodexo Chile (seleccione una alternativa):</p>
+                                        
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs8" id="querySiNoObs8_NO" value="no">
+                                                    <label class="form-check-label querySiNoObs8" for="querySiNoObs5">No tengo ning&uacute;n conflicto de inter&eacute;s que reportar a la fecha</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs8" id="querySiNoObs8_SI" value="si">
+                                                    <label class="form-check-label querySiNoObs8" for="querySiNoObs8">Reporto la existencia de las siguientes situaciones y/o relaciones que pueden dar lugar a un conflicto de inter&eacute;s en el marco de mis funciones en SODEXO</label>
+                                                </div>
+                                                <br />
+                                                <div id="querySiNoObs8_show" style="display:none;">
+                                                    
+                                                    <label id="querySiNoObs8_etiqueta" for="contenedorid">Describa el conflicto de inter&eacute;s existente:</label>
+                                                    <div class="input-group col-xs-12">
+                                                        <textarea class="form-control" id="querySiNoObs8_texto" name="querySiNoObs8_texto-R" rows="2" placeholder="Escriba y explique" value="<php:item id="querySiNoObs8_texto" />" disabled  onkeyup="pinta(this)"></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <p>Declaro que todas y cada una de las declaraciones que he hecho son verdaderas y precisas seg&uacute;n mi leal saber y entender. Entiendo que proporcionar cualquier informaci&oacute;n falsa o enga&ntilde;osa, ya sea por acci&oacute;n u omisi&oacute;n, es una ofensa que puede resultar en una acci&oacute;n disciplinaria, incluyendo la terminaci&oacute;n de mi empleo y que puedo ser considerado personalmente responsable de cualquier p&eacute;rdida o da&ntilde;o que surja de cualquier informaci&oacute;n falsa o enga&ntilde;osa contenida en este documento. </p>
+                                                <p>Los datos personales recopilados a trav&eacute;s de esta declaraci&oacute;n se procesan con el &uacute;nico fin de cumplir con la legislaci&oacute;n y las regulaciones aplicables y las pol&iacute;ticas de la empresa sobre integridad comercial. El controlador de datos es <php:texto id="EMPRESA_RazonSocial" /> . Los detalles de sus derechos de protecci&oacute;n de datos y a qui&eacute;n contactar con las consultas de protecci&oacute;n de datos se pueden encontrar en su pol&iacute;tica local de protecci&oacute;n de datos de recursos humanos y aviso de privacidad. Si tiene alguna pregunta sobre la protecci&oacute;n de datos, no dude en ponerse en contacto con: jorge.gavilan@sodexo.com</p>
+                                                <p>El presente acuerdo forma parte integrante del contrato de trabajo. As&iacute; mismo, todo lo no expresamente regulado o modificado en este instrumento se mantiene en id&eacute;nticos t&eacute;rminos a lo previamente pactado en el contrato de trabajo.</p>
+                                                <p>El presente anexo se firma en 3 ejemplares del mismo tenor, quedando 2 en poder de la empresa y uno en poder del trabajador.</p>
+                                                
+
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-md-2 xs-12 pull-left">  
+                                        <button style="display:none" class="btn btn-info btn-md btn-block" name="accion" id="vista_previa" value="" type="button" data-toggle="modal" data-target="#modal_vp" >Ver Documento</button>  
+                                    </div>
+                                    <div class="col-md-2 xs-12 pull-right esteFormulario" style="display:<php:texto id="esteFormulario" />;">  
+                                        <button class="btn btn-md btn-success btn-block" type="button" name="accion" id="ENVIARFORMULARIO" value="ENVIARFORMULARIO" style="margin-top: 10px;">Enviar formulario</button>  
+                                    </div>
+                                </div>
+                            </div>
+                            </php:repeticion>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form name="formularioFirmador" class="formularioFirmador" id="formularioFirmador"  class="form-horizontal" action="Documentos_Pendientes.php" method="POST" autocomplete=off>
+        <input type="hidden" id="idDocumento" name="idDocumento" value="" />
+        <input type="hidden" name="accion" value="INICIOFIRMA" />
+    </from>
+    <!-- Modal para Vista previa-->
+    <div class="modal fade bd-example-modal-lg" id="modal_vp" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" >
+            <div class="modal-content">
+                <div class="modal-header" align="center">
+                    <h4 class="modal-title" id="ejemplo-titulo"> Vista Previa de Documento <h3 id="num"></h3></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="row">
+                        <div class="col-md-2 xs-12 pull-left" style="display:<php:texto id="muestraBotonesGestion" />;">  
+                            <button type="button" class="btn btn-md btn-primary btn-block" id="eliminar" data-dismiss="modal">Eliminar</button>
+                        </div>
+                        <div class="col-md-2 xs-12 pull-right">  
+                            <button type="button" class="btn btn-md btn-success btn-block" id="aprobar" data-dismiss="modal">Aprobar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div id="mensajeError_modal"></div>
+                    <div style="clear:both">
+                        <iframe id="viewer" width="100%" height="500px"></iframe>
+                    </div>
+                </div>
+                <div class="modal-footer" style="margin-top:10px;">
+                    <div class="row">
+                        <div class="col-md-2 xs-12 pull-right">  
+                            <button type="button" class="btn btn-secondary btn-md btn-block" id="cerrar" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<script>
+$(document).ready(function(){
+    <php:texto id="clickAutomatico" />
+});
+
+var ajax;
+$('#eliminar').click(function(){
+    var url = "EliminarFormulario_ajax.php?idDocumento=" + $("#idDocumento").val() + "&empleadoFormularioid=" + $('#empleadoFormularioid').val();
+    // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+    if( window.XMLHttpRequest )
+        ajax = new XMLHttpRequest(); // No Internet Explorer
+    else
+        ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+    // Almacenamos en el control al funcion que se invocara cuando la peticion
+    ajax.onreadystatechange = funcionCallback_rechazar;
+    // Enviamos la peticion
+    ajax.open( "GET", url, false);
+    ajax.send( "" );
+});
+function funcionCallback_rechazar()
+{
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+        if( ajax.status == 200 )
+        {
+            // Escribimos el resultado en la pagina HTML mediante DHTML
+            salida = ajax.responseText;
+            if( salida != '' )
+            {
+                if(salida)
+                {
+                    $('.esteFormulario').show();
+                    $('#ENVIARFORMULARIO').show();
+                    $('#vista_previa').hide();
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                $("#mensajeError").show();
+                $("#mensajeError").html("Ha habido un error, intente mas tarde.");
+            }
+        }
+    }
+}
+$('#aprobar').click(function(){
+    MostrarCargando();
+    var url = "Documentos_aprobar2_ajax.php?idDocumento=" + $('#idDocumento').val();// + "&empleadoFormularioid=" + $('#empleadoFormularioid').val();
+    // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+    if( window.XMLHttpRequest )
+        ajax = new XMLHttpRequest(); // No Internet Explorer
+    else
+        ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+    // Almacenamos en el control al funcion que se invocara cuando la peticion
+    ajax.onreadystatechange = funcionCallback_aprobar;
+    // Enviamos la peticion
+    ajax.open( "GET", url, false);
+    ajax.send( "" );
+});
+//Callback de Vista previa
+function funcionCallback_aprobar()
+{
+    OcultarCargando();
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+        if( ajax.status == 200 )
+        {
+            // Escribimos el resultado en la pagina HTML mediante DHTML
+            salida = ajax.responseText;
+            if( salida != '' )
+            {
+                if(salida)
+                {
+                    $('#formularioFirmador').submit();
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                $("#mensajeError").show();
+                $("#mensajeError").html("Ha habido un error, intente mas tarde.");
+            }
+        }
+    }
+}
+$("#vista_previa").click(function()
+{
+    //MostrarCargando();
+    var url = "Documentos_aprobar4_ajax.php?idDocumento=" + $('#idDocumento').val(); //Descargar Documento
+    // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+    if( window.XMLHttpRequest )
+       ajax = new XMLHttpRequest(); // No Internet Explorer
+    else
+       ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+    // Almacenamos en el control al funcion que se invocara cuando la peticion
+    ajax.onreadystatechange = funcionCallback_descargarDoc;
+    // Enviamos la peticion
+    ajax.open( "GET", url, false);
+    ajax.send( "" );
+});
+//Callback de Vista previa
+function funcionCallback_descargarDoc()
+{
+    OcultarCargando();
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+        if( ajax.status == 200 )
+        {
+            // Escribimos el resultado en la pagina HTML mediante DHTML
+            salida = ajax.responseText;
+            if(salida)
+            {
+                var ruta = salida;
+                $("#viewer").attr("src",ruta);
+                $("#num").html('Documento : ' + $('#idDocumento').val());
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+}
+$('#ENVIARFORMULARIO').on('click', function(){
+    if (validar())
+    {
+        MostrarCargando();
+        var parametros = $('#formulario').serialize();
+        //Produccion var url = "EnvioFormulario_ajax.php?idPlantilla=" + ? + "&idProceso=" + ? + "&empleadoFormularioid=" + $('#empleadoFormularioid').val() + "&" + parametros;
+        //QA var url = "EnvioFormulario_ajax.php?idPlantilla=" + 2112 + "&idProceso=" + 9 + "&empleadoFormularioid=" + $('#empleadoFormularioid').val() + "&" + parametros;
+        //Desarrollo 
+        var url = "EnvioFormulario_ajax.php?idPlantilla=" + <php:texto id="idPlantilla" /> + "&idProceso=" + <php:texto id="idProceso" /> + "&empleadoFormularioid=" + $('#empleadoFormularioid').val() + "&" + parametros;
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+            ajax = new XMLHttpRequest(); // No Internet Explorer
+        else
+            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajax.onreadystatechange = funcionCallback_envioformulario;
+        // Enviamos la peticion
+        ajax.open( "GET", url, true );
+        ajax.send( "" );
+    }
+});
+function funcionCallback_envioformulario()
+{
+    // Comprobamos si la peticion se ha completado (estado 4)
+    //OcultarCargando();
+    if( ajax.readyState == 4 )
+    {
+        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+        if( ajax.status == 200 )
+        {
+            // Escribimos el resultado en la pagina HTML mediante DHTML
+            //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
+            var salida = ajax.responseText;
+            //console.log(salida);
+            if( salida != '' )
+            {
+                var datos = JSON.parse(salida);
+                if (datos.estado)
+                {
+                    $('#idDocumento').val(datos.idDocumento);
+                    //$('#vista_previa').val(datos.idDocumento);
+                    $('#ENVIARFORMULARIO').hide();
+                    $('#vista_previa').show();
+                    $('#vista_previa').click();
+                }
+                else
+                {
+                    //alert(123);
+                    $("#mensajeError").show();
+                    $("#mensajeError").html(datos.mensaje);
+                }
+            }
+            else
+            {
+                $("#mensajeError").show();
+                $("#mensajeError").html("Ha habido un error, intente mas tarde.");
+            }
+        }
+    }
+}
+function validar()
+{
+    var respuesta = true;
+    $('#formulario input[type=text]').each(function(index, element)
+    {
+        if (element.name.split('-')[1])
+        {
+            if ($(element).val() == '')
+            {
+                respuesta = false;
+                $(element).focus();
+                $(element).css('background', 'darkred');
+                $(element).css('font-color', 'white');
+            }
+        }
+    });
+    $('#formulario textarea').each(function(index, element)
+    {
+        if (!$(element).prop('disabled'))
+        {
+            if ($(element).val() == '')
+            {
+                respuesta = false;
+                $(element).focus();
+                $(element).css('background', 'darkred');
+                $(element).css('font-color', 'white');
+            }
+        }
+    });
+    $('input:radio').each(function(index, element)
+    {
+        if ($('input:radio[name=' + element.name + ']:checked').val() == undefined)
+        {
+            aux = element.id.split('_');
+            respuesta = false;
+            $(element).focus();
+            $('.' + aux[0]).css('background', 'darkred');
+            $('.' + aux[0]).css('color', 'white');
+       }
+    });
+    $('#formulario select').each(function(index, element)
+    {
+        //console.log(index, element);
+        //if (element.name.split('-')[1])
+        //{
+            if ($(element).val() == '0')
+            {
+                respuesta = false;
+                $(element).focus();
+                $(element).css('background-color', 'darkred');
+                $(element).css('color', 'white');
+            }
+        //}
+    });
+
+    $('#formulario .RUT-VALIDAR').each(function(index, element)
+    {
+        //console.log(validaRut($(element).val()));
+        if(!validaRut($(element).val())){
+            respuesta = false;
+            $(element).focus();
+            $(element).css('background', 'darkred');
+            $(element).css('font-color', 'white');
+            alert('RUT invalido');
+        }
+    });
+
+    $('#formulario .EMAIL-VALIDAR').each(function(index, element)
+    {
+        //console.log(validaRut($(element).val())); validarEmail(email)
+        if(!validarEmail($(element).val())){
+            respuesta = false;
+            $(element).focus();
+            $(element).css('background', 'darkred');
+            $(element).css('font-color', 'white');
+            alert('Email invalido');
+        }
+    });
+
+    $('#formulario .FECHA-VALIDAR').each(function(index, element)
+    {
+        //console.log(validaRut($(element).val())); validarEmail(email)
+        if(!validarFecha2($(element).val())){
+            respuesta = false;
+            $(element).focus();
+            $(element).css('background', 'darkred');
+            $(element).css('font-color', 'white');
+            alert('Fecha invalida');
+        }
+    });
+    return respuesta;
+}
+function pinta(element)
+{
+    $(element).css('background', 'white');
+    $(element).css('font-color', 'grey');
+    $(element).css('color', 'black');
+}
+function controlCheck(elemento)
+{
+    var aux = elemento.id.split('_');
+    pinta($('.' + aux[0]));
+    // Para tipo pregunta 1
+    try
+    {
+        if ($(elemento).val() == 'si')
+        {
+            $('#' + aux[0] + '_texto').attr('disabled', false);
+            if ($('#' + aux[0] + '_etiqueta').html().indexOf('(*)') == -1)
+            {
+                $('#' + aux[0] + '_etiqueta').html($('#' + aux[0] + '_etiqueta').html() + ' (*)');
+            }
+            $('#' + aux[0] + '_show').show();
+        }
+        else
+        {
+            $('#' + aux[0] + '_texto').attr('disabled', true);
+            $('#' + aux[0] + '_etiqueta').html($('#' + aux[0] + '_etiqueta').html().replace(' (*)', ''));
+            $('#' + aux[0] + '_show').hide();
+        }
+    }
+    catch(e){}
+    // Para tipo pregunta 2
+    try
+    {
+        if ($(elemento).val() == 'si')
+        {
+            $('#' + aux[0] + '_MAS').attr('disabled', false);
+            $('#' + aux[0] + '_MENOS').attr('disabled', false);
+            $('#' + aux[0] + '_show').show();
+        }
+        else
+        {
+            $('#' + aux[0] + '_MAS').attr('disabled', true);
+            $('#' + aux[0] + '_MENOS').attr('disabled', true);
+            $('#' + aux[0] + '_show').hide();
+        }
+    }
+    catch(e){}
+}
+
+var indice = 0;
+function limpiar(elemento, origen)
+{
+    for (i = indice; i > 0; i--)
+    {
+        menos(elemento, origen);
+    }
+}
+function mas(elemento, origen)
+{
+    if ((origen == 'check' && indice == 0) || origen == 'button' && indice >= 0)
+    {
+        var aux = elemento.id.split('_');
+        var html = '';
+        html += '<div class="row" id="fila_' + indice + '">';
+        html += '   <li>';
+        html += '       <div class="col-md-4">';
+        html += '           <label for="contenedorid" >Nombre (*)</label>';
+        html += '           <div class="input-group col-xs-12">';
+        html += '               <input type="text" class="form-control" name="' + aux[0] + '_columna1-R[]" placeholder="Nombre" maxlength="110" value="<php:item id="' + aux[0] + '_nombre" />"  onkeyup="pinta(this)">';
+        html += '           </div>';
+        html += '       </div>';
+        html += '       <div class="col-md-4">';
+        html += '           <label for="contenedorid" >Parentesco (*)</label>';
+        html += '           <div class="input-group col-xs-12">';
+        html += '               <input type="text" class="form-control" name="' + aux[0] + '_columna2-R[]" placeholder="Parentesco" maxlength="50" value="<php:item id="' + aux[0] + '_parentesco" />"  onkeyup="pinta(this)">';
+        html += '           </div>';
+        html += '       </div>';
+        html += '       <div class="col-md-4">';
+        html += '           <label for="contenedorid" >Entidad / Autoridad politica / Cargo (*)</label>';
+        html += '           <div class="input-group col-xs-12">';
+        html += '               <input type="text" class="form-control" name="' + aux[0] + '_columna3-R[]" placeholder="Entidad / Autoridad politica / Cargo" maxlength="50" value="<php:item id="' + aux[0] + '_entidadAutoridadCargo" />"  onkeyup="pinta(this)">';
+        html += '           </div>';
+        html += '       </div>';
+        html += '   </li>';
+        html += '</div>';
+        $('#' + aux[0] + '_fila').append(html);
+        indice++;
+    }
+}
+function menos(elemento, origen)
+{
+    if ((indice > 1 && origen == 'button') || (origen == 'check'))
+    {
+        var aux = elemento.id.split('_');
+        indice--;
+        $('#fila_' + indice).remove();
+    }
+}
+</script>

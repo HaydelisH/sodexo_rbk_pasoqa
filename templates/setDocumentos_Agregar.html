@@ -1,0 +1,445 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box ">
+            <div class="box-body pad table-responsive">
+                <!--Botones de cabecera
+                <div class="box-header">
+                    <a class="btn btn-default btn_letra_azul" href="setDocumentos_Listado.html"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</a>
+                </div>-->
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <!--Mensajes-->
+                    <div id="mensajeError"><php:texto id="mensajeError" /></div>
+                    <div id="mensajeOK"><php:texto id="mensajeOK" /></div>	
+                    <form name="formulario" class="formulario" id="formulario"  class="form-horizontal" action="setDocumentos.php" method="POST" autocomplete=off enctype="multipart/form-data">
+                        <div class="box-body">
+                            <div class="form-row">
+                                <div class="col-md-6 xs-12">
+                                    <label for="rutEmpresa">Empresa</label>
+                                    <div class="box-body" style="padding-left: 0px;">
+                                        <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                                            <input class="form-control" type="text" name="rutEmpresa" id="rutEmpresa" data-rutempresa="" placeholder="(Seleccione)" disabled>
+                                        </div>
+                                        <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                                            <button class="btn btn-md btn-primary btn-block" type="button" id="btn_centro_costo" data-toggle="modal" data-target="#modal_empresas"><i class="fa fa-search"></i></button>  
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 xs-12">
+                                    <label for="cargoempleado">Cargo</label>
+                                    <div class="box-body" style="padding-left: 0px;">
+                                        <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                                            <input class="form-control" type="text" name="cargoempleado" id="cargoempleado" data-idCargoEmpleado="" placeholder="(Seleccione)" disabled>
+                                        </div>
+                                        <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                                            <button class="btn btn-md btn-primary btn-block" type="button" id="btn_cargoempleado" data-toggle="modal" data-target="#modal_cargoempleado"><i class="fa fa-search"></i></button>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 xs-12">
+                                    <label for="tipomovimiento">Tipo Movimiento</label>
+                                    <div class="box-body" style="padding-left: 0px;">
+                                        <div class="col-md-12 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                                            <select class="form-control" name="tipomovimiento" id="tipomovimiento">
+                                                <option value="">(Seleccione)</option>
+                                                <php:repeticion id="tipoMovimiento">
+                                                    <option value="<php:item id="idTipoMovimiento" />"><php:item id="Descripcion" /></option>
+                                                </php:repeticion>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 xs-12">
+                                    <label for="plantilla">Plantilla</label>
+                                    <div class="box-body" style="padding-left: 0px;">
+                                        <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                                            <input class="form-control" type="text" name="plantilla" id="plantilla" data-idplantilla="" placeholder="(Seleccione)" disabled>
+                                        </div>
+                                        <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                                            <button class="btn btn-md btn-primary btn-block" type="button" id="btn_plantilla" data-toggle="modal" data-target="#modal_plantilla"><i class="fa fa-search"></i></button>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-2 xs-12 pull-right">  
+                                    <button class="btn btn-md btn-success btn-block" type="button" name="accion" id="AGREGAR" value="AGREGAR" style="margin-top: 10px" disabled>Agregar</button>  
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table id="tabla_setDocumentos" class="table table-bordered table-hover" style="text-align: center">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center">Tipo Movimiento</th>
+                                        <th style="text-align: center">Plantilla</th>
+                                        <th style="text-align: center">Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Empresas-->
+<div class="modal fade" id="modal_empresas" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <h4 class="modal-title" id="ejemplo-titulo"> Empresas </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="mensajeError_modal"></div>
+                <table id="tabla_empresa" class="table table-bordered table-hover" style="text-align: center">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center">R.U.T.</th>
+                            <th style="text-align: center">Raz&oacute;n social</th>
+                            <th style="text-align: center">Selecci&oacute;n</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <php:repeticion id="listadoEmpresas">
+                            <tr>
+                                <td><php:item id="RutEmpresa"/></td>
+                                <td><php:item id="RazonSocial"/></td>
+                                <td>
+                                    <button type="button" style="background-color: transparent;" class="btn" name="btn_agregar_empresa" id="btn_agregar_empresa" onclick="javascript:agregarEmpresa('<php:item id="RutEmpresa" />','<php:item id="RazonSocial" />');"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                </td>
+                            </tr>
+                        </php:repeticion>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer" style="margin-top:10px;">
+                <button type="button" class="btn btn-secondary btn-md" id="cerrar_empresa" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Cargo Empleado-->
+<div class="modal fade" id="modal_cargoempleado" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <h4 class="modal-title" id="ejemplo-titulo"> Cargos </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="mensajeError_modal"></div>
+                <table id="tabla_cargoempleado" class="table table-bordered table-hover" style="text-align: center">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center">C&oacute;digo.</th>
+                            <th style="text-align: center">Cargo</th>
+                            <th style="text-align: center">Selecci&oacute;n</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer" style="margin-top:10px;">
+                <button type="button" class="btn btn-secondary btn-md" id="cerrar_cargoempleado" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Plantilla-->
+<div class="modal fade" id="modal_plantilla" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <h4 class="modal-title" id="ejemplo-titulo"> Plantillas </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="mensajeError_modal"></div>
+                <table id="tabla_plantilla" class="table table-bordered table-hover" style="text-align: center">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center">Plantilla</th>
+                            <th style="text-align: center">Selecci&oacute;n</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer" style="margin-top:10px;">
+                <button type="button" class="btn btn-secondary btn-md" id="cerrar_plantilla" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<script>
+    var ajax;
+    var salida;
+    $('#AGREGAR').on('click', function(){
+        var RutEmpresa = $("#rutEmpresa").data('rutempresa');
+        var idCargoEmpleado = $('#cargoempleado').data('idCargoEmpleado');
+        var idplantilla = $('#plantilla').data('idplantilla');
+        var idtipomovimiento = $('#tipomovimiento').val();
+        var url  = "setDocumentos_ajax.php?RutEmpresa=" + RutEmpresa + '&idCargoEmpleado=' + idCargoEmpleado + '&idPlantilla=' + idplantilla + '&idTipoMovimiento=' + idtipomovimiento + '&accion=AGREGAR';
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+            ajax = new XMLHttpRequest(); // No Internet Explorer
+        else
+            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajax.onreadystatechange = funcionCallback_agregar;
+        // Enviamos la peticion
+        ajax.open( "GET", url, true );
+        ajax.send( "" );
+    });
+    function refrescarFormulario()
+    {
+        setDocumentos_listar();
+        $("#plantilla").val('');
+        $('#plantilla').data('idplantilla', '');
+        checkFormulario();
+    }
+    function funcionCallback_agregar()
+    {
+        // Comprobamos si la peticion se ha completado (estado 4)
+        if( ajax.readyState == 4 )
+        {
+            // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+            if( ajax.status == 200 )
+            {
+                refrescarFormulario();
+            }
+        }
+    }
+    function checkFormulario()
+    {
+        if ($("#rutEmpresa").data('rutempresa') != '' && $('#cargoempleado').data('idCargoEmpleado') != '' && $('#plantilla').data('idplantilla') != '' && $('#tipomovimiento').val() != '')
+        {
+            $('#AGREGAR').removeAttr('disabled');
+        }
+        else
+        {
+            $('#AGREGAR').attr('disabled','disabled');
+        }
+    }
+    $('#tipomovimiento').on('change', function(){
+        checkFormulario();
+    });
+    function agregarEmpresa(RutEmpresa, RazonSocial)
+    {
+        $("#rutEmpresa").val(RazonSocial);
+        $("#rutEmpresa").data('rutempresa', RutEmpresa);
+        $("#cargoempleado").val('');
+        $('#cargoempleado').data('idCargoEmpleado', '');
+        $("#plantilla").val('');
+        $('#plantilla').data('idplantilla', '');
+        $("#cerrar_empresa").click();
+        checkFormulario();
+    }
+    function agregarCC(nombrecargoempleado, idCargoEmpleado)
+    {
+        $("#cargoempleado").val(nombrecargoempleado);
+        $('#cargoempleado').data('idCargoEmpleado', idCargoEmpleado);
+        $("#cerrar_cargoempleado").click();
+        setDocumentos_listar();
+        checkFormulario();
+    }
+    function agregarPlantilla(idPlantilla, Descripcion_Pl)
+    {
+        $("#plantilla").val(Descripcion_Pl);
+        $('#plantilla').data('idplantilla', idPlantilla);
+        $("#cerrar_plantilla").click();
+        checkFormulario();
+    }
+    function setDocumentos_listar()
+    {
+        var RutEmpresa = $("#rutEmpresa").data('rutempresa');
+        var idCargoEmpleado = $("#cargoempleado").data('idCargoEmpleado');
+        $(".fila_setDocumentos").remove();
+        var url  = "setDocumentos_ajax.php?RutEmpresa=" + RutEmpresa + "&idCargoEmpleado=" +idCargoEmpleado + "&accion=LISTAR";
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+            ajax = new XMLHttpRequest(); // No Internet Explorer
+        else
+            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajax.onreadystatechange = funcionCallback_setDocumentos_listar;
+        // Enviamos la peticion
+        ajax.open( "GET", url, true );
+        ajax.send( "" );
+    }
+    function funcionCallback_setDocumentos_listar()
+    {
+        // Comprobamos si la peticion se ha completado (estado 4)
+        if( ajax.readyState == 4 )
+        {
+            // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+            if( ajax.status == 200 )
+            {
+                // Escribimos el resultado en la pagina HTML mediante DHTML
+                salida = ajax.responseText;
+                listado = JSON.parse(salida); 
+                num = listado.length;
+                if( num > 0 ){
+                    $.each(listado, function( index, value ) {
+                        $('#tabla_setDocumentos tr:last').after('<tr class="fila_setDocumentos"><td>' + listado[index].nombreTipoMovimento + '</td><td>' + listado[index].nombrePlantilla + ' </td><td ><button type="button" style="background-color: transparent;" class="btn btn-default btn-sm" name="btn_eliminar_setDocumentos" onclick="javascript:eliminarSetDocumentos(\'' + listado[index].idTipoMovimiento + '\', \'' + listado[index].RutEmpresa + '\', \'' + listado[index].idCargoEmpleado + '\', \'' + listado[index].idPlantilla + '\');">Eliminar</button></td></tr>');
+                    });
+                }else{
+                    $('#tabla_setDocumentos tr:last').after('<tr class="fila_setDocumentos"><td colspan=3 >No existen datos para la empresa y cargo seleccionado </td></tr>');
+                }
+            }
+        }
+    }
+    function eliminarSetDocumentos(idTipoMovimiento, RutEmpresa, idCargoEmpleado,idPlantilla)
+    {
+        var url  = "setDocumentos_ajax.php?RutEmpresa=" + RutEmpresa + "&idCargoEmpleado=" +idCargoEmpleado + "&idTipoMovimiento=" + idTipoMovimiento + "&idPlantilla=" + idPlantilla + "&accion=ELIMINAR";
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+            ajax = new XMLHttpRequest(); // No Internet Explorer
+        else
+            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajax.onreadystatechange = funcionCallback_eliminarSetDocumentos;
+        // Enviamos la peticion
+        ajax.open( "GET", url, true );
+        ajax.send( "" );
+    }
+    function funcionCallback_eliminarSetDocumentos()
+    {
+        // Comprobamos si la peticion se ha completado (estado 4)
+        if( ajax.readyState == 4 )
+        {
+            // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+            if( ajax.status == 200 )
+            {
+                refrescarFormulario();
+            }
+        }
+    }
+    //Modal de Cargos empreados
+    $("#btn_cargoempleado").click(function(){
+        var RutEmpresa = $("#rutEmpresa").data('rutempresa');
+        $(".fila_cc").remove();
+        if( RutEmpresa == "" ){
+            $("#mensajeError").addClass("callout callout-warning");
+            $("#mensajeError").html("Debe seleccionar la Empresa");
+            return false;
+        }
+        $("#mensajeError").html("");
+        $("#mensajeError").removeClass("callout callout-warning");
+        var url  = "cargoEmpleadoListar_ajax.php?RutEmpresa=" + RutEmpresa;
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+            ajax = new XMLHttpRequest(); // No Internet Explorer
+        else
+            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajax.onreadystatechange = funcionCallback_cargoempleado;
+        // Enviamos la peticion
+        ajax.open( "GET", url, true );
+        ajax.send( "" );
+    });
+    function funcionCallback_cargoempleado()
+    {
+        // Comprobamos si la peticion se ha completado (estado 4)
+        if( ajax.readyState == 4 )
+        {
+            // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+            if( ajax.status == 200 )
+            {
+                // Escribimos el resultado en la pagina HTML mediante DHTML
+                salida = ajax.responseText;
+                listado = JSON.parse(salida); 
+                num = listado.length;
+                if( num > 0 ){
+                    $.each(listado, function( index, value ) {
+                        $('#tabla_cargoempleado tr:last').after('<tr class="fila_cc"><td>' + listado[index].idCargoEmpleado + '</td><td><div id="' + listado[index].idCargoEmpleado + '">' + listado[index].nombrecargoempleado + ' </div></td><td ><button type="button" style="background-color: transparent;" class="btn" name="btn_agregar_cc" id="btn_agregar_cc" onclick="javascript:agregarCC(\'' + listado[index].nombrecargoempleado + '\', \'' + listado[index].idCargoEmpleado + '\');"><i class="fa fa-plus" aria-hidden="true"></i></button></td></tr>');
+                    });
+                }else{
+                    $('#tabla_cargoempleado tr:last').after('<tr class="fila_cc"><td colspan=3 >No existen cargos para la Empresa seleccionada</td></tr>');
+                }
+            }
+        }
+    }
+    //Modal de plantillas
+    $("#btn_plantilla").click(function(){
+        var cargoempleado = $('#cargoempleado').data('idCargoEmpleado');
+        var idtipomovimiento = $('#tipomovimiento').val();
+        var RutEmpresa = $("#rutEmpresa").data('rutempresa');
+        
+        $(".fila_plantilla").remove();
+        if (RutEmpresa == "" || RutEmpresa == undefined)
+        {
+            $("#mensajeError").addClass("callout callout-warning");
+            $("#mensajeError").html("Debe seleccionar empresa");
+            return false;
+        }
+        else if( cargoempleado == "" || cargoempleado == undefined){
+            $("#mensajeError").addClass("callout callout-warning");
+            $("#mensajeError").html("Debe seleccionar cargo");
+            return false;
+        }
+        else if (idtipomovimiento == '')
+        {
+            $("#mensajeError").addClass("callout callout-warning");
+            $("#mensajeError").html("Debe seleccionar tipo de movimiento");
+            return false;
+        }
+        $("#mensajeError").html("");
+        $("#mensajeError").removeClass("callout callout-warning");
+        var url  = "plantillasListar_ajax.php?RutEmpresa=" + RutEmpresa + "&idCargoEmpleado=" + cargoempleado + "&idtipomovimiento=" + idtipomovimiento;
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+            ajax = new XMLHttpRequest(); // No Internet Explorer
+        else
+            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajax.onreadystatechange = funcionCallback_plantilla;
+        // Enviamos la peticion
+        ajax.open( "GET", url, true );
+        ajax.send( "" );
+    });
+    
+    function funcionCallback_plantilla()
+    {
+        // Comprobamos si la peticion se ha completado (estado 4)
+        if( ajax.readyState == 4 )
+        {
+            // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+            if( ajax.status == 200 )
+            {
+                // Escribimos el resultado en la pagina HTML mediante DHTML
+                salida = ajax.responseText;
+                listado = JSON.parse(salida); 
+                num = listado.length;
+                if( num > 0 ){
+                    $.each(listado, function( index, value ) {
+                        $('#tabla_plantilla tr:last').after('<tr class="fila_plantilla"><td>' + listado[index].Descripcion_Pl + '</td><td ><button type="button" style="background-color: transparent;" class="btn" name="btn_agregar_plantilla" id="btn_agregar_plantilla" onclick="javascript:agregarPlantilla(\'' + listado[index].idPlantilla + '\', \'' + listado[index].Descripcion_Pl + '\');"><i class="fa fa-plus" aria-hidden="true"></i></button></td></tr>');
+                    });
+                }else{
+                    $('#tabla_plantilla tr:last').after('<tr class="fila_plantilla"><td colspan=3 >No existen plantillas para la Empresa, cargo y tipo de movimiento seleccionado</td></tr>');
+                }
+            }
+        }
+    }
+</script>

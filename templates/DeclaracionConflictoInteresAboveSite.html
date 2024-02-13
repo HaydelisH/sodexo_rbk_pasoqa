@@ -1,0 +1,548 @@
+<style type="text/css">
+    hr{
+        margin-top:10px;
+        margin-bottom:10px;
+        height:1px;
+        width:100%;
+        border-top:1px solid gray;
+    }
+</style>
+<div class="noacceso" style="display:<php:texto id="noacceso" />;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box" style="background-color:#dd4b39; color:#ffffff">
+                <div class="box-body pad table-responsive">
+                    <!--Botones de cabecera>
+                    <div class="box-header">
+                        <a class="btn btn-default btn_letra_azul" href="DeclaracionConflictoInteres.php"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</a>
+                    </div-->
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <!--Mensajes-->
+                        <div id="mensajeError2"><php:texto id="mensajeError" /></div>
+                        <div id="mensajeOK2"><php:texto id="mensajeOK" /></div>	
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="acceso" style="display:<php:texto id="acceso" />;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-body pad table-responsive">
+                    <!--Botones de cabecera>
+                    <div class="box-header">
+                        <a class="btn btn-default btn_letra_azul" href="DeclaracionConflictoInteres.php"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</a>
+                    </div-->
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <!--Mensajes-->
+                        <div id="mensajeError" class="callout caluot-danger" style="display:none; background-color:#dd4b39; color:#ffffff"><php:texto id="mensajeError" /></div>
+                        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>	
+                    </div>
+                    <div class="box-body">
+                        <input type="hidden" class="form-control" id="empleadoFormularioid" value="<php:texto id="empleadoFormularioid" />" >
+                        <form name="formulario" class="formulario" id="formulario"  class="form-horizontal" action="DeclaracionConflictoInteresAboveSite.php" method="POST" autocomplete=off>
+                            <php:repeticion id="formulario">
+                            <div class="box-body">
+                                <div class="form-row esteFormulario" style="display:<php:texto id="esteFormulario" />;">
+                                    <div class="col-md-12">
+                                        <label style="float:right;"> (*) Campos obligatorios </label>
+                                    </div>
+                                </div>
+                                <!--div class="form-row esteFormulario" style="display:<php:texto id="esteFormulario" />;">
+                                    <div class="col-md-12">
+                                        <label for="tituloCargo" >Titulo / cargo (*)</label>
+                                        <div class="input-group col-xs-12">
+                                            <input type="text" class="form-control" name="tituloCargo-R" placeholder="Titulo / cargo" maxlength="110" onkeyup="pinta(this)" value="<php:item id="tituloCargo" />" >
+                                        </div>
+                                    </div>
+                                </div-->
+                                <!--div class="form-row esteFormulario" style="display:<php:texto id="esteFormulario" />;">
+                                    <div class="col-auto">&nbsp;</div>
+                                    <div class="col"><hr /></div>
+                                </div-->
+                                <div class="form-row esteFormulario" style="display:<php:texto id="esteFormulario" />;">
+                                    <h3><p style="text-align:center"><strong>ANEXO DE CONTRATO DE TRABAJO</strong></p></h3>
+                                    <h4><p style="text-align:center"><strong>Pol&iacute;tica de Conflicto de Inter&eacute;s, Pol&iacute;tica sobre obsequios, regalos, favores, invitaciones, donaciones, patrocinios y auspicios, C&oacute;digo de &Eacute;tica SODEXO</strong></p></h4>
+                                    <br />
+                                    <p>En <php:texto id="DATOS_CiudadFirma" />, a <php:texto id="DATOS_FechaDocumento" />, entre <php:texto id="EMPRESA_RazonSocial" />, sociedad comercial, rol &uacute;nico tributario N&deg; <php:texto id="EMPRESA_RutEmpresa" />, representada por don <php:texto id="REPRESENTANTE_Nombre" />, ambos domiciliados en <php:texto id="EMPRESA_Direccion" />, comuna de <php:texto id="EMPRESA_Comuna" />; en adelante, por su raz&oacute;n social o el 'empleador'; y, don <php:texto id="EMPLEADO_NombreTrabajador" />, c&eacute;dula de identidad N&deg; <php:texto id="EMPLEADO_RutTrabajador" /> en adelante, el 'trabajador', se ha convenido en el siguiente anexo de contrato de trabajo, que viene a regular las condiciones de la Pol&iacute;tica de Conflicto de Inter&eacute;s de Sodexo..</p>
+                                    <p>Las partes con fecha <php:texto id="DATOS_FechaIngreso" /> han suscrito un contrato de trabajo que regula la relaci&oacute;n laboral entre ellas. As&iacute; mismo se indica que el trabajador actualmente desarrolla funciones asociadas al cargo de <php:texto id="DATOS_Cargo" />.</p>
+                                    <p>El trabajador/a declara tomar conocimiento y aceptar la pol&iacute;tica sobre obsequios, regalos, favores, invitaciones, donaciones, patrocinios y auspicios como asimismo del C&oacute;digo de &Eacute;tica que la Compa&ntilde;&iacute;a disponga, en funci&oacute;n de lineamientos entregados por el Grupo y sus actualizaciones futuras.</p>
+                                    <p>Describa a continuaci&oacute;n cualquier relaci&oacute;n, transacci&oacute;n, posici&oacute;n que detenta o cualquier otra circunstancia que usted considera podr&iacute;a dar lugar a un conflicto de inter&eacute;s en el marco de sus funciones en <php:texto id="EMPRESA_RazonSocial" /> (seleccione una alternativa):</p>
+                                    <br />
+                                    <!--ol  type="1">
+                                        <hr />
+                                        <li>&#191;Tiene <b>usted o alguno de sus familiares directos</b> alguna relaci&oacute;n personal, comercial, econ&oacute;mica o de direcci&oacute;n, directa o indirectamente, con un cliente, competidor, proveedor, consultor o asesor de la empresa donde usted labora o en Mel&oacute;n y sus subsidiar&iacute;as?</li-->
+                                        <div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs1" id="querySiNoObs1_NO" value="no">
+                                                <label class="form-check-label querySiNoObs1" for="querySiNoObs1">No tengo ning&uacute;n conflicto de inter&eacute;s que reportar a la fecha</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" onclick="javascript: controlCheck(this);" name="querySiNoObs1" id="querySiNoObs1_SI" value="si">
+                                                <label class="form-check-label querySiNoObs1" for="querySiNoObs1">Reporto la existencia de las siguientes situaciones y/o relaciones que pueden dar lugar a un conflicto de inter&eacute;s en el marco de mis funciones en SODEXO</label>
+                                            </div>
+                                            <br />
+                                            <div id="querySiNoObs1_show" style="display:none;">
+                                                <!--p></p>
+                                                <ol  type="a">
+                                                    <li>Si el v&iacute;nculo guarda relaci&oacute;n con una participaci&oacute;n en el cliente, competidor o proveedor, describa la naturaleza y la cantidad de la misma, desde cu&aacute;ndo se mantiene la participaci&oacute;n y cualquier otra informaci&oacute;n pertinente que considere relevante.</li>
+                                                    <li>Si el v&iacute;nculo est&aacute; relacionado con una funci&oacute;n ejercida en la otra entidad como cliente, competidor, proveedor, asesor o consultor tal como Director en dicha empresa, describa la naturaleza de la misma, desde cu&aacute;ndo se ejerce esa funci&oacute;n y cualquier otra informaci&oacute;n pertinente que considere relevante.</li>
+                                                </ol-->
+                                                <label id="querySiNoObs1_etiqueta" for="contenedorid">Describa el conflicto de inter&eacute;s existente:</label>
+                                                <div class="input-group col-xs-12">
+                                                    <textarea class="form-control" id="querySiNoObs1_texto" name="querySiNoObs1_texto-R" rows="2" placeholder="Escriba y explique" value="<php:item id="querySiNoObs1_texto" />" disabled  onkeyup="pinta(this)"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--hr />
+                                    </ol>
+                                    <p><em>Confirmo que he le&iacute;do y entendido y que cumplo con el C&oacute;digo de Conducta y &Eacute;tica. Declaro que la informaci&oacute;n que revelo en este Formulario de Declaraci&oacute;n de Conflicto de Inter&eacute;s es verdadera, correcta y completa. Me comprometo a actualizar la informaci&oacute;n contenida en este formulario anualmente y en caso de que se produjese cualquier cambio material.</em></p-->
+                                </div>
+                                <!--class="esteFormulario" style="display:<php:texto id="esteFormulario" />;" hr /-->
+                                <div class="form-row">
+                                    <div class="col-md-2 xs-12 pull-left">  
+                                        <button style="display:none" class="btn btn-info btn-md btn-block" name="accion" id="vista_previa" value="" type="button" data-toggle="modal" data-target="#modal_vp" >Ver Documento</button>  
+                                    </div>
+                                    <div class="col-md-2 xs-12 pull-right esteFormulario" style="display:<php:texto id="esteFormulario" />;">  
+                                        <button class="btn btn-md btn-success btn-block" type="button" name="accion" id="ENVIARFORMULARIO" value="ENVIARFORMULARIO" style="margin-top: 10px;">Enviar formulario</button>  
+                                    </div>
+                                </div>
+                            </div>
+                            </php:repeticion>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form name="formularioFirmador" class="formularioFirmador" id="formularioFirmador"  class="form-horizontal" action="Documentos_Pendientes.php" method="POST" autocomplete=off>
+        <input type="hidden" id="idDocumento" name="idDocumento" value="" />
+        <input type="hidden" name="accion" value="INICIOFIRMA" />
+    </from>
+    <!-- Modal para Vista previa-->
+    <div class="modal fade bd-example-modal-lg" id="modal_vp" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" >
+            <div class="modal-content">
+                <div class="modal-header" align="center">
+                    <h4 class="modal-title" id="ejemplo-titulo"> Vista Previa de Documento <h3 id="num"></h3></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="row">
+                        <div class="col-md-2 xs-12 pull-left" style="display:<php:texto id="muestraBotonesGestion" />;">  
+                            <button type="button" class="btn btn-md btn-primary btn-block" id="eliminar" data-dismiss="modal">Eliminar</button>
+                        </div>
+                        <div class="col-md-2 xs-12 pull-right">  
+                            <button type="button" class="btn btn-md btn-success btn-block" id="aprobar" data-dismiss="modal">Aprobar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div id="mensajeError_modal"></div>
+                    <div style="clear:both">
+                        <iframe id="viewer" width="100%" height="500px"></iframe>
+                    </div>
+                </div>
+                <div class="modal-footer" style="margin-top:10px;">
+                    <div class="row">
+                        <div class="col-md-2 xs-12 pull-right">  
+                            <button type="button" class="btn btn-secondary btn-md btn-block" id="cerrar" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<script>
+$(document).ready(function(){
+    <php:texto id="clickAutomatico" />
+});
+
+var ajax;
+$('#eliminar').click(function(){
+    var url = "EliminarFormulario_ajax.php?idDocumento=" + $("#idDocumento").val() + "&empleadoFormularioid=" + $('#empleadoFormularioid').val();
+    // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+    if( window.XMLHttpRequest )
+        ajax = new XMLHttpRequest(); // No Internet Explorer
+    else
+        ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+    // Almacenamos en el control al funcion que se invocara cuando la peticion
+    ajax.onreadystatechange = funcionCallback_rechazar;
+    // Enviamos la peticion
+    ajax.open( "GET", url, false);
+    ajax.send( "" );
+});
+function funcionCallback_rechazar()
+{
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+        if( ajax.status == 200 )
+        {
+            // Escribimos el resultado en la pagina HTML mediante DHTML
+            salida = ajax.responseText;
+            if( salida != '' )
+            {
+                if(salida)
+                {
+                    $('.esteFormulario').show();
+                    $('#ENVIARFORMULARIO').show();
+                    $('#vista_previa').hide();
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                $("#mensajeError").show();
+                $("#mensajeError").html("Ha habido un error, intente mas tarde.");
+            }
+        }
+    }
+}
+$('#aprobar').click(function(){
+    MostrarCargando();
+    var url = "Documentos_aprobar2_ajax.php?idDocumento=" + $('#idDocumento').val();// + "&empleadoFormularioid=" + $('#empleadoFormularioid').val();
+    // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+    if( window.XMLHttpRequest )
+        ajax = new XMLHttpRequest(); // No Internet Explorer
+    else
+        ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+    // Almacenamos en el control al funcion que se invocara cuando la peticion
+    ajax.onreadystatechange = funcionCallback_aprobar;
+    // Enviamos la peticion
+    ajax.open( "GET", url, false);
+    ajax.send( "" );
+});
+//Callback de Vista previa
+function funcionCallback_aprobar()
+{
+    OcultarCargando();
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+        if( ajax.status == 200 )
+        {
+            // Escribimos el resultado en la pagina HTML mediante DHTML
+            salida = ajax.responseText;
+            if( salida != '' )
+            {
+                if(salida)
+                {
+                    $('#formularioFirmador').submit();
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                $("#mensajeError").show();
+                $("#mensajeError").html("Ha habido un error, intente mas tarde.");
+            }
+        }
+    }
+}
+$("#vista_previa").click(function()
+{
+    //MostrarCargando();
+    var url = "Documentos_aprobar4_ajax.php?idDocumento=" + $('#idDocumento').val(); //Descargar Documento
+    // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+    if( window.XMLHttpRequest )
+       ajax = new XMLHttpRequest(); // No Internet Explorer
+    else
+       ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+    // Almacenamos en el control al funcion que se invocara cuando la peticion
+    ajax.onreadystatechange = funcionCallback_descargarDoc;
+    // Enviamos la peticion
+    ajax.open( "GET", url, false);
+    ajax.send( "" );
+});
+//Callback de Vista previa
+function funcionCallback_descargarDoc()
+{
+    OcultarCargando();
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+        if( ajax.status == 200 )
+        {
+            // Escribimos el resultado en la pagina HTML mediante DHTML
+            salida = ajax.responseText;
+            if(salida)
+            {
+                var ruta = salida;
+                $("#viewer").attr("src",ruta);
+                $("#num").html('Documento : ' + $('#idDocumento').val());
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+}
+$('#ENVIARFORMULARIO').on('click', function(){
+    if (validar())
+    {
+        MostrarCargando();
+        var parametros = $('#formulario').serialize();
+        //Produccion var url = "EnvioFormulario_ajax.php?idPlantilla=" + ? + "&idProceso=" + ? + "&empleadoFormularioid=" + $('#empleadoFormularioid').val() + "&" + parametros;
+        //QA var url = "EnvioFormulario_ajax.php?idPlantilla=" + 2112 + "&idProceso=" + 9 + "&empleadoFormularioid=" + $('#empleadoFormularioid').val() + "&" + parametros;
+        //Desarrollo 
+        var url = "EnvioFormulario_ajax.php?idPlantilla=" + <php:texto id="idPlantilla" /> + "&idProceso=" + <php:texto id="idProceso" /> + "&empleadoFormularioid=" + $('#empleadoFormularioid').val() + "&" + parametros;
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+            ajax = new XMLHttpRequest(); // No Internet Explorer
+        else
+            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajax.onreadystatechange = funcionCallback_envioformulario;
+        // Enviamos la peticion
+        ajax.open( "GET", url, true );
+        ajax.send( "" );
+    }
+});
+function funcionCallback_envioformulario()
+{
+    // Comprobamos si la peticion se ha completado (estado 4)
+    //OcultarCargando();
+    if( ajax.readyState == 4 )
+    {
+        // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+        if( ajax.status == 200 )
+        {
+            // Escribimos el resultado en la pagina HTML mediante DHTML
+            //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
+            var salida = ajax.responseText;
+            //console.log(salida);
+            if( salida != '' )
+            {
+                var datos = JSON.parse(salida);
+                if (datos.estado)
+                {
+                    $('#idDocumento').val(datos.idDocumento);
+                    //$('#vista_previa').val(datos.idDocumento);
+                    $('#ENVIARFORMULARIO').hide();
+                    $('#vista_previa').show();
+                    $('#vista_previa').click();
+                }
+                else
+                {
+                    //alert(123);
+                    $("#mensajeError").show();
+                    $("#mensajeError").html(datos.mensaje);
+                }
+            }
+            else
+            {
+                $("#mensajeError").show();
+                $("#mensajeError").html("Ha habido un error, intente mas tarde.");
+            }
+        }
+    }
+}
+function validar()
+{
+    var respuesta = true;
+    $('#formulario input[type=text]').each(function(index, element)
+    {
+        if (element.name.split('-')[1])
+        {
+            if ($(element).val() == '')
+            {
+                respuesta = false;
+                $(element).focus();
+                $(element).css('background', 'darkred');
+                $(element).css('font-color', 'white');
+            }
+        }
+    });
+    $('#formulario textarea').each(function(index, element)
+    {
+        if (!$(element).prop('disabled'))
+        {
+            if ($(element).val() == '')
+            {
+                respuesta = false;
+                $(element).focus();
+                $(element).css('background', 'darkred');
+                $(element).css('font-color', 'white');
+            }
+        }
+    });
+    $('input:radio').each(function(index, element)
+    {
+        if ($('input:radio[name=' + element.name + ']:checked').val() == undefined)
+        {
+            aux = element.id.split('_');
+            respuesta = false;
+            $(element).focus();
+            $('.' + aux[0]).css('background', 'darkred');
+            $('.' + aux[0]).css('color', 'white');
+       }
+    });
+    $('#formulario select').each(function(index, element)
+    {
+        //console.log(index, element);
+        //if (element.name.split('-')[1])
+        //{
+            if ($(element).val() == '0')
+            {
+                respuesta = false;
+                $(element).focus();
+                $(element).css('background-color', 'darkred');
+                $(element).css('color', 'white');
+            }
+        //}
+    });
+
+    $('#formulario .RUT-VALIDAR').each(function(index, element)
+    {
+        //console.log(validaRut($(element).val()));
+        if(!validaRut($(element).val())){
+            respuesta = false;
+            $(element).focus();
+            $(element).css('background', 'darkred');
+            $(element).css('font-color', 'white');
+            alert('RUT invalido');
+        }
+    });
+
+    $('#formulario .EMAIL-VALIDAR').each(function(index, element)
+    {
+        //console.log(validaRut($(element).val())); validarEmail(email)
+        if(!validarEmail($(element).val())){
+            respuesta = false;
+            $(element).focus();
+            $(element).css('background', 'darkred');
+            $(element).css('font-color', 'white');
+            alert('Email invalido');
+        }
+    });
+
+    $('#formulario .FECHA-VALIDAR').each(function(index, element)
+    {
+        //console.log(validaRut($(element).val())); validarEmail(email)
+        if(!validarFecha2($(element).val())){
+            respuesta = false;
+            $(element).focus();
+            $(element).css('background', 'darkred');
+            $(element).css('font-color', 'white');
+            alert('Fecha invalida');
+        }
+    });
+    return respuesta;
+}
+function pinta(element)
+{
+    $(element).css('background', 'white');
+    $(element).css('font-color', 'grey');
+    $(element).css('color', 'black');
+}
+function controlCheck(elemento)
+{
+    var aux = elemento.id.split('_');
+    pinta($('.' + aux[0]));
+    // Para tipo pregunta 1
+    try
+    {
+        if ($(elemento).val() == 'si')
+        {
+            $('#' + aux[0] + '_texto').attr('disabled', false);
+            if ($('#' + aux[0] + '_etiqueta').html().indexOf('(*)') == -1)
+            {
+                $('#' + aux[0] + '_etiqueta').html($('#' + aux[0] + '_etiqueta').html() + ' (*)');
+            }
+            $('#' + aux[0] + '_show').show();
+        }
+        else
+        {
+            $('#' + aux[0] + '_texto').attr('disabled', true);
+            $('#' + aux[0] + '_etiqueta').html($('#' + aux[0] + '_etiqueta').html().replace(' (*)', ''));
+            $('#' + aux[0] + '_show').hide();
+        }
+    }
+    catch(e){}
+    // Para tipo pregunta 2
+    try
+    {
+        if ($(elemento).val() == 'si')
+        {
+            $('#' + aux[0] + '_MAS').attr('disabled', false);
+            $('#' + aux[0] + '_MENOS').attr('disabled', false);
+            $('#' + aux[0] + '_show').show();
+        }
+        else
+        {
+            $('#' + aux[0] + '_MAS').attr('disabled', true);
+            $('#' + aux[0] + '_MENOS').attr('disabled', true);
+            $('#' + aux[0] + '_show').hide();
+        }
+    }
+    catch(e){}
+}
+
+var indice = 0;
+function limpiar(elemento, origen)
+{
+    for (i = indice; i > 0; i--)
+    {
+        menos(elemento, origen);
+    }
+}
+function mas(elemento, origen)
+{
+    if ((origen == 'check' && indice == 0) || origen == 'button' && indice >= 0)
+    {
+        var aux = elemento.id.split('_');
+        var html = '';
+        html += '<div class="row" id="fila_' + indice + '">';
+        html += '   <li>';
+        html += '       <div class="col-md-4">';
+        html += '           <label for="contenedorid" >Nombre (*)</label>';
+        html += '           <div class="input-group col-xs-12">';
+        html += '               <input type="text" class="form-control" name="' + aux[0] + '_columna1-R[]" placeholder="Nombre" maxlength="110" value="<php:item id="' + aux[0] + '_nombre" />"  onkeyup="pinta(this)">';
+        html += '           </div>';
+        html += '       </div>';
+        html += '       <div class="col-md-4">';
+        html += '           <label for="contenedorid" >Parentesco (*)</label>';
+        html += '           <div class="input-group col-xs-12">';
+        html += '               <input type="text" class="form-control" name="' + aux[0] + '_columna2-R[]" placeholder="Parentesco" maxlength="50" value="<php:item id="' + aux[0] + '_parentesco" />"  onkeyup="pinta(this)">';
+        html += '           </div>';
+        html += '       </div>';
+        html += '       <div class="col-md-4">';
+        html += '           <label for="contenedorid" >Entidad / Autoridad politica / Cargo (*)</label>';
+        html += '           <div class="input-group col-xs-12">';
+        html += '               <input type="text" class="form-control" name="' + aux[0] + '_columna3-R[]" placeholder="Entidad / Autoridad politica / Cargo" maxlength="50" value="<php:item id="' + aux[0] + '_entidadAutoridadCargo" />"  onkeyup="pinta(this)">';
+        html += '           </div>';
+        html += '       </div>';
+        html += '   </li>';
+        html += '</div>';
+        $('#' + aux[0] + '_fila').append(html);
+        indice++;
+    }
+}
+function menos(elemento, origen)
+{
+    if ((indice > 1 && origen == 'button') || (origen == 'check'))
+    {
+        var aux = elemento.id.split('_');
+        indice--;
+        $('#fila_' + indice).remove();
+    }
+}
+</script>

@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <!--Botones de cabecera-->
+        <div class="box-header">
+          <a class="btn btn-default btn_letra_azul" onClick="history.back(-1)" ><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
+        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <!--Mensajes-->
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+        <!--Formulario de los datos propios de Categoria-->   
+        <table id="example2" class="table table-bordered table-hover pagin-table">
+          <thead>
+           <tr>
+            <th data-campo="SELECCION" style="text-align: center;">Selecci&oacute;n </th>
+            <th data-campo="RutEmpresa" style="text-align: center;">Rut Empresa</th>
+            <th data-campo="RazonSocial">Razon Social </th>
+          </tr>
+          </thead>
+          <tbody >
+            <php:repeticion id="listado">
+              <tr id="fila_<php:filamenos />">
+                <!--Boton de Agregar-->
+                <td data-campo="BOTON_AGREGAR"> 
+                  <div style="text-align: center">
+                   <form role="form" action="Documentos.php" method="POST" name="formulario" id="formulario">
+                      <input type="hidden" id="RutEmpresa" name="RutEmpresa" value="<php:item id="RutEmpresa"/>"/>
+                      <input type="hidden" id="fecha" name="fecha" value="<php:item id="fecha"/>"/>
+                      <input type="hidden" id="modelo_contrato" name="modelo_contrato" value="<php:item id="modelo_contrato"/>"/>
+                      <input type="hidden" name="accion" value="AGREGAR"/>
+                      <button type="submit" style="background-color: transparent;" class="btn" name="accion2" value="BUSCAR_1"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                  </form>
+                  </div>
+                </td>
+                <!--RutEmpresa-->
+                <td data-campo="RutEmpresa" style="text-align: center;"><php:item id="RutEmpresa"/></div></td>
+                <!--Razon Social-->
+                <td data-campo="RazonSocial"nstyle="text-align: center;"><php:item id="RazonSocial"/></p></td>
+              </tr>
+            </php:repeticion>
+          </tbody>
+        </table> 
+      </div>
+      </div>
+    <!-- /.box -->
+    </div>
+  </div>
+  <!-- /.col -->
+  </div>
+

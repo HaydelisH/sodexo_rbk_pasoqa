@@ -1,0 +1,90 @@
+<style type="text/css">
+    .responsiveContent {
+      position: relative;
+      height: 0;
+      overflow: hidden;
+     padding-bottom: 50.2%;
+      margin-bottom: 20px;
+    }
+    .responsiveContent iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    </style>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box">
+          <div class="box-body pad table-responsive">
+            <!--Botones de cabecera-->
+            <div class="box-header">
+               <php:repeticion id="formulario">
+                  <form role="form" name="formulario3" id="formulario3" action="revisionActor2.php" method="POST">
+                    <input type="hidden" name="idDocumento" value="<php:item id="idDocumento" />" />
+                    <input type="hidden" name="accion" value="DETALLE">
+                    <input type="hidden" name="pagina" value="<php:texto id="pagina" />">
+                    <input type="hidden" name="idDocumento" 			value="<php:item id="idDocumento" />"/>
+                    <input type="hidden" name="idDocumento_filtro" 		value="<php:item id="idDocumento_filtro" />"/>
+                    <input type="hidden" name="RutEmpleado_filtro" 		value="<php:item id="RutEmpleado_filtro" />"/>
+                    <input type="hidden" name="NombreEmpleado_filtro" 	value="<php:item id="NombreEmpleado_filtro" />"/>
+                    <input type="hidden" name="fechaInicio_filtro" 		value="<php:item id="fechaInicio_filtro" />"/>
+                    <input type="hidden" name="fechaFin_filtro"			value="<php:item id="fechaFin_filtro" />"/>
+                    <input type="hidden" name="idEstadoGestion_filtro"  value="<php:item id="idEstadoGestion_filtro" /> "/>
+                    <input type="hidden" name="empleadoFormularioid" 			value="<php:texto id="empleadoFormularioid" />"/>
+                    <input type="hidden" name="RutEmpresa_filtro" 		value="<php:item id="RutEmpresa_filtro" />"/>
+                    <button type="submit" class="btn btn-default" onclick="MostrarCargando();"><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
+                    <!--<a class="btn btn-default" style="color: #3c8dbc;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>-->
+                    <!--input type="hidden" name="nombrex" value="<php:texto id="nombrex" />"-->
+                    <!--input type="hidden" name="RutCreador_filtro" 		value="<php:item id="RutCreador_filtro" />"/-->   
+                    <!--input type="hidden" name="NombreCreador_filtro" 	value="<php:item id="NombreCreador_filtro" />"/-->
+                    <!--input type="hidden" name="idPlantilla_filtro" 		value="<php:item id="idPlantilla_filtro" />"/-->
+                    <!--input type="hidden" name="Descripcion_Pl_filtro" 	value="<php:item id="Descripcion_Pl_filtro"/>"/-->
+                    <!--input type="hidden" name="centrocostoid_filtro" 	value="<php:item id="centrocostoid_filtro"/>"/-->
+                    <!--input type="hidden" name="nombrecentrocosto_filtro" value="<php:item id="nombrecentrocosto_filtro" />"/-->
+                    <!--input type="hidden" name="NombreCasino_filtro" 	value="<php:item id="NombreCasino_filtro" />"/-->
+                    <!--input type="hidden" name="CodCargo_filtro" 		value="<php:item id="CodCargo_filtro" />"/-->
+                    <!--input type="hidden" name="Cargo_filtro" 			value="<php:item id="Cargo_filtro" />"/-->
+                    <!--input type="hidden" name="idEstado_filtro" 		value="<php:item id="idEstado_filtro" />"/-->
+                    <!--input type="hidden" name="idTipoFirma_filtro" 		value="<php:item id="idTipoFirma_filtro" />"/-->
+                    <!--input type="hidden" name="idProceso_filtro" 		value="<php:item id="idProceso_filtro"/>"/-->
+                    <!--input type="hidden" name="Enviado_filtro" 			value="<php:item id="Enviado_filtro" />"/-->
+                  </form>
+            </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <!--Mensajes-->
+            <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+            <div id="mensajeError"><php:texto id="mensajeError" /></div>
+            <!--Datos referenciales-->
+            <div class="form-row">
+              <!--Empresas-->
+            
+        
+             <!--Formulario de datos propios de Clausulas-->
+            <form role="form" name="formulario" id="formulario" action="revisionActor2.php" method="POST">
+            
+                   <div class="row">  
+                    <div class="col-xs-4 col-sm-offset-0 col-xs-offset-0 col-md-2 col-lg-2">
+                            <span >Nro Contrato : <php:item id="idDocumento" /></span>										
+                    </div>					
+                </div>
+                <div class="responsiveContent">
+                    <!--<embed id="imagen" src="<php:item id="ruta" />#toolbar=0" width="100%" height="340">-->
+                    <!--<iframe id="ifrmArch" name="ifrmArch" src="<php:item id="ruta" />" width="100%" height="600px"></iframe>-->
+                    <iframe id="ifrmArch" name="ifrmArch"  width="100%" height="600px" src="<php:item id="ruta" />" ></iframe>
+                </div>
+             
+              </php:repeticion>  
+             
+            </form> 
+    
+          </div>
+        <!-- /.box -->
+        </div>
+      </div>
+      <!-- /.col -->
+      </div>
+      <!--Tomar datos con ajax y reasigna datos de un selec a un input hidden-->
+     

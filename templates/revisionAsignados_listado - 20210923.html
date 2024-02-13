@@ -1,0 +1,559 @@
+<style>
+    .switch-field {
+    display: flex;
+    margin-bottom: 36px;
+    overflow: hidden;
+}
+
+.switch-field input {
+    position: absolute !important;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    width: 1px;
+    border: 0;
+    overflow: hidden;
+}
+
+.switch-field label {
+    background-color: #e4e4e4;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    line-height: 1;
+    text-align: center;
+    padding: 8px 16px;
+    margin-right: -1px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+    transition: all 0.1s ease-in-out;
+}
+
+.switch-field label:hover {
+    cursor: pointer;
+}
+
+.switch-field input:checked + label {
+    background-color: #3c8dbc;
+    box-shadow: none;
+}
+
+.switch-field label:first-of-type {
+    border-radius: 4px 0 0 4px;
+}
+
+.switch-field label:last-of-type {
+    border-radius: 0 4px 4px 0;
+}
+
+/* This is just for CodePen. */
+
+.form {
+    max-width: 600px;
+    font-family: "Lucida Grande", Tahoma, Verdana, sans-serif;
+    font-weight: normal;
+    line-height: 1.625;
+    margin: 8px auto;
+    padding: 16px;
+}
+
+h2 {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+</style>
+<div class="row" >
+    <div class="col-md-12">
+      <div class="box">
+        <div class="box-body pad table-responsive"> 
+          <div class="box-body">
+             <!--Mensajes-->
+            <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+            <div id="mensajeError"><php:texto id="mensajeError" /></div>      
+          </div>
+          <form name="formulario2" id="formulario_usuarios" action="revisionAsignados.php" method="POST" autocomplete="off">
+  
+            <table id="example2" class="table table-bordered table-hover">
+                <div class="col-md-2 xs-12">
+                  <button class="btn btn-md btn-default btn-block ocultar" type="button" style="margin-top: 10px" data-toggle="collapse" href="#collapseExample" role="button" data-parent="#accordion"><a id="a">Ocultar Filtro</a></button>
+                </div>
+            </table>
+                
+                <div id="collapseExample"  class="panel-collapse collapse in">
+                    <div class="col-md-12">
+                        <div class="box">
+                            <div class="box-body pad table-responsive">
+                              <div class="box-header">
+                                  <div class="form-group">
+                               
+                                   <php:repeticion id="formulario">
+                                             
+                                      <!--Numero e Documento>
+                                      <div class="form-row">
+                                          <div class="col-md-3 xs-12">
+                                          <label for="idDocumento">Nro Documento</label>
+                                          <input type="text" class="form-control" id="idDocumento" name="idDocumento_filtro" maxlength="10" value="<php:item id="idDocumento" />" placeholder="Nro Documento" />
+                                          </div>
+                                      </div-->
+                                      
+                                      <!--Rut de creador>
+                                      <div class="form-row" style="display:none">
+                                          <div class="col-md-3 xs-12">
+                                              <label for="RutCreador">Rut del Creador</label>
+                                              <input type="text" class="form-control" id="RutCreador" name="RutCreador" value="<php:item id="RutCreador" />" placeholder="Rut del Creador" />
+                                          </div>
+                                      </div-->
+                                      
+                                      <!--Nombre del creador>
+                                      <div class="form-row" style="display:none">
+                                          <div class="col-md-3 xs-12">
+                                              <label for="NombreCreador">Nombre del Creador</label>
+                                              <input type="text" class="form-control" id="NombreCreador" name="NombreCreador" value="<php:item id="NombreCreador" />" placeholder="Nombre del Creador" />
+                                          </div>
+                                      </div-->
+  
+                                      <!--idPlantilla>
+                                      <div class="form-row">
+                                          <div class="col-md-3 xs-12">
+                                            <label for="idPlantilla">idPlantilla</label>
+                                              <input type="text" class="form-control" id="idPlantilla" name="idPlantilla" value="<php:item id="idPlantilla" />" placeholder="idPlantilla" />
+                                          </div>
+                                      </div-->
+                                      
+                                      <!--Descripcion de la plantila>
+                                      <div class="form-row">
+                                          <div class="col-md-3 xs-12">
+                                            <label for="idPlantilla">Descripcion de Plantilla</label>
+                                              <input type="text" class="form-control" id="Descripcion_Pl" name="Descripcion_Pl" value="<php:item id="Descripcion_Pl" />" placeholder="Descripcion_Pl" />
+                                          </div>
+                                      </div-->
+                                      
+                                      <!--Rut de empresa>
+                                      <div class="form-row">
+                                          <div class="col-md-3 xs-12">
+                                          <label for="RutEmpresa">RutEmpresa</label>	
+                                              <select class="form-control" name="RutEmpresa" id="RutEmpresa" >
+                                                  <option value="">(Seleccione)</option>
+                                                  <php:repeticion id="Empresas">			
+                                                      <option value="<php:item id="RutEmpresa" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEmpresa" /><php:argumento idvalor="RutEmpresa" /></php:funcion>><php:item id="RazonSocial" /></option>
+                                                  </php:repeticion>
+                                              </select>	
+                                          </div>
+                                      </div-->
+                                      
+                                      <!--idCentro de Costo>
+                                      <div class="form-row">
+                                          <div class="col-md-3 xs-12">
+                                            <label for="centrocostoid">idCentroCosto</label>
+                                              <input type="text" class="form-control" id="centrocostoid" name="centrocostoid" value="<php:item id="centrocostoid" />" placeholder="centrocostoid" />
+                                          </div>
+                                      </div-->
+                                      
+                                      <!--Nombre del centro de costo>
+                                      <div class="form-row" style="display:none">
+                                          <div class="col-md-3 xs-12">
+                                            <label for="nombrecentrocosto">Nombre del centro de costo</label>
+                                              <input type="text" class="form-control" id="nombrecentrocosto" name="nombrecentrocosto" value="<php:item id="nombrecentrocosto" />" placeholder="Nombre del centro de costo" />
+                                          </div>
+                                      </div-->
+                                      
+                                      <!--Nombre del casino>
+                                      <div class="form-row" style="display:none">
+                                          <div class="col-md-3 xs-12">
+                                            <label for="nombrecentrocosto">Nombre de Casino</label>
+                                              <input type="text" class="form-control" id="NombreCasino" name="NombreCasino" value="<php:item id="NombreCasino" />" placeholder="Nombre de Casino" />
+                                          </div>
+                                      </div-->
+                                      
+                                      <!--Codigo de cargo>
+                                      <div class="form-row" style="display:none">
+                                          <div class="col-md-3 xs-12">
+                                            <label for="CodCargo">CodCargo</label>
+                                              <input type="text" class="form-control" id="CodCargo" name="CodCargo" value="<php:item id="CodCargo" />" placeholder="CodCargo" />
+                                          </div>
+                                      </div-->
+                                      
+                                      <!--Cargo>
+                                      <div class="form-row" >
+                                          <div class="col-md-3 xs-12">
+                                            <label for="nombrecentrocosto">Cargo</label>
+                                              <input type="text" class="form-control" id="Cargo" name="Cargo" value="<php:item id="Cargo" />" placeholder="Cargo" />
+                                          </div>
+                                      </div-->
+  
+                                      <!--Proceso>
+                                      <div class="form-row" style="display:none">
+                                          <div class="col-md-3 xs-12">
+                                              <label for="Nombre">Proceso</label>	
+                                              <select class="form-control" name="idProceso" id="idProceso" >
+                                                  <option value="0">(Seleccione)</option>
+                                                  <php:repeticion id="Procesos">						
+                                                      <option value="<php:item id="idProceso" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idProceso" /><php:argumento idvalor="idProceso" /></php:funcion>><php:item id="Descripcion" /></option>
+                                                  </php:repeticion>
+                                              </select>	
+                                          </div>
+                                      </div-->
+                                                                          
+                                      <!--Rut del empleado-->
+                                      <div class="form-row">
+                                          <div class="col-md-3 xs-12">
+                                            <label for="RutEmpleado">RutEmpleado</label>
+                                              <input type="text" class="form-control" id="RutEmpleado" name="RutEmpleado" value="<php:item id="RutEmpleado" />" placeholder="RutEmpleado" />
+                                          </div>
+                                      </div>
+                                      
+                                      <!--Nombre del empleado-->
+                                      <div class="form-row">
+                                          <div class="col-md-3 xs-12">
+                                            <label for="NombreEmpleado">Nombre del Empleado</label>
+                                              <input type="text" class="form-control" id="NombreEmpleado" name="NombreEmpleado" value="<php:item id="NombreEmpleado" />" placeholder="Nombre del Empleado" />
+                                          </div>
+                                      </div>
+                                      
+                                      <!--Enviado>
+                                      <div class="form-row" style="display:none">
+                                          <div class="col-md-3 xs-12">
+                                          <label for="Enviado">Enviado</label>	
+                                              <select class="form-control" name="Enviado" id="Enviado" >
+                                                  <option value="-1">(Seleccione)</option>
+                                                  <php:repeticion id="Enviados">			
+                                                      <option value="<php:item id="idEnviado" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idEnviado" /><php:argumento idvalor="idEnviado" /></php:funcion>><php:item id="Descripcion" /></option>
+                                                  </php:repeticion>
+                                              </select>	
+                                          </div>
+                                      </div-->
+                                                                          
+                                      <!--Estado de firma de Documento-->
+                                      <div class="form-row">
+                                          <div class="col-md-3 xs-12">
+                                          <label for="Nombre">Estados de Gesti&oacute;n</label>	
+                                              <select class="form-control" name="idEstadoGestion" id="idEstadoGestion" >
+                                                  <option value="0">(Seleccione)</option>
+                                                  <php:repeticion id="EstadosGestion">			
+                                                      <option value="<php:item id="idEstadoGestion" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idEstadoGestion" /><php:argumento idvalor="idEstadoGestion" /></php:funcion>><php:item id="Descripcion" /></option>
+                                                  </php:repeticion>
+                                              </select>	
+                                          </div>
+                                      </div>
+                                      
+                                      <!--Estado de firma de Documento>
+                                      <div class="form-row">
+                                          <div class="col-md-3 xs-12">
+                                          <label for="Nombre">Estado Documento</label>	
+                                              <select class="form-control" name="idEstado" id="idEstado" >
+                                                  <option value="0">(Seleccione)</option>
+                                                  <php:repeticion id="estadocontratos">			
+                                                      <option value="<php:item id="idEstado" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idEstado" /><php:argumento idvalor="idEstado" /></php:funcion>><php:item id="Descripcion" /></option>
+                                                  </php:repeticion>
+                                              </select>	
+                                          </div>
+                                      </div-->
+  
+                                      <!--Tipo de firma del Documento>
+                                      <div class="form-row">
+                                          <div class="col-md-3 xs-12">
+                                              <label for="Nombre">Tipo de Firma</label>	
+                                              <select class="form-control" name="idTipoFirma" id="idTipoFirma" >
+                                                  <option value="0">(Seleccione)</option>
+                                                  <php:repeticion id="TipoFirmas">						
+                                                      <option value="<php:item id="idTipoFirma" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idTipoFirma" /><php:argumento idvalor="idTipoFirma" /></php:funcion>><php:item id="Descripcion" /></option>
+                                                  </php:repeticion>
+                                              </select>	
+                                          </div>
+                                      </div-->
+                                      
+                                      <!--Fecha de inicio>
+                                      <div class="form-row">
+                                              <div class="col-md-3 xs-12" >
+                                            <label for="">Fechas de incio</label>
+                                             <div class="form-group">
+                                              <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                  <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="datetime" style="background-color: white;" class="form-control pull-right" id="fechaInicio" name="fechaInicio" placeholder="Fecha de inicio" value="<php:item id="fechaInicio"/>"  />
+                                              </div>
+                                            </div>
+                                          </div>
+                                          </div-->
+                                      
+                                      <!--Fecha de Fin>
+                                          <div class="form-row">
+                                              <div class="col-md-3 xs-12">
+                                            <label for="">Fecha de fin</label>
+                                           <div class="form-group">
+                                              <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                  <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="datetime" class="form-control pull-right"  style="background-color: white;"id="fechaFin" name="fechaFin" placeholder="Fecha de fin" value="<php:item id="fechaFin"/>"/>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          </div-->
+                                      
+                                      <!--Estado de firma de Documento-->
+                                      <div class="form-row">
+                                        <div class="col-md-3 xs-12">
+                                        <label for="Nombre">Formularios</label>	
+                                            <select class="form-control" name="idFormulario" id="idFormulario" >
+                                                <option value="0">(Seleccione)</option>
+                                                <php:repeticion id="Formularios">			
+                                                    <option value="<php:item id="idFormulario" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idFormulario" /><php:argumento idvalor="idFormulario" /></php:funcion>><php:item id="nombreFormulario" /></option>
+                                                </php:repeticion>
+                                            </select>	
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                          <div class="col-md-2 xs-12 pull-right"  style="margin-top: 15px;">
+                                              <input type="hidden" name="accion" value="BUSCAR" />
+                                              <button class="btn btn-md btn-primary btn-block"  name="accion2" type="submit" value="BUSCAR">Buscar</button>
+                                          </div>
+                                      </div>
+                                  </div> <!-- <div class="form-group">-->
+                                </div> <!--<div class="box-header">-->
+                             </div> <!-- <div class="box-body pad table-responsive">-->
+                        </div> <!-- <div class="box">-->
+                  </div> <!-- <div class="col-md-12">-->
+                    <!--</div><div class="row"> -->
+                </div> <!-- <div class="collapse" id="collapseExample"> -->
+          </form>
+         
+         
+             <!--Tabla-->
+                    
+          <div id="divtabla" class="tabla-responsiva" >
+             <div class="col-md-12">
+              <table id="example" class="table table-bordered table-hover " name="tbltabla">
+                    <thead>
+                      <tr>
+                        <!--th style="text-align: center;" data-campo="Nr Documento">Nro Documento</th-->
+                        <th style="text-align: center;" data-campo="Nr Documento">Formulario</th>
+                        <!--th style="text-align: center;" data-campo="idPlantilla">idPlantilla</th-->
+                          <!--th style="text-align: center;" bdata-campo="Descripcion_Pl">Descripcion</th-->
+                          <!--th style="text-align: center;" data-campo="RutEmpresa">RutEmpresa</th-->
+                          <!--th style="text-align: center;" data-campo="idCentroCosto">idCentroCosto</th-->
+                          <!--th style="text-align: center;" data-campo="Cargo">Cargo</th-->
+                          <!--th style="text-align: center;" data-campo="Fecha ultima firma">Fecha ultima firma</th-->	
+                          <th style="text-align: center;" data-campo="Rut Empleado">Rut Empleado</th>	
+                          <th style="text-align: center;" data-campo="Nombre Empleado">Nombre Empleado</th>	
+                          <th style="text-align: center;" data-campo="idEstadoGestion">Estado de Gestion</th>	
+                          <!--th style="text-align: center;" data-campo="idEstado">idEstado</th-->		
+                          <th style="text-align: center;" data-campo="Opciones">Opciones</th>
+                      </tr>
+                    </thead>
+                  <tbody>
+                  
+                  <!--Contenido de Tabla-->
+                  <php:repeticion id="listado">
+                    <tr>
+                      <!--td style="text-align: center;" data-campo="idDocumento"><php:item id="idDocumento" /></td-->
+                       <td style="text-align: center;" data-campo="nombreFormulario"><php:item id="nombreFormulario" /></td>
+                      <!--td style="text-align: center;" data-campo="idPlantilla"><php:item id="idPlantilla" /></td-->
+                      <!--td style="text-align: center;" data-campo="Descripcion_Pl"><php:item id="Descripcion_Pl" /></td-->
+                      <!--td style="text-align: center;" data-campo="RutEmpresa"><php:item id="RutEmpresa" /></td-->
+                      <!--td style="text-align: center;" data-campo="centrocostoid"><php:item id="centrocostoid" /></td-->
+                      <!--td style="text-align: center;" data-campo="Cargo"><php:item id="Cargo" /></td-->
+                      <!--td style="text-align: center;" data-campo="FechaUltimaFirma"><php:item id="FechaUltimaFirma" /></td-->
+                      <td style="text-align: center;" data-campo="RutEmpleado"><php:item id="RutEmpleado" /></td>
+                      <td style="text-align: center;" data-campo="NombreEmpleado"><php:item id="NombreEmpleado" /></td>
+                      <td style="text-align: center;" data-campo="idEstadoGestion"><php:item id="EstadoGestion" /></td>
+                      <!--td style="text-align: center;" data-campo="idEstado"><php:item id="EstadoContrato" /></td-->
+                      <td data-campo="Opciones">
+                        <form name="formulario" id="formulario_tipo<php:filamenos />" action="revisionAsignados.php" method="POST">
+                          <!--input type="hidden" name="pagina" value="<php:hiddeno id="pagina" />">
+                          <input type="hidden" name="idDocumento" 			value="<php:item id="idDocumento" />"/>
+                          <input type="hidden" name="RutEmpleado_filtro" 		class="RutEmpleado_filtro" />
+                          <input type="hidden" name="NombreEmpleado_filtro" 	class="NombreEmpleado_filtro" />
+                          <input type="hidden" name="fechaInicio_filtro" 		class="fechaInicio_filtro" />
+                          <input type="hidden" name="fechaFin_filtro"			class="fechaFin_filtro" />
+                          <input type="hidden" name="idEstadoGestion_filtro"  class="idEstadoGestion_filtro" /> 
+                          <input type="hidden" name="empleadoFormularioid" 			value="<php:item id="empleadoFormularioid" />"/-->
+                          <!--button class="btn btn-primary btn-sm" type="submit" name="accion" value="DETALLE" onclick="MostrarCargando();">Detalle</button-->
+                          <php:item id="estadoFormulario" />
+                        </form>
+                      </td>
+                    </tr>
+                  </php:repeticion>
+                  </tbody>
+                  
+                  <th colspan=14 class="tabla_abajo">
+                      <div class="col-md-12" style="font-weight: normal;">
+                           <php:item id="pagina_actual" /> de <php:item id="pagina_ultimo" /> - Total <php:item id="total_registros" /> Registros
+                        </div>
+                    <div class="col-xs-offset-5"> 
+                      <nav aria-label="nav1">
+                        <ul class="pagination justify-content-center" style="margin-top: 0px; margin-bottom: 0px;">
+                          <li class="page-item ">
+                            <a id="pagina_primera" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_primera" />);" ><span><i class="fa fa-angle-double-left"></i></span></a>
+                          </li>
+                          <li class="page-item ">
+                            <a id="pagina_anterior" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_anterior" />);" ><span ><i class="fa fa-angle-left"></i></span></a>
+                          </li>                  
+                          <li class="page-item active"><a class="page-link1" href="#"><php:item id="pagina_actual" /></a></li>                              
+                          <li class="page-item">
+                            <a id="pagina_siguente" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_siguente" />);" ><span><i class="fa fa-angle-right"></i></span></a>
+                          </li>
+                        <li class="page-item">
+                          <a id="pagina_ultimo" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_ultimo" />);" ><span><i class="fa fa-angle-double-right"></i></span></a>
+                        </li>                                                     
+                        </ul>
+                      </nav>
+                    </div>
+  
+                    <div class="col-md-2 pull-right">
+                          <form action="Reportes_Excel_revisionAsignados.php" method="POST" name="formulario_reporte_excel" id="formulario_reporte_excel" >
+                              <!--Datos necesarios para generar reportes>-->
+                              <!--input type="hidden" name="idDocumento" value="<php:item id="idDocumento" />" -->
+                              <input type="hidden" name="RutEmpleado" value="<php:item id="RutEmpleado" />" >
+                              <input type="hidden" name="NombreEmpleado" value="<php:item id="NombreEmpleado" />" >
+                              <!--input type="hidden" name="fechaInicio" value="<php:item id="fechaInicio" />" -->
+                              <!--input type="hidden" name="fechaFin"    value="<php:item id="fechaFin" />" -->
+                              <input type="hidden" name="idEstadoGestion"    value="<php:item id="idEstadoGestion" />" >
+                              <input type="hidden" name="empleadoFormularioid"    value="<php:item id="empleadoFormularioid" />"  >
+                              <input type="hidden" name="idFormulario"    value="<php:item id="idFormulario" />"  >
+                              <!--input type="hidden" name="RutCreador" value="<php:item id="RutCreador" />" -->
+                              <!--input type="hidden" name="NombreCreador" value="<php:item id="NombreCreador" />" -->
+                              <!--input type="hidden" name="idPlantilla" value="<php:item id="idPlantilla" />" -->
+                              <!--input type="hidden" name="Descripcion_Pl" value="<php:item id="Descripcion_Pl" />" -->
+                              <!--input type="hidden" name="RutEmpresa" value="<php:item id="RutEmpresa" />" -->
+                              <!--input type="hidden" name="centrocostoid" value="<php:item id="centrocostoid" />" -->
+                              <!--input type="hidden" name="nombrecentrocosto" value="<php:item id="nombrecentrocosto" />" -->
+                              <!--input type="hidden" name="NombreCasino" value="<php:item id="NombreCasino" />" -->
+                              <!--input type="hidden" name="CodCargo" value="<php:item id="CodCargo" />" -->
+                              <!--input type="hidden" name="Cargo" value="<php:item id="Cargo" />" -->
+                              <!--input type="hidden" name="idEstado" value="<php:item id="idEstado" />" -->
+                              <!--input type="hidden" name="idTipoFirma" value="<php:item id="idTipoFirma" />" -->
+                              <!--input type="hidden" name="idProceso" value="<php:item id="idProceso" />" -->
+                              <!--input type="hidden" name="Enviado"    value="<php:item id="Enviado" />" -->
+                              <button type="submit" name="accion" id="accion" value="DESCARGAR" class="form-control btn btn-md btn-primary"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Descargar</button>
+                          </form>
+                      </div>
+  
+                    </th>
+  
+                  <form name="paginado" id="paginado" action="revisionAsignados.php" method="POST" >
+                      <input type="hidden" name="pagina" value="" id="pagina" >
+                      <!--input type="hidden" name="idDocumento" value="<php:item id="idDocumento" />" -->
+                      <input type="hidden" name="RutEmpleado" value="<php:item id="RutEmpleado" />" >
+                      <input type="hidden" name="NombreEmpleado" value="<php:item id="NombreEmpleado" />" >
+                      <!--input type="hidden" name="fechaInicio" value="<php:item id="fechaInicio" />" -->
+                      <!--input type="hidden" name="fechaFin"    value="<php:item id="fechaFin" />" -->
+                      <input type="hidden" name="idEstadoGestion"    value="<php:item id="idEstadoGestion" />" >
+                      <input type="hidden" name="idFormulario"    value="<php:item id="idFormulario" />" 
+                      <!--input type="hidden" name="holdingid" value="<php:item id="holdingid" />" -->
+                      <!--input type="hidden" name="RutCreador" value="<php:item id="RutCreador" />" -->
+                      <!--input type="hidden" name="NombreCreador" value="<php:item id="NombreCreador" />" -->
+                      <!--input type="hidden" name="idPlantilla" value="<php:item id="idPlantilla" />" -->
+                      <!--input type="hidden" name="Descripcion_Pl" value="<php:item id="Descripcion_Pl" />" -->
+                      <!--input type="hidden" name="RutEmpresa" value="<php:item id="RutEmpresa" />" -->
+                      <!--input type="hidden" name="centrocostoid" value="<php:item id="centrocostoid" />" -->
+                      <!--input type="hidden" name="nombrecentrocosto" value="<php:item id="nombrecentrocosto" />" -->
+                      <!--input type="hidden" name="NombreCasino" value="<php:item id="NombreCasino" />" -->
+                      <!--input type="hidden" name="CodCargo" value="<php:item id="CodCargo" />" -->
+                      <!--input type="hidden" name="Cargo" value="<php:item id="Cargo" />" -->
+                      <!--input type="hidden" name="idEstado" value="<php:item id="idEstado" />" -->
+                      <!--input type="hidden" name="idTipoFirma" value="<php:item id="idTipoFirma" />" -->
+                      <!--input type="hidden" name="idProceso" value="<php:item id="idProceso" />" -->
+                      <!--input type="hidden" name="Enviado"    value="<php:item id="Enviado" />" -->
+                  </form>
+      
+              </table>
+          </div>
+         </php:repeticion>
+  
+        </div>
+      </div>
+    </div>
+  </div> 
+  </section>
+      
+  
+  <script >
+          
+    /*$('#fechaInicio').datepicker({
+      language: "es",
+      orientation: "bottom",
+      autoclose: true,
+      todayHighlight: true,
+      format: 'dd-mm-yyyy'
+    });
+  
+    $('#fechaFin').datepicker({
+      language: "es",
+      orientation: "bottom",
+      autoclose: true,
+      todayHighlight: true,
+      format: 'dd-mm-yyyy'
+    });*/
+  
+	var ajax;
+	var salida;
+    function cambioEstado(empleadoFormularioid, estadoFormularioid){
+        var url  = "revisionAsignados_ajax.php?empleadoFormularioid=" + empleadoFormularioid + '&estadoFormularioid=' + estadoFormularioid;
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+            ajax = new XMLHttpRequest(); // No Internet Explorer
+        else
+            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajax.onreadystatechange = funcionCallback_cambioEstado;
+        // Enviamos la peticion
+        ajax.open( "GET", url, false );
+        ajax.send( "" );
+    }
+	function funcionCallback_cambioEstado() {
+		if( ajax.readyState == 4 ) {
+			if( ajax.status == 200 ) {
+				salida = ajax.responseText;
+				if( salida != '' ) {
+					/*datosDocumento = JSON.parse(salida);
+					for(var i = 0; i < datosDocumento.length; i++) {
+						$('#' + datosDocumento[i].Variable).show();
+					}*/
+                    $('#formulario_usuarios').submit();
+				}
+				else {
+					$("#mensajeError").removeClass("callout callout-warning");
+					$("#mensajeError").html("");
+				}
+			}
+		}
+	} 
+
+  $(".ocultar").click(function(){
+  
+      if ( $("#collapseExample").hasClass('in')){
+          $("#a").html('Mostrar filtros');
+      }else{
+            $("#a").html('Ocultar filtros');
+        }
+  
+   });
+   
+   //Asignar datos si hay filtros llenos 
+                          
+      $(document).ready(function(){
+      
+          //if( $("#idDocumento").val() != '' ) 	$(".idDocumento_filtro").val($("#idDocumento").val()); 
+          //if( $("#RutCreador").val() != '' ) 		$(".RutCreador_filtro").val($("#RutCreador").val()); 
+          //if( $("#NombreCreador").val() != '' ) 	$(".NombreCreador_filtro").val($("#NombreCreador").val()); 
+          //if( $("#idPlantilla").val() != '' ) 	$(".idPlantilla_filtro").val($("#idPlantilla").val());
+          //if( $("#Descripcion_Pl").val() != '' ) 	$(".Descripcion_Pl_filtro").val($("#Descripcion_Pl").val()); 
+          //if( $("#RutEmpresa").val() != '' ) 		$(".RutEmpresa_filtro").val($("#RutEmpresa").val()); 
+          //if( $("#centrocostoid").val() != '' ) 	$(".centrocostoid_filtro").val($("#centrocostoid").val()); 
+          //if( $("#nombrecentrocosto").val() != '') $(".nombrecentrocosto_filtro").val($("#nombrecentrocosto").val()); 
+          //if( $("#NombreCasino").val() != '' ) 	$(".NombreCasino_filtro").val($("#NombreCasino").val()); 
+          //if( $("#CodCargo").val() != '' ) 		$(".CodCargo_filtro").val($("#CodCargo").val()); 
+          //if( $("#Cargo").val() != '' ) 			$(".Cargo_filtro").val($("#Cargo").val()); 
+          if( $("#RutEmpleado").val() != '' ) 	$(".RutEmpleado_filtro").val($("#RutEmpleado").val()); 
+          if( $("#NombreEmpleado").val() != '' ) 	$(".NombreEmpleado_filtro").val($("#NombreEmpleado").val()); 
+          //if( $("#idEstado").val() != 0 ) 	 	$(".idEstado_filtro").val($("#idEstado").val());
+          //if( $("#idTipoFirma").val() != 0 ) 		$(".idTipoFirma_filtro").val($("#idTipoFirma").val()); 
+          //if( $("#idProceso").val() != 0 ) 		$(".idProceso_filtro").val($("#idProceso").val()); 
+          //if( $("#fechaInicio").val() != '' ) 	$(".fechaInicio_filtro").val($("#fechaInicio").val()); 
+          //if( $("#fechaFin").val() != '' ) 		$(".fechaFin_filtro").val($("#fechaFin").val()); 
+          //if( $("#Enviado").val() != '-1' ) 		$(".Enviado_filtro").val($("#Enviado").val()); 
+          if( $("#idEstadoGestion").val() != 0 ) $(".idEstadoGestion_filtro").val($("#idEstadoGestion").val()); 
+          
+      });
+  </script>

@@ -1,0 +1,213 @@
+<div class="row" >
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive"> 
+      	<div class="box-header">
+		<php:repeticion id="formulario">
+		 <form name="formulario_agregar" id="formulario_agregar" action="Fichas.php" method="POST" autocomplete="off">
+        	<!--<php:repeticion id="crea">
+	          <button type="submit" class="btn btn-default" name="accion" value="AGREGAR"><a><i class="fa fa-plus" aria-hidden="true"></i> Nuevo</a></button> 
+	        </php:repeticion>-->
+	      </form>
+      	</div>
+        <div class="box-body">
+           <!--Mensajes-->
+          <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+          <div id="mensajeError"><php:texto id="mensajeError" /></div>   
+		  <div id="mensajeAd"><php:texto id="mensajeAd" /></div>   		  
+        </div>
+        <form name="formulario2" id="formulario_usuarios" action="Fichas.php" method="POST" autocomplete="off">
+
+          <table id="example2" class="table table-bordered table-hover">
+	          <div class="col-md-2 xs-12">
+		          <button class="btn btn-md btn-default btn-block ocultar" type="button" style="margin-top: 10px" data-toggle="collapse" href="#collapseExample" role="button" data-parent="#accordion"><a id="a">Ocultar Filtro</a></button>
+	          </div>
+          </table>
+  			
+  		    <div id="collapseExample"  class="panel-collapse collapse in">
+      			<div class="col-md-12">
+      				<div class="box">
+      					<div class="box-body pad table-responsive">
+      					  <div class="box-header">
+      						  <div class="form-group">
+							 
+									<!--Numero e Documento-->
+									<div class="form-row">
+										<div class="col-md-4 xs-12">
+										<label for="idDocumento">C&oacute;digo de Ficha</label>
+										<input type="text" class="form-control" id="fichaid" name="fichaid" maxlength="10" value="<php:item id="fichaid" />">
+										</div>
+									</div>
+
+									<!--RutEmpresa-->
+									<div class="form-row">
+										<div class="col-md-4 xs-12">
+									 		<label for="Empresa">Empresa ( Rut o Nombre )</label>
+									  		<input type="text" class="form-control" id="empresaid" name="empresaid" value="<php:item id="empresaid" />">
+										</div>
+									</div>
+									<!--Division personal-->
+									<div class="form-row">
+										<div class="col-md-4 xs-12">
+									 		<label for="Empresa">Divisi&oacute;n personal ( C&oacute;digo o Descripci&oacute;n )</label>
+									  		<input type="text" class="form-control" id="centrocostoid" name="centrocostoid" value="<php:item id="centrocostoid" />">
+										</div>
+									</div>
+
+									<!--Estado de firma de Documento-->
+									<div class="form-row">
+										<div class="col-md-4 xs-12">
+										<label for="Nombre">Estado de Ficha</label>	
+											<select class="form-control" name="idEstado" id="idEstado" >
+												<option value="0">(Seleccione)</option>
+												<php:repeticion id="estadosfichas">			
+													<option value="<php:item id="idEstado" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idEstado" /><php:argumento idvalor="idEstado" /></php:funcion>><php:item id="Estado" /></option>
+												</php:repeticion>
+											</select>	
+										</div>
+									</div>
+
+									<!--Empleado-->
+									<div class="form-row">
+										<div class="col-md-4 xs-12">
+									 		<label for="Firmante">Empleado (Rut o Nombre)</label>
+									  		<input type="text" class="form-control" id="personaid" name="personaid" maxlength="50" value="<php:item id="personaid" />">
+										</div>
+									</div>
+
+									
+
+									<div class="form-row">
+										<div class="col-md-2 xs-12 pull-right"  style="margin-top: 15px;">
+											<input type="hidden" name="accion" value="BUSCAR" />
+											<button class="btn btn-md btn-primary btn-block"  name="accion2" type="submit" value="BUSCAR">Buscar</button>
+										</div>
+									</div>
+	                    		</div> <!-- <div class="form-group">-->
+	                  		</div> <!--<div class="box-header">-->
+	               		</div> <!-- <div class="box-body pad table-responsive">-->
+	              	</div> <!-- <div class="box">-->
+	            </div> <!-- <div class="col-md-12">-->
+	          	<!--</div><div class="row"> -->
+	      	</div> <!-- <div class="collapse" id="collapseExample"> -->
+	    </form>
+       
+       
+           <!--Tabla-->
+				  
+		<div id="divtabla" class="tabla-responsiva" >
+		   <div class="col-md-12">
+			<table id="example" class="table table-bordered table-hover " name="tbltabla">
+				  <thead>
+					<tr>
+						<th style="text-align: center;" data-campo="C&oacute;digo">C&oacute;digo</th>	
+						<th style="text-align: center;" data-campo="RutEmpresa">Rut de Empresa</th>
+						<th style="text-align: center;" data-campo="Empresa">Empresa</th>
+						<th style="text-align: center;" data-campo="DivisionPersonal">Divisi&oacute;n Personal</th>
+						<th style="text-align: center;" data-campo="DivisionPersonal">Descripci&oacute;n de Divisi&oacute;n</th>
+						<th style="text-align: center;" data-campo="RutEmpleado"> Rut del Empleado</th>
+						<th style="text-align: center;" data-campo="NombreEmpleado">Nombre del Empleado</th>
+						<th style="text-align: center;" data-campo="Fecha de solicitud">Fecha de subida</th>
+						<th style="text-align: center;" bdata-campo="Esatdo">Estado</th>
+						<th style="text-align: center;" data-campo="Opciones">Opciones</th>
+					</tr>
+				  </thead>
+				<tbody>
+				
+				<!--Contenido de Tabla-->
+				<php:repeticion id="listado">
+				  <tr>
+					<td style="text-align: center;" data-campo="idFicha"><php:item id="fichaid" /></td>
+					<td style="text-align: center;" data-campo="idFicha"><php:item id="RutEmpresa" /></td>
+					<td style="text-align: center;" data-campo="idFicha"><php:item id="RazonSocial" /></td>
+					<td style="text-align: center;" data-campo="idFicha"><php:item id="CodDivPersonal" /></td>
+					<td style="text-align: center;" data-campo="idFicha"><php:item id="nombrecentrocosto" /></td>
+					<td style="text-align: center;" data-campo="RutTrabajador"><php:item id="RutTrabajador" /></td>
+					<td style="text-align: center;" data-campo="RutTrabajador"><php:item id="NombreTrabajador" /></td>
+					<td style="text-align: center;" data-campo="FechaCreacion"><php:item id="FechaCreacion" /></td>
+					<td style="text-align: center;" data-campo="Estado"><php:item id="Estado" /></td>
+					
+					<td data-campo="Detalle" style="text-align: center;">
+					  <form name="formulario" id="formulario_tipo" action="Fichas.php" method="POST">
+						   <input type="hidden" name="fichaid" value="<php:item id="fichaid" />">
+						   <input type="hidden" name="pagina" value="<php:texto id="pagina" />">
+						   	
+						   	<php:repeticion id="modifica">
+						   		<button class="btn btn-primary btn-sm" type="submit" name="accion" value="PROCESAR" >Procesar</button>
+						   	
+						   		<!--button class="btn btn-default btn-sm" type="submit" name="accion" value="CANCELAR" onclick="javascript:return preguntarPorBorrar();">Cancelar</button>-->
+						   	</php:repeticion>
+					  </form>
+					</td>
+				  </tr>
+				</php:repeticion>
+				</tbody>
+				
+				<th colspan=10 class="tabla_abajo">
+					<div class="col-md-12" style="font-weight: normal;">
+                     	<php:item id="pagina_actual" /> de <php:item id="pagina_ultimo" /> - Total <php:item id="total_registros" /> Registros
+                  	</div>
+				  <div class="col-xs-offset-5"> 
+					<nav aria-label="nav1">
+					  <ul class="pagination justify-content-center" style="margin-top: 0px; margin-bottom: 0px;">
+						<li class="page-item ">
+						  <a id="pagina_primera" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_primera" />);" ><span><i class="fa fa-angle-double-left"></i></span></a>
+						</li>
+						<li class="page-item ">
+						  <a id="pagina_anterior" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_anterior" />);" ><span ><i class="fa fa-angle-left"></i></span></a>
+						</li>                  
+						<li class="page-item active"><a class="page-link1" href="#"><php:item id="pagina_actual" /></a></li>                              
+						<li class="page-item">
+						  <a id="pagina_siguente" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_siguente" />);" ><span><i class="fa fa-angle-right"></i></span></a>
+						</li>
+					  <li class="page-item">
+						<a id="pagina_ultimo" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_ultimo" />);" ><span><i class="fa fa-angle-double-right"></i></span></a>
+					  </li>                                                     
+					  </ul>
+					</nav>
+				  </div>
+				  </th>
+
+				<form name="paginado" id="paginado" action="Fichas.php" method="POST" >
+					<input type="hidden" name="pagina" value="" id="pagina" >
+					<input type="hidden" name="holdingid" value="<php:item id="holdingid" />" >
+					<input type="hidden" name="fichaid" value="<php:item id="fichaid" />" >
+					<input type="hidden" name="idEstado" value="<php:item id="idEstado" />" >
+					<input type="hidden" name="personaid"    value="<php:item id="personaid" />" >
+					<input type="hidden" name="empresaid" value="<php:item id="empresaid" />" >
+					<input type="hidden" name="centrocostoid"    value="<php:item id="centrocostoid" />" >
+				</form>
+	
+			</table>
+		</div>
+       </php:repeticion>
+
+      </div>
+    </div>
+  </div>
+</div> 
+</section>
+
+<script>
+$(document).ready(function(){
+    
+    if( $("#mensajeAd").html().length > 0 ){
+        $("#mensajeAd").addClass("callout callout-warning");
+    }
+    else{
+        $("#mensajeAd").removeClass("callout callout-warning");
+    }
+  });
+
+$(".ocultar").click(function(){
+
+	if ( $("#collapseExample").hasClass('in')){
+		$("#a").html('Mostrar filtros');
+	}else{
+  		$("#a").html('Ocultar filtros');
+  	}
+
+ });
+
+</script>
+    

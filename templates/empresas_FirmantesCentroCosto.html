@@ -1,0 +1,481 @@
+    <php:repeticion id="formulario">
+    <div class="row" id="firmantes" data-rutempresa="<php:item id="RutEmpresa" />" data-rutusuario="<php:item id="RutUsuario" />">
+    <div class="col-md-12">
+        <h4>Firmantes divisi&oacute;n de personal</h4>
+    </div>
+    <div class="col-md-12">
+        <!--Caja-->
+        <div class="box">
+            <!--Cuerpo de la caja-->
+            <div class="box-body pad table-responsive">
+                <!--Botones de cabecera-->
+                <form name="formulario" class="formulario" id="formulario"  class="form-horizontal" action="Empresas.php" method="POST" autocomplete=off enctype="multipart/form-data">
+                    <input type="hidden" name="RutEmpresa" value="<php:item id="RutEmpresa" />">
+                    </php:repeticion>
+                    <div class="box-header">
+                        <!--boton-volver-->
+                        <button type="submit" name="accion" value="MODIFICAR" class="btn btn-default btn_letra_azul"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</button>
+                    </div>
+                    <div class="box-body">
+                        <!--Mensajes-->
+                        <div id="mensajeError"><php:texto id="mensajeError" />
+                        </div>
+                        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+                        <div class="box-body">
+                            <div class="form-row">
+                                <!--componentes-->
+                                <!--selector-modal-->
+                                <div class="col-md-6 xs-12">
+                                    <label for="selector-modal-centrocosto">Divisi&oacute;n de personal</label>
+                                    <div class="box-body" style="padding-left: 0px;">
+                                        <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                                            <input class="form-control" type="text" name="selector-modal-centrocosto" id="selector-modal-centrocosto" placeholder="(Seleccione)" disabled>
+                                        </div>
+                                        <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                                            <button class="btn btn-md btn-primary btn-block" type="button" id="btn_centroscosto" data-toggle="modal" data-target="#modal_centroscosto"><i class="fa fa-search"></i></button>  
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 xs-12">
+                                    <label for="firmante_principal"></label>
+                                    <div class="box-body" style="padding-left: 0px;">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="firmante_principal">
+                                            <label class="custom-control-label" for="defaultUnchecked">Principal</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-2 xs-12 pull-right">  
+                                    <button class="btn btn-md btn-success btn-block" id="AGREGAR" type="button" onclick="javascript:agregar_centrocosto1_ajax({});" style="margin-top: 10px" disabled>Agregar</button>  
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <table id="firmanescentrocosto2" class="table table-bordered table-hover" style="text-align: center">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align: center">C&oacute;digo</th>
+                                            <th style="text-align: center">Principal</th>
+                                            <th style="text-align: center">Nombre divisi&oacute;n de personal</th>
+                                            <th style="text-align: center">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <!--Contenido de Tabla-->
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--selector-modal-->
+<div class="modal fade" id="modal_centroscosto" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <h4 class="modal-title" id="ejemplo-titulo">Divisi&oacute;n de personal</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="mensajeError_modal"></div>
+                <table id="firmanescentrocosto" class="table table-bordered table-hover" style="text-align: center">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center">C&oacute;digo</th>
+                            <th style="text-align: center">Nombre</th>
+                            <th style="text-align: center">Selecci&oacute;n</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer" style="margin-top:10px;">
+                <button type="button" class="btn btn-secondary btn-md" id="cerrar_centroscosto" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--atencion-->
+<div class="modal fade" id="modal_atencion" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <h4 class="modal-title" id="ejemplo-titulo">Atenci&oacute;n</h4>
+                <!--button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button-->
+            </div>
+            <div class="modal-body">
+                <div id="mensajeError_modal"></div>
+                La divisi&oacute;n de personal no tiene firmante principal
+            </div>
+            <div class="modal-footer" style="margin-top:10px;">
+                <button type="button" class="btn btn-secondary btn-md" id="forzar_principal" data-dismiss="modal">Forzar Principal</button>
+                <button type="button" class="btn btn-secondary btn-md" id="cerrar_atencion" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--notificacion-->
+<div class="modal fade" id="modal_notificacion" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <h4 class="modal-title" id="ejemplo-titulo">Notificaci&oacute;n</h4>
+            </div>
+            <div class="modal-body">
+                <div id="mensajeError_modal"></div>
+                La divisi&oacute;n de personal seleccionada ya posee un firmante principal
+                <div class="form-row">
+                    <div class="col-md-12 xs-12">
+                        <label for="RutUsuario_principal">R.U.T.</label>
+                        <div class="box-body" style="padding-left: 0px;">
+                            <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                                <input class="form-control" type="text" name="RutUsuario_principal" id="RutUsuario_principal" placeholder="" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 xs-12">
+                        <label for="nombre_principal">Nombres</label>
+                        <div class="box-body" style="padding-left: 0px;">
+                            <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                                <input class="form-control" type="text" name="nombre_principal" id="nombre_principal" placeholder="" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 xs-12">
+                        <label for="appaterno_principal">Apellido paterno</label>
+                        <div class="box-body" style="padding-left: 0px;">
+                            <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                                <input class="form-control" type="text" name="appaterno_principal" id="appaterno_principal" placeholder="" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 xs-12">
+                        <label for="apmaterno_principal">Apellido materno</label>
+                        <div class="box-body" style="padding-left: 0px;">
+                            <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                                <input class="form-control" type="text" name="apmaterno_principal" id="apmaterno_principal" placeholder="" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="margin-top:10px;">
+                <button type="button" class="btn btn-secondary btn-md" id="reemplazar_principal" data-dismiss="modal">Reemplazar Principal</button>
+                <button type="button" class="btn btn-secondary btn-md" id="asignar_secundario" data-dismiss="modal">Asignar como secundario</button>
+                <button type="button" class="btn btn-secondary btn-md" id="cerrar_notificacion" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<script>
+    $(document).ready(function()
+    {
+        listar_firmantescentrocosto_ajax();
+    });
+
+    $('#forzar_principal').on('click', function(){
+        forzar_principal();
+    });
+
+    $('#reemplazar_principal').on('click', function(){
+        reemplazar_principal();
+    });
+
+    $('#asignar_secundario').on('click', function(){
+        asignar_secundario();
+    });
+
+
+    function forzar_principal()
+    {
+        agregar_centrocosto1_ajax({opcionUsuario:'forzarPrincipal'});
+    };
+    function reemplazar_principal()
+    {
+        agregar_centrocosto1_ajax({opcionUsuario:'cambiarPrincipal'});
+    };
+    function asignar_secundario()
+    {
+        agregar_centrocosto1_ajax({opcionUsuario:'asignarSecundario'});
+    }
+    function listar_firmantescentrocosto_ajax()
+    {
+        var RutEmpresa = $('#firmantes').data('rutempresa');
+        var RutUsuario = $('#firmantes').data('rutusuario');
+        $(".fila_firmanescentrocosto2").remove();
+        $("#mensajeError").html("");
+        $("#mensajeError").removeClass("callout callout-warning");
+        var url  = "firmantescentrocosto_ajax.php?RutEmpresa=" + RutEmpresa + "&RutUsuario=" + RutUsuario + "&accion=LISTAR0";
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+            ajax = new XMLHttpRequest(); // No Internet Explorer
+        else
+            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajax.onreadystatechange = funcionCallback_listar_firmantescentrocosto;
+        // Enviamos la peticion
+        ajax.open( "GET", url, true );
+        ajax.send( "" );
+    };
+
+    function funcionCallback_listar_firmantescentrocosto()
+    {
+        // Comprobamos si la peticion se ha completado (estado 4)
+        if( ajax.readyState == 4 )
+        {
+            // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+            if( ajax.status == 200 )
+            {
+                // Escribimos el resultado en la pagina HTML mediante DHTML
+                salida = ajax.responseText;
+                listado = JSON.parse(salida); 
+                num = listado.length;
+                if( num > 0 ){
+                    var fila = '';
+                    $.each(listado, function( index, value ) {
+                        fila = '<tr class="fila_firmanescentrocosto2">';
+                        fila += '<td>' + listado[index].centrocostoid + '</td>';
+                        fila += '<td>' + (listado[index].pordefecto ? 'Si' : 'No') + '</td>';
+                        fila += '<td>' + listado[index].nombrecentrocosto + '</td>';
+                        fila += '<td><button class="btn btn-default btn-sm" type="button" onclick="javascript:eliminar(\'' + listado[index].RutEmpresa + '\', \'' + listado[index].RutUsuario + '\', \'' + listado[index].centrocostoid + '\');">Eliminar</button></td>';
+                        fila += '</tr>';
+                        $('#firmanescentrocosto2 tr:last').after(fila);
+                    });
+                }else{
+                    $('#firmanescentrocosto2 tr:last').after('<tr class="fila_firmanescentrocosto2"><td colspan=3 >No existen asignaciones de divisi&oacute personal</td></tr>');
+                }
+            }
+        }
+    };
+
+    function eliminar(RutEmpresa, RutUsuario, centrocostoid)
+    {
+        if (confirm('Va a eliminar un registro, esta seguro'))
+        {
+            eliminar_firmantescentrocosto_ajax(RutEmpresa, RutUsuario, centrocostoid);
+        }
+        else
+        {
+            return false;
+        }
+    };
+
+    function eliminar_firmantescentrocosto_ajax(RutEmpresa, RutUsuario, centrocostoid)
+    {
+        var url  = "firmantescentrocosto_ajax.php?RutEmpresa=" + RutEmpresa + "&RutUsuario=" + RutUsuario + "&centrocostoid=" + centrocostoid + "&accion=ELIMINAR";
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+            ajax = new XMLHttpRequest(); // No Internet Explorer
+        else
+            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajax.onreadystatechange = funcionCallback_eliminar_firmantescentrocosto;
+        // Enviamos la peticion
+        ajax.open( "GET", url, true );
+        ajax.send( "" );
+    };
+    function funcionCallback_eliminar_firmantescentrocosto()
+    {
+        // Comprobamos si la peticion se ha completado (estado 4)
+        if( ajax.readyState == 4 )
+        {
+            // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+            if( ajax.status == 200 )
+            {
+                listar_firmantescentrocosto_ajax();
+            }
+        }
+    };
+
+    //Modal de plantillas
+    function obtener_firmantescentrocosto_ajax()
+    {
+        var RutEmpresa = $('#firmantes').data('rutempresa');
+        var RutUsuario = $('#firmantes').data('rutusuario');
+        $(".fila_firmanescentrocosto").remove();
+
+        $("#mensajeError").html("");
+        $("#mensajeError").removeClass("callout callout-warning");
+        var url  = "firmantescentrocosto_ajax.php?RutEmpresa=" + RutEmpresa + "&RutUsuario=" + RutUsuario + "&accion=LISTAR";
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+            ajax = new XMLHttpRequest(); // No Internet Explorer
+        else
+            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajax.onreadystatechange = funcionCallback_obtener_firmantescentrocosto;
+        // Enviamos la peticion
+        ajax.open( "GET", url, true );
+        ajax.send( "" );
+    };
+    $("#btn_centroscosto").click(function()
+    {
+        obtener_firmantescentrocosto_ajax();
+    });
+    function funcionCallback_obtener_firmantescentrocosto()
+    {
+        // Comprobamos si la peticion se ha completado (estado 4)
+        if( ajax.readyState == 4 )
+        {
+            // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+            if( ajax.status == 200 )
+            {
+                // Escribimos el resultado en la pagina HTML mediante DHTML
+                salida = ajax.responseText;
+                listado = JSON.parse(salida); 
+                num = listado.length;
+                if( num > 0 ){
+                    $.each(listado, function( index, value ) {
+                        $('#firmanescentrocosto tr:last').after('<tr class="fila_firmanescentrocosto"><td>' + listado[index].centrocostoid + '</td><td>' + listado[index].nombrecentrocosto + '</td><td ><button type="button" style="background-color: transparent;" class="btn" name="btn_agregar_plantilla" id="btn_agregar_plantilla" onclick="javascript:agregar_centrocosto1(\'' + listado[index].centrocostoid + '\', \'' + listado[index].nombrecentrocosto + '\');"><i class="fa fa-plus" aria-hidden="true"></i></button></td></tr>');
+                    });
+                }else{
+                    $('#firmanescentrocosto tr:last').after('<tr class="fila_firmanescentrocosto"><td colspan=3 >No existen divisiones de personal para esta empresa</td></tr>');
+                }
+            }
+        }
+    };
+
+    function agregar_centrocosto1_ajax(data)
+    {
+        var principal = $('#firmante_principal').prop('checked') ? 1 : 0;
+        var RutUsuario = $('#firmantes').data('rutusuario');
+        var RutUsuario_principal = '';
+        switch(data.opcionUsuario)
+        {
+            case 'forzarPrincipal':
+                principal = 1;
+            break;
+            case 'asignarSecundario':
+                principal = 0;
+            break;
+            case 'cambiarPrincipal':
+                RutUsuario_principal = $('#RutUsuario_principal').val();
+            break;
+        }
+        var RutEmpresa = $('#firmantes').data('rutempresa');
+        var centrocostoid = $("#selector-modal-centrocosto").data('centrocostoid');
+
+        var url  = "firmantescentrocosto_ajax.php?RutEmpresa=" + RutEmpresa + "&centrocostoid=" + centrocostoid + "&RutUsuario=" + RutUsuario + "&principal=" + principal + "&RutUsuario_principal=" + RutUsuario_principal + "&accion=VALIDAR";
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+            ajax = new XMLHttpRequest(); // No Internet Explorer
+        else
+            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajax.onreadystatechange = funcionCallback_agregar_centrocosto1;
+        // Enviamos la peticion
+        ajax.open( "GET", url, true );
+        ajax.send( "" );
+    };
+    function funcionCallback_agregar_centrocosto1()
+    {
+        // Comprobamos si la peticion se ha completado (estado 4)
+        if( ajax.readyState == 4 )
+        {
+            // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+            if( ajax.status == 200 )
+            {
+                // Escribimos el resultado en la pagina HTML mediante DHTML
+                salida = ajax.responseText;
+                listado = JSON.parse(salida);
+                num = listado.length;
+                if( num > 0 )
+                {
+                    switch (listado[0].accion)
+                    {
+                        case 'ATENCION':
+                            $('#modal_atencion').modal({show:'true'});
+                        break;
+                        case 'NOTIFICACION':
+                            obtenerUsuarioPrincipalExistente_ajax();
+                        break;
+                        default:
+                            $('#selector-modal-centrocosto').data('centrocostoid', '');
+                            $('#selector-modal-centrocosto').val('');
+                            $('#firmante_principal').prop('checked', false);
+                            checkFormulario();
+                            listar_firmantescentrocosto_ajax();
+                            $('#mensajeOK').html('Agregado exitosamente');
+                            $('#mensajeOK').addClass('callout callout-success')
+                    }
+                }
+            }
+        }
+    }
+    function obtenerUsuarioPrincipalExistente_ajax()
+    {
+        var principal = 1;
+        var RutEmpresa = $('#firmantes').data('rutempresa');
+        var centrocostoid = $("#selector-modal-centrocosto").data('centrocostoid');
+
+        var url  = "firmantescentrocosto_ajax.php?RutEmpresa=" + RutEmpresa + "&centrocostoid=" + centrocostoid + "&principal=" + principal + "&accion=PRINCIPAL";
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+            ajax = new XMLHttpRequest(); // No Internet Explorer
+        else
+            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajax.onreadystatechange = funcionCallback_obtenerUsuarioPrincipalExistente;
+        // Enviamos la peticion
+        ajax.open( "GET", url, true );
+        ajax.send( "" );
+    };
+    function funcionCallback_obtenerUsuarioPrincipalExistente()
+    {
+        // Comprobamos si la peticion se ha completado (estado 4)
+        if( ajax.readyState == 4 )
+        {
+            // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+            if( ajax.status == 200 )
+            {
+                // Escribimos el resultado en la pagina HTML mediante DHTML
+                salida = ajax.responseText;
+                listado = JSON.parse(salida);
+                num = listado.length;
+                if( num > 0 )
+                {
+                    $('#RutUsuario_principal').val(listado[0].personaid);
+                    $('#nombre_principal').val(listado[0].nombre);
+                    $('#appaterno_principal').val(listado[0].appaterno);
+                    $('#apmaterno_principal').val(listado[0].apmaterno);
+                    $('#modal_notificacion').modal({show:'true'});
+                }
+            }
+        }
+    };
+
+    function agregar_centrocosto1(centrocostoid, nombrecentrocosto)
+    {
+        $('#selector-modal-centrocosto').val(nombrecentrocosto);
+        $('#selector-modal-centrocosto').data('centrocostoid', centrocostoid);
+        $("#cerrar_centroscosto").click();
+        checkFormulario();
+    }
+    function checkFormulario()
+    {
+        if ($("#selector-modal-centrocosto").data('centrocostoid') != '')
+        {
+            $('#AGREGAR').removeAttr('disabled');
+        }
+        else
+        {
+            $('#AGREGAR').attr('disabled','disabled');
+        }
+    }
+</script>

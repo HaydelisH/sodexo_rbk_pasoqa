@@ -1,0 +1,995 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box ">
+      <div class="box-body pad table-responsive">
+      <!--Botones de cabecera-->
+        <div class="box-header">
+		  <a class="btn btn-default btn_letra_azul" href="Generar_Documento_PorFicha.php"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</a>
+		  
+        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+         <!--Mensajes-->
+		<div id="mensajeError"><php:texto id="mensajeError" /></div>
+		<div id="mensajeOK"><php:texto id="mensajeOK" /></div>	
+		
+				<form name="formulario" class="formulario" id="formulario"  class="form-horizontal" action="Generar_Documento_PorFicha.php" method="POST" autocomplete=off>
+				<php:repeticion id="formulario">
+				
+				 <div class="nav-tabs-custom">
+		            <ul class="nav nav-tabs">
+		              <li class="active"><a href="#form_dp" data-toggle="tab">Datos personales</a></li>
+		              <li><a href="#form_dc" data-toggle="tab">Datos de Contrato</a></li>
+		              <li><a href="#tab_3" data-toggle="tab">Otros Datos</a></li>
+		              <li><a href="#tab_4" data-toggle="tab">Generaci&oacute;n</a></li>
+		            </ul>
+
+		            <div class="tab-content">
+
+		              <div class="tab-pane active" id="form_dp">
+						<div class="box-body">
+		                	<div class="form-row">
+								<div class="col-md-6 col-xs-12">
+									<label for="tipousuarioid">Rut</label>
+									<input type="text" class="form-control" id="newusuarioid"  name="newusuarioid" placeholder="Rut v&aacute;lido" maxlength="10" value="<php:item id="newusuarioid" />" autofocus >
+								  </div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-12">
+									<label for="contenedorid" >Nombre</label>
+									<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre completo" maxlength="50" value="<php:item id="nombre" />">
+								</div>
+							</div>
+											
+							<div class="form-row">
+								<div class="col-md-6 col-xs-12">
+									<label for="contenedorid" >Apellido Paterno</label>
+									<input type="text" class="form-control" id="appaterno" name="appaterno" placeholder="Apellido Paterno" maxlength="50" value="<php:item id="appaterno" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-12">
+									<label for="contenedorid" >Apellido Materno</label>
+									<input type="text" class="form-control" id="apmaterno" name="apmaterno" placeholder="Apellido Materno" maxlength="50" value="<php:item id="apmaterno" />">
+							  </div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-12">
+									<label for="contenedorid" >Fecha de nacimiento</label>
+									<input type="text" class="form-control" id="fechanacimiento" name="fechanacimiento" placeholder="Apellido Materno" maxlength="50" value="<php:item id="fechanacimiento" />">
+							  </div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Correo Electr&oacute;nico</label>
+									<input type="text" class="form-control" id="correo" name="correo" placeholder="Correo electr&oacute;nico" maxlength="50" value="<php:item id="correo" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Nacionalidad</label>
+									<input type="text" class="form-control" id="nacionalidad" name="nacionalidad" placeholder="Nacionalidad" maxlength="50" value="<php:item id="nacionalidad" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-12">
+									<label for="contenedorid" >Estado civil</label>
+									<select class= "form-control" name="idEstadoCivil" id="idEstadoCivil">
+										<option value="0">(Seleccionar)</option>
+										<php:repeticion id="EstadoCivil">
+											<option value="<php:item id="idEstadoCivil" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idEstadoCivil" /><php:argumento idvalor="idEstadoCivil" /></php:funcion>><php:item id="Descripcion" /></option>
+										</php:repeticion>
+									</select>
+								</div>
+							</div>	
+				
+									
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Direcci&oacute;n</label>
+									<input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion" maxlength="50" value="<php:item id="direccion" />">
+								</div>
+							</div>
+										
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Comuna</label>
+									<input type="text" class="form-control" id="comuna" name="comuna" placeholder="Comuna" maxlength="50" value="<php:item id="comuna" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Ciudad</label>
+									<input type="text" class="form-control" id="ciudad" name="ciudad" placeholder="Ciudad" maxlength="50" value="<php:item id="ciudad" />">
+								</div>
+							</div>
+
+							<!--<div class="form-row">
+								<div class="col-md-6 col-xs-12">
+									<label for="contenedorid" >Empresa</label>
+									<select class= "form-control" name="RutEmpresa" id="RutEmpresa">
+										<option value="0">(Seleccionar)</option>
+										<php:repeticion id="Empresas">
+											<option value="<php:item id="RutEmpresa" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEmpresa" /><php:argumento idvalor="RutEmpresa" /></php:funcion>><php:item id="RazonSocial" /></option>
+										</php:repeticion>
+									</select>
+								</div>
+							</div>	-->
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-12">
+									<label for="contenedorid" >Centro de Costo</label>
+									<select class= "form-control" name="idCentroCosto" id="idCentroCosto">
+										<option value="0">(Seleccionar)</option>
+										<php:repeticion id="CentrosCostos">
+											<option value="<php:item id="idCentroCosto" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idCentroCosto" /><php:argumento idvalor="idCentroCosto" /></php:funcion>><php:item id="Descripcion" /></option>
+										</php:repeticion>
+									</select>
+								</div>
+							</div>
+							</div>	
+		              </div>
+		              <!-- /.tab-pane -->
+		              <div class="tab-pane" id="form_dc">
+						<div class="box-body">
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Fecha de Documento</label>
+									<input type="text" class="form-control" id="fechadocumento" name="fechadocumento" placeholder="Fecha de Documento" maxlength="50" value="<php:item id="fechadocumento" />">
+								</div>
+							</div>
+
+		              		<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Ciudad de firma</label>
+									<input type="text" class="form-control" id="ciudadfirma" name="ciudadfirma" placeholder="Ciudad de firma" maxlength="50" value="<php:item id="ciudadfirma" />">
+								</div>
+							</div>
+		               		
+		               		<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Cargo</label>
+									<input type="text" class="form-control" id="cargo" name="cargo" placeholder="Cargo" maxlength="50" value="<php:item id="cargo" />">
+								</div>
+							</div>
+							
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Sueldo base</label>
+									<input type="text" class="form-control" id="sueldo" name="sueldo" placeholder="Sueldo base" maxlength="50" value="<php:item id="sueldo" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Plazo de Contrato</label>
+									<input type="text" class="form-control" id="plazocontrato" name="plazocontrato" placeholder="Plazo de Contrato" maxlength="50" value="<php:item id="plazocontrato" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Nombre de la sucursal</label>
+									<input type="text" class="form-control" id="nombresucursal" name="nombresucursal" placeholder="Nombre de la sucursal" maxlength="50" value="<php:item id="nombresucursal" />">
+								</div>
+							</div>
+
+							
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Direcci&oacute;n de la sucursal</label>
+									<input type="text" class="form-control" id="direcciontrabajo" name="direcciontrabajo" placeholder="Direccion del trabajo" maxlength="50" value="<php:item id="direcciontrabajo" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Domicilio de la Empresa</label>
+									<input type="text" class="form-control" id="domicilio" name="domicilio" placeholder="Domicilio de la Empresa" maxlength="50" value="<php:item id="domicilio" />">
+								</div>
+							</div>
+
+							
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Fecha ingreso</label>
+									<input type="text" class="form-control" id="fechaingreso" name="fechaingreso" placeholder="Fecha ingreso" maxlength="50" value="<php:item id="fechaingreso" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Fecha termino</label>
+									<input type="text" class="form-control" id="fechatermino" name="fechatermino" placeholder="Fecha termino" maxlength="50" value="<php:item id="fechatermino" />">
+								</div>
+							</div>
+	
+							<!--<div class="form-row">
+								<div class="col-md-6 col-xs-12">
+									<label for="contenedorid" >Jornadas </label>
+									<select class= "form-control" name="idSubClausula" id="idCentroCosto">
+										<option value="0">(Seleccionar)</option>
+										<php:repeticion id="Jornadas">
+											<option value="<php:item id="idSubClausula" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idSubClausula" /><php:argumento idvalor="idSubClausula" /></php:funcion>><php:item id="Titulo" /></option>
+										</php:repeticion>
+									</select>
+								</div>
+							</div>-->
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Jornada</label>
+									<input type="text" class="form-control" id="jornada" name="jornada" placeholder="Jornada" maxlength="50" value="<php:item id="jornada" />">
+								</div>
+							</div>
+
+							<!--<div class="form-row">
+								<div class="col-md-6 col-xs-12">
+									<label for="contenedorid" >Turnos </label>
+									<select class= "form-control" name="idSubClausula" id="idCentroCosto">
+										<option value="0">(Seleccionar)</option>
+										<php:repeticion id="Turnos">
+											<option value="<php:item id="idSubClausula" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idSubClausula" /><php:argumento idvalor="idSubClausula" /></php:funcion>><php:item id="Titulo" /></option>
+										</php:repeticion>
+									</select>
+								</div>
+							</div>	-->
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Turno</label>
+									<input type="text" class="form-control" id="turno" name="turno" placeholder="Turno" maxlength="50" value="<php:item id="turno" />">
+								</div>
+							</div>
+
+						</div>
+		              </div>
+		              <!-- /.tab-pane -->
+		              <div class="tab-pane" id="tab_3">
+		              	<div class="box-body">
+
+		              		<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Movilizaci&oacute;n autom&aacute;tica</label>
+									<input type="text" class="form-control" id="movilizacionautomatica" name="movilizacionautomatica" placeholder="Movilizaci&oacute;n autom&aacute;tica" maxlength="50" value="<php:item id="movilizacionautomatica" />">
+								</div>
+							</div>
+		               		
+		               		<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Bono CC</label>
+									<input type="text" class="form-control" id="bonocc" name="bonocc" placeholder="Bono CC" maxlength="50" value="<php:item id="bonocc" />">
+								</div>
+							</div>
+							
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Bono CCA1</label>
+									<input type="text" class="form-control" id="bonocca1" name="bonocca1" placeholder="Bono CCA1" maxlength="50" value="<php:item id="bonocca1" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Bono CC Diario</label>
+									<input type="text" class="form-control" id="bonoccdiario" name="bonoccdiario" placeholder="Bono CC Diario" maxlength="50" value="<php:item id="bonoccdiario" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Bono Asignacion de Zona</label>
+									<input type="text" class="form-control" id="bonoasignzona" name="bonoasignzona" placeholder="Bono Asignacion de Zona" maxlength="50" value="<php:item id="bonoasignzona" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Bono Asistencia</label>
+									<input type="text" class="form-control" id="bonoasistencia" name="bonoasistencia" placeholder="Bono Asistencia" maxlength="50" value="<php:item id="bonoasistencia" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Bono Planta</label>
+									<input type="text" class="form-control" id="bonoplanta" name="bonoplanta" placeholder="Bono Planta" maxlength="50" value="<php:item id="bonoplanta" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Gratificacion</label>
+									<input type="text" class="form-control" id="gratificacion" name="gratificacion" placeholder="Gratificacion" maxlength="50" value="<php:item id="gratificacion" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Asignaci&oacute;n m&oacute;vil</label>
+									<input type="text" class="form-control" id="asignacionmovil" name="asignacionmovil" placeholder="Asignaci&oacute;n m&oacute;vil" maxlength="50" value="<php:item id="asignacionmovil" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Asignaci&oacute;n clinica</label>
+									<input type="text" class="form-control" id="asignacionclinica" name="asignacionclinica" placeholder="Asignaci&oacute;n clinica" maxlength="50" value="<php:item id="asignacionclinica" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Movilizaci&oacute;n</label>
+									<input type="text" class="form-control" id="movilizacion" name="movilizacion" placeholder="Movilizaci&oacute;n" maxlength="50" value="<php:item id="movilizacion" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Bono Movilizaci&oacute;n</label>
+									<input type="text" class="form-control" id="bonomovilizacion" name="bonomovilizacion" placeholder="Bono Movilizaci&oacute;n" maxlength="50" value="<php:item id="bonomovilizacion" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Bono Noche</label>
+									<input type="text" class="form-control" id="bononoche" name="bononoche" placeholder="Bono Noche" maxlength="50" value="<php:item id="bononoche" />">
+								</div>
+							</div>
+							
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Bono Uno</label>
+									<input type="text" class="form-control" id="bonouno" name="bonouno" placeholder="Bono Uno" maxlength="50" value="<php:item id="bonouno" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Bono Adicional CC</label>
+									<input type="text" class="form-control" id="bonoadicionalcc" name="bonoadicionalcc" placeholder="Bono Adicional CC" maxlength="50" value="<php:item id="bonoadicionalcc" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Bono Locomocion Extra</label>
+									<input type="text" class="form-control" id="bonolocomocionextra" name="bonolocomocionextra" placeholder="Bono Locomocion Extra" maxlength="50" value="<php:item id="bonolocomocionextra" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Bono Altura</label>
+									<input type="text" class="form-control" id="bonoaltura" name="bonoaltura" placeholder="Bono Altura" maxlength="50" value="<php:item id="bonoaltura" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Bono Piso</label>
+									<input type="text" class="form-control" id="bonopiso" name="bonopiso" placeholder="Bono Piso" maxlength="50" value="<php:item id="bonopiso" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Bono Noche</label>
+									<input type="text" class="form-control" id="bononoche" name="bononoche" placeholder="Bono Noche" maxlength="50" value="<php:item id="bononoche" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Bono Sup</label>
+									<input type="text" class="form-control" id="bonosup" name="bonosup" placeholder="Bono Sup" maxlength="50" value="<php:item id="bonosup" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Bono Nocturno</label>
+									<input type="text" class="form-control" id="bononocturno" name="bononocturno" placeholder="Bono Nocturno" maxlength="50" value="<php:item id="bononocturno" />">
+								</div>
+							</div>
+
+							
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Prima</label>
+									<input type="text" class="form-control" id="prima" name="prima" placeholder="Prima" maxlength="50" value="<php:item id="prima" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >FraseCC</label>
+									<input type="text" class="form-control" id="frasecc" name="frasecc" placeholder="FraseCC" maxlength="50" value="<php:item id="frasecc" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >FraseCCDos</label>
+									<input type="text" class="form-control" id="fraseccdos" name="frasecdosc" placeholder="FraseCCDos" maxlength="50" value="<php:item id="fraseccdos" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >FraseCCTres</label>
+									<input type="text" class="form-control" id="frasecctres" name="frasecdtres" placeholder="FraseCCTres" maxlength="50" value="<php:item id="frasecctres" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >FraseCCCuatro</label>
+									<input type="text" class="form-control" id="frasecccuatro" name="frasecccuatro" placeholder="FraseCCCuatro" maxlength="50" value="<php:item id="frasecccuatro" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >FraseCCCinco</label>
+									<input type="text" class="form-control" id="frasecccinco" name="frasecccinco" placeholder="FraseCCCinco" maxlength="50" value="<php:item id="frasecccinco" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Movilizaci&oacute;n</label>
+									<input type="text" class="form-control" id="movilizacion" name="movilizacion" placeholder="Movilizaci&oacute;n" maxlength="50" value="<php:item id="movilizacion" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >InstalacionCC</label>
+									<input type="text" class="form-control" id="instalacioncc" name="instalacioncc" placeholder="InstalacionCC" maxlength="50" value="<php:item id="instalacioncc" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Renta Variable Mensual</label>
+									<input type="text" class="form-control" id="rentavariablemensual" name="rentavariablemensual" placeholder="Renta Variable Mensual" maxlength="50" value="<php:item id="rentavariablemensual" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Mes de pago</label>
+									<input type="text" class="form-control" id="mesdepago" name="mesdepago" placeholder="Mes de pago" maxlength="50" value="<php:item id="mesdepago" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Asignaci&oacute;n de caja</label>
+									<input type="text" class="form-control" id="asignacioncaja" name="asignacioncaja" placeholder="Asignaci&oacute;n de caja" maxlength="50" value="<php:item id="asignacioncaja" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Asistencia Puntualidad</label>
+									<input type="text" class="form-control" id="asistenciapunt" name="asistenciapunt" placeholder="Asistencia Puntualidad" maxlength="50" value="<php:item id="asistenciapunt" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Nombre</label>
+									<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" maxlength="50" value="<php:item id="nombre" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Frase</label>
+									<input type="text" class="form-control" id="frase" name="frase" placeholder="Frase" maxlength="50" value="<php:item id="frase" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Mes de Inicio</label>
+									<input type="text" class="form-control" id="mesdeinicio" name="mesdeinicio" placeholder="Mes de Inicio" maxlength="50" value="<php:item id="mesdeinicio" />">
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col-md-6 col-xs-122">
+									<label for="contenedorid" >Asignacion de colaci&oacute;n</label>
+									<input type="text" class="form-control" id="asignacioncolacion" name="asignacioncolacion" placeholder="Asignacion de colaci&oacute;n" maxlength="50" value="<php:item id="asignacioncolacion" />">
+								</div>
+							</div>
+
+						</div>
+		              </div>
+
+		              <div class="tab-pane" id="tab_4">
+						<div class="box-body">
+		                	
+		                  <!--Empresas-->
+			              <div class="col-md-6" style="padding-bottom: 15px;">
+			                <label for="Empresa" >Empresa</label>
+			                <!--Select de Empresas disponibles-->
+			                <select class= "form-control" name="RutEmpresa" id="RutEmpresa">
+			                <option value="0">( Seleccione )</option>
+			                  <php:repeticion id="Empresas">
+			                    <option value="<php:item id="RutEmpresa" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEmpresa" /><php:argumento idvalor="RutEmpresa" /></php:funcion>><php:item id="RazonSocial" /></option>
+			                  </php:repeticion>
+			                </select>
+			              </div>
+
+			              <!--Tipo de Documento-->
+			              <div class="col-md-6" style="padding-bottom: 15px;">
+			                  <label for="TipoDeDocumento" >Tipo de Documento</label>
+			                  <!--Select de Empresas disponibles-->
+			                  <select class= "form-control" name="idTipoDoc" id="idTipoDoc" required>
+			                    <option value="0">(Seleccionar)</option>
+			                    <php:repeticion id="TipoDocumentos">
+			                      <option value="<php:item id="idTipoDoc" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idTipoDoc" /><php:argumento idvalor="idTipoDoc" /></php:funcion>><php:item id="NombreTipoDoc" /></option>
+			                    </php:repeticion>
+			                  </select>
+			              </div>
+
+			              <!--Procesos-->
+			              <div class="col-md-6" style="padding-bottom: 15px;">
+			                  <label for="Proceso" >Proceso</label>
+			                  <!--Select de Empresas disponibles-->
+			                  <select class= "form-control" name="idProceso" id="idProceso" required>
+			                    <option value="0">(Seleccionar)</option>
+			                    <php:repeticion id="idProceso">
+			                      <option value="<php:item id="idProceso" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idProceso" /><php:argumento idvalor="idProceso" /></php:funcion>><php:item id="Descripcion" /></option>
+			                    </php:repeticion>
+			                  </select>
+			              </div>
+						
+					    <!--Plantilla-->
+			            <div class="col-md-6 xs-12" style="padding-bottom: 15px;">
+			               <label>Plantilla</label>
+			               <select class="form-control" name="idPlantilla" id="idPlantilla">
+			                 <option value="0">( Seleccione )</option>
+			               </select>
+			            </div>
+			        
+			           <!--Tipo de Firmas-->
+			           <div class="col-md-6" style="padding-bottom: 15px;">
+			              <label for="Proceso" >Tipo de firma</label>
+			              <!--Select de Empresas disponibles-->
+			              <select class= "form-control" name="idFirma" id="idFirma" required>
+			                <option value="0">(Seleccionar)</option>
+			                <php:repeticion id="idFirma">
+			                  <option value="<php:item id="idTipoFirma" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idTipoFirma" /><php:argumento idvalor="idTipoFirma" /></php:funcion>><php:item id="Descripcion" /></option>
+			                </php:repeticion>
+			              </select>
+			          </div>
+
+			         <!--Seleccionar Firmantes por Empresas -->
+			         <div class="form-row">
+			           <div class="col-md-12">
+			             <h5></h5>
+			           </div>
+			         </div>
+
+			        <div class="form-row">
+			            <div class="col-md-12">
+			                <label id="label" style="display: none">Seleccione Firmantes</label>
+			               
+			                  <!-- Pasos-->
+			                  <div class="steps-form-2">
+			                      <div class="steps-row-2 setup-panel-2 d-flex justify-content-between">
+			                          <div class="steps-step-2" id="icono_representante" style="display:none">
+			                              <a href="#step-1" id="boton_emp" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0" data-placement="top" title="Empresa"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-building" aria-hidden="true"></i></a>
+			                              <div id="text_emp" class="text">Firmantes</div>
+			                          </div>
+			                          <div class="steps-step-2" style="display:none">
+			                              <a href="#step-2" id="boton_cli" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0" data-placement="top" title="Cliente"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-users" aria-hidden="true"></i></a>
+			                               <div id="text_cli" class="text">Cliente</div>
+			                          </div>
+			                          <div class="steps-step-2" style="display:none">
+			                              <a href="#step-3" id="boton_not" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0 not steps-not" data-placement="top" title="Notaria"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+			                              <div id="text_not" class="text">Notaria</div>
+			                          </div>
+			                      </div>
+			                  </div>
+			              
+			                  <!--Firmantes de Empresas-->
+			                  <div class="collapse" id="step-1">
+			                   <table id="tabla_emp" class="table table-bordered table-hover">
+			                    <thead>
+			                      <tr>
+			                          <h4> Firmantes </h4>
+			                      </tr> 
+			                      <tr>
+			                        <th style="text-align: center;">Selecci&oacute;n</th>
+			                        <th style="text-align: center;">Rut</th>
+			                        <th style="text-align: center;">Nombre y Apellido</th>
+			                        <th style="text-align: center;">Cargo</th>
+			                      </tr>
+			                    </thead>
+			                    <tbody>
+			                    </tbody>                 
+			                   </table>
+			                  </div>
+			                <!--Fin de firmantes-->
+			            </div>
+			        </div>
+			        <!--Fin de Firmantes-->
+			         
+			           <div class="form-row">  
+			            <div class="col-md-2 xs-12 pull-right">  
+			                <input type="hidden" id="idWF" name="idWF"/>
+			              
+			                <!--Firmantes de la Plantilla-->
+			                <input type="hidden" id="Representantes" name="Representantes" />
+			                <input type="hidden" id="Empleado" name="Empleado" />
+			                <input type="hidden" id="Cantidad_Firmantes" name="Cantidad_Firmantes" />
+			 
+							<input type="hidden" id="input_empleado" name="input_empleado" value="<php:item id="input_empleado"/>"/>
+			                <button class="btn btn-md btn-success btn-block" type="submit" name="accion" id="GENERAR" value="GENERAR" style="margin-top: 10px">Generar</button> 
+			            </div>
+			           </div>
+
+					</div>	
+              	   </div>
+
+		              
+              	</div>
+              </div>
+			</php:repeticion>
+		</form>
+	</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<script>
+
+  $(document).ready(function(){
+
+    $("#GENERAR").attr('disabled', true);
+    $("#idTipoDoc").attr("disabled",true);
+    $("#idProceso").attr("disabled",true);
+    $("#idPlantilla").attr("disabled",true);
+    $("#idFirma").attr("disabled",true);
+  });
+
+
+ $("#idProceso").change(function(){
+
+    if( $("#idProceso").val() != 0 )
+      $("#idPlantilla").attr("disabled",false);
+    else{
+        $("#idPlantilla").attr("disabled",true);
+        $("#idFirma").attr("disabled",true);
+        $("#idProceso").val(0);
+        $("#idPlantilla").val(0);
+        $("#idFirma").val(0);
+
+    }
+ });
+
+
+  var cantidad_firmantes;
+
+  $("#idPlantilla").change(function(){
+
+      if( $("#idPlantilla").val() != 0 ){
+        $("#idFirma").attr("disabled",false);
+          
+        $("#Representates").val("");
+        $("#Empleado").val("");
+        $("#Cantidad_Firmantes").val("");
+
+        $("#mensajeError").removeClass("callout callout-warning");
+        $("#mensajeError").html("");
+
+        $('input[type=checkbox]').prop('checked', false);
+        $("#step-1").collapse('hide');
+
+        var idPlantilla = $("#idPlantilla").val();
+
+        if( idPlantilla != 0 ){
+          var url  = "Generar_Documentos_Masivos1_ajax.php?idPlantilla=" + idPlantilla;
+
+          // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+          if( window.XMLHttpRequest )
+            ajax = new XMLHttpRequest(); // No Internet Explorer
+          else
+            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+         
+          // Almacenamos en el control al funcion que se invocara cuando la peticion
+          // cambie de estado 
+          ajax.onreadystatechange = funcionCallback_Plantilla;
+
+          // Enviamos la peticion
+          ajax.open( "GET", url, true );
+          ajax.send( "" );
+        }
+      }else{
+      
+        $("#idFirma").attr("disabled",true);
+        $("#Documento").attr("disabled",true);
+        $(".btn-file").attr("disabled",true);
+        $("#archivo").attr("disabled",true);
+
+        $("#idPlantilla").val(0);
+        $("#idFirma").val(0);
+        $("#Documento").val();
+        $("#archivo").val();
+      }
+     
+  });
+
+  function funcionCallback_Plantilla()
+  {
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+      if( ajax.status == 200 )
+      {
+        // Escribimos el resultado en la pagina HTML mediante DHTML
+        //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
+        salida = ajax.responseText;
+
+        if( salida != '' ){ 
+            var datos = JSON.parse(salida);
+            var cont = 0; 
+
+            $.each(datos,function(key, registro) {
+             //2 : Representante 
+             //3 : Empleado
+             if( registro.idEstado == 2 ){
+                $("#Representantes").val("1");
+                cont++;
+             }
+             if( registro.idEstado == 3 ){
+                $("#Empleado").val("1");
+             }        
+
+            cantidad_firmantes = cont;
+            $("#Cantidad_Firmantes").val(cantidad_firmantes); 
+            $("#idWF").val(registro.idWF);                             
+          }); 
+        }else{
+            $("#mensajeError").removeClass("callout callout-warning");
+            $("#mensajeError").html("");
+        }
+      }
+    }
+  }
+
+	/*********************/
+	/**FILTRAR PLANTILLA**/
+	/********************/
+  $("#idTipoDoc").change(function(){
+
+    $("#mensajeError").removeClass("callout callout-warning");
+    $("#mensajeError").html(""); 
+
+    if( $("#idTipoDoc").val() != 0 ){
+    
+
+      var empresa = $("#RutEmpresa").val();
+      var idTipoDoc = $("#idTipoDoc").val();
+
+      if( idTipoDoc != 0 && empresa != 0 ){
+        var url  = "Generar_Documentos_Masivos_ajax.php?RutEmpresa=" + empresa + "&idTipoDoc=" + idTipoDoc;
+     
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+          ajax = new XMLHttpRequest(); // No Internet Explorer
+        else
+          ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+       
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajax.onreadystatechange = funcionCallback;
+
+        // Enviamos la peticion
+        ajax.open( "GET", url, true );
+        ajax.send( "" );
+      }
+    }else{
+       
+        $("#idProceso").attr("disabled",true);
+        $("#idPlantilla").attr("disabled",true);
+        $("#idFirma").attr("disabled",true);
+        $("#Documento").attr("disabled",true);
+        $(".btn-file").attr("disabled",true);
+        $("#archivo").attr("disabled",true);
+
+        $("#idTipoDoc").val(0);
+        $("#idProceso").val(0);
+        $("#idPlantilla").val(0);
+        $("#idFirma").val(0);
+        $("#Documento").val();
+        $("#archivo").val();
+    }
+
+  });
+
+  var ajax;
+  var salida;
+ 
+  function funcionCallback()
+  {
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+      if( ajax.status == 200 )
+      {
+        // Escribimos el resultado en la pagina HTML mediante DHTML
+        //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
+        salida = ajax.responseText;
+
+        if( salida != '' ){
+            var datos = JSON.parse(salida);
+           
+            $.each(datos,function(key, registro) {
+                $("#idPlantilla").append('<option value='+ registro.idPlantilla +'>'+registro.Descripcion_Pl+'</option>');                                      
+            }); 
+
+            $('#idProceso').attr("disabled",false);  
+
+        }else{
+            $("#mensajeError").addClass("callout callout-warning");
+            $("#mensajeError").html("La Empresa seleccionada no tiene Plantillas aprobadas o asociadas"); 
+            
+            $("#idProceso").attr("disabled",true);
+            $("#idPlantilla").attr("disabled",true);
+            $("#idFirma").attr("disabled",true);
+            $("#idTipoDoc").val(0);
+            $("#idProceso").val(0);
+            $("#idPlantilla").val(0);
+            $("#idFirma").val(0);
+        }
+      }
+    }
+  }
+
+	
+  function mostrarFirmantes(){
+
+      var Representantes = $("#Representantes").val();
+
+      if( Representantes != '' ){
+        $("#icono_representante").show();
+        $("#label").show();
+      }
+  }
+
+  /*******************************/
+  /**BUSCAR FIRMANTES DE EMPRESA**/
+  /*******************************/
+
+   $("#RutEmpresa").change(function(){
+            
+      var RutEmpresa = $("#RutEmpresa").val();
+
+      $("#mensajeError").removeClass("callout callout-warning");
+      $("#mensajeError").html("");
+      $("#idTipoDoc").attr("disabled",true);
+      $("#idProceso").attr("disabled",true);
+      $("#idPlantilla").attr("disabled",true);
+      $("#idFirma").attr("disabled",true);
+      $("#Documento").attr("disabled",true);
+      $(".btn-file").attr("disabled",true);
+      $("#archivo").attr("disabled",true);
+
+      $("#idTipoDoc").val(0);
+      $("#idProceso").val(0);
+      $("#idPlantilla").val(0);
+      $("#idFirma").val(0);
+      $("#Documento").val('');
+      $("#archivo").val();
+
+      //Limpiar tabla 
+      $(".fila").remove();
+
+      //Ocultar firmantes 
+      $("#icono_representante").hide();
+      $("#label").hide();
+      $("#step-1").collapse('hide');
+
+      if( RutEmpresa != 0 ){
+        
+        $("#idTipoDoc").attr("disabled",false);
+        $("#idTipoDoc").val(0);
+
+        var url  = "Generar_Documentos_Masivos2_ajax.php?RutEmpresa=" + RutEmpresa;
+    
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+          ajax = new XMLHttpRequest(); // No Internet Explorer
+        else
+          ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+       
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajax.onreadystatechange = funcionCallback_Empresa;
+
+        // Enviamos la peticion
+        ajax.open( "GET", url, true );
+        ajax.send( "" );
+      }
+  });
+
+  function funcionCallback_Empresa()
+  {
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+      if( ajax.status == 200 )
+      {
+        // Escribimos el resultado en la pagina HTML mediante DHTML
+        //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
+        salida = ajax.responseText;
+
+        if( salida != '' ){ 
+            var datos = JSON.parse(salida);
+
+            $.each(datos,function(key, registro) {
+                $("#tabla_emp tr:last ").after("<tr align='center' class='fila'><td ><input type='checkbox' name='Firmantes_Emp[]' class='f_emp' value='" + registro.personaid + "'id='emp_<php:filamenos />'  onclick='seleccion(<php:filamenos />);'/> </td><td>" + registro.personaid + "</td><td>" + registro.nombre + " " + registro.appaterno + " " + registro.apmaterno + "</td><td>" +  registro.descripcion + "</td></tr>");                                 
+            });          
+        }else{
+            $("#mensajeError").removeClass("callout callout-warning");
+            $("#mensajeError").html("");
+        }
+      }
+    }
+  }
+
+  function seleccion(id){
+
+      var num = $('input[type=checkbox]:checked').length;
+      var cantidad_firmantes = $("#Cantidad_Firmantes").val(); 
+
+      if ( cantidad_firmantes == '' ){
+          $("#mensajeError").addClass("callout callout-warning");
+          $("#mensajeError").html("Debe seleccionar la Plantilla" );
+          $("#idPlantilla").focus();
+          $("#GENERAR").attr('disabled', true);
+          return false;
+
+      }
+      if ( num > cantidad_firmantes ){
+          $("#mensajeError").addClass("callout callout-warning");
+          $("#mensajeError").html("Debe seleccionar solo " + cantidad_firmantes + " Firmante, seg&uacute;n el flujo de firma de la Plantilla seleccionada" );
+          $("#GENERAR").attr('disabled', true);
+      }else{
+          $("#mensajeError").removeClass("callout callout-warning");
+          $("#mensajeError").html("");
+          $("#GENERAR").attr('disabled', false);
+      }
+  }
+
+  $("#idFirma").change(function(){
+   
+      mostrarFirmantes();  
+
+      if ( $("#Representantes").val() == '' ){
+        $("#GENERAR").attr('disabled', false);
+      }
+  });
+
+ </script>

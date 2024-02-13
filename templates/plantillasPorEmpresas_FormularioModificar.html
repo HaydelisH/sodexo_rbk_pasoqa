@@ -1,0 +1,136 @@
+<div class="row">
+	  <div class="col-md-12">
+		<div class="box ">
+		  <div class="box-body pad table-responsive">
+			 <div class="box-header">
+			  <div class="form-inline ">
+				<div class="form-group">
+				<php:repeticion id="formulario">			
+			  	</div>
+				<div class="form-group">
+				 <form name="formulario" id="formulario_usuarios" action="PlantillasPorEmpresas.php" method="POST" >
+					<input type="hidden" name="tipousuarioid" 	id="tipousuarioid" 	value="<php:item id="tipousuarioid" />">		
+					<input type="hidden" name="holdingid" 		id="holdingid"		value="<php:item id="holdingid" />">
+					<input type="hidden" name="cantfilas" 	 	value="<php:item id="cantfilas" />" />		
+					<input type="hidden" name="pagina"	 	 	value="<php:item id="pagina" />" />	
+					<input type="hidden" name="nombre"	 	 	value="<php:item id="nombre" />" />	
+					<input type="hidden" class="form-control" id="RutEmpresa" name="RutEmpresa" value="<php:item id="RutEmpresa" />">
+				
+					<button type="submit" class="btn btn-default" ><a><i class="fa fa-home" aria-hidden="true"></i> Ir a Listado</a></button>
+					<button type="submit" class="btn btn-default" name="accion" value="AGREGAR"><a><i class="fa fa-plus" aria-hidden="true"></i>Agregar</a></button>
+
+					
+				</form>
+			
+				
+				</div>
+			  </div> 
+			</div>	
+		  <div class="box-body">
+	   <!--Mensajes-->
+	  <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+	  <div id="mensajeError"><php:texto id="mensajeError" /></div>	
+
+
+	<div id="divtabla" class="tabla-responsiva" >
+		
+		<div class="form-row" >
+			<div class="col-md-5" style="padding-bottom: 15px; padding-left: 0;">
+			  <input type="hidden" name="tipousuarioid" id="tipousuarioidx" value="<php:item id="tipousuarioid" />" />
+			  <label for="nombre">Empresa</label>
+			  <input type="text" class="form-control" id="RazonSocial" name="RazonSocial" value="<php:item id="RazonSocial" />" readonly>
+			</div>
+		</div>
+
+						
+		<!--Tabla-->
+		<table id="example2" class="table table-bordered table-hover" name="tbltabla">
+		  <thead>
+			<tr>
+			<th style="text-align:center" data-campo="ID Documento">C&oacute;digo</th>
+			<th style="text-align:center" data-campo="Nombre">T&iacute;tulo</th>
+			<th style="text-align:center" data-campo="Nombre">Flujo de Firma</th>
+			<th style="text-align:center" data-campo="Nombre">Tipo de Documento</th>
+			<th style="text-align:center" data-campo="Nombre">Categoria</th>
+			<th style="text-align:center" data-campo="Nombre">Aprobado</th>
+			<th style="text-align:center" data-campo="Nombre">Acciones</th>
+			</tr>
+		  </thead>
+		  <tbody>
+		  <!--Contenido de Tabla-->
+		  <php:repeticion id="listado">
+			<tr>
+				<td align="center" data-campo="ID Documento"><php:item id="idPlantilla" /></td>
+				<td align="center" data-campo="ID Documento"><php:item id="Descripcion_Pl" /></td>
+				<td align="center" data-campo="Nombre"><php:item id="NombreWF" /></td>
+				<td align="center" data-campo="Nombre"><php:item id="NombreTipoDoc" /></td>
+				<td align="center" data-campo="Nombre"><php:item id="Titulo" /></td>
+				<td data-campo="APROBADO"><div style="text-align: center;" id="Aprobado_<php:filamenos />"><php:item id="Aprobado"/></div></td>
+				<td data-campo="Acciones" style="text-align: center;">
+				<form name="formulario" id="formulario_tipo" action="PlantillasPorEmpresas.php" method="POST">
+					<input type="hidden" name="holdingid" value="<php:item id="holdingid" />">
+					<input type="hidden" name="tipodocumentoid" value="<php:item id="<php:item id="idTipoDoc" />" >
+					<input type="hidden" name="tipousuarioid" value="<php:item id="<php:item id="tipousuarioid" />" >
+					<input type="hidden" name="configid" value="<php:item id="<php:item id="configid" />" >
+					<input type="hidden" name="pagina" value="<php:item id="<php:item id="pagina" />" >
+					<input type="hidden" name="cantfilas" value="<php:item id="<php:item id="cantfilas" />" >
+					<input type="hidden" id="RutEmpresa_aux_<php:filamenos />" name="RutEmpresa" >
+					<input type="hidden" id="idPlantilla" name="idPlantilla" value="<php:item id="idPlantilla" />">
+					<button class="btn btn-primary btn-sm" type="submit" name="accion" id="eliminar" value="ELIMINAR" data-toggle="tooltip" title="Esta Plantilla se  desvincular&aacute; s&oacute;lo de la Empresa" onclick="javascript:return preguntarPorBorrar() && asignarRutEmpresa(<php:filamenos />);" >Eliminar</button>
+				</form>
+			</tr></php:repeticion>
+		  </tbody>
+		</table>
+	  </div>
+         
+	  </div> 
+	<!-- /.box-header -->
+
+	</section>
+		<form name="formulario3"  id="formulario3"  action="PlantillasEmpresas.php" method="POST">
+			<input type="hidden" name="tipousuarioid" 	id="tipousuarioidx" 	value="<php:item id="tipousuarioid" />">	
+			<input type="hidden" name="holdingid" 		id="holdingidx"			value="<php:item id="holdingid" />">
+			<input type="hidden" name="nombre" 			id="nombrex"			value="<php:item id="nombre" />">
+			<input type="hidden" name="accion" 			id="accionx"			value="<php:item id="accion" />">
+			<input type="hidden" name="cantfilas" 	 	value="<php:item id="cantfilas" />" />		
+			<input type="hidden" name="pagina"	 	 	value="<php:item id="pagina" />" />	
+			<input type="hidden" id="RutEmpresa_1" name="RutEmpresa" value="<php:item id="RutEmpresa" />">
+		</form>
+		
+		</php:repeticion>
+
+		<script>
+
+		function TipoUsuarioSel()
+		{
+			document.formulario.tipousuarioid.value = document.form1.tipousuarioid.options[document.form1.tipousuarioid.selectedIndex].value;
+		}
+		
+		
+		function iraPlantillasDisponibles()
+		{
+			
+			var tipousuarioid = document.getElementById('tipousuarioid').value;
+			document.getElementById('tipousuarioidx').value = document.getElementById('tipousuarioid').value;
+			document.getElementById('holdingidx').value 	= document.getElementById('holdingid').value;
+			
+			if (document.getElementById('tipousuarioid').value == '')
+			{	
+				document.getElementById('accion').value = 'BUSCAR';
+			}else{
+				document.getElementById('accionx').value = 'MODIFICAR';
+			}
+			
+			document.formulario3.submit();				
+		}
+
+		function asignarRutEmpresa(i){
+			var rut = document.getElementById("RutEmpresa").value;
+			var id = "RutEmpresa_aux_" + i;
+			document.getElementById(id).value = rut;
+			return true;
+		}
+			</script>
+
+
+

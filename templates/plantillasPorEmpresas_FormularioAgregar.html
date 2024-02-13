@@ -1,0 +1,81 @@
+<div class="row">
+  <div class="col-md-12">
+	<div class="box">
+	  <div class="box-body pad table-responsive">
+		 <div class="box-header">
+		  <div class="form-inline ">
+			<div class="form-group">
+			<php:repeticion id="formulario">			
+		  </div>
+			<div class="form-group">
+			  <form name="formulario1" id="formulario_usuarios" action="PlantillasPorEmpresas.php" method="POST" autocomplete="off" >
+			  
+				<input type="hidden" name="tipousuarioid" 	id="tipousuarioid" 	value="<php:item id="tipousuarioid" />">		
+				<input type="hidden" name="holdingid" 		id="holdingid"		value="<php:item id="holdingid" />">
+				<input type="hidden" name="cantfilas" 	 	value="<php:item id="cantfilas" />" />		
+				<input type="hidden" name="pagina"	 	 	value="<php:item id="pagina" />" />	
+				<input type="hidden" name="nombre"	 	 	value="<php:item id="nombre" />" />	
+				<input type="hidden" name="RutEmpresa"	 	 	value="<php:item id="RutEmpresa" />" />	
+				
+				<button type="submit" class="btn btn-default" ><a><i class="fa fa-home" aria-hidden="true"></i> Ir a Listado</a></button>
+				<button type="submit" class="btn btn-default" name="accion" value="PLANTILLAS"><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>																
+			  </form>
+				<br>
+				<label for="nombre">Nombre de Perfil: <php:item id="RazonSocial" /></label>		
+			</div>
+		  </div> 
+		</div>	
+	  <div class="box-body">
+   <!--Mensajes-->
+  <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+  <div id="mensajeError"><php:texto id="mensajeError" /></div>
+			  
+			<form name="formulario" id="formulario_usuarios" action="PlantillasPorEmpresas.php" method="POST" >
+				<div id="divtabla" class="tabla-responsiva" >
+				
+					<table id="example2" class="table table-bordered table-hover" name="tbltabla">
+						<thead>
+							<tr>
+								
+								<th style="text-align:center" data-campo="Selecci&oacute;n"><input id="SelAll" name="accion2" style="margin-top: 10px" onclick="SelectAllCheck(formulario)" type="checkbox"></th>
+								<th style="text-align:center" data-campo="ID Documento">C&oacute;digo</th>
+								<th style="text-align:center" data-campo="Nombre">T&iacute;tulo</th>
+								<th style="text-align:center" data-campo="Nombre">Flujo de Firma</th>
+								<th style="text-align:center" data-campo="Nombre">Tipo de Documento</th>
+								<th style="text-align:center" data-campo="Nombre">Categoria</th>
+								<th style="text-align:center" data-campo="Nombre">Aprobado</th>
+							</tr>
+						</thead>
+						<tbody>
+						<php:repeticion id="listado">
+						<tr>
+							<td align="center" data-campo="Selecci&oacute;n"><input type="checkbox" name="sel_<php:filamenos />" id="sel<php:filamenos />" value="<php:item id="idPlantilla" />"></td>
+							<td align="center" data-campo="ID Documento"><php:item id="idPlantilla" /></td>
+							<td align="center" data-campo="ID Documento"><php:item id="Descripcion_Pl" /></td>
+							<td align="center" data-campo="Nombre"><php:item id="NombreWF" /></td>
+							<td align="center" data-campo="Nombre"><php:item id="NombreTipoDoc" /></td>
+							<td align="center" data-campo="Nombre"><php:item id="Titulo" /></td>
+							<td data-campo="APROBADO"><div style="text-align: center;" id="Aprobado_<php:filamenos />"><php:item id="Aprobado"/></div></td>
+						</tr></php:repeticion>
+						</tbody>	
+					</table>
+				</div>		
+				<br>
+				<input type="hidden" name="holdingid"     value="<php:item id="holdingid" />">
+				<input type="hidden" name="tipousuarioid" value="<php:item id="tipousuarioid" />" />		
+				<input type="hidden" name="cantidad" 	  value="<php:texto id="cantidad" />" />
+				<input type="hidden" name="nombre"	 	  value="<php:item id="nombre" />" />	
+				<input type="hidden" name="RutEmpresa"	 	 	value="<php:item id="RutEmpresa" />" />	
+				
+				<input type="hidden" name="accion" value="AGREGAR" />
+				<div class="form-row">  
+                    <div class="col-md-2 xs-12 pull-right">
+                        <button class="btn btn-md btn-primary btn-block" type="submit" name="accion2" value="AGREGAR" style="margin-top: 10px">Guardar</button>  
+                    </div>
+			    </div>  
+					
+		
+				</DIV>
+
+		</form>
+		</php:repeticion>

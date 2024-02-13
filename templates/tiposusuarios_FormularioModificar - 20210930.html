@@ -1,0 +1,119 @@
+  <div class="row">
+          <div class="col-md-12">
+            <div class="box">
+              <div class="box-body pad table-responsive">
+                <div class="box-header">
+					<div class="btn-group-md" role="group">
+						<a class="btn btn-default btn_letra_azul" href="tiposusuarios.php" ><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</a>
+						<a class="btn btn-default btn_letra_azul" href="#" onclick="javascript:irdocumentosxperfil();">Ir a documentos por perfil</a>
+						<!--<a class="btn btn-default btn_letra_azul" href="#" onclick="javascript:iraccesoxperfil();">Ir a permisos por perfil</a>-->
+					</div>
+                </div>
+
+                <!-- /.box-header -->
+                <div class="box-body">
+				
+
+				
+				<!--Mensajes-->
+				<div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+				<div id="mensajeError"><php:texto id="mensajeError" /></div>
+				  <php:repeticion id="formulario">
+                  <form role="form" name="formulario" id="formulario" action="tiposusuarios.php" method="POST" autocomplete="off">
+     
+				  
+                      <!--Campos basicos-->
+                      <div class="form-row">
+                        <div class="col-md-5">
+							<php:repeticion id="listado">	
+						  <input type="hidden" name="tipousuarioid" id="tipousuarioidx" value="<php:item id="tipousuarioid" />" />
+                          <label for="nombre">Nombre Perfil</label>
+                          <input type="text" class="form-control" id="nombre" name="nombre" value="<php:item id="nombre" />" placeholder="Nombre Perfil" required>
+                        </div>
+                      </div>
+							</php:repeticion>
+					 <div class="form-row">
+                        <div class="col-md-12">
+                          <label for="nombre"> </label>
+  
+                        </div>
+                      </div>
+					
+					  
+                      <div class="form-row">
+                        <div class="col-md-12">  
+						  
+                          <table class="table table-bordered table-hover">
+                            <thead>
+								<th data-campo="Opciones">Opciones</th>
+								<th data-campo="Consulta" class="text-center" >Consulta</th>
+								<th data-campo="Modifica" class="text-center">Modifica</th>
+								<th data-campo="Crea" class="text-center">Crea</th>
+								<th data-campo="Elimina" class="text-center">Elimina</th>
+								<th data-campo="Ver Documento" class="text-center">Ver Documento</th>
+                            </thead>
+								<tbody>
+								<php:repeticion id="listado2">
+								<tr>
+									<td align="left" data-campo="CODIGO"><php:item id="nombre" /></td>
+									<td align="center" data-campo="CONSULTA"><input <php:item id="disabled_consulta" /> class="js-switch" type="checkbox" name="consulta<php:filamenos />" <php:item id="checkconsulta" /> id="consulta<php:filamenos />" value="<php:item id="opcionid" />"></td>
+									<td align="center" data-campo="MODIFICA"><input <php:item id="disabled_modifica" /> class="js-switch" type="checkbox" name="modifica<php:filamenos />" <php:item id="checkmodifica" /> id="modifica<php:filamenos />" value="<php:item id="opcionid" />"></td>
+									<td align="center" data-campo="CREA">    <input <php:item id="disabled_crea" /> class="js-switch" type="checkbox" name="crea<php:filamenos />"     <php:item id="checkcrea" /> id="crea<php:filamenos />"     value="<php:item id="opcionid" />"></td>
+									<td align="center" data-campo="ELIMINA"> <input  <php:item id="disabled_elimina" /> class="js-switch" type="checkbox" name="elimina<php:filamenos />"  <php:item id="checkelimina" /> id="elimina<php:filamenos />"  value="<php:item id="opcionid" />"></td>
+									<td align="center" data-campo="VER DOCUMENTO"> <input  <php:item id="disabled_ver" /> class="js-switch" type="checkbox" name="ver<php:filamenos />"  <php:item id="checkver" /> id="ver<php:filamenos />"  value="<php:item id="opcionid" />"></td>
+									<input type="hidden" name="opcion<php:filamenos />" id="opcion<php:filamenos />" value="<php:item id="opcionid" />"> 
+								</tr></php:repeticion>
+								</tbody>	
+                          </table>
+                        </div>
+                      </div>                         
+					  <div class="form-row">  
+                        <div class="col-md-2 xs-12 pull-right">
+						
+							<input type="hidden" name="cantfilas" 	id="cantfilas" 	value="<php:texto id="cantfilas" />" />		
+							<input type="hidden" name="pagina" 		id="pagina" 	value="<php:texto id="pagina" />" />		
+							<input type="hidden" name="nombrex" 	id="nombrex" 	value="<php:texto id="nombrex" />" />		
+							<input type="hidden" name="accion" value="MODIFICAR" />
+							<button class="btn btn-md btn-primary btn-block" type="submit" name="accion2" value="MODIFICAR" style="margin-top: 10px">Guardar</button>
+                         </div>
+                      </div>                  
+                    </form> 
+
+					<form name="formulario2"  id="formulario2"  action="documentosxperfil.php" method="POST">
+						<input type="hidden" name="tipousuarioid" 	id="perfildoc" 	value="<php:texto id="tipousuarioid" />" />		
+						<php:repeticion id="listado">	
+						<input type="hidden" name="nombre"			value="<php:item id="nombre" />" />	
+						</php:repeticion>
+					</form>
+					
+					<form name="formulario3"  id="formulario3"  action="accesodocxperfil.php" method="POST">
+						<input type="hidden" name="tipousuarioid" 	id="perfilacc" 	value="<php:texto id="tipousuarioid" />" />	
+						<php:repeticion id="listado">	
+						<input type="hidden" name="nombre"		 	value="<php:item id="nombre" />" />			
+						</php:repeticion>
+						<input type="hidden" name="accion" value="BUSCAR" />
+					</form>					
+					</php:repeticion>
+                  </div>
+                <!-- /.box-body -->
+              </div>
+              <!-- /.box -->
+            </div>
+          </div>
+          <!-- /.col -->
+        </div>
+		
+		
+<script>		
+function irdocumentosxperfil()
+{
+	document.getElementById('perfildoc').value = document.getElementById('tipousuarioidx').value;
+	formulario2.submit();
+}
+
+function iraccesoxperfil()
+{
+	document.getElementById('perfilacc').value = document.getElementById('tipousuarioidx').value;
+	formulario3.submit();
+}
+</script>

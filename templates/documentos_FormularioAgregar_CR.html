@@ -1,0 +1,365 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <php:repeticion id="formulario">
+        <!--Botones de cabecera-->
+        <div class="box-header">
+          <a class="btn btn-default btn_letra_azul" onClick="history.back(-1)" ><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
+        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <!--Mensajes-->
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+
+       <!--Formulario de los datos propios de Categoria-->   
+      <form role="form" name="formulario" id="formulario" action="Documentos.php" method="POST" autocomplete="off">
+        <!--Formas de Pago-->
+        <div class="form-row">
+          <div class="col-md-6 xs-12">
+            <input type="hidden" name="idFormaPago" id="idFormaPago" value="<php:item id="idFormaPago"/>" />
+            <label>Formas de Pago</label>
+            <select class="form-control" id="FormasPago" name="FormasPago">
+              <option value="0">(Seleccione)</option>
+                <php:repeticion id="FormasPago">
+                  <option value='<php:item id="idFormaPago"/>'><php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idFormaPago" /><php:argumento valor="idFormaPago" /></php:funcion><php:item id="FormaPago"/></option>
+                </php:repeticion>   
+            </select>
+          </div>
+        </div>
+ 
+        <div class="form-row">
+         <div class="col-md-6">
+          <label for="Marca">Marca</label>
+          <input type="text" class="form-control" id="Marca" name="Marca" maxlength="50"  placeholder="Marca"/> 
+         </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-6">
+            <label for="Modelo">Modelo</label>
+            <input type="text" class="form-control" id="Modelo" name="Modelo" maxlength="50"  placeholder="Modelo"/>
+          </div>
+        </div>
+
+        <div class="form-row">       
+          <div class="col-md-6 xs-12">
+            <label for="Patente">Patente</label>
+            <input type="text" class="form-control" id="Patente" name="Patente" maxlength="50" placeholder="Patente"/>
+          </div>
+        </div>
+
+        <div class="form-row">
+         <div class="col-md-6 xs-12">
+            <label for="Color">Color</label>
+            <input type="text" class="form-control" id="Color" name="Color" maxlength="50" placeholder="Color"/>
+          </div>
+        </div>
+
+        <div class="form-row">  
+          <div class="col-md-6 xs-12">
+            <label for="VIN">VIN</label>
+            <input type="text" class="form-control" id="VIN" name="VIN" maxlength="50" placeholder="VIN"/>
+         </div>
+        </div>
+
+        <div class="form-row">  
+          <div class="col-md-6 xs-12">
+            <label for="Anno">A&ntilde;o</label>
+            <input type="number" class="form-control" id="AnnoVehiculo" name="AnnoVehiculo" min="1960" maxlength="50" placeholder="A&ntilde;o"/>
+         </div>
+        </div>
+
+        <div class="form-row">  
+          <div class="col-md-6 xs-12">
+            <label for="PeriodoArriendo">Periodo de Arriendo</label>
+            <input type="number" min="0" class="form-control" id="PeriodoArriendo" name="PeriodoArriendo" placeholder="Periodo de Arriendo"/>
+         </div>
+        </div>  
+        
+        <div class="form-row">  
+          <div class="col-md-6">
+            <label for="KmsMensuales">Kms Mensuales</label>
+            <input type="number" min="0" class="form-control" id="KmsMensuales" name="KmsMensuales"   placeholder="Kms Mensuales"/>
+         </div>
+        </div>
+
+        <div class="form-row">
+         <div class="col-md-6 xs-12">
+          <label for="FechaInicio">Fecha Inicio</label>
+          <div class="input-group date">
+            <div class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </div>
+            <input type="datetime" class="form-control" id="FechaInicio" name="FechaInicio"  readonly="readonly" placeholder="Fecha Inicio" style="background-color:white;"/>
+          </div>
+         </div>
+        </div>
+
+       <div class="form-row">  
+        <div class="col-md-6 xs-12">
+          <label >Fecha de Entrega</label>
+            <div class="input-group date">
+              <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+              </div>
+              <input type="datetime" class="form-control" id="FechaFinal" name="FechaFinal"  readonly="readonly" placeholder="Fecha de entrega" style="background-color:white;"/>
+            </div>
+        </div>
+       </div>
+
+       <div class="form-row">
+         <div class="col-md-6 xs-12">
+          <label >Fecha de pago de pie</label>
+          <div class="input-group date">
+            <div class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </div>
+            <input type="datetime" class="form-control" id="FechaPie" name="FechaPie"  readonly="readonly" placeholder="Fecha de pago de pie" style="background-color:white;"/>
+          </div>
+       </div>
+      </div>
+
+       <div class="form-row">  
+        <div class="col-md-6 xs-12">
+          <label>Fecha de pago (Primera cuota)</label>
+            <div class="input-group date">
+              <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+              </div>
+              <input type="datetime" class="form-control" id="FechaPago" name="FechaPago"  readonly="readonly" placeholder="Fecha de pago (Primera cuota)" style="background-color:white;"/>
+            </div>
+        </div>
+       </div>
+
+        <div class="form row">
+          <div class="col-md-6" style="margin-top: 10px; margin-left: 15px;margin-bottom: 10px;" >
+            <label >Pagos</label>
+          </div>
+        </div>
+
+        <div class="form-row"> 
+          <div class="col-md-2 xs-4">
+            <label>Moneda</label>
+            <select class= "form-control" name="CuotaPie" id="CuotaPie">
+              <option value="0">(Seleccione)</option>
+              <option value="1">Pesos</option>
+              <option value="2">UF</option>
+            </select>
+          </div>
+          <div class="col-md-4 xs-8">
+            <label>Cuota inicial (Pie)</label>
+            <input type="number" min="0" step="any" class="form-control" id="MontoCuota" name="MontoCuota" placeholder="Monto de la cuota de pie"/>
+          </div>
+       </div>
+
+       <div class="form-row"> 
+        <div class="col-md-2 xs-4 ">
+          <label>Moneda</label>
+          <select class= "form-control" name="Exceso" id="Exceso">
+            <option value="0">(Seleccione)</option>
+            <option value="1">Pesos</option>
+            <option value="2">UF</option>
+          </select>
+        </div>
+        <div class="col-md-4 xs-8">
+          <label>Cobro por Kms adicional</label>
+          <input type="number" min="0" step="any" class="form-control" id="KmsExceso" name="KmsExceso" placeholder="Kms Exceso"/>
+        </div>
+      </div> 
+
+
+   <div class="form-row"> 
+      <div class="col-md-2 xs-4">
+        <label>Moneda</label>
+        <select class= "form-control" name="idRentaMens" id="idRentaMens">
+          <option value="0">(Seleccione)</option>
+          <option value="1">Pesos</option>
+          <option value="2">UF</option>
+        </select>
+      </div>
+      <div class="col-md-4 xs-8">
+        <label >Valor Renta Mensual</label>
+        <input type="number" min="0" step="any" class="form-control" id="RentaMens" name="RentaMens" placeholder="Valor de Renta Mensual"/>
+      </div>
+     </div>  
+
+     <div class="form-row">  
+        <div class="col-md-6">
+          <h5></h5> 
+        </div>
+      </div>
+  
+       <div class="form-row">  
+        <div class="col-md-2 xs-12 pull-right">
+           <input type="hidden" name="RutEmpresa" id="RutEmpresa" value="<php:item id="RutEmpresa"/>" >
+           <input type="hidden" name="RutEmpresaC" id="RutEmpresaC" value="<php:item id="RutEmpresaC"/>" >
+           <input type="hidden" name="modelo_contrato" id="modelo_contrato" value="<php:item id="modelo_contrato"/>" >
+           <input type="hidden" name="fecha" id="fecha" value="<php:item id="fecha"/>" >
+           <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion" id="FIRMANTES" value="FIRMANTES">Siguiente</button>  
+        </div>
+       </div> 
+
+       </form>
+     </div>
+    </php:repeticion>
+     </div>
+    </div>
+  </div>
+</div>
+    
+<!--Calendarios-->
+<script>
+
+  $('#FechaInicio').datepicker({
+    language: "es",
+    orientation: "bottom",
+    autoclose: true,
+    todayHighlight: true,
+    format: 'dd-mm-yyyy'
+    });
+
+  $('#FechaFinal').datepicker({
+    language: "es",
+    orientation: "bottom",
+    autoclose: true,
+    todayHighlight: true,
+    format: 'dd-mm-yyyy'
+    });
+
+  $('#FechaPie').datepicker({
+    language: "es",
+    orientation: "bottom",
+    autoclose: true,
+    todayHighlight: true,
+    format: 'dd-mm-yyyy'
+    });
+
+  $('#FechaPago').datepicker({
+    language: "es",
+    orientation: "bottom",
+    autoclose: true,
+    todayHighlight: true,
+    format: 'dd-mm-yyyy'
+    });
+
+//Validar los tipo Number 
+  $("#FIRMANTES").click(function(){
+   //Validar los datos del Proyecto
+    if($("#FormasPago").val().length == 0){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#FormasPago').focus();
+        return false;
+    }
+    if($("#Marca").val().length == 0){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#Marca').focus();
+        return false;
+    }
+    if($("#Modelo").val().length == 0){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#Modelo').focus();
+        return false;
+    } 
+    if($("#Patente").val().length == 0){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#Patente').focus();
+        return false;
+    }
+    if($("#Color").val().length == 0){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#Color').focus();
+        return false;
+    }
+    if($("#VIN").val().length == 0){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#VIN').focus();
+        return false;
+    }
+     if($("#Anno").val().length == 0){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#Anno').focus();
+        return false;
+    }
+    if ($("#PeriodoArriendo").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El Periodo de arriendo no puede estar vac&iacute;o");
+        $('#PeriodoArriendo').focus();
+        return false;
+    }
+    if ($("#KmsMensuales").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no puede ser 0");
+        $('#KmsMensuales').focus();
+        return false;
+    }
+    if ($("#FechaInicio").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Seleccione Fecha Inicio para continuar");
+        $('#FechaInicio').focus();
+        return false;
+    }
+    if ($("#FechaFin").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Seleccione Fecha Inicio para continuar");
+        $('#FechaFin').focus();
+        return false;
+    }
+    if ($("#FechaPago").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Seleccione Fecha Inicio para continuar");
+        $('#FechaPago').focus();
+        return false;
+    }
+    if ($("#FechaPie").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Seleccione Fecha Inicio para continuar");
+        $('#FechaPie').focus();
+        return false;
+    }
+    if ($("#CuotaPie").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Seleccione Tipo de Moneda para continuar");
+        $('#CuotaPie').focus();
+        return false;
+    }
+    if ($("#Monto_CuotaPie").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Seleccione Tipo de Moneda para continuar");
+        $('#Monto_CuotaPie').focus();
+        return false;
+    }
+    if ($("#Exceso").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Seleccione Tipo de Moneda para continuar");
+        $('#Exceso').focus();
+        return false;
+    }
+    if ($("#KmsExceso").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Seleccione Tipo de Moneda para continuar");
+        $('#KmsExceso').focus();
+        return false;
+    }
+    if ($("#RentaMens").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Seleccione Tipo de Moneda para continuar");
+        $('#RentaMens').focus();
+        return false;
+    }
+    if ($("#Monto_RentaMens").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Seleccione Tipo de Moneda para continuar");
+        $('#Monto_RentaMens').focus();
+        return false;
+    }
+  });
+</script>

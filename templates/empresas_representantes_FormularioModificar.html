@@ -1,0 +1,104 @@
+<h4> Editar </h4>
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <div class="box-header">
+        </div>
+        <div class="btn-group-md" role="group">
+          <php:repeticion id="formulario">
+            <form role="form" name="formulario2" id="formulario2" action="Empresas.php" method="POST" >
+              <input type="hidden" class="form-control" id="RutEmpresa" name="RutEmpresa" value="<php:item id="RutEmpresa"/>"/>
+              <button type="submit" name="accion" value="MODIFICAR" class="btn btn-default btn_letra_azul"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</button>
+            </form>
+        </div>
+        <div class="box-body">
+          <div id="mensajeError"><php:texto id="mensajeError" /></div>
+          <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+          <form role="form" name="formulario" id="formulario" action="Empresas.php" method="POST" autocomplete="off" >
+            <div class="col-md-6 xs-12">
+              <label for="RutEmpresa">Rut Empresa</label>
+              <input type="text" class="form-control" id="RutEmpresa" readonly="readonly" name="RutEmpresa" value="<php:item id="RutEmpresa"/>">
+            </div>
+            <div class="form-row">
+              <div class="col-md-6 xs-12">
+                <label for="RutUsuario">Rut (*)</label>
+                <input type="text" class="form-control" id="RutUsuario"  readonly="readonly" name="RutUsuario" placeholder="Rut" value="<php:item id="RutUsuario"/>">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-6 xs-12">
+                <label for="nacionalidad">Nacionalidad (*)</label>
+                <input type="text" class="form-control" id="nacionalidad" name= "nacionalidad" placeholder="Nacionalidad" value="<php:item id="nacionalidad"/>">
+              </div>
+            </div>
+		  
+            <div class="form-row">
+              <div class="col-md-6 xs-12">
+                  <label for="nombre">Nombre (*)</label>
+                  <input type="text" class="form-control" id="nombre" name= "nombre" placeholder="Nombres " value="<php:item id="nombre"/>">
+              </div>
+            </div>
+		         
+            <div class="form-row">
+              <div class="col-md-6 xs-12">
+                  <label for="appaterno">Apellido Paterno (*) </label>
+                  <input type="text" class="form-control" id="appaterno" name= "appaterno" placeholder="Apellido Paterno " value="<php:item id="appaterno"/>">
+              </div>
+              <div class="col-md-6 xs-12">
+                  <label for="apmaterno">Apellido Materno </label>
+                  <input type="text" class="form-control" id="apmaterno" name= "apmaterno" placeholder="Apellido Materno " value="<php:item id="apmaterno"/>">
+              </div>
+            </div>
+            <div class="form-row">  
+              <div class="col-md-6 xs-12">
+                <label for="correo">Correo (*)</label>
+                <input type="text" class="form-control" id="correo" name= "correo" placeholder="correo" value="<php:item id="correo"/>">
+              </div>
+            </div>
+			
+            <div class="form-row" >
+              <div class="col-md-6 xs-12">
+                <label for="Cargo">Rol de firmante (*)</label>
+                <select class= "form-control" name="idCargo" id="idCargo">
+                  <option value="0">(Seleccione)</option>
+                  <php:repeticion id="Cargos">
+                    <option value="<php:item id="idCargo" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idCargo" /><php:argumento idvalor="idCargo" /></php:funcion>><php:item id="Descripcion" /></option>
+                  </php:repeticion>
+                </select>
+              </div>
+            </div>
+				
+            <div class="form-row" >
+              <div class="col-md-6 xs-12">
+                <label for="">Tipo de Firma (*)</label>
+                <select class= "form-control" name="idFirma" id="idFirma">
+                  <option value="0">(Seleccione)</option>
+                  <php:repeticion id="Firmas">
+                    <option value="<php:item id="idFirma" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idFirma"/><php:argumento idvalor="idFirma" /></php:funcion>><php:item id="Descripcion" /></option>
+                  </php:repeticion>
+                </select>
+              </div>
+            </div>
+			
+			<div class="form-row">  
+							<div class="col-md-6 xs-12">
+								<label for="Profesion">Cargo</label>
+								<input type="text" class="form-control" id="Cargo" name= "Cargo" placeholder="Cargo" value="<php:item id="Cargo"/>" >
+							</div>
+			</div>
+	
+            <div class="form-row">  
+              <div class="col-md-2 xs-12 pull-right style"> 
+                <input type="hidden" name="accion" value="MODIFICAR_R" />
+                <button class="btn btn-md btn-primary btn-block " type="submit" style="margin-top: 10px" name="accion2" value="MODIFICAR_R" onclick="javascript: return validarFormulario(this,new Array(),new Array('apmaterno'))"/>Guardar</button>
+              </div>
+            </div> 
+            </php:repeticion>     
+          </form>  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>

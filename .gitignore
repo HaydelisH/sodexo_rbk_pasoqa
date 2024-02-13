@@ -1,0 +1,5 @@
+Config.php
+aspnet_client/*
+logs/*
+tmp/*
+*.pdf

@@ -1,0 +1,44 @@
+		
+
+		<div id="mensajeError"><php:texto id="mensajeError" /></div>
+		<div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+		<form name="formulario" class="formularioAgregar" id="formulario_solicitudes" action="cambioclave.php" method="POST" onsubmit="javascript:return validarFormulario(this) && ValidarNuevaClave();" >
+		
+		<php:repeticion id="solicitudes">
+		<div class="box box-primary">
+
+			<div class="box-body">
+				<div class="col-md-7">
+					
+			
+					<div class="form-group">
+					  <label for="contenedorid" class="col-sm-4 control-label">Contrase&ntilde;a Actual</label>
+					  <div class="col-sm-5">
+						<input type="password" class="form-control" name="claveant" id="claveant" size="10" maxlength="10" value="<php:item id="claveant" />" autocomplete="off" />
+					  </div>
+					</div>
+	
+					<div class="form-group">
+					  <label for="contenedorid" class="col-sm-4 control-label">Contrase&ntilde;a Nueva</label>
+					  <div class="col-sm-5">
+						<input type="password" class="form-control" name="clavenew" id="clavenew" size="10" maxlength="10" value="<php:item id="clavenew" />" autocomplete="off" />
+					  </div>
+					</div>
+					
+					<div class="form-group">
+					  <label for="contenedorid" class="col-sm-4 control-label">Repita Nueva Contrase&ntilde;a</label>
+					  <div class="col-sm-5">
+						<input type="password" class="form-control" name="claverep" id="claverep" size="10" maxlength="10" value="<php:item id="claverep" />" autocomplete="off" />
+					  </div>
+					</div>
+	
+				</div>
+			</div>
+		</div>
+			
+		</php:repeticion>
+		
+		<input type="hidden" name="accion" value="Cambiar" />
+		<input class="btn btn-primary" type="submit" name="accion2" value="Cambiar" conclick="javascript:return ValidarNuevaClave();" />
+
+		</form>

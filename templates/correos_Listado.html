@@ -1,0 +1,169 @@
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box">
+        <div class="box-body pad table-responsive">
+        <div class="box-header">
+          <!--Opciones del encabezado-->
+          <div class="form-inline ">
+            <!--Nuevo-->
+            <div class="form-group">
+            <form name="formulario" id="formulario_usuarios" action="Correo.php" method="POST" autocomplete="off">
+              <input type="hidden" name="pagina"  value="<php:texto id="pagina" />" />    
+              <input type="hidden" name="nombrex" value="<php:texto id="nombrex" />" /> 
+            </form>
+     </div>
+          </div> 
+        </div>
+        <div class="box-body">
+          <!--Mensaje de error-->
+          <div id="mensajeError"><php:texto id="mensajeError" /></div>
+          <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+          <php:repeticion id="formulario">
+            <div id="divtabla" class="tabla-responsiva" >
+            <!--Tabla-->
+            <table id="example3" class="table table-bordered table-hover" name="tbltabla">
+              <thead>
+                <tr>
+                <th data-campo="Descripcion" style="text-align: center;">Descripci&oacute;n </th>
+                <th data-campo="Asunto" style="text-align: center;">Asunto </th>
+                <th data-campo="CC" style="text-align: center;">CC </th>
+                <th data-campo="CCo" style="text-align: center;">CCo </th>
+                <th data-campo="Opciones" style="text-align: center;">Opciones </th>
+                </tr>
+              </thead>
+              <tbody>
+              <!--Contenido de Tabla-->
+              <php:repeticion id="listado">
+                <tr>
+                  <td data-campo="Descripcion"><php:item id="Descripcion" /></td>
+                  <td data-campo="Asunto"><php:item id="Asunto" /></td>
+                  <td data-campo="CC"><php:item id="CC" /></td>
+                  <td data-campo="CCo"><php:item id="CCo" /></td>
+                  <td data-campo="Opciones">
+                 <form name="formulario" id="formulario_tipo" action="Correo.php" method="POST">
+                    <input type="hidden" name="holdingid" value="<php:item id="holdingid" />">
+                    <input type="hidden" name="CodCorreo" id="CodCorreo_<php:item id="CodCorreo" />" value="<php:item id="CodCorreo" />">
+                    
+                    <php:repeticion id="ver">
+                      <button class="btn btn-info btn-sm openBtn2" type="button" name="accion" onclick="vistaprevia('<php:item id="CodCorreo" />');" id="VistaPrevia_<php:item id="CodCorreo" />" value="VISTAPREVIA">Vista Previa</button>
+                    </php:repeticion>
+
+                    <php:repeticion id="modifica">
+                      <button class="btn btn-primary btn-sm" type="submit" name="accion" value="MODIFICAR">Modificar</button>
+                    </php:repeticion>
+                    
+                    <php:repeticion id="elimina"> 
+                      <button class="btn btn-default btn-sm" type="submit" name="accion" value="ELIMINAR" onclick="javascript:return preguntarPorBorrar();">Eliminar</button>
+                    </php:repeticion>
+
+                  </form></td>
+                </tr>
+              </php:repeticion>
+              </tbody>
+            </table>
+            
+            <form name="paginado" id="paginado" action="Correo.php" method="POST" >
+              <input type="hidden" name="pagina"        value="" id="pagina" >
+              <input type="hidden" name="accion"        value="BUSCAR" />
+              <input type="hidden" name="holdingid"       value="<php:item id="holdingid" />" >
+              <input type="hidden" name="nombrex"       value="<php:item id="nombrex" />" >
+            </form>
+          </div>
+          </php:repeticion>
+          </div> 
+        </div>
+        <!-- /.box -->
+      </div>
+      <!--.col-->
+      </div>
+    <!-- /.roe -->
+    </div>
+  </section>
+  <div class="modal fade" id="exampleModal-mod" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="exampleModalLabel">Correo</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <h3>Descripci&oacute;n: </h3>
+                <h3>Asunto: </h3>
+                <h3>CC: </h3>
+                <h3>CCO: </h3>
+                <h3>Contenido: </h3>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div> 
+      <div class="modal fade" id="ejemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" align="center">
+        <h4 class="modal-title" id="ejemplo-titulo"></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="ejemplo-cuerpo" align="justify" style="padding-right: 30px; padding-left: 30px;">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var ajax;
+var salida;
+ 
+function funcionCallback()
+{
+
+  // Comprobamos si la peticion se ha completado (estado 4)
+  if( ajax.readyState == 4 )
+  {
+    // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+    if( ajax.status == 200 )
+    {
+      // Escribimos el resultado en la pagina HTML mediante DHTML
+      //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
+      salida = ajax.responseText;
+      respuesta = salida.split("|");
+      document.getElementById("ejemplo-titulo").innerHTML = respuesta[0];
+      document.getElementById("ejemplo-cuerpo").innerHTML = respuesta[1];
+      $("#ejemplo").modal({show:true});
+
+    }
+  }
+}
+
+ 
+function vistaprevia(fila)
+{
+  var vistaprevia = "CodCorreo_" + fila; 
+  var valor = document.getElementById(vistaprevia).value; 
+
+  var url = "Correo_ajax.php?CodCorreo=" + valor;
+  // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+  if( window.XMLHttpRequest )
+    ajax = new XMLHttpRequest(); // No Internet Explorer
+  else
+    ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+ 
+  // Almacenamos en el control al funcion que se invocara cuando la peticion
+  // cambie de estado 
+  ajax.onreadystatechange = funcionCallback;
+
+  // Enviamos la peticion
+  ajax.open( "GET", url, true );
+  ajax.send( "" );
+}
+</script>

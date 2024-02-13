@@ -1,0 +1,241 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <php:repeticion id="formulario">
+        <!--Botones de cabecera-->
+        <div class="box-header">
+          <a class="btn btn-default btn_letra_azul" onClick="history.back(-1)" ><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
+        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <!--Mensajes-->
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+
+       <!--Formulario de los datos propios de Categoria-->   
+      <form role="form" name="formulario" id="formulario" action="Documentos.php" method="POST" autocomplete="off">
+       <!--Empresa-->
+          <div class="form-row">
+            <div class="col-md-6 xs-12">
+             <label>Empresa</label>
+              <input class="form-control" type="text" name="RutEmp" id="RutEmp" autofocus value="<php:item id="RutEmpresa" />  <php:item id="RazonSocial"/>" readonly style="background-color:white;"/>
+               <input type="hidden" name="RutEmpresa" id="RutEmpresa" value="<php:item id="RutEmpresa"/>"/>              
+              </div>
+          </div>
+
+          <!--Cliente-->
+          <div class="form-row">
+            <div class="col-md-6 xs-12">
+               <label>Cliente</label>
+                <input class="form-control" type="text" name="RutCli" id="RutCli" value="<php:item id="RutEmpresaC" /> <php:item id="RazonSocialC"/>" readonly style="background-color:white;"/>
+                <input type="hidden" name="RutEmpresaC" id="RutEmpresaC" value="<php:item id="RutEmpresaC"/>"/>
+            </div>
+          </div>
+
+        <!--Proyecto-->
+        <!--<div id="Proyecto">
+          <div class="form-row">
+            <div class="col-md-12">
+                <h5></h5>
+            </div>
+          </div>
+          <!--Seleccionar Proyecto-->
+           <!--<div class="form-row" >
+            <div class="col-md-6 xs-12" style=" padding-left: 10px;"  >
+             <label>Proyecto</label>
+              <div class="col-md-11 xs-12" style=" padding-left: 0px; padding-right: 0px;" >
+                <input class="form-control" type="text" name="idProyecto" id="idProyecto" value='<php:item id="idProyecto"/>' readonly style="background-color:white;"/>
+                <input type="hidden" id="RutEmpresaC" name="RutEmpresaC" value="<php:item id="RutEmpresaC"/>"/>
+                <input type="hidden" id="RutEmpresa" name="RutEmpresa" value="<php:item id="RutEmpresa"/>"/>
+                <input type="hidden" id="modelo_contrato" name="modelo_contrato" value="<php:item id="modelo_contrato"/>"/>
+                <input type="hidden" id="activar_pro" name="activar_pro" value="<php:item id="activar_pro"/>"/>
+                <input type="hidden" id="proyectos_emp" name="proyectos_emp" value="<php:item id="proyectos_emp"/>"/>
+              </div>
+              <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                 <button class="btn btn-md btn-primary btn-block" type="submit" name="accion" value="BUSCAR_PROYECTO_CM" id="btn_proyecto" ><i class="fa fa-search"></i></button>  
+              </div>
+            </div>
+          </div>
+        </div>-->
+
+        <div class="form-row">
+          <div class="col-md-12">
+              <h5></h5>
+          </div>
+        </div>
+                
+        <!--Fechas de Inicio-->
+          <div class="form-row">
+            <div class="col-md-6 xs-12" >
+              <label for="">Fechas de incio</label>
+               <div class="form-group">
+                <div class="input-group date">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="datetime" style="background-color: white;" class="form-control pull-right" id="fechaInicio" name="fechaInicio" readonly placeholder="Fecha de inicio" value="<php:item id="fechaInicio"/>"  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--Fecha de Fin-->
+          <div class="form-row">
+          <div class="col-md-6 xs-12" >
+          <label for="">Fecha de fin</label>
+             <div class="form-group">
+                <div class="input-group date">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="datetime" class="form-control pull-right"  style="background-color: white;"id="fechaFin" name="fechaFin" readonly placeholder="Fecha de culminacion" value="<php:item id="fechaFin"/>"/>
+                </div>
+              </div>
+          </div>
+        </div>
+
+          <!--Ejecutivo-->
+          <!--<div class="form-row" >
+            <div class="col-md-6"  >
+              <label for="rut">Ejecutivo</label>
+                <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                  <input class="form-control" style="background-color: white;" type="text" name="RutEje" id="RutEje" value="<php:item id="RutEjecutivo" /> <php:item id="NombreEje"/> <php:item id="ApellidoEje" />" readonly />
+                  <input type="hidden" name="RutEjecutivo" id="RutEjecutivo" value="<php:item id="RutEjecutivo"/>"/>
+                </div>
+                 <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                   <button class="btn btn-md btn-primary btn-block" type="submit" type="submit" name="accion" value="BUSCAR_EJECUTIVO"><i class="fa fa-search"></i></button>  
+                </div>
+              </div>
+            </div>-->
+
+          <!--Supervisor-->
+           <!--<div class="form-row"> 
+            <div class="col-md-6">
+              <label for="rut">Supervisor</label>
+                <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                  <input class="form-control" style="background-color: white;" type="text" id="RutSup" name="RutSup" value="<php:item id="RutSupervisor"/> <php:item id="NombreSup"/> <php:item id="ApellidoSup"/> "  readonly />
+                  <input type="hidden" name="RutSupervisor" id="RutSupervisor" value="<php:item id="RutSupervisor"/>"/>
+                </div>
+                 <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                   <button class="btn btn-md btn-primary btn-block" type="submit" type="submit" name="accion" value="BUSCAR_SUPERVISOR"><i class="fa fa-search"></i></button>  
+                </div>
+              </div>
+          </div>-->          
+          
+          <!--Formas de Pago-->
+          <div class="form-row">
+            <div class="col-md-6 xs-12" >
+              <input type="hidden" name="idFormaPago" id="idFormaPago" value="<php:item id="idFormaPago"/>" />
+              <label>Formas de Pago</label>
+              <select class="form-control" id="FormasPago" name="FormasPago">
+                <option value="<php:texto id="idFormaPago"/>"><php:texto id="FormaPago"/></option>
+                  <php:repeticion id="FormasPago">
+                    <option value="<php:item id="idFormaPago"/>"><php:item id="FormaPago"/></option>
+                  </php:repeticion>   
+              </select>
+            </div>
+          </div> 
+          
+          <div class="form-row">
+              <div class="col-md-12 xs-12" style="padding-top: 10px;">
+                <h4></h4>
+              </div>
+           </div>
+
+          <div class="form-row">                 
+            <div class="col-md-2 xs-12 pull-right">
+                <input type="hidden" name="modelo_contrato" id="modelo_contrato" value="<php:item id="modelo_contrato"/>" >
+                <input type="hidden" name="fecha" id="fecha" value="<php:item id="fecha"/>" >
+                <input type="hidden" name="pro" id="pro" value="<php:item id="pro"/>" >
+                <input type="hidden" name="TipoEmpresa" id="TipoEmpresa" value="<php:item id="TipoEmpresa"/>" >
+                <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion" id="FIRMANTES" value="FIRMANTES" >Siguiente</button>  
+            </div>
+          </div>  
+          </php:repeticion>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+    
+<!--Calendarios-->
+<script>
+  $('#fechaInicio').datepicker({
+    language: "es",
+    orientation: "bottom",
+    autoclose: true,
+    todayHighlight: true,
+    format: 'dd-mm-yyyy'
+    });
+
+  $('#fechaFin').datepicker({
+    language: "es",
+    orientation: "bottom",
+    autoclose: true,
+    todayHighlight: true,
+    format: 'dd-mm-yyyy'
+    });
+
+
+  $("#FIRMANTES").click(function(){
+    //Fecha de Inicio
+    if( $('#fechaInicio').val().length == 0 ){
+       $("#mensajeError").addClass("callout callout-warning");
+       $("#mensajeError").html("Debe seleccionar la Fecha de Inicio");
+       return false;
+    }
+    //Fecha de Fin 
+    if($('#fechaFin').val().length == 0){
+       $("#mensajeError").addClass("callout callout-warning");
+       $("#mensajeError").html("Debe seleccionar la Fecha de Fin");
+       return false;
+    }
+    //Ejecutivo
+    /*if($("#RutEje").val().length == 2){
+       $("#mensajeError").addClass("callout callout-warning");
+       $("#mensajeError").html("Debe seleccionar un Ejecutivo");
+       return false;
+    }*/
+    //Formas de Pago
+    if($("#FormasPago").val().length == 0){
+       $("#mensajeError").addClass("callout callout-warning");
+       $("#mensajeError").html("Debe seleccionar la forma de pago");
+      return false;
+    }
+
+    /*
+      Consulta que tipo de empresa es, los proyectos se generaran, 
+      solo si son empresas Clientes, es decir empresas tipo 2
+    */
+    if ( $("#TipoEmpresa").val() == 2 ){ 
+       //Confirmar si quieren generara automaticamente un Proyecto
+      //respuesta = confirm( " Desea generar un Negocio con este Cliente ?");
+      
+     // if( respuesta == true ){
+     //   $("#pro").val("1");
+     // }
+     // else{
+        $("#pro").val("0");
+     // }
+    }
+   
+  });
+
+  $(document).ready(function(){
+
+     if( $("#FormasPago").val().length == 0 ){
+        $("#FormasPago option:selected").text("(Seleccione)");  
+     }
+
+     /*if ($("#RutEje").val().length == 2 ){
+        $("#RutEje").val("(Seleccione)");
+      }
+
+    if ($("#RutSup").val().length == 3 ){
+      $("#RutSup").val("(Seleccione)");
+    }*/
+  });
+
+</script>

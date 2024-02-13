@@ -1,0 +1,67 @@
+<div class="row">
+    <div class="col-md-12">
+      <div class="box">
+        <div class="box-body pad table-responsive">
+          <div class="box-header">
+            <php:repeticion id="formulario">
+              <form role="form" name="formulario" id="formulario" action="LugaresPago.php" method="POST">
+                  <input type="hidden" name="pagina" value="<php:item id="pagina_actual" />" id="pagina" >
+                  <button class="btn btn-md btn-default btn_letra_azul" type="submit" name="accion" value="BUSCAR" /><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</button>
+              </form>
+          </div>
+        </div>
+        <div class="box-body">
+          <div id="mensajeError"><php:texto id="mensajeError" /></div>
+          <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+       
+          <form role="form" name="formulario" id="formulario" action="LugaresPago.php" method="POST" autocomplete="off">
+          
+              <div class="form-row">
+                <div class="col-md-12">
+                  <label style="float:right;"> (*) Campos obligatorios </label>
+                </div>
+              </div>
+                          
+              <!--Campos basicos-->
+                 <!--Empresas-->
+                <div class="col-md-12 xs-12" >
+                  <label for="Empresa" >Empresa (*) </label>
+                  <!--Select de Empresas disponibles-->
+                  <select class= "form-control" name="RutEmpresa" id="RutEmpresa" readonly>
+                  <option value="0">( Seleccione )</option>
+                    <php:repeticion id="Empresas">
+                      <option value="<php:item id="RutEmpresa" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEmpresa" /><php:argumento idvalor="RutEmpresa" /></php:funcion>><php:item id="RazonSocial" /></option>
+                    </php:repeticion>
+                  </select>
+                </div>
+              <div class="form-row">
+                 <div class="col-md-12">
+                  <label class="Estructura" for="lugarpagoid">C&oacute;digo Lugar de Pago (*)</label>
+                  <input type="text" class="form-control" id="lugarpagoid" name="lugarpagoid" maxlength="10" value="<php:item id="lugarpagoid" />" placeholder="C&oacute;digo" readonly> 
+                 </div>
+                </div>
+                <div class="form-row">
+                <div class="col-md-12 xs-12">
+                  <label class="Estructura" for="nombrelugarpago">Lugar de Pago (*)</label>
+                  <input type="text" class="form-control" id="nombrelugarpago" name="nombrelugarpago" maxlength="50" value="<php:item id="nombrelugarpago" />" placeholder="Nombre Lugar de Pago" >
+                </div>
+              </div>
+              <!--<div class="form-row">
+                <div class="col-md-12 xs-12">
+                  <label for="Direccion">Descripci&oacute;n</label>
+                  <input type="text" class="form-control" id="descripcionlugarpago" name="descripcionlugarpago" maxlength="50" value="<php:item id="descripcionlugarpago" />" placeholder="Descripci&oacute;n" >
+                </div>
+              </div>-->
+              <input type="hidden" name="accion" value="MODIFICAR" />
+              <div class="col-md-2 xs-12 pull-right">
+                  <input type="hidden" name="pagina" value="<php:item id="pagina_actual" />" id="pagina" >
+                  <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="MODIFICAR" onclick="javascript: return validarFormulario(this,new Array(),new Array('descripcionlugarpago'))"  />Guardar</button>
+              </div>  
+          </php:repeticion>
+          </form>      
+        </div>  
+      </div>
+      <!-- /.box -->
+    </div>
+    <!--.col-->
+  </div> 

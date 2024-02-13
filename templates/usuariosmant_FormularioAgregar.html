@@ -1,0 +1,299 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="box ">
+			<div class="box-body pad table-responsive">
+				<!--Botones de cabecera-->
+				<div class="box-header">
+					<a class="btn btn-default btn_letra_azul" href="usuariosmant.php"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</a>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<!--Mensajes-->
+					<div id="mensajeError"><php:texto id="mensajeError" /></div>
+					<div id="mensajeOK"><php:texto id="mensajeOK" /></div>	
+					<form name="formulario" class="formularioModificar" id="formulario"  class="form-horizontal" action="usuariosmant.php" method="POST" autocomplete=off>
+						<php:repeticion id="formulario">
+						<div class="form-row">
+							<div class="col-md-12">
+								<label style="float:right;"> (*) Campos obligatorios </label>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col-md-6 col-xs-12">
+								<label for="tipousuarioid">Rut (*)</label>
+								<input type="contenedor" class="form-control" id="newusuarioid"  name="newusuarioid" placeholder="Rut v&aacute;lido" maxlength="10" value="<php:item id="newusuarioid" />" autofocus >
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col-md-6 col-xs-12">
+								<label for="contenedorid" >Nombre (*)</label>
+								<input type="contenedor" class="form-control" id="nombre" name="nombre" placeholder="Nombre completo" maxlength="50" value="<php:item id="nombre" />">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col-md-6 col-xs-12">
+								<label for="contenedorid" >Apellido Paterno (*)</label>
+								<input type="contenedor" class="form-control" id="appaterno" name="appaterno" placeholder="Apellido Paterno" maxlength="50" value="<php:item id="appaterno" />">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col-md-6 col-xs-12">
+								<label for="contenedorid" >Apellido Materno</label>
+								<input type="contenedor" class="form-control" id="apmaterno" name="apmaterno" placeholder="Apellido Materno" maxlength="50" value="<php:item id="apmaterno" />">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col-md-6 col-xs-12">
+								<label for="contenedorid" >Correo Electr&oacute;nico (*)</label>
+								<input type="contenedor" class="form-control" id="correo" name="correo" placeholder="Correo electr&oacute;nico" maxlength="50" value="<php:item id="correo" />">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col-md-6 col-xs-12">
+								<label for="contenedorid" >Perfil (*)</label>
+								<select class= "form-control" name="tipousuarioid" id="tipousuarioid">
+									<option value="0">(Seleccione)</option>
+									<php:repeticion id="tiposusuarios">
+									<option value="<php:item id="tipousuarioid" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="tipousuarioid" /><php:argumento idvalor="tipousuarioid" /></php:funcion>><php:item id="nombre" /></option>
+									</php:repeticion>
+								</select>
+							</div>
+						</div>	
+						<div class="form-row" >
+							<div class="col-md-6 col-xs-12">
+								<label for="idFirma">Tipo de Firma (*)</label>
+								<select class= "form-control" name="idFirma" id="idFirma">
+									<option value="0">(Seleccione)</option>
+									<php:repeticion id="idFirma">
+									<option value="<php:item id="idFirma" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idFirma"" /><php:argumento idvalor="idFirma" /></php:funcion>><php:item id="Descripcion" /></option>
+									</php:repeticion>
+								</select>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col-md-6 col-xs-12">
+								<label for="contenedorid" >Rol (*)</label>
+								<select class= "form-control" name="rolid" id="rolid">
+									<option value="0">(Seleccione)</option>
+									<php:repeticion id="Roles">
+									<option value="<php:item id="rolid" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="rolid" /><php:argumento idvalor="rolid" /></php:funcion>><php:item id="Descripcion" /></option>
+									</php:repeticion>
+								</select>
+							</div>
+						</div>
+						<!--Empresas-->
+						<div class="form-row" >
+							<div class="col-md-6 col-xs-12">
+								<label for="contenedorid" >Empresa (*) </label>
+								<!--Select de Empresas disponibles-->
+								<select class="form-control" name="RutEmpresa" id="RutEmpresa">
+									<option value="0">( Seleccione )</option>
+									<php:repeticion id="Empresas">
+									<option value="<php:item id="RutEmpresa" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEmpresa" /><php:argumento idvalor="RutEmpresa" /></php:funcion>><php:item id="RazonSocial" /></option>
+									</php:repeticion>
+								</select>
+							</div>
+						</div>
+						<!--Corta palo - Ocultar/Mostrar Division personal de ventana usuario-->
+						<!--div class="col-md-6 xs-12">
+							<label>Divisi&oacute;n de Personal</label>
+							<div class="col-md-11 xs-12 box-body" style="padding-left: 0px;padding-top: 0px;">
+								<input class="form-control" type="text" name="nombrecentrocosto" id="nombrecentrocosto" placeholder="(Seleccione)" value="<php:item id="nombrecentrocosto"/>" readonly="readonly" />
+								<input type="hidden" name="centrocostoid" id="centrocostoid" placeholder="(Seleccione)" value="<php:item id="idCentroCosto"/>" />
+							</div>
+							<div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+								<button class="btn btn-md btn-primary btn-block" type="button" id="btn_centro_costo" data-toggle="modal" data-target="#modal_centro_costo"><i class="fa fa-search"></i></button>  
+							</div>
+						</div-->
+						<!--Corta palo - Ocultar/Mostrar Division personal de ventana usuario-->
+						<!-- <div class="form-row" >
+							<div class="col-md-6 xs-12">
+								<label class="form-check-label" >Login con PIN </label>    
+								<select class= "form-control" name="idloginExterno" id="idloginExterno">          
+									<option value="0">(Seleccione)</option>
+									<php:repeticion id="LoginExterno">
+									<option value="<php:item id="idloginExterno" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idloginExterno"" /><php:argumento idvalor="idloginExterno" /></php:funcion>><php:item id="Descripcion" /></option>
+									</php:repeticion>
+								</select>
+							</div>
+						</div>-->
+						</php:repeticion>
+						<div class="form-row">  
+							<div class="col-md-2 xs-12 pull-right" style="margin-top: 15px" >            
+								<input type="hidden" name="accion" value="AGREGAR" />
+								<button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" id="accion2" value="AGREGAR" onclick="javascript:return validarFormulario(this,new Array(),new Array('apmaterno','idloginExterno','nombrecentrocosto')) && validaRut2(document.formulario.newusuarioid) && validarRutEmpresa();"/>Guardar</button>
+							</div>
+						</div>   
+					</form>
+					<!--Corta palo - Ocultar/Mostrar Division personal de ventana usuario-->
+					<!--Modal de Centros de Costo>
+					<div class="modal fade" id="modal_centro_costo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+						<div class="modal-dialog" >
+							<div class="modal-content">
+								<div class="modal-header" align="center">
+									<h4 class="modal-title" id="ejemplo-titulo"> Divisi&oacute;n personal </h4>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<div id="mensajeError_modal"></div>
+									<table id="tabla_centro_costo" class="table table-bordered table-hover" style="text-align: center">
+										<thead >
+											<tr>
+												<th  style="text-align: center" >C&oacute;digo</th>
+												<th  style="text-align: center" >Nombre</th>
+												<th  style="text-align: center" >Selecci&oacute;n</th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+								<div class="modal-footer" style="margin-top:10px;">
+									<button type="button" class="btn btn-secondary btn-md" id="cerrar_centro_costo" data-dismiss="modal">Cerrar</button>
+								</div>
+							</div>
+						</div>
+					</div-->
+					<!--Corta palo - Ocultar/Mostrar Division personal de ventana usuario-->
+				</div>
+			</div>
+			<!-- /.box -->
+		</div>
+  	</div>
+  	<!-- /.col -->
+</div>
+<script >
+  	function validarRutEmpresa(){
+  		if( $("#RutEmpresa").val() == 0 ){
+  			$("#mensajeError").html("Debe seleccionar");
+  			$("#mensajeError").addClass("callout callout-warning");
+  			$("#RutEmpresa").focus();
+  			return false;
+  		}else{
+  			$("#mensajeError").html("");
+  			$("#mensajeError").removeClass("callout callout-warning");
+  			return true;
+  		}
+  	}
+	
+	 /************************/
+	/**VALIDAR RUT EMPLEADO**/
+	/************************/
+	$("#newusuarioid").change(function(){
+
+  		var RutUsuario = $("#newusuarioid").val();
+  		var url  = "Generar_Documento_PorFicha_ajax.php?personaid=" + RutUsuario;
+
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+          ajax = new XMLHttpRequest(); // No Internet Explorer
+        else
+          ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+       
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajax.onreadystatechange = funcionCallback_rutusuario;
+
+        // Enviamos la peticion
+        ajax.open( "GET", url, true );
+        ajax.send( "" );
+  });
+
+  function funcionCallback_rutusuario()
+  {
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+      if( ajax.status == 200 )
+      {
+        // Escribimos el resultado en la pagina HTML mediante DHTML
+        salida = ajax.responseText;
+        datos = JSON.parse(salida);
+
+        if( salida != '' ){ 
+			if(datos.existe=="1"){
+				$("#mensajeError").addClass("callout callout-warning");
+				$("#mensajeError").html("Usuario Existente");
+				$("#accion2").attr("disabled",true);
+			}
+        }
+		else{
+			$("#mensajeError").removeClass("callout callout-warning");
+			$("#mensajeError").html("");
+			$("#accion2").attr("disabled",false);
+		}
+		
+      }
+	  
+    }
+	else{
+		$("#mensajeError").removeClass("callout callout-warning");
+		$("#mensajeError").html("");
+		$("#accion2").attr("disabled",false);
+	}
+  }
+	
+	$("#RutEmpresa").change(function(){
+		$("#nombrecentrocosto").val('');
+		$("#centrocostoid").val('');
+	});
+
+	//Modal de Centros de Costo
+	/*$("#btn_centro_costo").click(function(){
+		var RutEmpresa = $("#RutEmpresa").val();
+		$(".fila_cc").remove();
+		if( RutEmpresa == 0 ){
+			$("#mensajeError").addClass("callout callout-warning");
+			$("#mensajeError").html("Debe seleccionar la Empresa");
+			return false;
+		}
+		$("#mensajeError").html("");
+		$("#mensajeError").removeClass("callout callout-warning");
+		var url  = "Generar_Documento_PorFicha_ajax1.php?RutEmpresa=" + RutEmpresa;
+		// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+		if( window.XMLHttpRequest )
+			ajax = new XMLHttpRequest(); // No Internet Explorer
+		else
+			ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+		// Almacenamos en el control al funcion que se invocara cuando la peticion
+		// cambie de estado 
+		ajax.onreadystatechange = funcionCallback_centrocosto;
+		// Enviamos la peticion
+		ajax.open( "GET", url, true );
+		ajax.send( "" );
+	});
+
+	function funcionCallback_centrocosto()
+	{
+		// Comprobamos si la peticion se ha completado (estado 4)
+		if( ajax.readyState == 4 )
+		{
+			// Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+			if( ajax.status == 200 )
+			{
+				// Escribimos el resultado en la pagina HTML mediante DHTML
+				salida = ajax.responseText;
+				listado = JSON.parse(salida); 
+				num = listado.length;
+				if( num > 0 ){
+					//[{"0":"cc1","centrocostoid":"cc1","1":"cc1","nombrecentrocosto":"cc1","2":"'cc1'","lp":"'cc1'"},{"0":"cc2","centrocostoid":"cc2","1":"c2","nombrecentrocosto":"c2","2":"'cc2'","lp":"'cc2'"}]
+					$.each(listado, function( index, value ) {
+						$('#tabla_centro_costo tr:last').after('<tr class="fila_cc"><td>' + listado[index].centrocostoid + '</td><td><div id="' + listado[index].centrocostoid + '">' + listado[index].nombrecentrocosto + ' </div></td><td ><button type="button" style="background-color: transparent;" class="btn" name="btn_agregar_cc" id="btn_agregar_cc" onclick="agregarCC(' + listado[index].lp + ');"><i class="fa fa-plus" aria-hidden="true"></i></button></td></tr>');
+					});
+				}else{
+					$('#tabla_centro_costo tr:last').after('<tr class="fila_cc"><td colspan=3 >No existen Relaciones laborales para la Empresa y el Centro de Costo seleccionado</td></tr>');
+				}
+			}
+		}
+	}
+
+	function agregarCC(i){
+		$("#centrocostoid").val(i);
+		$("#nombrecentrocosto").val($("#"+i).html());
+		$("#cerrar_centro_costo").click();
+	}*/
+
+</script>

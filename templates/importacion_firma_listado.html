@@ -1,0 +1,204 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <div class="box-header">
+          <div class="box-header">
+			<a class="btn btn-default btn_letra_azul" onclick="MostrarCargando() & inicio();"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
+ 
+			<php:repeticion id="formulario2">
+			<div class="form-row">
+				<div class="col-md-2" style="margin-left:40%;">  
+					<button class="btn btn-md btn-success btn-block" type="button" name="accion" id="REPROCESAR" value="REPROCESAR" style="margin-top: 10px" onclick="iniciar()">Reprocesar</button>  
+				</div>
+				
+				<div id="estado" style="display:none;">
+					<div class="col-md-8" style="margin-left:40%;"> 
+						<label id="estadodetalle">Estado reproceso</label>
+					</div>
+					<div class="col-md-8" style="margin-left:40%;"> 
+						<progress style="margin-top:3px" value="0" id="progreso" max="<php:item id="noenviados" />">	</progress>
+					 </div>
+				</div>
+			 </div>
+			</div>
+		  </div>
+			</php:repeticion>
+
+	
+          <div class="form-inline ">
+            <div class="form-group">
+				<form name="volver" id="volver" action="importacion_firma.php" method="POST" >
+					
+				</form>
+				
+				<form name="procesoanterior" id="procesoanterior" action="importacion_firma.php" method="POST" >
+					<input type="hidden" id="accion2" name="accion2" value="PROCESOANTERIOR"/>
+				</form>
+			
+            </div>
+          </div> 
+        </div>
+        <div class="box-body">
+          <div id="mensajeError"><php:texto id="mensajeError" /></div>
+          <div id="mensajeOK"><php:texto id="mensajeOK" /></div>				
+			
+		
+		  
+
+
+          <php:repeticion id="formulario">
+            <div id="divtabla" class="tabla-responsiva" >
+              <table id="example4" class="table table-bordered table-hover" name="tbltabla">
+                <thead>
+                  <tr>
+					<!--<th data-campo="Seleccionar" style="text-align: center;">Seleccionar</th>-->
+                    <th data-campo="Nro." style="text-align: center;">Nro.</th>
+                    <th data-campo="P&aacute;gina Inicio" style="text-align: center;">P&aacute;gina Inicio</th>
+                    <th data-campo="P&aacute;gina Fin" style="text-align: center;">P&aacute;gina Fin</th>
+                    <th data-campo="Rut" style="text-align: center;">Rut</th>
+					<th data-campo="Nombre" style="text-align: center;">Nombre</th>
+					<th data-campo="Observaci&oacute;n" style="text-align: center;">Observaci&oacute;n</th>
+					<th data-campo="Estado" style="text-align: center;">Estado</th>
+                  </tr>
+                </thead>
+              <tbody>
+              <php:repeticion id="listado">
+                <tr>
+				  <!--<td>
+					<input type="checkbox" <php:item id="checked_sn" /> <php:item id="disabled" /> name="sel_<php:filamenos />" id="sel_<php:filamenos />" <php:item id="estadocheck" /> value="<php:item id="pagina" />"  >
+			      </td>-->			
+				  <td data-campo="Nro." align="center"><php:item id="pagina" /></td>
+                  <td data-campo="P&aacute;gina Inicio" align="center"><php:item id="paginainicio" /></td>
+                  <td data-campo="P&aacute;gina Fin" align="center"><php:item id="paginafin" /></td>
+                  <td data-campo="Rut" align="center"><php:item id="empleadoid" /></td>
+				  <td data-campo="Nombre" align="center"><php:item id="nombre" /></td>
+				  <td data-campo="Observaci&oacute;n" align="center"><php:item id="observacion" /></td>
+				  <td data-campo="Estado" align="center"><php:item id="estado" /></td>
+                 
+                </tr>
+              </php:repeticion>
+              </tbody>
+              </table>
+              <input type="hidden" name="cantidad" id="cantidad" value="<php:texto id="cantidad" />" >
+			  <input type="hidden" name="noenviados" id="noenviados" value="<php:texto id="noenviados" />" >
+			  <input type="hidden" name="nro" id="nro" value="0" >
+				
+            </div>
+          </php:repeticion>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+
+var conexion;
+		
+function crearXMLHttpRequest() 
+{
+	var xmlHttp=null;
+	if (window.ActiveXObject) 
+		xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	else 
+	if (window.XMLHttpRequest) 
+		xmlHttp = new XMLHttpRequest();
+	return xmlHttp;
+}
+
+var consulta;
+var noenviados = document.getElementById('noenviados').value;
+var iniciarx;
+function iniciar()
+{
+	document.getElementById('estadodetalle').innerHTML =  '0 reprocesados de un total de ' + noenviados;
+	MostrarCargando();
+	document.getElementById('REPROCESAR').disabled = true;
+	document.getElementById('estado').style.display = "block";
+	iniciarx = setInterval(function(){ reprocesar() }, 1000);
+}
+
+function reprocesar()
+{
+	clearInterval(iniciarx);
+	conexion=crearXMLHttpRequest();
+    conexion.open('POST', 'importacion_firma_split.php?accion=REPROCESO&pagina=0');
+    conexion.send(null);
+	consulta_estado();
+	OcultarCargando();
+	consulta = setInterval(function(){ consulta_estado() }, 7000);
+	
+}
+
+var mismovalor;
+var cantloop  = 10;
+function consulta_estado()
+{	
+	conexion=crearXMLHttpRequest();
+
+	// Preparamos la petición con parametros
+	var par = "?accion=ESTADOREPROCESO";
+	
+	conexion.open('POST', 'importacion_firma_split.php' + par, false);
+	// Realizamos la petición
+	//alert ("antes de send");
+	conexion.send(null);
+	// Devolvemos el resultado
+	respuesta =  conexion.responseText;	
+	arr_resp  = respuesta.split('|');
+	reprocesados = arr_resp[0];
+	if (reprocesados != '')
+	{	
+		resp = validaloop(reprocesados);
+	
+		if (resp == true)
+		{ 
+			document.getElementById('progreso').value = reprocesados;
+			document.getElementById('estadodetalle').innerHTML = reprocesados + ' reprocesados de un total de ' + noenviados;
+			if ( noenviados == reprocesados || reprocesados > noenviados)
+			{	
+				document.getElementById('estado').style.display = "none";
+				clearInterval(consulta);
+				alert ("Proceso Finalizado");
+				document.getElementById("procesoanterior").submit();
+			}
+		}
+		else
+		{	
+			document.getElementById('estado').style.display = "none";
+			clearInterval(consulta);	
+			alert ("Problemas al reprocesar, intente nuevamente");
+		}
+	}
+}
+
+function validaloop(reprocesados)
+{
+	if (document.getElementById('progreso').value == reprocesados)
+	{
+		mismovalor++;
+	}
+	else
+	{
+		mismovalor = 0;
+	}
+	
+	if (mismovalor > cantloop)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+
+}
+
+function inicio()
+{
+	document.getElementById("volver").submit();
+}
+
+</script>

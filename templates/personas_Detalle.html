@@ -1,0 +1,91 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+      	   <php:repeticion id="formulario">
+	        <!--Botones de cabecera-->
+	        <div class="box-header">
+		         <form role="form" name="formulario3" id="formulario3" action="Personas.php" method="POST">
+					<input type="hidden" name="accion" value="BUSCAR">
+					<button type="submit" class="btn btn-default"><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
+	
+					 <input type="hidden" name="personaid" value="<php:item id="personaid" />">
+				     <input type="hidden" name="nombre" value="<php:item id="nombre_filtro" />" >
+				     <input type="hidden" name="envioinfo" value="<php:item id="envioinfo_filtro" />" >
+					 <input type="hidden" name="pagina" value="<php:item id="pagina" />" id="pagina" >
+					 <input type="hidden" name="holdingid" value="<php:item id="holdingid" />" >
+					 <input type="hidden" name="volver" />
+				</form>
+	        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+       
+        <!--Mensajes-->
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+       
+        <!--Datos referenciales-->
+        <div class="form-row">
+          
+          <div class="col-md-6" style="padding-bottom: 15px;">
+    		<h3>Datos del trabajador</h3>
+	     
+	        <form role="form" name="formulario" id="formulario" action="Personas.php" method="POST" enctype="multipart/form-data">
+	          
+	       
+	          	<table class="table table-striped">
+		            <tbody>
+			            <tr>
+			              <td valign="center"><label for="personaid" class="col-md-6">Rut Trabajador:</label></td>
+			              <td valign="center"> <php:item id="personaid" /></td>
+			            </tr>
+			            <tr>
+			              <td valign="center"><label for="nombre" class="col-md-6">Nombre Trabajador:</label></td>
+			              <td valign="center"> <php:item id="nombre" /></td>
+			            </tr>
+			            <tr>
+			              <td valign="center"><label for="direccion" class="col-md-6">Direcci&oacute;n:</label></td>
+			              <td valign="center"><php:item id="direccion" /></td>
+			            </tr>
+			            <tr>
+			              <td valign="center"><label for="comuna" class="col-md-6">Comuna:</label></td>
+			              <td valign="center"><php:item id="comuna" /></td>
+			            </tr>
+						<tr>
+			              <td valign="center"><label for="ciudad" class="col-md-6">Ciudad:</label></td>
+			              <td valign="center"><php:item id="ciudad" /></td>
+			            </tr>
+			            <tr>
+			              <td valign="center"><label for="celularContacto" class="col-md-6">Celular Contacto:</label></td>
+			              <td valign="center"><php:item id="celularContacto" /></td>
+			            </tr>
+			            <tr>
+			              <td valign="center"><label for="celularPersonal" class="col-md-6">Celular Personal:</label></td>
+			              <td valign="center"><php:item id="celularPersonal" /></td>
+			            </tr>
+			            <tr>
+			              <td valign="center"><label for="envioinfo" class="col-md-6">Envio Info:</label></td>
+			              <td valign="center"><php:item id="ei" /></td>
+			            </tr>
+			            <tr>
+			              <td valign="center"><label for="nombrecontacto" class="col-md-6">Nombre Contacto:</label></td>
+			              <td valign="center"><php:item id="nombreContacto" /></td>
+			            </tr>
+						<tr>
+			              <td valign="center"><label for="relacionContacto" class="col-md-6">Relaci&oacute;n Contacto:</label></td>
+			              <td valign="center"><php:item id="relacionContacto" /></td>
+			            </tr>
+						
+		            </tbody>
+		        </table>
+		    </div>
+
+				</php:repeticion>
+		 	</form>
+	      </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>

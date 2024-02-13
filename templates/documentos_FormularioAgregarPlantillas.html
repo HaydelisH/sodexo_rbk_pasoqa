@@ -1,0 +1,196 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <!--Botones de cabecera-->
+        <div class="box-header">
+          <a class="btn btn-default btn_letra_azul" onClick="history.back(-1)" ><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
+        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <!--Mensajes-->
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+        <!--Formulario de los datos propios de Categoria-->   
+        <table id="example2" class="table table-bordered table-hover pagin-table">
+          <thead>
+           <tr>
+            <th data-campo="SELECCION" style="text-align: center;">Selecci&oacute;n </th>
+            <th data-campo="Descripcion_Pl" style="text-align: center;">Descripcion de Plantilla</th>
+            <th data-campo="NombreTipoDoc" style="text-align: center;">Tipo de Documento</th>
+            <th data-campo="Categoria" style="text-align: center;">Categoria</th>
+            <th data-campo="Cant" style="text-align: center;">Clausulas</th>
+            <th data-campo="Aprobado" style="text-align: center;">Aprobado</th>
+          </tr>
+          </thead>
+          <tbody >
+            <php:repeticion id="listado">
+              <tr id="fila_<php:filamenos />">
+                <!--Boton de Agregar-->
+                <td data-campo="BOTON_AGREGAR"> 
+                  <div style="text-align: center">
+                   <form role="form" action="Documentos.php" method="POST" name="formulario" id="formulario">
+                      
+                      <input type="hidden" id="idPlantilla" name="idPlantilla" value="<php:item id="idPlantilla"/>"/>
+                      <input type="hidden" id="idWF" name="idWF" value="<php:item id="idWF"/>"/>
+                      <input type="hidden" id="idTipoDoc" name="idTipoDoc" value="<php:item id="idTipoDoc"/>"/>
+                      <input type="hidden" id="RutEmpresa" name="RutEmpresa" value="<php:item id="RutEmpresa"/>"/>
+                      <input type="hidden" id="RutEmpresaC" name="RutEmpresaC" value="<php:item id="RutEmpresaC"/>"/>
+                      <input type="hidden" id="RutEmpresaN" name="RutEmpresaN" value="<php:item id="RutEmpresaN"/>"/>
+                      <input type="hidden" id="RutEjecutivo" name="RutEjecutivo" value="<php:item id="RutEjecutivo"/>"/> 
+                      <input type="hidden" id="RutSupervisor" name="RutSupervisor" value="<php:item id="RutSupervisor"/>"/> 
+                      <input type="hidden" id="fechaInicio" name="fechaInicio" value="<php:item id="fechaInicio"/>" />
+                      <input type="hidden" name="modelo_contrato" id="modelo_contrato" value="<php:item id="modelo_contrato"/>" >
+                      <input type="hidden" name="FormasPago" id="FormasPago" value="<php:item id="FormasPago"/>" >
+                      <input type="hidden" name="TipoFirmas" id="TipoFirmas" value="<php:item id="TipoFirmas"/>" >
+                      <input type="hidden" name="pro" id="pro" value="<php:item id="pro"/>" >
+                      <input type="hidden" name="fecha" id="fecha" value="<php:item id="fecha"/>" >
+                      <input type="hidden" id="fechaFin" name="fechaFin" value="<php:item id="fechaFin"/>" />
+                      <input type="hidden" id="aprob_<php:filamenos />" name="aprob" value="<php:item id="aprob"/>" />
+
+                      <!--Anexo-->
+                      <input type="hidden" id="idProyecto" name="idProyecto" value="<php:item id="idProyecto"/>"/>
+                      <input type="hidden" id="fechaFirma" name="fechaFirma" value="<php:item id="fechaFirma"/>"/>
+                      <input type="hidden" id="Marca" name="Marca" value="<php:item id="Marca"/>"/>
+                      <input type="hidden" id="Modelo" name="Modelo" value="<php:item id="Modelo"/>"/>
+                      <input type="hidden" id="CiudadEntrega" name="CiudadEntrega" value="<php:item id="CiudadEntrega"/>"/>
+                      <input type="hidden" id="CiudadOperacion" name="CiudadOperacion" value="<php:item id="CiudadOperacion"/>"/>
+                      <input type="hidden" id="CiudadDevolucion" name="CiudadDevolucion" value="<php:item id="CiudadDevolucion"/>"/> 
+                      <input type="hidden" id="PeriodoArriendo" name="PeriodoArriendo" value="<php:item id="PeriodoArriendo"/>"/> 
+                      <input type="hidden" id="FechaInicio" name="FechaInicio" value="<php:item id="FechaInicio"/>" />
+                      <input type="hidden" id="FechaFinal" name="FechaFinal" value="<php:item id="FechaFinal"/>" />
+                      <input type="hidden" name="Tarifa" id="Tarifa" value="<php:item id="Tarifa"/>" >
+                      <input type="hidden" name="idMoneda_Tarifa" id="idMoneda_Tarifa" value="<php:item id="idMoneda_Tarifa"/>" >
+                      <input type="hidden" name="idMoneda_KmsExceso" id="idMoneda_KmsExceso" value="<php:item id="idMoneda_KmsExceso"/>" >
+                      <input type="hidden" name="KmsExceso" id="KmsExceso" value="<php:item id="KmsExceso"/>" >
+                      <input type="hidden" name="KmsContratados" id="KmsContratados" value="<php:item id="KmsContratados"/>" >
+                      <input type="hidden" name="FrecuenciaMantencion" id="FrecuenciaMantencion" value="<php:item id="FrecuenciaMantencion"/>" >
+                      <input type="hidden" name="FrecuenciaCambio" id="FrecuenciaCambio" value="<php:item id="FrecuenciaCambio"/>" >
+                      <input type="hidden" name="Cantidad" id="Cantidad" value="<php:item id="Cantidad"/>" >
+                      <input type="hidden" name="Porcentaje" id="Porcentaje" value="<php:item id="Porcentaje"/>" >
+                      <input type="hidden" name="Propuesta" id="Propuesta" value="<php:item id="Propuesta"/>" >
+                      <input type="hidden" name="FechaPropuesta" id="FechaPropuesta" value="<php:item id="FechaPropuesta"/>" >
+                      <input type="hidden" name="GPS" id="GPS" value="<php:item id="GPS"/>" >
+                      <input type="hidden" name="seleccion" id="seleccion" value="<php:item id="seleccion"/>" >
+                      <input type="hidden" name="seleccion_ded" id="seleccion_ded" value="<php:item id="seleccion_ded"/>" >
+                      <input type="hidden" name="rut_coordinador" id="rut_coordinador" value="<php:item id="rut_coordinador"/>" >
+                      <input type="hidden" name="nombre_coordinador" id="nombre_coordinador" value="<php:item id="nombre_coordinador"/>" >
+                      <input type="hidden" name="idDocumento_Gama" id="idDocumento_Gama" value="<php:item id="idDocumento_Gama"/>" >
+
+                      <!--Contrato Renting -->
+                      <input type="hidden" name="Patente" id="Patente" value="<php:item id="Patente"/>" >
+                      <input type="hidden" name="Color" id="Color" value="<php:item id="Color"/>" >
+                      <input type="hidden" name="VIN" id="VIN" value="<php:item id="VIN"/>" >
+                      <input type="hidden" name="AnnoVehiculo" id="AnnoVehiculo" value="<php:item id="AnnoVehiculo"/>" >
+                      <input type="hidden" name="KmsMensuales" id="KmsMensuales" value="<php:item id="KmsMensuales"/>" >
+                      <input type="hidden" name="FechaPie" id="FechaPie" value="<php:item id="FechaPie"/>" >
+                      <input type="hidden" name="FechaPago" id="FechaPago" value="<php:item id="FechaPago"/>" >
+                      <input type="hidden" name="CuotaPie" id="CuotaPie" value="<php:item id="CuotaPie"/>" >
+                      <input type="hidden" name="MontoCuota" id="MontoCuota" value="<php:item id="MontoCuota"/>" >
+                      <input type="hidden" name="Exceso" id="Exceso" value="<php:item id="Exceso"/>" >
+                      <input type="hidden" name="KmsExceso" id="KmsExceso" value="<php:item id="KmsExceso"/>" >
+                      <input type="hidden" name="RentaMens" id="RentaMens" value="<php:item id="RentaMens"/>" >
+
+                       <!--Operativo - Financiero-->
+                      <input type="hidden" name="RutProveedor" id="RutProveedor" value="<php:item id="RutProveedor"/>" >
+                      <input type="hidden" name="FechaInicioPago" id="FechaInicioPago" value="<php:item id="FechaInicioPago"/>" >
+                      <input type="hidden" name="DetalleBienes" id="DetalleBienes" value="<php:item id="DetalleBienes"/>" >
+                      <input type="hidden" name="Moneda" id="Moneda" value="<php:item id="Moneda"/>" >
+                      <input type="hidden" name="MontoAdquisicion" id="MontoAdquisicion" value="<php:item id="MontoAdquisicion"/>" >
+                      <input type="hidden" name="CantTotal" id="CantTotal" value="<php:item id="CantTotal"/>" >
+                      <input type="hidden" name="CantRentas" id="CantRentas" value="<php:item id="CantRentas"/>" >
+                      <input type="hidden" name="ValorBallon" id="ValorBallon" value="<php:item id="ValorBallon"/>" >
+                      <input type="hidden" name="ValorCompra" id="ValorCompra" value="<php:item id="ValorCompra"/>" >
+                      <input type="hidden" name="DiaPagoMensual" id="DiaPagoMensual" value="<php:item id="DiaPagoMensual"/>" >
+                      <input type="hidden" name="DuracionContrato" id="DuracionContrato" value="<php:item id="DuracionContrato"/>" >
+                      <input type="hidden" name="FechaPrepago" id="FechaPrepago" value="<php:item id="FechaPrepago"/>" >
+                      <input type="hidden" name="ValorAsegurable" id="ValorAsegurable" value="<php:item id="ValorAsegurable"/>" >
+                      <input type="hidden" name="ValorIguales" id="ValorIguales" value="<php:item id="ValorIguales"/>" >
+                      <input type="hidden" name="pro" id="pro" value="<php:item id="pro"/>" >
+
+                      <!--Proveedores seleccionados-->
+
+                      <input type="hidden" name="rut_p_1" value='<php:item id="rut_p_1" />' />
+                      <input type="hidden" name="nombre_p_1" value='<php:item id="nombre_p_1" />' />
+                      <input type="hidden" name="detalle_p_1" value='<php:item id="detalle_p_1" />' />
+                      <input type="hidden" name="monto_p_1" value='<php:item id="monto_p_1" />' />
+
+                      <input type="hidden" name="rut_p_2" value='<php:item id="rut_p_2" />' />
+                      <input type="hidden" name="nombre_p_2" value='<php:item id="nombre_p_2" />' />
+                      <input type="hidden" name="detalle_p_2" value='<php:item id="detalle_p_2" />' />
+                      <input type="hidden" name="monto_p_2" value='<php:item id="monto_p_2" />' />
+
+                      <input type="hidden" name="rut_p_0" value='<php:item id="rut_p_0" />' />
+                      <input type="hidden" name="nombre_p_0" value='<php:item id="nombre_p_0" />' />
+                      <input type="hidden" name="detalle_p_0" value='<php:item id="detalle_p_0" />' />
+                      <input type="hidden" name="monto_p_0" value='<php:item id="monto_p_0" />' />
+
+                      <input type="hidden" name="accion" value="AGREGAR"/>
+                      <button type="submit" style="background-color: transparent;" class="btn" id="boton_<php:filamenos />" name="accion2" value="BUSCAR_P"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                  </form>
+                  </div>
+                </td>
+                <!--Titulo de Plantilla-->
+                <td data-campo="Titulo_Pl" style="text-align: center;"><div><php:item id="Descripcion_Pl"/></div></td>
+                <!--Titulo de Documento-->
+                <td data-campo="NombreTipoDoc"style="text-align: center;"><div><php:item id="NombreTipoDoc"/></div></td>
+                <!--Categoria-->
+                <td data-campo="Titulo" style="text-align: center;"><div><php:item id="Titulo"/></div></td>
+                <!--Cantidad de Clausulas-->
+                <td data-campo="Cant" style="text-align: center;"><div id="cant_<php:filamenos />"><php:item id="Cant"/></div></td>
+                <!--Aprobado-->
+                <td data-campo="Aprobado" style="text-align: center;"><div><php:item id="Aprobado"/></div></td>
+              </tr>
+            </php:repeticion>
+          </tbody>
+        </table> 
+      </div>
+      </div>
+    <!-- /.box -->
+    </div>
+  </div>
+  <!-- /.col -->
+  </div>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+    var row = $("#example2 tr").length;
+    var i = 0;
+
+    for( i = 0; i < row ; i++ ){
+      //Si esta pendiente por aprobacion
+     if($("#aprob_"+i).val() == 0 ){
+      //Inhabilitar el boton de agregar
+       $("#boton_"+i).prop('disabled', true);
+       $("#fila_"+i).css("background-color","#f4f4f4");
+       $("#boton_"+i).prop('title', 'La Plantilla no esta aprobada');
+     }
+     if($("#Cant_"+i).val() == 0){
+      //Inhabilitar el boton de agregar
+       $("#boton_"+i).prop('disabled', true);
+       $("#boton_"+i).prop('title', 'La Plantilla no tiene Clausulas asociadas');
+
+     }
+    }
+
+  });
+
+  //Si la Plantilla esta aprobada y no tiene Clausulas 
+  $(".btn").click(function(){
+    //Variables
+    elemento = $(this).attr("id");
+    i = elemento.split("_")[1];
+    txt = "";
+   
+   if($("#cant_"+i).text() == 0){
+        //Asigno respuesta a variable
+        txt = confirm("Esta Plantilla no tiene Clausulas asociadas. Desea continuar?");
+        //Si es no, no avanza
+        if (txt == false) {
+            return false;
+        }
+    }
+  });
+
+</script>

@@ -1,0 +1,83 @@
+  <div class="row">
+          <div class="col-md-12">
+            <div class="box ">
+              <div class="box-body pad table-responsive">
+                <div class="box-header">
+                  <div class="btn-group-md" role="group">
+					  <a class="btn btn-default btn_letra_azul" href="flujofirma.php"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</a>
+                      
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+				
+				<!--Mensajes-->
+				<div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+				<div id="mensajeError"><php:texto id="mensajeError" /></div>
+				  <php:repeticion id="formulario">
+                  <form role="form" name="formulario" id="formulario" action="flujofirma.php" method="POST" autocomplete="off">
+                      <!--Campos basicos-->
+                      <div class="form-row">
+                        <div class="col-md-12">
+                          <label for="rut">Descripci&oacute;n</label>
+                          <input type="text" class="form-control" id="nombrewf" name="nombrewf" value="<php:item id="nombrewf" />" placeholder="Descripci&oacute;n" required>
+                        </div>
+                      </div>
+                       <div class="form-row">
+                        <div class="col-md-8 xs-12">
+							<label for="nombre">Seleccion Tipo de Estado</label>
+							<select class= "form-control" name="idestado" id="idestado" >
+								<option value="">(Seleccionar)</option>
+								<php:repeticion id="idsestado">
+								<option value="<php:item id="idestado" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idestado" /><php:argumento valor="idestado" /></php:funcion>><php:item id="nombre" /></option>
+								</php:repeticion>
+							</select>
+                        </div>
+                        
+                        <div class="col-md-3 xs-12">
+                          <label for="nombre">Dias</label>
+                           <input type="number" min="1" maxlength = "3" class="form-control" name="diasmax" id="diasmax" value="<php:item id="diasmax" />" required>
+                        </div>
+                         <div class="col-md-1 xs-12">
+						   <input type="hidden" name="accion" value="AGREGAR" />
+                           <button class="btn btn-md btn-primary" type="submit" name="accion2" value="AGREGAR" onclick="javascript:return validarFormulario(this,new Array('diasmax'));" style="margin-top: 25px"><i class="fa fa-plus" aria-hidden="true"></i></button>  
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="col-md-12">  
+                          <label for="nombre">Estados seleccionados</label>
+                          <table class="table table-bordered table-hover">
+                            <thead>
+                              <th data-campo="Orden" style="text-align: center;" >Orden</th>
+                              <th data-campo="Estado" style="text-align: center;" >Estado</th>
+                              <th data-campo="D&iacute;as para firmar" style="text-align: center;" >D&iacute;as para firmar</th>
+                              <th data-campo="Opciones" style="text-align: center;" >Opciones</th>
+                            </thead>
+                            <tbody>
+							  <php:repeticion id="estados">
+						      <tr>
+							   <td data-campo="Orden"><div style="text-align: center;"><php:item id="orden" /></div></td>
+							   <td data-campo="Estado"><div style="text-align: center;"><php:item id="estado" /></div></td>
+							   <td data-campo="D&iacute;as para firmar"><input type="number" min="1" maxlength="3" class="form-control" placeholder="0" id="diasmx_<php:item id="filamenos" />" name="diasmx_<php:item id="filamenos" />" value="<php:item id="diasmax" />" ></td>
+							   <td><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+							  </tr>
+							  </php:repeticion>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>                         
+					  <div class="form-row">  
+                        <div class="col-md-2 xs-12">
+                            <button class="btn btn-md btn-primary btn-block" type="submit" name="accion2" value="GRABAR" style="margin-top: 10px">Guardar</button>  
+                        </div>
+                      </div>                  
+                    </form>     
+					</php:repeticion>
+                  </div>
+                <!-- /.box-body -->
+              </div>
+              <!-- /.box -->
+            </div>
+          </div>
+          <!-- /.col -->
+        </div>

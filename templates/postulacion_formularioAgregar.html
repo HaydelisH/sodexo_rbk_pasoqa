@@ -1,0 +1,466 @@
+	<div class="row">
+		<div class="col-md-12">
+		  	<div class="box ">
+				<div class="box-body pad table-responsive">
+					<!--Botones de cabecera-->
+					<div class="box-header">
+						<a class="btn btn-default btn_letra_azul" href="postulacion.php">Nueva postulaci&oacute;n</a>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<!--Mensajes-->
+						<div id="mensajeError"><php:texto id="mensajeError" /></div>
+						<div id="mensajeOK"><php:texto id="mensajeOK" /></div>	
+						<form name="formulariox" class="formulariox" id="formulariox"  class="form-horizontal" action="Postulacion.phpx" method="POST" autocomplete=off>
+							<php:repeticion id="formulario">
+							<div class="box-body">
+								<div class="form-row">
+									<div class="col-md-12">
+										<label style="float:right;"> (*) Campos obligatorios </label>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="col-md-6">
+										<label for="contenedorid" >Empresa</label>
+										<div class="input-group col-xs-12">
+											<input type="text" class="form-control" id="RazonSocial" name="RazonSocial" placeholder="Empresa" maxlength="50" value="<php:item id="RazonSocial" />" disabled >
+											<input type="hidden" id="RutEmpresa" name="RutEmpresa" value="<php:item id="RutEmpresa" />" >
+										</div>
+									</div>
+									<div class="col-md-6">
+										<label for="contenedorid" >Divisi&oacute;n personal</label>
+										<div class="input-group col-xs-12">
+											<input type="text" class="form-control" id="nombrecentrocosto" name="nombrecentrocosto" placeholder="Divisi&oacute;n personal" maxlength="50" value="<php:item id="nombrecentrocosto" />" disabled >
+											<input type="hidden" id="centrocostoid2" name="centrocostoid2" value="<php:item id="centrocostoid2" />" >
+										</div>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="col-md-6">
+										<label for="tipousuarioid">Rut postulante (*)</label>
+										<div class="input-group col-xs-12">
+											<input type="text" class="form-control" id="newusuarioid"  name="newusuarioid" placeholder="Rut v&aacute;lido" maxlength="10" value="<php:item id="newusuarioid" />" autofocus >
+										</div>
+									</div>
+									<div class="col-md-6">
+										<label for="contenedorid" >Nombre postulante (*)</label>
+										<div class="input-group col-xs-12">
+											<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" maxlength="50" value="<php:item id="nombre" />" >
+										</div>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="col-md-6">
+										<label for="contenedorid" >Telefono postulante (*)</label>
+										<div class="input-group col-xs-12">
+											<input type="text" class="form-control" id="telefono" name="telefono" placeholder="Telefono" maxlength="50" value="<php:item id="telefono" />">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<label for="contenedorid" >E-mail postulante (*)</label>
+										<div class="input-group col-xs-12">
+											<input type="text" class="form-control" id="email" name="email" placeholder="E-mail" maxlength="50" value="<php:item id="email" />">
+										</div>
+									</div>
+								</div>			
+								<div class="form-row">
+									<div class="col-md-6">
+										<label for="contenedorid" >Cargo (*)</label>
+										<select class= "form-control" name="idCargoEmpleado" id="idCargoEmpleado">
+											<option value="0">(Seleccione)</option>
+											<php:repeticion id="Cargos">
+											<option value="<php:item id="idCargoEmpleado" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idCargoEmpleado" /><php:argumento idvalor="idCargoEmpleado" /></php:funcion>><php:item id="nombrecargoempleado" /></option>
+											</php:repeticion>
+										</select>
+									</div>
+									<div class="col-md-6">
+										<label for="contenedorid" >Divisi&oacute;n personal (*)</label>
+										<select class= "form-control" name="centrocostoid" id="centrocostoid">
+											<option value="0">(Seleccione)</option>
+											<php:repeticion id="CentrosCostos">
+											<option value="<php:item id="centrocostoid" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="centrocostoid" /><php:argumento idvalor="centrocostoid" /></php:funcion>><php:item id="nombrecentrocosto" /></option>
+											</php:repeticion>
+										</select>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="col-md-6 xs-12">
+										<label for="contenedorid" >Disponibilidad</label>
+										<select class= "form-control" name="disponibilidadid" id="disponibilidadid">
+											<option value="0">(Seleccione)</option>
+											<php:repeticion id="Disponibilidades">
+											<option value="<php:item id="disponibilidadid" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="disponibilidadid" /><php:argumento idvalor="disponibilidadid" /></php:funcion>><php:item id="nombre" /></option>
+											</php:repeticion>
+										</select>
+									</div>
+								</div>
+								<div class="form-row">
+								</div>
+								<div class="form-row">
+								</div>
+								<div class="form-row">
+									<div class="col-md-6">
+										<label for="contenedorid" >Observaciones</label>
+										<div class="input-group col-xs-12">
+											<textarea class="form-control" id="Observacion" name="Observacion" rows="1" placeholder="Observaciones" maxlength="300" value="<php:item id="Observacion" />"></textarea>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<label class="form-check-label" for="discapacidad">
+											Indicanos si tienes alg&uacute;n tipo de discapacidad y requieres de alg&uacute;n tipo de apoyo o ajuste para participar y desarrollar &oacute;ptimamente tu entrevista*
+										</label>
+										<div class="form-check">
+											<input class="form-check-input" type="radio" onclick="javascript: controlCheck();" name="discapacidad" id="discapacidadSI" value="si">
+											<label class="form-check-label" for="discapacidadSI">Si</label>
+											&nbsp;&nbsp;
+											<input class="form-check-input" type="radio" onclick="javascript: controlCheck();" name="discapacidad" id="discapacidadNO" value="no" checked>
+											<label class="form-check-label" for="discapacidadNO">No</label>
+										</div>
+										<label id='unid' for="contenedorid">&iquest;Cual?</label>
+										<div class="input-group col-xs-12">
+											<textarea class="form-control" id="DiscapacidadObs" name="DiscapacidadObs" rows="1" placeholder="&iquest;Cual?" value="<php:item id="DiscapacidadObs" />" disabled></textarea>
+										</div>
+									</div>
+								</div>
+								<div class="form-row">
+								</div>
+								<div class="form-row">
+									<div class="form-row">
+										<div class="col-md-2 xs-12 pull-right">  
+											<!--button class="btn btn-md btn-success btn-block" type="button" name="accion" id="AGREGAR" value="AGREGAR" style="margin-top: 10px" disabled>Agregar</button-->  
+											<button class="btn btn-md btn-success btn-block" type="button" name="accion" id="AGREGAR" value="AGREGAR" style="margin-top: 10px" >Agregar</button>  
+										</div>
+									</div>
+								</div>			
+							</div>
+						</form>
+						</php:repeticion>
+						<form name="formulario" class="formulario" id="formulario"  class="form-horizontal" action="Postulacion.php" method="POST" autocomplete=off>
+							<div class="box-body">
+								<table id="tabla_postulaciones" class="table table-bordered table-hover" style="text-align: center">
+									<thead>
+										<tr>
+											<th style="text-align: center">Divisi&oacute;n personal</th>
+											<th style="text-align: center">Cargo</th>
+											<th style="text-align: center">Resultado</th>
+											<th style="text-align: center">Opciones</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+								<div class="form-row">
+									<div class="col-md-2 xs-12 pull-right">  
+										<button class="btn btn-md btn-success btn-block" type="button" name="accion" id="GENERARPOSTULACION" value="GENERARPOSTULACION" style="margin-top: 10px" disabled>Enviar postulaciones</button>  
+									</div>
+								</div>
+							</div>
+						</form>
+						<div>
+							<p><font color="green">* Somos una empresa inclusiva y diversa, que propicia ambientes laborales que valoran las diferencias, incentivando la inclusi&oacute;n laboral de acuerdo a la ley 21.015 y favoreciendo el desarrollo de talentos en todos sus colaboradores.</font></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<script>
+	function controlCheck()
+	{
+		if (getCheck())
+		{
+			$('#DiscapacidadObs').text('');
+		}
+		$('#DiscapacidadObs').attr('disabled', getCheck());
+		$('#unid').html((getCheck() ? '&iquest;Cual?' : '&iquest;Cual? (*)'));
+	}
+
+	function getCheck()
+	{
+		return ($('input:radio[name=discapacidad]:checked').val() == 'no');
+	}
+
+	$('#idCargoEmpleado').change(function()
+	{
+		var etiqueta = $('#idCargoEmpleado option:selected').text();
+		if (etiqueta.substring(etiqueta.length - 8, etiqueta.length - 1) == 'cerrada')
+		{
+			//$('option[value="0"]').attr('selected',true);
+			alert('Esta postulacion se encuentra cerrada');
+			$("#idCargoEmpleado").prop("selectedIndex", 0).val(); 
+		}
+	});
+
+	$("#newusuarioid").change(function(){
+		//Limpiar los campos 
+		$("#nombre").val('');
+		$("#correo").val('');
+		$('#telefono').val('');
+		$("#Observacion").val('');
+		var respuesta = validaRut2(document.formulariox.newusuarioid);
+		if( respuesta ){
+			var RutUsuario = $("#newusuarioid").val();
+			var url  = "postulacion_ajax.php?personaid=" + RutUsuario;
+			// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+			if( window.XMLHttpRequest )
+				ajax = new XMLHttpRequest(); // No Internet Explorer
+			else
+				ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+			// Almacenamos en el control al funcion que se invocara cuando la peticion
+			// cambie de estado 
+			ajax.onreadystatechange = funcionCallback_rutusuario;
+			// Enviamos la peticion
+			ajax.open( "GET", url, true );
+			ajax.send( "" );
+		}
+	});
+	
+	function funcionCallback_rutusuario()
+	{
+		// Comprobamos si la peticion se ha completado (estado 4)
+		if( ajax.readyState == 4 )
+		{
+			// Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+			if( ajax.status == 200 )
+			{
+				// Escribimos el resultado en la pagina HTML mediante DHTML
+				salida = ajax.responseText;
+				datos = JSON.parse(salida);
+				var cant = Object.keys(datos).length;
+				if( cant > 0 ){ 
+					console.log(datos);
+					$("#nombre").val( datos.nombre );
+					$("#email").val(datos.email);
+					$('#telefono').val(datos.telefono);
+					$("#Observacion").val(datos.Observacion);
+					$("#DiscapacidadObs").val(datos.discapacidad);
+					if (datos.discapacidad != '' && datos.discapacidad != null)
+					{
+						$("#discapacidadSI").attr('checked', true);
+						$("#discapacidadNO").attr('checked', false);
+						controlCheck();
+					}
+					else
+					{
+						$("#discapacidadSI").attr('checked', false);
+						$("#discapacidadNO").attr('checked', true);
+						controlCheck();
+					}
+				}
+				else
+				{
+					$("#mensajeError").removeClass("callout callout-warning");
+					$("#mensajeError").html("");
+				}
+			}
+		}
+	}
+	
+	var ajax_AGREGAR;
+	var listado = [];
+	var mensajeDuplicados = 'Tiene Postulaciones vigentes';//'Ya esta agregado el cargo a la postulacion';
+	$('#AGREGAR').on('click', function(){
+		var centrocostoid = $('#centrocostoid').children("option:selected").val();
+		var RutEmpresa = $('#RutEmpresa').val();
+		var disponibilidadid = $('#disponibilidadid').children("option:selected").val();
+		var idCargoEmpleado = $('#idCargoEmpleado').children("option:selected").val();
+		var personaid = $('#newusuarioid').val();
+
+		if (centrocostoid == 0 || idCargoEmpleado == 0 || personaid == '' || disponibilidadid == 0 || $('#nombre').val() == '' || $('#telefono').val() == '' || $('#email').val() == '' || (getCheck() ? false : $('#DiscapacidadObs').val() == ''))
+		{
+			alert('Debe rellenar todos los campos obligatorios (*)');
+			return false;
+		}
+		else
+		{
+			for (var i = 0; i < listado.length; i++)
+			{
+				if (listado[i]['RutEmpresa'] == RutEmpresa && listado[i]['idCargoEmpleado'] == idCargoEmpleado)
+				{
+					alert(mensajeDuplicados);
+					return false;
+				}
+			}
+
+			var url  = "postulacion_ajax1.php?centrocostoid=" + centrocostoid + '&idCargoEmpleado=' + idCargoEmpleado + '&personaid=' + personaid + '&RutEmpresa=' + $('#RutEmpresa').val();
+			// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+			if( window.XMLHttpRequest )
+				ajax_AGREGAR = new XMLHttpRequest(); // No Internet Explorer
+			else
+				ajax_AGREGAR = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+			// Almacenamos en el control al funcion que se invocara cuando la peticion
+			// cambie de estado 
+			ajax_AGREGAR.onreadystatechange = funcionCallback_agregar;
+			// Enviamos la peticion
+			ajax_AGREGAR.open( "GET", url, true );
+			ajax_AGREGAR.send( "" );
+		}
+	});
+
+	function funcionCallback_agregar()
+	{
+		// Comprobamos si la peticion se ha completado (estado 4)
+		if( ajax_AGREGAR.readyState == 4 )
+		{
+			// Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+			if( ajax_AGREGAR.status == 200 )
+			{
+				var salida = ajax_AGREGAR.responseText;
+				respuesta = JSON.parse(salida);
+				$('#mensajeOK').removeClass();
+				if (respuesta.existe)
+				{
+					alert(mensajeDuplicados);
+					return false;
+				}
+				else
+				{
+					fila = {
+						'centrocostoid':$('#centrocostoid').children("option:selected").val(),
+						'nombrecentrocosto':$('#centrocostoid').children("option:selected").text(),
+						'idCargoEmpleado':$('#idCargoEmpleado').children("option:selected").val(),
+						'nombrecargo':$('#idCargoEmpleado').children("option:selected").text(),
+						'disponibilidadid':$('#disponibilidadid').children("option:selected").val(),
+						'disponibilidadnombre':$('#disponibilidadid').children("option:selected").text(),
+						'personaid':$("#newusuarioid").val(),
+						'nombre':$("#nombre").val(),
+						'email':$("#email").val(),
+						'telefono':$('#telefono').val(),
+						'Observacion':$("#Observacion").val(),
+						'RutEmpresa':$("#RutEmpresa").val(),
+						'discapacidad':$('#DiscapacidadObs').val(),
+						'estadoGeneracion':'Por generar'
+					};
+					listado.push(fila);
+					add2listado(true);
+				}
+			
+			}
+		}
+	}
+	
+	function habilitaGeneracion()
+	{
+		$('#GENERARPOSTULACION').attr('disabled', !(listado.length > 0));
+	}
+
+	function limpiarFormulario()
+	{
+		$('#centrocostoid').val(0);
+		$('#idCargoEmpleado').val(0);
+	}
+
+	function quitarElemento(centrocostoid, idCargoEmpleado)
+	{
+		var aux = [];
+		for (var i = 0; i < listado.length; i++)
+		{
+			if (!(listado[i]['centrocostoid'] == centrocostoid && listado[i]['idCargoEmpleado'] == idCargoEmpleado))
+			{
+				aux.push(listado[i]);
+			}
+		}
+		listado = aux;
+		add2listado(true);
+	}
+
+	function add2listado(condicion)
+	{
+		if (condicion)
+		{
+			habilitaGeneracion();
+		}
+		limpiarFormulario();
+		$('#tabla_postulaciones').DataTable().destroy();
+		$('#tabla_postulaciones').DataTable({
+			data: listado,
+			columns: [
+				{
+					data: 'nombrecentrocosto'
+				},
+				{
+					data: 'nombrecargo'
+				},
+				{
+					data: 'estadoGeneracion'
+				},
+				{
+					data: 'centrocostoid',
+					render: function ( data, type, row ) {
+						if (row.estadoGeneracion != 'Por generar')
+						{
+							html = '';
+						}
+						else
+						{
+							html = '<button class="btn btn-md btn-warning btn-block" onclick="javascrip: quitarElemento(\'' + row.centrocostoid + '\', \'' + row.idCargoEmpleado + '\')" type="button" id="QUITAR" value="QUITAR" style="margin-top: 10px" >Quitar</button>';
+						}
+						return html;
+					}
+				}
+			],
+			paging: false,
+			//lengthMenu: [ 10, 25, 50 ],
+			lengthChange: true,
+			searching: false,
+			ordering: false,
+			info: true,
+			autoWidth: false,
+			fixedColumns: true
+		});
+	}
+
+	$('#GENERARPOSTULACION').on('click', function(){
+		$('#AGREGAR').attr('disabled', true);
+		$('#GENERARPOSTULACION').attr('disabled', true);
+		var url  = "postulacion_ajax2.php?matriz=" + JSON.stringify(listado);
+		// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+		if( window.XMLHttpRequest )
+			ajax_AGREGAR = new XMLHttpRequest(); // No Internet Explorer
+		else
+			ajax_AGREGAR = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+		// Almacenamos en el control al funcion que se invocara cuando la peticion
+		// cambie de estado 
+		ajax_AGREGAR.onreadystatechange = funcionCallback_generarpostulacion;
+		// Enviamos la peticion
+		ajax_AGREGAR.open( "POST", url, true );
+		ajax_AGREGAR.send( "" );
+	});
+
+	function funcionCallback_generarpostulacion()
+	{
+		// Comprobamos si la peticion se ha completado (estado 4)
+		if( ajax_AGREGAR.readyState == 4 )
+		{
+			// Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+			if( ajax_AGREGAR.status == 200 )
+			{
+				var salida = ajax_AGREGAR.responseText;
+				respuesta = JSON.parse(salida);
+				$('#mensajeOK').removeClass();
+				listado = respuesta;
+				for (var i = 0, contError = 0; i < listado.length; i++)
+				{
+					if (!listado[i]['exito'])
+					{
+						contError++;
+					}
+				}
+				if (contError == listado.length)
+				{
+					alert('La operacion fallo, intente nuevamente');
+				}
+				else if (contError > 0)
+				{
+					alert('La operacion finalizo correctamente, con fallos en algunos registros');
+				}
+				else
+				{
+					alert('La operacion finalizo correctamente');
+				}
+				add2listado(false);
+			}
+		}
+	}
+</script>

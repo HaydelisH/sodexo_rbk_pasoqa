@@ -1,0 +1,260 @@
+
+
+	
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="box ">
+      <div class="box-body pad table-responsive">
+      <!--Botones de cabecera-->
+
+      <!-- /.box-header -->
+      <div class="box-body">
+         <!--Mensajes-->
+		<div id="mensajeError"><php:texto id="mensajeError" /></div>
+		<div id="mensajeOK"><php:texto id="mensajeOK" /></div>	
+		
+		<form name="formulario" class="formularioModificar" id="formulario"  class="form-horizontal"  autocomplete=off>
+				
+			
+				<div class="form-row">
+					<div class="col-md-4 col-xs-12">
+						<label for="rut">Rut a Enrolar</label>
+						<input type="contenedor" class="form-control" id="rut"  name="rut" placeholder="Rut v&aacute;lido" maxlength="10" value="<php:item id="rut" />" autofocus >
+					  </div>
+				</div>
+				
+			<div class="form-row">  
+				<div class="col-md-2 xs-12 pull-right" style="margin-top: 15px" >            
+				  	<input type="hidden" name="accion" value="AGREGAR" />
+				   <button class="btn btn-md btn-primary btn-block" type="button" style="margin-top: 10px" name="accion2" value="AGREGAR" onclick="javascript:return validaRut2(document.formulario.rut) && enrolar();"/>Enrolar</button>
+				</div>
+			</div>   
+		</form>
+	   </div>
+      </div>
+    <!-- /.box -->
+    </div>
+  </div>
+  <!-- /.col -->
+  </div>
+
+  
+   <script type="text/javascript">
+  
+    $(function() {
+      $('#rut').keyup(function() {
+        this.value = this.value.toUpperCase();
+      });
+    });
+	 let general = {
+        baseUrl: "",
+        apiKey: "",
+        digitalSignature: 0,
+        session: {
+          id: "",
+          companyId: "",
+          username: ""
+        },
+        currentAction: "CREATE",
+        operator: {
+          sessionId: null
+        }
+      };
+   
+	  
+	  let popupPage;
+      let openCheckId = function(action) 
+	  {
+		MostrarCargando();
+        general.currentAction = action;
+        // Create popup window
+        var w = 900;
+        var h = 620;
+
+        // Fixes dual-screen position                         Most browsers      Firefox
+        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+
+        var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+        var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+        var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+        var top = ((height / 2) - (h / 2)) + dualScreenTop;
+
+        var opciones = "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=" + w + ", height=" + h + ", top=" + top + ", left=" + left;
+        popupPage = window.open("checkid/index.html?v13", "libPage", opciones);
+		
+		var timer = setInterval(function() { 
+			if(popupPage.closed) {
+				clearInterval(timer);
+				document.getElementById('cargando').style.display='none';
+			}
+		}, 1000);
+		
+        // Puts focus on the popupPage
+        if (window.focus) {
+          popupPage.focus();
+        }
+      };
+
+	 
+   let getParamsCreate = function() {
+        return {
+            action: "CREATE",
+	          apiKey: general.apiKey,
+	          sessionId: general.session.id,
+	          companyId: general.session.companyId,
+	          operationId: 1,
+	          baseUrl: general.baseUrl,
+			  useFingerprint: true,//si pide huella al que esta enrolando
+			  usePin: true,//si pide pin al que esta enrolando
+			  pinRestore: false,//cambio de pin
+			  pinRestoreMethod:'ACEP',
+	          operator: {
+			  useFingerprint:true,
+			  usePin:false,
+			  pinRestore: false,//cambio de pin
+              sessionId: general.operator.sessionId,
+              identityDocument: {
+                  countryCode: general.countryCode,
+                  type: general.type,
+                  personalNumber: general.rutoperador	
+              }
+            },
+              digitalIdentity: {
+                  personalData: {
+                      givenNames: "desmond",
+                      surnames: "miles",
+                      dob: 20000101,
+                      gender: "NOT_KNOWN"
+                  },
+                  emailAddresses: [
+                    {
+                        type: 'BUSINESS',
+                        address: '',
+                        primary: true
+                    },
+                    {
+                        type: 'PERSONAL',
+                        address: '',
+                        primary: false
+                    }
+                ],
+                contactPhones: [
+                    {
+                        number: '',
+                        primary: false,
+                        type: 'HOME'
+                    },
+                    {
+                        number: '',
+                        primary: true,
+                        type: 'PERSONAL'
+                    }
+
+                  ],
+                  identityDocuments: [{
+                    countryCode: general.countryCode,
+                    type: general.type,
+                    personalNumber: general.rutaenrolar	
+                  }]
+              }
+          };
+      };
+
+	  
+	  
+	window.getParams = function()
+	{
+	  return getParamsCreate();
+	}
+	  
+	//respuesta del formulario checkid
+	window.callback = function(result) 
+	{
+		popupPage.close();
+		console.log("callback", result);
+		document.getElementById('cargando').style.display='none';
+		
+		if (result.numError == 0) 
+		{
+			//alert ("OK")
+		}
+		else
+		{
+			alert (result.numError +  " " + result.msError);
+		}
+
+		return false;
+	}
+	  
+	function enrolar()
+	{
+		
+		consulta_sesion();
+	}
+	  
+	  
+	var conexion;
+			
+	function crearXMLHttpRequest() 
+	{
+		var xmlHttp=null;
+		if (window.ActiveXObject) 
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+		else 
+		if (window.XMLHttpRequest) 
+			xmlHttp = new XMLHttpRequest();
+		return xmlHttp;
+	}
+
+
+	function consulta_sesion()
+	{
+		conexion=crearXMLHttpRequest();
+	
+		conexion.open('POST', './consulta_sesion.php', false);
+	
+		conexion.send(null);
+		// Devolvemos el resultado
+		respuesta =  conexion.responseText;		
+		arr_resp  = respuesta.split('|');
+		if (arr_resp[0] == 'ok')
+		{
+			general.baseUrl 			= arr_resp[1];
+			general.session.companyId 	= arr_resp[2];
+			general.username 			= arr_resp[4];
+			general.session.id 			= arr_resp[6];
+			general.countryCode 		= arr_resp[7];
+			general.type 				= arr_resp[8];
+			general.apiKey 				= arr_resp[9];
+			
+			<php:repeticion id="formulario">
+			var rut						= "<php:item id="usuarioid" />"
+			general.rutoperador			= rut.replace ("-","");
+			</php:repeticion>
+			
+			var rut						= document.getElementById('rut').value;
+			general.rutaenrolar			= rut.replace ("-","");
+		
+			
+			openCheckId("CREATE");
+		}
+		else
+		{
+			alert (respuesta);
+		}
+		
+	}
+ 
+  </script>
+</body>
+</html>

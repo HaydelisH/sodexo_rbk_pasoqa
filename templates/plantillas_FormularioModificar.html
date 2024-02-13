@@ -1,0 +1,277 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <div class="box-header">
+           <php:repeticion id="formulario">
+           <form role="form" name="formulario2" id="formulario2" action="Plantillas.php" method="POST" >
+              <input type="hidden" name="RutEmpresa" value='<php:item id="RutEmpresa"/>'/>
+              <button type="submit" name="accion" value="BUSCAR" class="btn btn-default"/><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
+          </form>
+        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+        <div id="mensajeAd"><php:texto id="mensajeAd" /></div> 
+
+        <form role="form" name="formulario" id="formulario_principal" action="Plantillas.php" method="POST" autocomplete="off">
+         
+          <div class="form-row">
+           <div class="col-md-6">
+              <label for="Titulo" >C&oacute;digo Plantilla</label>
+              <!--idPlantilla-->
+              <input type="text" class="form-control" id="idPlantilla" name="idPlantilla" value="<php:item id="idPlantilla"/>" readonly/> 
+           </div>
+         </div>
+
+          <div class="form-row">
+          
+              <!--Categorias-->
+              <div class="col-md-6" style="padding-bottom: 15px;">
+               
+                  <label for="Categoria" >Categoria</label>
+                  <!--Select de Empresas disponibles-->
+                  <select class= "form-control" name="idCategoria" id="idCategoria" disabled>
+                    <option value="0">(Seleccione)</option>
+                    <php:repeticion id="Categorias">
+                      <option value="<php:item id="idCategoria" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idCategoria" /><php:argumento idvalor="idCategoria" /></php:funcion>><php:item id="Titulo" /></option>
+                    </php:repeticion>
+                  </select>
+				  
+				  <input type="hidden" name="idCategoria" id="idCategoria" value="<php:item id="idCategoria" />" />
+              </div>
+            <!--Fin del row-->
+            </div>
+             
+             <div class="form-row">
+              <!--Tipo de Documento-->
+              <div class="col-md-6" style="padding-bottom: 15px;">
+                  <label for="TipoDeDocumento" >Tipo de Documento</label>
+                  <!--Select de Empresas disponibles-->
+                  <select class= "form-control" name="idTipoDoc" id="idTipoDoc" disabled>
+                    <option value="0">(Seleccione)</option>
+                    <php:repeticion id="TipoDocumentos">
+                      <option value="<php:item id="idTipoDoc" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idTipoDoc" /><php:argumento idvalor="idTipoDoc" /></php:funcion>><php:item id="NombreTipoDoc" /></option>
+                    </php:repeticion>
+                  </select>
+				  
+				  <input type="hidden" id="idTipoDoc" name="idTipoDoc" value="<php:item id="idTipoDoc" />" />
+              </div>
+            </div>
+              <!--Workflow-->
+              <div class="form-row">
+              <div class="col-md-6" style="padding-bottom: 15px;">
+               
+                  <label for="Flujo" >Flujo de Firmas</label>
+                  <!--Select de Empresas disponibles-->
+                  <select class= "form-control" name="idWF" id="idWF" required>
+                    <option value="0">(Seleccione)</option>
+                    <php:repeticion id="Flujos">
+                      <option value="<php:item id="idWF" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idWF" /><php:argumento idvalor="idWF" /></php:funcion>><php:item id="NombreWF" /></option>
+                    </php:repeticion>
+                  </select>
+              </div>
+            <!--Fin del row-->
+            </div>
+              <!--Tipo de Gestor-->
+              <div class="form-row">
+             <div class="col-md-6" style="padding-bottom: 15px;">
+                  <label for="TipoGestor" >Tipos Gestor</label>
+                  <!--Select de Empresas disponibles-->
+                  <select class= "form-control" name="idTipoGestor" id="idTipoGestor" required>
+                    <option value="0">(Seleccione)</option>
+                    <php:repeticion id="TipoGestor">
+                      <option value="<php:item id="idTipoGestor" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idTipoGestor" /><php:argumento idvalor="idTipoGestor" /></php:funcion>><php:item id="Nombre" /></option>
+                    </php:repeticion>
+                  </select>
+              </div>
+            </div>
+
+            <!--Aprobado-->
+            <input type="hidden" id="Aprobado_Generar" name="Aprobado" value="<php:item id="Aprobado"/>"/>
+            <!--Titulo-->
+            <div class="form-row">
+              <div class="col-md-12">
+                <label for="Titulo" >T&iacute;tulo</label>
+                <textarea id="TextoTxt" name="Titulo_Pl" rows="5" cols="80" ><php:item id="Titulo_Pl" /></textarea>
+              </div>
+            </div>
+
+            <!--Descripcion-->
+            <div class="form-row">
+              <div class="col-md-12">
+                <label for="Descripcion">Descripci&oacute;n</label>
+                <input type="text" class="form-control" id="Descripcion_Pl" name="Descripcion_Pl" value="<php:item id="Descripcion_Pl" />" placeholder="Descripcion" >
+              </div>
+            </div>                      
+      
+            <div class="form-row"> 
+              <!--Datos ocultos--> 
+              <input type="hidden" name="accion" value="MODIFICAR" />
+              <!--Boton de Clusulas-->
+              <div class="col-md-2 xs-12">
+                <button class="btn btn-md btn-default btn-block" type="submit" style="margin-top: 10px" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" name="accion2" value="CLAUSULAS"><a href="" >Clausulas</a></button>
+              </div>
+              <!--Boton de Generar-->
+              <div class="col-md-2 xs-12 pull-right">
+                <button class="btn btn-md btn-success btn-block" type="submit" style="margin-top: 10px" id="GENERAR" name="accion" value="GENERAR_MOD">Previsualizar</button>
+              </div>
+              <!--Boton para Modificar-->
+              <div class="col-md-2 xs-12 pull-right">
+                 <input  type="hidden" name="accion2" value="MODIFICAR" />
+                 <button class="btn btn-md btn-primary btn-block" type="button" style="margin-top: 10px" name="accion2" value="MODIFICAR" id="MODIFICAR" onclick="javascript:return validarFormulario(this);"/>Guardar</button>
+              </div>           
+            </div>        
+          </form> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!--Clausulas-->
+  <div class="collapse" id="collapseExample" >
+    <section class="content" style="padding-left: 0px; padding-right: 0px;">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-body pad table-responsive">
+              <div class="box-header">
+                <form role="form" name="formulario" id="formulario" action="Plantillas.php" method="POST">
+                  <!--idCategoria-->
+                  <input type="hidden" id="idCategoria" name="idCategoria" value="<php:item id="idCategoria"/>"/>
+                  <!--idPlantilla-->
+                  <input type="hidden" id="idPlantilla" name="idPlantilla" value="<php:item id="idPlantilla"/>"/>
+                  <!--Boton de Agregar Clausulas-->
+                  <button class="btn btn-md btn-default" style="margin-top: 10px" type="submit" name="accion" id="AGREGAR_CLAUSULA" value="AGREGAR_CLAUSULA"><a><i class="fa fa-plus" aria-hidden="true"></i>Agregar Clausula</a></button>
+                </form>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body">
+                <div class="box-body pad table-responsive">
+                  <div class="box-body">
+                    <div id="divtabla" class="tabla-responsiva" >
+                      <table id="table" class="table table-bordered table-hover" cellspacing="0" cellpadding="2">
+                          <thead>
+                           <tr>
+                            <th data-campo="SELECCION" style="text-align: center;">Seleccion </th>
+                            <th data-campo="IDCLAUSULA" style="text-align: center;">Id Clausula </th>
+                            <th data-campo="TITULO">Clausula </th>
+                            <th data-campo="APROBADO">Aprobaci&oacute;n </th>
+                            <th data-campo="ENCABEZADO">Encabezado</th>
+                            <th data-campo="TITULO">T&iacute;tulo</th>
+                          </tr>
+                          </thead>
+                       
+                            <php:repeticion id="listado_clausulas">
+                              <tr id="<php:item id="idClausula"/>" >
+                                <td> 
+                                  <div style="text-align: center">
+                                  <!--Formulario de Elimmnar del Listado de Clausulas-->
+                                   <form role="form" name="formulario" id="formulario" action="Plantillas.php" method="POST"> 
+                                      <input type="hidden" name="accion" value="ELIMINAR_CLAUSULA" />
+                                      <input type="hidden" id="idCategoria" name="idCategoria" value="<php:item id="idCategoria"/>"/>
+                                      <input type="hidden" id="idClausula" name="idClausula" value="<php:item id="idClausula"/>"/>
+                                      <input type="hidden" id="idPlantilla" name="idPlantilla" value="<php:item id="idPlantilla"/>"/>
+                                      <button type="submit" style="background-color: transparent;" class="btn" name="accion3" id="boton" value="ELIMINAR_CLAUSULA" onclick="javascript:return preguntarPorBorrar();"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                                   </form> 
+                                    </div>
+                                </td>
+                                <td data-campo="IDCLAUSULA"><div style="text-align: center;" id="id_ref"><php:item id="idClausula"/></div>
+                                </td>
+                                <td data-campo="TITULO" style="text-align: justify; padding: 10px 20px 0 20px ;">
+                                   <h4 style="margin-top: 0;">Titulo: <php:item id="Titulo_Cl"/></h4>
+                                   <p><h4 style="margin-top: 0;"> Contenido: </h4><php:item id="Texto"/></p>
+                                </td>
+                                <td data-campo="APROBADO" style="text-align: center;"><div style="text-align: center;" id="Aprobado_<php:filamenos />"><php:item id="Aprobado"/></div></td>
+                                <td data-campo="ENCABEZADO"><php:item id="Encabezado" /></td>
+                                <td data-campo="TITULO"><php:item id="Titulo" /></td>
+                              </tr>
+                            </php:repeticion>
+                        </table>
+                        <!--Resultado del Orden de Clausulas-->
+                        <div id="resultado"></div> 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</php:repeticion>
+</section>
+
+<script>
+
+//Si no tiene clausulas no podran previsualizar el documento
+  $(document).ready(function(){
+    var filas = $("#table tr").length;
+    if ( filas == 1 ){
+      $("#GENERAR").prop('disabled', true);
+      $("#GENERAR").attr('title', 'La Plantilla no tiene Clausulas asociadas');
+    }
+
+    if( $("#mensajeAd").html().length > 0 ){
+        $("#mensajeAd").addClass("callout callout-warning");
+    }
+    else{
+        $("#mensajeAd").removeClass("callout callout-warning");
+    }
+  });
+
+ $("#MODIFICAR").click(function(){
+
+    //Consultar si esta Plantilla existe para mas de una empresa 
+    var idPlantilla = $("#idPlantilla").val();
+    var url = "Plantillas_ajax3.php?idPlantilla=" + idPlantilla;
+
+    // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+    if( window.XMLHttpRequest )
+      ajax = new XMLHttpRequest(); // No Internet Explorer
+    else
+      ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+   
+    // Almacenamos en el control al funcion que se invocara cuando la peticion
+    // cambie de estado 
+    ajax.onreadystatechange = funcionCallback;
+
+    // Enviamos la peticion
+    ajax.open( "GET", url, true );
+    ajax.send( "" );
+  });
+
+  var ajax;
+  var salida;
+   
+  function funcionCallback()
+  {
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+      if( ajax.status == 200 )
+      {
+        // Escribimos el resultado en la pagina HTML mediante DHTML
+        salida = ajax.responseText;
+
+        if( salida == '1'){
+          var respuesta = confirm("Esta Plantilla esta asociada a m&aacute;s de una Empresa, desea continuar ?");
+
+          if( respuesta ){
+            $("#formulario_principal").submit();
+          }
+        }else{
+           $("#formulario_principal").submit();
+        }
+      }
+    }
+  }
+</script>
+

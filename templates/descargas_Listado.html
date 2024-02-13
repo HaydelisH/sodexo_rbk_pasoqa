@@ -1,0 +1,63 @@
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box">
+        <div class="box-body pad table-responsive">
+        <!--Botones de cabecera-->
+        <div class="box-header">
+            <div class="form-group">
+              <form name="formulario" id="formulario_usuarios" action="Descargas.php" method="POST" >
+                <!--<button type="submit" name="accion" value="AGREGAR" class="btn btn-md btn-default"><a><i class="fa fa-plus" aria-hidden="true"></i> Nuevo </a></button>-->
+              </form>
+            </div>
+          </div> 
+        </div>
+        <div class="box-body">
+        <!--Mensajes-->
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+          <!--Listado-->   
+          <php:repeticion id="formulario">
+            <div id="divtabla" class="tabla-responsiva" >
+            <!--Tabla-->
+            <table id="example2" class="table table-bordered table-hover" name="tbltabla">
+              <thead>
+                <tr>
+                <!--<th data-campo="ID Descarga" style="text-align: center;">Id Descarga </th>-->
+                <th data-campo="Descripcion" style="text-align: center;">Descripcion </th>
+                <th data-campo="Nombre" style="text-align: center;">Nombre de Archivo </th>
+                <th data-campo="Tipo" style="text-align: center;">Tipo </th>
+                <th data-campo="Opciones" style="text-align: center;">Opciones </th>
+                </tr>
+              </thead>
+              <tbody>
+              <!--Contenido de Tabla-->
+              <php:repeticion id="listado">
+                <tr>
+                  <!--<td data-campo="ID Descarga" style="text-align: center;"><php:item id="idDescarga" /></td>-->
+                  <td data-campo="Descripcion" style="text-align: center;"><php:item id="Descripcion" /></td>
+                  <td data-campo="Nombre" style="text-align: center;"><php:item id="Nombre" /></td>
+                  <td data-campo=Tipo"><php:item id="Tipo" /></td>
+                  <td data-campo="Opciones">
+
+                   <!-- <a href="Descargas.php?accion=DESCARGAR&file=<php:item id="Ruta" />">Ejemplo</a>-->
+                  <form name="formulario" id="formulario_tipo" action="Descargas.php" method="POST">
+                    <input type="hidden" name="holdingid" value="<php:item id="holdingid" />">
+                    <input type="hidden" name="idDescarga" value="<php:item id="idDescarga" />">
+                    <button class="btn btn-primary btn-sm" type="submit" name="accion" value="DESCARGAR">Descargar</button>
+                    <!--<button class="btn btn-default btn-sm" type="submit" name="accion" value="MODIFICAR">Modificar</button>
+                    <button class="btn btn-default btn-sm" type="submit" name="accion" value="ELIMINAR" onclick="javascript:return preguntarPorBorrar();">Eliminar</button>-->
+                  </form></td>
+                </tr>
+              </php:repeticion>
+              </tbody>
+            </table>
+          </div>
+          </php:repeticion>
+        </div> <!--div box-body-->
+
+        <!-- /.box -->
+      </div>
+      <!--.col-->
+     </div>
+    <!-- /.roe -->
+    </div>

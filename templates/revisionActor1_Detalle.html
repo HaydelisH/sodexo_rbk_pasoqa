@@ -1,0 +1,384 @@
+<div class="row">
+    <div class="col-md-12">
+      <div class="box">
+        <div class="box-body pad table-responsive">
+               <php:repeticion id="formulario">
+              <!--Botones de cabecera-->
+              <div class="box-header">
+                   <form role="form" name="formulario3" id="formulario3" action="revisionActor1.php" method="POST">
+                      <input type="hidden" name="accion" value="BUSCAR">
+                      <button type="submit" class="btn btn-default" onclick="MostrarCargando();"><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
+                      <input type="hidden" name="pagina" value="<php:item id="pagina" />">
+                      <input type="hidden" name="idDocumento_filtro" value="<php:item id="idDocumento_filtro" />"/>
+                      <input type="hidden" name="RutEmpleado" value="<php:item id="RutEmpleado_filtro" />"/>		
+                      <input type="hidden" name="NombreEmpleado" value="<php:item id="NombreEmpleado_filtro" />"/>	
+                      <input type="hidden" name="fechaInicio" value="<php:item id="fechaInicio_filtro" />"/> 		
+                      <input type="hidden" name="fechaFin" value="<php:item id="fechaFin_filtro" />"/>		
+                      <input type="hidden" name="idEstadoGestion" value="<php:item id="idEstadoGestion_filtro" />"/>
+                      <!--input type="hidden" name="nombrex" value="<php:texto id="nombrex" />"-->
+                      <!--input type="hidden" name="RutCreador" value="<php:item id="RutCreador_filtro" />"/-->	
+                      <!--input type="hidden" name="NombreCreador" value="<php:item id="NombreCreador_filtro" />"/-->
+                      <!--input type="hidden" name="idPlantilla" value="<php:item id="idPlantilla_filtro" />"/-->	
+                      <!--input type="hidden" name="Descripcion_Pl" value="<php:item id="Descripcion_Pl_filtro" />"/-->
+                      <!--input type="hidden" name="RutEmpresa" value="<php:item id="RutEmpresa_filtro" />"/-->	
+                      <!--input type="hidden" name="centrocostoid" value="<php:item id="centrocostoid_filtro" />"/-->	
+                      <!--input type="hidden" name="nombrecentrocosto" value="<php:item id="nombrecentrocosto_filtro" />"/-->
+                      <!--input type="hidden" name="NombreCasino" value="<php:item id="NombreCasino_filtro" />"/-->
+                      <!--input type="hidden" name="CodCargo" value="<php:item id="CodCargo_filtro" />"/-->	
+                      <!--input type="hidden" name="Cargo" value="<php:item id="Cargo_filtro" />"/-->	
+                      <!--input type="hidden" name="idEstado" value="<php:item id="idEstado_filtro" />"/-->
+                      <!--input type="hidden" name="idTipoFirma" value="<php:item id="idTipoFirma_filtro" />"/-->	
+                      <!--input type="hidden" name="idProceso" value="<php:item id="idProceso_filtro" />"/-->		
+                      <!--input type="hidden" name="Enviado" value="<php:item id="Enviado_filtro" />"/-->		
+                  </form>
+              </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+         
+          <!--Mensajes-->
+          <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+          <div id="mensajeError"><php:texto id="mensajeError" /></div>
+         
+          <!--Datos referenciales-->
+          <div class="form-row">
+            
+            <div class="col-md-6" style="padding-bottom: 15px;">
+              <h3>Datos del documento</h3>
+           
+              <form role="form" name="formulario" id="formulario" action="revisionActor1.php" method="POST" enctype="multipart/form-data">
+                  
+                  <!--Atributos ocultos-->
+                  <input type="hidden" name="pagina" value="<php:item id="pagina" />">
+                  <input type="hidden" name="idDocumento_filtro" value="<php:item id="idDocumento_filtro" />"/>
+                  <input type="hidden" name="RutEmpleado" value="<php:item id="RutEmpleado_filtro" />"/>		
+                  <input type="hidden" name="NombreEmpleado" value="<php:item id="NombreEmpleado_filtro" />"/>	
+                  <input type="hidden" name="fechaInicio" value="<php:item id="fechaInicio_filtro" />"/> 		
+                  <input type="hidden" name="fechaFin" value="<php:item id="fechaFin_filtro" />"/>		
+                  <input type="hidden" name="idEstadoGestion" value="<php:item id="idEstadoGestion_filtro" />"/>
+                  <!--input type="hidden" name="nombrex" value="<php:texto id="nombrex" />"-->
+                  <!--input type="hidden" name="RutCreador" value="<php:item id="RutCreador_filtro" />"/-->	
+                  <!--input type="hidden" name="NombreCreador" value="<php:item id="NombreCreador_filtro" />"/-->
+                  <!--input type="hidden" name="idPlantilla" value="<php:item id="idPlantilla_filtro" />"/-->	
+                  <!--input type="hidden" name="Descripcion_Pl" value="<php:item id="Descripcion_Pl_filtro" />"/-->
+                  <!--input type="hidden" name="RutEmpresa" value="<php:item id="RutEmpresa_filtro" />"/-->	
+                  <!--input type="hidden" name="centrocostoid" value="<php:item id="centrocostoid_filtro" />"/-->	
+                  <!--input type="hidden" name="nombrecentrocosto" value="<php:item id="nombrecentrocosto_filtro" />"/-->
+                  <!--input type="hidden" name="NombreCasino" value="<php:item id="NombreCasino_filtro" />"/-->
+                  <!--input type="hidden" name="CodCargo" value="<php:item id="CodCargo_filtro" />"/-->	
+                  <!--input type="hidden" name="Cargo" value="<php:item id="Cargo_filtro" />"/-->	
+                  <!--input type="hidden" name="idEstado" value="<php:item id="idEstado_filtro" />"/-->
+                  <!--input type="hidden" name="idTipoFirma" value="<php:item id="idTipoFirma_filtro" />"/-->	
+                  <!--input type="hidden" name="idProceso" value="<php:item id="idProceso_filtro" />"/-->		
+                  <!--input type="hidden" name="Enviado" value="<php:item id="Enviado_filtro" />"/-->		
+                  
+                    <table class="table table-striped">
+                      <tbody>
+                          <tr>
+                            <td valign="center"><label for="idDocument" class="col-md-6">Nro Documento:</label></td>
+                            <td valign="center"> <php:item id="idDocumento" /></td>
+                          </tr>
+                          <!--tr>
+                            <td valign="center"><label for="idDocument" class="col-md-6">C&oacute;digo de Documento</label></td>
+                            <td valign="center"> <php:item id="DocCode" /></td>
+                          </tr-->	      
+                          <tr>
+                            <td valign="center"><label for="FechaUltimaFirma" class="col-md-6">Fecha ultima firma:</label></td>
+                            <td valign="center"><php:item id="FechaUltimaFirma" /></td>
+                          </tr>
+                          <!--tr>
+                            <td valign="center"><label for="Titulo" class="col-md-6">Tipo Documento:</label></td>
+                            <td valign="center"><php:item id="NombreTipoDoc" /></td>
+                          </tr-->
+                          <!--tr>
+                            <td valign="center"><label for="idPlantilla" class="col-md-6">idPlantilla:</label></td>
+                            <td valign="center"><php:item id="idPlantilla" /> <php:item id="Descripcion_Pl" /></td>
+                          </tr-->
+                          
+                          <!--tr>
+                            <td valign="center"><label for="Estado" class="col-md-6">Estado:</label></td>
+                            <td valign="center"><php:item id="Estado" /></td>
+                          </tr-->
+                          <!--tr>
+                            <td valign="center"><label for="Estado" class="col-md-6">Flujo de firma:</label></td>
+                            <td valign="center"><php:item id="NombreWF" /></td>
+                          </tr-->
+                          <!--tr>
+                            <td valign="center"><label for="Proceso" class="col-md-6">Proceso:</label></td>
+                            <td valign="center"><php:item id="Proceso" /></td>
+                          </tr-->
+                          <!--tr>
+                            <td valign="center"><label for="Cargo" class="col-md-6">Cargo:</label></td>
+                            <td valign="center"><php:item id="Cargo" /></td>
+                          </tr-->
+                          <!--tr>
+                            <td valign="center"><label for="Observacion" class="col-md-6">Observacion:</label></td>
+                            <td valign="center"><php:item id="Observacion" /></td>
+                          </tr-->
+                          <!--tr>
+                            <td valign="center"><label for="Enviado" class="col-md-6">Enviado:</label></td>
+                            <td valign="center"><php:item id="Enviado" /></td>
+                          </tr-->
+                          <!--tr>
+                            <td valign="center"><label for="Creador" class="col-md-6">Creador:</label></td>
+                            <td valign="center"><php:item id="RutCreador" /> <php:item id="NombreCreador" /></td>
+                          </tr-->
+                          <!--tr>
+                            <td valign="center"><label for="RutEmpresa" class="col-md-6">RutEmpresa:</label></td>
+                            <td valign="center"><php:item id="RutEmpresa" /> <php:item id="RazonSocial" /></td>
+                          </tr-->
+                          <!--tr>
+                            <td valign="center"><label for="centrocostoid" class="col-md-6">Centro de Costo:</label></td>
+                            <td valign="center"><php:item id="centrocostoid" /> <php:item id="nombrecentrocosto" /></td>
+                          </tr-->
+                          <!--tr>
+                              <td valign="center"><label for="centrocostoid" class="col-md-6">Fecha de solicitud:</label></td>
+                              <td valign="center">
+                                  <div class="input-group date">
+                                      <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                      <input type="text" class="form-control" id="FechaSolicitud" name="FechaSolicitud" placeholder="Fecha de solicitud" value="<php:item id="FechaSolicitud" />"  />
+                                  </div>
+                              </td>
+                          </tr-->
+                          <!--tr>
+                            <td valign="center"><label for="centrocostoid" class="col-md-6">Responsable:</label></td>
+                            <td valign="center"><input type="text" class="form-control" name="Responsable" id="Responsable" placeholder="Responsable" value="<php:item id="Responsable" />" /></td>
+                          </tr-->
+                          <!--tr>
+                            <td valign="center"><label for="centrocostoid" class="col-md-6">Fecha Ingreso Payroll:</label></td>
+                              <td valign="center"><input type="text" class="form-control" id="FechaPayroll" name="FechaPayroll" placeholder="Fecha Ingreso Payroll" value="<php:item id="FechaPayroll" />"  /></td>
+                          </tr-->
+                          <tr>
+                            <td valign="center"><label for="idEstadoGestion" class="col-md-6">Estado de Gesti&oacute;n:</label></td>
+                            <td valign="center">
+                              <select class="form-control" name="idEstadoGestion" id="idEstadoGestion" >
+                                  <option value="0">(Seleccione)</option>
+                                  <php:repeticion id="EstadosGestion">			
+                                      <option value="<php:item id="idEstadoGestion" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idEstadoGestion" /><php:argumento idvalor="idEstadoGestion" /></php:funcion>><php:item id="Descripcion" /></option>
+                                  </php:repeticion>
+                              </select>
+                              </td>
+                          </tr>
+                          <tr>
+                            <td valign="center"><label for="Observacion" class="col-md-6">Observaci&oacute;n de Gesti&oacute;n:</label></td>
+                            <td valign="center"><textarea name="Observacion" id="Observacion" rows="5" cols="60"> <php:item id="Observacion_GI" /></textarea></td>
+                          </tr>
+                          <!--tr>
+                            <td valign="center"><label for="centrocostoid" class="col-md-6">Fecha DT:</label></td>
+                              <td valign="center">
+                                  <div class="input-group date">
+                                      <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                      <input type="text" class="form-control" id="FechaDT" name="FechaDT" placeholder="Fecha DT" value="<php:item id="FechaDT" />"  />
+                                  </div>
+                              </td>
+                          </tr-->
+                      </tbody>
+                  </table>
+                  <input type="hidden" name="idDocumento" id="idDocumento" value="<php:item id="idDocumento" />" />
+  
+                  <div class="form-row">  
+                                      
+                      <php:repeticion id="ver">
+                          <div class="col-md-4 xs-12">
+                              <input type="hidden" name="idDocumento_vd" id="idDocumento_vd"/>
+                              <input type="hidden" name="empleadoFormularioid" 			value="<php:texto id="empleadoFormularioid" />"/>
+                              <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion" value="VERDOCUMENTO" onclick="MostrarCargando();"> <i class="fa fa-search-plus" aria-hidden="true"></i> Ver Documento</button>
+                          </div>
+                      </php:repeticion>
+  
+                      <!--<php:repeticion id="rechazo">
+                          <div class="col-md-4 xs-12">
+                              <input type="hidden" name="idDocumento_ac" id="idDocumento_ac"/>
+                                <button class="btn btn-md btn-primary btn-block" type="button" data-toggle="modal" data-target="#myModal" style="margin-top: 10px"  /><i class="fa fa-ban" aria-hidden="true"></i> Rechazar</button>
+                          </div>
+                      </php:repeticion>
+  
+                      <php:repeticion id="elimina">
+                          <div class="col-md-4 xs-12">
+                              <input type="hidden" name="idDocumento_el" id="idDocumento_el" />
+                              <button class="btn btn-md btn-primary btn-block" type="submit" onclick="javascript : return confirm('Esta seguro que desea eliminar este Documento?');" name="accion" id="ELIMINAR" value="ELIMINAR" style="margin-top: 10px"  /><i class="fa fa-trash-o" aria-hidden="true"></i> Eliminar</button>
+                          </div>
+                      </php:repeticion>-->
+                      <!--Opcion de actualizar documento, descargando de nuevo el documento de Acepta-->
+                    <!-- <php:repeticion id="actualizar">
+                      <div class="col-md-4 xs-12">
+                              <input type="hidden" name="idDocumento_ac" id="idDocumento_ac" />
+                              <button class="btn btn-md btn-primary btn-block" type="submit"  onclick="MostrarCargando();" style="margin-top: 10px" name="accion" id="ACTUALIZAR" value="ACTUALIZAR"/><i class="fa fa-refresh" aria-hidden="true"></i> Actualizar</button>
+                      </div>
+                      </php:repeticion>-->
+                      
+                      <!--Opcion de enviar Documento al Gestor-->
+                     <php:repeticion id="envioagestor">
+                      <div class="col-md-4 xs-12">
+                              <input type="hidden" name="idDocumento_eg" id="idDocumento_eg" />
+                              <button class="btn btn-md btn-primary btn-block" type="submit"  onclick="MostrarCargando();" style="margin-top: 10px" name="accion" id="ENVIO" value="ENVIO"/><i class="fa fa-share-square-o" aria-hidden="true"></i> Envio al Gestor</button>
+                      </div>
+                      </php:repeticion>	
+                      
+                      <!--Opcion de actualizar el estado de gestion-->
+                     <php:repeticion id="estadogestion">
+                      <div class="col-md-4 xs-12">
+                              <input type="hidden" name="idDocumento_eg" id="idDocumento_eg" />
+                              <input type="hidden" name="empleadoFormularioid" 			value="<php:texto id="empleadoFormularioid" />"/>
+                              <!--button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion" id="GUARDAR" value="ESTADO" onclick="guardarValida();MostrarCargando();"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button-->
+                              <button class="btn btn-md btn-primary btn-block" type="button" style="margin-top: 10px" name="accion" id="GUARDAR" value="ESTADO" onclick="guardarValida();"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
+                      </div>
+                      </php:repeticion>																   
+                  </div>  
+              </div>
+  
+               <div class="col-md-6">
+                    <h3>Firmantes</h3>
+                  <div id="divtabla" class="tabla-responsiva" >
+                      <table id="example" class="table table-bordered table-hover " name="tbltabla">
+                            <thead>
+                              <tr>
+                                  <th style="text-align: center;" data-campo="Rut">Rut</th>
+                                  <th style="text-align: center;" data-campo="Nombre">Nombre</th>
+                                  <th style="text-align: center;" data-campo="Fecha Firma">Fecha Firma</th>
+                              </tr>
+                            </thead>
+                          <tbody>
+                              <!--Contenido de Tabla-->
+                              <php:repeticion id="contratofirmantes">
+                                    <tr>
+                                      <td style="text-align: center;" data-campo="Rut"><php:item id="RutFirmante" /></td>
+                                      <td style="text-align: center;" data-campo="Nombre"><php:item id="nombre" /></td>
+                                      <td style="text-align: center;" data-campo=""FechaFirma"><php:item id="FechaFirma" /></td>
+                                  </tr>
+                              </php:repeticion>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+                
+                  <!-- Modal de Rechazo>
+                  <div class="modal fade" id="myModal" role="dialog">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Rechazo del Documento</h4>
+                          </div>
+                          <div class="modal-body">
+                              <div class="col-md-12">
+                                  <label for="Descripcion">Observaci&oacute;n</label>
+                                  <input type="text" class="form-control" id="observacion" maxlength="200" name="observacion" value="<php:item id="observacion" />" placeholder="observacion" >
+                              </div>
+                          </div>					
+                          <div class="modal-footer" style="margin-top:30px">
+                               <br>
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                              <button type="submit" name="accion" value="RECHAZAR" class="btn btn-default" >Aceptar</button>
+                          </div>
+                        </div>
+                      </div>
+                  </div-->
+                  <!--fin  Modal de Rechazo -->  
+  
+                  </php:repeticion>
+               </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+  
+  
+  <script>
+      var idEstadoGestion = '<php:texto id="estadoFormularioid" />';
+      //alert(idEstadoGestion);
+      function guardarValida()
+      {
+          if ($('#idEstadoGestion').val() == 3 && $('#Observacion').val().trim() == '')//Cerrado por RRHH
+          {
+              alert('Debe agregar una observacion a la gestion de cierre');
+              return false;
+          }
+          var datos = '&idEstadoGestion='+$('#idEstadoGestion').val()+'&Observacion='+$('#Observacion').val().trim()+'&empleadoFormularioid=<php:texto id="empleadoFormularioid" />'
+          $("#formulario").attr("action", "revisionActor1.php?accion=ESTADO"+datos);
+          $('#formulario').submit();
+          MostrarCargando();
+      }
+
+      $('#FechaSolicitud').datepicker({
+          language: "es",
+          orientation: "bottom",
+          autoclose: true,
+          todayHighlight: true,
+          format: 'dd-mm-yyyy'
+      });
+      
+      $('#FechaDT').datepicker({
+          language: "es",
+          orientation: "bottom",
+          autoclose: true,
+          todayHighlight: true,
+          format: 'dd-mm-yyyy'
+      });
+      
+      $('#idEstadoGestion').change(function(){
+        hab_deshab_boton();
+      });
+
+      function hab_deshab_boton()
+      {
+        if ($('#idEstadoGestion').val() != 3)// Cerrado por RRHH
+        {
+            $('#Observacion').prop("disabled", true);
+        }
+        else
+        {
+            $('#Observacion').prop("disabled", false);
+        }
+        if ($('#idEstadoGestion').val() != 2)
+        {
+            $('#GUARDAR').prop("disabled", false);
+        }
+        else
+        {
+            $('#GUARDAR').prop("disabled", true);
+        }
+        if (idEstadoGestion != 2)
+          {
+            $('#GUARDAR').hide();
+          }
+      }
+
+      $(document).ready(function(){
+  
+          $("#idDocumento_vd").val($("#idDocumento").val());
+          $("#idDocumento_ac").val($("#idDocumento").val());
+          $("#idDocumento_el").val($("#idDocumento").val());
+          $("#idDocumento_ac").val($("#idDocumento").val());
+          $("#idDocumento_eg").val($("#idDocumento").val());
+          
+          hab_deshab_boton();
+          
+          /*if( $("#ficha").val().length > 0 ){
+              $(".fichaid").show();
+          }
+          else{
+              $(".fichaid").hide();
+          }*/
+      });
+      
+      /*$("#GUARDAR").click(function(){
+          
+          if( document.getElementById('FechaPayroll').value != '' ){
+           if( ! validarFecha(document.getElementById('FechaPayroll').value )){
+              $("#mensajeError").addClass("callout callout-warning");
+              $("#mensajeError").html("La fecha de ingreso a payroll debe tener formato de fecha dd/mm/YYYY");
+              return false;
+           }
+           else{
+              $("#mensajeError").removeClass("callout callout-warning");
+              $("#mensajeError").html("");
+              MostrarCargando();
+           }
+          }
+              
+      });*/
+  
+  </script>

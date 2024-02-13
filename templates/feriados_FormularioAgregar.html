@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <div class="box-header">
+          <!--<button type="button" class="btn btn-default">-->
+		   <a class="btn btn-default btn_letra_azul" href="Feriados.php" style="color: #3c8dbc;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
+		  <!--</button>-->
+        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+        <div  id="mensajeOK"><php:texto id="mensajeOK" /></div>
+     
+        <form role="form" name="formulario" id="formulario" action="Feriados.php" method="POST" autocomplete="off">
+          <php:repeticion id="formulario">
+            <!--Campos basicos-->
+            <input type="hidden" class="form-control" id="idFeriados" name="idFeriados" value="<php:texto id="idFeriados"/>"/>
+            <!--Fecha-->
+            <div class="form-row">
+              <div class="col-md-12">
+                <label for="Fecha">Fecha</label>
+                  <div class="input-group date">
+                    <div class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="datetime" class="form-control" id="Fecha" name="Fecha"  readonly="readonly" value="<php:item id="Fecha" />" placeholder="Fecha" >
+                  </div>
+              </div>
+            </div>
+
+            <!--Descripcion-->
+            <div class="form-row">
+              <div class="col-md-12">
+                <label for="Descripcion">Descripcion</label>
+                <input type="text" class="form-control" id="Descripcion" name="Descripcion"  maxlength="100" value="<php:item id="Descripcion" />" placeholder="Descripcion" >
+              </div>
+            </div>
+            </php:repeticion>  
+          <div class="form-row">  
+            <div class="col-md-2 xs-12 pull-right">
+               <input type="hidden" id="idFeriados" name="idFeriados" value="<php:texto id="idFeriados" />" />
+               <input type="hidden" name="accion" value="AGREGAR" />
+              <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="AGREGAR" onclick="javascript:return validarFormulario(this);"/>Guardar</button>
+            </div>
+          </div> 
+                    
+        </form>  
+      </div>
+      </div>
+    <!-- /.box -->
+    </div>
+  </div>
+  <!-- /.col -->
+  </div>
+  <!-- calendario -->
+ <script>
+	$('#Fecha').datepicker({
+	    language: "es",
+	    orientation: "bottom",
+	    autoclose: true,
+	    todayHighlight: true,
+	    format: 'dd-mm-yyyy'
+    });
+</script>

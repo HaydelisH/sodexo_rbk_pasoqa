@@ -1,0 +1,1993 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box ">
+      <div class="box-body pad table-responsive">
+      <!--Botones de cabecera-->
+        <div class="box-header">
+		  <a class="btn btn-default btn_letra_azul" href="Generar_Documento_PorFicha.php"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</a>
+		  
+        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+         <!--Mensajes-->
+		<div id="mensajeError"><php:texto id="mensajeError" /></div>
+		<div id="mensajeOK"><php:texto id="mensajeOK" /></div>	
+		
+				<form name="formulario" class="formulario" id="formulario"  class="form-horizontal" action="Generar_Documento_PorFicha.php" method="POST" autocomplete=off>
+				<php:repeticion id="formulario">
+				
+				 <div class="nav-tabs-custom">
+		            <ul class="nav nav-tabs">
+		                <li id="personaldata" class="active"><a id="datosPersonales" href="#form_dp" data-toggle="tab">Datos personales</a></li>
+						<li id="generaciondata"><a id="generacion" href="#tab_4" data-toggle="tab">Generaci&oacute;n</a></li>
+						<li id="documentdata"><a id="datosDocumento" href="#form_dc" data-toggle="tab">Datos de Documento</a></li>
+							
+						<a type="button" class="btn btn-success btn-md" id="btnsiguiente" name="btnsiguiente" onclick="btnSiguiente()" style="position: absolute;right: 5%;">Siguiente</a>
+		            </ul>
+
+		        <div class="tab-content">
+		            <div class="tab-pane  active" id="form_dp">
+						<div class="box-body">						
+							<div class="form-row">
+				              <div class="col-md-12">
+								<label style="float:right;"> (*) Campos obligatorios </label>
+							  </div>
+							</div>
+							
+		                	<div class="form-row">
+								<div class="col-md-6">
+									<label for="tipousuarioid">Rut (*)</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="newusuarioid"  name="newusuarioid" placeholder="Rut v&aacute;lido" maxlength="10" value="<php:item id="newusuarioid" />" autofocus >
+									</div>
+								</div>
+								<div class="col-md-6">
+									<label for="contenedorid" >Nombre Completo(*)</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" maxlength="50" value="<php:item id="nombre" />" >
+									</div>
+								</div>
+							</div>
+							
+							<!-- <div class="form-row"> -->
+								<!-- <div class="col-md-6"> -->
+									<!-- <label for="contenedorid" >Apellido paterno(*)</label> -->
+									<!-- <div class="input-group col-xs-12"> -->
+										<!-- <input type="text" class="form-control" id="appaterno" name="appaterno" placeholder="Apellido paterno" maxlength="50" value="<php:item id="appaterno" />" > -->
+									<!-- </div> -->
+								<!-- </div> -->
+								<!-- <div class="col-md-6"> -->
+									<!-- <label for="contenedorid" >Apellido Materno</label> -->
+									<!-- <div class="input-group col-xs-12"> -->
+										<!-- <input type="text" class="form-control" id="apmaterno" name="apmaterno" placeholder="Apellido materno" maxlength="50" value="<php:item id="apmaterno" />" > -->
+									<!-- </div> -->
+								<!-- </div> -->
+							<!-- </div> -->
+						
+							<div class="form-row">
+								<div class="col-md-6">
+									<label for="contenedorid" >Nacionalidad (*)</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="nacionalidad" name="nacionalidad" placeholder="Nacionalidad" maxlength="50" value="<php:item id="nacionalidad" />">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<label for="contenedorid" >Fecha de nacimiento (*)</label>
+									<div class="input-group date">
+										<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+										<input type="text" class="form-control" id="fechanacimiento" name="fechanacimiento" placeholder="Fecha de nacimiento" value="<php:item id="fechanacimiento" />">
+									</div>
+							  	</div>
+							</div>			
+
+							<div class="form-row">
+								<div class="col-md-6">
+									<label for="contenedorid" >Estado civil (*)</label>
+									<select class= "form-control" name="idEstadoCivil" id="idEstadoCivil">
+										<option value="0">(Seleccione)</option>
+										<php:repeticion id="EstadoCivil">
+										<option value="<php:item id="idEstadoCivil" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idEstadoCivil" /><php:argumento idvalor="idEstadoCivil" /></php:funcion>><php:item id="Descripcion" /></option>
+										</php:repeticion>
+									</select>
+								</div>
+								<div class="col-md-6">
+									<label for="contenedorid" >Direcci&oacute;n (*)</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion" maxlength="150" value="<php:item id="direccion" />">
+									</div>
+								</div>
+							</div>
+	
+							<div class="form-row">
+								<div class="col-md-6">
+									<label for="contenedorid" >Comuna (*)</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="comuna" name="comuna" placeholder="Comuna" value="<php:item id="comuna" />">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<label for="contenedorid" >Ciudad (*)</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="ciudad" name="ciudad" placeholder="Ciudad" value="<php:item id="ciudad" />">
+									</div>
+								</div>
+							</div>	
+
+							<div class="form-row">
+								<div class="col-md-6">
+									<label for="contenedorid" >Rol (*)</label>
+									<select class= "form-control" name="rolid" id="rolid">
+										<option value="0">(Seleccione)</option>
+										<php:repeticion id="Roles">
+										<option value="<php:item id="rolid" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="rolid" /><php:argumento idvalor="rolid" /></php:funcion>><php:item id="Descripcion" /></option>
+										</php:repeticion>
+									</select>
+								</div>
+								<div class="col-md-6">
+									<label for="contenedorid" >Correo Electr&oacute;nico (*)</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="correo" name="correo" placeholder="Correo electr&oacute;nico" maxlength="50" value="<php:item id="correo" />">
+									</div>
+								</div>
+							</div>	
+
+							<div class="form-row">
+								<div class="col-md-6">
+									<label for="contenedorid" >Estado del Empleado</label>
+									<select class= "form-control" name="idEstadoEmpleado" id="idEstadoEmpleado">
+										<option value="0">(Seleccione)</option>
+										<php:repeticion id="EstadosEmpleado">
+										<option value="<php:item id="idEstadoEmpleado" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idEstadoEmpleado" /><php:argumento idvalor="idEstadoEmpleado" /></php:funcion>><php:item id="Descripcion" /></option>
+										</php:repeticion>
+									</select>
+								</div>
+							</div>	
+						
+						</div>
+		            </div>
+		              <!-- /.tab-pane -->
+		              <div class="tab-pane" id="form_dc">
+						<div class="box-body">		               									
+							<div class="form-row">
+								<div class="col-md-6 datosDocumento" id="DATOS_FechaInicio" style="display:none;">
+									<label for="contenedorid" >Fecha Inicio</label>
+									<div class="input-group date">
+										<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+										<input type="text" class="form-control" id="FechaInicio" name="FechaInicio" placeholder="Fecha Inicio"  value="<php:item id="FechaInicio" />">
+									</div>
+							  	</div>
+								<div class="col-md-6 datosDocumento" id="DATOS_Fecha" style="display:none;">
+									<label for="contenedorid" >Fecha Ingreso</label>
+									<div class="input-group date">
+										<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+										<input type="text" class="form-control" id="Fecha" name="Fecha" placeholder="Fecha Ingreso"  value="<php:item id="Fecha" />">
+									</div>
+							  	</div>
+								<div class="col-md-6 datosDocumento" id="DATOS_Ciudad" style="display:none;">
+									<label for="contenedorid" >Ciudad</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="Ciudad2" name="Ciudad2" placeholder="Ciudad"  value="<php:item id="Ciudad2" />">
+									</div>
+								</div>
+								<div class="col-md-6 datosDocumento" id="DATOS_DescripcionCargo" style="display:none;">
+									<label for="contenedorid" >Descripci&oacute;n Cargo</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="DescripcionCargo" name="DescripcionCargo" placeholder="Descripci&oacute;n Cargo"  value="<php:item id="Cargo" />">
+									</div>
+								</div>
+								<div class="col-md-6 datosDocumento" id="DATOS_Duracion" style="display:none;">
+									<label for="contenedorid" >Duraci&oacute;n</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="Duracion" name="Duracion" placeholder="Duraci&oacute;n"  value="<php:item id="oacute;n" />">
+									</div>
+								</div>
+								<div class="col-md-6 datosDocumento" id="DATOS_ModTeletrabajo" style="display:none;">
+									<label for="contenedorid" >Mod. Teletrabajo</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="ModTeletrabajo" name="ModTeletrabajo" placeholder="Mod. Teletrabajo"  value="<php:item id="Teletrabajo" />">
+									</div>
+								</div>
+								<div class="col-md-6 datosDocumento" id="DATOS_Segmento" style="display:none;">
+									<label for="contenedorid" >Segmento</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="Segmento" name="Segmento" placeholder="Segmento"  value="<php:item id="Segmento" />">
+									</div>
+								</div>
+								<div class="col-md-6 datosDocumento" id="DATOS_PorcentajeBonoTarget" style="display:none;">
+									<label for="contenedorid" >Porcentaje Bono Target</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="PorcentajeBonoTarget" name="PorcentajeBonoTarget" placeholder="Porcentaje Bono Target"  value="<php:item id="Target" />">
+									</div>
+								</div>
+								<div class="col-md-6 datosDocumento" id="DATOS_MetaTargetS" style="display:none;">
+									<label for="contenedorid" >MetaTargetS</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="MetaTargetS" name="MetaTargetS" placeholder="MetaTargetS"  value="<php:item id="MetaTargetS" />">
+									</div>
+								</div>
+								<div class="col-md-6 datosDocumento" id="DATOS_MetaTargetU" style="display:none;">
+									<label for="contenedorid" >MetaTargetU</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="MetaTargetU" name="MetaTargetU" placeholder="MetaTargetU"  value="<php:item id="MetaTargetU" />">
+									</div>
+								</div>
+								<div class="col-md-6 datosDocumento" id="DATOS_ObjetivoFinanciero1" style="display:none;">
+									<label for="contenedorid" >ObjetivoFinanciero1</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="ObjetivoFinanciero1" name="ObjetivoFinanciero1" placeholder="ObjetivoFinanciero1"  value="<php:item id="ObjetivoFinanciero1" />">
+									</div>
+								</div>
+								<div class="col-md-6 datosDocumento" id="DATOS_DetalleObjetivoFinanciero1" style="display:none;">
+									<label for="contenedorid" >DetalleObjetivoFinanciero1</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="DetalleObjetivoFinanciero1" name="DetalleObjetivoFinanciero1" placeholder="DetalleObjetivoFinanciero1"  value="<php:item id="DetalleObjetivoFinanciero1" />">
+									</div>
+								</div>
+								<div class="col-md-6 datosDocumento" id="DATOS_ObjetivoFinanciero2" style="display:none;">
+									<label for="contenedorid" >ObjetivoFinanciero2</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="ObjetivoFinanciero2" name="ObjetivoFinanciero2" placeholder="ObjetivoFinanciero2"  value="<php:item id="ObjetivoFinanciero2" />">
+									</div>
+								</div>
+								<div class="col-md-6 datosDocumento" id="DATOS_DetalleObjetivoFinanciero2" style="display:none;">
+									<label for="contenedorid" >DetalleObjetivoFinanciero2</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="DetalleObjetivoFinanciero2" name="DetalleObjetivoFinanciero2" placeholder="DetalleObjetivoFinanciero2"  value="<php:item id="DetalleObjetivoFinanciero2" />">
+									</div>
+								</div>
+								<div class="col-md-6 datosDocumento" id="DATOS_MetaIndividual" style="display:none;">
+									<label for="contenedorid" >MetaIndividual</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="MetaIndividual" name="MetaIndividual" placeholder="MetaIndividual"  value="<php:item id="MetaIndividual" />">
+									</div>
+								</div>
+								<div class="col-md-6 datosDocumento" id="DATOS_Bono" style="display:none;">
+									<label for="contenedorid" >Bono</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="Bono" name="Bono" placeholder="Bono"  value="<php:item id="Bono" />">
+									</div>
+								</div>
+								<div class="col-md-6 datosDocumento" id="DATOS_Codigo" style="display:none;">
+									<label for="contenedorid" >C&oacute;digo</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="Codigo" name="Codigo" placeholder="C&oacute;digo"  value="<php:item id="digo" />">
+									</div>
+								</div>
+								<div class="col-md-6 datosDocumento" id="DATOS_Texto1" style="display:none;">
+									<label for="contenedorid" >Texto 1</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="Texto1" name="Texto1" placeholder="Texto 1"  value="<php:item id="Texto1" />">
+									</div>
+								</div>
+
+								<div class="col-md-6 datosDocumento" id="DATOS_nombreJefeDirecto" style="display:none;">
+									<label for="contenedorid" >Nombre Jefe Directo</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="nombreJefeDirecto" name="nombreJefeDirecto" placeholder="Nombre Jefe Directo"  value="<php:item id="nombreJefeDirecto" />">
+									</div>
+								</div>
+
+								<div class="col-md-6 datosDocumento" id="DATOS_cargoJefeDirecto" style="display:none;">
+									<label for="contenedorid" >Cargo Jefe Directo</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="cargoJefeDirecto" name="cargoJefeDirecto" placeholder="Cargo Jefe Directo"  value="<php:item id="cargoJefeDirecto" />">
+									</div>
+								</div>
+
+								<div class="col-md-6 datosDocumento" id="DATOS_nombreDirectorSegmento" style="display:none;">
+									<label for="contenedorid" >Nombre Director De Segmento</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="nombreDirectorSegmento" name="nombreDirectorSegmento" placeholder="Nombre Director Segmento"  value="<php:item id="nombreDirectorSegmento" />">
+									</div>
+								</div>
+
+								<div class="col-md-6 datosDocumento" id="DATOS_directorDeSegmento" style="display:none;">
+									<label for="contenedorid" >Director De Segmento</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="directorDeSegmento" name="directorDeSegmento" placeholder="Director De Segmento"  value="<php:item id="directorDeSegmento" />">
+									</div>
+								</div>
+
+
+
+
+								<div class="col-md-6 datosDocumento" id="DATOS_Texto2" style="display:none;">
+									<label for="contenedorid" >Texto2</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="Texto2" name="Texto2" placeholder="Texto2"  value="<php:item id="Texto2" />">
+									</div>
+								</div>
+
+								<div class="col-md-6 datosDocumento" id="DATOS_Texto3" style="display:none;">
+									<label for="contenedorid" >Texto3</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="Texto3" name="Texto3" placeholder="Texto3"  value="<php:item id="Texto3" />">
+									</div>
+								</div>
+
+								<div class="col-md-6 datosDocumento" id="DATOS_Texto4" style="display:none;">
+									<label for="contenedorid" >Texto4</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="Texto4" name="Texto4" placeholder="Texto4"  value="<php:item id="Texto4" />">
+									</div>
+								</div>
+
+								<div class="col-md-6 datosDocumento" id="DATOS_Porcentaje1" style="display:none;">
+									<label for="contenedorid" >Porcentaje1</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="Porcentaje1" name="Porcentaje1" placeholder="Porcentaje1"  value="<php:item id="Porcentaje1" />">
+									</div>
+								</div>
+
+								<div class="col-md-6 datosDocumento" id="DATOS_Porcentaje2" style="display:none;">
+									<label for="contenedorid" >Porcentaje2</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="Porcentaje2" name="Porcentaje2" placeholder="Porcentaje2"  value="<php:item id="Porcentaje2" />">
+									</div>
+								</div>
+
+								<div class="col-md-6 datosDocumento" id="DATOS_Porcentaje3" style="display:none;">
+									<label for="contenedorid" >Porcentaje3</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="Porcentaje3" name="Porcentaje3" placeholder="Porcentaje3"  value="<php:item id="Porcentaje3" />">
+									</div>
+								</div>
+
+								<div class="col-md-6 datosDocumento" id="DATOS_Porcentaje4" style="display:none;">
+									<label for="contenedorid" >Porcentaje4</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="Porcentaje4" name="Porcentaje4" placeholder="Porcentaje4"  value="<php:item id="Porcentaje4" />">
+									</div>
+								</div>
+								
+								<div class="col-md-6 datosDocumento" id="DATOS_Porcentaje5" style="display:none;">
+									<label for="contenedorid" >Porcentaje5</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="Porcentaje5" name="Porcentaje5" placeholder="Porcentaje5"  value="<php:item id="Porcentaje5" />">
+									</div>
+								</div>
+								
+								<div class="col-md-6 datosDocumento" id="DATOS_Porcentaje6" style="display:none;">
+									<label for="contenedorid" >Porcentaje6</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="Porcentaje6" name="Porcentaje6" placeholder="Porcentaje6"  value="<php:item id="Porcentaje6" />">
+									</div>
+								</div>
+									
+								<div class="col-md-6 datosDocumento" id="DATOS_Stretch1" style="display:none;">
+									<label for="contenedorid" >Stretch1</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="Stretch1" name="Stretch1" placeholder="Stretch1"  value="<php:item id="Stretch1" />">
+									</div>
+								</div>
+								
+								<div class="col-md-6 datosDocumento" id="DATOS_Stretch2" style="display:none;">
+									<label for="contenedorid" >Stretch2</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="Stretch2" name="Stretch2" placeholder="Stretch2"  value="<php:item id="Stretch2" />">
+									</div>
+								</div>
+								
+								<div class="col-md-6 datosDocumento" id="DATOS_Texto5" style="display:none;">
+									<label for="contenedorid" >Texto5</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="Texto5" name="Texto5" placeholder="Texto5"  value="<php:item id="Texto5" />">
+									</div>
+								</div>
+								
+								<div class="col-md-6 datosDocumento" id="DATOS_Jornada2" style="display:none;">
+									<label for="contenedorid" >Jornada 2</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="Jornada2" name="Jornada2" placeholder="Jornada2"  value="<php:item id="Jornada2" />">
+									</div>
+								</div>
+								
+								<div class="col-md-6 datosDocumento" id="DATOS_AplicaStrech1" style="display:none;">
+									<label for="contenedorid" >Aplica Strech 1</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="AplicaStrech1" name="AplicaStrech1" placeholder="AplicaStrech1"  value="<php:item id="AplicaStrech1" />">
+									</div>
+								</div>
+								
+								<div class="col-md-6 datosDocumento" id="DATOS_AplicaStrech2" style="display:none;">
+									<label for="contenedorid" >Aplica Strech 2</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="AplicaStrech2" name="AplicaStrech2" placeholder="AplicaStrech2"  value="<php:item id="AplicaStrech2" />">
+									</div>
+								</div>
+								
+								<div class="col-md-6 datosDocumento" id="DATOS_Stretch3" style="display:none;">
+									<label for="contenedorid" >Stretch 3</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="Stretch3" name="Stretch3" placeholder="Stretch3"  value="<php:item id="Stretch3" />">
+									</div>
+								</div>
+								
+								<div class="col-md-6 datosDocumento" id="DATOS_Stretch4" style="display:none;">
+									<label for="contenedorid" >Stretch 4</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="Stretch4" name="Stretch4" placeholder="Stretch4"  value="<php:item id="Stretch4" />">
+									</div>
+								</div>
+								
+								<div class="col-md-6 datosDocumento" id="DATOS_Booster" style="display:none;">
+									<label for="contenedorid" >Booster</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="Booster" name="Booster" placeholder="Booster"  value="<php:item id="Booster" />">
+									</div>
+								</div>
+								
+								<div class="col-md-6 datosDocumento" id="DATOS_Modificador" style="display:none;">
+									<label for="contenedorid" >Modificador</label>
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control" id="Modificador" name="Modificador" placeholder="Modificador"  value="<php:item id="Modificador" />">
+									</div>
+								</div>
+								
+							</div>
+							
+							<div class="form-row">  
+			            <div class="col-md-2 xs-12 pull-right">  
+			                <input type="hidden" id="idWF" name="idWF"/>
+			              
+			                <!--Firmantes de la Plantilla-->
+			                <input type="hidden" id="Representantes" name="Representantes" />
+							<!--<input type="hidden" id="Notario" name="Notario" />-->
+							<input type="hidden" id="Clientes" name="Clientes" />
+							<input type="hidden" id="Representantes_ConOrden" name="Representantes_ConOrden" />
+							<input type="hidden" id="Clientes_ConOrden" name="Clientes_ConOrden" />
+			                <input type="hidden" id="Empleado" name="Empleado" />
+			                <input type="hidden" id="Cantidad_Firmantes" name="Cantidad_Firmantes" />
+							<input type="hidden" id="max" value="<php:texto id="max" />" />
+							<input type="hidden" id="orden_representantes" value="<php:texto id="orden_representantes" />" />
+							<input type="hidden" id="orden_clientes" value="<php:texto id="orden_clientes" />" />
+							<input type="hidden" id="input_empleado" name="input_empleado" value="<php:item id="input_empleado"/>"/>
+							
+							<!--accion 2 -->
+							<input type="hidden" id="accion2" name="accion2" />
+							<!--Variables-->
+							<input type="hidden" id="variables" name="variables" />
+							<!--Modal-->
+							<input type="hidden" id="btn_vista_previa" data-toggle="modal" data-target="#modal_vista_previa"/>
+			                <input type="hidden" name="accion" value="GENERAR"/>
+							<!-- <button class="btn btn-md btn-success btn-block" type="button" name="accion" id="GENERAR" value="GENERAR" style="margin-top: 10px">Generar</button>  -->
+							<button class="btn btn-md btn-success btn-block" type="button" style="margin-top: 10px;" id="GENERAR" >Generar</button> 
+						
+			            </div>
+			         </div>
+
+					   <div class="form-row">  
+							<div class="col-md-2 xs-12 pull-right">  
+								<button class="btn btn-md btn-info btn-block" type="button" name="accion" id="VISTA_PREVIA" value="VISTA_PREVIA" style="margin-top: 10px">Vista Previa</button> 
+							</div>
+						</div>
+						</div>
+		              </div>
+
+		              <div class="tab-pane" id="tab_4">
+						<div class="box-body">
+						
+						<div class="form-row">
+						  <div class="col-md-12">
+							<label style="float:right;"> (*) Campos obligatorios </label>
+							
+						  </div>
+						</div>
+		                	
+		                  <!--Empresas-->
+			              <div class="col-md-6" >
+			                <label for="Empresa" >Empresa (*) </label>
+			                <!--Select de Empresas disponibles-->
+			                <select class= "form-control" name="RutEmpresa" id="RutEmpresa">
+			                <option value="0">( Seleccione )</option>
+			                  <php:repeticion id="Empresas">
+			                    <option value="<php:item id="RutEmpresa" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEmpresa" /><php:argumento idvalor="RutEmpresa" /></php:funcion>><php:item id="RazonSocial" /></option>
+			                  </php:repeticion>
+			                </select>
+			              </div>
+						  
+						  <!--Fecha del documento-->
+				 
+						  <div class="col-md-6">
+							<label for="contenedorid" >Fecha del Documento(*)</label>
+								<div class="form-group">
+									<div class="input-group date">
+										<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+										<input type="text" class="form-control" id="FechaDocumento" name="FechaDocumento" placeholder="Fecha del Documento"  value="<php:item id="FechaDocumento" />">
+									</div>
+								</div>
+							</div>
+						<div class="col-md-6 xs-12">
+							<label class="Estructura">Lugar de Pago (*)</label>
+							<div class="box-body" style="padding-left: 0px;padding-top: 0px;">
+								<div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+									<input class="form-control" type="text" name="nombrelugarpago" id="nombrelugarpago" placeholder="(Seleccione)" readonly value="<php:item id="nombrelugarpago" />">
+									<input class="form-control" type="hidden" name="LugarPagoid" id="lugarpagoid" value="<php:item id="LugarPagoid" />">
+								</div>
+								<div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+									<button class="btn btn-md btn-primary btn-block lugares_pago"  type="button" id="btn_lugares_pago" data-toggle="modal" data-target="#modal_lugares_pago"><i class="fa fa-search"></i></button>
+								</div>
+							</div>
+						</div>
+						 <!--Division de personal-->
+			              
+			              <div class="col-md-6 xs-12">
+			               <label class="Estructura">Centro de Costo (*)</label>
+			                <div class="box-body" style="padding-left: 0px;padding-top: 0px;">
+			                    <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+			                      <input class="form-control" type="text" name="nombrecentrocosto" id="nombrecentrocosto" placeholder="(Seleccione)" readonly value="<php:item id="nombrecentrocosto" />">
+			                      <input type="hidden" name="idCentroCosto" id="centrocostoid" placeholder="(Seleccione)" value="<php:item id="idCentroCosto" />">
+			                    </div>
+			                    <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+			                       <button class="btn btn-md btn-primary btn-block" type="button" id="btn_centro_costo" data-toggle="modal" data-target="#modal_centro_costo"><i class="fa fa-search"></i></button>  
+			                    </div>
+			                  </div>
+			                </div>
+				            
+			              <!--Tipo de Documento-->
+			              <div class="col-md-6" style="padding-bottom: 15px;">
+			                  <label for="TipoDeDocumento" >Tipo de Documento(*)</label>
+			                  <!--Select de Empresas disponibles-->
+			                  <select class= "form-control" name="idTipoDoc" id="idTipoDoc" required>
+			                    <option value="0">(Seleccione)</option>
+			                    <php:repeticion id="TipoDocumentos">
+			                      <option value="<php:item id="idTipoDoc" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idTipoDoc" /><php:argumento idvalor="idTipoDoc" /></php:funcion>><php:item id="NombreTipoDoc" /></option>
+			                    </php:repeticion>
+			                  </select>
+			              </div>
+
+
+			              <!--Procesos-->
+			              <div class="col-md-6" style="padding-bottom: 15px;">
+			                  <label for="Proceso" >Proceso (*)</label>
+			                  <!--Select de Empresas disponibles-->
+			                  <select class= "form-control" name="idProceso" id="idProceso" required>
+			                    <option value="0">(Seleccione)</option>
+			                    <php:repeticion id="Procesos">
+			                      <option value="<php:item id="idProceso" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idProceso" /><php:argumento idvalor="idProceso" /></php:funcion>><php:item id="Descripcion" /></option>
+			                    </php:repeticion>
+			                  </select>
+			              </div>
+						
+					    <!--Plantilla-->
+			            <div class="col-md-6 xs-12" style="padding-bottom: 15px;">
+			               <label>Plantilla (*)</label>
+			               <select class="form-control" name="idPlantilla" id="idPlantilla">
+			                 <option value="0">( Seleccione )</option>
+			               </select>
+			            </div>
+			        
+			           <!--Tipo de Firmas-->
+			           <div class="col-md-6" style="padding-bottom: 15px;">
+			              <label for="Proceso" >Tipo de firma (*)</label>
+			              <!--Select de Empresas disponibles-->
+			              <select class= "form-control" name="idTipoFirma" id="idTipoFirma" required>
+			                <option value="0">(Seleccione)</option>
+			                <php:repeticion id="TipoFirmas">
+			                  <option value="<php:item id="idTipoFirma" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idTipoFirma" /><php:argumento idvalor="idTipoFirma" /></php:funcion>><php:item id="Descripcion" /></option>
+			                </php:repeticion>
+			              </select>
+			          </div>
+
+			         <!--Seleccionar Firmantes por Empresas -->
+			         <div class="form-row">
+			           <div class="col-md-12">
+			             <h5></h5>
+			           </div>
+			         </div>
+
+			        <div class="form-row">
+			            <div class="col-md-12">
+			                <label id="label" style="display: none">Seleccione Firmantes</label>
+			               
+			                  <!-- Pasos-->
+			                  <div class="steps-form-2">
+			                      <div class="steps-row-2 setup-panel-2 d-flex justify-content-between">
+			                          <div class="steps-step-2" id="icono_representante" style="display:none">
+			                              <a href="#step-1" id="boton_emp" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0" data-placement="top" title="Empresa"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-building" aria-hidden="true"></i></a>
+			                              <div id="text_emp" class="text">Firmantes</div>
+			                          </div>
+			                          <div class="steps-step-2" style="display:none">
+			                              <a href="#step-2" id="boton_cli" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0" data-placement="top" title="Cliente"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-users" aria-hidden="true"></i></a>
+			                               <div id="text_cli" class="text">Cliente</div>
+			                          </div>
+			                          <div class="steps-step-2" style="display:none">
+			                              <a href="#step-3" id="boton_not" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0 not steps-not" data-placement="top" title="Notaria"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+			                              <div id="text_not" class="text">Notaria</div>
+			                          </div>
+			                      </div>
+			                  </div>
+			              
+			                  <!--Firmantes de Empresas-->
+			                  <div class="collapse" id="step-1">
+			                   <table id="tabla_emp" class="table table-bordered table-hover">
+			                    <thead>
+			                      <tr>
+			                          <h4> Firmantes </h4>
+			                      </tr> 
+			                      <tr>
+			                        <th style="text-align: center;">Selecci&oacute;n</th>
+			                        <th style="text-align: center;">Rut</th>
+			                        <th style="text-align: center;">Nombre y Apellido</th>
+			                        <th style="text-align: center;">Cargo</th>
+									<th style="text-align: center;">Orden</th>
+			                      </tr>
+			                    </thead>
+			                    <tbody>
+			                    </tbody>                 
+			                   </table>
+			                  </div>
+			                <!--Fin de firmantes-->
+			            </div>
+			        </div>
+			        <!--Fin de Firmantes-->
+			         
+			         <!--inputs old -->
+					</div>	
+              	   </div>
+
+              	</div>
+              </div>		
+			
+		</form>
+
+	 <!--Modal de Lugares de pago-->
+  
+          <div class="modal fade" id="modal_lugares_pago" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			<div class="modal-dialog" >
+			  <div class="modal-content">
+				<div class="modal-header" align="center">
+				  <h4 class="Estructura" id="ejemplo-titulo"> Lugares de Pago </h4>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+					<div id="mensajeError_modal"></div>
+				   <table id="tabla_lugares_pago" class="table table-bordered table-hover" style="text-align: center">
+					   <thead >
+						   <tr>
+							   <th  style="text-align: center" >C&oacute;digo</th>
+							   <th  style="text-align: center" >Nombre</th>
+							   <th  style="text-align: center" >Selecci&oacute;n</th>
+						   </tr>
+					   </thead>
+					   <tbody>
+					   </tbody>
+				   </table>
+				</div>
+				<div class="modal-footer" style="margin-top:10px;">
+				  <button type="button" class="btn btn-secondary btn-md" id="cerrar_lugares_pago" data-dismiss="modal">Cerrar</button>
+				</div>
+			  </div>
+			</div>
+		  </div>
+  
+		  <!--Modal de Departamentos>
+  
+		  <div class="modal fade" id="modal_departamento" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" >
+				<div class="modal-content">
+				  <div class="modal-header" align="center">
+					<h4 class="modal-title" id="ejemplo-titulo"> Divisi&oacute;n Superior</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body">
+					  <div id="mensajeError_modal"></div>
+					 <table id="tabla_departamento" class="table table-bordered table-hover" style="text-align: center">
+						 <thead >
+							 <tr>
+								 <th  style="text-align: center" >C&oacute;digo</th>
+								 <th  style="text-align: center" >Nombre</th>
+								 <th  style="text-align: center" >Selecci&oacute;n</th>
+							 </tr>
+						 </thead>
+						 <tbody>
+						 </tbody>
+					 </table>
+				  </div>
+				  <div class="modal-footer" style="margin-top:10px;">
+					<button type="button" class="btn btn-secondary btn-md" id="cerrar_departamento" data-dismiss="modal">Cerrar</button>
+				  </div>
+				</div>
+			  </div>
+			</div-->
+		<!--Modal de Centros de Costo-->
+		<div class="modal fade" id="modal_centro_costo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			<div class="modal-dialog" >
+			  <div class="modal-content">
+				<div class="modal-header" align="center">
+				  <h4 class="Estructura" id="ejemplo-titulo"> Centros de Costo </h4>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+					<div id="mensajeError_modal"></div>
+				   <table id="tabla_centro_costo" class="table table-bordered table-hover" style="text-align: center">
+					   <thead >
+						   <tr>
+							   <th  style="text-align: center" >C&oacute;digo</th>
+							   <th  style="text-align: center" >Nombre</th>
+							   <th  style="text-align: center" >Selecci&oacute;n</th>
+						   </tr>
+					   </thead>
+					   <tbody>
+						   
+					   </tbody>
+				   </table>
+				</div>
+				<div class="modal-footer" style="margin-top:10px;">
+				  <button type="button" class="btn btn-secondary btn-md" id="cerrar_centro_costo" data-dismiss="modal">Cerrar</button>
+				</div>
+			  </div>
+			</div>
+		  </div>
+						<!--Modal Vista previa -->
+						<div class="modal fade bd-example-modal-lg" id="modal_vista_previa" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+							<div class="modal-dialog modal-lg" >
+								<div class="modal-content" style="width:1000px">
+									<div class="modal-header" align="center">
+										<h4 class="modal-title" id="ejemplo-titulo">Vista previa de Documento</h4>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<div id="contenido" style=" padding-top:3cm; padding-left:3cm; padding-right:3cm; padding-bottom:1cm; border: 1px solid; box-shadow: 5px 10px 8px #888888; "></div>
+									</div>
+									<div class="modal-footer" style="margin-top:10px;">
+										<button type="button" class="btn btn-secondary btn-md" id="cerrar_centro_costo" data-dismiss="modal">Cerrar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+	</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<script>
+
+$('#datosDocumento').on('click', function() {
+		if ($('#idPlantilla').val() == 0) {
+			alert('Debe seleccionar una plantilla para acceder a esta seccion');
+		}
+	});
+	var idPlantillaajax;	
+	idPlantillaajax = "<php:item id="idPlantilla" />";
+	
+	var ajaxVariablesPlantilla;
+	var salidaVariablesPlantilla;
+	var datosDocumento = [];
+	var datosDocumentoAux = [];
+	function getVariablesPlantilla() {
+		var url  = "Generar_Documentos_Masivos3_ajax.php?idPlantilla=" + $('#idPlantilla').val();
+		if( window.XMLHttpRequest )
+			ajaxVariablesPlantilla = new XMLHttpRequest(); // No Internet Explorer
+		else
+			ajaxVariablesPlantilla = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+		ajaxVariablesPlantilla.onreadystatechange = funcionCallback_getVariablesPlantilla;
+		ajaxVariablesPlantilla.open( "GET", url, true );
+		ajaxVariablesPlantilla.send( "" );
+	}
+
+	function funcionCallback_getVariablesPlantilla() {
+		if( ajaxVariablesPlantilla.readyState == 4 ) {
+			if( ajaxVariablesPlantilla.status == 200 ) {
+				salidaVariablesPlantilla = ajaxVariablesPlantilla.responseText;
+				if( salidaVariablesPlantilla != '' ) {
+					datosDocumento = JSON.parse(salidaVariablesPlantilla);
+					for(var i = 0; i < datosDocumento.length; i++) {
+						$('#' + datosDocumento[i].Variable).show();
+					}
+				}
+				else {
+					$("#mensajeError").removeClass("callout callout-warning");
+					$("#mensajeError").html("");
+				}
+			}
+		}
+	} 
+	
+	function ocultaDatosDocumento() {
+		$('.datosDocumento').hide();
+	}
+
+	$('#GENERAR').on('click', function(){
+	
+		if (validacionGenerar()) {
+		    $('#nombre').val(encodeURIComponent($('#nombre').val()));
+            $('#nacionalidad').val(encodeURIComponent($('#nacionalidad').val()));
+            $('#direccion').val(encodeURIComponent($('#direccion').val()));
+            $('#comuna').val(encodeURIComponent($('#comuna').val()));
+            $('#ciudad').val(encodeURIComponent($('#ciudad').val()));
+
+			$('#formulario').submit();
+			
+		}
+	});
+ /*Variables*/
+  	var ajax;
+	var salida;
+	var pri;
+	var cantidad_firmantes;
+	var arreglo_emp = [];
+	var orden_emp = [];
+	var nuevo_emp = {};
+	var arreglo = [];
+	var orden = [];
+	var nuevo = {};
+	var orden_representantes = $("#orden_representantes").val();
+	var orden_clientes = $("#orden_clientes").val();
+	
+	/*******************/
+	/**CAMPOS DE FECHA**/
+	/*******************/			  
+	$('#fechanacimiento').datepicker({
+	    language: "es",
+	    orientation: "bottom",
+	    autoclose: true,
+	    todayHighlight: true,
+	    format: 'dd-mm-yyyy'
+    });
+    $('#FechaInicio').datepicker({
+	    language: "es",
+	    orientation: "bottom",
+	    autoclose: true,
+	    todayHighlight: true,
+	    format: 'dd-mm-yyyy'
+    });
+
+    $('#Fecha').datepicker({
+	    language: "es",
+	    orientation: "bottom",
+	    autoclose: true,
+	    todayHighlight: true,
+	    format: 'dd-mm-yyyy'
+    });
+    /*$('#FechaTermino').datepicker({
+	    language: "es",
+	    orientation: "bottom",
+	    autoclose: true,
+	    todayHighlight: true,
+	    format: 'dd-mm-yyyy'
+    });*/
+	$('#FechaDocumento').datepicker({
+	    language: "es",
+	    orientation: "bottom",
+	    autoclose: true,
+	    todayHighlight: true,
+	    format: 'dd-mm-yyyy'
+    });						   
+	/*$('#FechaIngreso').datepicker({
+	    language: "es",
+	    orientation: "bottom",
+	    autoclose: true,
+	    todayHighlight: true,
+	    format: 'dd-mm-yyyy'
+    });*/
+
+	 
+   $(document).ready(function(){
+	
+	if(idPlantillaajax!=0){
+		$("#GENERAR").attr('disabled', false);
+		$("#idTipoDoc").attr("disabled",false);
+		$("#idProceso").attr("disabled",false);
+		$("#idPlantilla").attr("disabled",false);
+		$("#idTipoFirma").attr("disabled",false);
+		$("#FechaDocumento").attr("disabled",false);
+		change_RutEmpresa();
+		filtrarPlantilla();
+		change_Plantilla();
+		change_TipoFirma();
+	}
+	else{
+		$("#GENERAR").attr('disabled', true);
+		$("#idTipoDoc").attr("disabled",true);
+		$("#idProceso").attr("disabled",true);
+		$("#idPlantilla").attr("disabled",true);
+		$("#idTipoFirma").attr("disabled",true);
+		$("#FechaDocumento").attr("disabled",true);
+	}
+  });
+
+
+ $("#idProceso").change(function(){
+
+    if( $("#idProceso").val() != 0 )
+      $("#idPlantilla").attr("disabled",false);
+    else{
+        $("#idPlantilla").attr("disabled",true);
+        $("#idTipoFirma").attr("disabled",true);
+        $("#idProceso").val(0);
+        $("#idPlantilla").val(0);
+        $("#idTipoFirma").val(0);
+        $("#idWF").val(0);
+		$(".orden").val('');
+    }
+ });
+
+	function btnSiguiente(){	
+		
+		<!-- $("#documentdata").addClass("active");  -->
+		<!-- $("#documentdata").addClass("active");  -->
+		<!-- if($(#personaldata).element.className -->
+		if($('#personaldata').hasClass('active')){
+			$("#generacion").click();		
+		}
+		else if($('#generaciondata').hasClass('active') && $('#idPlantilla').val() >0){
+			$("#datosDocumento").click();
+		}
+		else if ($('#idPlantilla').val() ==0){
+			alert('Debe seleccionar una plantilla para acceder a esta seccion');
+		}
+		if($('#documentdata').hasClass('active') ){
+			$("#btnsiguiente").hide();
+		}
+		
+	}
+	$("#datosPersonales").click(function(){
+		$("#btnsiguiente").show();	
+	});
+	$("#generacion").click(function(){
+		$("#btnsiguiente").show();	
+	});
+	$("#datosDocumento").click(function(){
+		$("#btnsiguiente").hide();	
+	});
+
+	$("#idPlantilla").change(function(){
+		idPlantillaajax=0;		
+		$("#idTipoFirma").attr("disabled",false);
+		$("#idTipoFirma").val(0);
+		$(".orden").val('');		
+
+		//$("#Documento").val('');
+
+		//Ocultar firmantes 
+		$("#icono_representante").hide();
+		$("#GENERAR").attr('disabled', true);
+
+		$("#Representates").val("");
+		$("#Empleado").val("");
+		$("#Cantidad_Firmantes").val("");
+
+		$("#mensajeError").removeClass("callout callout-warning");
+		$("#mensajeError").html("");
+
+		$('input[type=checkbox]').prop('checked', false);
+		$("#step-1").collapse('hide');
+		
+		change_Plantilla();
+	});
+	function change_Plantilla(){
+		ocultaDatosDocumento(); 
+		if( $("#idPlantilla").val() != 0 ){			
+			var idPlantilla = $("#idPlantilla").val();
+			
+			if( idPlantilla != 0 ){
+				getVariablesPlantilla();
+				var url  = "Generar_Documentos_Masivos1_ajax.php?idPlantilla=" + idPlantilla;
+
+				// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+				if( window.XMLHttpRequest )
+				ajax = new XMLHttpRequest(); // No Internet Explorer
+				else
+				ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+
+				// Almacenamos en el control al funcion que se invocara cuando la peticion
+				// cambie de estado 
+				ajax.onreadystatechange = funcionCallback_Plantilla;
+
+				// Enviamos la peticion
+				ajax.open( "GET", url, false );
+				ajax.send( "" );
+			}
+		}
+		else{
+
+			$("#idTipoFirma").attr("disabled",true);
+			$("#Documento").attr("disabled",true);
+			$(".btn-file").attr("disabled",true);
+			$("#archivo").attr("disabled",true);
+
+			$("#idPlantilla").val(0);
+			$("#idTipoFirma").val(0);
+			$("#Documento").val('');
+			$("#archivo").val();
+			$("#idWF").val(0);
+			$(".orden").val('');
+		}
+
+	}
+
+  function funcionCallback_Plantilla()
+  {
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+      if( ajax.status == 200 )
+      {
+        // Escribimos el resultado en la pagina HTML mediante DHTML
+        //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
+        salida = ajax.responseText;
+
+        if( salida != '' ){ 
+            var datos = JSON.parse(salida);
+            var cont = 0; 
+			var cant_firm = 0;
+			cant_firm = datos.length;
+			
+			$.each(datos,function(key, registro) {
+			   if ( cant_firm == 1 ){
+					 if( registro.idEstado == 2 || registro.idEstado == 10 || registro.idEstado == 9 || registro.idEstado == 11){ //Reresentante - Representante 2 - Notario - Representante 3
+						$("#Representantes").val("1");
+						$("#Empleado").val("");
+						cont++;
+					 }
+					 if( registro.idEstado == 3 ){
+						$("#Empleado").val("1");
+						$("#Representantes").val("");
+					 } 
+				}  
+				else 
+				{ 	
+					if( registro.idEstado == 2 || registro.idEstado == 10 || registro.idEstado == 9 || registro.idEstado == 11 ){ //Reresentante - Representante 2 - Notario - Representante 3
+						cont++; 
+						$("#Representantes").val(cont);
+					 }
+					 if( registro.idEstado == 3 ){
+						$("#Empleado").val("1");
+					 }
+				}
+				
+				$("#Cantidad_Firmantes").val(cont); 
+				$("#idWF").val(registro.idWF);    
+				
+			});
+			if(numFirmantesEmpresa<cont){
+				$("#mensajeError").addClass("callout callout-warning");
+				$("#mensajeError").html("La Empresa solo posee "+numFirmantesEmpresa+" Representante/s.La Empresa debe tener al menos  "+cont+". " );
+			}
+			
+        }else{
+            $("#mensajeError").removeClass("callout callout-warning");
+            $("#mensajeError").html("");
+        }
+      }
+    }
+  }
+
+	/*********************/
+	/**FILTRAR PLANTILLA**/
+	/********************/
+	$("#idTipoDoc").change(function(){
+		$("#mensajeError").removeClass("callout callout-warning");
+		$("#mensajeError").html(""); 
+		filtrarPlantilla();
+	});
+	function filtrarPlantilla(){	  
+	
+	if( $("#idTipoDoc").val() != 0 ){
+		var empresa = $("#RutEmpresa").val();
+		var idTipoDoc = $("#idTipoDoc").val();
+		$(".plan").remove();
+
+		if( idTipoDoc != 0 && empresa != 0 ){
+			var url  = "Generar_Documentos_Masivos_ajax.php?RutEmpresa=" + empresa + "&idTipoDoc=" + idTipoDoc;
+
+			// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+			if( window.XMLHttpRequest )
+			ajax = new XMLHttpRequest(); // No Internet Explorer
+			else
+			ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+
+			// Almacenamos en el control al funcion que se invocara cuando la peticion
+			// cambie de estado 
+			ajax.onreadystatechange = funcionCallback;
+
+			// Enviamos la peticion
+			ajax.open( "GET", url, false );
+			ajax.send( "" );
+		}
+	}
+	else{
+		$("#idProceso").attr("disabled",true);
+		$("#idPlantilla").attr("disabled",true);
+		$("#idTipoFirma").attr("disabled",true);
+		$("#Documento").attr("disabled",true);
+		$(".btn-file").attr("disabled",true);
+		$("#archivo").attr("disabled",true);
+
+		$("#idTipoDoc").val(0);
+		$("#idProceso").val(0);
+		$("#idPlantilla").val(0);
+		$("#idTipoFirma").val(0);
+		$("#Documento").val('');
+		$("#archivo").val();
+		$("#idWF").val(0);
+		$(".orden").val('');
+	}
+
+  }
+
+  
+ 
+  function funcionCallback()
+  {
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+      if( ajax.status == 200 )
+      {
+        // Escribimos el resultado en la pagina HTML mediante DHTML
+        //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
+        salida = ajax.responseText;
+
+        if( salida != '' ){
+            var datos = JSON.parse(salida);
+           
+            $.each(datos,function(key, registro) {
+				if(registro.Aprobado=="disabled"){
+					$("#idPlantilla").append('<option class="plan" ' + registro.Aprobado + ' value='+ registro.idPlantilla +'>'+registro.Descripcion_Pl +' (sin aprobar)'+'</option>');                                      
+				}
+				else{
+					$("#idPlantilla").append('<option class="plan" ' + registro.Aprobado + ' value='+ registro.idPlantilla +'>'+registro.Descripcion_Pl +'</option>');
+				}
+			}); 
+			if(idPlantillaajax.length > 0){
+				$("#idPlantilla").val(idPlantillaajax);
+			}
+            $('#idProceso').attr("disabled",false);  
+
+        }else{
+            $("#mensajeError").addClass("callout callout-warning");
+            $("#mensajeError").html("La Empresa seleccionada no tiene Plantillas aprobadas o asociadas"); 
+            
+            $("#idProceso").attr("disabled",true);
+            $("#idPlantilla").attr("disabled",true);
+            $("#idTipoFirma").attr("disabled",true);
+            $("#idTipoDoc").val(0);
+            $("#idProceso").val(0);
+            $("#idPlantilla").val(0);
+            $("#idTipoFirma").val(0);
+            $("#idWF").val(0);
+			$(".orden").val('');
+        }
+      }
+    }
+  }
+
+	
+	function mostrarFirmantes(){
+		var Representantes = $("#Representantes").val();
+		if( Representantes != '' ){
+			$("#icono_representante").show();
+			$("#label").show();
+		}
+	}
+
+  /*******************************/
+  /**BUSCAR FIRMANTES DE EMPRESA**/
+  /*******************************/
+
+	var numFirmantesEmpresa;
+   $("#RutEmpresa").change(function(){
+		$("#mensajeError").removeClass("callout callout-warning");
+		$("#mensajeError").html("");
+		$("#idTipoDoc").attr("disabled",true);
+		$("#idProceso").attr("disabled",true);
+		$("#idPlantilla").attr("disabled",true);
+		$("#idTipoFirma").attr("disabled",true);
+		$("#Documento").attr("disabled",true);
+		$(".btn-file").attr("disabled",true);
+		$("#archivo").attr("disabled",true);
+		$("#FechaDocumento").attr("disabled",true);
+
+		$("#idTipoDoc").val(0);
+		$("#idProceso").val(0);
+		$("#idPlantilla").val(0);
+		$("#idTipoFirma").val(0);
+		$("#Documento").val('');
+		$("#archivo").val();
+		$("#idWF").val(0);
+		$(".plan").remove();
+		$("#rut_orden").val('');
+		$("#ordenx").val('');
+		$(".orden").val('');
+		$("#nombrelugarpago").val("");
+		$("#lugarpagoid").val("");
+		$("#nombrecentrocosto").val('');
+		$("#idCentroCosto").val('');
+		change_RutEmpresa();
+	});
+	var ajaxFirmantes;
+	var salidaFirmantes;
+	
+    function change_RutEmpresa(){   
+       numFirmantesEmpresa=0;     
+      var RutEmpresa = $("#RutEmpresa").val();
+
+      
+
+      //Limpiar tabla 
+      $(".fila").remove();
+
+      //Ocultar firmantes 
+      $("#icono_representante").hide();
+      $("#label").hide();
+      $("#step-1").collapse('hide');
+
+      if( RutEmpresa != 0 ){
+        
+        /*$("#idTipoDoc").attr("disabled",false);
+        $("#idTipoDoc").val(0);*/
+
+        var url  = "Generar_Documentos_Masivos2_ajax.php?RutEmpresa=" + RutEmpresa;
+
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+          ajaxFirmantes = new XMLHttpRequest(); // No Internet Explorer
+        else
+          ajaxFirmantes = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+       
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajaxFirmantes.onreadystatechange = funcionCallback_Empresa;
+
+        // Enviamos la peticion
+        ajaxFirmantes.open( "GET", url, false );
+        ajaxFirmantes.send( "" );
+      }
+  }
+
+  function funcionCallback_Empresa()
+  {
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajaxFirmantes.readyState == 4 )
+    {
+      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+      if( ajaxFirmantes.status == 200 )
+      {
+        // Escribimos el resultado en la pagina HTML mediante DHTML
+        //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
+        salidaFirmantes = ajaxFirmantes.responseText;
+
+        if( salidaFirmantes != '' ){ 
+            var datos = JSON.parse(salidaFirmantes);
+			var x = "";
+			var FirmantesCheck;	
+			var OrdenFirm;	
+			FirmantesCheck = "<php:item id="Firmantes_Emp" />";
+			OrdenFirm = "<php:item id="ordenfirmantes" />";
+            $.each(datos,function(key, registro) {
+				x = "onclick=\"seleccion(\'" + registro.personaid + "\');\"";
+
+				$("#tabla_emp tr:last ").after("<tr align='center' class='fila'><td ><input type='checkbox' name='Firmantes_Emp[]' class='f_emp' value='" + registro.personaid + "'id='emp_"+ registro.personaid +"' " + x + "/> </td><td>" + registro.personaid + "</td><td>" + registro.nombrecompleto +"</td><td>" +  registro.descripcion + "</td><td><input name='orden_" + registro.personaid + "' id='orden_" + registro.personaid + "' class='orden' style='text-align:center; border: none;' /></td></tr>");   
+				numFirmantesEmpresa=numFirmantesEmpresa+1;	
+				
+			});
+			var ArrayFirmantes = FirmantesCheck.split("|");
+			var ArrayOrdenFirm = OrdenFirm.split("|");
+			$.each(ArrayFirmantes,function(key){
+				$("#emp_"+ArrayFirmantes[key]).prop( "checked", true ); 	
+				$("#orden_"+ArrayFirmantes[key]).val(ArrayOrdenFirm[key]);
+				<!-- seleccion(ArrayFirmantes[key]);			 -->
+			});
+			$("#FechaDocumento").attr("disabled",false);
+        }else{
+            $("#mensajeError").addClass("callout callout-warning");
+            $("#mensajeError").html("La empresa seleccionada no posee firmantes.");
+        }
+      }
+    }
+  }
+ 
+  function seleccion(id){
+
+	var num = $('input[type=checkbox]:checked').length; 
+	var cantidad_firmantes = $("#Cantidad_Firmantes").val();
+
+	var representantes = $("#Representantes").val();
+	if ( cantidad_firmantes == '' ){
+		$("#mensajeError").addClass("callout callout-warning");
+		$("#mensajeError").html("Debe seleccionar la Plantilla" );
+		$("#idPlantilla").focus();
+		$("#GENERAR").attr('disabled', true);
+		return false;
+	}
+	if ( num < cantidad_firmantes ){
+		$("#mensajeError").addClass("callout callout-warning");
+		$("#mensajeError").html("Debe seleccionar un total de " + cantidad_firmantes + " Firmante/s, seg&uacute;n el flujo de firma de la Plantilla seleccionada" );
+		$("#GENERAR").attr('disabled',true);
+	}
+	if ( num > cantidad_firmantes ){
+		$("#mensajeError").addClass("callout callout-warning");
+		$("#mensajeError").html("Debe seleccionar solo " + cantidad_firmantes + " Firmante, seg&uacute;n el flujo de firma de la Plantilla seleccionada" );
+		$("#GENERAR").attr('disabled', true);
+	}
+
+	if( num == cantidad_firmantes ){
+		if($("#idPlantilla").length>0 ){
+			$("#mensajeError").removeClass("callout callout-warning");
+			$("#mensajeError").html("");
+			$("#GENERAR").attr('disabled', false);
+		}
+		
+	}
+
+	if( $("#orden_" + id ).val() == '' ){ //Seleccionado
+	if ( cantidad_firmantes > 1 ){
+		$("#orden_" + id).val(num);
+	}
+	}else{//Deseleccionado
+	if ( cantidad_firmantes > 1 ){
+	  
+		if( confirm(' Desea reiniciar el orden de los firmantes ?')){
+		  $(".orden").val('');
+		  $(".f_emp").prop('checked',false);
+	  }else{	
+		$("#orden_" + id).val('');
+		  
+		  //Colocar orden 
+		  var rutfirmante = $("#emp_" + id).val();
+		  
+		  convertirArreglo_emp();
+		  nuevo_emp = convertirItem(arreglo_emp, orden_emp);
+		  var items = nuevo_emp;
+
+		  items.sort(function (a, b) {
+			if (a.orden > b.orden) {
+			  return 1;
+			}
+			if (a.orden < b.orden) {
+			  return -1;
+			}
+			// a must be equal to b
+			return 0;
+		  });
+			  
+		  reasignarOrden(items,'');
+	  
+
+	  }
+  }
+}
+}
+	$("#idTipoFirma").change(function(){
+		change_TipoFirma();
+	});
+	function change_TipoFirma(){
+		var num = $('input[type=checkbox]:checked').length; 
+		var cantidad_firmantes = $("#Cantidad_Firmantes").val();
+		if($("#idTipoFirma").val()!=0){
+			mostrarFirmantes();  
+			
+			if (($("#Representantes").val() == '') || (num==cantidad_firmantes)  ){
+				$("#GENERAR").attr('disabled', false);
+			}
+		}else{
+			$("#icono_representante").hide();
+			  $("#label").hide();
+			  $("#step-1").collapse('hide');
+			$("#GENERAR").attr('disabled', true);
+		}
+		
+	}	
+
+  	function validacionGenerar() {
+		/*respuesta = Checkfiles(); console.log(respuesta); return false;
+		if (respuesta == false)
+		{
+			return false;
+		}*/
+		
+		if ($("#newusuarioid").val().length < 9 ){
+			$('#datosPersonales').click();
+			$("#mensajeError").addClass("callout callout-warning");
+			$("#mensajeError").html("El campo Rut no puede estar vac&iacute;o");
+			$('#newusuarioid').focus();
+			return false;
+		}
+		
+		if( ! validaRut2(document.formulario.newusuarioid)){
+		
+			return false;
+		}
+		
+		if ($("#nombre").val().length == 0 ){
+			$('#datosPersonales').click();
+			$("#mensajeError").addClass("callout callout-warning");
+			$("#mensajeError").html("El campo Nombre no puede estar vac&iacute;o");
+			$('#nombre').focus();
+			return false;
+		}
+		<!-- if ($("#appaterno").val().length == 0 ){ -->
+			<!-- $("#mensajeError").addClass("callout callout-warning"); -->
+			<!-- $("#mensajeError").html("El campo Apellido Paterno no puede estar vac&iacute;o"); -->
+			<!-- $('#appaterno').focus(); -->
+			<!-- return false; -->
+		<!-- } -->
+		if ($("#nacionalidad").val().length == 0 ){
+			$('#datosPersonales').click();
+			$("#mensajeError").addClass("callout callout-warning");
+			$("#mensajeError").html("El campo Nacionalidad no puede estar vac&iacute;o");
+			$('#nacionalidad').focus();
+			return false;
+		}
+		if ($("#direccion").val().length == 0 ){
+			$('#datosPersonales').click();
+			$("#mensajeError").addClass("callout callout-warning");
+			$("#mensajeError").html("El campo Direcci&oacute;n no puede estar vac&iacute;o");
+			$('#direccion').focus();
+			return false;
+		}
+		if ($("#comuna").val().length == 0 ){
+			$('#datosPersonales').click();
+			$("#mensajeError").addClass("callout callout-warning");
+			$("#mensajeError").html("El campo Comuna no puede estar vac&iacute;o");
+			$('#comuna').focus();
+			return false;
+		}
+		if ($("#ciudad").val().length == 0 ){
+			$('#datosPersonales').click();
+			$("#mensajeError").addClass("callout callout-warning");
+			$("#mensajeError").html("El campo Ciudad no puede estar vac&iacute;o");
+			$('#ciudad').focus();
+			return false;
+		}
+		if ($("#correo").val().length == 0 ){
+			$('#datosPersonales').click();
+			$("#mensajeError").addClass("callout callout-warning");
+			$("#mensajeError").html("El campo correo no puede estar vac&iacute;o");
+			$('#correo').focus();
+			return false;
+		}
+		if ($("#fechanacimiento").val().length == 0 ){
+			$('#datosPersonales').click();
+			$("#mensajeError").addClass("callout callout-warning");
+			$("#mensajeError").html("El campo Fecha de Nacimiento no puede estar vac&iacute;o");
+			$('#fechanacimiento').focus();
+			return false;
+		}
+		if ($("#idEstadoCivil").val() == 0 ){
+			$('#datosPersonales').click();
+			$("#mensajeError").addClass("callout callout-warning");
+			$("#mensajeError").html("Debe seleccionar el campo de Estado Civil");
+			$('#idEstadoCivil').focus();
+			return false;
+		}
+		if ($("#rolid").val() == 0 ){
+			$('#datosPersonales').click();
+			$("#mensajeError").addClass("callout callout-warning");
+			$("#mensajeError").html("Debe seleccionar el campo de Rol");
+			$('#rolid').focus();
+			return false;
+		}
+		if ($("#nombrecentrocosto").val() == 0 ){
+			$('#datosPersonales').click();
+			$("#mensajeError").addClass("callout callout-warning");
+			$("#mensajeError").html("Debe seleccionar Relaci�n Laboral");
+			$('#nombrecentrocosto').focus();
+			return false;
+		}
+		if ($("#nombrelugarpago").val() == 0 ){
+			$('#datosPersonales').click();
+			$("#mensajeError").addClass("callout callout-warning");
+			$("#mensajeError").html("Debe seleccionar Relaci�n Laboral");
+			$('#nombrelugarpago').focus();
+			return false;
+		}
+		if ($("#idEstadoEmpleado").val() == 0 ){
+			$('#datosPersonales').click();
+			$("#mensajeError").addClass("callout callout-warning");
+			$("#mensajeError").html("Debe seleccionar un Estado para el Empleado");
+			$('#idEstadoEmpleado').focus();
+			return false;
+		}
+		for(var i = 0; i < datosDocumento.length; i++) {
+		
+			if ($('#' + datosDocumento[i].Variable + ' select').length)
+			{
+				if ($('#' + datosDocumento[i].Variable + ' select').val() == 0)
+				{
+					$('#datosDocumento').click();
+					$("#mensajeError").addClass("callout callout-warning");
+					$("#mensajeError").html("Debe seleccionar una opci&oacute;n");
+					$('#' + datosDocumento[i].Variable + ' select').focus();
+					return false;
+				}
+			}
+			if ($('#' + datosDocumento[i].Variable + ' input').length)
+			{
+				if ($('#' + datosDocumento[i].Variable + ' input').val().length == 0)
+				{
+					$('#datosDocumento').click();
+					$("#mensajeError").addClass("callout callout-warning");
+					$("#mensajeError").html("Debe agregar informaci&oacute;n");
+					$('#' + datosDocumento[i].Variable + ' input').focus();
+					return false;
+				}
+			}
+		}
+		MostrarCargando();
+		return true;
+	}
+
+
+/*
+  $("#GENERAR").click(function(){
+
+  	respuesta = Checkfiles();
+	if (respuesta == false)
+	{
+		return false;
+	}
+
+  	if ($("#newusuarioid").val().length < 9 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El campo Rut no puede estar vac&iacute;o");
+        $('#newusuarioid').focus();
+        return false;
+    }
+   	if( ! validaRut2(document.formulario.newusuarioid)){
+   		return false;
+    }
+
+    if ($("#nombre").val().length == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El campo Nombre no puede estar vac&iacute;o");
+        $('#nombre').focus();
+        return false;
+    }
+
+    if ($("#nacionalidad").val().length == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El campo Nacionalidad no puede estar vac&iacute;o");
+        $('#nacionalidad').focus();
+        return false;
+    }
+
+    if ($("#direccion").val().length == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El campo Direcci&oacute;n no puede estar vac&iacute;o");
+        $('#direccion').focus();
+        return false;
+    }
+
+    if ($("#correo").val().length == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El campo correo no puede estar vac&iacute;o");
+        $('#correo').focus();
+        return false;
+    }
+
+	if ($("#fechanacimiento").val().length == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El campo Fecha de Nacimiento no puede estar vac&iacute;o");
+        $('#fechanacimiento').focus();
+        return false;
+    }
+
+    if ($("#idEstadoCivil").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Debe seleccionar el campo de Estado Civil");
+        $('#idEstadoCivil').focus();
+        return false;
+    }
+
+    if ($("#rolid").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Debe seleccionar el campo de Rol");
+        $('#rolid').focus();
+        return false;
+    }
+
+    if ($("#nombrecentrocosto").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Debe seleccionar Relaci�n Laboral");
+        $('#nombrecentrocosto').focus();
+        return false;
+    }
+    
+    MostrarCargando();
+	return true;
+  }); */
+
+  $("#newusuarioid").change(function(){
+  
+		//Limpiar los campos 
+		$("#nombre").val('');
+		$("#appaterno").val('');
+		$("#apmaterno").val('');
+		$("#fechanacimiento").val('');
+		$("#correo").val('');
+		$("#nacionalidad").val('');
+		$("#direccion").val(''); 
+		$("#comuna").val('');
+		$("#ciudad").val('');
+		$("#idEstadoCivil").val(0);
+		$("#rolid").val(0);
+		$("#idEstadoEmpleado").val(0);
+		
+		var respuesta = validaRut2(document.formulario.newusuarioid);
+
+		if( respuesta ){
+
+			var RutUsuario = $("#newusuarioid").val();
+			var url  = "Generar_Documento_PorFicha_ajax.php?personaid=" + RutUsuario;
+
+			// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+			if( window.XMLHttpRequest )
+			  ajax = new XMLHttpRequest(); // No Internet Explorer
+			else
+			  ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+		   
+			// Almacenamos en el control al funcion que se invocara cuando la peticion
+			// cambie de estado 
+			ajax.onreadystatechange = funcionCallback_rutusuario;
+
+			// Enviamos la peticion
+			ajax.open( "GET", url, true );
+			ajax.send( "" );
+		}
+  });
+
+  function funcionCallback_rutusuario()
+  {
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+      if( ajax.status == 200 )
+      {
+        // Escribimos el resultado en la pagina HTML mediante DHTML
+        salida = ajax.responseText;
+        datos = JSON.parse(salida);
+		var cant = Object.keys(datos).length;
+        if( cant > 0 ){ 
+			//console.log(datos);
+        	$("#nombre").val( datos.nombre );
+			$("#appaterno").val( datos.appaterno );
+			$("#apmaterno").val( datos.apmaterno );
+        	$("#fechanacimiento").val( datos.fechanacimiento );
+        	$("#correo").val(datos.correo);
+        	$("#nacionalidad").val(datos.nacionalidad);
+        	$("#direccion").val(datos.direccion); 
+        	$("#comuna").val(datos.comuna);
+        	$("#ciudad").val(datos.ciudad);
+        	$("#idEstadoCivil").val(datos.estadocivil);
+
+        	var idestado = '#idEstadoCivil option[value="'+ datos.estadocivil + '"]';
+        	$(idestado).attr("selected",true);
+
+        	var rolid = '#rolid option[value="'+ datos.rolid +'"]'; 
+        	$(rolid).attr("selected", true);
+			
+			var idestadoEmpleado = '#idEstadoEmpleado option[value="'+ datos.idEstadoEmpleado + '"]';
+			$(idestadoEmpleado).attr("selected",true);
+
+        }
+		
+		else{
+            $("#mensajeError").removeClass("callout callout-warning");
+            $("#mensajeError").html("");
+        }
+      }
+    }
+	else{
+            $("#mensajeError").removeClass("callout callout-warning");
+            $("#mensajeError").html("");
+        }
+  }
+
+ 
+ //Modal de Centros de Costo
+  $("#btn_centro_costo").click(function(){
+
+  	var RutEmpresa = $("#RutEmpresa").val();
+	var departamento = $("#departamentoid").val();
+	var lugarpago = $("#lugarpagoid").val();
+	
+  	$(".fila_cc").remove();
+
+  	if( RutEmpresa == 0 ){
+
+  		$("#mensajeError").addClass("callout callout-warning");
+  		$("#mensajeError").html("Debe seleccionar la Empresa");
+  		return false;
+
+  	}
+
+	if( lugarpago == '' ){
+
+		$("#mensajeError").addClass("callout callout-warning");
+		$("#mensajeError").html("Debe seleccionar un lugar de pago");
+		return false;
+
+	}
+
+	if( departamento == '' ){
+
+		$("#mensajeError").addClass("callout callout-warning");
+		$("#mensajeError").html("Debe seleccionar una Divisi&oacuten");
+		return false;
+
+	}
+
+	$("#mensajeError").html("");
+	$("#mensajeError").removeClass("callout callout-warning");
+
+	var url  = "Generar_Documento_PorFicha_ajax2.php?RutEmpresa=" + RutEmpresa + '&lugarpagoid=' + lugarpago;
+
+    // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+    if( window.XMLHttpRequest )
+      ajax = new XMLHttpRequest(); // No Internet Explorer
+    else
+      ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+   
+    // Almacenamos en el control al funcion que se invocara cuando la peticion
+    // cambie de estado 
+    ajax.onreadystatechange = funcionCallback_centrocosto;
+
+    // Enviamos la peticion
+    ajax.open( "GET", url, false );
+    ajax.send( "" );
+
+  });
+
+  function funcionCallback_centrocosto()
+  {
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+      if( ajax.status == 200 )
+      {
+        // Escribimos el resultado en la pagina HTML mediante DHTML
+        salida = ajax.responseText;
+        listado = JSON.parse(salida); 
+     	num = listado.length;
+     	if( num > 0 ){
+
+     		//[{"0":"cc1","centrocostoid":"cc1","1":"cc1","nombrecentrocosto":"cc1","2":"'cc1'","lp":"'cc1'"},{"0":"cc2","centrocostoid":"cc2","1":"c2","nombrecentrocosto":"c2","2":"'cc2'","lp":"'cc2'"}]
+	       	$.each(listado, function( index, value ) {
+				var ccid = listado[index].centrocostoid;	
+		 		$('#tabla_centro_costo tr:last').after('<tr class="fila_cc"><td>' + listado[index].centrocostoid + '</td><td><div id="' + listado[index].centrocostoid + '">' + listado[index].nombrecentrocosto + ' </div></td><td ><button type="button" style="background-color: transparent;" class="btn" name="btn_agregar_cc" id="btn_agregar_cc" onclick="agregarCC(&quot;'+ccid+'&quot;);"><i class="fa fa-plus" aria-hidden="true"></i></button></td></tr>');
+		 	});
+		 }else{
+			$('#tabla_centro_costo tr:last').after('<tr class="fila_cc"><td colspan=3 >No existen Relaciones laborales para la Empresa y el Centro de Costo seleccionado</td></tr>');
+		}
+      }
+    }
+  }
+
+  function agregarCC(i){
+  	$("#centrocostoid").val(i);
+  	$("#idCentroCosto").val(i);
+  	$("#nombrecentrocosto").val($("#"+i).html());
+  	$("#cerrar_centro_costo").click();
+
+	$("#idTipoDoc").attr("disabled",false);
+	$("#idTipoDoc").val(0);
+  }
+
+  function Checkfiles()
+ {	
+	
+	var fup = document.getElementById('pdf64');
+	var fileName = fup.value;
+	
+	var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+	if(ext == "pdf" || ext == "PDF")
+	{
+		return true;
+	} 
+	else
+	{
+		alert("Solo se pueden seleccionar archivos pdf !");
+		fup.focus();
+		return false;	
+	}
+  }
+
+  //Modal de Lugares de pago 
+	$("#btn_lugares_pago").click(function(){
+  
+  var RutEmpresa = $("#RutEmpresa").val();
+  $(".fila_lp").remove();
+  if( RutEmpresa == 0 ){
+
+	  $("#mensajeError").addClass("callout callout-warning");
+	  $("#mensajeError").html("Debe seleccionar la Empresa");
+	  return false;
+
+  }else{
+
+	  $("#mensajeError").html("");
+	  $("#mensajeError").removeClass("callout callout-warning");
+
+	  var url  = "Generar_Documento_PorFicha_ajax1.php?RutEmpresa=" + RutEmpresa;
+
+	  // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+	  if( window.XMLHttpRequest )
+		  ajax = new XMLHttpRequest(); // No Internet Explorer
+	  else
+		  ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+	  
+	  // Almacenamos en el control al funcion que se invocara cuando la peticion
+	  // cambie de estado 
+	  ajax.onreadystatechange = funcionCallback_lugarespago;
+
+	  // Enviamos la peticion
+	  ajax.open( "GET", url, true );
+	  ajax.send( "" );
+  }
+
+  });
+
+  function funcionCallback_lugarespago()
+  {
+  // Comprobamos si la peticion se ha completado (estado 4)
+  if( ajax.readyState == 4 )
+  {
+	  // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+	  if( ajax.status == 200 )
+	  {
+		  // Escribimos el resultado en la pagina HTML mediante DHTML
+		  salida = ajax.responseText;
+		  listado = JSON.parse(salida);
+		  num = listado.length;
+
+		  if( num > 0 ){
+			  $.each(listado, function( index, value ) {
+				  $('#tabla_lugares_pago tr:last').after('<tr class="fila_lp"><td>' + listado[index].lugarpagoid + '</td><td><div id="' + listado[index].lugarpagoid + '">' + listado[index].nombrelugarpago + ' </div></td><td ><button type="button" style="background-color: transparent;" class="btn" name="btn_agregar_lp" id="btn_agregar_lp" onclick="agregarLp(' + listado[index].lp + ');"><i class="fa fa-plus" aria-hidden="true"></i></button></td></tr>');
+			  });
+		  }
+		  else{
+			  $('#tabla_lugares_pago tr:last').after('<tr class="fila_lp"><td colspan = 3>No existen Plantas asociadas a la Empresa seleccionada</td></tr>');
+		  }
+	  }
+  }
+  }
+
+  function agregarLp(i){
+
+	$("#lugarpagoid").val(i);
+	$("#nombrelugarpago").val($("#" + i ).html());
+	$("#cerrar_lugares_pago").click();
+	$("#idCentroCosto").val("");
+  	$("#nombrecentrocosto").val("");
+  }
+  
+  	var valores = [];
+	var variables = [];
+	var variables_aux;
+	var json_variables;
+
+	$("#VISTA_PREVIA").click(function(){
+
+		var form = $("#formulario").serialize();
+		var url  = "Generar_Documento_PorFicha_ajax5.php";//?" + form;
+
+		// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+		if( window.XMLHttpRequest )
+			ajax = new XMLHttpRequest(); // No Internet Explorer
+		else
+			ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+		// Almacenamos en el control al funcion que se invocara cuando la peticion
+		// cambie de estado 
+		ajax.onreadystatechange = funcionCallback_inputToVar;
+		// Enviamos la peticion
+		ajax.open( "POST", url, false );
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+		ajax.send( form );	
+	});
+
+	function funcionCallback_inputToVar()
+	{
+		// Comprobamos si la peticion se ha completado (estado 4)
+		if( ajax.readyState == 4 )
+		{
+			// Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+			if( ajax.status == 200 )
+			{
+				// Escribimos el resultado en la pagina HTML mediante DHTML
+				salida = ajax.responseText; 
+				
+				if( salida === '0' ){
+					$("#mensajeError").html("Debe seleccionar una Plantilla para poder visualizar el documento a generar");
+					$("#mensajeError").addClass("callout callout-warning");
+				}else{
+					$("#mensajeError").html("");
+					$("#mensajeError").removeClass("callout callout-warning");
+					$("#contenido").html(salida);
+					$("#btn_vista_previa").click();
+				}
+				
+			}
+		}
+	}
+
+	function limpiarCampoAccion2(input){
+		$("#accion2").val('');
+		$("#accion2").removeClass(input);
+	}
+	/****************************/
+	/**OPERACIONES DE SELECCION**/
+	/****************************/
+	
+	function reasignarOrden(items,emp){
+		
+		for ( i = 0; i < items.length ; i++ ){
+			var rut = $("#" + items[i].id).val(); 
+			
+			if( emp != '' )
+				$("#orden_" + emp + rut).val(i+1);
+			else
+				$("#orden_" + rut).val(i+1);
+		}
+	}
+
+	function convertirArreglo(){
+		
+		arreglo = [];
+		var rut = '';
+		var orden_id = '';
+
+		$(".f_cli").each(function (index) {  
+			
+			if( $(this).is(':checked') ){
+				rut = this.id;
+				orden_id = $("#orden_"+ $("#" + this.id).val()).val();
+				arreglo.push(this.id);
+				orden.push(orden_id);
+			}
+		});
+	}
+
+	function convertirArreglo_emp(){
+		
+		arreglo_emp = [];
+		orden_emp = [];
+		var rut = '';
+		var orden_id = '';
+
+		$(".f_emp").each(function (index) {  
+			
+			if( $(this).is(':checked') ){
+				rut = this.id;
+				orden_id = $("#orden_" + $("#" + this.id).val()).val();
+				arreglo_emp.push(this.id);
+				orden_emp.push(orden_id);
+			}
+		});
+	}
+
+	function convertirItem(arreglo1,arreglo2){
+
+		var data = new Object();
+		var array = new Array();
+		
+		$.each(arreglo1, function (ind, elem){ 
+
+			var data = new Object();
+
+			data.id = elem;
+			data.orden = arreglo2[ind];
+			array[ind] = data;
+		}); 	
+
+		return array;
+	}
+  
+ </script></php:repeticion>

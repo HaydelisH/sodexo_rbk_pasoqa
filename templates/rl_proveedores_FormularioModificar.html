@@ -1,0 +1,310 @@
+<h4> Editar </h4>
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <div class="box-header">
+        </div>
+        <div class="btn-group-md" role="group">
+          <php:repeticion id="formulario">
+            <form role="form" name="formulario2" id="formulario2" action="rl_Proveedores.php" method="POST" >
+ 					 <button type="submit" name="accion" value="BUSCAR" class="btn btn-default btn_letra_azul"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</button>
+					<input type="hidden" class="form-control" id="buscar" name="buscar" value="<php:texto id="buscar" />" />
+					<input type="hidden" class="form-control" id="pagina" name="pagina" value="<php:texto id="pagina" />" />
+					<input type="hidden" class="form-control" id="RutEmpresadin" name="RutEmpresadin" value="<php:texto id="RutEmpresadin" />" />
+					<input type="hidden" class="form-control" id="collapse_clientes" name="collapse_clientes" />
+
+           </form>
+		   
+			<form name="importacion" id="importacion" action="rl_importacionpdf_proveedores.php" method="POST" >
+				<input type="hidden" name="RutEmpresa" value="<php:texto id="RutEmpresadin" />" />
+				<input type="hidden" name="RutProveedor" id="RutProveedor" value="<php:item id="RutProveedor"/>" >
+				<input type="hidden" name="NombreProveedor" id="NombreProveedor" value="<php:item id="NombreProveedor" />">
+			</form>
+		   </php:repeticion>
+         </div>
+      <div class="box-body">
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+        <div id="mensajeAd"><php:texto id="mensajeAd" /></div>
+     
+        <form role="form" name="formulario" id="formulario" action="rl_Proveedores.php" method="POST">
+ 
+          <php:repeticion id="formulario">
+					<!--Rut de Empresa-->
+					<!--<div class="form-row">
+						<div class="col-md-6">
+							<label for="RutEmpresa">Rut Empresa</label>
+							<input type="text" class="form-control" id="RutEmpresa" name="RutEmpresa" maxlength="10"  readonly="readonly" value="<php:item id="RutEmpresa" />">
+						</div>
+					</div>-->
+					<input type="hidden" name="RutEmpresa" value="<php:texto id="RutEmpresadin" />" />	
+					<input type="hidden" class="form-control" id="buscar" name="buscar" value="<php:texto id="buscar" />" />
+					<input type="hidden" class="form-control" id="pagina" name="pagina" value="<php:texto id="pagina" />" />
+					<input type="hidden" name="RutEmpresadin" value="<php:texto id="RutEmpresadin" />" />	
+					
+					<input type="hidden" class="form-control" id="RutProveedor" name="RutProveedor" value="<php:item id="RutProveedor"/>"/>
+				
+                     <div class="form-row">
+                      <div class="col-md-6">
+                        <label for="RutProveedor">Rut</label>
+                        <input type="text" class="form-control" id="RutProveedor" name="RutProveedor" maxlength="10"  readonly="readonly" value="<php:item id="RutProveedor" />">
+                      </div>
+                      <div class="col-md-6 xs-12">
+                        <label for="Nombreproveedor">Nombre</label>
+                        <input type="text" class="form-control" id="NombreProveedor" name="NombreProveedor" maxlength="50" value="<php:item id="NombreProveedor" />"autofocus required="">
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-md-6">
+                        <label for="Direccion">Direcci&oacute;n</label>
+                        <input type="text" class="form-control" id="Direccion" name="Direccion" maxlength="50" value="<php:item id="Direccion" />" placeholder="Direcci&oacute;n" />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-md-6 xs-12">
+                        <label for="Comuna">Comuna</label>
+                        <input type="text" class="form-control" id="Comuna" name="Comuna" maxlength="50" value="<php:item id="Comuna" />" placeholder="Comuna" />
+                      </div>
+                     <div class="col-md-6 xs-12">
+                        <label for="Ciudad">Ciudad</label>
+                        <input type="text" class="form-control" id="Ciudad" name="Ciudad" maxlength="50" value="<php:item id="Ciudad" />" placeholder="Ciudad" />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                
+                    <div class="form-row">  
+                      <div class="col-md-2 xs-12">
+                          <button class="btn btn-md btn-default btn-block" type="submit" style="margin-top: 10px" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"  id="btn_proveedor"><a href="" >Representantes</a></button>
+                      </div>
+                       <input type="hidden" name="accion" value="MODIFICAR" />
+					             <input type="hidden" id="collapse_campo" value="<php:texto id='collapse'/>" />
+                       <div class="col-md-2 xs-12 pull-right">
+                       <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="MODIFICAR" onclick="javascript:return validarFormulario(this);"/>Guardar</button>
+                     </div>
+                    </div>   
+                 </form>      
+                </div>  
+              </div>
+              <!-- /.box -->
+            </div>
+            <!--.col-->
+          </div> 
+      <!--Seccion para mostrar firmantes de Notaria-->
+      <div class="collapse" id="collapseExample">
+        <div class="col-md-12">
+         <div class="row">
+           <div class="box">
+            <div class="box-body pad table-responsive">
+                 <div class="form-group">
+                   <form name="formulario2" id="formulario_usuarios" action="rl_Proveedores.php" method="POST" autocomplete="off">
+                    <input type="hidden" name="RutProveedor" id="RutProveedor" value ="<php:item id="RutProveedor" />" />
+				    <input type="hidden" id="RutEmpresa" name="RutEmpresa" value="<php:item id="RutEmpresa" />" />
+                    <button type="button" class="btn btn-default" name="accion" data-toggle="modal"  onclick="inicio_firmate_proveedor()" data-target="#modal_creafirmanteproveedor" value="AGREGAR_R"><a><i class="fa fa-plus" class="fa fa-plus" aria-hidden="true"></i> Agregar</a></button>
+                  </div>
+                  </form>
+                </php:repeticion>    
+            </div>
+           <div class="box-body">
+             <table id="example2" class="table table-bordered table-hover">
+               <thead>
+                 <tr>
+                  <th style="text-align: center;" >Rut</th>
+                  <th style="text-align: center;" >Nombre</th>
+                  <th style="text-align: center;" >Tipo Firma</th>
+                 <!-- <th style="text-align: center;" >Rol</th>-->
+                  <th style="text-align: center;" >Opciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <php:repeticion id="Firmantes">
+                <tr align="center">
+                  <td data-campo="Rut"><php:item id="RutUsuario" /></td>
+                  <td data-campo="nombre"><php:item id="nombre" /> <php:item id="appaterno" /> <php:item id="apmaterno" /> </td>
+                  <td data-campo="TipoFirma"><php:item id="Descripcion" /></td>
+                  <!-- <td data-campo="Rol"><php:item id="Cargo" /></td>-->
+                  <td data-campo="Opciones">
+                  <form name="formulario1" id="formulario_tipo" action="rl_Proveedores.php" method="POST">
+                    <input type="hidden" name="RutProveedor" value="<php:item id="RutProveedor" />">
+                    <input type="hidden" name="RutUsuario" value="<php:item id="RutUsuario" />">
+                    <input type="hidden" name="RutEmpresa" value="<php:item id="RutEmpresa" />">   
+					<input type="hidden" class="form-control" id="RutEmpresadin" name="RutEmpresadin" value="<php:texto id="RutEmpresadin" />" />
+					
+					<input type="hidden" class="form-control" id="buscar" name="buscar" value="<php:texto id="buscar" />" />
+					<input type="hidden" class="form-control" id="pagina" name="pagina" value="<php:texto id="pagina" />" />
+                    <!--<button class="btn btn-primary btn-sm" type="submit" name="accion" value="MODIFICAR_R">Modificar</button>-->
+                    <button class="btn btn-default btn-sm" type="submit" name="accion" value="ELIMINAR_R" onclick="javascript:return preguntarPorBorrar();">Eliminar</button>
+                 </form></td>
+                </tr>
+                </php:repeticion> <!-- repeticion de representantes -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+   </div>
+   
+		<!--Modal crea firmante proveedor-->
+		<div class="modal fade" id="modal_creafirmanteproveedor" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+		  <div class="modal-dialog" >
+		    <div class="modal-content">
+		      <div class="modal-header" align="center">
+		        <h4 class="modal-title" id="ejemplo-titulo"> Crea Firmante Empresa Externa</h4>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		      	<div id="mensajeError_modal"></div>
+		         <form name="formulario3" id="formulario3"  >
+				 
+					<div class="form-row">
+						<div class="col-md-6">
+							<label for="RutRepresentante">Rut Empresa Externa</label>
+							<input type="text" class="form-control" id="rutempresa_fp" name="rutempresa_fp" maxlength="10" value="" placeholder="" readonly>
+						</div>
+					</div>
+					
+					<div class="form-row">
+						<div class="col-md-6">
+							<label for="RutRepresentante">Rut Representante</label>
+							<input type="text" class="form-control" id="rutrepresentate_fp" name="rutrepresentate_fp" maxlength="10" value="" placeholder="" >
+						</div>
+					</div>
+					
+					<div class="form-row">
+						<div class="col-md-6">
+							<label for="Nacionalidad">Nacionalidad</label>
+							<input type="text" class="form-control" id="nacionalidad_fp" name="nacionalidad_fp" maxlength="20 value="" placeholder="" >
+						</div>
+					</div>
+					
+					<div class="form-row">
+						<div class="col-md-6">
+							<label for="Nombre">Nombre</label>
+							<input type="text" class="form-control" id="nombre_fp" name="nombre_fp" maxlength="50" value="" placeholder="" > 
+						</div>
+					</div>
+					
+					<div class="form-row">
+						<div class="col-md-6 xs-12">
+							<label for="ApPaterno">Apellido Paterno</label>
+							<input type="text" class="form-control" id="paterno_fp" name="paterno_fp" maxlength="50" value="" placeholder="" >
+						</div>
+					</div>
+					
+					<div class="form-row">
+						<div class="col-md-6 xs-12">
+							<label for="ApMaterno">Apellido Materno</label>
+							<input type="text" class="form-control" id="materno_fp" name="materno_fp" maxlength="50" value="" placeholder="" >
+						</div>
+					</div>	
+
+					<div class="form-row">
+						<div class="col-md-6 xs-12">
+							<label for="Correo">Correo</label>
+							<input type="text" class="form-control" id="email" name="email" maxlength="60" value="" placeholder="" >
+						</div>
+					</div>	
+				
+					<div class="form-row" >
+					  <div class="col-md-6 xs-12">
+						<label for="">Tipo de Firma</label>
+						<select class= "form-control" name="idFirma" id="idFirma">
+						 <php:repeticion id="formulario_firmante">
+						  <php:repeticion id="Firmas">
+							<option value="<php:item id="idFirma" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idFirma"/><php:argumento idvalor="idFirma" /></php:funcion>><php:item id="Descripcion" /></option>
+						  </php:repeticion>
+						</php:repeticion>
+						</select>
+					  </div>
+					</div>					
+					
+					<div class="form-row">
+						<div class="col-md-6 xs-12">
+							<label for="Cargo">Cargo</label>
+							<input type="text" class="form-control" id="cargo_fp" name="cargo_fp" maxlength="60" value="" placeholder="" >
+						</div>
+					</div>				
+					
+					<div class="form-row">
+						<div class="col-md-6 xs-12" style="margin-top:10px">
+							<button type="button" class="btn btn-secondary btn-md" onclick="javascript:return validarFormulario3(this,new Array(),new Array('materno_fp')) && validaRut3(obtenerElemento('rutrepresentate_fp').value,'rutrepresentate_fp') && graba_firmante_proveedor();" name="grabar_creaproveedor" id="grabar_creaproveedor" >Grabar</button>
+						</div>
+					</div
+				 
+			  </div>
+			  
+			  <div class="modal-footer" style="margin-top:10px;">
+			  </form>
+		      </div>
+		    </div>
+		  </div>
+		</div>	
+		
+
+
+<script type="text/javascript">
+  
+  $(document).ready(function(){
+
+    if( $("#mensajeAd").html().length > 0 )
+    {
+      $("#mensajeAd").addClass("callout callout-warning");
+    }else{
+      $("#mensajeAd").removeClass("callout callout-warning");
+    }
+
+  });
+
+  
+$(document).ready(function(){
+  
+	if( $("#collapse").val().length > 0 ){
+		$("#btn_clientes").removeClass("collapsed");
+		$("#btn_clientes").attr("aria-expanded",true);
+		$("#collapseExample").attr("aria-expanded",true);
+		$("#collapseExample").addClass("in");
+	}else{
+		$("#btn_clientes").addClass("collapsed");
+		$("#btn_clientes").attr("aria-expanded",false);
+		$("#collapseExample").attr("aria-expanded",false);
+		$("#collapseExample").removeClass("in");
+	}
+
+	$("#collapse_campo").val('');
+  });
+
+//para agregar el rut del  proveedor al popup de ingreso de proveeedor
+	function inicio_firmate_proveedor()
+	{
+		var rut = $("#RutProveedor").val();
+		$("#rutempresa_fp").val(rut);
+	}
+	
+	$("#rutrepresentate_fp").focusout(function(){
+		resultado = ajax_buscar_proveedor_firmante( $("#rutempresa_fp").val(), $("#rutrepresentate_fp").val() );
+		
+		if (resultado != 'ERROR' && resultado != '')
+		{	
+			$("#nacionalidad_fp").val(resultado.nacionalidad); 
+			$("#nombre_fp").val(resultado.nombre); 
+			$("#paterno_fp").val(resultado.appaterno); 
+			$("#materno_fp").val(resultado.apmaterno); 
+			$("#idFirma option[value='"+ resultado.idFirma +"']").attr("selected",true);
+			$("#email").val(resultado.correo); 
+			$("#cargo_fp").val(resultado.cargo); 
+			
+		}		
+	});
+	
+	function graba_firmante_proveedor()
+	{	
+		resultado = ajax_graba_firmante_proveedor( $("#nacionalidad_fp").val(),$("#nombre_fp").val(),$("#paterno_fp").val(),$("#materno_fp").val(),$("#email").val(),$("#rutempresa_fp").val(),$("#rutrepresentate_fp").val(),$("#idFirma").val(),$("#cargo_fp").val() )
+		if (resultado != "ERROR")
+		{	
+			importacion.submit();
+		}
+	}	
+
+</script>

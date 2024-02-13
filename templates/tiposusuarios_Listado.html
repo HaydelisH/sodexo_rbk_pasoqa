@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <div class="box-header">
+          <div class="form-group">
+
+            <php:repeticion id="formulario">
+              <form name="formulario" id="formulario_usuarios" action="tiposusuarios.php" method="POST" >
+                <php:repeticion id="crear">
+                  <button type="submit" class="btn btn-default" name="accion" value="AGREGAR"><a><i class="fa fa-plus" aria-hidden="true"></i> Nuevo</a></button> 
+                </php:repeticion>
+              </form>
+          </div>
+        </div> 
+
+        <div class="box-body">
+          <!--Mensajes-->
+          <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+          <div id="mensajeError"><php:texto id="mensajeError" /></div>
+          <!--Listado-->   
+          <div id="divtabla" class="tabla-responsiva" >
+            <!--Tabla-->
+            <table id="example2" class="table table-bordered table-hover" name="tbltabla">
+              <thead>
+                <tr>
+                  <th data-campo="Nombre Perfil" style="text-align: center;" >Nombre Perfil</th>
+                <th data-campo="Opciones" style="text-align: center;" >Opciones </th>
+                </tr>
+              </thead>
+              <tbody>
+                <!--Contenido de Tabla-->
+                <php:repeticion id="listado">
+                  <tr>
+                    <td data-campo="Nombre Perfil" ><php:item id="nombre" /></td>
+                    <td data-campo="Opciones" >
+                      <form name="formulario" id="formulario_tipo" action="tiposusuarios.php" method="POST">
+                        <input type="hidden" name="tipousuarioid" value="<php:item id="tipousuarioid" />">
+
+                        <php:repeticion id="modifica">
+                          <button class="btn btn-primary btn-sm" type="submit" name="accion" value="MODIFICAR">Modificar</button>
+                        </php:repeticion>
+
+                        <php:repeticion id="elimina">
+                          <button class="btn btn-default btn-sm" type="submit" name="accion" value="ELIMINAR" onclick="javascript:return preguntarPorBorrar();">Eliminar</button>
+                        </php:repeticion>
+
+                      </form>
+                    </td>
+                  </tr>
+                </php:repeticion>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </php:repeticion>
+      </div>
+    </div>
+  </div>
+</div>
+</section>

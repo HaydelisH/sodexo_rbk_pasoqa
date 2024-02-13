@@ -1,0 +1,69 @@
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box">
+        <div class="box-body pad table-responsive">
+        <!--Botones de cabecera-->
+        <div class="box-header">
+            <div class="form-group">
+              <php:repeticion id="formulario">
+                
+                <php:repeticion id="crear">
+                  <form name="formulario" id="formulario_usuarios" action="Causales.php" method="POST" >
+                    <button type="submit" class="btn btn-default" name="accion" value="AGREGAR"><a><i class="fa fa-plus" aria-hidden="true"></i> Nuevo</a></button> 
+                  </form>
+                </php:repeticion>
+
+            </div>
+          </div> 
+        </div>
+        <div class="box-body">
+        <!--Mensajes-->
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+          <!--Listado-->   
+          
+            <div id="divtabla" class="tabla-responsiva" >
+            <!--Tabla-->
+            <table id="example2" class="table table-bordered table-hover" name="tbltabla">
+              <thead>
+                <tr>
+                <th data-campo="idSubClausula" style="text-align: center;">C&oacute;digo </th>
+                <th data-campo="Titulo" style="text-align: center;">T&iacute;tulo </th>
+                <th data-campo="ACCIONES" style="text-align: center;" id="th_opciones">Opciones </th>
+                </tr>
+              </thead>
+              <tbody>
+              <!--Contenido de Tabla-->
+              <php:repeticion id="listado">
+                <tr>
+                  <td data-campo="idSubClausula" style="text-align: center;"><php:item id="idSubClausula" /></td>
+                  <td data-campo="Titulo"><php:item id="Titulo" /></td>
+                  <td data-campo="ACCIONES">
+                 <form name="formulario" id="formulario_tipo" action="Causales.php" method="POST">
+                    <input type="hidden" name="holdingid" value="<php:item id="holdingid" />">
+                    <input type="hidden" name="idSubClausula" value="<php:item id="idSubClausula" />">
+
+                    <php:repeticion id="modifica">
+                      <button class="btn btn-primary btn-sm" type="submit" name="accion" value="MODIFICAR">Modificar</button>
+                    </php:repeticion>
+
+                    <php:repeticion id="elimina">
+                      <button class="btn btn-default btn-sm" type="submit" name="accion" value="ELIMINAR" onclick="javascript:return preguntarPorBorrar();">Eliminar</button>
+                    </php:repeticion>
+
+                  </form></td>
+                </tr>
+              </php:repeticion>
+              </tbody>
+            </table>
+          </div>
+          
+          </php:repeticion>
+        </div> <!--div box-body-->
+
+        <!-- /.box -->
+      </div>
+      <!--.col-->
+     </div>
+    <!-- /.roe -->
+    </div>

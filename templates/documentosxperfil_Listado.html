@@ -1,0 +1,116 @@
+<div class="row">
+	  <div class="col-md-12">
+		<div class="box ">
+		  <div class="box-body pad table-responsive">
+			 <div class="box-header">
+			  <div class="form-inline ">
+				<div class="form-group">
+				<php:repeticion id="formulario">			
+			  	</div>
+				<div class="form-group">
+				  <form name="formulario" id="formulario_usuarios" action="documentosxperfil.php" method="POST" >
+					<input type="hidden" name="tipousuarioid" 	id="tipousuarioid" 	value="<php:item id="tipousuarioid" />">		
+					<input type="hidden" name="holdingid" 		id="holdingid"		value="<php:item id="holdingid" />">
+					<input type="hidden" name="cantfilas" 	 	value="<php:item id="cantfilas" />" />		
+					<input type="hidden" name="pagina"	 	 	value="<php:item id="pagina" />" />	
+					<input type="hidden" name="nombre"	 	 	value="<php:item id="nombre" />" />	
+					
+					<a class="btn btn-default btn_letra_azul" href="#" onclick="javascript:irtipousuarios();"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</a>
+					<button type="submit" class="btn btn-default" name="accion" value="AGREGAR"><a><i class="fa fa-plus" aria-hidden="true"></i>Agregar</a></button>
+					
+					  </form>
+			
+				
+				</div>
+			  </div> 
+			</div>	
+		  <div class="box-body">
+	   <!--Mensajes-->
+	  <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+	  <div id="mensajeError"><php:texto id="mensajeError" /></div>	
+
+
+	<div id="divtabla" class="tabla-responsiva" >
+		
+		<div class="form-row" >
+			<div class="col-md-5" style="padding-bottom: 15px; padding-left: 0;">
+			  <input type="hidden" name="tipousuarioid" id="tipousuarioidx" value="<php:item id="tipousuarioid" />" />
+			  <label for="nombre">Nombre Perfil</label>
+			  <input type="text" class="form-control" id="nombre" name="nombre" value="<php:item id="nombre" />" placeholder="Nombre Perfil" required>
+			</div>
+		</div>
+
+						
+		<!--Tabla-->
+		<table id="example2" class="table table-bordered table-hover" name="tbltabla">
+		  <thead>
+			<tr>
+			<th data-campo="ID Documento" style="text-align: center;">Id Documento</th>
+			<th data-campo="Nombre" style="text-align: center;">Nombre</th>
+			<th data-campo="Acciones" style="text-align: center;">Acciones</th>
+			</tr>
+		  </thead>
+		  <tbody>
+		  <!--Contenido de Tabla-->
+		  <php:repeticion id="listado">
+			<tr>
+				<td data-campo="ID Documento" style="text-align: center;"><php:item id="idTipoDoc" /></td>
+				<td data-campo="Nombre" style="text-align: center;"><php:item id="NombreTipoDoc" /></td>
+				<td data-campo="Acciones" style="text-align: center;">
+				<form name="formulario" id="formulario_tipo" action="documentosxperfil.php" method="POST">
+					<input type="hidden" name="holdingid" value="<php:item id="holdingid" />">
+					<input type="hidden" name="tipodocumentoid" value="<php:item id="<php:item id="idTipoDoc" />" >
+					<input type="hidden" name="tipousuarioid" value="<php:item id="<php:item id="tipousuarioid" />" >
+					<input type="hidden" name="configid" value="<php:item id="<php:item id="configid" />" >
+					<input type="hidden" name="pagina" value="<php:item id="<php:item id="pagina" />" >
+					<input type="hidden" name="cantfilas" value="<php:item id="<php:item id="cantfilas" />" >
+					<button class="btn btn-default btn-sm" type="submit" name="accion" value="ELIMINAR" onclick="javascript:return preguntarPorBorrar();">Eliminar</button>
+				</form>
+			</tr></php:repeticion>
+		  </tbody>
+		</table>
+	  </div>
+         
+	  </div> 
+	<!-- /.box-header -->
+
+	</section>
+		<form name="formulario3"  id="formulario3"  action="tiposusuarios.php" method="POST">
+			<input type="hidden" name="tipousuarioid" 	id="tipousuarioidx" 	value="<php:item id="tipousuarioid" />">	
+			<input type="hidden" name="holdingid" 		id="holdingidx"			value="<php:item id="holdingid" />">
+			<input type="hidden" name="nombre" 			id="nombrex"			value="<php:item id="nombre" />">
+			<input type="hidden" name="accion" 			id="accionx"			value="<php:item id="accion" />">
+			<input type="hidden" name="cantfilas" 	 	value="<php:item id="cantfilas" />" />		
+			<input type="hidden" name="pagina"	 	 	value="<php:item id="pagina" />" />	
+		</form>
+		
+		</php:repeticion>
+
+		<script>
+		function TipoUsuarioSel()
+		{
+			document.formulario.tipousuarioid.value = document.form1.tipousuarioid.options[document.form1.tipousuarioid.selectedIndex].value;
+		}
+		
+		
+		function irtipousuarios()
+		{
+			
+		
+			var tipousuarioid = document.getElementById('tipousuarioid').value;
+			document.getElementById('tipousuarioidx').value = document.getElementById('tipousuarioid').value;
+			document.getElementById('holdingidx').value 	= document.getElementById('holdingid').value;
+			
+			if (document.getElementById('tipousuarioid').value == '')
+			{	
+				document.getElementById('accion').value = 'BUSCAR';
+			}else{
+				document.getElementById('accionx').value = 'MODIFICAR';
+			}
+			
+			document.formulario3.submit();				
+		}
+		</script>
+
+
+

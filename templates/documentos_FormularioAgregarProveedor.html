@@ -1,0 +1,87 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <!--Botones de cabecera-->
+        <div class="box-header">
+            <!--Volver
+            <a class="btn btn-default btn_letra_azul" href="Documentos.php" ><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>-->
+
+            <!--Buscar-->
+            <form role="form" name="formulario" id="formulario" action="Documentos.php" method="POST" autocomplete="off">
+              <div class="col-md-2 pull-right">
+                <div id="form-inline">  
+                    <input class="form-control mr-sm-2" type="hidden" name="buscar" id="buscar" placeholder="Buscar" aria-label="Search"/>
+                    <input type="hidden" name="accion" value="BUSCAR_PROYECTO" />
+                    <input type="hidden" name="accion3" value="BUSCAR_PROYECTO" id="accion"/>
+                </div>
+              </div>
+           </form>
+        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <!--Mensajes-->
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+
+       
+
+        <div id="resultado"></div>
+        <!--Formulario de los datos propios de Categoria-->   
+        <table id="example2" class="table table-bordered table-hover pagin-table">
+          <thead>
+           <tr>
+            <th data-campo="SELECCION" style="text-align: center;">Selecci&oacute;n </th>
+            <th data-campo="RutEmpresa" style="text-align: center;">Rut de Empresa</th>
+            <th data-campo="RazonSocial" style="text-align: center;">Razon Social</th>
+          </tr>
+          </thead>
+          <tbody >
+            <php:repeticion id="listado">
+              <tr id="fila_<php:filamenos />">
+                <!--Boton de Agregar-->
+                <td data-campo="BOTON_AGREGAR"> 
+                  <div style="text-align: center">
+                   <form role="form" action="Documentos.php" method="POST" name="formulario" id="formulario">
+                      <input type="hidden" id="RutEmpresaC" name="RutEmpresaC" value="<php:item id="RutEmpresaC"/>"/>
+                      <input type="hidden" id="RutEmpresaGama" name="RutEmpresaGama" value="<php:item id="RutEmpresaGama"/>"/>
+                      <input type="hidden" id="modelo_contrato" name="modelo_contrato" value="<php:item id="modelo_contrato"/>"/>
+                      <input type="hidden" id="RutProveedor" name="RutProveedor" value="<php:item id="RutEmpresa"/>"/>
+
+                      <!--Proveedores seleccionados-->
+                      
+                      <input type="hidden" name="rut_p_1" value='<php:item id="rut_p_1" />' />
+                      <input type="hidden" name="nombre_p_1" value='<php:item id="nombre_p_1" />' />
+                      <input type="hidden" name="detalle_p_1" value='<php:item id="detalle_p_1" />' />
+                      <input type="hidden" name="monto_p_1" value='<php:item id="monto_p_1" />' />
+                      
+                      <input type="hidden" name="rut_p_2" value='<php:item id="rut_p_2" />' />
+                      <input type="hidden" name="nombre_p_2" value='<php:item id="nombre_p_2" />' />
+                      <input type="hidden" name="detalle_p_2" value='<php:item id="detalle_p_2" />' />
+                      <input type="hidden" name="monto_p_2" value='<php:item id="monto_p_2" />' />
+
+                      <input type="hidden" name="rut_p_0" value='<php:item id="rut_p_0" />' />
+                      <input type="hidden" name="nombre_p_0" value='<php:item id="nombre_p_0" />' />
+                      <input type="hidden" name="detalle_p_0" value='<php:item id="detalle_p_0" />' />
+                      <input type="hidden" name="monto_p_0" value='<php:item id="monto_p_0" />' />
+
+                      <input type="hidden" name="accion" value="AGREGAR"/>
+                      <button type="submit" style="background-color: transparent;" class="btn" name="accion2" value="BUSCAR_PROVEEDOR"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                  </form>
+                  </div>
+                </td>
+                <!--RutEmpresa-->
+                <td data-campo="RutEmpresa" style="text-align: center;"><php:item id="RutEmpresa"/></div></td>
+                <!--RazonSocial-->
+                <td data-campo="RazonSocial" style="text-align: center;"><php:item id="RazonSocial"/></div></td>
+              </tr>
+            </php:repeticion>
+          </tbody>
+        </table> 
+      </div>
+      </div>
+    <!-- /.box -->
+    </div>
+  </div>
+  <!-- /.col -->
+  </div>

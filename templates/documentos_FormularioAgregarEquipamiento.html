@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <!--Botones de cabecera-->
+        <div class="box-header">
+            <!--Volver
+            <a class="btn btn-default btn_letra_azul" href="Documentos.php" ><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>-->
+        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <!--Mensajes-->
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+        <div id="resultado"></div>
+        <!--Formulario de los datos propios de Categoria-->   
+        <form role="form" action="Documentos.php" method="POST" name="formulario" id="formulario" autocomplete="off">
+        <table id="example2" class="table table-bordered table-hover pagin-table">
+          <thead>
+           <tr>
+            <th data-campo="SELECCION" style="text-align: center;">Selecci&oacute;n </th>
+            <th data-campo="DESCRIPCION" style="text-align: center;">Descripci&oacute;n</th>
+          </tr>
+          </thead>
+          <tbody >
+            <php:repeticion id="listado">
+              <tr id="fila_<php:filamenos />">
+                <!--Boton de Agregar-->
+                <td data-campo="BOTON_AGREGAR"> 
+                  <div style="text-align: center">
+                      <input type="checkbox" aria-label="Checkbox for following text input" name="Equipamiento[]" value="<php:item id="IdEquipamiento"/>">
+                  </div>
+                </td>
+                <!--Descripcion-->
+                <td data-campo="Descripcion" style="text-align: center;"><php:item id="Descripcion"/></div></td>
+              </tr>
+            </php:repeticion>
+          </tbody>
+        </table> 
+        <div class="col-md-2 xs-12 pull-right">
+          <input type="hidden" name="accion" value="AGREGAR"/>
+          <button type="submit" class="btn btn-md btn-primary btn-block" name="accion2" value="BUSCAR">Guardar</button>
+        </div>
+       </form>
+      </div>
+      </div>
+    <!-- /.box -->
+    </div>
+  </div>
+  <!-- /.col -->
+  </div>

@@ -1,0 +1,137 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-body pad table-responsive">
+                <!--Botones de cabecera-->
+                <div class="box-header">
+                    <a class="btn btn-default btn_letra_azul" href="mantenedorCargos.php" ><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <!--Mensajes-->
+                    <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+                    <div id="mensajeError"><php:texto id="mensajeError" /></div>
+                    <!--Formulario de los datos propios de Categoria-->   
+                    <form role="form" name="formulario" id="formulario" action="mantenedorCargos.php" method="POST" autocomplete="off">
+                        <php:repeticion id="formulario">
+                        <div class="form-row">
+                            <div class="col-md-6 xs-12">
+                                <label for="RazonSocial">Empresa</label>
+                                <div class="box-body" style="padding-left: 0px;">
+                                    <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                                            <input class="form-control" type="text" name="RazonSocial" id="RazonSocial" placeholder="(Seleccione)" disabled>
+                                            <input class="form-control" type="hidden" name="RutEmpresa" id="RutEmpresa">
+                                        </div>
+                                    <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                                        <button class="btn btn-md btn-primary btn-block" type="button" id="btn_centro_costo" data-toggle="modal" data-target="#modal_empresas"><i class="fa fa-search"></i></button>  
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 xs-12">
+                                <!--idCargoEmpleado-->
+                                <label for="idCargoEmpleado" >C&oacute;digo </label>
+                                <div class="box-body" style="padding-left: 0px;">
+                                    <input type="text" class="form-control" id="idCargoEmpleado" name="idCargoEmpleado" value="<php:item id="idCargoEmpleado" />" placeholder="C&oacute;digo">
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 xs-12">
+                                <!--Titulo-->
+                                <label for="Titulo">T&iacute;tulo</label>
+                                <div class="box-body" style="padding-left: 0px;">
+                                    <input type="text" class="form-control" id="Titulo" name="Titulo" value="<php:item id="Titulo" />" placeholder="T&iacute;tulo" >
+                                </div>
+                            </div>
+                            <div class="col-md-6 xs-12">
+                                <!--Descripcion-->
+                                <label for="Descripcion">Descripci&oacute;n</label>
+                                <div class="box-body" style="padding-left: 0px;">
+                                    <input type="text" class="form-control" id="Descripcion" name="Descripcion" value="<php:item id="Descripcion" />" placeholder="Descripci&oacute;n" >
+                                </div>
+                            </div>
+                        </div>
+                        <!--Editor de texto--> 
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <label for="Obligaciones">Obligaciones </label>
+                                <div class="box-body" style="padding-left: 0px;">
+                                    <textarea id="TextoTxt_Clausulas" name="Obligaciones" rows="10" cols="80" ><php:item id="Obligaciones"/></textarea>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="form-row">  
+                            <div class="col-md-2 xs-12 pull-right">
+                                <input type="hidden" name="accion" value="AGREGAR" />
+                                <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="AGREGAR" id="AGREGAR" onclick="javascript:return validarFormulario(this, new Array(), new Array('Obligaciones', 'Descripcion'));"/>Guardar</button>
+                            </div>
+                        </div> 
+                        </php:repeticion>
+                    </form>  
+               </div>
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+<!-- Modal Empresas-->
+<div class="modal fade" id="modal_empresas" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <h4 class="modal-title" id="ejemplo-titulo"> Empresas </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="mensajeError_modal"></div>
+                <table id="tabla_empresa" class="table table-bordered table-hover" style="text-align: center">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center">R.U.T.</th>
+                            <th style="text-align: center">Raz&oacute;n social</th>
+                            <th style="text-align: center">Selecci&oacute;n</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <php:repeticion id="listadoEmpresas">
+                            <tr>
+                                <td><php:item id="RutEmpresa"/></td>
+                                <td><php:item id="RazonSocial"/></td>
+                                <td>
+                                    <button type="button" style="background-color: transparent;" class="btn" name="btn_agregar_empresa" id="btn_agregar_empresa" onclick="javascript:agregarEmpresa('<php:item id="RutEmpresa" />','<php:item id="RazonSocial" />');"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                </td>
+                            </tr>
+                        </php:repeticion>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer" style="margin-top:10px;">
+                <button type="button" class="btn btn-secondary btn-md" id="cerrar_empresa" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function agregarEmpresa(RutEmpresa, RazonSocial)
+    {
+        $("#RutEmpresa").val(RutEmpresa);
+        $("#RazonSocial").val(RazonSocial);
+        //$("#RutEmpresa").data('Rutempresa', RutEmpresa);
+        $("#cerrar_empresa").click();
+        checkFormulario();
+    }
+    function checkFormulario()
+    {
+        /*if ($("#RutEmpresa").data('Rutempresa') != '')
+        {
+            $('#AGREGAR').removeAttr('disabled');
+        }
+        else
+        {
+            $('#AGREGAR').attr('disabled','disabled');
+        }*/
+    }
+</script>

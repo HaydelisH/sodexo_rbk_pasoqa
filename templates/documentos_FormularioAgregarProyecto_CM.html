@@ -1,0 +1,86 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <php:repeticion id="formulario">
+        <!--Botones de cabecera-->
+        <div class="box-header">
+            <!--Volver
+            <a class="btn btn-default btn_letra_azul" href="Documentos.php" ><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>-->
+            <form role="form" name="formulario2" id="formulario2" action="Documentos.php" method="POST" >
+                <input type="hidden" name="RutEmpresa" id="RutEmpresa" value="<php:item id="RutEmpresa"/>" >
+                <input type="hidden" name="RutEmpresaC" id="RutEmpresaC" value="<php:item id="RutEmpresaC"/>" >
+                <input type="hidden" name="modelo_contrato" id="modelo_contrato" value="<php:item id="modelo_contrato"/>" >
+                <input type="hidden" name="lugar" id="lugar" value="<php:item id="lugar"/>" >
+                <input type="hidden" name="fecha" id="fecha" value="<php:item id="fecha"/>" >
+                <button type="submit" name="accion" value="ATRAS" class="btn btn-default"/><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
+          </form>
+        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <!--Mensajes-->
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+
+       
+
+        <div id="resultado"></div>
+        <!--Formulario de los datos propios de Categoria-->   
+        <table id="example2" class="table table-bordered table-hover pagin-table">
+          <thead>
+           <tr>
+            <!--C.idProyecto, C.idDocumento,C.FechaCreacion, Pro.Tipo, Mo.DescripcionMC, Es.idEstado, Es.Nombre,  E.nombre + E.appaterno AS Ejecutivo-->
+            <th data-campo="SELECCION" style="text-align: center;">Selecci&oacute;n </th>
+            <th data-campo="idProyecto" style="text-align: center;">Id de Proyecto</th>
+            <th data-campo=idDocumento style="text-align: center;">Id Contrato</th>
+            <th data-campo="fechaCreacion" style="text-align: center;">Fecha de Creaci&oacute;n</th>
+            <th data-campo="Tipo" style="text-align: center;">Tipo de Documento</th>
+            <th data-campo="idEstado" style="text-align: center;">Estado de Documento</th>
+            <th data-campo="Ejecutivo" style="text-align: center;">Ejecutivo</th>
+          </tr>
+          </thead>
+          <tbody >
+            <php:repeticion id="listado">
+              <tr id="fila_<php:filamenos />">
+                <!--Boton de Agregar-->
+                <td data-campo="BOTON_AGREGAR"> 
+                  <div style="text-align: center">
+                   <form role="form" action="Documentos.php" method="POST" name="formulario" id="formulario">
+                      <input type="hidden" id="proyectos_emp" name="proyectos_emp" value="<php:item id="proyectos_emp"/>"/>
+                      <input type="hidden" id="RutEmpresaC" name="RutEmpresaC" value="<php:item id="RutEmpresaC"/>"/>
+                      <input type="hidden" id="RutEmpresa" name="RutEmpresa" value="<php:item id="RutEmpresa"/>"/>
+                      <input type="hidden" id="modelo_contrato" name="modelo_contrato" value="<php:item id="modelo_contrato"/>"/>
+                      <input type="hidden" id="idProyecto" name="idProyecto" value="<php:item id="idProyecto"/>"/>
+                       <input type="hidden" id="band" name="band" value="<php:item id="band"/>"/>
+                      <input type="hidden" id="idMC" name="idMC" value="<php:item id="idMC"/>"/>
+                      <input type="hidden" id="Nombre" name="Nombre" value="<php:item id="Nombre"/>"/>
+                      <input type="hidden" id="activar_pro" name="activar_pro" value="<php:item id="activar_pro"/>"/>
+                      <input type="hidden" name="accion" value="AGREGAR"/>
+                      <button type="submit" style="background-color: transparent;" class="btn" name="accion2" value="BUSCAR_PRO"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                  </form>
+                  </div>
+                </td>
+                <!--idProyecto-->
+                <td data-campo="idProyecto" style="text-align: center;"><php:item id="idProyecto"/></div></td>
+                <!--idDocumento-->
+                <td data-campo="idDocumento" style="text-align: center;"><php:item id="idDocumento"/></div></td>
+                <!--Fecha de Creacion-->
+                <td data-campo="FechaCreacion"style="text-align: center;"><php:item id="FechaCreacion"/></div></td>
+                <!--Descripcion de modelo de contrato-->
+                <td data-campo="TipoDocumento" style="text-align: center;"><php:item id="TipoDocumento"/></div></td>
+                <!--Estado de firma del documento-->
+                <td data-campo="Nombre" style="text-align: center;"><php:item id="Nombre"/></div></td>
+                <!--Ejecutivo-->
+                <td data-campo="Cliente" style="text-align: center;"><php:item id="Ejecutivo"/> </div></td>
+              </tr>
+            </php:repeticion>
+          </php:repeticion>
+          </tbody>
+        </table> 
+      </div>
+      </div>
+    <!-- /.box -->
+    </div>
+  </div>
+  <!-- /.col -->
+  </div>

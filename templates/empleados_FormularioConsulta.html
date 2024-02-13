@@ -1,0 +1,130 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+      <!--Botones de cabecera-->
+        <div class="box-header">
+		   <a class="btn btn-default btn_letra_azul" href="Empleados.php"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</a>
+        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+         <!--Mensajes-->
+		<div id="mensajeError"><php:texto id="mensajeError" /></div>
+		<div id="mensajeOK"><php:texto id="mensajeOK" /></div>	
+		
+		<form name="formulario" class="formularioModificar" id="formulario"  class="form-horizontal" action="Empleados.php" method="POST" autocomplete="off">
+				<php:repeticion id="formulario">
+					<div class="form-row">
+						<div class="col-md-6">
+							<label for="tipousuarioid">Rut </label>
+							<div class="input-group col-xs-12" style="padding-left: 20px;">
+								<h5><php:item id="personaid" /></h5>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<label for="contenedorid" >Nombre Completo </label>
+							<div class="input-group col-xs-12" style="padding-left: 20px;">
+								<h5><php:item id="nombre" /></h5>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="col-md-6">
+							<label for="contenedorid" >Nacionalidad </label>
+							<div class="input-group col-xs-12" style="padding-left: 20px;">
+								<h5><php:item id="nacionalidad" /></h5>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<label for="contenedorid" >Fecha de nacimiento </label>
+							<div class="input-group col-xs-12" style="padding-left: 20px;">
+								<h5><i class="fa fa-calendar"></i>   <php:item id="fechanacimiento" /></h5>
+							</div>
+					  	</div>
+					</div>			
+					
+					<div class="form-row">
+						<div class="col-md-6">
+							<label for="contenedorid" >Estado civil </label>
+							<div class="input-group col-xs-12" style="padding-left: 20px;">
+								<h5><php:item id="Descripcion"/></h5>
+							<!--<select class= "form-control lectura" name="estadocivil" id="estadocivil">
+								<option value="0">(Seleccione)</option>
+								<php:repeticion id="EstadoCivil">
+								<option value="<php:item id="idEstadoCivil" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idEstadoCivil" /><php:argumento idvalor="idEstadoCivil" /></php:funcion>><php:item id="Descripcion" /></option>
+								</php:repeticion>
+							</select>-->
+							</div>
+						</div>
+						<div class="col-md-6">
+							<label for="contenedorid" >Direcci&oacute;n </label>
+							<div class="input-group col-xs-12" style="padding-left: 20px;">
+								<h5><php:item id="direccion" /></h5>
+							</div>
+						</div>
+					</div>		
+
+					<div class="form-row">
+						<div class="col-md-6">
+							<label for="contenedorid" >Comuna </label>
+							<div class="input-group col-xs-12" style="padding-left: 20px;">
+								<h5><php:item id="comuna" /></h5>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<label for="contenedorid" >Ciudad </label>
+							<div class="input-group col-xs-12" style="padding-left: 20px;">
+								<h5><php:item id="ciudad" /></h5>
+							</div>
+						</div>
+					</div>	
+
+					<div class="form-row">
+						<div class="col-md-6">
+							<label for="contenedorid" >Rol </label>
+								<div class="input-group col-xs-12" style="padding-left: 20px;">
+									<h5><php:item id="DescripcionR" /></h5>
+							<!--<select class= "form-control lectura" name="rolid" id="rolid">
+								<option value="0">(Seleccione)</option>
+								<php:repeticion id="Roles">
+								<option value="<php:item id="rolid" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="rolid" /><php:argumento idvalor="rolid" /></php:funcion>><php:item id="Descripcion" /></option>
+								</php:repeticion>
+							</select>-->
+								</div>
+						</div>
+						<div class="col-md-6">
+							<label for="contenedorid" >Correo Electr&oacute;nico </label>
+							<div class="input-group col-xs-12" style="padding-left: 20px;">
+								<h5><php:item id="correo" /></h5>
+							</div>
+						</div>
+					</div>	
+
+					<div class="form-row">
+						<div class="col-md-6 col-xs-12">
+							<label for="contenedorid" >Estado del Empleado</label>
+							<div class="input-group col-xs-12" style="padding-left: 20px;">
+								<h5><php:item id="DescripcionEE"/></h5>
+							<!--<select class= "form-control lectura" name="idEstadoEmpleado" id="idEstadoEmpleado">
+								<option value="0">(Seleccione)</option>
+								<php:repeticion id="EstadosEmpleado">
+									<option value="<php:item id="idEstadoEmpleado" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idEstadoEmpleado" /><php:argumento idvalor="idEstadoEmpleado" /></php:funcion>><php:item id="Descripcion" /></option>
+								</php:repeticion>
+							</select>-->
+							</div>	
+						</div>
+					</div>	
+					  
+			</php:repeticion>
+				
+			
+		</form>
+	   </div>
+      </div>
+    <!-- /.box -->
+    </div>
+  </div>
+  <!-- /.col -->
+  </div>
+

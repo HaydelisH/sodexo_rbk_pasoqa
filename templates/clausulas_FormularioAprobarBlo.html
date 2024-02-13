@@ -1,0 +1,88 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <!--Botones de cabecera-->
+        <div class="box-header">
+         <php:repeticion id="formulario">
+         <form role="form" name="formulario2" id="formulario2" action="Clausulas.php" method="POST" >
+              <input type="hidden" name="RutEmpresa" value='<php:item id="RutEmpresa"/>'/>
+              <button type="submit" name="accion" value="BUSCAR" class="btn btn-default"/><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
+          </form>
+        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+         <!--Mensajes-->
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+       
+        <!--Formulario de datos propios de Clausulas-->
+        <form role="form" name="formulario" id="formulario" action="Clausulas.php" method="POST">
+
+            <!--Datos referenciales-->
+				    
+             <!--idClausula-->
+             <div class="form-row">
+              <div class="col-md-6">
+                <label for="Descripcion">C&oacute;digo Clausula</label>
+                <input type="text" class="form-control" id="idClausula" name="idClausula" value="<php:item id="idClausula" />" placeholder="Descripcion" readonly />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <!--Categorias-->
+              <div class="col-md-6" style="padding-bottom: 15px;">
+                  <label for="Categoria" >Categoria</label>
+                  <!--Select de Empresas disponibles-->
+                  <select class= "form-control" name="idCategoria" id="idCategoria" disabled>
+                   <option value="0">( Seleccione )</option>
+                    <php:repeticion id="Categorias">
+                      <option value="<php:item id="idCategoria" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idCategoria" /><php:argumento idvalor="idCategoria" /></php:funcion>><php:item id="Titulo" /></option>
+                    </php:repeticion>
+                  </select>
+				  
+				   <input type="hidden" name="idCategoria" id="idCategoria" value="<php:item id="idCategoria" />" />
+              </div>
+            </div>
+          </div>
+
+            <!--Campos estan fuera del formulario-->
+            <!--Titulo-->
+            <div class="form-row">
+              <div class="col-md-12">
+                <label for="Titulo" >T&iacute;tulo</label>
+                <input type="text" class="form-control" id="Titulo_Cl" name="Titulo_Cl" value="<php:item id="Titulo_Cl" />" placeholder="Titulo" disabled>
+              </div>
+            </div> 
+
+            <!--Descripcion-->
+            <div class="form-row">
+              <div class="col-md-12">
+                <label for="Descripcion">Descripci&oacute;n</label>
+                <input type="text" class="form-control" id="Descripcion_Cl" name="Descripcion_Cl" value="<php:item id="Descripcion_Cl" />" placeholder="Descripcion" disabled>
+              </div>
+            </div>
+
+            <!--Editor de texto--> 
+           <div class="form-row">
+             <div class="col-md-12">
+                <label for="texto">Texto de Clausula</label>
+                 <textarea id="TextoTxt_Clausulas" name="Texto" rows="10" cols="80" disabled=""><php:item id="Texto"/></textarea>
+             </div>
+           </div>                       
+
+
+          <div class="form-row">  
+            <div class="col-md-2 xs-12 pull-right">
+               <input type="hidden" name="accion" value="APROBAR" />
+               <button class="btn btn-md btn-info btn-block" type="submit" style="margin-top: 10px" name="accion2" value="APROBAR" onclick="javascript:return validarFormulario(this);" disabled="" />Aprobar</button>
+            </div>
+          </div>
+          </form>
+          </div>
+        </php:repeticion> 
+     </div>
+   </div>
+ </div>
+</div>
+</section>

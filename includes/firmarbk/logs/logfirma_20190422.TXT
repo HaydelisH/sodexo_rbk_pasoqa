@@ -1,0 +1,30 @@
+
+-------------
+INFO ENTRADA
+hora inicio....:22-04-2019 14:36:48
+X-Auth-Token...:c8f5e64dde44159c51791b14b1cfd93bd37f802149223529c2d49a0266ae8379
+X-Session-Token:
+url............:https://qarubrika.solem.cl/api/v1/session
+json entrada...:{"code":"USER","type":"START","subtype":"SESSION","createdAt":"2019-04-22T11:36:48.657","id":"20190422113648690","client":{"operationId":"20190422113648690","companyId":"1","machineId":"","username":"rubrika.test","password":"password"}}
+
+INFO SALIDA
+hora fin....:22-04-2019 14:36:50
+tiempo resp.:00:00:02
+json salida.:{"code":"USER","type":"START","subtype":"SESSION","createdAt":"2019-04-22T10:36:42.702","id":155594380270100224,"client":{"companyId":"1","username":"rubrika.test","token":"2ad7e1ab35fd6f8d42f885089ccfaea6a51aa72f846692212aa0ae801c969063"},"status":{"status":{"timestamp":"2019-04-22T14:36:42.715Z","code":200,"transactionId":155594380270100224}}}
+-------------
+
+
+-------------
+INFO ENTRADA
+hora inicio....:22-04-2019 11:36:50
+X-Auth-Token...:c8f5e64dde44159c51791b14b1cfd93bd37f802149223529c2d49a0266ae8379
+X-Session-Token:2ad7e1ab35fd6f8d42f885089ccfaea6a51aa72f846692212aa0ae801c969063
+url............:https://qarubrika.solem.cl/api/v1/role/get
+json entrada...:{"code":"PERSON","type":"GET","subtype":"ROLE","createdAt":"2019-04-22T11:36:50.203","id":"20190422113650203","client":{"operationId":"20190422113650203","companyId":"1","machineId":"","username":"rubrika.test","password":"password"},"data":{"digitalIdentity":{"identityDocuments":[{"countryCode":"CL","type":"ID","personalNumber":"123824660"}]}}}
+
+INFO SALIDA
+hora fin....:22-04-2019 11:36:50
+tiempo resp.:00:00:00
+json salida.:{"code":"PERSON","type":"GET","subtype":"ROLE","createdAt":"2019-04-22T10:36:42.853","id":155594380285300187,"data":{"digitalIdentity":{"personId":205,"roles":[{"code":"CREATE_PERSON","description":""},{"code":"UPDATE_AUTH","description":""}],"checksum":"f40dfcf9ff00f204f9f009f8fcf8020e"}},"status":{"status":{"timestamp":"2019-04-22T14:36:42.89Z","code":200,"transactionId":155594380285300187}}}
+-------------
+

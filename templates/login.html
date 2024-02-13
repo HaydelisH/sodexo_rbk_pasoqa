@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<style>
+.btn-info:hover .fa-eye-slash {
+	color: #000; 
+}
+</style>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Rubrika</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="assets/css/form-elements.css?v=1.1">
+        <link rel="stylesheet" href="assets/css/style.css">
+		
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- Re-captcha v3-->
+		<script src="https://www.google.com/recaptcha/api.js?render=<php:texto id="RECAPTCHA" />"></script>
+
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="assets/ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+		
+		<!--Favicon-->
+		<link rel="shortcut icon" href="images/favicon.ico"/>
+		
+    </head>
+
+    <body>
+
+        <!-- Top content -->
+        <div class="top-content">
+        	
+            <div class="inner-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2 text">
+                            <h1><strong>RUBRIKA DOCUFLOW RRHH</strong></h1>
+                            <div class="description">
+                            	<p>
+	                            	Bienvenido
+                            	</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+						<php:repeticion id="login">
+                        <div class="col-sm-4 col-sm-offset-4 form-box">
+                        	<div class="form-top">
+                        		<div class="form-top-left">
+                        			<h3>Para ingresar al sitio</h3>
+                            		<p>Ingrese su usuario y clave</p>
+									<div id="mensajeError"><php:texto id="mensajeError" /></div>
+									<div id="mensajeOK"></div>
+                        		</div>
+                        		<div class="form-top-right">
+                        			<i class="fa fa-key"></i>
+                        		</div>
+                            </div>
+                            <div class="form-bottom">
+			                    <form role="form"action="index.php" name="formularioLogin" id="formularioLogin" method="post" class="login-form" >
+									<input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+									<input type="hidden" name="action" value="validate_captcha">
+									<div class="form-group">
+			                    		<label class="sr-only" for="form-username">Nombre de usuario</label>
+			                        	<input type="text" name="usuarioid" placeholder="Usuario..." class="form-username form-control" id="usuarioid" value="<php:item id="usuarioid" />" >
+			                        </div>
+									<div class="form-group">
+										<div class="input-group">
+											<label class="sr-only" for="form-password">Clave</label>											
+											<input type="password" name="clave" placeholder="Clave..." class="form-password form-control" style="border-right:0" autocomplete="new-password" id="clave">
+												<span class="input-group-btn">
+													<button type="button" class="btn btn-info btn-flat" id="show_password" style="background: #f8f8f8;border:3px solid #ddd;border-left:0" onclick="mostrarPassword()"><i class="fa fa-eye-slash icon" style="color:#888" aria-hidden="true"></i>
+												</span>
+											</button>
+										</div>		
+									</div>	
+
+									<input type="hidden" id="RECAPTCHA" name="RECAPTCHA" value="<php:texto id="RECAPTCHA" />">
+
+			                        <!--button type="submit" class="btn" style="background: #545096;">Ingresar</button-->
+			                        <button type="button" id="hacerlogin" class="btn" style="background:#545096;">Ingresar</button>
+									<a href="#" data-toggle="modal" data-target="#modal-default" onclick="limpiarCampos()"; >&iquest;Olvidaste la contrase&ntilde;a&quest;</a>
+
+									<input type="hidden" name="accion"    	value="Ingresar">
+									<input type="hidden" name="javascriptok" id="javascriptok" >
+									<input type="hidden" name="cookiesok"    id="cookiesok" >
+			                    </form>
+		                    </div>
+                        </div>
+						</php:repeticion>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3 social-login">
+                        	<h3>Vis&iacute;tanos</h3>
+                        	<div class="social-login-buttons">
+	                        	<a class="btn btn-link-1 btn-link-1-facebook" target="_blank" href="https://www.facebook.com/Rubrika-Carpeta-y-Documentos-Digitales-461354434035041/?hc_location=ufi">
+	                        		<i class="fa fa-facebook"></i> Facebook
+	                        	</a>
+	                        	<a class="btn btn-link-1 btn-link-1-twitter" target="_blank" href="https://twitter.com/rubrikacl?lang=es">
+	                        		<i class="fa fa-twitter"></i> Twitter
+	                        	</a>
+	                        	<a class="btn btn-link-1 btn-link-1-linkedin" target="_blank" href="https://www.linkedin.com/in/rubrikasa">
+	                        		<i class="fa fa-linkedin"></i> Linkedin
+	                        	</a>
+                        	</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+		<!--Olvido de clave-->								  
+		<div class="modal fade" id="modal-default">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Recupera tu cuenta</h4>
+              </div>
+              <div class="modal-body">
+				<form role="form" id="formulario" action="OlvidoClave.php"  method="post" class="login-form" autocomplete="off" onKeypress="if(event.keyCode == 13) event.returnValue = false;">
+					<div class="form-group">
+						<label class="sr-only" for="form-username">Usuario</label>
+						<input type="text" name="usuarioid" placeholder="Ingrese su RUT sin puntos (ejemplo 12345678-0)" class="form-username form-control" id="usuarioid_1" value="<php:item id="usuarioid" />" >
+						<input name="accion" type="hidden" value="RECUPERAR_PIN" />
+ 					</div>
+				</form>
+              </div>
+              <div class="modal-footer">
+                <button id="enviar" type="button" class="btn btn-sm" data-dismiss="modal" onclick="javascript:return enviar();">Enviar</button>
+				<button type="button" class="btn pull-left btn-sm" data-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+
+        <!-- Javascript -->
+        <script src="assets/js/jquery-1.11.1.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.backstretch.min.js"></script>
+        <script src="assets/js/scripts.js"></script>
+        
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+
+	<script>
+			
+	$(document).ready(function(){
+		if( $("#mensajeError").html() != '' ) {
+			document.getElementById("mensajeError").style.color = "red";
+		}
+	});
+	/*jQuery(document).ready(function($) {
+
+	  if (window.history && window.history.pushState) {
+
+		$(window).on('popstate', function() {
+		  var hashLocation = location.hash;
+		  var hashSplit = hashLocation.split("#!/");
+		  var hashName = hashSplit[1];
+
+		  if (hashName !== '') {
+			var hash = window.location.hash;
+			if (hash === '') {
+			   window.location.assign("https://rbksmu.rubrika.cl/")
+			}
+		  }
+		});
+
+		window.history.pushState('forward', null, './#forward');
+	  }
+
+	});*/
+	
+
+
+	function limpiarCampos(){
+		
+		document.getElementById("usuarioid_1").value = "";
+		document.getElementById("mensajeError").innerHTML  = "";
+		document.getElementById("mensajeOK").innerHTML  = "";
+	}
+	
+	document.getElementById("javascriptok").value = navigator.javaEnabled();
+	document.getElementById("cookiesok").value = navigator.cookieEnabled;
+	
+	function enviar(){
+	
+		usuario = document.getElementById("usuarioid_1").value;
+
+		if( usuario.length == 0 ){
+			document.getElementById("mensajeError").innerHTML  = "Para recuperar su clave de acceso, debe introducir su Usuario";
+			document.getElementById("mensajeError").style.color = "red";
+		}
+		else {
+			var respuesta = validaRut2(usuario);
+				
+			if( respuesta )
+				enviarDatos();
+		
+		}
+	}
+	
+	var ajax;
+	var salida;
+	
+	$( "#clave" ).keypress(function(evento) {
+		if (evento.which == 13)
+		{
+			$('#hacerlogin').click();
+		}
+	});
+	$('#hacerlogin').on('click', function(){
+		grecaptcha.ready(function() {
+        // do request for recaptcha token
+        // response is promise with passed token
+			var RECAPTCHA = document.getElementById("RECAPTCHA").value; 
+			grecaptcha.execute(RECAPTCHA, {action:'validate_captcha'}).then(function(token) {	
+				$('#g-recaptcha-response').val(token);
+				$('#formularioLogin').submit();
+			});
+		});
+	});
+
+	function funcionCallback()
+	{
+	  // Comprobamos si la peticion se ha completado (estado 4)
+	  if( ajax.readyState == 4 )
+	  {
+		// Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+		if( ajax.status == 200 )
+		{
+		  // Escribimos el resultado en la pagina HTML mediante DHTML
+		  salida = ajax.responseText; 
+		  
+		  if( salida === 'Su clave ha sido enviada a su correo' ){
+			document.getElementById("mensajeOK").innerHTML = salida;
+			document.getElementById("mensajeOK").style.color = "green";
+			return false;
+		  }else{
+			document.getElementById("mensajeError").innerHTML = salida;
+			document.getElementById("mensajeError").style.color = "red";
+			return false;
+		  }
+		  
+		}
+	  }
+	}
+	 
+	function enviarDatos()
+	{
+		var usuario = document.getElementById("usuarioid_1").value; 
+		var url = "OlvidoClave.php?usuarioid=" + usuario;
+
+		// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+		if( window.XMLHttpRequest )
+			ajax = new XMLHttpRequest(); // No Internet Explorer
+		else
+			ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+
+		// Almacenamos en el control al funcion que se invocara cuando la peticion
+		// cambie de estado 
+		ajax.onreadystatechange = funcionCallback;
+
+		// Enviamos la peticion
+		ajax.open( "GET", url, true );
+		ajax.send( "" );
+	}
+		
+		
+	function validaRut2(obj)
+	{ 	
+		var texto = obj;//.value;
+
+		/// EXPRESIONES REGULARES
+		var reg_rut=/[0-9]{7,8}\-[k|K|0-9]/;
+		// si no pasa el test entonces no es un rut valido
+		if(!reg_rut.test(texto)) {
+			document.getElementById("mensajeError").innerHTML  = 'Rut en formato invalido, debe contener a lo menos 7 numeros, un guion y el digito verificador, ej: 12345678-9';
+			document.getElementById("mensajeError").style.color = "red";
+			return false;
+		}
+		// Separamos el rut del digito verificador
+		var array_rut=texto.split("-");
+		var rut=array_rut[0];
+		var dv=array_rut[1];
+		// si es K minuscula la agrandamos
+		if(dv == 'k') dv = 'K';	
+
+		// calculamos y si son iguales esta todo bien
+		if (dv!=calcularDigito(rut)) {
+			document.getElementById("mensajeError").innerHTML  = 'Digito Incorrecto';
+			document.getElementById("mensajeError").style.color = "red";
+			obj.focus();
+			return false;
+		}
+		return true;
+	}
+	
+	function calcularDigito(rut)
+	{
+		var largo=rut.length;
+		var mult=2;
+		var suma=0;
+		largo--;
+		while(largo>=0)
+		{
+			suma=suma+(rut.charAt(largo)*mult);
+			if(mult>6)
+				mult=2;
+			else
+				mult++;
+			largo--;
+		}
+
+		var resto = suma%11;
+		var digito = 11-resto
+		if(digito==10)
+			digito="K";
+		else
+			if(digito==11)
+				digito=0;
+
+		return digito;
+	}
+	function mostrarPassword()
+	{
+		var cambio = document.getElementById("clave");
+		if(cambio.type == "password"){
+			cambio.type = "text";
+			$('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+		}else{
+			cambio.type = "password";
+			$('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+		}	
+	}
+	</script>
+
+    </body>
+
+</html>

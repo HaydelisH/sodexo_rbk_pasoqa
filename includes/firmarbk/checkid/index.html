@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CheckId Demo</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-2">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="#" data-toggle="modal" data-target="#loginModal">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-button disabled" href="#" data-view="create-signature">Create Signature Process</a>
+          </li>
+          <!--
+          <li class="nav-item">
+            <a class="nav-link nav-button disabled" href="#" data-view="add-document">Add Document</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-button disabled" href="#" data-view="start-signature">Start Signature Process</a>
+          </li>
+          -->
+          <li class="nav-item">
+            <a class="nav-link nav-button disabled" href="#" data-view="download-document">Download Document</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-button disabled" href="#" data-view="get-status-signature">Get Status Signature</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-button disabled" href="#" data-view="create-person">Create Person</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-button disabled" href="#" data-view="roles">Roles</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-button disabled" href="#" data-view="verify">Verify</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-button disabled" href="#" data-view="sign">Sign</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-10">
+        <div class="container-view" id="create-signature">
+            <!-- Signers -->
+            <div class="row">
+              <div class="col-sm-8">
+                <div class="card">
+                  <div class="card-header">
+                    Add Signer
+                  </div>
+                  <div class="card-body">
+                    <form id="signer-form">
+                      <div class="form-group row">
+                        <label for="inDocCountryCode" class="col-sm-2 col-form-label">Country Code</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inDocCountryCode" value="CL">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="inDocType" class="col-sm-2 col-form-label">Type</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inDocType" value="ID">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="inPersonalNumber" class="col-sm-2 col-form-label">Personal Number</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inPersonalNumber" value="97643182">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="inAuthentication" class="col-sm-2 col-form-label">Authentication</label>
+                        <div class="col-sm-10">
+                          <select class="form-control" id="inAuthentication">
+                            <option value="PIN">PIN</option>
+                            <option value="FINGERPRINT">Fingerprint</option>
+                            <option value="FPORPIN">Fingerprint or PIN</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="inRole" class="col-sm-2 col-form-label">Role</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inRole" value="">
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-success">Add signer</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="card">
+                  <div class="card-header">
+                    Signers
+                  </div>
+                  <div class="card-body">
+                    <ul class="list-group" id="signer-list">
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Documents -->
+            <div class="row">
+              <div class="col-sm-8">
+                <div class="card">
+                  <div class="card-header">
+                    Add Document
+                  </div>
+                  <div class="card-body">
+                    <form id="document-form">
+                      <div class="form-group row">
+                        <label for="inDocReferenceName" class="col-sm-2 col-form-label">Reference Name</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inDocReferenceName" value="">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="inDocName" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inDocName" value="">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="inDocFile" class="col-sm-2 col-form-label">File</label>
+                        <div class="col-sm-10">
+                          <input type="file" class="form-control-file" id="inDocFile">
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-success">Add document</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="card">
+                  <div class="card-header">
+                    Documents
+                  </div>
+                  <div class="card-body">
+                    <ul class="list-group" id="document-list">
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <button type="button" class="btn btn-primary" id="btn-create-signature">Create Signature</button>
+              </div>
+            </div>
+        </div>
+
+        <div class="container-view" id="add-document">
+          <button type="button" class="btn btn-primary" id="btn-add-document">Add Document</button>
+        </div>
+
+        <div class="container-view" id="start-signature">
+          <button type="button" class="btn btn-primary" id="btn-start-signature">Start Signature</button>
+        </div>
+
+        <div class="container-view" id="download-document">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-header">
+                  Sign Status
+                </div>
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label for="inDownloadSignId" class="col-sm-2 col-form-label">Process Id</label>
+                    <div class="col-sm-10">
+                      <input type="number" class="form-control" id="inDownloadSignId" value="0">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inDownloadDocId" class="col-sm-2 col-form-label">Document Id</label>
+                    <div class="col-sm-10">
+                      <input type="number" class="form-control" id="inDownloadDocId" value="0">
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-primary" id="btn-download-document">Download Document</button>
+                  <a id="download-link" target="_blank">Download</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-view" id="get-status-signature">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-header">
+                  Sign Status
+                </div>
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label for="inStatusSignId" class="col-sm-2 col-form-label">Process Id</label>
+                    <div class="col-sm-10">
+                      <input type="number" class="form-control" id="inStatusSignId" value="0">
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-primary" id="btn-get-status-signature">Get Signature Status</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-header">
+                  Sign Result
+                </div>
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label for="inStatusStatus" class="col-sm-2 col-form-label">Process Status</label>
+                    <div class="col-sm-10">
+                      <input type="text" readonly="" class="form-control-plaintext" id="inStatusStatus" value="">
+                    </div>
+                  </div>
+                  <ul class="list-group" id="signer-status-list"></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-view" id="create-person">
+
+
+            <div class="row">
+            <div class="col-sm-8">
+              <div class="card">
+                <div class="card-header">
+                  Create Person
+                </div>
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label for="inCreateType" class="col-sm-2 col-form-label">Type</label>
+                    <div class="col-sm-10">
+                      <select class="form-control" id="inCreateType">
+                        <option value="">Any</option>
+                        <option value="PIN">PIN</option>
+                        <option value="FINGERPRINT">Fingerprint</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inCreateDocCountryCode" class="col-sm-2 col-form-label">Country Code</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inCreateDocCountryCode" value="CL">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inCreateDocType" class="col-sm-2 col-form-label">Type</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inCreateDocType" value="ID">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inCreateDocPersonalNumber" class="col-sm-2 col-form-label">Personal Number</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inCreateDocPersonalNumber" value="97643182">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inCreateAuthenticationResult" class="col-sm-2 col-form-label">Authentication Result</label>
+                    <div class="col-sm-10">
+                      <input type="text" readonly class="form-control-plaintext" id="inCreateAuthenticationResult" value="">
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-primary" id="btn-create-person">Create Person</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-view" id="roles">
+          <div class="row">
+            <div class="col-sm-8">
+              <div class="card">
+                <div class="card-header">
+                  Roles
+                </div>
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label for="inRoleDocCountryCode" class="col-sm-2 col-form-label">Country Code</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inRoleDocCountryCode" value="CL">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inRoleDocType" class="col-sm-2 col-form-label">Type</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inRoleDocType" value="ID">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inRoleDocPersonalNumber" class="col-sm-2 col-form-label">Personal Number</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inRoleDocPersonalNumber" value="97643182">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inRoleCode" class="col-sm-2 col-form-label">Role</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inRoleCode" value="97643182">
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-primary" id="btn-get-role">Get Role</button>
+                  <button type="button" class="btn btn-primary" id="btn-add-role">Add Role</button>
+                  <button type="button" class="btn btn-primary" id="btn-remove-role">Remove Role</button>
+                </div>
+              </div>
+            </div>
+              <div class="col-sm-4">
+                <div class="card">
+                  <div class="card-header">
+                    Roles
+                  </div>
+                  <div class="card-body">
+                    <ul class="list-group" id="roles-list">
+                    </ul>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+
+        <div class="container-view" id="verify">
+          <div class="row">
+            <div class="col-sm-8">
+              <div class="card">
+                <div class="card-header">
+                  Verify
+                </div>
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label for="inVerifyType" class="col-sm-2 col-form-label">Type</label>
+                    <div class="col-sm-10">
+                      <select class="form-control" id="inVerifyType">
+                        <option value="">Any</option>
+                        <option value="PIN">PIN</option>
+                        <option value="FINGERPRINT">Fingerprint</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inVerifyDocCountryCode" class="col-sm-2 col-form-label">Country Code</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inVerifyDocCountryCode" value="CL">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inVerifyDocType" class="col-sm-2 col-form-label">Type</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inVerifyDocType" value="ID">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inVerifyDocPersonalNumber" class="col-sm-2 col-form-label">Personal Number</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inVerifyDocPersonalNumber" value="97643182">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inVerifyAuthenticationResult" class="col-sm-2 col-form-label">Authentication Result</label>
+                    <div class="col-sm-10">
+                      <input type="text" readonly class="form-control-plaintext" id="inVerifyAuthenticationResult" value="">
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-primary" id="btn-verify">Verify</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-view" id="sign">
+          <div class="row">
+            <div class="col-sm-8">
+              <div class="card">
+                <div class="card-header">
+                  Sign
+                </div>
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label for="inSignId" class="col-sm-2 col-form-label">Process Id</label>
+                    <div class="col-sm-10">
+                      <input type="number" class="form-control" id="inSignId" value="0">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inSignDocCountryCode" class="col-sm-2 col-form-label">Country Code</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inSignDocCountryCode" value="CL">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inSignDocType" class="col-sm-2 col-form-label">Type</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inSignDocType" value="ID">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inSignDocPersonalNumber" class="col-sm-2 col-form-label">Personal Number</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inSignDocPersonalNumber" value="97643182">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inAuthenticationId" class="col-sm-2 col-form-label">Authentication Id</label>
+                    <div class="col-sm-10">
+                      <input type="text" readonly class="form-control-plaintext" id="inAuthenticationId" value="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inAuthenticationType" class="col-sm-2 col-form-label">Authentication Type</label>
+                    <div class="col-sm-10">
+                      <input type="text" readonly class="form-control-plaintext" id="inAuthenticationType" value="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inAuthenticationSubtype" class="col-sm-2 col-form-label">Authentication Subtype</label>
+                    <div class="col-sm-10">
+                      <input type="text" readonly class="form-control-plaintext" id="inAuthenticationSubtype" value="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inAuthenticationMatch" class="col-sm-2 col-form-label">Authentication Match</label>
+                    <div class="col-sm-10">
+                      <input type="text" readonly class="form-control-plaintext" id="inAuthenticationMatch" value="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inAuthenticationSign" class="col-sm-2 col-form-label">Authentication Sign</label>
+                    <div class="col-sm-10">
+                      <input type="text" readonly class="form-control-plaintext" id="inAuthenticationSign" value="">
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-primary" id="btn-sign">Sign</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <form id="loginForm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Login</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="inputCompanyId">Company</label>
+              <input type="text" class="form-control" id="inputCompanyId" placeholder="Company Id" value="1">
+            </div>
+            <div class="form-group">
+              <label for="inputOperatorDocCountry">Operator Document Country</label>
+              <input type="text" class="form-control" id="inputOperatorDocCountry" placeholder="CL" value="CL">
+            </div>
+            <div class="form-group">
+              <label for="inputOperatorType">Operator Document Type</label>
+              <input type="text" class="form-control" id="inputOperatorType" placeholder="ID" value="ID">
+            </div>
+            <div class="form-group">
+              <label for="inputOperatorId">Operator Document Id</label>
+              <input type="text" class="form-control" id="inputOperatorId" placeholder="111111111" value="170538676">
+            </div>
+            <div class="form-group">
+              <label for="inputUsername">Username</label>
+              <input type="text" class="form-control" id="inputUsername" placeholder="Username">
+            </div>
+            <div class="form-group">
+              <label for="inputPassword">Password</label>
+              <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Login</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="title-modal"></h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body" id="content-modal">>
+	      </div>
+	    </div>
+    </div>
+  </div>
+
+
+  <!-- Templates -->
+  <script id="signer-list-template" type="text/x-handlebars-template" class="handlebars-template">
+    {{#each signers}}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <span>{{docCountryCode}} {{docType}} {{docPersonalNumber}} {{authentication}} {{role}} {{@index}}</span>
+      <a class="badge badge-primary badge-pill remove-signer" data-index="{{@index}}" href="#">delete</a>
+    </li>
+    {{/each}}
+  </script>
+  <script id="document-list-template" type="text/x-handlebars-template" class="handlebars-template">
+    {{#each documents}}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <span>{{referenceName}} {{name}} {{fileName}} ID: {{id}}</span>
+      <a class="badge badge-primary badge-pill remove-document" data-index="{{@index}}" href="#">delete</a>
+    </li>
+    {{/each}}
+  </script>
+  <script id="signer-status-list-template" type="text/x-handlebars-template" class="handlebars-template">
+    {{#each signers}}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <span>{{identityDocument.countryCode}} {{identityDocument.type}} {{identityDocument.personalNumber}} {{role.code}} {{signState}} {{signStateDate}}</span>
+    </li>
+    {{/each}}
+  </script>
+  <script id="role-list-template" type="text/x-handlebars-template" class="handlebars-template">
+    {{#each roles}}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <span>{{code}}</span>
+    </li>
+    {{/each}}
+  </script>
+
+  <script type="text/javascript">
+    $(function(){
+      $(".container-view").hide();
+
+      let general = {
+        //baseUrl: "",
+        //baseUrl: "http://10.0.1.93",
+        baseUrl: "https://qarubrika.solem.cl",
+        apiKey: "c8f5e64dde44159c51791b14b1cfd93bd37f802149223529c2d49a0266ae8379",
+        digitalSignature: 0,
+        session: {
+          id: "",
+          companyId: "",
+          username: ""
+        },
+        //currentAction: "CREATE"
+        currentAction: "VERIFY",
+        operator: {
+          sessionId: null
+        }
+      };
+
+      let signature = {
+        signatureId: 0,
+        signers: [],
+        documents: []
+      }
+
+      let templates = { };
+
+      $(".handlebars-template").each(function(key, item){
+        let source   = $(this).html();
+        let template = Handlebars.compile(source);
+        templates[$(this).attr("id")] = template;
+      });
+
+      let showModal = function(title, content) {
+        $("#title-modal").text(title);
+        $("#content-modal").text(content);
+
+        $("#alertModal").modal('show');
+      };
+
+      $("#loginForm").submit(function(e){
+        e.preventDefault();
+        if( $('#inputOperatorDocCountry').val() == '') {
+          showModal('Alert', 'Empty fields');
+          return false;
+        }
+        if( $('#inputOperatorType').val() == '') {
+          showModal('Alert', 'Empty fields');
+          return false;
+        }
+        if( $('#inputOperatorId').val() == '') {
+          showModal('Alert', 'Empty fields');
+          return false;
+        }
+        let requestData = {
+          "code": "USER",
+          "type": "START",
+          "subtype": "SESSION",
+          "createdAt": moment().format('YYYY-MM-DDTHH:mm:ss.SSS'),
+          "id": 1549887978384,
+          "client": {
+            "operationId": 4965423403669707118,
+            "companyId": $("#inputCompanyId").val(),
+            "machineId": "",
+            "username": $("#inputUsername").val(),
+            "password": $("#inputPassword").val()
+          }
+        };
+
+        $.ajax({
+          method: "POST",
+          contentType : "application/json",
+          dataType: "json",
+          crossDomain: true,
+          url: general.baseUrl + "/api/v1/session",
+          headers: {
+            "X-Auth-Token": general.apiKey
+          },
+          data: JSON.stringify(requestData)
+        })
+        .done(function( json ) {
+          general.session.id = json.client.token;
+		  general.session.companyId = $("#inputCompanyId").val();
+          general.session.username = $("#inputUsername").val();
+          $(".nav-link.nav-button").removeClass("disabled");
+          $('#loginModal').modal('hide')
+        });
+
+        return false;
+      });
+
+      let loadSignForm = function(){
+        $("#inSignId").val(general.digitalSignature);
+        $("#inSignDocCountryCode").val($("#inVerifyDocCountryCode").val());
+        $("#inSignDocType").val($("#inVerifyDocType").val());
+        $("#inSignDocPersonalNumber").val($("#inVerifyDocPersonalNumber").val());
+        if (general.lastVerify) {
+          $("#inAuthenticationId").val(general.lastVerify.id);
+          $("#inAuthenticationType").val(general.lastVerify.type);
+          $("#inAuthenticationSubtype").val(general.lastVerify.subtype);
+          $("#inAuthenticationMatch").val(general.lastVerify.authenticated);
+          $("#inAuthenticationSign").val(general.lastVerify.sign);
+        }
+      };
+
+      $(".nav-link.nav-button").click(function(e){
+        e.preventDefault();
+        $(".container-view").hide();
+        /*
+        if (general.sessionId != "") {
+          $("#" + $(this).data("view")).show();
+        }
+        */
+        $("#" + $(this).data("view")).show();
+        if ($(this).data("view") == "sign"){
+          loadSignForm();
+        }
+
+        return false;
+      });
+
+      let drawSignerList = function() {
+        let html = templates["signer-list-template"](signature);
+        $("#signer-list").html(html);
+
+        $(".remove-signer").click(function(e){
+          e.preventDefault();
+          let index = parseInt($(this).data("index"));
+          console.log('Remove signer ' + index, signature.signers);
+          signature.signers.splice(index, 1);
+          console.log('signer removed', signature.signers);
+          drawSignerList();
+        })
+      }
+
+      let drawDocumentList = function() {
+        let html = templates["document-list-template"](signature);
+        $("#document-list").html(html);
+
+        $(".remove-document").click(function(e){
+          e.preventDefault();
+          signature.documents.splice($(this).data("index"), 1);
+          drawDocumentList();
+        })
+      }
+
+      $("#signer-form").submit(function(e){
+        e.preventDefault();
+        let signer = {
+          docCountryCode: $("#inDocCountryCode").val(),
+          docType: $("#inDocType").val(),
+          docPersonalNumber: $("#inPersonalNumber").val(),
+          authentication: $("#inAuthentication").val(),
+          role: $("#inRole").val()
+        };
+
+        signature.signers.push(signer);
+
+        drawSignerList();
+
+        return false;
+      });
+
+      $("#document-form").submit(function(e){
+        e.preventDefault();
+        let file = $("#inDocFile")[0].files[0];
+        let doc = {
+          referenceName: $("#inDocReferenceName").val(),
+          name: $("#inDocName").val(),
+          fileName: file.name,
+          file: file
+        };
+
+        signature.documents.push(doc);
+
+        drawDocumentList();
+
+        return false;
+      });
+
+      $("#btn-create-signature").click(function(){
+        $("#btn-create-signature").addClass('disabled');
+        let requestData = {
+          "code": "SIGN",
+          "type": "CREATE",
+          "subtype": "SESSION",
+          "createdAt": moment().format('YYYY-MM-DDTHH:mm:ss.SSS'),
+          "id": 1549887978384,
+          "client": {
+            "operationId": 4965423403669707118,
+            "companyId": general.session.companyId,
+            "machineId": "",
+            "username": general.session.username
+          },
+          "data": {
+            "digitalSignature": {
+              "sessionId": 0,
+              "signers": [],
+              "documentTotal" : signature.documents.length,
+              "documents": []
+            }
+          }
+        };
+
+        let formData = new FormData();
+
+        $.each(signature.signers, function(idx, signer){
+          let signerRequest = {
+            "identityDocument": {
+              "countryCode": signer.docCountryCode,
+              "personalNumber": signer.docPersonalNumber,
+              "type": signer.docType
+            },
+            "authenticationFactorsCode": signer.authentication,
+            "role": {
+              "code": signer.role,
+              "type": ""
+            },
+            "signingOrder": idx + 1
+          };
+
+          requestData.data.digitalSignature.signers.push(signerRequest);
+        });
+
+        $.each(signature.documents, function(idx, file){
+          formData.append( file.referenceName, file.file );
+          let documentRequest = {
+              "referenceName": file.referenceName,
+              "name": file.name
+          };
+
+          requestData.data.digitalSignature.documents.push(documentRequest);
+        });
+
+        console.log("Request:", requestData);
+
+        var jsonBlob = new Blob([JSON.stringify(requestData)], { type: "application/json" }); // Se debe especificar el mimetype
+        formData.append( 'content', jsonBlob);
+
+        let url = general.baseUrl + "/api/v1/signature/";
+
+        $.ajax({
+          method: "POST",
+          contentType : false,
+          dataType: "json",
+          crossDomain: true,
+          url: url,
+          headers: {
+            "X-Auth-Token": general.apiKey,
+            "X-Session-Token": general.session.id
+          },
+          mimeType: "multipart/form-data",
+          processData: false,
+          data: formData
+        })
+        .done(function( json ) {
+          console.log("Success:", json);
+          if (json.status.status.code == 200) {
+            general.digitalSignature = json.data.digitalSignature.sessionId;
+            signature.documents = json.data.digitalSignature.documents;
+            drawDocumentList();
+
+            showModal('Info', 'Process created: ' + general.digitalSignature);
+          }
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+          if (jqXHR.responseJSON) {
+            console.error("Error:", jqXHR.responseJSON);
+          } else if (textStatus) {
+            console.error("Error:", textStatus);
+          }
+        })
+        .always(function(){
+          $("#btn-create-signature").removeClass('disabled');
+        });
+      });
+
+      let popupPage;
+      let openCheckId = function(action) {
+        general.currentAction = action;
+        // Create popup window
+        var w = 900;
+        var h = 620;
+
+        // Fixes dual-screen position                         Most browsers      Firefox
+        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+
+        var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+        var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+        var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+        var top = ((height / 2) - (h / 2)) + dualScreenTop;
+
+        var opciones = "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=" + w + ", height=" + h + ", top=" + top + ", left=" + left;
+        popupPage = window.open("checkid/", "libPage", opciones);
+        // Puts focus on the popupPage
+        if (window.focus) {
+          popupPage.focus();
+        }
+      };
+
+	  //csb
+      let getParamsVerify = function() {
+        return {
+          action: "VERIFY",
+          method: $("#inVerifyType").val(),
+          apiKey: general.apiKey,
+          sessionId: general.session.id,
+          companyId: general.session.companyId,
+          operationId: 1,
+          baseUrl: general.baseUrl,
+          operator: {
+            sessionId: general.operator.sessionId,
+            identityDocument: {
+                countryCode: $('#inputOperatorDocCountry').val(),
+                type: $('#inputOperatorType').val(),
+                personalNumber: $('#inputOperatorId').val()
+            }
+          },
+          digitalIdentity: {
+            identityDocuments: [{
+              countryCode: $("#inVerifyDocCountryCode").val(),
+              type: $("#inVerifyDocType").val(),
+              personalNumber: $("#inVerifyDocPersonalNumber").val()
+            }]
+          }
+          };
+      };
+
+      let getParamsCreate = function() {
+        return {
+            action: "CREATE",
+	          apiKey: general.apiKey,
+	          sessionId: general.session.id,
+	          companyId: general.session.companyId,
+	          operationId: 1,
+	          baseUrl: general.baseUrl,
+            useFingerprint: true,
+            usePin: true,
+            operator: {
+              sessionId: general.operator.sessionId,
+              identityDocument: {
+                  countryCode: $('#inputOperatorDocCountry').val(),
+                  type: $('#inputOperatorType').val(),
+                  personalNumber: $('#inputOperatorId').val()
+              }
+            },
+              digitalIdentity: {
+                  personalData: {
+                      givenNames: "desmond",
+                      surnames: "miles",
+                      dob: 20000101,
+                      gender: "NOT_KNOWN"
+                  },
+                  emailAddresses: [
+                    {
+                        type: 'BUSINESS',
+                        address: 'algo@algo.cl',
+                        primary: true
+                    },
+                    {
+                        type: 'PERSONAL',
+                        address: 'algo@algo2.cl',
+                        primary: false
+                    }
+                ],
+                contactPhones: [
+                    {
+                        number: '+56982365612',
+                        primary: false,
+                        type: 'HOME'
+                    },
+                    {
+                        number: '+56911111111',
+                        primary: true,
+                        type: 'PERSONAL'
+                    }
+
+                  ],
+                  identityDocuments: [{
+                    countryCode: $("#inCreateDocCountryCode").val(),
+                    type: $("#inCreateDocType").val(),
+                    personalNumber: $("#inCreateDocPersonalNumber").val()
+                  }]
+              }
+          };
+      };
+
+      window.getParams = function() {
+        if (general.currentAction == "CREATE") {
+          return getParamsCreate();
+        } else {
+          return getParamsVerify();
+        }
+      }
+
+      window.callback = function(result) {
+          popupPage.close();
+          console.log("callback", result);
+
+          if (result.numError == 0) {
+            if (result.action == "VERIFY") {
+              let resultMessage = "No match";
+              if (result.data.authenticated) {
+                resultMessage = "Match";
+              }
+
+              general.lastVerify = result.data;
+				//csb aqui devuelve datos para firmar
+				//alert ("ff:" + general.lastVerify.sign);
+
+              $("#inVerifyAuthenticationResult").val(resultMessage);
+			  
+            }
+			  
+            general.operator.sessionId = result.operator.sessionId;
+          }
+
+          return false;
+      }
+
+      $("#btn-verify").click(function(){
+		//alert ("va")
+        openCheckId("VERIFY");
+      });
+
+      $("#btn-create-person").click(function(){
+        openCheckId("CREATE");
+      });
+
+
+      $("#btn-sign").click(function(){
+        $("#btn-sign").addClass('disabled');
+        let requestData = {
+          "code": "SIGN",
+          "type": "SIGN",
+          "subtype": "SESSION",
+          "createdAt": moment().format('YYYY-MM-DDTHH:mm:ss.SSS'),
+          "id": 1549887978384,
+          "client": {
+            "operationId": 4965423403669707118,
+            "companyId": general.session.companyId,
+            "machineId": "",
+            "username": general.session.username,
+            "operator": {
+              "identityDocument": {
+                "countryCode": $('#inputOperatorDocCountry').val(),
+                "type": $('#inputOperatorType').val(),
+                "personalNumber": $('#inputOperatorId').val()
+              }
+            }
+          },
+          "data": {
+            "digitalSignature": {
+              "sessionId": $("#inSignId").val()
+            },
+            "digitalIdentity": {
+              "identityDocuments": [
+              {
+                "countryCode": $("#inSignDocCountryCode").val(),
+                "type": $("#inSignDocType").val(),
+                "personalNumber": $("#inSignDocPersonalNumber").val()
+              }]
+            },
+            "authenticationResult": general.lastVerify
+          }
+        };
+
+        let url = general.baseUrl + "/api/v1/signature/sign";
+
+        $.ajax({
+          method: "POST",
+          contentType : "application/json",
+          dataType: "json",
+          crossDomain: true,
+          url: url,
+          headers: {
+            "X-Auth-Token": general.apiKey,
+            "X-Session-Token": general.session.id
+          },
+          data: JSON.stringify(requestData)
+        })
+        .done(function( json ) {
+          console.log("Success:", json);
+          if (json.status.status.code == 200) {
+            showModal('Info', 'Sign success');
+          }
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+          if (jqXHR.responseJSON) {
+            console.error("Error:", jqXHR.responseJSON);
+          } else if (textStatus) {
+            console.error("Error:", textStatus);
+          }
+          showModal('Alert', 'Sign error');
+        })
+        .always(function(){
+          $("#btn-sign").removeClass('disabled');
+        });
+      });
+
+      $("#btn-get-status-signature").click(function(){
+        $("#btn-get-status-signature").addClass('disabled');
+        let requestData = {
+          "code": "SIGN",
+          "type": "STATUS",
+          "subtype": "SESSION",
+          "createdAt": moment().format('YYYY-MM-DDTHH:mm:ss.SSS'),
+          "id": 1549887978384,
+          "client": {
+            "operationId": 4965423403669707118,
+            "companyId": general.session.companyId,
+            "machineId": "",
+            "username": general.session.username
+          },
+          "data": {
+            "digitalSignature": {
+              "sessionId": $("#inStatusSignId").val()
+            }
+          }
+        };
+
+        let url = general.baseUrl + "/api/v1/signature/status";
+
+        $.ajax({
+          method: "POST",
+          contentType : "application/json",
+          dataType: "json",
+          crossDomain: true,
+          url: url,
+          headers: {
+            "X-Auth-Token": general.apiKey,
+            "X-Session-Token": general.session.id
+          },
+          data: JSON.stringify(requestData)
+        })
+        .done(function( json ) {
+          console.log("Success:", json);
+          if (json.status.status.code == 200) {
+            $("#inStatusStatus").val(json.data.digitalSignature.sessionState);
+
+            let html = templates["signer-status-list-template"](json.data.digitalSignature);
+            $("#signer-status-list").html(html);
+          }
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+          if (jqXHR.responseJSON) {
+            console.error("Error:", jqXHR.responseJSON);
+          } else if (textStatus) {
+            console.error("Error:", textStatus);
+          }
+          showModal('Alert', 'Sign error');
+        })
+        .always(function(){
+          $("#btn-get-status-signature").removeClass('disabled');
+        });
+      });
+
+      $("#btn-download-document").click(function(){
+        $("#btn-download-document").addClass('disabled');
+        var img = document.getElementById('download-link');
+        img.removeAttribute("href");
+        let requestData = {
+          "code": "SIGN",
+          "type": "GET",
+          "subtype": "DOCUMENT",
+          "createdAt": moment().format('YYYY-MM-DDTHH:mm:ss.SSS'),
+          "id": 1549887978384,
+          "client": {
+            "operationId": 4965423403669707118,
+            "companyId": general.session.companyId,
+            "machineId": "",
+            "username": general.session.username
+          },
+          "data": {
+            "digitalSignature": {
+              "sessionId": $("#inDownloadSignId").val(),
+              "documents": [
+                {
+                  id: $("#inDownloadDocId").val()
+                }
+              ]
+            }
+          }
+        };
+
+        let url = general.baseUrl + "/api/v1/document/raw";
+
+        $.ajax({
+          method: "POST",
+          contentType : "application/json",
+          //dataType: "json",
+          crossDomain: true,
+          url: url,
+          headers: {
+            "X-Auth-Token": general.apiKey,
+            "X-Session-Token": general.session.id
+          },
+          data: JSON.stringify(requestData),
+          xhrFields:{
+            responseType: 'blob'
+          }
+        })
+        .done(function( blob ) {
+          console.log("Success");
+          var url = window.URL || window.webkitURL;
+          img.href = url.createObjectURL(blob);
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+          if (jqXHR.responseJSON) {
+            console.error("Error:", jqXHR.responseJSON);
+          } else if (textStatus) {
+            console.error("Error:", textStatus);
+          }
+          showModal('Alert', 'Sign error');
+        })
+        .always(function(){
+          $("#btn-download-document").removeClass('disabled');
+        });
+      });
+
+      $("#btn-get-role").click(function(){
+        $("#btn-add-role").addClass('disabled');
+        $("#btn-get-role").addClass('disabled');
+        $("#btn-remove-role").addClass('disabled');
+
+        let requestData = {
+          "code": "PERSON",
+          "type": "GET",
+          "subtype": "ROLE",
+          "createdAt": moment().format('YYYY-MM-DDTHH:mm:ss.SSS'),
+          "id": 1549887978384,
+          "client": {
+            "operationId": 4965423403669707118,
+            "companyId": general.session.companyId,
+            "machineId": "",
+            "username": general.session.username
+          },
+          "data": {
+            "digitalIdentity": {
+              "identityDocuments": [
+              {
+                "countryCode": $("#inRoleDocCountryCode").val(),
+                "type": $("#inRoleDocType").val(),
+                "personalNumber": $("#inRoleDocPersonalNumber").val()
+              }]
+            }
+          }
+        };
+
+        let url = general.baseUrl + "/api/v1/role/get";
+
+        $.ajax({
+          method: "POST",
+          contentType : "application/json",
+          dataType: "json",
+          crossDomain: true,
+          url: url,
+          headers: {
+            "X-Auth-Token": general.apiKey,
+            "X-Session-Token": general.session.id
+          },
+          data: JSON.stringify(requestData)
+        })
+        .done(function( json ) {
+          console.log("Success:", json);
+
+          let html = templates["role-list-template"](json.data.digitalIdentity);
+          $("#roles-list").html(html);
+
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+          if (jqXHR.responseJSON) {
+            console.error("Error:", jqXHR.responseJSON);
+          } else if (textStatus) {
+            console.error("Error:", textStatus);
+          }
+          showModal('Alert', 'Role add error');
+        })
+        .always(function(){
+          $("#btn-add-role").removeClass('disabled');
+          $("#btn-remove-role").removeClass('disabled');
+          $("#btn-get-role").removeClass('disabled');
+        });
+      });
+      $("#btn-add-role").click(function(){
+        $("#btn-add-role").addClass('disabled');
+        $("#btn-get-role").addClass('disabled');
+        $("#btn-remove-role").addClass('disabled');
+        let requestData = {
+          "code": "PERSON",
+          "type": "ADD",
+          "subtype": "ROLE",
+          "createdAt": moment().format('YYYY-MM-DDTHH:mm:ss.SSS'),
+          "id": 1549887978384,
+          "client": {
+            "operationId": 4965423403669707118,
+            "companyId": general.session.companyId,
+            "machineId": "",
+            "username": general.session.username
+          },
+          "data": {
+            "digitalIdentity": {
+              "identityDocuments": [
+              {
+                "countryCode": $("#inRoleDocCountryCode").val(),
+                "type": $("#inRoleDocType").val(),
+                "personalNumber": $("#inRoleDocPersonalNumber").val()
+              }],
+              "roles": [
+                {
+                  "code": $("#inRoleCode").val()
+                }
+              ]
+            }
+          }
+        };
+
+        let url = general.baseUrl + "/api/v1/role/";
+
+        $.ajax({
+          method: "POST",
+          contentType : "application/json",
+          dataType: "json",
+          crossDomain: true,
+          url: url,
+          headers: {
+            "X-Auth-Token": general.apiKey,
+            "X-Session-Token": general.session.id
+          },
+          data: JSON.stringify(requestData)
+        })
+        .done(function( json ) {
+          console.log("Success:", json);
+          showModal('Info', 'Role created');
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+          if (jqXHR.responseJSON) {
+            console.error("Error:", jqXHR.responseJSON);
+          } else if (textStatus) {
+            console.error("Error:", textStatus);
+          }
+          showModal('Alert', 'Role add error');
+        })
+        .always(function(){
+          $("#btn-add-role").removeClass('disabled');
+          $("#btn-remove-role").removeClass('disabled');
+          $("#btn-get-role").removeClass('disabled');
+        });
+      });
+      $("#btn-remove-role").click(function(){
+        $("#btn-add-role").addClass('disabled');
+        $("#btn-remove-role").addClass('disabled');
+        $("#btn-get-role").addClass('disabled');
+
+        let requestData = {
+          "code": "PERSON",
+          "type": "REMOVE",
+          "subtype": "ROLE",
+          "createdAt": moment().format('YYYY-MM-DDTHH:mm:ss.SSS'),
+          "id": 1549887978384,
+          "client": {
+            "operationId": 4965423403669707118,
+            "companyId": general.session.companyId,
+            "machineId": "",
+            "username": general.session.username
+          },
+          "data": {
+            "digitalIdentity": {
+              "identityDocuments": [
+              {
+                "countryCode": $("#inRoleDocCountryCode").val(),
+                "type": $("#inRoleDocType").val(),
+                "personalNumber": $("#inRoleDocPersonalNumber").val()
+              }],
+              "roles": [
+                {
+                  "code": $("#inRoleCode").val()
+                }
+              ]
+            }
+          }
+        };
+
+        let url = general.baseUrl + "/api/v1/role/";
+
+        $.ajax({
+          method: "DELETE",
+          contentType : "application/json",
+          dataType: "json",
+          crossDomain: true,
+          url: url,
+          headers: {
+            "X-Auth-Token": general.apiKey,
+            "X-Session-Token": general.session.id
+          },
+          data: JSON.stringify(requestData)
+        })
+        .done(function( json ) {
+          console.log("Success:", json);
+          showModal('Info', 'Role created');
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+          if (jqXHR.responseJSON) {
+            console.error("Error:", jqXHR.responseJSON);
+          } else if (textStatus) {
+            console.error("Error:", textStatus);
+          }
+          showModal('Alert', 'Role add error');
+        })
+        .always(function(){
+          $("#btn-add-role").removeClass('disabled');
+          $("#btn-remove-role").removeClass('disabled');
+          $("#btn-get-role").removeClass('disabled');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

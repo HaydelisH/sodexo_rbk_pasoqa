@@ -1,0 +1,25 @@
+<php:repeticion id="formulario">
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+      	 <div class="box-header">
+           <form role="form" name="formulario2" id="formulario2" action="Plantillas.php" method="POST" >
+              <input type="hidden" name="idPlantilla" value='<php:item id="idPlantilla"/>'/>
+              <button type="submit" name="accion" value="APROBAR" class="btn btn-default"/><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
+          </form>
+      	 
+        </div>
+	     <div class="box-body">
+				<!--Texto-->
+			  <!--<div id="Texto"><php:texto id="Texto" /></div>-->
+        <div class="responsiveContent">
+        <iframe id="ifrmArch" name="ifrmArch"  width="100%" height="600px" src="<php:item id="ruta" />" ></iframe>
+      </div>
+	  </div>
+    </div>
+  </div>
+</div>
+</php:repeticion>
+
+

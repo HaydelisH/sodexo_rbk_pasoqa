@@ -1,0 +1,7 @@
+11:36:48 sp_firma_obtener 'token'
+11:36:48 sp_firma_obtener 'url'
+11:36:48 sp_firma_obtener 'companyId'
+11:36:48 sp_firma_obtener 'username'
+11:36:48 sp_firma_obtener 'password'
+11:36:48 sp_firma_obtener 'countryCode'
+11:36:48 sp_firma_obtener 'type'

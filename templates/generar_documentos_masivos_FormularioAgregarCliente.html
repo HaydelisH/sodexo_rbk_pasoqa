@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <!--Botones de cabecera-->
+        <!--<div class="box-header">
+            <a class="btn btn-default btn_letra_azul" href="Documentos.php" ><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
+        </div>-->
+      <!-- /.box-header -->
+      <div class="box-body">
+        <!--Mensajes-->
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+        <!--Formulario de los datos propios de Categoria-->   
+        <table id="example2" class="table table-bordered table-hover pagin-table">
+          <thead>
+           <tr>
+            <th data-campo="SELECCION" style="text-align: center;">Selecci&oacute;n </th>
+            <th data-campo="RutEmpresa" style="text-align: center;">Rut Empresa</th>
+            <th data-campo="RazonSocial" style="text-align: center;">Razon Social </th>
+          </tr>
+          </thead>
+          <tbody >
+            <php:repeticion id="listado">
+              <tr id="fila_<php:filamenos />">
+                <!--Boton de Agregar-->
+                <td data-campo="BOTON_AGREGAR"> 
+                  <div style="text-align: center">
+                   <form role="form" action="Generar_Documentos_Masivo.php" method="POST" name="formulario" id="formulario">
+                      <input type="hidden" id="RutEmpresa_Gama" name="RutEmpresa_Gama" value="<php:item id="RutEmpresa_Gama"/>"/>
+                      <input type="hidden" id="RutEmpresa" name="RutEmpresa" value="<php:item id="RutEmpresa"/>"/>
+					  <input type="hidden" id="idPlantilla" name="idPlantilla" value="<php:item id="idPlantilla"/>" />
+					  <input type="hidden" id="idWF" name="idWF" value="<php:item id="idWF"/>" />
+                      <input type="hidden" id="modelo_contrato" name="modelo_contrato" value="<php:item id="modelo_contrato"/>"/>
+					 
+						<!--Campos correspondientes al flujo-->
+						<input type="hidden" id="input_emp" name="input_emp" value="<php:item id="input_emp"/>"/>
+						<input type="hidden" id="input_cli" name="input_cli" value="<php:item id="input_cli"/>"/>
+						<input type="hidden" id="input_not" name="input_not" value="<php:item id="input_not"/>"/>
+						<input type="hidden" id="input_aval" name="input_aval" value="<php:item id="input_aval"/>"/>
+						<input type="hidden" id="input_empleado" name="input_empleado" value="<php:item id="input_empleado"/>"/>
+				
+                      <input type="hidden" name="accion" value="AGREGAR"/>
+                      <button type="submit" style="background-color: transparent;" class="btn" name="accion2" value="BUSCAR_CLI"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                  </form>
+                  </div>
+                </td>
+                <!--RutEmpresa-->
+                <td data-campo="RutEmpresa" style="text-align: center;"><php:item id="RutEmpresa"/></div></td>
+                <!--Razon Social-->
+                <td data-campo="RazonSocial" style="text-align: center;"><php:item id="RazonSocial"/></p></td>
+              </tr>
+            </php:repeticion>
+          </tbody>
+        </table> 
+      </div>
+      </div>
+    <!-- /.box -->
+    </div>
+  </div>
+  <!-- /.col -->
+  </div>
+

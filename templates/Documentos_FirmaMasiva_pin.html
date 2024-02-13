@@ -1,0 +1,275 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <!--Formulario para volver-->
+        <php:repeticion id="formulario">
+  			<form role="form" name="formulario" id="formulario" action="documentosdet.php" method="POST" autocomplete="off">
+  				<button type="submit" class="btn btn-default"><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
+  			</form>
+
+        <div class="box-body">
+          <!--Mensajes-->
+          <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+          <div id="mensajeError"><php:texto id="mensajeError" /></div>
+        
+          <!--Formulario para procesamiento-->
+          <div class="form-row">
+            <form role="form" name="formulario2" id="formulario2" action="documentosdet.php" method="POST">
+              
+              <input type="hidden" name="usuarioid" id="usuarioid" value="<php:item id='usuarioid'/>" />
+              
+              <div class="row">  
+                <!--<div class="col-lg-2 col-md-2 col-md-offset-8">                       
+                  <input   type="password" class="form-control" id="pin" name="pin" placeholder="Ingrese PIN"  />
+                </div>  -->        
+                <div class="col-lg-2 col-md-2 ">
+                  <button class="btn btn-md btn-primary btn-block" type="button"  name="accion" value="FIRMAR_PIN" id="FIRMAR_PIN" />Firmar</button>
+
+                </div>
+              </div>
+              <br>
+
+              <table id="example" class="table table-bordered table-hover " name="tbltabla">
+                <thead>
+                  <tr>
+                    <th style="text-align: center;" data-campo="Nro Contrato">Nro Contrato</th>
+                    <th style="text-align: center;" data-campo="Tipo Documento">Tipo Documento </th>
+                    <th style="text-align: center;" data-campo="Estado Contrato">Estado Contrato</th> 
+                    <th style="text-align: center;" data-campo="Opciones">Opciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <!--Contenido de Tabla-->
+                  <php:repeticion id="listado">
+                    <tr id="fila_<php:filamenos />">
+                      <td style="text-align: center;" data-campo="Nro Contrato"><input type="text" name="doc_<php:filamenos />" id="doc_<php:filamenos />" style="border:0; text-align: center;" value='<php:item id="idDocumento" />' /></td>
+                      <td style="text-align: center;"  data-campo="Tipo Documento"><php:item id="NombreTipoDoc" /></td>
+                      <td style="text-align: center;" data-campo="Estado Contrato"><php:item id="Estado" /></td>
+                      <td style="text-align: center;" data-campo="Estado">
+                          <button style="background-color: transparent;" class="btn btn-md" type="button" class="borrar" id="borrar_<php:filamenos />" onclick="eliminarDoc('<php:filamenos />');" ><i id="icon_<php:filamenos />"  class="fa fa-minus" aria-hidden="true"  title="Quitar de esta lista"></i></button>
+                      </td>
+                    </tr>
+                  </php:repeticion>
+                </tbody>
+                 <tfoot>
+                  <th colspan=5 class="tabla_abajo"><div class="col-md-12" style="font-weight: normal;">
+                   <span id="cant_docs"><php:item id="total_registros" /></span> Documentos a firmar 
+                  </div></td>
+                  </th>
+                </tfoot>
+              </table>
+        
+        		
+            </form>
+          </div>
+        </php:repeticion>
+
+      </div>
+    </div>
+  </div>
+</div>
+			 
+<script type="text/javascript">
+    
+  var ajax;
+  var salida;
+  var fila = 0;
+  var proceso;
+  var cant = 0;
+  var i = 0;
+  var documento = 0;
+  var indices = [];
+
+  $(document).ready(function(){
+
+    $("#pin").val("");
+    $("#pin").css("display","block");
+    $("#FIRMAR").prop("disabled",false);
+
+    if( $("#cant_docs").html() == '' ){
+      var fil = 0;
+      fil = parseInt($("#example tr").length);
+      $("#cant_docs").html(fil-2);
+    }
+
+ });
+
+    function eliminarDoc(i){
+
+        var fila = $("#example tr").length;
+        if( fila == 3 ){
+          $("#formulario").submit();
+        }else if( fila > 3){
+          $("#fila_" + i).remove();
+
+          var fil = 0;
+          fil = parseInt($("#example tr").length);
+          $("#cant_docs").html(fil-2);
+         }        
+    }
+
+   $("#FIRMAR_PIN").click(function(){
+    
+    //Limpiamos errores anteriores
+    $("#mensajeError").removeClass("callout callout-warning");
+    $("#mensajeError").html("");
+
+    //Mostrar cargando 
+    MostrarCargando();
+
+    //Bloquear
+    $("#FIRMAR_PIN").prop("disabled",true);
+
+     if( $("#pin").val().length == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Debe introducir su PIN de firma");
+          return false;
+     }
+
+    //Cantidad de filas 
+    cant = $("#example tr").length;
+    cant = cant - 2;
+
+    //Buscar los indices de las filas de la tabla 
+    $('#example tbody tr').each(function () {
+       var indice = $(this).attr("id");
+       var res = indice.split("_");
+       indices.push(res[1]);
+    });
+
+    documento = $("#doc_" + indices[i]).val();
+    
+    //Validar si desean firmar todo
+    var respuesta = confirm('Esta seguro(a) que desea firmar estos documentos?');
+
+    if( respuesta ){
+      proceso = setInterval(function(){ firma_pin(documento,indices[i]) }, 1000);
+    }else{
+      
+      //Bloquear
+      $("#FIRMAR_PIN").prop("disabled",false);
+      return false;
+    }
+
+  });
+
+   //Firmar un documento
+  function firma_pin(idDocumento,i){
+
+    clearInterval(proceso);// poner esto cuando llega respuesta
+
+    var usuarioid = $("#usuarioid").val();
+    var pin = $("#pin").val();
+
+    var url = "Documentos_firmaMasiva3_ajax.php?idDocumento=" + idDocumento + "&pin="+ pin + "&usuarioid=" + usuarioid;
+
+    fila = i;
+
+     // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+    if( window.XMLHttpRequest )
+       ajax = new XMLHttpRequest(); // No Internet Explorer
+    else
+       ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+    
+       // Almacenamos en el control al funcion que se invocara cuando la peticion
+    ajax.onreadystatechange = funcionCallback_firma_pin;
+    ajax.addEventListener("load", transferComplete);
+
+    // Enviamos la peticion
+    ajax.open( "GET", url, false);
+    ajax.send( "" );
+
+    function transferComplete(evt) {
+      mostrarEstadoFirma(salida,fila);
+    }
+  }
+
+  function funcionCallback_firma_pin(){
+
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+      if( ajax.status == 200 )
+      {
+        // Escribimos el resultado en la pagina HTML mediante DHTML
+        salida = '';
+        salida = ajax.responseText;
+      }
+    }
+  }
+
+  //Mostrar estado de Firma en el modal
+  function mostrarEstadoFirma(salida, fila){
+
+    //Error de login
+    var error = salida.substring(0, 33);
+
+    //Incrementar la fila de la tabla a recorrer
+    i++;
+
+    //Actualizamos iconos segun la respuesta 
+
+    //Si es error de login
+    if ( error == 'Error en Login del Usuario400 Rut' ){
+      //Limpiar campo de pin
+      $("#pin").val("");
+
+      //Desbloquear boton de firma 
+      $("#FIRMAR_PIN").prop("disabled",false);
+
+      //Enviamos mensaje
+      $("#mensajeError").addClass("callout callout-warning");
+      $("#mensajeError").html(salida);
+
+      //Asignar el mismo valor y se cancela la firma para los proximos documentos
+      i = cant;
+      //Ocultar el gif de cargando
+      OcultarCargando();
+
+    }
+
+    //Si es otro error 
+    else if( salida != 0 ){
+
+      $("#icon_" + fila).removeClass();
+      $("#icon_" + fila).addClass('fa fa-exclamation-triangle text-warning');
+      $("#icon_" + fila).prop('title',salida); 
+      $("#icon_" + fila).prop('onclick','');
+      
+      //Si termino de recorrer las filas 
+      if( !(i < cant) ){
+          //Limpiar campo de pin
+          $("#pin").val("");
+          //Ocultar el gif de cargando
+          OcultarCargando();
+
+      }//Si no, no se limpia el campo pin, para que continue con los siguientes documentos 
+
+    }else if (salida){
+      $("#icon_" + fila).removeClass();
+      $("#icon_" + fila).addClass('fa fa-check-circle text-success');
+      $("#icon_" + fila).prop('title','Firmado correctamente');
+      $("#icon_" + fila).prop('onclick','');
+      //Si termino de recorrer las filas 
+      if( !(i < cant) ){
+          //Limpiar campo de pin
+          $("#pin").val("");
+
+            //Ocultar el gif de cargando
+            OcultarCargando();
+
+      }//Si no, no se limpia el campo pin, para que continue
+      //Continua con los siguientes documentos 
+    }
+
+    //Si quedan filas que recorrer 
+    if( i < cant ){
+        //Pasar al siguiente 
+        documento = $("#doc_"+ indices[i]).val();
+        proceso = setInterval(function(){ firma_pin(documento,indices[i]) }, 1000);
+    }
+  }
+
+</script>

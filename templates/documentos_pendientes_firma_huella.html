@@ -1,0 +1,115 @@
+<script type="text/javascript" src="js/libMB/json2.js"></script>     
+<script type="text/javascript" src="js/libMB/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="js/libMB/blockui.js"></script>	
+<script type="text/javascript" src="js/libMB/jsrasign/ext/jsbn.js"></script>
+<script type="text/javascript" src="js/libMB/jsrasign/ext/jsbn2.js"></script>
+<script type="text/javascript" src="js/libMB/jsrasign/ext/rsa.js"></script>
+<script type="text/javascript" src="js/libMB/jsrasign/ext/rsa2.js"></script>
+<script type="text/javascript" src="js/libMB/jsrasign/ext/base64.js"></script>
+<script type="text/javascript" src="js/libMB/crypto/yahoo-min.js"></script>
+<script type="text/javascript" src="js/libMB/crypto/core.js"></script>
+<script type="text/javascript" src="js/libMB/crypto/md5.js"></script>
+<script type="text/javascript" src="js/libMB/crypto/sha1.js"></script>
+<script type="text/javascript" src="js/libMB/crypto/sha256.js"></script>
+<script type="text/javascript" src="js/libMB/crypto/ripemd160.js"></script>
+<script type="text/javascript" src="js/libMB/crypto/x64-core.js"></script>
+<script type="text/javascript" src="js/libMB/crypto/sha512.js"></script>
+<script type="text/javascript" src="js/libMB/jsrasign/rsapem-1.1.min.js"></script>
+<script type="text/javascript" src="js/libMB/jsrasign/rsasign-1.2.min.js"></script>
+<script type="text/javascript" src="js/libMB/jsrasign/asn1hex-1.1.min.js"></script>
+<script type="text/javascript" src="js/libMB/jsrasign/x509-1.1.min.js"></script>
+<script type="text/javascript" src="js/libMB/jsrasign/crypto-1.1.min.js"></script>
+<script type="text/javascript" src="js/libMB/pluginautentiav3.js"></script>
+<script type="text/javascript" src="js/libMB/multibrowser.js"></script>   
+
+<script type="text/javascript" src="js/libMB/bootstrap.min.js"></script>
+<style type="text/css">
+.responsiveContent {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+ padding-bottom: 50.2%;
+  margin-bottom: 20px;
+}
+.responsiveContent iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+</style>
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <!--Botones de cabecera-->
+		<php:repeticion id="formulario">
+  			<form role="form" name="formulario2" id="formulario2" action="Documentos_Pendientes.php	" method="POST">
+  				<input type="hidden" name="idDocumento" value="<php:item id="idDocumento" />" />
+  				<button type="submit" class="btn btn-default"><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
+  			</form>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <!--Mensajes-->
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+        <!--Datos referenciales-->
+        <div class="form-row">
+          <!--Empresas-->
+        
+    
+         <!--Formulario de datos propios de Clausulas-->
+        <form role="form" name="actionForm" id="actionForm" action="Documentos_Pendientes.php	" method="POST">
+
+			<div class="row">  
+					<php:repeticion id="botonfirma">	
+				<div class="col-xs-4 col-sm-offset-0 col-xs-offset-0 col-md-offset-7 col-md-2 col-lg-offset-7 col-lg-2">												
+					<!--<label  	for="Descripcion">Ingrese PIN</label>-->
+					<!--<span style="display: none;">Pin </span>-->
+					<!--<input   type="text" class="form-control" id="rut" name="rut" maxlength="10"  placeholder="Ingrese Rut"  >-->
+				</div>					
+				<div class="col-lg-2 col-md-2">
+					
+					<button class="btn btn-md btn-primary btn-block" type="button" onclick="verificarh();" name="accion" value="FIRMATOKEN" />Firmar</button>
+					</php:repeticion>  
+				</div>
+		  </div>
+
+			<div class="row">  
+				<div class="col-xs-4 col-sm-offset-0 col-xs-offset-0 col-md-2 col-lg-2">												
+					<!--<label  	for="Descripcion">Ingrese PIN</label>-->					
+						<span >Nro Contrato : <php:item id="idDocumento" /></span>							
+				</div>					
+		  </div>
+		  
+		  <div class="row">			   
+				<input type="hidden" name="idDocumento" value="<php:item id="idDocumento" />" />
+			   
+				<input type="hidden" name="documentos"  	id="documentos" 	value="<php:item id="documentos" />" />
+				<input type="hidden" name="rut" 			id="rut" 			value="<php:item id="rut" />" />
+				<input type="hidden" name="idDocumento" 	id="idDocumento" 	value="<php:item id="idDocumento" />" />
+				<input type="hidden" name="auditoria" 		id="auditoria" 		value="<php:item id="auditoria" />" />
+				<input type="hidden" name="accion" 			id="accion" 		value="FIRMAHUELLA" />
+								
+								
+				<div class="col-md-12">
+					<div class="responsiveContent">
+						<!--<embed id="imagen" src="<php:item id="ruta" />#toolbar=0" width="100%" height="340">-->
+						<!--<iframe id="ifrmArch" name="ifrmArch" src="<php:item id="ruta" />" width="100%" height="600px"></iframe>-->
+						<iframe id="ifrmArch" name="ifrmArch"  width="100%" height="600px" src="<php:item id="ruta" />" ></iframe>
+					</div>
+				</div>
+				
+			  </php:repeticion>  
+         </div>
+        </form> 
+
+      </div>
+    <!-- /.box -->
+    </div>
+  </div>
+  <!-- /.col -->
+  </div>
+  <!--Tomar datos con ajax y reasigna datos de un selec a un input hidden-->
+ 

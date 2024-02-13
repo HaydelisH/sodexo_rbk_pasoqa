@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <!--Botones de cabecera-->
+        <div class="box-header">
+         <a class="btn btn-default btn_letra_azul" href="Jornadas.php" ><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
+        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <!--Mensajes-->
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+        <!--Formulario de los datos propios de Categoria-->   
+        <form role="form" name="formulario" id="formulario" action="Jornadas.php" method="POST" autocomplete="off">
+            <php:repeticion id="formulario">
+
+              <!--idSubClausula-->
+              <div class="form-row">
+                <div class="col-md-12">
+                  <label for="idSubClausula" >C&oacute;digo </label>
+                  <input type="text" class="form-control" id="idSubClausula" name="idSubClausula" value="<php:item id="idSubClausula" />" placeholder="C&oacute;digo de SubClausula">
+                </div>
+              </div> 
+
+              <!--Titulo-->
+              <div class="form-row">
+                <div class="col-md-12">
+                  <label for="Titulo">T&iacute;tulo</label>
+                  <input type="text" class="form-control" id="Titulo" name="Titulo" value="<php:item id="Titulo" />" placeholder="T&iacute;tulo" >
+                </div>
+              </div>
+
+              <!--Descripcion-->
+              <div class="form-row">
+                <div class="col-md-12">
+                  <label for="Descripcion">Descripci&oacute;n</label>
+                  <input type="text" class="form-control" id="Descripcion" name="Descripcion" value="<php:item id="Descripcion" />" placeholder="Descripci&oacute;n" >
+                </div>
+              </div>
+
+              <!--Editor de texto--> 
+             <div class="form-row">
+               <div class="col-md-12">
+                  <label for="SubClausula">Texto</label>
+                   <textarea id="TextoTxt_Clausulas" name="SubClausula" rows="10" cols="80" ><php:item id="SubClausula"/></textarea>
+               </div>
+             </div>  
+
+              <div class="form-row">  
+                <div class="col-md-2 xs-12 pull-right">
+                   <input type="hidden" name="accion" value="AGREGAR" />
+                   <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion2" value="AGREGAR" id="AGREGAR" onclick="javascript:return validarFormulario(this);"/>Guardar</button>
+                </div>
+              </div> 
+              
+            </php:repeticion>        
+        </form>  
+      </div>
+      </div>
+    <!-- /.box -->
+    </div>
+  </div>
+  <!-- /.col -->
+  </div>

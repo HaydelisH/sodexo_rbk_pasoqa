@@ -1,0 +1,537 @@
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+<style type="text/css">
+.responsiveContent {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+ padding-bottom: 50.2%;
+  margin-bottom: 20px;
+}
+.responsiveContent iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+</style>
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <!--Botones de cabecera-->
+		    <php:repeticion id="formulario">
+    			
+          <form role="form" name="formulario2" id="formulario2" action="rl_Documentos_Pendientes.php" method="POST">
+    				<input type="hidden" name="idDocumento" value="<php:item id="idDocumento" />" />
+    				<button type="button" class="btn btn-default" onclick="history.back(-1)"><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
+    			</form>
+
+          <form role="form" name="formulario3" id="formulario3" action="rl_Documentos_Pendientes.php" method="POST">
+    				<input type="hidden" name="idDocumento" value="<php:item id="idDocumento" />" />
+					<input type="hidden" name="accion" value="INICIOFIRMA" />
+    			</form>
+
+          <div class="box-body">
+            
+            <!--Mensajes-->
+            <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+            <div id="mensajeError"><php:texto id="mensajeError" /></div>
+        
+            <!--Datos referenciales-->
+            <div class="form-row">
+            
+              <form role="form" name="formulario" id="formulario" action="rl_Documentos_Pendientes.php" method="POST">
+
+                <div class="row">  			
+                	<div class="col-lg-2 col-md-2 pull-right">
+                    
+                    <input type="hidden" name="idDocumento" value="<php:item id="idDocumento" />" />
+                    <input type="hidden" name="id"            id="id"           />   
+                    <input type="hidden" name="type"          id="type"         /> 
+                    <input type="hidden" name="subtype"       id="subtype"      /> 
+                    <input type="hidden" name="authenticated" id="authenticated"/> 
+                    <input type="hidden" name="sign"          id="sign"         /> 
+                    <input type="hidden" name="sessionid"        id="sessionid"         /> 
+
+                    <input type="hidden"   name="inVerifyDocPersonalNumber" id="inVerifyDocPersonalNumber" value="<php:item id="RutUsuario"/>">
+                    <input type="hidden"   name="inVerifyType" id="inVerifyType" value="<php:item id="TipoFirma"/>">
+                    <input type="hidden" name="accion" value="FIRMAR" />
+                		<button class="btn btn-md btn-primary btn-block " onclick="verificar()" type="button" name="accion" id="btn-verify" value="FIRMAR" />Firmar</button>
+					
+					<!--Campo para enrolar-->
+					<input type="hidden" id="accion_enrolar" value="" />
+					<input type="hidden" id="rut_operador" value="<php:item id="RutUsuario"/>" />
+					<input type="hidden" id="rut" value="<php:item id="RutUsuario"/>" />
+					
+					<php:repeticion id="personas">
+						<input type="hidden" id="nombre" value="<php:item id='nombre'/>" />
+						<input type="hidden" id="appaterno" value="<php:item id='appaterno'/>" />
+						<input type="hidden" id="apmaterno" value="<php:item id='apmaterno'/>" />
+						<input type="hidden" id="correo" value="<php:item id='correo'/>" />
+						<input type="hidden" id="fono" value="<php:item id='fono'/>" />
+					</php:repeticion>
+					
+                	</div>
+                </div>
+
+          			<div class="row">  
+          				<div class="col-md-2">												
+          						<span >Nro Documento : <php:item id="idDocumento" /></span>							
+          				</div>					
+          		  </div>
+		  
+		            <div class="row">			   
+          				<div class="col-md-12">
+          					<div class="responsiveContent">
+          						<iframe id="ifrmArch" name="ifrmArch"  width="100%" height="600px" src="<php:item id="ruta" />" ></iframe>
+          					</div>
+          				</div>
+                </div>
+              </form> 
+
+            </div>
+          </div>
+        </php:repeticion>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+ <script type="text/javascript">
+  
+	var swpopup = 0;			 
+   let general = {
+        baseUrl: "",
+        apiKey: "",
+        digitalSignature: 0,
+        session: {
+          id: "",
+          companyId: "",
+          username: ""
+        },
+        currentAction: "VERIFY",
+        operator: {
+          sessionId: null
+        }
+      };
+   
+    
+    let popupPage;
+      let openCheckId = function(action) 
+    {
+		MostrarCargando();
+        general.currentAction = action;
+        // Create popup window
+        var w = 850;
+        var h = 580;
+
+        // Fixes dual-screen position                         Most browsers      Firefox
+        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+
+        var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+        var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+        var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+        var top = ((height / 2) - (h / 2)) + dualScreenTop;
+
+        var opciones = "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=" + w + ", height=" + h + ", top=" + top + ", left=" + left;
+        popupPage = window.open("checkid/index.html?v12", "libPage", opciones);
+
+        var timer = setInterval(function() { 
+          if(popupPage.closed) {
+            clearInterval(timer);
+			if( swpopup == 0 )
+			{
+				document.getElementById('cargando').style.display='none';
+			}
+          }
+        }, 1000);
+        
+        // Puts focus on the popupPage
+        if (window.focus) {
+          popupPage.focus();
+        }
+      };
+
+   
+      let getParamsVerify = function() {
+        return {
+          action: "VERIFY",
+          method: general.method,
+          apiKey: general.apiKey,
+          sessionId: general.session.id,
+          companyId: general.session.companyId,
+          operationId: 1,
+          baseUrl: general.baseUrl,
+		pinRestore: true,//cambio de pin
+		pinRestoreMethod:'ACEP',//pide nro documento
+          operator: {
+            sessionId: general.operator.sessionId,
+            identityDocument: {
+                countryCode: general.countryCode,
+                type: general.type,
+                personalNumber: general.rutaverificar
+            }
+          },
+          digitalIdentity: {
+            identityDocuments: [{
+              countryCode: general.countryCode,
+              type: general.type,
+              personalNumber: general.rutaverificar
+            }]
+          }
+          };
+      };
+    
+  //respuesta del formulario checkid
+  window.callback = function(result) 
+  {	//console.log("callback", result);
+	if( $("#accion_enrolar").val() === 'SI'){
+		popupPage_enrolar.close();
+		document.getElementById("formulario3").submit();	
+		console.log("callback", result);
+		//document.getElementById('cargandof').style.display='none';
+		OcultarCargando();
+		if (result.numError == 0) 
+		{
+			//alert ("OK")
+			 //document.getElementById("formulario3").submit();	
+		}
+		else
+		{
+			
+			alert (result.numError +  " " + result.msError);
+			//document.getElementById('cargandof').style.display='none';
+			OcultarCargando();
+		}
+
+		return false;
+	}
+	else
+	{
+		swpopup = 1;	 
+		popupPage.close();
+		console.log("callback", result);
+		//document.getElementById('cargando').style.display='none';
+
+		if (result.numError == 0) 
+		{
+		  if (result.action == "VERIFY") 
+		  {	
+			try{	
+					let resultMessage = "Validación Errónea";
+					if (result.data.authenticated)
+					{
+					  resultMessage = "Validación Exitosa!";
+				  
+					  general.lastVerify = result.data;
+			  
+					  document.getElementById('id').value       = general.lastVerify.id;
+					  document.getElementById('type').value       = general.lastVerify.type;
+					  document.getElementById('subtype').value      = general.lastVerify.subtype;
+					  document.getElementById('authenticated').value  = general.lastVerify.authenticated;
+					  document.getElementById('sign').value       = general.lastVerify.sign;      
+					  document.getElementById("formulario").submit();
+					
+					}
+					else
+					{	
+						document.getElementById('cargando').style.display='none';
+					}
+				}catch(err){
+					//alert(err);
+					document.getElementById('cargando').style.display='none';
+				}
+		
+			}
+		}
+		
+		if (result.numError == 0) 
+		{
+			//alert ("OK")
+		}
+		else
+		{
+			alert (result.numError +  " " + result.msError);
+			document.getElementById('cargando').style.display='none';
+		}
+
+		return false;
+	}
+  }
+
+  function verificar()
+  { 
+    //consulta_sesion();
+    consultar_usuario();
+  }
+
+  var conexion;
+      
+  function crearXMLHttpRequest() 
+  {
+    var xmlHttp=null;
+    if (window.ActiveXObject) 
+      xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+    else 
+    if (window.XMLHttpRequest) 
+      xmlHttp = new XMLHttpRequest();
+    return xmlHttp;
+  }
+
+
+  function consulta_sesion_enrolar()
+  {
+    conexion=crearXMLHttpRequest();
+  
+    conexion.open('POST', 'consulta_sesion.php', false);
+  
+    conexion.send(null);
+    // Devolvemos el resultado
+    respuesta =  conexion.responseText;   
+    arr_resp  = respuesta.split('|'); 
+    if (arr_resp[0] == 'ok')
+    {
+		//Datos para enrolar
+		general_enrolar.baseUrl 			= arr_resp[1];
+		general_enrolar.session.companyId 	= arr_resp[2];
+		general_enrolar.username 			= arr_resp[4];
+		general_enrolar.session.id 			= arr_resp[6];
+		general_enrolar.countryCode 		= arr_resp[7];
+		general_enrolar.type 				= arr_resp[8];
+		general_enrolar.apiKey 				= arr_resp[9];
+		
+		<php:repeticion id="formulario">
+		var rut						= "<php:item id="RutUsuario" />"
+		general_enrolar.rutoperador			= rut.replace ("-",""); 
+		
+		var rut						= "<php:item id="RutUsuario" />"
+		general_enrolar.rutaenrolar			= rut.replace ("-",""); 
+		</php:repeticion>
+			
+		openCheckId_enrolar("CREATE");			
+    }
+    else
+    {
+      alert (respuesta);
+    }
+    
+  }
+
+  function consulta_sesion()
+  {
+    conexion=crearXMLHttpRequest();
+  
+    conexion.open('POST', 'consulta_sesion.php', false);
+  
+    conexion.send(null);
+    // Devolvemos el resultado
+    respuesta =  conexion.responseText;   
+    arr_resp  = respuesta.split('|'); 
+    if (arr_resp[0] == 'ok')
+    {
+      general.baseUrl       = arr_resp[1];
+      general.session.companyId   = arr_resp[2];
+      general.username      = arr_resp[4];
+      general.session.id      = arr_resp[6];
+      general.countryCode     = arr_resp[7];
+      general.type        = arr_resp[8];
+      general.apiKey        = arr_resp[9];
+
+      document.getElementById('sessionid').value =   general.session.id; //token de la sesion
+
+      var rut           = document.getElementById('inVerifyDocPersonalNumber').value;
+      general.rutaverificar   = rut.replace ("-","");
+      general.method        = document.getElementById('inVerifyType').value;
+
+      openCheckId("VERIFY");
+    }
+    else
+    {
+      alert (respuesta);
+    }
+    
+  }
+
+  function consultar_usuario()
+  {
+    conexion=crearXMLHttpRequest();
+	var rut           = document.getElementById('inVerifyDocPersonalNumber').value;
+    rut  = rut.replace ("-","");
+	var url = 'consulta_usuario.php?personalNumber=' + rut;
+
+    conexion.open('GET',url, false);
+  
+    conexion.send(null);
+    // Devolvemos el resultado
+    respuesta =  conexion.responseText;  
+
+	var datos = JSON.parse(respuesta); 
+
+	if( respuesta.length > 5 ){
+	
+		$("#mensajeError").removeClass("callout callout-wauning");
+		$("#mensajeError").html("");
+		consulta_sesion();
+    }
+    else
+    {
+	  $("#respuesta").css("display","none");
+	  $("#huella").html("");
+	  $("#pin").html("");
+	  
+	/*  $("#mensajeError").addClass("callout callout-warning");
+	  $("#mensajeError").html("El usuario no esta enrolado, <a onclick='enrolarse()'>haga clic aqu&iacute;</a> para enrolarse");*/
+	  
+	  var mensaje = "El usuario no esta enrolado, " + "<a onclick='enrolarse()'>haga clic aqu&iacute;</a>" + " para enrolarse";
+      ventanax(mensaje,'error')
+	  
+    }
+}
+
+    let general_enrolar = {
+        baseUrl: "",
+        apiKey: "",
+        digitalSignature: 0,
+        session: {
+          id: "",
+          companyId: "",
+          username: ""
+        },
+        currentAction: "CREATE",
+        operator: {
+          sessionId: null
+        }
+      };
+
+      let popupPage_enrolar;
+      let openCheckId_enrolar = function(action) 
+	  {
+        general_enrolar.currentAction = action;
+        // Create popup window
+        var w = 900;
+        var h = 620;
+
+        // Fixes dual-screen position                         Most browsers      Firefox
+        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+
+        var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+        var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+        var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+        var top = ((height / 2) - (h / 2)) + dualScreenTop;
+
+        var opciones = "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=" + w + ", height=" + h + ", top=" + top + ", left=" + left;
+        popupPage_enrolar = window.open("checkid/index.html?v12", "libPage", opciones);
+		
+	
+		var timer_enrolar = setInterval(function() { 
+			if(popupPage_enrolar.closed) {
+				clearInterval(timer_enrolar);
+				//document.getElementById('cargandof').style.display='none';
+			}
+		}, 1000);
+	
+		
+        // Puts focus on the popupPage_enrolar
+        if (window.focus) {
+          popupPage_enrolar.focus();
+        }
+      };
+
+      let getParamsCreate = function() {
+        return {
+            action: "CREATE",
+	          apiKey: general_enrolar.apiKey,
+	          sessionId: general_enrolar.session.id,
+	          companyId: general_enrolar.session.companyId,
+	          operationId: 1,
+	          baseUrl: general_enrolar.baseUrl,
+			  useFingerprint: false,//si pide huella al que esta enrolando
+			  usePin: true,//si pide pin al que esta enrolando
+			  pinRestore: false,//cambio de pin
+			  pinRestoreMethod:'ACEP',
+	          operator: {
+			  useFingerprint:false,
+			  usePin:true,
+              sessionId: general_enrolar.operator.sessionId,
+              identityDocument: {
+                  countryCode: general_enrolar.countryCode,
+                  type: general_enrolar.type,
+                  personalNumber: general_enrolar.rutoperador	
+              }
+            },
+		
+              digitalIdentity: {
+                  personalData: {
+                      givenNames: '',
+                      surnames: '',
+                      dob: 20000101,
+                      gender: "NOT_KNOWN"
+                  },
+                  emailAddresses: [
+                    {
+                        type: 'BUSINESS',
+                        address: '',
+                        primary: true
+                    },
+                    {
+                        type: 'PERSONAL',
+                        address: '' ,
+                        primary: false
+                    }
+                ],
+                contactPhones: [
+                    {
+                        number: '',
+                        primary: true,
+                        type: 'HOME'
+                    },
+                    {
+                        number: '',
+                        primary: false,
+                        type: 'PERSONAL'
+                    }
+
+                  ],
+                  identityDocuments: [{
+                    countryCode: general_enrolar.countryCode,
+                    type: general_enrolar.type,
+                    personalNumber: general_enrolar.rutaenrolar
+                  }]
+              }
+          };
+      };
+
+  window.getParams = function()
+  {
+    //return getParamsVerify();
+		if( $("#accion_enrolar").val() === 'SI' ){
+			//$("#accion_enrolar").val('');
+			return getParamsCreate();
+		}else{
+			 return getParamsVerify();
+    }
+  }
+	function enrolarse()
+	{
+		 $('#myModalx').modal('hide');
+		$("#accion_enrolar").val('SI');	
+		consulta_sesion_enrolar();
+		
+		
+	}
+
+
+  
+  </script>
+   

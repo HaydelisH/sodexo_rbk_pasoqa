@@ -1,0 +1,189 @@
+	<div class="row">
+	  <div class="col-md-12">
+		<div class="box">
+		  <div class="box-body pad table-responsive">
+			 <div class="box-header">
+			  <php:repeticion id="formulario">
+			 
+			</div>	
+			<div class="box-body">
+
+				<form name="formulario2" id="formulario_usuarios" action="Personas.php" method="POST" autocomplete="off">
+
+		          <table id="example2" class="table table-bordered table-hover">
+			          <div class="col-md-2 xs-12">
+				        <button class="btn btn-md btn-default btn-block ocultar" type="button" style="margin-top: 10px" data-toggle="collapse" href="#collapseExample" role="button" data-parent="#accordion"><a id="a">Ocultar Filtro</a></button>
+			          </div>
+		          </table>
+		  			
+		  		    <div id="collapseExample"  class="panel-collapse collapse in">
+		      			<div class="col-md-12">
+		      				<div class="box">
+		      					<div class="box-body pad table-responsive">
+		      					  <div class="box-header">
+		      						  <div class="form-group">
+									 
+		   									
+		   									<!--Rut del trabajador-->
+											<div class="form-row">
+												<div class="col-md-4 xs-12">
+											 		<label for="personaid">Rut Trabajador</label>
+											  		<input type="text" class="form-control" id="personaid" name="personaid" maxlength="50" value="<php:item id="personaid" />" placeholder="Rut Trabajador" />
+												</div>
+											</div>
+
+											<!--Nombre del trabajador-->
+											<div class="form-row">
+												<div class="col-md-4 xs-12">
+											 		<label for="nombre">Nombre </label>
+											  		<input type="text" class="form-control" id="nombre" name="nombre" maxlength="50" value="<php:item id="nombre" />" placeholder="Nombre " />
+												</div>
+											</div>
+											
+											<!--Envio Info-->
+											<div class="form-row">
+												<div class="col-md-4 xs-12">
+											 	 <label for="Descripcion">Envio Info</label>
+													<select class= "form-control" name="envioinfo" id="envioinfo" >
+														<option value="-1">(Seleccione)</option>
+														<php:repeticion id="EnvioInfo_select">			
+															<option value="<php:item id="envioinfo" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="envioinfo" /><php:argumento idvalor="envioinfo" /></php:funcion>><php:item id="Descripcion" /></option>
+														</php:repeticion>
+													</select>										  
+												</div>
+											</div>
+											
+											<!--Nombre de Contacto-->
+											<div class="form-row" style="display:none">
+												<div class="col-md-3 xs-12">
+											 		<label for="nombreContacto">Nombre de Contacto</label>
+											  		<input type="text" class="form-control" id="nombreContacto" name="nombreContacto" maxlength="50" value="<php:item id="nombreContacto" />" placeholder="Nombre de Contacto" />
+												</div>
+											</div>
+
+											<!--Nombre del trabajador-->
+											<div class="form-row" style="display:none">
+												<div class="col-md-3 xs-12">
+											 		<label for="relacionContacto">Relacion Contacto</label>
+											  		<input type="text" class="form-control" id="relacionContacto" name="relacionContacto" maxlength="50" value="<php:item id="relacionContacto" />" placeholder="Relacion Contacto" />
+												</div>
+											</div>
+											
+											<div class="form-row">
+												<div class="col-md-2 xs-12 pull-right"  style="margin-top: 15px;">
+													<input type="hidden" name="accion" value="BUSCAR" />
+													<button class="btn btn-md btn-primary btn-block"  name="accion2" type="submit" value="BUSCAR">Buscar</button>
+												</div>
+											</div>
+			                    		</div> <!-- <div class="form-group">-->
+			                  		</div> <!--<div class="box-header">-->
+			               		</div> <!-- <div class="box-body pad table-responsive">-->
+			              	</div> <!-- <div class="box">-->
+			            </div> <!-- <div class="col-md-12">-->
+			          	<!--</div><div class="row"> -->
+			      	</div> <!-- <div class="collapse" id="collapseExample"> -->
+			    </form>
+       
+
+				<!--Mensajes-->
+				<div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+				<div id="mensajeError"><php:texto id="mensajeError" /></div>
+				
+					<div id="divtabla" class="tabla-responsiva" >
+						<table id="" class="table table-bordered table-hover" name="tbltabla">
+							<thead>
+								<tr>
+									<th data-campo="C&oacute;digo Empleado" style="text-align: center;" >Rut del Trabajador</th>
+									<th data-campo="Nombre" style="text-align: center;" >Nombre</th>
+									<th data-campo="envioinfo" style="text-align: center;" >Envio Info</th>
+									<!--<th data-campo="nombreContacto" style="text-align: center;" >Nombre Contacto</th>
+									<th data-campo="relacionContacto" style="text-align: center;" >Relacion Contacto</th>-->
+									<th style="text-align: center;" data-campo="Opciones">Opciones</th>
+								</tr>
+							</thead>
+							<tbody>
+								<php:repeticion id="listado">
+									<tr>
+										<td data-campo="personaid" style="text-align: center;"><php:item id="personaid" /></td>
+										<td data-campo="Nombre" style="text-align: center;"><php:item id="nombre" /> </td>
+										<td data-campo="envioinfo" style="text-align: center;"><php:item id="ei" /></td>
+										<!--<td data-campo="nombreContacto" style="text-align: center;"><php:item id="nombreContacto" /></td>
+										<td data-campo="relacionContacto" style="text-align: center;"><php:item id="relacionContacto" /></td>-->
+										<td data-campo="Opciones" style="text-align: center;">
+										  <form name="formulario" id="formulario_tipo" action="Personas.php" method="POST">
+											   <input type="hidden" name="personaid" value="<php:item id="personaid" />">
+											   <input type="hidden" name="nombre" value="<php:item id="nombre_filtro" />" >
+											   <input type="hidden" name="envioinfo" value="<php:item id="envioinfo_filtro />" >
+											   <input type="hidden" name="pagina" value="<php:texto id="pagina" />">
+											   <input type="hidden" name="nombrex" value="<php:texto id="nombrex" />">
+											   <button class="btn btn-primary btn-sm" type="submit" name="accion" value="DETALLE" >Detalle</button>
+										  </form>
+										</td>
+									</tr>
+								</php:repeticion>
+							</tbody>
+							<tr>  
+			                  <th colspan=5 class="tabla_abajo">
+			                  <div class="col-md-12" style="font-weight: normal;">
+			                     <php:item id="pagina_actual" /> de <php:item id="pagina_ultimo" /> - Total <php:item id="total_registros" /> Registros
+			                  </div>
+			                    <div class="col-xs-offset-5"> 
+				                    <nav aria-label="nav1">
+				                      <ul class="pagination justify-content-center" style="margin-top: 0px; margin-bottom: 0px;">
+				                      <li class="page-item ">
+				                        <a id="pagina_primera" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_primera" />);" ><span><i class="fa fa-angle-double-left"></i></span></a>
+				                      </li>
+				                      <li class="page-item ">
+				                        <a id="pagina_anterior" class="page-link" href="#" tabindex="-1" onclick="javascript:proc_paginado(<php:item id="pagina_anterior" />);" ><span ><i class="fa fa-angle-left"></i></span></a>
+				                      </li>                  
+				                      <li class="page-item active"><a class="page-link1" href="#"><php:item id="pagina_actual" /></a></li>                              
+				                      <li class="page-item">
+				                        <a id="pagina_siguente" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_siguente" />);"  title="<php:item id="pagina_siguente" />"><span><i class="fa fa-angle-right"></i></span></a>
+				                      </li>
+				                      <li class="page-item">
+				                      <a id="pagina_ultimo" class="page-link" href="#" onclick="javascript:proc_paginado(<php:item id="pagina_ultimo" />);" title="<php:item id="pagina_ultimo" />"><span><i class="fa fa-angle-double-right"></i></span></a>
+				                      </li>                                                     
+				                      </ul>
+				                    </nav>
+			                    </div>
+			                    	<div class="col-md-2 pull-right">
+										<form action="Reportes_Excel_PersonasInfoContact.php" method="POST" name="formulario4" id="formulario4" >
+
+											<!--Datos necesarios para generar reportes-->
+											<input type="hidden" name="personaid" value="<php:item id="personaid" />" >
+											<input type="hidden" name="nombre" value="<php:item id="nombre" />" >
+											<input type="hidden" name="envioinfo" value="<php:item id="envioinfo" />" >
+											<input type="hidden" name="nombreContacto" value="<php:item id="nombreContacto" />" >
+											<input type="hidden" name="relacionContacto" value="<php:item id="relacionContacto" />" >
+											<button type="submit" name="accion" id="accion" value="DESCARGAR" class="form-control btn btn-md btn-primary"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Descargar</button>
+										</form>
+									</div>
+			                    </th>
+			                </tr>
+    					</table>
+						<form name="paginado" id="paginado" action="Personas.php" method="POST" >
+							<input type="hidden" name="pagina" value="" id="pagina" >
+							<input type="hidden" name="holdingid" value="<php:item id="holdingid" />" >
+							<input type="hidden" name="personaid" value="<php:item id="personaid" />" >
+							<input type="hidden" name="nombre" value="<php:item id="nombre" />" >
+							<input type="hidden" name="envioinfo" value="<php:item id="envioinfo" />" >
+							<input type="hidden" name="nombreContacto" value="<php:item id="nombreContacto" />" >
+							<input type="hidden" name="relacionContacto" value="<php:item id="relacionContacto" />" >
+						</form>
+					</div>
+				</php:repeticion>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+</section>
+
+<script>
+ 
+</script>
+
+
+
+
+

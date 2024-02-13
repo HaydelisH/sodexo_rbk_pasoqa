@@ -1,0 +1,210 @@
+    <script src="js/Chart.js"></script>
+    <script src="js/Chart.bundle.js"></script>
+    <script src="js/utils.js"></script>
+
+  
+    <div id="mensajeError" ><php:texto id="mensajeError" /></div>
+    <div id="mensajeOK" ><php:texto id="mensajeOK" /></div>
+  
+    <php:repeticion id="formulario">
+    
+         <div class="container-fluid">   
+      <!--Panel general-->        
+      <div class="row pull-center-container">
+
+        <!--Total de documentos-->
+        <div class="col-lg-3 col-lg-offset-0 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+          <div class="inner">
+            <h3><div id="dt"><php:item id="TotalDocumentos" /></div></h3>
+
+            <p>Total Documentos</p>
+          </div>
+          <div class="icon">
+            <i class="fa fa-file-text-o" aria-hidden="true"></i>
+          </div>
+          <form name="formulario" id="formulario_usuarios" action="<php:texto id='action' />" method="POST" autocomplete="off">           
+            <button class="btn-xs btn-block bg-aqua" type="submit"  name="accion" value="TODOS"><span>Ver <i class="fa fa-arrow-circle-right"></i></span></button>
+          </form>
+          </div>
+        </div>        
+        
+        <!--En proceso-->
+        <div class="col-lg-3 col-lg-offset-0 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+          <div class="inner">
+            <h3><div id="dp"><php:item id="DocumentosEnProceso" /></div></h3>
+
+            <p>Documentos en Proceso de Firma</p>
+          </div>
+          <div class="icon">
+            <i class="fa fa-spinner" aria-hidden="true"></i>
+          </div>
+          <form name="formulario" id="formulario_usuarios" action="<php:texto id='action' />" method="POST" autocomplete="off">           
+            <button class="btn-xs btn-block bg-yellow" type="submit" name="accion" value="POR_FIRMA"><span>Ver <i class="fa fa-arrow-circle-right"></i></span></button>
+          </form>
+          </div>
+        </div>        
+    
+        <!--Firmados-->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+          <div class="inner">
+            <h3><div id="df"><php:item id="DocumentosFirmados" /></div></h3>
+
+            <p>Documentos Firmados</p>
+          </div>
+          <div class="icon">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          </div>            
+          <form name="formulario" id="formulario_usuarios" action="<php:texto id='action' />" method="POST" autocomplete="off">           
+            <button class="btn-xs btn-block bg-green" type="submit"  name="accion" value="FIRMADOS"><span>Ver <i class="fa fa-arrow-circle-right"></i></span></button>
+          </form>
+          </div>          
+        </div>  
+
+        <!--Recgazados-->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+          <div class="inner">
+            <h3><div id="dr"><php:item id="DocumentosRechazados" /></div></h3>
+
+            <p>Documentos Rechazados</p>
+          </div>
+          <div class="icon">
+            <i class="fa fa-ban"></i>
+          </div>            
+          <form name="formulario" id="formulario_usuarios" action="<php:texto id='action' />" method="POST" autocomplete="off">           
+            <button class="btn-xs btn-block bg-red" type="submit"  name="accion" value="RECHAZADOS"><span>Ver <i class="fa fa-arrow-circle-right"></i></span></button>
+          </form>
+          </div>          
+        </div>  
+        
+        
+      </div><!--/.row-->
+      
+      <!--Grafico de torta-->
+      <div class="col-md-6" style="">
+        <div class="row pull-center-container">     
+          <div class="box box-danger">
+            <div class="box-header with-border">
+              <h3 class="box-title">Mis Documentos</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+          <div class="box-body">
+            <canvas id="pieChart" style="height: 150px; width: 407px;" width="407" height="150"></canvas>
+          </div>
+         </div>          
+        </div>
+      </div>
+           
+      <!--Ultimos documentos creados-->
+         <div class="col-md-6" style="">
+          <div class="box box-warning">
+            <div class="box-header with-border">
+              <h3 class="box-title">Documentos recientes</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table no-margin">
+                  <thead>
+                  <tr>
+                    <th>Id Documento</th>
+                    <th>Modelo de Contrato</th>
+                    <th>Estado de firma</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <php:repeticion id="doc_ultimos">
+                    <tr>
+                     <form action="<php:texto id='action' />" name="formulario5" id="formulario5" method="post">
+                        <input type="hidden" name="idDocumento" id="idDocumento"  value='<php:item id="idDocumento"/>' >
+                      <td align="center"><button type="submit" id="accion_dr" name="accion" value="DETALLE" class="btn btn-md"><div id="boton"><php:item id="idDocumento" /></div></button></td>
+                      <td align="center"><php:item id="NombreTipoDoc" /></td>
+                      <td align="center"><span class="<php:item id="color"/>"><php:item id="Nombre" /></span></td>
+
+                        <input type="hidden" name="pagina" value="1">
+                        <input type="hidden" name="nombrex" value="<php:texto id="nombrex" />">
+                    </form>
+                    </tr>
+                   </php:repeticion>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+            <!-- /.box-body -->
+           <div class="box-footer text-center">
+            <!--Ver todos los documentos-->
+            <!--<form action="Reportes.php" method="POST" role="form" id="formulario3" name="formulario3">
+              <button name="accion" id="accion" value="BUSCAR_P" class="btn" style="background-color: transparent;"><a>Ver Todos</a></button>
+            </form>-->
+          </div>
+            <!-- /.box-footer -->
+          </div>
+        </div>
+      </div> <!-- Conteiner -->
+
+<script>
+
+  $(document).ready(function(){
+	
+    if( $("#boton").html() == '' ){
+      $("#accion_dr").css("display","none");
+      $("#boton").hide();
+    }
+
+    var ctx = document.getElementById("pieChart");
+
+    var data = {
+        labels: [
+             "Firmados",
+             "En Proceso",
+             "Rechazados"
+        ],
+        datasets: [
+            {
+                data: [$("#df").html(), $("#dp").html(), $("#dr").html()],
+                backgroundColor: [
+                     "#00a65a",
+                     "#f39c12",
+                     "#dd4b39"
+                ]
+            }]
+    };
+
+    var pieChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: data,
+      options: {
+          legend: {
+              display: true,
+              position: 'bottom',
+              labels: {
+                fontColor: "#000080",
+              }
+          }
+      }
+    });
+  });
+
+</script>
+
+</php:repeticion>
+  

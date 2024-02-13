@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-body pad table-responsive">
+                <div class="box-header">
+                    <div class="box-header">
+                    <a class="btn btn-default btn_letra_azul" href="#" onclick="window.history.go(-1)"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
+                </div>
+                <div class="form-inline ">
+                    <div class="form-group">
+                        <form name="formulario" id="formulario_usuarios" action="Respuesta_importar_masivo.php" method="POST" autocomplete="off">
+                            <!--input type="text" name="IdArchivo"  value="<php:texto id="IdArchivo" />" /-->    
+                            <input type="hidden" name="pagina"  value="<php:texto id="pagina" />" />    
+                            <input type="hidden" name="nombrex" value="<php:texto id="nombrex" />" /> 
+                        </form>
+                    </div>
+                </div> 
+            </div>
+            <div class="box-body">
+                <div id="mensajeError"><php:texto id="mensajeError" /></div>
+                <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+                <php:repeticion id="formulario">
+                <div id="divtabla" class="tabla-responsiva" >
+                    <table id="example5" class="table table-bordered table-hover" name="tbltabla">
+                        <thead>
+                            <tr>
+                                <th data-campo="fila" style="text-align: center;">Fila</th>
+                                <th data-campo="resultado" style="text-align: center;">Resultado</th>
+                                <th data-campo="observaciones" style="text-align: center;">Observaciones</th>
+                                <th data-campo="tipotransaccion" style="text-align: center;">Tipo Transacci&oacute;n </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <php:repeticion id="listado">
+                            <tr>
+                                <td data-campo="fila" align="center"><php:item id="fila" /></td>
+                                <td data-campo="resultado" align="center"><php:item id="resultado" /></td>
+                                <td data-campo="observaciones" align="center"><php:item id="observaciones" /></td>
+                                <td data-campo="tipotransaccion" align="center"><php:item id="tipotransaccion" /></td>
+                                <!--<td data-campo="Opciones">
+                                <form name="formulario" id="formulario_tipo" action="Respuesta_importar.php" method="POST">
+                                    <input type="hidden" name="holdingid" value="<php:item id="holdingid" />">
+                                </form></td>-->
+                            </tr>
+                            </php:repeticion>
+                        </tbody>
+                    </table>
+                    <form name="paginado" id="paginado" action="Respuesta_importar.php" method="POST" >
+                        <input type="hidden" name="pagina"        value="" id="pagina" >
+                        <input type="hidden" name="accion"        value="BUSCAR" />
+                        <input type="hidden" name="holdingid"       value="<php:item id="holdingid" />" >
+                        <input type="hidden" name="nombrex"       value="<php:item id="nombrex" />" >
+                    </form>
+                    <!--div class="col-md-2 pull-right">
+                        <form action="Reportes_Excel_resultadopostulacion.php" method="POST" name="formulario" id="formulario" >
+                            <input type="hidden" id="IdArchivo" name="IdArchivo" value="2" />
+                            <button type="submit" name="accion" id="accion" value="DESCARGAR" class="form-control btn btn-md btn-primary"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Descargar</button>
+                        </form>
+                    </div-->
+                </div>
+                </php:repeticion>
+            </div> 
+        </div>
+    </div>
+</div>
+</section>

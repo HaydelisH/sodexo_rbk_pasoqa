@@ -1,0 +1,75 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="box">
+			<div class="box-body pad table-responsive">
+				<div class="box-header">
+					<div class="btn-group-md" role="group">
+						<a class="btn btn-default btn_letra_azul" href="tiposusuarios.php" ><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</a>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<!--Mensajes-->
+					<div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+					<div id="mensajeError"><php:texto id="mensajeError" /></div>
+					<php:repeticion id="formulario">
+					<form role="form" name="formulario" id="formulario" action="tiposusuarios.php" method="POST" autocomplete="off">
+						<!--Campos basicos-->
+						<div class="form-row">
+							<label for="contenedorid" class="col-md-4 control-label">Nombre</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control" id="nombre" name="nombre" value="<php:item id="nombre" />" placeholder="Nombre Perfil" required>
+							</div>
+						</div>
+						<div class="form-row">
+							<label for="contenedorid" class="col-md-4 control-label">Puede re-notificar documentos</label>
+							<div class="col-md-8">
+								<input type="checkbox"  id="renotificar" name="renotificar" >
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col-md-12">  
+								<table class="table table-bordered table-hover">
+									<thead>
+										<th data-campo="Opciones" >Opciones</th>
+										<th data-campo="Consulta" class="text-center">Consulta</th>
+										<th data-campo="Modifica" class="text-center">Modifica</th>
+										<th data-campo="Crea" class="text-center">Crea</th>
+										<th data-campo="Elimina" class="text-center">Elimina</th>
+										<th data-campo="Ver Documento" class="text-center">Ver Documento</th>
+									</thead>
+									<tbody>
+										<php:repeticion id="listado">
+										<tr>
+											<td align="left" data-campo="Opciones"><php:item id="nombre" /></td>
+											<td align="center" data-campo="Consulta"><input  <php:item id="disabled_consulta" /> class="js-switch" type="checkbox" name="consulta<php:filamenos />" 	id="consulta<php:filamenos />" 	value="<php:item id="opcionid" />"></td>
+											<td align="center" data-campo="Modifica"><input <php:item id="disabled_modifica" />  class="js-switch" type="checkbox" name="modifica<php:filamenos />" 	id="modifica<php:filamenos />" 	value="<php:item id="opcionid" />"></td>
+											<td align="center" data-campo="CREA"><input <php:item id="disabled_crea" />  class="js-switch" type="checkbox" name="crea<php:filamenos />"     	id="crea<php:filamenos />"     	value="<php:item id="opcionid" />"></td>
+											<td align="center" data-campo="Elimina"><input <php:item id="disabled_elimina" /> class="js-switch" type="checkbox" name="elimina<php:filamenos />"  	id="elimina<php:filamenos />"  	value="<php:item id="opcionid" />"></td>
+											<td align="center" data-campo="Ver Documento"> <input <php:item id="disabled_ver" /> class="js-switch" type="checkbox" name="ver<php:filamenos />"	id="ver<php:filamenos />"  		value="<php:item id="opcionid" />"></td>
+										</tr>
+										</php:repeticion>
+									</tbody>
+								</table>
+							</div>
+						</div>                         
+						<div class="form-row">  
+							<div class="col-md-2 xs-12 pull-right">
+								<input type="hidden" name="cantfilas" value="<php:texto id="cantfilas" />" />		
+								<input type="hidden" name="pagina" value="<php:texto id="pagina" />" />		
+								<input type="hidden" name="nombrex" value="<php:texto id="nombrex" />" />		
+								<input type="hidden" name="accion" value="AGREGAR" />
+								<button class="btn btn-md btn-primary btn-block pull-right" type="submit" name="accion2" value="AGREGAR" style="margin-top: 10px">Guardar</button>  
+							</div>
+						</div>                  
+					</form>     
+					</php:repeticion>
+				</div>
+				<!-- /.box-body -->
+			</div>
+			<!-- /.box -->
+		</div>
+	</div>
+	<!-- /.col -->
+</div>

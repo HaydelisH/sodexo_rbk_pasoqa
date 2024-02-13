@@ -1,0 +1,1174 @@
+    <script src="js/Chart.js"></script>
+    <script src="js/Chart.bundle.js"></script>
+    <script src="js/utils.js"></script>
+
+  <style>
+  canvas {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+  }
+  </style>
+
+    <div id="mensajeError" ><php:texto id="mensajeError" /></div>
+    <div id="mensajeOK" ><php:texto id="mensajeOK" /></div>
+  
+    <php:repeticion id="formulario">
+
+      <div class="container-fluid">
+      
+    <!--I : Panel General -->
+      <div class="row">
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-aqua">
+              <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">CUMPLIMIENTO</span>
+                <span class="info-box-number" id="cumplimiento_gama"><div id="pg_cumplimiento"></div></span>
+                <div class="progress">
+                  <div class="progress-bar" id="pg_cumplimiento_barra"></div>
+                </div>
+                    <span class="progress-description">
+                        <div id="pg_cumplimiento_desc"></div>
+                    </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-yellow">
+              <span class="info-box-icon"><i class="fa fa-spinner" aria-hidden="true"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">EN PROCESO</span>
+                <span class="info-box-number" id="totales_gama"><div id="pg_proceso"></div></span>
+
+                <div class="progress">
+                  <div class="progress-bar" id="pg_proceso_barra" ></div>
+                </div>
+                    <span class="progress-description">
+                      <div id="pg_proceso_desc"></div>
+                    </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-green">
+              <span class="info-box-icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">FIRMADOS</span>
+                <span class="info-box-number" id="total_firmados_gama" ><div id="pg_firmados"></div>
+                </span>
+
+                <div class="progress">
+                  <div class="progress-bar" id="pg_firmados_barra"></div>
+                </div>
+                    <span class="progress-description">
+                      <div id="pg_firmados_desc"></div>
+                    </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-red">
+              <span class="info-box-icon"><i class="fa fa-ban" aria-hidden="true"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">RECHAZADOS</span>
+                <span class="info-box-number"><div id="pg_rechazados"></div></span>
+
+                <div class="progress">
+                  <div class="progress-bar" id="pg_rechazados_barra"></div>
+                </div>
+                    <span class="progress-description">
+                        <div id="pg_rechazados_desc"></div>
+                    </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+      </div>
+    <!--I : Fin -->
+
+    <!--II : Documentos generados -->
+    <div class="col-md-12" style="padding-left: 0px; padding-right: 0px;">
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <div class="col-md-3 col-sm-12" >
+            <h2 class="box-title"><div id="nuevo_anno"></div> </h2>
+          </div>
+
+          <div class="box-tools">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <!--<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>-->
+          </div>
+          <div class="col-md-3 col-sm-12" >
+           <div class="form-group" >
+              <div class="input-group date" style="margin-right: 10px" >
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                  <input type="datetime" style="background-color: white;" class="form-control pull-right" id="anno" name="anno" readonly /> 
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-12">
+              <!--Select de Ejecutivos disponibles-->
+              <select class= "form-control" name="S_Documentos_Empresas" id="S_Documentos_Empresas">
+                  <option value="0">( Seleccione Empresa )</option>
+                  <php:repeticion id="Documentos_Empresas">
+                    <option value='<php:item id="RutEmpresa"/>'><php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEmpresa" /><php:argumento valor="RutEmpresa" /></php:funcion><php:item id="RazonSocial" /></option>
+                  </php:repeticion>
+              </select>  
+          </div>
+          <div class="col-md-3 col-sm-12">
+              <!--Select de Ejecutivos disponibles-->
+              <select class= "form-control" name="S_Documentos_Ejecutivos" id="S_Documentos_Ejecutivos">
+                  <option value="0">( Seleccione Ejecutivo )</option>
+                  <php:repeticion id="Documentos_Ejecutivos">
+                    <option value='<php:item id="RutEjecutivo"/>'><php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEjecutivo" /><php:argumento valor="RutEjecutivo" /></php:funcion><php:item id="nombre" /> <php:item id="appaterno" /></option>
+                  </php:repeticion>
+              </select>
+          </div>
+        </div>
+        <div class="box-body" id="grafico_b">
+          <canvas id="GraficoBarras" style="width: 100%; height: 200px;"></canvas>
+        </div>
+        <!-- /.box-body -->
+         <div class="box-footer text-center">
+          <!--Ver todos los documentos-->
+            <button name="accion" id="accion" value="BUSCAR_P" class="btn" style="background-color: transparent;"><a>Ver Todos</a></button>
+        </div>
+      </div>
+    </div>
+    <!--II : Fin-->
+
+    <!--III : Empresas-->
+    <div class="col-md-12 col-xs-12" style="padding-left: 0px;">
+      <!-- USERS LIST -->
+      <div class="box box-danger">
+        <div class="box-header with-border">
+          <h3 class="box-title">Empresas </h3>    
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+
+          <!--Grafico-->
+          <div class="col-md-6 xs-12">
+            <div class="col-md-10 col-md-offset-1"> 
+              <!--Select de Empresas disponibles-->
+              <select class= "form-control" name="RutEmpresa" id="RutEmpresa" required>
+                  <option value="<php:item id="RutEmpresa"/>"><php:item id="RazonSocial" /></option>
+                  <php:repeticion id="Empresas">
+                    <option value="<php:item id="RutEmpresa"/>" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="RutEmpresa" /><php:argumento valor="RutEmpresa" /></php:funcion>><php:item id="RazonSocial" /></option>
+                  </php:repeticion>
+              </select>
+            </div>
+            <div id="grafico_e">
+              <canvas id="GraficoEmpresas" width="100%" height="50px"></canvas>
+            </div>
+          </div>
+
+          <!--Datos-->
+          <div class="col-md-6 xs-12" style="padding-top: 20px;">
+            <div id="grafico_e_datos">
+                
+                 <div class="progress-group">
+                    <span class="progress-text">Contrato Marco</span>
+                    <span class="progress-number"><div id="total_1"></div></span>
+
+                    <div class="progress sm">
+                      <div class="progress-bar progress-bar-green" id="barra_1"></div>
+                    </div>
+                  </div>
+                  <!-- /.progress-group -->
+                  <div class="progress-group">
+                    <span class="progress-text">Anexos</span>
+                    <span class="progress-number"><div id="total_2"></div></span>
+
+                    <div class="progress sm">
+                      <div class="progress-bar progress-bar-aqua" id="barra_2"></div>
+                    </div>
+                  </div>
+                  <!-- /.progress-group -->
+                  <div class="progress-group">
+                    <span class="progress-text">Contrato de Arriendo</span>
+                    <span class="progress-number"><div id="total_3"></div></span>
+
+                    <div class="progress sm">
+                      <div class="progress-bar progress-bar-red" id="barra_3"></div>
+                    </div>
+                  </div>
+                  <!-- /.progress-group -->
+                  <div class="progress-group">
+                    <span class="progress-text">Condiciones Generales</span>
+                    <span class="progress-number"><div id="total_4"></div></span>
+
+                    <div class="progress sm">
+                      <div class="progress-bar progress-bar-yellow" id="barra_4"></div>
+                    </div>
+                  </div>
+                  <!-- /.progress-group -->
+                  <div class="progress-group">
+                    <span class="progress-text">Contrato Finaciero-Operativo</span>
+                    <span class="progress-number"><div id="total_5"></div></span>
+
+                    <div class="progress sm">
+                      <div class="progress-bar progress-bar-yellow" id="barra_5" style="background: #b5bbc8;"></div>
+                    </div>
+                  </div>
+                  <!-- /.progress-group -->
+
+            </div>
+          </div>
+
+        <!-- /.box-body -->  
+        <div class="col-md-12">      
+          <div class="box-footer text-center">
+            <!--Ver todos los documentos-->
+            <form action="Reportes.php" method="POST" role="form" id="formulario3" name="formulario3">
+              <button name="accion" id="accion" value="BUSCAR" class="btn" style="background-color: transparent;"><a>Ver Todos</a></button>
+            </form>
+          </div>
+        </div>
+   
+        <!-- /.box-footer -->
+      </div>
+      <!--/.box -->
+    </div>
+    <!--III : Fin de Empresas-->
+
+    <!--IV : Ejecutivos-->   
+    <div class="col-md-6 col-xs-12" style="padding-left: 0px;padding-right: 0px;">
+      <!-- USERS LIST -->
+      <div class="box box-warning">
+        <div class="box-header with-border">
+          <h3 class="box-title">Ejecutivos </h3>
+
+          <div class="box-tools pull-right">
+            <span class="label label-green"><php:item id="cantidad" /> Ejecutivos</span>
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <!--<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>-->
+          </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+          <ul class="users-list clearfix">
+            <php:repeticion id="ejecutivos">
+              <li>
+                <div id="imagen" style="text-align: center; text-align: center;padding-left: 35px;">
+                 <img class="img-circle img-md" src="images/user_1.png" alt="Usuario" align="center" />
+               </div>
+                <!--Buscar Documentos por ejecutivo-->
+                <span class="users-list-date">
+                  <button type="button" id='<php:item id="RutEjecutivo"/>' class="btn btn-sm btn_ejecutivo" style="background-color: transparent;" value='<php:item id="RutEjecutivo"/>'>
+                      <php:item id="nombre" /> <br> <php:item id="appaterno" /> <php:item id="apmaterno" />
+                  </button>
+               </span>
+              </li>
+            </php:repeticion>
+          </ul>
+          <!-- /.users-list -->
+        </div>
+        <!-- /.box-body -->
+        
+        <div class="box-footer text-center" >
+            <div id="detalle_ejecutivo" class="collapse">  
+
+                <canvas id="GraficoEjecutivo" width="100%" height="200px"></canvas>
+
+                <div class="box-footer">
+                  <div class="row">
+                    <!--Empresa a la que pertenece-->
+                    <div id="ejecutivo_emp">
+                      <div class="col-md-10 col-md-offset-1"> 
+                        <select class="form-control" id="s_empresas_emp"></select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4 col-xs-12">
+                      <div class="description-block border-right">
+                        <span class="description-percentage text-green"></span>
+                        <h5 class="description-header"><div id="eje_num_clientes"></div></h5>
+                        <span class="description-text" id="eje_desc_clientes"></span>
+                      </div>
+                      <!-- /.description-block -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-sm-4 col-xs-12">
+                      <div class="description-block border-right">
+                        <span class="description-percentage text-green"></span>
+                        <h5 class="description-header"><div id="eje_num_generados"></div></h5>
+                        <span class="description-text" id="eje_desc_generados"></span>
+                      </div>
+                      <!-- /.description-block -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-sm-4 col-xs-12">
+                      <div class="description-block border-right">
+                        <span class="description-percentage text-green"></span>
+                        <h5 class="description-header"><div id="eje_num_cumplimiento"></div></h5>
+                        <span class="description-text" id="eje_desc_cumplimiento"></span>
+                      </div>
+                      <!-- /.description-block -->
+                    </div>
+                     
+                  </div>
+                  <!-- /.row -->
+                </div>
+            </div>
+        </div>
+
+        <div class="box-footer text-center">
+          <!--Ver todos los documentos-->
+          <form action="Reportes.php" method="POST" role="form" id="formulario3" name="formulario3">
+            <button name="accion" id="accion" value="BUSCAR" class="btn" style="background-color: transparent;"><a>Ver Todos</a></button>
+          </form>
+        </div>
+   
+        <!-- /.box-footer -->
+      </div>
+      <!--/.box -->
+    </div>
+    <!--IV : Fin-->
+  </div> <!-- Conteiner -->
+
+</php:repeticion>
+
+<script>
+
+  $(document).ready(function(){
+    // Grafico de barras : Documentos Generados
+    $('#anno').val(2018);
+    $('#nuevo_anno').html("Documentos Generados : " + $('#anno').val());
+    $('#S_Documentos_Empresas').val('99525100-0');
+    mostrarGBarras(); 
+
+    //Grafico de Empresas
+    $('#RutEmpresa').val('99525100-0');
+    mostrarGEmpresas($("#RutEmpresa").val());
+
+    //Grafico de Ejecutivos
+    $("#ejecutivo_emp").hide();
+
+    //Tooltips
+    $('[data-toggle="tooltip"]').tooltip(); 
+    
+  });
+
+  /////////////////////////////
+  ///Grafico  de Documentos///
+  ////////////////////////////
+  $('#anno').datepicker({
+    language: "es",
+    orientation: "bottom",
+    autoclose: true,
+    format: 'yyyy',
+    viewMode: "years", 
+    minViewMode: "years"
+  });
+
+  $("#anno").change(function(){
+
+     $('#nuevo_anno').html($('#anno').val());
+
+     $('#GraficoBarras').remove(); 
+     $('iframe.chartjs-hidden-iframe').remove(); 
+     $('#grafico_b').append('<canvas id="GraficoBarras" style="width: 100%; height: 150px;"><canvas>'); 
+     var ctx = document.getElementById("GraficoBarras"); 
+     var myChart = new Chart(ctx,{});
+
+      $("#pg_cumplimiento").html("");
+      $("#pg_cumplimiento_desc").html("");
+      $("#pg_cumplimiento_barra").removeAttr('style');
+      $("#pg_cumplimiento_barra").removeAttr('data-toogle');
+      $("#pg_cumplimiento_barra").removeAttr('data-original-title');
+      $("#pg_cumplimiento_barra").attr("title", "");
+
+      $("#pg_proceso").html("");
+      $("#pg_proceso_desc").html("");
+      $("#pg_proceso_barra").removeAttr('style');
+      $("#pg_proceso_barra").removeAttr('data-toogle');
+      $("#pg_proceso_barra").removeAttr('data-original-title');
+      $("#pg_proceso_barra").attr("title", "");
+
+      $("#pg_firmados").html("");
+      $("#pg_firmados_desc").html("");
+      $("#pg_firmados_barra").removeAttr('style');
+      $("#pg_firmados_barra").removeAttr('data-toogle');
+      $("#pg_firmados_barra").removeAttr('data-original-title');
+      $("#pg_firmados_barra").attr("title", "");
+
+      $("#pg_rechazados").html("");
+      $("#pg_rechazados_desc").html("");
+      $("#pg_rechazados_barra").removeAttr('style');
+      $("#pg_rechazados_barra").removeAttr('data-toogle');
+      $("#pg_rechazados_barra").removeAttr('data-original-title');
+      $("#pg_rechazados_barra").attr("title", "");
+      
+     mostrarGBarras();
+  });
+
+  $("#S_Documentos_Empresas").change(function(){
+
+     $('#GraficoBarras').remove(); 
+     $('iframe.chartjs-hidden-iframe').remove(); 
+     $('#grafico_b').append('<canvas id="GraficoBarras" style="width: 100%; height: 150px;"><canvas>'); 
+     var ctx = document.getElementById("GraficoBarras"); 
+     var myChart = new Chart(ctx,{});
+
+      $("#pg_cumplimiento").html("");
+      $("#pg_cumplimiento_desc").html("");
+      $("#pg_cumplimiento_barra").removeAttr('style');
+      $("#pg_cumplimiento_barra").removeAttr('data-toogle');
+      $("#pg_cumplimiento_barra").removeAttr('data-original-title');
+      $("#pg_cumplimiento_barra").attr("title", "");
+
+      $("#pg_proceso").html("");
+      $("#pg_proceso_desc").html("");
+      $("#pg_proceso_barra").removeAttr('style');
+      $("#pg_proceso_barra").removeAttr('data-toogle');
+      $("#pg_proceso_barra").removeAttr('data-original-title');
+      $("#pg_proceso_barra").attr("title", "");
+
+      $("#pg_firmados").html("");
+      $("#pg_firmados_desc").html("");
+      $("#pg_firmados_barra").removeAttr('style');
+      $("#pg_firmados_barra").removeAttr('data-toogle');
+      $("#pg_firmados_barra").removeAttr('data-original-title');
+      $("#pg_firmados_barra").attr("title", "");
+
+      $("#pg_rechazados").html("");
+      $("#pg_rechazados_desc").html("");
+      $("#pg_rechazados_barra").removeAttr('style');
+      $("#pg_rechazados_barra").removeAttr('data-toogle');
+      $("#pg_rechazados_barra").removeAttr('data-original-title');
+      $("#pg_rechazados_barra").attr("title", "");
+
+     mostrarGBarras();
+  });
+
+  $("#S_Documentos_Ejecutivos").change(function(){
+
+     $('#GraficoBarras').remove(); 
+     $('iframe.chartjs-hidden-iframe').remove(); 
+     $('#grafico_b').append('<canvas id="GraficoBarras" style="width: 100%; height: 150px;"><canvas>'); 
+     var ctx = document.getElementById("GraficoBarras"); 
+     var myChart = new Chart(ctx,{});
+
+      $("#pg_cumplimiento").html("");
+      $("#pg_cumplimiento_desc").html("");
+      $("#pg_cumplimiento_barra").removeAttr('style');
+      $("#pg_cumplimiento_barra").removeAttr('data-toogle');
+      $("#pg_cumplimiento_barra").removeAttr('data-original-title');
+      $("#pg_cumplimiento_barra").attr("title", "");
+
+      $("#pg_proceso").html("");
+      $("#pg_proceso_desc").html("");
+      $("#pg_proceso_barra").removeAttr('style');
+      $("#pg_proceso_barra").removeAttr('data-toogle');
+      $("#pg_proceso_barra").removeAttr('data-original-title');
+      $("#pg_proceso_barra").attr("title", "");
+
+      $("#pg_firmados").html("");
+      $("#pg_firmados_desc").html("");
+      $("#pg_firmados_barra").removeAttr('style');
+      $("#pg_firmados_barra").removeAttr('data-toogle');
+      $("#pg_firmados_barra").removeAttr('data-original-title');
+      $("#pg_firmados_barra").attr("title", "");
+
+      $("#pg_rechazados").html("");
+      $("#pg_rechazados_desc").html("");
+      $("#pg_rechazados_barra").removeAttr('style');
+      $("#pg_rechazados_barra").removeAttr('data-toogle');
+      $("#pg_rechazados_barra").removeAttr('data-original-title');
+      $("#pg_rechazados_barra").attr("title", "");
+      
+     mostrarGBarras();
+  });
+  
+  function datosGBarras(data){
+
+    var datos = JSON.parse(data);
+
+    var meses_grafico = "['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']";
+    var totales = datos.Documentos_T; 
+    var total = 0;
+    var en_proceso = datos.Documentos_P;
+    var en_pro = 0;
+    var firmados = datos.Documentos_F;
+    var firma = 0;
+    var rechazados = datos.Documentos_R;
+    var rech = 0;
+    var cumplimiento = [];
+    var pg_cumplimiento = 0;
+    var pg_proceso = 0;
+    var pg_rech = 0;
+
+    //Calculo de cumplimiento mensual 
+
+    for (var i = 0 ; i < 12 ; i++ ) {
+        
+        if( totales[i] != 0 ){
+
+          cumplimiento[i] = parseFloat(( firmados[i] * 100 ) / totales[i]).toFixed(2);
+
+        }else{
+          
+          cumplimiento[i] = 0;
+        
+        }
+
+        total  += totales[i];
+        firma  += firmados[i];
+        en_pro += en_proceso[i];
+        rech   += rechazados[i];
+    }
+
+    //Calculos para paneles generales 
+    if ( total > 0 ){
+        pg_cumplimiento = parseFloat(( firma  * 100 ) / total).toFixed(2);
+        pg_proceso      = parseFloat(( en_pro * 100 ) / total).toFixed(2);
+        pg_rech         = parseFloat(( rech   * 100 ) / total).toFixed(2);
+    }
+
+    //Asignacion de datos
+
+    $("#pg_cumplimiento").html(pg_cumplimiento + " %");
+    $("#pg_cumplimiento_desc").html(firma + " De " + total + " Documentos");
+    $("#pg_cumplimiento_barra").attr("style", "width:" + pg_cumplimiento + "%");
+    $("#pg_cumplimiento_barra").attr("data-toggle", "tooltip");
+    $("#pg_cumplimiento_barra").attr("data-original-title", + pg_cumplimiento + "%");
+    $("#pg_cumplimiento_barra").attr("title", + pg_cumplimiento + "%");
+
+    $("#pg_proceso").html(pg_proceso + " %");
+    $("#pg_proceso_desc").html(en_pro + " De " + total + " Documentos");
+    $("#pg_proceso_barra").attr("style", "width:" + pg_proceso + "%");
+    $("#pg_proceso_barra").attr("data-toggle", "tooltip");
+    $("#pg_proceso_barra").attr("data-original-title", + pg_proceso + "%");
+    $("#pg_proceso_barra").attr("title", + pg_proceso + "%");
+
+    $("#pg_firmados").html(pg_cumplimiento + " %");
+    $("#pg_firmados_desc").html(firma + " De " + total + " Documentos");
+    $("#pg_firmados_barra").attr("style", "width:" + pg_cumplimiento + "%");
+    $("#pg_firmados_barra").attr("data-toggle", "tooltip");
+    $("#pg_firmados_barra").attr("data-original-title", + pg_cumplimiento + "%");
+    $("#pg_firmados_barra").attr("title", + pg_cumplimiento + "%");
+
+    $("#pg_rechazados").html(pg_rech + " %");
+    $("#pg_rechazados_desc").html(rech + " De " + total + " Documentos");
+    $("#pg_rechazados_barra").attr("style", "width:" + pg_rech + "%");
+    $("#pg_rechazados_barra").attr("data-toggle", "tooltip");
+    $("#pg_rechazados_barra").attr("data-original-title", + pg_rech + "%");
+    $("#pg_rechazados_barra").attr("title", + pg_rech + "%");
+
+    var ctx = document.getElementById('GraficoBarras').getContext('2d');
+
+    // Borramos el área que nos interese
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+        datasets: [{
+                    type: 'line',
+                    label: 'Cumplimiento',
+                    data: firmados,
+                    backgroundColor: "#00c0ef",
+                    borderColor: "#00c0ef",
+                    pointBorderColor: "#00c0ef",
+                    pointBackgroundColor: "#00c0ef",
+                    pointHoverBackgroundColor: "00c0ef",
+                    pointHoverBorderColor: "00c0ef",
+                    borderWidth: 2,
+                    fill: false
+                  },
+                  {
+                    label: 'Total',
+                    data: totales,
+                    backgroundColor: "#009CC0"
+                  },{
+                    label: 'En Proceso',
+                    data: en_proceso,
+                    backgroundColor: "#f39c12"
+                  },{
+                    label: 'Firmados',
+                    data: firmados,
+                    backgroundColor: "#00a65a"  
+                  },{
+                    label: 'Rechazados',
+                    data: rechazados,
+                    backgroundColor: "#dd4b39"
+                  }
+        ]
+      },
+      options: {
+        responsive: true,
+        tooltips: {
+          callbacks: {
+            
+            label: function(tooltipItem, data) {
+              var nombre  = data.datasets[tooltipItem.datasetIndex].label;
+              var valor = tooltipItem.yLabel;
+              var index = tooltipItem.index;
+
+              if( nombre == 'Cumplimiento'){
+                
+                  if( totales[index] > 0 ){
+                    return  nombre + ": " + parseFloat(( valor * 100 ) / totales[index]).toFixed(2) + '%';
+                  }else{
+                    return  '0.00 %';
+                  }
+              }
+             
+              return nombre + ": " + valor;
+            }
+          }
+        }
+      }
+    });
+  }
+
+  function mostrarGBarras(){
+
+      var anno = $("#anno").val();
+      var empresa = $("#S_Documentos_Empresas").val(); 
+      var ejecutivo = $("#S_Documentos_Ejecutivos").val();
+
+      var url = "Documentos_Generados_ajax.php?anno=" + anno + "&RutEmpresa=" + empresa + "&RutEjecutivo=" + ejecutivo ;
+
+      // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+      if( window.XMLHttpRequest )
+        ajax = new XMLHttpRequest(); // No Internet Explorer
+      else
+        ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+     
+      // Almacenamos en el control al funcion que se invocara cuando la peticion
+      // cambie de estado 
+      ajax.onreadystatechange = funcionCallback;
+
+      // Enviamos la peticion
+      ajax.open( "GET", url, false );
+      ajax.send( "" );
+  }
+
+  function funcionCallback(){
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+      if( ajax.status == 200 )
+      {
+        // Escribimos el resultado en la pagina HTML mediante DHTML
+        //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
+        salida = ajax.responseText;
+ 
+        if( salida.length > 0 ){
+          datosGBarras(salida);
+        }
+      }
+    } else{
+        $("#mensajeError").removeClass("callout callout-warning");
+        $("#mensajeError").html("");
+      }
+  }
+
+
+  /////////////////////////////
+  /// Grafico por Empresas ///
+  ////////////////////////////
+  function mostrarGEmpresas(empresa){
+
+      var url = "Documentos_Empresas_ajax.php?RutEmpresa=" + empresa; 
+      // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+      if( window.XMLHttpRequest )
+        ajax = new XMLHttpRequest(); // No Internet Explorer
+      else
+        ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+     
+      // Almacenamos en el control al funcion que se invocara cuando la peticion
+      // cambie de estado 
+      ajax.onreadystatechange = funcionCallback_Empresas;
+
+      // Enviamos la peticion
+      ajax.open( "GET", url, false);
+      ajax.send( "" );
+  }
+
+  function funcionCallback_Empresas(){// Comprobamos si la peticion se ha completado (estado 4)
+
+    if( ajax.readyState == 4 )
+    {
+      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+      if( ajax.status == 200 )
+      {
+        // Escribimos el resultado en la pagina HTML mediante DHTML
+        salida_emp = ajax.responseText;
+
+        if( salida_emp.length > 0 ){
+          datosGEmpresas(salida_emp);
+        }
+      }
+    } else{
+        $("#mensajeError").removeClass("callout callout-warning");
+        $("#mensajeError").html("");
+      }
+  }
+
+  function datosGEmpresas(respuesta){
+
+      var datos = JSON.parse(respuesta); 
+
+      var ctomco   = datos.Contrato_Marco;
+      var anexos   = datos.Anexos;
+      var ctoarr   = datos.Contrato_Arriendo;
+      var ctocon   = datos.Condiciones_Generales;
+      var ctofin   = datos.Contrato_Financiero;
+      var firmados = datos.Firmados; 
+   
+      var i_cum = 0;
+
+      var total_1 = ctomco[0] + ctomco[1] + ctomco[2];
+      var total_2 = anexos[0] + anexos[1] + anexos[2];
+      var total_3 = ctoarr[0] + ctoarr[1] + ctoarr[2];
+      var total_4 = ctocon[0] + ctocon[1] + ctocon[2];
+      var total_5 = ctofin[0] + ctofin[1] + ctofin[2];
+
+	  var todos    = total_1 + total_2 + total_3 + total_4 + total_5;	  
+
+      if( total_1 > 0 ){
+          var i_cum_1 =  parseFloat(( firmados[0] * 100 ) /  total_1); 
+      }else{
+          i_cum_1 = 0;
+      }
+
+      if( total_2 > 0 ){
+          var i_cum_2 =  parseFloat(( firmados[1] * 100 ) /  total_2);
+      }else{
+         i_cum_2 = 0;
+      }
+
+      if( total_3 > 0 ){
+          var i_cum_3 =  parseFloat(( firmados[2] * 100 ) /  total_3);
+      }else{
+         i_cum_3 = 0;
+      }
+
+      if( total_4 > 0 ){ 
+          var i_cum_4 =  parseFloat(( firmados[3] * 100 ) /  total_4);
+      }else{
+        i_cum_4 = 0;
+      }
+
+      if( total_5 > 0 ){ 
+          var i_cum_5 =  parseFloat(( firmados[4] * 100 ) /  total_5); 
+      }else{
+          i_cum_5 = 0;
+      }
+
+      //Asignar datosa  Barras de progreso
+      $("#total_1").html("<b>" + total_1 + "</b> Generados / <b>" + firmados[0] + "</b> Firmados ");
+      $("#barra_1").attr("style", "width:" + i_cum_1.toFixed(2) + "%");
+      $("#barra_1").attr("data-toggle", "tooltip");
+      $("#barra_1").attr("data-original-title", i_cum_1.toFixed(2) + "%");
+      $("#barra_1").attr("title", i_cum_1.toFixed(2) + "%");
+
+      $("#total_2").html("<b>" + total_2 + "</b> Generados / <b>" + firmados[1] + "</b> Firmados ");
+      $("#barra_2").attr("style", "width:" + i_cum_2.toFixed(2) + "%");
+      $("#barra_2").attr("data-toggle", "tooltip");
+      $("#barra_2").attr("data-original-title", i_cum_2.toFixed(2) + "%");
+      $("#barra_2").attr("title", i_cum_2.toFixed(2) + "%");
+
+      $("#total_3").html("<b>" + total_3 + "</b> Generados / <b>" + firmados[2] + "</b> Firmados ");
+      $("#barra_3").attr("style", "width:" + i_cum_3.toFixed(2) + "%");
+      $("#barra_3").attr("data-toggle", "tooltip");
+      $("#barra_3").attr("data-original-title", i_cum_3.toFixed(2) + "%");
+      $("#barra_3").attr("title", i_cum_3.toFixed(2) + "%");
+
+      $("#total_4").html("<b>" + total_4 + "</b> Generados / <b>" + firmados[3] + "</b> Firmados ");
+      $("#barra_4").attr("style", "width:" + i_cum_4.toFixed(2) + "%");
+      $("#barra_4").attr("data-toggle", "tooltip");
+      $("#barra_4").attr("data-original-title", i_cum_4.toFixed(2) + "%");
+      $("#barra_4").attr("title", i_cum_4.toFixed(2) + "%");
+
+      $("#total_5").html("<b>" + total_5 + "</b> Generados / <b>" + firmados[4] + "</b> Firmados ");
+      $("#barra_5").css({"width": i_cum_5.toFixed(2) + "%" });
+      $("#barra_5").attr("data-toggle", "tooltip");
+      $("#barra_5").attr("data-original-title", i_cum_5.toFixed(2) + "%");
+      $("#barra_5").attr("title", i_cum_5.toFixed(2) + "%");
+
+      var chartColors = {
+        red:    '#dd4b39',
+        orange: 'rgb(255, 159, 64)',
+        yellow: '#f39c12',
+        green:  '#00a65a',
+        blue:   '#00c0ef',
+        purple: 'rgb(153, 102, 255)',
+        grey:   'rgb(231,233,237)'
+      };
+
+      var tipo_doc = ["Rechazados","En Proceso", "Firmados"];
+
+      var config = {
+        type: 'line',
+        data: {
+          labels: tipo_doc,
+          datasets: [{
+            label: "Contrato Marco",
+            backgroundColor: chartColors.green,
+            borderColor: chartColors.green,
+            data: ctomco,
+            fill: false,
+          }, {
+            label: "Anexos",
+            fill: false,
+            backgroundColor: chartColors.blue,
+            borderColor: chartColors.blue,
+            data: anexos,
+          }, {
+            label: "Contrato de Arriendo",
+            fill: false,
+            backgroundColor: chartColors.red,
+            borderColor: chartColors.red,
+            data: ctoarr,
+          },{
+            label: "Condiciones Generales",
+            fill: false,
+            backgroundColor: chartColors.yellow,
+            borderColor: chartColors.yellow,
+            data: ctocon,
+          },{
+            label: "Contrato Financiero Operativo",
+            fill: false,
+            backgroundColor: chartColors.gray,
+            borderColor: chartColors.gray,
+            data: ctofin,
+          }]
+        },
+        options: {
+          responsive: true,
+          title: {
+            display: true,
+            text: 'Titulo'
+          },
+          tooltips: {
+            mode: 'label',
+          },
+          hover: {
+            mode: 'nearest',
+            intersect: true
+          },
+          scales: {
+            xAxes: [{
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: 'Estados del Documento'
+              }
+            }],
+            yAxes: [{
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: 'Documentos'
+              }
+            }]
+          },
+          legend: {
+              display : true,
+              position : 'bottom',
+              labels: {
+                  fontSize: 10,
+                  boxWidth: 10
+              },
+              usePointStyle: true
+
+          }
+        }
+      };
+
+      var grafico_emp = document.getElementById("GraficoEmpresas").getContext("2d");
+      window.myLine = new Chart(grafico_emp, config);
+  }
+
+  $("#RutEmpresa").change(function(){
+
+     $('#GraficoEmpresas').remove(); 
+     $('iframe.chartjs-hidden-iframe').remove(); 
+     $('#grafico_e').append('<canvas id="GraficoEmpresas" width="100%" height="50px"></canvas>'); 
+
+     var ctx = document.getElementById("GraficoEmpresas"); 
+     var myChart = new Chart(ctx,{});
+
+      $("#total_1").html("");
+      $("#barra_1").removeAttr('style');
+      $("#barra_1").removeAttr('data-toogle');
+      $("#barra_1").removeAttr('data-original-title');
+      $("#barra_1").attr("title", "");
+
+      $("#total_2").html("");
+      $("#barra_2").removeAttr('style');
+      $("#barra_2").removeAttr('data-toogle');
+      $("#barra_2").removeAttr('data-original-title');
+      $("#barra_2").attr("title", "");
+
+      $("#total_3").html("");
+      $("#barra_3").removeAttr('style');
+      $("#barra_3").removeAttr('data-toogle');
+      $("#barra_3").removeAttr('data-original-title');
+      $("#barra_3").attr("title", "");
+
+      $("#total_4").html("");
+      $("#barra_4").removeAttr('style');
+      $("#barra_4").removeAttr('data-toogle');
+      $("#barra_4").removeAttr('data-original-title');
+      $("#barra_4").attr("title", "");
+
+      $("#total_5").html("");
+      $("#barra_5").css({"width":"0"});
+      $("#barra_5").attr("title", "");
+      $("#barra_5").removeAttr('data-toogle');
+      $("#barra_5").removeAttr('data-original-title');
+
+      mostrarGEmpresas($("#RutEmpresa").val());
+  });
+
+  /////////////////////////////
+  ///Grafico por Ejecutivos///
+  ////////////////////////////
+  var rut = '';
+
+  $(".btn_ejecutivo").click(function(){
+
+      $("#detalle_ejecutivo").collapse("toggle");
+
+      //Asignaciones
+      $("#eje_num_clientes").html("");
+      $("#eje_num_generados").html("");
+      $("#eje_num_cumplimiento").html("");
+
+      $("#eje_desc_clientes").html("");
+      $("#eje_desc_generados").html("");
+      $("#eje_desc_cumplimiento").html("");
+
+      //Limpiar grafico
+       $('#GraficoEjecutivo').remove(); 
+       $('iframe.chartjs-hidden-iframe').remove(); 
+       $('#detalle_ejecutivo').append('<canvas id="GraficoEjecutivo" style="width: 100%; height: 200px;"><canvas>');
+
+       $("#s_empresas_emp").html("");
+
+       var ctx = document.getElementById("GraficoEjecutivo"); 
+       var myChart = new Chart(ctx,{});
+      
+      rut = $(this).attr("id"); 
+      var url = "Ejecutivos_ajax.php?RutEjecutivo=" + rut;
+
+      // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+      if( window.XMLHttpRequest )
+        ajax = new XMLHttpRequest(); // No Internet Explorer
+      else
+        ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+     
+      // Almacenamos en el control al funcion que se invocara cuando la peticion
+      // cambie de estado 
+      ajax.onreadystatechange = funcionCallback_Ejecutivo;
+
+      // Enviamos la peticion
+      ajax.open( "GET", url, true );
+      ajax.send( "" );
+  });
+  
+  function funcionCallback_Ejecutivo(){
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+      if( ajax.status == 200 )
+      {
+        // Escribimos el resultado en la pagina HTML mediante DHTML
+        //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
+        salida = ajax.responseText;
+      
+        if( salida.length > 0 ){
+
+          var datos = JSON.parse(salida);
+          var empresas = datos.empresas;
+
+          if( empresas.length > 0 ){
+              //Muestra el collapse
+              $("#ejecutivo_emp").show();
+              //Llena el select de las empresas a las que pertenece
+              for( var i = 0;  i < empresas.length ; i++ ){
+                  $("#s_empresas_emp").append('<option value=' + empresas[i][0] +'>' + empresas[i][1] + '</option>'); 
+              }
+          }else{
+              $("#s_empresas_emp").append('<option value="0"> No tiene empresas asociadas</option>'); 
+          }
+          //Va a calcular los datos por empresa
+          calcularPorEmpresa_Ejecutivos();
+        }
+      }
+    } else{
+        $("#mensajeError").removeClass("callout callout-warning");
+        $("#mensajeError").html("");
+      }
+  }
+
+  function datosGEjecutivos(data){
+
+    var datos = JSON.parse(data);
+
+    var cm = datos.Contrato_Marco;
+    var an = datos.Anexos;
+    var ca = datos.Contrato_Arriendo;
+    var cg = datos.Condiciones_Generales;
+    var cf = datos.Contrato_Financiero;
+    var cliente_eje = datos.clientes;
+    var firmados_eje = datos.Firmados;
+    var firmados_total_eje = firmados_eje[0] + firmados_eje[1] + firmados_eje[2] + firmados_eje[3] + firmados_eje[4];
+    var totales_eje = datos.Totales;
+    var total_eje = totales_eje[0] + totales_eje[1] + totales_eje[2] + totales_eje[3] + totales_eje[4];
+    var rechazados_eje = 0;
+    var firmados_eje = 0;
+    var en_proceso_eje = 0;
+
+    //calculos
+    if( firmados_total_eje  > 0 ){
+        firmados_total_eje = parseFloat(( total_eje * 100 )/ firmados_total_eje);
+    }
+
+    rechazados_eje = cm[0]+ an[0] + ca[0] + cg[0] + cf[0];
+    en_proceso_eje = cm[1]+ an[1] + ca[1] + cg[1] + cf[1];
+    firmados_eje   = cm[2]+ an[2] + ca[2] + cg[2] + cf[2];
+
+    //Asignaciones
+    $("#eje_num_clientes").html(cliente_eje);
+    $("#eje_num_generados").html(total_eje);
+    $("#eje_num_cumplimiento").html( firmados_total_eje.toFixed(2) + " %");
+
+    $("#eje_desc_clientes").html("CLIENTES");
+    $("#eje_desc_generados").html("DOCUMENTOS");
+    $("#eje_desc_cumplimiento").html("CUMPLIMIENTO");
+
+
+    var etiquetas = ["Rechazados (" + rechazados_eje +")" ,"En Proceso (" + en_proceso_eje + ")","Firmados (" + firmados_eje + ")"];
+    var chartColors = {
+        red:    '#dd4b39',
+        orange: 'rgb(255, 159, 64)',
+        yellow: '#f39c12',
+        green:  '#00a65a',
+        blue:   '#00c0ef',
+        purple: 'rgb(153, 102, 255)',
+        grey:   'rgb(231,233,237)'
+      };
+    var ctx = document.getElementById('GraficoEjecutivo').getContext('2d');
+     
+    // Borramos el área que nos interese
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: { 
+        labels: etiquetas,
+        datasets: [{
+                    label: 'Contrato Marco',
+                    stack: 'Stack 0',
+                    data: cm,
+                    backgroundColor: chartColors.green
+                  },{
+                    label: 'Anexos',
+                    stack: 'Stack 0',
+                    data: an,
+                    backgroundColor: chartColors.blue
+                  },{
+                    label: 'Contrato de Arriendo',
+                    stack: 'Stack 0',
+                    data: ca,
+                    backgroundColor: chartColors.red
+                  },{
+                    label: 'Condiciones Generales',
+                    stack: 'Stack 0',
+                    data: cg,
+                    backgroundColor: chartColors.yellow
+                  },{
+                    label: 'Contrato Financiero',
+                    stack: 'Stack 0',
+                    data: cf,
+                    backgroundColor: chartColors.grey  
+                  }]
+      }, options: {
+          responsive: true,
+          legend: {
+              display : true,
+              position : 'bottom',
+              labels: {
+                  fontSize: 10,
+                  boxWidth: 10
+              },
+              usePointStyle: true
+
+          }
+        }
+    });
+  }
+
+  function calcularPorEmpresa_Ejecutivos(){
+
+      var rut_empresa = $("#s_empresas_emp").val(); 
+      var url = "Ejecutivos_PorEmpresas_ajax.php?RutEmpresa=" + rut_empresa + "&&RutEjecutivo=" + rut;
+
+      // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+      if( window.XMLHttpRequest )
+        ajax = new XMLHttpRequest(); // No Internet Explorer
+      else
+        ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+     
+      // Almacenamos en el control al funcion que se invocara cuando la peticion
+      // cambie de estado 
+      ajax.onreadystatechange = funcionCallback_Ejecutivo_porEmpresas;
+
+      // Enviamos la peticion
+      ajax.open( "GET", url, true );
+      ajax.send( "" );
+  }
+
+  function funcionCallback_Ejecutivo_porEmpresas(){
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+      if( ajax.status == 200 )
+      {
+        // Escribimos el resultado en la pagina HTML mediante DHTML
+        //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
+        salida = ajax.responseText;
+     
+        if( salida.length > 0 ){
+          datosGEjecutivos(salida);
+        }
+      }
+    } else{
+        $("#mensajeError").removeClass("callout callout-warning");
+        $("#mensajeError").html("");
+      }
+  }
+
+  $("#s_empresas_emp").change(function(){
+    calcularPorEmpresa_Ejecutivos();
+  });
+
+</script>
+  

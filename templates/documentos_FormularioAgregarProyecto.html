@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+       <!--Botones de cabecera-->
+        <div class="box-header">
+          <a class="btn btn-default btn_letra_azul" onClick="history.back(-1)" ><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
+        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <!--Mensajes-->
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+        <div id="resultado"></div>
+        <!--Formulario de los datos propios de Categoria-->   
+        <table id="example2" class="table table-bordered table-hover pagin-table">
+          <thead>
+           <tr>
+            <!--C.idProyecto, C.idDocumento,C.FechaCreacion, Pro.Tipo, Mo.DescripcionMC, Es.idEstado, Es.Nombre,  E.nombre + E.appaterno AS Ejecutivo-->
+            <th data-campo="SELECCION" style="text-align: center;">Selecci&oacute;n </th>
+            <th data-campo="idProyecto" style="text-align: center;">Id de Proyecto</th>
+            <th data-campo="idProyecto" style="text-align: center;">Detalle</th>
+            <th data-campo="Documento" style="text-align: center;">Empresa</th>
+            <th data-campo="Ejecutivo" style="text-align: center;">Ejecutivo</th>
+          </tr>
+          </thead>
+          <tbody >
+            <php:repeticion id="listado">
+              <tr id="fila_<php:filamenos />">
+                <!--Boton de Agregar-->
+                <td data-campo="BOTON_AGREGAR"> 
+                  <div style="text-align: center">
+                   <form role="form" action="Documentos.php" method="POST" name="formulario" id="formulario">
+                      <input type="hidden" id="idDocumento" name="idDocumento" value="<php:item id="idDocumento"/>"/>
+                      <input type="hidden" id="proyectos_emp" name="proyectos_emp" value="<php:item id="proyectos_emp"/>"/>
+                      <input type="hidden" id="RutEmpresaC" name="RutEmpresaC" value="<php:item id="RutEmpresaC"/>"/>
+                      <input type="hidden" id="RutEmpresa" name="RutEmpresa" value="<php:item id="RutEmpresa"/>"/>
+                      <input type="hidden" id="modelo_contrato" name="modelo_contrato" value="<php:item id="modelo_contrato"/>"/>
+                      <input type="hidden" id="idProyecto" name="idProyecto" value="<php:item id="idProyecto"/>"/>
+                       <input type="hidden" id="band" name="band" value="<php:item id="band"/>"/>
+                      <input type="hidden" id="idMC" name="idMC" value="<php:item id="idMC"/>"/>
+                      <input type="hidden" id="Nombre" name="Nombre" value="<php:item id="Nombre"/>"/>
+                      <input type="hidden" id="activar_pro" name="activar_pro" value="<php:item id="activar_pro"/>"/>
+                      <input type="hidden" name="detalle" id="detalle" value='<php:item id="detalle" />'>
+                      <input type="hidden" id="id_detalle_<php:filamenos />" value='<php:item id="id_detalle" />' />
+                      <input type="hidden" name="accion" value="AGREGAR"/>
+                      <button type="submit" style="background-color: transparent;" class="btn" name="accion2" id="boton_<php:filamenos />" value="BUSCAR_PRO"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                  </form>
+                  </div>
+                </td>
+                <!--idProyecto-->
+                <td data-campo="idProyecto" style="text-align: center;"><php:item id="idProyecto"/></div></td>
+                <!--Detalle del Proyecto-->
+                <td data-campo="detalle" style="text-align: center;"><php:item id="detalle"/></div></td>
+                <!--Empresa-->
+                <td data-campo="RazonSocial" style="text-align: center;"><php:item id="RazonSocial"/><php:item id="RazonSocialC"/></div></td>
+               
+                <!--Ejecutivo-->
+                <td data-campo="Cliente" style="text-align: center;"><php:item id="nombre"/> <php:item id="appaterno"/> </div></td>
+              </tr>
+            </php:repeticion>
+          </tbody>
+        </table> 
+      </div>
+      </div>
+    <!-- /.box -->
+    </div>
+  </div>
+  <!-- /.col -->
+  </div>
+
+  <script type="text/javascript">
+
+  $(document).ready(function(){
+    var row = $("#example2 tr").length;
+    var i = 0;
+
+    for( i = 0; i < row ; i++ ){
+    
+     if($("#id_detalle_"+i).val() == 0 ){
+      //Inhabilitar el boton de agregar
+       $("#boton_" + i).prop('disabled', true);
+       $("#fila_"+i).css("background-color","#f4f4f4");
+       $("#boton_"+i).prop('title', 'El proyecto no tiene detalle');
+     }
+    }
+  });
+
+</script>

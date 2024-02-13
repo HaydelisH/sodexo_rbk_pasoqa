@@ -1,0 +1,370 @@
+		<style>
+			.mnuoculto{
+				display:none;
+			}
+		</style>
+		<ul class="sidebar-menu" data-widget="tree">
+			<!--Header del Menu-->
+			<li class="header" id="gestionProyectos">GESTI&Oacute;N PROCESOS RRHH</li>
+			<li id="li_generardocumentos" style="display:none" class="treeview">
+				<a href=""><i class="fa fa-file-o" aria-hidden="true"></i><span>Generar Documentos</span>
+					<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu" id="ul_generardocumentos">
+					<!--Generar Documento Individual-->
+					<li class="gestionProyectos" id="Generar_Documento_PorFicha.php" style="display:none" ><a href="Generar_Documento_PorFicha.php" onclick="OpcionMenu('Generar_Documento_PorFicha.php');"><i class="fa fa-file-o" aria-hidden="true"></i><span> Generar Documento individual</span></a></li>
+					<!--Generar Documento Masivo-->
+					<li class="gestionProyectos" id="Generar_Documentos_Masivo.php" style="display:none" ><a href="Generar_Documentos_Masivo.php" onclick="OpcionMenu('Generar_Documentos_Masivo.php');"><i class="fa fa-clipboard" aria-hidden="true"></i><span> Generar Documentos Masivo</span></a></li>
+					<!--Ficha de contratacion--> 
+					<!--<li class="gestionProyectos" id="Fichas.php" style="display:none"><a href="Fichas.php" onclick="OpcionMenu('Fichas.php');"><i class="fa fa-address-card-o" aria-hidden="true"></i><span>Ficha de Contrataci&oacute;n</span></a></li>  -->
+					<!--Importacion PDF--> 
+					<li class="gestionProyectos" id="importacionpdf.php" style="display:none"><a href="importacionpdf.php" onclick="OpcionMenu('importacionpdf.php');"><i class="fa fa-upload" aria-hidden="true"></i><span>Importar PDF</span></a></li>  
+					<li class="gestionProyectos" id="importacion_firma.php" style="display:none"><a href="importacion_firma.php" onclick="OpcionMenu('importacion_firma.php');"><i class="fa fa-upload" aria-hidden="true"></i><span>Importaci&oacute;n Masiva PDF</span></a></li>  
+					<!--Ficha de contratacion-->
+					<li class="gestionProyectos" id="Fichas.php" style="display:none"><a href="Fichas.php" onclick="OpcionMenu('Fichas.php');"><i class="fa fa-check-square-o" aria-hidden="true"></i><span>Flujo de Contrataci&oacute;n</span></a></li>  
+				</ul>
+			</li>
+			<li id="li_formularios" style="display:none" class="treeview"><a href=""><i class="fa fa-file-o" aria-hidden="true"></i><span>Formularios</span>
+				<span class="pull-right-container">
+				<i class="fa fa-angle-left pull-right"></i>
+				</span>
+				</a>
+				<ul class="treeview-menu" id="ul_formularios">
+					<!--Declaracion conflicto de interes-->
+					<li id="DeclaracionConflictoInteresEmail.php" style="display:none"><a href="DeclaracionConflictoInteresEmail.php" onclick="OpcionMenu('DeclaracionConflictoInteresEmail.php');"><i class="fa fa-check-square-o" aria-hidden="true"></i><span>Declaraci&oacute;n Firma Electr&oacute;nica</span></a></li>  
+					<!--ODI Covid 19-->
+					<li id="DeclaracionConflictoInteresADC.php" style="display:none"><a href="DeclaracionConflictoInteresADC.php" onclick="OpcionMenu('DeclaracionConflictoInteresADC.php');"><i class="fa fa-check-square-o" aria-hidden="true"></i><span>Conflicto Interes (ADC)</span></a></li>  
+					<!--bono silla teletrebajo-->
+					<li id="DeclaracionConflictoInteresAboveSite.php" style="display:none"><a href="DeclaracionConflictoInteresAboveSite.php" onclick="OpcionMenu('DeclaracionConflictoInteresAboveSite.php');"><i class="fa fa-check-square-o" aria-hidden="true"></i><span>Conflicto Interes (Above site)</span></a></li>  
+					
+					<li id="DeclaracionConflictoInteresclc-2022.php" style="display:none"><a href="DeclaracionConflictoInteresclc-2022.php" onclick="OpcionMenu('DeclaracionConflictoInteresclc-2022.php');"><i class="fa fa-check-square-o" aria-hidden="true"></i><span>ConflictoInteres (clc-2022)</span></a></li> 
+				</ul>
+			</li>
+			<li id="li_firmardocumentos" style="display:none" class="treeview">
+				<a href=""><i class="fa fa-file-text-o" aria-hidden="true"></i><span>Firmar Documentos</span>
+					<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu" id="ul_firmardocumentos">
+					<!--Aprobar Documentos--> 
+					<li class="gestionProyectos" id="Documentos_Aprobar.php" style="display:none"><a href="Documentos_Aprobar.php" onclick="OpcionMenu('Documentos_Aprobar.php');"><i class="fa fa-check-square-o" aria-hidden="true"></i><span>Aprobar Documentos</span></a></li>  
+					<!--Firmar Documento de forma unitaria-->		
+					<!--<li id="Documentos_Firmas.php" style="display:none"><a href="Documentos_Firmas.php" onclick="OpcionMenu('Documentos_Firmas.php');"><i class="fa fa-file-text-o" aria-hidden="true"></i><span>Firmar un Documento</span></a></li>   -->
+					<!--Firmar Mis Documentos pendientes--> 
+					<li class="gestionProyectos" id="Documentos_Pendientes.php" style="display:none"><a href="Documentos_Pendientes.php" onclick="OpcionMenu('Documentos_Pendientes.php');"><i class="fa fa-folder-o" aria-hidden="true"></i><span>Firmar Mis Documentos</span></a></li> 
+					<!--Firmar Documentos de forma masiva--> 
+					<li class="gestionProyectos" id="Documentos_FirmaMasiva.php" style="display:none"><a href="Documentos_FirmaMasiva.php" onclick="OpcionMenu('Documentos_FirmaMasiva.php');"><i class="fa fa-file-text-o" aria-hidden="true"></i><span>Firma Masiva</span></a></li> 
+					<!--Sacar firma de un tercero--> 
+					<li class="gestionProyectos" id="Documentos_FirmaTercero.php" style="display:none"><a href="Documentos_FirmaTercero.php" onclick="OpcionMenu('Documentos_FirmaTercero.php');"><i class="fa fa-file-text-o" aria-hidden="true"></i><span>Firma un Tercero</span></a></li> 
+				</ul>
+			</li>
+			<li id="li_verdocumentos" style="display:none" class="treeview">
+				<a href=""><i class="fa fa-folder-o" aria-hidden="true"></i><span>Ver Documentos</span>
+					<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu" id="ul_verdocumentos">
+					<!--Mis Documentos (Empleado)--> 
+					<li class="gestionProyectos" id="MisDocumentos.php" style="display:none"><a href="MisDocumentos.php" onclick="OpcionMenu('MisDocumentos.php');"><i class="fa fa-folder-o" aria-hidden="true"></i><span>Mis Documentos</span></a></li> 
+					<!--Documentos Vigentes--> 
+					<li class="gestionProyectos" id="Documentos_Vigentes.php" style="display:none"><a href="Documentos_Vigentes.php" onclick="OpcionMenu('Documentos_Vigentes.php');"><i class="fa fa-folder" aria-hidden="true"></i><span>Documentos vigentes</span></a></li> 
+					<!--Documentos X Proceso--> 
+					<li class="gestionProyectos" id="Documentos_PorProcesos.php" style="display:none"><a href="Documentos_PorProcesos.php" onclick="OpcionMenu('Documentos_PorProcesos.php');"><i class="fa fa-tasks" aria-hidden="true"></i><span>Documentos por Procesos</span></a></li>  
+				</ul>
+			</li>
+			<li class="header" id="relacionLaboral">RELACI&Oacute;N LABORAL</li>
+			<li id="li_rl_generardocumentos" style="display:none" class="treeview">
+				<a href=""><i class="fa fa-file-o" aria-hidden="true"></i><span>Generar Documentos</span>
+					<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu" id="ul_rl_generardocumentos">
+					<li class="relacionLaboral" id="rl_importacionpdf_proveedores.php" style="display:none" ><a href="rl_importacionpdf_proveedores.php" onclick="OpcionMenu('rl_importacionpdf_proveedores.php');"><i class="fa fa-upload" aria-hidden="true"></i><span> Importacion PDF</span></a></li>
+				</ul>
+			</li>
+			<li id="li_rl_firmardocumentos" style="display:none" class="treeview">
+				<a href=""><i class="fa fa-file-text-o" aria-hidden="true"></i><span>Firmar Documentos</span>
+					<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu" id="ul_rl_firmardocumentos">
+					<!--Aprobar Documentos--> 
+					<li class="relacionLaboral" id="rl_Documentos_Aprobar.php" style="display:none"><a href="rl_Documentos_Aprobar.php" onclick="OpcionMenu('rl_Documentos_Aprobar.php');"><i class="fa fa-check-square-o" aria-hidden="true"></i><span>Aprobar Documentos</span></a></li>  
+					<!--Firmar Mis Documentos pendientes--> 
+					<li class="relacionLaboral" id="rl_Documentos_Pendientes.php" style="display:none"><a href="rl_Documentos_Pendientes.php" onclick="OpcionMenu('rl_Documentos_Pendientes.php');"><i class="fa fa-folder-o" aria-hidden="true"></i><span>Firmar Mis Documentos</span></a></li> 
+				</ul>
+			</li>
+			<li id="li_rl_verdocumentos" style="display:none" class="treeview">
+				<a href=""><i class="fa fa-folder-o" aria-hidden="true"></i><span>Ver Documentos</span>
+					<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu" id="ul_rl_verdocumentos">
+					<!--Documentos Vigentes--> 
+					<li class="relacionLaboral" id="rl_Documentos_Vigentes.php" style="display:none"><a href="rl_Documentos_Vigentes.php" onclick="OpcionMenu('rl_Documentos_Vigentes.php');"><i class="fa fa-folder" aria-hidden="true"></i><span>Documentos vigentes</span></a></li> 
+				</ul>
+			</li>
+			<!--Header del Menu-->
+			<li class="header" id="mantenedores">MANTENEDORES</li>
+			<li id="li_estructura" style="display:none" class="treeview">
+				<a href=""><i class="fa fa-folder-o" aria-hidden="true"></i><span>Estructuras</span>
+					<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu" id="ul_estructura">
+					<!--Empresas-->
+					<li class="mantenedores" id="Empresas.php" style="display:none"><a href="Empresas.php" onclick="OpcionMenu('Empresas.php');"><i class="fa fa-building-o" aria-hidden="true"></i><span>Empresas</span></a></li>
+					<!--lugarespago-->
+					<li class="mantenedores" id="LugaresPago.php" style="display:none"><a href="LugaresPago.php" onclick="OpcionMenu('LugaresPago.php');"><i class="fa fa-building" aria-hidden="true"></i><span class="Estructura">Lugares de Pago</span></a></li>
+					<!--centros de costo-->
+					<li class="mantenedores" id="CentrosCosto.php" style="display:none"><a href="CentrosCosto.php" onclick="OpcionMenu('CentrosCosto.php');"><i class="fa fa-location-arrow" aria-hidden="true"></i><span class="Estructura">Centros de Costo</span></a></li>
+				</ul>
+			</li>
+			<!--Gestion de Usuarios-->
+			<li id="li_gestionusuarios" style="display:none" class="treeview">
+				<a href=""><i class="fa fa-users" aria-hidden="true"></i><span>Gestor de Usuarios</span>
+					<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu" id="ul_gestionusuarios">
+					<!--Usuarios-->
+					<li class="mantenedores" id="usuariosmant.php" 	style="display:none"><a href="usuariosmant.php" onclick="OpcionMenu('usuariosmant.php');"><i class="fa fa-circle-o"></i> Usuarios</a></li>
+					<!--Perfiles-->
+					<li class="mantenedores" id="tiposusuarios.php" style="display:none"><a href="tiposusuarios.php" onclick="OpcionMenu('tiposusuarios.php');"><i class="fa fa-circle-o"></i> Perfiles</a></li>
+					<!--<li class="mantenedores" id="excelempl.php" style="display:none"><a href="excelempl.php" onclick="OpcionMenu('excelempl.php');"><i class="fa fa-upload" aria-hidden="true"></i><span>Carga de Excel de trabajadores</span></a></li>  -->
+				</ul>
+			</li>
+			<!--Gestion de Plantillas RRHH-->
+			<li id="li_gestionplantilla" style="display:none" class="treeview">
+				<a href=""><i class="fa fa-files-o" aria-hidden="true"></i><span>Gestor de Plantillas RRHH</span>
+					<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu" id="ul_gestionplantilla">
+					<!--Tipo de Documentos-->
+					<li class="mantenedores" id="TiposDocumentos.php" style="display:none"><a href="TiposDocumentos.php" onclick="OpcionMenu('TiposDocumentos.php');"><i class="fa fa-file" aria-hidden="true"></i><span>Tipos de Documentos</span></a></li> 
+					<!--Plantillas por empresas-->
+					<li class="mantenedores" id="PlantillasPorEmpresas.php" style="display:none"><a href="PlantillasPorEmpresas.php" onclick="OpcionMenu('PlantillasPorEmpresas.php');"><i class="fa fa-circle-o"></i><span>Plantillas por Empresas</span></a></li>
+					<!--Plantillas-->
+					<li class="mantenedores" id="Plantillas.php" style="display:none"><a href="Plantillas.php" onclick="OpcionMenu('Plantillas.php');"><i class="fa fa-circle-o"></i><span>Plantillas</span></a></li>
+					<!--Clausulas-->
+					<li class="mantenedores" id="Clausulas.php" style="display:none"><a href="Clausulas.php" onclick="OpcionMenu('Clausulas.php');"><i class="fa fa-circle-o"></i><span>Clausulas</span></a></li>	
+					<!--Categorias-->
+					<li class="mantenedores" id="Categorias.php" style="display:none"><a href="Categorias.php" onclick="OpcionMenu('Categorias.php');"><i class="fa fa-circle-o"></i><span>Categorias</span></a></li>
+					<!--Turnos-->
+					<li class="mantenedores" id="Turnos.php" style="display:none"><a href="Turnos.php" onclick="OpcionMenu('Turnos.php');"><i class="fa fa-circle-o"></i><span>Turnos</span></a></li>
+					<!--Jornadas-->
+					<li class="mantenedores" id="Jornadas.php" style="display:none"><a href="Jornadas.php" onclick="OpcionMenu('Jornadas.php');"><i class="fa fa-circle-o"></i><span>Jornadas</span></a></li>
+					<!--Causales-->
+					<li class="mantenedores" id="Causales.php" style="display:none"><a href="Causales.php" onclick="OpcionMenu('Causales.php');"><i class="fa fa-circle-o"></i><span>Causales</span></a></li>
+				</ul>
+			</li>
+			<li id="li_rl_relacionesLaborales" style="display:none" class="treeview">
+				<a href=""><i class="fa fa-files-o" aria-hidden="true"></i><span>Relaciones Laborales</span>
+					<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu" id="ul_rl_relacionesLaborales">
+					<!--rl_institucion-->
+					<li class="mantenedores" id="rl_institucion.php" style="display:none"><a href="rl_institucion.php" onclick="OpcionMenu('rl_institucion.php');"><i class="fa fa-building-o" aria-hidden="true"></i><span>Instituci&oacute;n</span></a></li>
+					<!--Gestion de Plantillas RL-->
+					<li id="li_rl_gestionplantilla" style="display:none" class="treeview">
+						<a href=""><i class="fa fa-files-o" aria-hidden="true"></i><span>Gestor de Plantillas</span>
+							<span class="pull-right-container">
+								<i class="fa fa-angle-left pull-right"></i>
+							</span>
+						</a>
+						<ul class="treeview-menu" id="ul_rl_gestionplantilla">
+							<li class="mantenedores" id="rl_plantillasexp.php" style="display:none"><a href="rl_plantillasexp.php" onclick="OpcionMenu('rl_plantillasexp.php');"><i class="fa fa-circle-o"></i><span>Flujos de Importaci&oacute;n</span></a></li>
+						</ul>
+					</li>
+					<!--Gestion de Firma RL-->
+					<li id="li_rl_gestionfirmas" style="display:none" class="treeview"><a href=""><i class="fa fa-cog" aria-hidden="true"></i><span>Gestor de Firmas</span>
+						<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+						</span>
+						</a>
+						<ul class="treeview-menu" id="ul_rl_gestionfirmas">
+							<!--Flujos por entes-->
+							<li class="mantenedores" id="rl_flujosPorEnte.php" style="display:none"><a href="rl_flujosPorEnte.php" onclick="OpcionMenu('rl_flujosPorEnte.php');"><i class="fa fa-spinner" aria-hidden="true"></i><span>Flujos por Ente</span></a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<!--Gestion de Firma-->
+			<li id="li_procesos" style="display:none" class="treeview">
+				<a href=""><i class="fa fa-cog" aria-hidden="true"></i><span>Procesos</span>
+					<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu" id="ul_procesos">
+					<!--Procesos-->
+					<li class="mantenedores" id="Procesos.php" style="display:none"><a href="Procesos.php" onclick="OpcionMenu('Procesos.php');"><i class="fa fa-tasks" aria-hidden="true"></i><span>Procesos</span></a></li> 
+					<!--Correos-->
+					<li class="mantenedores" id="Correo.php" style="display:none"><a href="Correo.php" onclick="OpcionMenu('Correo.php');"><i class="fa fa-envelope" aria-hidden="true"></i> <span>Correos</span></a></li>   
+					<!--Dias feriados-->
+					<li class="mantenedores" id="Feriados.php" style="display:none"><a href="Feriados.php" onclick="OpcionMenu('Feriados.php');"><i class="fa fa-calendar" aria-hidden="true"></i><span>D&iacute;as Inhabiles</span></a></li>  
+				</ul>
+			</li>
+			<!--Gestion de Firma-->
+			<li id="li_gestionfirmas" style="display:none" class="treeview">
+				<a href=""><i class="fa fa-cog" aria-hidden="true"></i><span>Gestor de Firmas</span>
+					<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu" id="ul_gestionfirmas">
+					<!--Flujos-->
+					<li class="mantenedores" id="flujofirma.php" style="display:none"><a href="flujofirma.php" onclick="OpcionMenu('flujofirma.php');"><i class="fa fa-spinner" aria-hidden="true"></i><span>Flujos</span></a></li>
+					<!--Roles-->
+					<li class="mantenedores" id="Cargos.php" style="display:none"><a href="Cargos.php" onclick="OpcionMenu('Cargos.php');"><i class="fa fa-id-card-o" aria-hidden="true"></i><span>Roles</span></a></li>  
+					<!--Registrar usuario-->
+					<li class="mantenedores" id="enrolar.php" 	style="display:none"><a href="enrolar.php" onclick="OpcionMenu('enrolar.php');"><i class="fa fa-circle-o"></i> Enrolar Usuario</a></li><!--Crear Pin-->
+					<li class="mantenedores" id="crearpin.php" 	style="display:none"><a href="crearpin.php" onclick="OpcionMenu('crearpin.php');"><i class="fa fa-circle-o"></i> Crear clave PIN</a></li><!--Crear Pin-->
+					<li class="mantenedores" id="asignacionroles.php" 	style="display:none"><a href="asignacionroles.php" onclick="OpcionMenu('asignacionroles.php');"><i class="fa fa-circle-o"></i> Asignar Roles de Firma</a></li>
+					<li class="mantenedores" id="asignacionperfiles.php" 	style="display:none"><a href="asignacionperfiles.php" onclick="OpcionMenu('asignacionperfiles.php');"><i class="fa fa-circle-o"></i> Asignar Perfiles de Firma</a></li>
+					<!--Verificar identitidad-->
+					<li class="mantenedores" id="VerificarIdentidad.php" 	style="display:none"><a href="VerificarIdentidad.php" onclick="OpcionMenu('VerificarIdentidad.php');"><i class="fa fa-circle-o"></i> Verificar identidad</a></li>
+					<li class="mantenedores" id="ObtenerEnrolado.php" 	style="display:none"><a href="ObtenerEnrolado.php" onclick="OpcionMenu('ObtenerEnrolado.php');"><i class="fa fa-circle-o"></i>Obtener Tipo Enrolamiento</a></li> 
+				</ul>
+			</li>
+			<!--Flujo automatizacion-->
+			<li id="li_flujoautomatizacion" style="display:none" class="treeview">
+				<a href=""><i class="fa fa-spinner" aria-hidden="true"></i><span>Flujo automatizaci&oacute;n</span>
+					<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu" id="ul_flujoautomatizacion">
+					<!--Set Documentos-->
+					<li class="mantenedores" id="setDocumentos.php" style="display:none"><a href="setDocumentos.php" onclick="OpcionMenu('setDocumentos.php');"><i class="fa fa-files-o" aria-hidden="true"></i> Set Documentos</a></li>
+					<!--CheckList de Documentos-->
+					<li class="mantenedores" id="checkListDocumentos.php" style="display:none"><a href="checkListDocumentos.php" onclick="OpcionMenu('checkListDocumentos.php');"><i class="fa fa-files-o" aria-hidden="true"></i> Check list documentos</a></li>
+				</ul>
+			</li>
+			<!--Formularios-->
+			<li id="li_formulariosMantenedor" style="display:none" class="treeview">
+				<a href=""><i class="fa fa-spinner" aria-hidden="true"></i><span>Formularios</span>
+					<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu" id="ul_formulariosMantenedor">
+					<!--Carga de usuarios que deberan llenar un formulario-->
+					<li class="mantenedores" id="loadUserFormulario.php" style="display:none"><a href="loadUserFormulario.php" onclick="OpcionMenu('loadUserFormulario.php');"><i class="fa fa-files-o" aria-hidden="true"></i> Carga usuarios formulario</a></li>
+					<li class="mantenedores" id="revisionAsignados.php" style="display:none"><a href="revisionAsignados.php" onclick="OpcionMenu('revisionAsignados.php');"><i class="fa fa-files-o" aria-hidden="true"></i> Revisi&oacute;n Asignados</a></li>
+					<li class="mantenedores" id="revisionActor1.php" style="display:none"><a href="revisionActor1.php" onclick="OpcionMenu('revisionActor1.php');"><i class="fa fa-files-o" aria-hidden="true"></i> Revisi&oacute;n RRHH</a></li>
+					<!--li class="mantenedores" id="revisionActor2.php" style="display:none"><a href="revisionActor2.php" onclick="OpcionMenu('revisionActor2.php');"><i class="fa fa-files-o" aria-hidden="true"></i> Revision Comite Etica</a></li-->
+					<!--Personas Info Contact-->
+					<li class="mantenedores" id="Personas.php" style="display:none"><a href="Personas.php" onclick="OpcionMenu('Personas.php');"><i class="fa fa-files-o" aria-hidden="true"></i> Personas Info Contactos</a></li>
+					<li class="mantenedores" id="reporteDeclaracionFirmaElectonica.php" style="display:none"><a href="reporteDeclaracionFirmaElectonica.php" onclick="OpcionMenu('reporteDeclaracionFirmaElectonica.php');"><i class="fa fa-files-o" aria-hidden="true"></i> Reporte Declaraci&oacute;n Firma Electr&oacute;nica</a></li>
+				</ul>
+			</li>
+		</ul>	  
+		<!-- /.sidebar-menu -->
+	</section>
+	<!-- /.sidebar -->
+</aside>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+	<section class="content-header">
+<script>
+ 	<php:repeticion id="formulario">
+		<php:repeticion id="opciones">
+			if (document.getElementById('<php:item id="opcionid" />'))
+			{
+				document.getElementById('<php:item id="opcionid" />').style.display = "block";
+			}
+		</php:repeticion>
+	</php:repeticion>
+
+	function HabilitaMenu(idmenu)
+	{
+		$(document).ready(function(){
+			var contenido = "#ul_" + idmenu + " li";
+			$(contenido).each(function(){
+				var estilo = $(this).attr('style');
+				if (estilo.indexOf("block") > -1)
+				{	
+					document.getElementById('li_' + idmenu).style.display = "block";
+				}
+			});
+		});
+	}
+
+	HabilitaMenu("gestionusuarios");
+	HabilitaMenu("gestionplantilla");
+	HabilitaMenu("gestionfirmas");
+	HabilitaMenu("rl_gestionfirmas");
+	HabilitaMenu("firmardocumentos");
+	HabilitaMenu("estructura");		   
+	HabilitaMenu("generardocumentos");
+	HabilitaMenu("rl_generardocumentos");
+	HabilitaMenu("rl_gestionplantilla");
+	HabilitaMenu("rl_relacionesLaborales");
+	HabilitaMenu("rl_firmardocumentos");
+	HabilitaMenu("rl_verdocumentos");
+	HabilitaMenu("verdocumentos");
+	HabilitaMenu("procesos");
+	HabilitaMenu("flujoautomatizacion");
+	HabilitaMenu("formularios");
+	HabilitaMenu("formulariosMantenedor");
+	$(document).ready(function(){
+		ocultaPrincipal();
+	});
+	function ocultaPrincipal()
+	{
+		var contadorVisible = 0;
+		$(".relacionLaboral").each(function(i,e){
+			if ($(e).css("display") == 'block')
+			{
+				contadorVisible++;
+			}
+		});
+		if (contadorVisible == 0)
+		{
+			$("#relacionLaboral").hide();
+		}
+		contadorVisible = 0;
+		$(".gestionProyectos").each(function(i,e){
+			if ($(e).css("display") == 'block')
+			{
+				contadorVisible++;
+			}
+		});
+		if (contadorVisible == 0)
+		{
+			$("#gestionProyectos").hide();
+		}
+		contadorVisible = 0;
+		$(".mantenedores").each(function(i,e){
+			if ($(e).css("display") == 'block')
+			{
+				contadorVisible++;
+			}
+		});
+		if (contadorVisible == 0)
+		{
+			$("#mantenedores").hide();
+		}
+	}
+	function OpcionMenu(p_opcion)
+	{
+		MostrarCargando();
+		setCookie ("opcion",p_opcion,"365");
+	
+	}
+</script>

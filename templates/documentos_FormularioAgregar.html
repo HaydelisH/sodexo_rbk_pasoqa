@@ -1,0 +1,323 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <!--Botones de cabecera-->
+        <div class="box-header">
+         <!--<a class="btn btn-default btn_letra_azul" href="Documentos.php" ><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>-->
+        </div>
+      <!-- /.box-header -->
+        <div class="box-body">
+          <!--Mensajes-->
+          <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+          <div id="mensajeError"><php:texto id="mensajeError" /></div>
+         
+          <!--Formulario de los datos propios de Categoria-->   
+          <form role="form" name="formulario" id="formulario" action="Documentos.php" method="POST" autocomplete="off">
+          <php:repeticion id="formulario">
+              
+            <!--Empresa-->
+            <div class="form-row">
+              <div class="col-md-6 xs-12">
+               <label>Empresa</label>
+                <div class="box-body">
+                    <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                      <input class="form-control" type="text" name="RutEmp" id="RutEmp" autofocus value="<php:item id="RutEmpresa" />  <php:item id="RazonSocial"/>" readonly style="background-color:white;"/>
+                      <input type="hidden" name="RutEmpresa" id="RutEmpresa" value="<php:item id="RutEmpresa"/>"/>
+                      <!--Falta firmantes de Empresa-->
+                      <input type="hidden" id="FirEmpresa" value="<php:item id="FirEmpresa"/>"/>
+                      <!--Falta Plantilla de Empresa -->
+                      <input type="hidden" id="PlaEmpresa" value="<php:item id="PlaEmpresa"/>"/>
+                    </div>
+                    <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                       <button class="btn btn-md btn-primary btn-block" type="submit" name="accion" value="BUSCAR_EMPRESA" id="btn_empresa"><i class="fa fa-search"></i></button>  
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <!--Cliente-->
+            <div class="form-row">
+              <div class="col-md-6 xs-12">
+                 <label>Cliente</label>
+                 <div class="box-body">
+                  <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                    <input class="form-control" type="text" name="RutCli" id="RutCli" value="<php:item id="RutEmpresaC" /> <php:item id="RazonSocialC"/>" readonly style="background-color:white;"/>
+                    <!--Falta firmantes de Empresa Cliente -->
+                    <input type="hidden" id="FirEmpresaC" value="<php:item id="FirEmpresaC"/>"/>
+                    <input type="hidden" name="RutEmpresaC" id="RutEmpresaC" value="<php:item id="RutEmpresaC"/>"/>
+                  </div>
+                  <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                     <button class="btn btn-md btn-primary btn-block" type="submit" name="accion" value="BUSCAR_CLIENTE" id="btn_cliente"><i class="fa fa-search"></i></button>  
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--Fechas de Documento-->
+            <!--<div class="form-row">
+              <div class="col-md-6 xs-12" >
+                <label for="">Fechas de Documento</label>
+                 <div class="form-group">
+                  <div class="input-group date" style="padding-left: 10px; padding-right: 10px;">
+                    <div class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    --><input type="hidden" id="fecha" name="fecha" value='<php:item id="fecha"/>' /><!--
+                  </div>
+                </div>
+              </div>
+            </div>-->
+
+            <!--Lugar de Documento-->
+            <!--<div class="form-row">
+              <div class="col-md-6 xs-12">
+                <label for="">Lugar de creaci&oacute;n</label>
+                 <div style="padding-left: 10px; padding-right: 10px;">
+                  <input type="text" class="form-control pull-right" id="lugar" name="lugar" placeholder="Lugar de creaci&oacute;n" value="<php:item id="lugar"/>" />
+                </div>
+              </div>
+            </div>-->
+
+            <!--Modelo de Contrato-->
+            <div class="form-row ">
+              <div class="col-md-12 xs-12" style="padding-right: 30px;">
+                 <label>Modelo de Contrato</label>
+                 <select class= "form-control" name="modelo_contrato" id="modelo_contrato" style="margin-left: 10px;">
+                   <option value="<php:texto id="idMC"/>"><php:texto id="DescripcionMC" /></option>
+                    <php:repeticion id="Modelo_Contrato">
+                      <option value="<php:item id="idMC"/>"><php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="idMC" /><php:argumento valor="idMC" /></php:funcion><php:item id="DescripcionMC" /></option>
+                    </php:repeticion>
+                </select>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="col-md-12 xs-12" style="padding-top: 10px;">
+                <h4></h4>
+              </div>
+           </div>
+
+          <div class="form-row">                 
+            <div class="col-md-2 xs-12 pull-right">
+                <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion" id="SIGUIENTE" value="SIGUIENTE" >Siguiente</button>  
+            </div>
+          </div>  
+          </php:repeticion>  
+        </form>  
+      </div>
+      </div>
+    </div>
+  </div>
+
+<!--Calendarios-->
+<script>
+
+  $('#fecha').datepicker({
+    language: "es",
+    orientation: "bottom",
+    autoclose: true,
+    todayHighlight: true,
+    format: 'dd-mm-yyyy'
+  });
+
+  $(document).ready(function(){
+
+    //Empresa
+    if( $("#RutEmp").val().length < 3 ){
+      $("#btn_cliente").prop("disabled",true);
+      $("#SIGUIENTE").prop("disabled",true);
+      $("#modelo_contrato").prop("disabled",true);
+    }
+    else{
+      $("#btn_cliente").prop("disabled",false);
+      $("#SIGUIENTE").prop("disabled",false);
+      $("#modelo_contrato").prop("disabled",false);
+    }
+
+    //Cliente
+    if( $("#RutCli").val().length < 3 ){
+      $("#SIGUIENTE").prop("disabled",true);
+      $("#modelo_contrato").prop("disabled",true);
+    }
+    else{
+      $("#modelo_contrato").prop("disabled",false);
+      $("#SIGUIENTE").prop("disabled",false);
+    }
+
+    //Modelo de Contrato
+    if( $("#modelo_contrato").val() == 0 ){
+       $("#SIGUIENTE").prop("disabled",true);
+    }
+    else{
+      $("#SIGUIENTE").prop("disabled",false);
+    }
+
+    if( $("#modelo_contrato").val().length == 0 ){
+      $("#modelo_contrato option:selected").text("(Seleccione)");  
+    }
+
+    if( $("#RutEmp").val().length == 2){
+       $("#RutEmp").val("(Seleccione)");  
+    }
+
+    if( $("#RutCli").val().length ==  1 ){
+       $("#RutCli").val("(Seleccione)");  
+    }
+
+    if( $("#FirEmpresa").val() == 1){
+      $("#mensajeError").addClass("callout callout-warning");
+      $("#mensajeError").html("La Empresa seleccionada no tiene Firmantes asociados");
+      $("#btn_empresa").focus();
+      $("#SIGUIENTE").prop("disabled",true);
+    }
+
+    if( $("#FirEmpresaC").val() == 1){
+      $("#mensajeError").addClass("callout callout-warning");
+      $("#mensajeError").html("La Empresa Cliente seleccionada no tiene Firmantes asociados");
+      $("#btn_cliente").focus();
+      $("#SIGUIENTE").prop("disabled",true);
+    }
+
+    if( $("#PlaEmpresa").val() == 1){
+      $("#mensajeError").addClass("callout callout-warning");
+      $("#mensajeError").html("La Empresa seleccionada no tiene Plantillas");
+      $("#btn_empresa").focus();
+      $("#SIGUIENTE").prop("disabled",true);
+    }
+
+    //Si hay algun error, dehabilitar el boton de siguiente
+   if( $("#mensajeError").html().length > 0 ){
+      $("#SIGUIENTE").prop("disabled",true);
+   }
+
+   if( $("#modelo_contrato").val() != 0 ){
+       //Verificar si hay Contrato Marco generado
+
+      if ( $("#modelo_contrato").val() == 2 && $("#RutEmpresaC").val().length > 0){
+
+        var url = "Documentos_ajax.php?RutEmpresaC=" + $("#RutEmpresaC").val();
+
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+          ajax = new XMLHttpRequest(); // No Internet Explorer
+        else
+          ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+       
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajax.onreadystatechange = funcionCallback;
+
+        // Enviamos la peticion
+        ajax.open( "GET", url, true );
+        ajax.send( "" );
+
+      }
+
+      //Verificar si hay Contrato de Renting generado
+      if ( $("#modelo_contrato").val() == 4 && $("#RutEmpresaC").val().length > 0){
+        var url = "Documentos_ajax2.php?RutEmpresaC=" + $("#RutEmpresaC").val();
+
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+          ajax = new XMLHttpRequest(); // No Internet Explorer
+        else
+          ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+       
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajax.onreadystatechange = funcionCallback;
+
+        // Enviamos la peticion
+        ajax.open( "GET", url, true );
+        ajax.send( "" );
+
+      } 
+   }
+
+  });
+
+  //Tipo de Documento
+  $("#modelo_contrato").change(function(){
+      //Tipo de Documento
+      if( $("#modelo_contrato").val() == 0 ){
+         $("#SIGUIENTE").prop("disabled",true);
+      }
+      else{
+        $("#SIGUIENTE").prop("disabled",false);
+      }
+
+      //Verificar si hay Contrato Marco generado
+      if ( $("#modelo_contrato").val() == 2 && $("#RutEmpresaC").val().length > 0){
+        var url = "Documentos_ajax.php?RutEmpresaC=" + $("#RutEmpresaC").val();
+
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+          ajax = new XMLHttpRequest(); // No Internet Explorer
+        else
+          ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+       
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajax.onreadystatechange = funcionCallback;
+
+        // Enviamos la peticion
+        ajax.open( "GET", url, true );
+        ajax.send( "" );
+
+      }
+
+      //Verificar si hay Contrato de Renting generado
+      if ( $("#modelo_contrato").val() == 4 && $("#RutEmpresaC").val().length > 0){
+        var url = "Documentos_ajax2.php?RutEmpresaC=" + $("#RutEmpresaC").val();
+
+        // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
+        if( window.XMLHttpRequest )
+          ajax = new XMLHttpRequest(); // No Internet Explorer
+        else
+          ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+       
+        // Almacenamos en el control al funcion que se invocara cuando la peticion
+        // cambie de estado 
+        ajax.onreadystatechange = funcionCallback;
+
+        // Enviamos la peticion
+        ajax.open( "GET", url, true );
+        ajax.send( "" );
+
+      } 
+
+  }); 
+
+  //Variables Globales 
+  var ajax;
+  var i = "";
+
+  function funcionCallback(){
+    // Comprobamos si la peticion se ha completado (estado 4)
+    if( ajax.readyState == 4 )
+    {
+      // Comprobamos si la respuesta ha sido correcta (resultado HTTP 200)
+      if( ajax.status == 200 )
+      {
+        // Escribimos el resultado en la pagina HTML mediante DHTML
+        //document.all.salida.innerHTML = "<b>"+ajax.responseText+"</b>"; 
+        salida = ajax.responseText;
+
+         if( salida.length > 0 ){
+            $("#mensajeError").addClass("callout callout-warning");
+            $("#mensajeError").html(salida);
+            $("#SIGUIENTE").prop("disabled",true);
+            $("#modelo_contrato").focus();
+          }
+         
+      }
+    } else{
+            $("#mensajeError").removeClass("callout callout-warning");
+            $("#mensajeError").html("");
+          }
+  }
+
+ 
+</script>
+

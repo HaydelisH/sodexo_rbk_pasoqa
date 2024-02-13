@@ -1,0 +1,124 @@
+<!-- saved from url=(0046)http://200.0.156.150/Multibrowser2/FirmaToken/ -->
+<script type="text/javascript" src="js/libMB/jquery-1.11.2.js"></script>
+<script type="text/javascript" src="js/libMB/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/libMB/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/libMB/jsrasign/ext/jsbn.js"></script>
+<script type="text/javascript" src="js/libMB/jsrasign/ext/jsbn2.js"></script>
+<script type="text/javascript" src="js/libMB/jsrasign/ext/rsa.js"></script>
+<script type="text/javascript" src="js/libMB/jsrasign/ext/rsa2.js"></script>
+<script type="text/javascript" src="js/libMB/jsrasign/ext/base64.js"></script>
+<script type="text/javascript" src="js/libMB/jsrasign/ext/prng4.js"></script>
+<script type="text/javascript" src="js/libMB/jsrasign/ext/rng.js"></script>
+<script type="text/javascript" src="js/libMB/crypto/yahoo-min.js"></script>
+<script type="text/javascript" src="js/libMB/crypto/core.js"></script>
+<script type="text/javascript" src="js/libMB/crypto/md5.js"></script>
+<script type="text/javascript" src="js/libMB/crypto/sha1.js"></script>
+<script type="text/javascript" src="js/libMB/crypto/sha256.js"></script>
+<script type="text/javascript" src="js/libMB/crypto/ripemd160.js"></script>
+<script type="text/javascript" src="js/libMB/crypto/x64-core.js"></script>
+<script type="text/javascript" src="js/libMB/crypto/sha512.js"></script>
+<script type="text/javascript" src="js/libMB/jsrasign/rsapem-1.1.min.js"></script>
+<script type="text/javascript" src="js/libMB/jsrasign/rsasign-1.2.min.js"></script>
+<script type="text/javascript" src="js/libMB/jsrasign/asn1hex-1.1.min.js"></script>
+<script type="text/javascript" src="js/libMB/jsrasign/x509-1.1.min.js"></script>
+<script type="text/javascript" src="js/libMB/jsrasign/crypto-1.1.min.js"></script>
+<script type="text/javascript" src="js/libMB/json2.js"></script>        
+<script type="text/javascript" src="js/libMB/jquery.blockUI.js"></script>
+<script type="text/javascript" src="js/libMB/plugin.autentia.js"></script>
+<script type="text/javascript" src="js/libMB/autentia_sign.js?=1.6"></script>   
+
+<style type="text/css">
+
+</style>
+<div class="row">
+	<div class="col-md-12">
+		<div class="box">
+			<div class="box-body pad table-responsive">
+				<!--Botones de cabecera-->
+				<php:repeticion id="formulario">
+				<form role="form" name="formulario2" id="formulario2" action="Documentos_FirmaMasiva.php" method="POST">
+					<input type="hidden" name="idDocumento" value="<php:item id="idDocumento" />" />
+					<button type="submit" name="accion2 value="DETALLE" class="btn btn-default"><a><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></button>
+				</form>
+				
+				<!-- /.box-header -->
+				<div class="box-body">
+					<!--Mensajes-->
+					<div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+					<div id="mensajeError"><php:texto id="mensajeError" /></div>
+					
+					<!--Datos referenciales-->
+					<div class="form-row">
+					<!--Empresas-->
+				
+			
+						<!--Formulario de datos propios de Clausulas-->
+						<form role="form" name="actionForm" id="actionForm" action="Documentos_FirmaMasiva.php" method="POST">
+
+							<div class="row">  
+								<php:repeticion id="botonfirma">	
+								<div class="col-xs-4 col-sm-offset-0 col-xs-offset-0 col-md-offset-7 col-md-2 col-lg-offset-7 col-lg-2">												
+									<!--<label  	for="Descripcion">Ingrese PIN</label>-->
+									<!--<span style="display: none;">Pin </span>-->
+									<input   type="password" class="form-control" id="pin" name="pin" placeholder="Ingrese PIN"  >
+								</div>					
+								<div class="col-lg-2 col-md-2">
+									
+									<button class="btn btn-md btn-primary btn-block" type="button" onclick="firmarToken();" name="accion" value="FIRMATOKEN" />Firmar</button>
+								
+								</div>
+								</php:repeticion>  
+							</div>
+
+							<div class="row">  
+								<div class="col-xs-4 col-sm-offset-0 col-xs-offset-0 col-md-2 col-lg-2">												
+									<!--<label  	for="Descripcion">Ingrese PIN</label>-->					
+										<span >Nro Contrato : <php:item id="idDocumento" /></span>							
+								</div>					
+							</div>
+						  
+							<div class="row">			   
+								<input type="hidden" name="idDocumento" value="<php:item id="idDocumento" />" />
+							   
+								<input type="hidden" name="uri" id="uri" 	id="uri" 			value="<php:item id="uri" />" />
+								<input type="hidden" name="session_id"  	id="session_id" 	value="<php:item id="session_id" />" />
+								<input type="hidden" name="documentos"  	id="documentos" 	value="<php:item id="documentos" />" />
+								<input type="hidden" name="institucion" 	id="institucion" 	value="<php:item id="institucion" />" />
+								<input type="hidden" name="rut" 			id="rut" 			value="<php:item id="rut" />" />
+								<input type="hidden" name="status" 			id="status" 		value="<php:item id="status" />" />
+								<input type="hidden" name="message" 		id="message" 		value="<php:item id="message" />" />
+								<input type="hidden" name="idDocumento" 	id="idDocumento" 	value="<php:item id="idDocumento" />" />
+								<input type="hidden" name="accion" 			id="accion" 		value="FIRMATOKEN" />
+												
+												
+								<div class="col-md-12">
+									<div class="responsiveContent">
+										<!--<embed id="imagen" src="<php:item id="ruta" />#toolbar=0" width="100%" height="340">-->
+										<!--<iframe id="ifrmArch" name="ifrmArch" src="<php:item id="ruta" />" width="100%" height="600px"></iframe>-->
+										<iframe id="ifrmArch" disabled name="ifrmArch"  width="90%" height="600px" src="<php:item id="ruta" />" ></iframe>
+									</div>
+								</div>
+							  </php:repeticion>  
+							</div>
+						</form> 
+				
+					<!--<div class="form-row">-->
+					</div>
+					
+					
+				<!--<div class="box-body -->
+				</div>
+				
+			<!--<div class="box-body pad table-responsive">-->
+			</div>
+    
+		<!-- /.box -->
+		</div>
+  
+	<!-- <div class="col-md-12"> -->
+	</div>
+ 
+ <!-- <div class="row"> -->
+</div>
+  
+ 

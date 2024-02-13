@@ -1,0 +1,1202 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <php:repeticion id="formulario">
+        <!--Botones de cabecera-->
+        <div class="box-header">
+          <!--<a class="btn btn-default btn_letra_azul" href="Documentos.php" ><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>-->
+        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <!--Mensajes-->
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+        <!--Formulario de los datos propios de Categoria-->   
+        <form role="form" name="formulario" id="formulario" action="Documentos.php" method="POST" autocomplete="off">
+
+          <!--Empresa-->
+          <div class="form-row">
+            <div class="col-md-6 xs-12"> 
+             <label>Empresa</label>
+             <div id="ejemplo" >
+               <input class="form-control" type="text" name="RutEmp" id="RutEmp" autofocus value="<php:item id="RutEmpresa" />  <php:item id="RazonSocial"/>" readonly style="background-color:white;"/>
+               <input type="hidden" name="RutEmpresa" id="RutEmpresa" value="<php:item id="RutEmpresa"/>"/> 
+             </div>             
+            </div>
+          </div>
+
+          <!--Cliente-->
+          <div class="form-row">
+            <div class="col-md-6 xs-12">
+               <label>Cliente</label>
+                <input class="form-control" type="text" name="RutCli" id="RutCli" value="<php:item id="RutEmpresaC" /> <php:item id="RazonSocialC"/>" readonly style="background-color:white;"/>
+                <input type="hidden" name="RutEmpresaC" id="RutEmpresaC" value="<php:item id="RutEmpresaC"/>"/>
+            </div>
+          </div>
+
+          <!--Plantilla-->
+          <div class="form-row">
+            <div class="col-md-6 xs-12" style="margin-top: 10px;">
+               <label>Plantilla</label>
+                <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                  <input class="form-control" type="text" name="idPla" id="idPla" value="<php:item id="idPla" />" readonly style="background-color:white;"/>
+                  <input type="hidden" name="idPlantilla" id="idPlantilla" value="<php:item id="idPlantilla"/>"/>
+                  <input type="hidden" name="idWF" id="idWF" value="<php:item id="idWF"/>"/>
+                  <input type="hidden" name="idTipoDoc" id="idTipoDoc" value="<php:item id="idTipoDoc"/>"/>
+                  <input type="hidden" name="datos" id="datos" value="<php:item id="datos"/>"/>
+                </div>
+                <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                   <button class="btn btn-md btn-primary btn-block" type="submit" name="accion" value="BUSCAR_PLANTILLA" id="btn_plantilla"><i class="fa fa-search"></i></button>  
+              </div>
+            </div>
+          </div>
+
+          <!--Tipo de Firmas-->
+          <div class="form-row">
+            <div class="col-md-6 xs-12" style="margin-top: 10px;">
+              <label>Tipo de Firma</label>
+              <select class="form-control" id="TipoFirmas" name="TipoFirmas">
+                <option value="<php:texto id="idTipoFirma"/>"><php:texto id="Descripcion"/></option>
+                  <php:repeticion id="TipoFirmas">
+                    <option value="<php:item id="idTipoFirma"/>"><php:item id="Descripcion"/></option>
+                  </php:repeticion>   
+              </select>
+              <input type="hidden" name="idTipoFirma" id="idTipoFirma" value="<php:item id="idTipoFirma"/>" />
+            </div>
+          </div> 
+
+          <div class="form-row">
+            <div class="col-md-12">
+              <h4></h4>
+            </div>
+          </div>
+            
+          <!--Notarias-->
+           <div class="col-md-6 xs-12" id="notaria">
+            <label>Notaria</label>
+             <div class="form-row">
+                <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                  <input class="form-control" type="text" name="Notaria" id="Notaria_Seleccion" value="<php:item id="Notaria" />" readonly style="background-color:white;" />
+                  <input type="hidden" name="RutEmpresaN" id="RutEmpresaN" value="<php:item id="RutEmpresaN"/>"/>
+                </div>
+                <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                   <button class="btn btn-md btn-primary btn-block" type="submit" name="accion" value="BUSCAR_NOTARIA" id="btn_notaria"><i class="fa fa-search"></i></button>  
+                </div>
+             </div>
+           </div>
+
+          <!--idDocumento-->
+          <div class="form-row">
+            <div class="col-md-6 xs-12"> 
+             <label>idDocumento</label>
+             <div id="ejemplo" >
+               <input class="form-control" type="text" name="idDocumento" id="idDocumento" maxlength="11" value='<php:item id="idDocumento" />'/>  
+             </div>             
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-md-12">
+              <h4></h4>
+            </div>
+          </div>
+
+         <!--Seleccionar Firmantes por Empresas -->
+          <div class="form-row">
+            <div class="col-md-12">
+                <label>Seleccione Firmantes</label>
+               
+                  <!-- Pasos-->
+                  <div class="steps-form-2">
+                      <div class="steps-row-2 setup-panel-2 d-flex justify-content-between">
+                          <div class="steps-step-2">
+                              <a href="#step-1" id="icono_emp" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0" data-placement="top" title="Empresa"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-building" aria-hidden="true"></i></a>
+                              <div>Empresa</div>
+                          </div>
+                          <div class="steps-step-2">
+                              <a href="#step-2" id="icono_cli" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0" data-placement="top" title="Cliente"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-users" aria-hidden="true"></i></a>
+                               <div>Cliente</div>
+                          </div>
+                          <div class="steps-step-2">
+                              <a href="#step-3" id="icono_not" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0 not steps-not" data-placement="top" title="Notaria"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                              <div>Notaria</div>
+                          </div>
+                      </div>
+                  </div>
+              
+                  <!--Firmantes de Empresas-->
+                  <div class="collapse" id="step-1">
+                   <table id="tabla_emp" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                          <h4> Representantes de la Empresa </h4>
+                      </tr> 
+                      <tr>
+                        <th style="text-align: center;">Selecci&oacute;n</th>
+                        <th style="text-align: center;">Rut</th>
+                        <th style="text-align: center;">Nombre y Apellido</th>
+                        <th style="text-align: center;">Personeria</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <php:repeticion id="firmantes_empresa">
+                      <tr id="fila_emp_<php:filamenos />">
+                        <td style="text-align: center;"><input type="checkbox" aria-label="Checkbox for following text input" name="Firmantes_Emp[]" class="f_emp" value='<php:item id="personaid"/>' id='emp_<php:filamenos />'><input type="checkbox" aria-label="Checkbox for following text input" name="Firmantes_Emp_Per[]" class="f_emp_per" id="<php:item id="personaid"/>" style="display:none;"></td>
+                        <td style="text-align: center;"><php:item id="personaid"/></td>
+                        <td style="text-align: center;"><php:item id="nombre"/> <php:item id="appaterno"/></td>
+                        <td style="text-align: center;">
+                          <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title='<php:item id="Personeria"/>' id="btn_ver_<php:filamenos />">Ver</button>
+                        </td>
+                      </tr>
+                    </php:repeticion>
+                    </tbody>                 
+                   </table>
+                  </div>
+                <!--Fin de firmantes-->
+               
+                  <!--Firmantes de Cliente-->
+                  <div class="collapse" id="step-2">
+                   <table id="tabla_cli" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <h4> Firmantes del Cliente </h4>
+                      </tr> 
+                      <tr>
+                        <th style="text-align: center;">Selecci&oacute;n</th>
+                        <th style="text-align: center;">Rut</th>
+                        <th style="text-align: center;">Nombre y Apellido</th>
+                        <th style="text-align: center;">Personeria</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <php:repeticion id="firmantes_cliente">
+                      <tr  id="fila_cli_<php:filamenos />">
+                        <td style="text-align: center;"><input type="checkbox" aria-label="Checkbox for following text input" name="Firmantes_Cli[]" class="f_cli" value='<php:item id="personaid"/>' id='cli_<php:filamenos />'><input type="checkbox" aria-label="Checkbox for following text input" name="Firmantes_Cli_Per[]" class="f_cli_per" id="<php:item id="personaid"/>_cli" style="display:none;"></td>
+                        <td style="text-align: center;"><php:item id="personaid"/></td>
+                        <td style="text-align: center;"><php:item id="nombre"/> <php:item id="appaterno"/></td>
+                         <td style="text-align: center;"><button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" value="1" title='<php:item id="Personeria"/>' id="btn_ver_cli_<php:filamenos />">Ver</button></td>
+                      </tr>
+                      </php:repeticion>
+                    </tbody>                 
+                   </table>
+
+                   <div class="form-row" id="avales">
+                    <h4>Avales</h4>
+                     <div class="col-md-12">
+                      <table id="avales" class="table table-bordered table-hover" >
+                        <tr>
+                          <td><input type="text" name='rut_aval' id="rut_aval" placeholder="Rut del aval" class="form-control" maxlength="10"></td>
+                          <td><input type="text" name="nombre_aval" id="nombre_aval" placeholder="Nombre " class="form-control" maxlength="50" ></td>
+                          <td><input type="text" name="apellido_aval" id="apellido_aval" placeholder="Apellido Paterno" class="form-control" maxlength="50"></td>
+                          <td><input type="email" name="correo_aval" id="correo_aval" placeholder="Correo electr&oacute;nico" class="form-control" maxlength="60"></td>
+                          <!--<td style="text-align: center;"><button style="background-color: transparent;" class="btn" type="button" id="agregar"><i class="fa fa-plus" aria-hidden="true"></i></button></td>-->
+                        </tr>
+                        <tr>
+                          <td colspan="4"><textarea name="personeria_aval" id="personeria_aval" rows="5" cols="80" style="width: 100%;" placeholder=" Personeria"></textarea></td>
+                        </tr>
+                      </table>
+                     </div>
+                   </div>
+                  </div>
+                   <!--Fin de firmantes-->
+                   
+                  <!--Firmantes de Notaria-->
+                  <div class="collapse" id="step-3">
+                   <table class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <h4> Notarios </h4>
+                      </tr> 
+                      <tr>
+                        <th style="text-align: center;">Selecci&oacute;n</th>
+                        <th style="text-align: center;">Rut</th>
+                        <th style="text-align: center;">Nombre y Apellido</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <php:repeticion id="firmantes_notaria">
+                      <tr id="firmantes_notaria">
+                        <td style="text-align: center;"><input type="checkbox" aria-label="Checkbox for following text input" name="Firmantes_Not[]" class="f_not" value="<php:item id="personaid"/>"></td>
+                        <td style="text-align: center;"><php:item id="personaid"/></td>
+                        <td style="text-align: center;"><php:item id="nombre"/> <php:item id="appaterno"/></td>
+                      </tr>
+                      </php:repeticion>
+                    </tbody>                 
+                   </table>
+                  </div>
+                   <!--Fin de firmantes-->
+                </div>
+              </div>
+            <!--Fin de Firmantes-->
+      
+          <div class="form-row">  
+            <div class="col-md-2 xs-12 pull-right">
+                <input type="hidden" id="idPlantilla" name="idPlantilla" value="<php:item id="idPlantilla"/>"/>
+                <input type="hidden" id="RutEmpresa" name="RutEmpresa" value="<php:item id="RutEmpresa"/>"/>
+                <input type="hidden" id="RutEmpresaC" name="RutEmpresaC" value="<php:item id="RutEmpresaC"/>"/>
+                <input type="hidden" id="RutEjecutivo" name="RutEjecutivo" value="<php:item id="RutEjecutivo"/>"/> 
+                <input type="hidden" id="RutSupervisor" name="RutSupervisor" value="<php:item id="RutSupervisor"/>"/> 
+                <input type="hidden" id="fechaInicio" name="fechaInicio" value="<php:item id="fechaInicio"/>" />
+                <input type="hidden" name="modelo_contrato" id="modelo_contrato" value="<php:item id="modelo_contrato"/>" >
+                <input type="hidden" name="FormasPago" id="FormasPago" value="<php:item id="FormasPago"/>" >
+                <input type="hidden" name="band" id="band" value="<php:item id="band"/>" >
+                <input type="hidden" name="datos" id="datos" value="<php:item id="datos"/>" >
+
+                <input type="hidden" name="fecha" id="fecha" value="<php:item id="fecha"/>" >
+                <input type="hidden" id="fechaFin" name="fechaFin" value="<php:item id="fechaFin"/>" />
+                
+                <!--Si el flujo tiene Notario-->
+                <input type="hidden" id="input_emp" name="input_emp" value="<php:item id="emp"/>" />
+                <input type="hidden" id="input_cli" name="input_cli" value="<php:item id="cli"/>" />
+                <input type="hidden" id="not" name="not" value="<php:item id="not"/>" />
+
+                <!--Si el flujo tiene Aval-->
+                <input type="hidden" id="aval" name="aval" value="<php:item id="aval"/>" />
+
+                <!--Anexo-->
+                <input type="hidden" id="idProyecto" name="idProyecto" value="<php:item id="idProyecto"/>"/>
+                <input type="hidden" id="fechaFirma" name="fechaFirma" value="<php:item id="fechaFirma"/>"/>
+                <input type="hidden" id="Marca" name="Marca" value="<php:item id="Marca"/>"/>
+                <input type="hidden" id="Modelo" name="Modelo" value="<php:item id="Modelo"/>"/>
+                <input type="hidden" id="CiudadEntrega" name="CiudadEntrega" value="<php:item id="CiudadEntrega"/>"/>
+                <input type="hidden" id="CiudadOperacion" name="CiudadOperacion" value="<php:item id="CiudadOperacion"/>"/>
+                <input type="hidden" id="CiudadDevolucion" name="CiudadDevolucion" value="<php:item id="CiudadDevolucion"/>"/> 
+                <input type="hidden" id="PeriodoArriendo" name="PeriodoArriendo" value="<php:item id="PeriodoArriendo"/>"/> 
+                <input type="hidden" id="FechaInicio" name="FechaInicio" value="<php:item id="FechaInicio"/>" />
+                <input type="hidden" id="FechaFinal" name="FechaFinal" value="<php:item id="FechaFinal"/>" />
+                <input type="hidden" name="Tarifa" id="Tarifa" value="<php:item id="Tarifa"/>" >
+                <input type="hidden" name="idMoneda_Tarifa" id="idMoneda_Tarifa" value="<php:item id="idMoneda_Tarifa"/>" >
+                <input type="hidden" name="idMoneda_KmsExceso" id="idMoneda_KmsExceso" value="<php:item id="idMoneda_KmsExceso"/>" >
+                <input type="hidden" name="KmsExceso" id="KmsExceso" value="<php:item id="KmsExceso"/>" >
+                <input type="hidden" name="KmsContratados" id="KmsContratados" value="<php:item id="KmsContratados"/>" >
+                <input type="hidden" name="FrecuenciaMantencion" id="FrecuenciaMantencion" value="<php:item id="FrecuenciaMantencion"/>" >
+                <input type="hidden" name="FrecuenciaCambio" id="FrecuenciaCambio" value="<php:item id="FrecuenciaCambio"/>" >
+                <input type="hidden" name="Cantidad" id="Cantidad" value="<php:item id="Cantidad"/>" >
+                <input type="hidden" name="Porcentaje" id="Porcentaje" value="<php:item id="Porcentaje"/>" >
+                <input type="hidden" name="Propuesta" id="Propuesta" value="<php:item id="Propuesta"/>" >
+                <input type="hidden" name="FechaPropuesta" id="FechaPropuesta" value="<php:item id="FechaPropuesta"/>" >
+                <input type="hidden" name="GPS" id="GPS" value="<php:item id="GPS"/>" >
+                <input type="hidden" name="seleccion" id="seleccion" value="<php:item id="seleccion"/>" >
+                <input type="hidden" name="seleccion_ded" id="seleccion_ded" value="<php:item id="seleccion_ded"/>" >
+                <input type="hidden" name="rut_coordinador" id="rut_coordinador" value="<php:item id="rut_coordinador"/>" >
+                <input type="hidden" name="nombre_coordinador" id="nombre_coordinador" value="<php:item id="nombre_coordinador"/>" >
+                <input type="hidden" name="idDocumento_Gama" id="idDocumento_Gama" value="<php:item id="idDocumento_Gama"/>" >
+
+                <!--Contrato Renting -->
+                <input type="hidden" name="Patente" id="Patente" value="<php:item id="Patente"/>" >
+                <input type="hidden" name="Color" id="Color" value="<php:item id="Color"/>" >
+                <input type="hidden" name="VIN" id="VIN" value="<php:item id="VIN"/>" >
+                <input type="hidden" name="AnnoVehiculo" id="AnnoVehiculo" value="<php:item id="AnnoVehiculo"/>" >
+                <input type="hidden" name="KmsMensuales" id="KmsMensuales" value="<php:item id="KmsMensuales"/>" >
+                <input type="hidden" name="FechaPie" id="FechaPie" value="<php:item id="FechaPie"/>" >
+                <input type="hidden" name="FechaPago" id="FechaPago" value="<php:item id="FechaPago"/>" >
+                <input type="hidden" name="CuotaPie" id="CuotaPie" value="<php:item id="CuotaPie"/>" >
+                <input type="hidden" name="MontoCuota" id="MontoCuota" value="<php:item id="MontoCuota"/>" >
+                <input type="hidden" name="Exceso" id="Exceso" value="<php:item id="Exceso"/>" >
+                <input type="hidden" name="KmsExceso" id="KmsExceso" value="<php:item id="KmsExceso"/>" >
+                <input type="hidden" name="idRentaMens" id="idRentaMens" value="<php:item id="idRentaMens"/>" >
+                <input type="hidden" name="RentaMens" id="RentaMens" value="<php:item id="RentaMens"/>" >
+                
+                <!--Operativo - Financiero-->
+                <input type="hidden" name="RutProveedor" id="RutProveedor" value="<php:item id="RutProveedor"/>" >
+                <input type="hidden" name="FechaInicioPago" id="FechaInicioPago" value="<php:item id="FechaInicioPago"/>" >
+                <input type="hidden" name="DetalleBienes" id="DetalleBienes" value="<php:item id="DetalleBienes"/>" >
+                <input type="hidden" name="Moneda" id="Moneda" value="<php:item id="Moneda"/>" >
+                <input type="hidden" name="MontoAdquisicion" id="MontoAdquisicion" value="<php:item id="MontoAdquisicion"/>" >
+                <input type="hidden" name="CantTotal" id="CantTotal" value="<php:item id="CantTotal"/>" >
+                <input type="hidden" name="CantRentas" id="CantRentas" value="<php:item id="CantRentas"/>" >
+                <input type="hidden" name="ValorBallon" id="ValorBallon" value="<php:item id="ValorBallon"/>" >
+                <input type="hidden" name="ValorCompra" id="ValorCompra" value="<php:item id="ValorCompra"/>" >
+                <input type="hidden" name="DiaPagoMensual" id="DiaPagoMensual" value="<php:item id="DiaPagoMensual"/>" >
+                <input type="hidden" name="DuracionContrato" id="DuracionContrato" value="<php:item id="DuracionContrato"/>" >
+                <input type="hidden" name="FechaPrepago" id="FechaPrepago" value="<php:item id="FechaPrepago"/>" >
+                <input type="hidden" name="ValorAsegurable" id="ValorAsegurable" value="<php:item id="ValorAsegurable"/>" >
+                <input type="hidden" name="ValorIguales" id="ValorIguales" value="<php:item id="ValorIguales"/>" >
+                <input type="hidden" name="pro" id="pro" value="<php:item id="pro"/>" >
+
+                 <!--Proveedores seleccionados-->
+
+                <input type="hidden" name="rut_p_1" value='<php:item id="rut_p_1" />' />
+                <input type="hidden" name="nombre_p_1" value='<php:item id="nombre_p_1" />' />
+                <input type="hidden" name="detalle_p_1" value='<php:item id="detalle_p_1" />' />
+                <input type="hidden" name="monto_p_1" value='<php:item id="monto_p_1" />' />
+
+                <input type="hidden" name="rut_p_2" value='<php:item id="rut_p_2" />' />
+                <input type="hidden" name="nombre_p_2" value='<php:item id="nombre_p_2" />' />
+                <input type="hidden" name="detalle_p_2" value='<php:item id="detalle_p_2" />' />
+                <input type="hidden" name="monto_p_2" value='<php:item id="monto_p_2" />' />
+
+                <input type="hidden" name="rut_p_0" value='<php:item id="rut_p_0" />' />
+                <input type="hidden" name="nombre_p_0" value='<php:item id="nombre_p_0" />' />
+                <input type="hidden" name="detalle_p_0" value='<php:item id="detalle_p_0" />' />
+                <input type="hidden" name="monto_p_0" value='<php:item id="monto_p_0" />' />
+
+                <input type="hidden" id="ACTIVAR" name="ACTIVAR"/>
+                <button class="btn btn-md btn-success btn-block" type="submit" name="accion" id="GENERAR" value="GENERAR" style="margin-top: 10px" >Generar</button>  
+            </div>
+          </div>
+        </form>  
+       </div>
+
+       </php:repeticion>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Calendarios-->
+<script>
+  $('#fechaInicio').datepicker({
+    language: "es",
+    orientation: "bottom",
+    autoclose: true,
+    todayHighlight: true,
+    format: 'dd-mm-yyyy'
+  });
+
+  $('#fechaFin').datepicker({
+    language: "es",
+    orientation: "bottom",
+    autoclose: true,
+    todayHighlight: true,
+    format: 'dd-mm-yyyy'
+  });
+
+$(document).ready(function(){
+
+  //Tooltip
+  $('[data-toggle="tooltip"]').tooltip(); 
+
+  //Opcion si aun no seleccionan nada 
+  if( $("#TipoFirmas").val().length == 0 ){
+      $("#TipoFirmas option:selected").text("(Seleccione)");  
+      $(".btn-circle-2").addClass("disabled");
+  }
+
+  //Opcion para habilitar o deshabilitar Avales
+  if( $("#aval").val() == 0 ){
+      //Ocultar 
+      $("#avales").hide();
+  }
+  else{
+      //Mostrar
+      $("#avales").show();
+  }
+
+  //Plantilla
+  if( $("#idPla").val().length == 1 ){
+    $("#GENERAR").prop("disabled", true);
+    $("#idPla").val("(Seleccione)");
+    $(".btn-circle-2").addClass("disabled");
+  }
+
+  //Tipo de firmas
+  if($("#TipoFirmas").val() == 0 ){
+    $("#GENERAR").prop("disabled", true);
+    $(".btn-circle-2").addClass("disabled");
+  }
+
+  if ( $("#Notaria_Seleccion").val().length == 1 ){
+    $("#Notaria_Seleccion").val("(Seleccione)");
+    
+  }
+  //Prefijo del idDocumento
+  var modelo = $("#modelo_contrato").val();
+
+  switch (modelo) { 
+     case '1': //Contrato Marco    
+      $("#idDocumento").attr("disabled",true);
+      $("#idDocumento_Gama").val($("#idDocumento").val());
+      break;
+    case '2': //Anexo     
+      $("#idDocumento").val($("#idDocumento_Gama").val());
+	    $("#idDocumento").attr("disabled",true);
+      break;
+    case '3': //Renting     
+      $("#idDocumento").val("CtoR_");
+      break;    
+    case '4': //Condiciones generales 
+      $("#idDocumento").val("CGR_");
+      break;
+    case '5': //Financiero
+      $("#idDocumento").val("OC_");
+      break;
+  }
+
+  //Si los RUT de los firmantes no cumplen con el formato 
+
+  if( $("#TipoFirmas").val() == 2 ){ //Si es firma electronica
+      //Firmantes Empresa
+      var row_emp = $("#tabla_emp tr").length;
+      var j = 0;
+      var respuesta_2 = "";
+
+      for( j = 0; j < row_emp ; j++ ){
+        //Si esta pendiente por aprobacion
+        respuesta_2 = validaRut($("#emp_" + i).val());
+
+        if( respuesta_2 == false ){
+          $("#fila_emp_" + i).css("background-color","#f4f4f4");
+          $("#emp_" + i).prop("disabled", true);
+          $("#mensajeError").removeClass("callout callout-warning");
+          $("#mensajeError").html("");
+        }
+      }
+
+      //Firmantes Clientes
+      var row_cli = $("#tabla_cli tr").length;
+      var i = 0;
+      var respuesta = "";
+
+      for( i = 0; i < row_cli ; i++ ){
+        //Si esta pendiente por aprobacion
+        respuesta = validaRut($("#cli_" + i).val());
+
+        if( respuesta == false ){
+          $("#fila_cli_" + i).css("background-color","#f4f4f4");
+          $("#cli_" + i).prop("disabled", true);
+          $("#mensajeError").removeClass("callout callout-warning");
+          $("#mensajeError").html("");
+        }
+      }
+  }
+
+/**/
+  //Asignar el numero de proyecto en el Anexo 
+  if( $("#idDocumento_Gama").val().length > 0){
+      $("#idDocumento").val($("#idDocumento_Gama").val());
+      $("#idDocumento").prop('readonly', true);
+  }
+  else{
+     $("#idDocumento").prop('readonly', false);
+  }
+
+
+  if( $("#not").val() == 1 ){
+
+    //Habilitar boton
+    $("#not").removeClass("disabled");
+    //Mostrar el selector de Notaria 
+    $("#notaria").show();
+
+    if( $("#Notaria_Seleccion").val().length == 0 ||num_e == 0 || num_c == 0 || num_n == 0 ){
+      $("#GENERAR").prop("disabled", true);
+    }
+
+    if( $("#input_emp").val() == 1 ){
+      $("#icono_emp").removeClass("disabled");
+    }else{
+       $("#icono_emp").addClass("disabled");
+    }
+
+    if( $("#input_cli").val() == 1 ){
+      $("#icono_cli").removeClass("disabled");
+    }else{
+       $("#icono_cli").addClass("disabled");
+    }
+
+    $("#icono_not").removeClass("disabled");
+
+  }else{
+
+      //Inahibilitar los firmantes 
+      $("#not").addClass("disabled");
+      //Se mantiene oculto mientras no haya Notario en el Flujo
+      $("#notaria").hide();
+
+     if( $("#input_emp").val() == 1 ){
+        $("#icono_emp").removeClass("disabled");
+      }else{
+         $("#icono_emp").addClass("disabled");
+      }
+
+      if( $("#input_cli").val() == 1 ){
+        $("#icono_cli").removeClass("disabled");
+      }else{
+         $("#icono_cli").addClass("disabled");
+      }
+
+      if( $("#not").val() == 1 ){
+        $("#icono_not").removeClass("disabled");
+      }else{
+         $("#icono_not").addClass("disabled");
+      }
+
+      $("#icono_not").addClass("disabled");
+  }
+
+  $("#GENERAR").attr('disabled', true);
+});
+
+$("#GENERAR").click(function(){
+
+    if( $("#aval").val() == 1 ){ //Si el flujo tiene avales
+     
+      if( $("#rut_aval").val().length == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Debe completar los campos del Aval");
+        $("#rut_aval").focus();
+        $("#GENERAR").attr('disabled', false);
+        return false;
+      }
+
+      if( $("#nombre_aval").val().length == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Debe completar los campos del Aval");
+        $("#nombre_aval").focus();
+        $("#GENERAR").attr('disabled', false);
+        return false;
+      }
+
+      if( $("#apellido_aval").val().length == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Debe completar los campos del Aval");
+        $("#apellido_aval").focus();
+        $("#GENERAR").attr('disabled', false);
+        return false;
+      }
+
+      if( $("#correo_aval").val().length == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Debe completar los campos del Aval");
+        $("#correo_aval").focus();
+        $("#GENERAR").attr('disabled', false);
+        return false;
+      }
+
+      if( $("#personeria_aval").val().length == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Debe completar los campos del Aval");
+        $("#personeria_aval").focus();
+        $("#GENERAR").attr('disabled', false);
+        return false;
+      }
+    }
+
+    if( $("#idDocumento").val().length < 6 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Debe completar el id de Documento");
+        $("#idDocumento").focus();
+        $("#GENERAR").attr('disabled', false);
+        return false;
+    }
+});
+
+var i = 0;
+var j = 0;
+
+$("#tabla_emp tr").click(function(){
+ nombre = $(this).attr("id").split("_");
+ i = nombre[2]; 
+});
+
+$("#tabla_cli tr").click(function(){
+ nombre = $(this).attr("id").split("_");
+ j = nombre[2]; 
+});
+
+/*****************/
+/****FIRMANTES****/
+/*****************/
+
+//Varibles
+var num_e = 0;
+var num_c = 0;
+var num_n = 0;
+var num_a = 0;
+
+//Firmantes de Empresa
+$(".f_emp").on( 'change', function() {
+  if( $(this).is(':checked') == true ) {
+
+    $("#mensajeError").removeClass("callout callout-warning");
+    $("#mensajeError").html("");
+
+    num_e++;
+    var resultado = confirm( "Desea incluir la personeria del firmante en el Documento?");
+    var btn = "#btn_ver_" + i;
+
+    if( resultado == true ){
+      $("#"+ $(this).val() ).prop( "checked", true );
+      $("#"+ $(this).val() ).attr( "value", 1 );
+      $(btn).removeClass("btn-secondary").addClass("btn-success");
+    }
+    else{
+      $("#" + $(this).val() ).prop( "checked", true );
+      $("#"+ $(this).val() ).attr( "value", 0 );
+    }
+  }
+  if( $(this).is(':checked') == false ){
+    num_e--;
+    $("#"+ $(this).val() ).attr( "value", 0 );
+    $("#btn_ver_" + i).removeClass("btn-success").addClass("btn-secondary");
+  }
+  if(num_e == 0) {
+    $("#mensajeError").addClass("callout callout-warning");
+    $("#mensajeError").html("Seleccione Firmantes de Empresa");
+    $("#GENERAR").prop('disabled', true); 
+  }
+ //Si tiene Notario
+  if ( $("#not").val() == 1 ){
+    //Si tiene aval
+    if( $("#aval").val() == 1 ){
+      //Si tiene Cliente 
+      if( $("#input_cli").val() == 1){
+        //Verificar los demas
+        if( num_e > 0 && num_c > 0 && num_n > 0 && num_a > 0){
+          $("#GENERAR").attr('disabled', false);
+        }
+        else{
+          $("#GENERAR").prop('disabled', true); 
+        }
+      }else{
+        if( num_e > 0 && num_n > 0 && num_a > 0 ){
+          $("#GENERAR").attr('disabled', false);
+        }
+      }
+    }else{
+      if( num_e > 0 && num_n > 0){
+        $("#GENERAR").attr('disabled', false);
+      }
+      else{
+        $("#GENERAR").prop('disabled', true); 
+      }
+    }
+  }else{
+   //Si tiene aval
+    if( $("#aval").val() == 1 ){
+      //Si tiene Cliente 
+      if( $("#input_cli").val() == 1){
+        //Verificar los demas
+        if( num_e > 0 && num_c > 0 && num_a > 0 ){
+          $("#GENERAR").attr('disabled', false);
+        }
+        else{
+          $("#GENERAR").prop('disabled', true); 
+        }
+      }else{
+        if( num_e > 0 && num_a > 0 ){
+          $("#GENERAR").attr('disabled', false);
+        }
+        else{
+          $("#GENERAR").prop('disabled', true); 
+        }
+      }
+   }else{
+       if( $("#input_cli").val() == 1){
+          //Verificar los demas
+          if( num_e > 0 && num_c > 0 ){
+            $("#GENERAR").attr('disabled', false);
+          }
+          else{
+            $("#GENERAR").prop('disabled', true); 
+          }
+        }
+        else{
+          if( num_e > 0){
+            $("#GENERAR").attr('disabled', false);
+          }
+          else{
+            $("#GENERAR").prop('disabled', true); 
+          }
+        }
+     }
+  }
+}); 
+
+//Firmantes de Clientes
+$(".f_cli").on( 'change', function() {
+  if( $(this).is(':checked') == true) {
+
+    $("#mensajeError").removeClass("callout callout-warning");
+    $("#mensajeError").html("");
+
+    num_c++;
+    var resultado = confirm( "Desea incluir la personeria del firmante en el Documento?");
+    var btn = "#btn_ver_cli_" + j;
+
+    if( resultado == true ){
+      $("#"+ $(this).val()+"_cli" ).prop( "checked", true );
+      $("#"+ $(this).val()+"_cli" ).attr( "value", 1 );
+      $(btn).removeClass("btn-secondary").addClass("btn-success");
+    }
+    else{
+       $("#" + $(this).val()+"_cli" ).prop( "checked", true );
+       $("#"+ $(this).val()+"_cli" ).attr( "value", 0 );
+    }
+  }
+   if( $(this).is(':checked') == false ){
+    num_c--;
+    $("#"+ $(this).val()+"_cli" ).attr( "value", 0 );
+    $("#btn_ver_cli_" + j).removeClass("btn-success").addClass("btn-secondary");
+  }
+  if(num_c == 0) {
+    $("#mensajeError").addClass("callout callout-warning");
+    $("#mensajeError").html("Seleccione Firmantes del Cliente");
+    $("#GENERAR").prop('disabled', true); 
+  }
+
+  if( $("#not").val() == 1 ){
+    if( $("#aval").val() == 1 ){
+      if( $("#input_emp").val() == 1){
+        //Verificar todos los demas
+        if( num_e > 0 && num_c > 0 && num_n > 0 && num_a >0){
+          $("#GENERAR").attr('disabled', false);
+        }
+        else{
+          $("#GENERAR").prop('disabled', true); 
+        }
+      }else{
+        //Verificar todos los demas
+        if( num_c > 0 && num_n > 0 && num_a > 0){
+          $("#GENERAR").attr('disabled', false);
+        }
+        else{
+          $("#GENERAR").prop('disabled', true); 
+        }
+      }
+    }else{
+        if( $("#input_emp").val() == 1){
+          //Verificar todos los demas
+          if( num_e > 0 && num_c > 0 && num_n > 0){
+            $("#GENERAR").attr('disabled', false);
+          }
+          else{
+            $("#GENERAR").prop('disabled', true); 
+          }
+        }else{
+           //Verificar todos los demas
+          if( num_c > 0 && num_n > 0){
+            $("#GENERAR").attr('disabled', false);
+          }
+          else{
+            $("#GENERAR").prop('disabled', true); 
+          }
+        }
+  }
+}else{
+    if ( $("#aval").val() == 1 ){
+      if( $("#input_emp").val() == 1){
+        if( num_e > 0 && num_c > 0 && num_a > 0){
+          $("#GENERAR").attr('disabled', false);
+        }
+        else{
+          $("#GENERAR").prop('disabled', true); 
+        }
+      }else{
+        if( num_a > 0 && num_c > 0){
+          $("#GENERAR").attr('disabled', false);
+        }
+        else{
+          $("#GENERAR").prop('disabled', true); 
+        }
+      }
+    }else{
+       if( $("#input_emp").val() == 1){
+          if( num_e > 0 && num_c > 0 ){
+             $("#GENERAR").attr('disabled', false);
+          }else{
+             $("#GENERAR").prop('disabled', true); 
+          }
+        }else{
+          if( num_c > 0 ){
+             $("#GENERAR").attr('disabled', false);
+          }else{
+             $("#GENERAR").prop('disabled', true); 
+          }
+        }
+    }
+  }
+
+  $("#rut_aval").focus();
+});  
+
+//Firmantes de Notaria
+$(".f_not").on('change', function() {
+  if ( $("#not").val() == 1 ){
+     if( $(this).is(':checked') ) {
+        num_n++;
+        $("#mensajeError").removeClass("callout callout-warning");
+        $("#mensajeError").html("");
+        
+      }//Si seleccionaron algun firmante
+       if( $(this).is(':checked') == false ){
+        num_n--;
+      }
+      if(num_n == 0) {
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Seleccione Notario");
+      $("#GENERAR").prop('disabled', true); 
+      }
+      
+      if ( $("#aval").val() == 1 ){
+        if( $("#input_emp").val() == 1 ){
+          if( $("#input_cli").val() == 1 ){
+            if ( num_n > 0 && num_e > 0 && num_c > 0 && num_a > 0 ){
+               $("#GENERAR").prop('disabled', false); 
+            }
+            else{
+                $("#GENERAR").prop('disabled', true); 
+            }
+          }else{
+            if ( num_n > 0 && num_e > 0 && num_a > 0 ){
+               $("#GENERAR").prop('disabled', false); 
+            }
+            else{
+                $("#GENERAR").prop('disabled', true); 
+            }
+          }
+        }else{
+          if ( num_n > 0 && num_a > 0 ){
+               $("#GENERAR").prop('disabled', false); 
+            }
+            else{
+                $("#GENERAR").prop('disabled', true); 
+            }
+        }
+      }
+      else{
+        if( $("#input_emp").val() == 1 ){
+          if( $("#input_cli").val() == 1 ){
+            if ( num_n > 0 && num_e > 0 && num_c > 0 ){
+               $("#GENERAR").prop('disabled', false); 
+            }
+            else{
+                $("#GENERAR").prop('disabled', true); 
+            }
+          }else{
+            if ( num_n > 0 && num_e > 0 ){
+               $("#GENERAR").prop('disabled', false); 
+            }
+            else{
+                $("#GENERAR").prop('disabled', true); 
+            }
+          }
+        }else{
+          if ( num_n > 0 ){
+               $("#GENERAR").prop('disabled', false); 
+            }
+            else{
+                $("#GENERAR").prop('disabled', true); 
+            }
+        }
+
+      }
+  }
+});
+
+/*****************/
+/**DATOS DE AVAL**/
+/*****************/
+
+//Validar Rut de Aval
+ $("#rut_aval").change(function(){
+
+    if ( $("#rut_aval").val().length == 0 ){
+      num_a--;
+    }else{
+      var respuesta = validaRut($("#rut_aval").val());
+
+      if( respuesta == false ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El Rut del Aval no es un rut v&aacute;lido");
+        $("#rut_aval").focus();
+        return false;
+      }
+      else{
+        $("#mensajeError").removeClass("callout callout-warning");
+        $("#mensajeError").html("");
+      }
+    }
+
+   //Si todos los campos estan completos avanza
+   if( $("#rut_aval").val().length > 0 && $("#nombre_aval").val().length > 0 && $("#apellido_aval").val().length > 0 && $("#correo_aval").val().length > 0 && $("#personeria_aval").val().length > 0 ){
+      num_a++;
+    }
+
+    //Si al menos un esta en blanco
+    if( num_a == 0 ){
+      $("#GENERAR").prop('disabled', true);
+    }
+
+    if( $("#not").val() == 1 ){
+      if ( num_n > 0 && num_e > 0 && num_c > 0 && num_a > 0 ){
+           $("#GENERAR").prop('disabled', false); 
+        }
+        else{
+            $("#GENERAR").prop('disabled', true); 
+        }
+    } 
+    else{
+      if ( num_e > 0 && num_c > 0 && num_a > 0 ){
+           $("#GENERAR").prop('disabled', false); 
+        }
+        else{
+            $("#GENERAR").prop('disabled', true); 
+        }
+    }           
+ });
+
+ //Nombre
+ $("#nombre_aval").change(function(){
+
+   if ( $("#nombre_aval").val().length == 0 ){
+      num_a--;
+    }
+
+    if( $("#rut_aval").val().length > 0 && $("#nombre_aval").val().length > 0 && $("#apellido_aval").val().length > 0 && $("#correo_aval").val().length > 0 && $("#personeria_aval").val().length > 0 ){
+        num_a++;
+    }
+
+    //Si al menos un esta en blanco
+    if( num_a == 0 ){
+      $("#GENERAR").prop('disabled', true);
+    }
+
+     if( $("#not").val() == 1 ){
+      if ( num_n > 0 && num_e > 0 && num_c > 0 && num_a > 0 ){
+           $("#GENERAR").prop('disabled', false); 
+        }
+        else{
+            $("#GENERAR").prop('disabled', true); 
+        }
+    } 
+    else{
+      if ( num_e > 0 && num_c > 0 && num_a > 0 ){
+           $("#GENERAR").prop('disabled', false); 
+        }
+        else{
+            $("#GENERAR").prop('disabled', true); 
+        }
+    } 
+ });
+
+ //Apellido
+ $("#apellido_aval").change(function(){
+
+    if ( $("#apellido_aval").val().length == 0 ){
+      num_a--;
+    }
+
+    if( $("#nombre_aval").val().length > 0 && $("#apellido_aval").val().length > 0 && $("#correo_aval").val().length > 0 && $("#personeria_aval").val().length > 0 ){
+        num_a++;
+      }
+    //Si al menos un esta en blanco
+    if( num_a == 0 ){
+      $("#GENERAR").prop('disabled', true);
+    }
+
+    if( $("#not").val() == 1 ){
+      if ( num_n > 0 && num_e > 0 && num_c > 0 && num_a > 0 ){
+           $("#GENERAR").prop('disabled', false); 
+        }
+        else{
+            $("#GENERAR").prop('disabled', true); 
+        }
+    } 
+    else{
+      if ( num_e > 0 && num_c > 0 && num_a > 0 ){
+           $("#GENERAR").prop('disabled', false); 
+        }
+        else{
+            $("#GENERAR").prop('disabled', true); 
+        }
+    } 
+ });
+
+ //Correo
+ $("#correo_aval").change(function(){
+
+   if ( $("#correo_aval").val().length == 0 ){
+      num_a--;
+    }
+   if( $("#rut_aval").val().length > 0 && $("#nombre_aval").val().length > 0 && $("#apellido_aval").val().length > 0 && $("#correo_aval").val().length > 0 && $("#personeria_aval").val().length > 0 ){
+        num_a++;
+      }
+
+     //Si al menos un esta en blanco
+    if( num_a == 0 ){
+      $("#GENERAR").prop('disabled', true);
+    }
+
+    if( $("#not").val() == 1 ){
+      if ( num_n > 0 && num_e > 0 && num_c > 0 && num_a > 0 ){
+           $("#GENERAR").prop('disabled', false); 
+        }
+        else{
+            $("#GENERAR").prop('disabled', true); 
+        }
+    } 
+    else{
+      if ( num_e > 0 && num_c > 0 && num_a > 0 ){
+           $("#GENERAR").prop('disabled', false); 
+        }
+        else{
+            $("#GENERAR").prop('disabled', true); 
+        }
+    } 
+ });
+
+ //Personerias
+ $("#personeria_aval").change(function(){
+
+    if ( $("#personeria_aval").val().length == 0 ){
+      num_a--;
+    }
+
+    if( $("#rut_aval").val().length > 0 && $("#nombre_aval").val().length > 0 && $("#apellido_aval").val().length > 0 && $("#correo_aval").val().length > 0 && $("#personeria_aval").val().length > 0 ){
+        num_a++;
+      }
+
+    //Si al menos un esta en blanco
+    if( num_a == 0 ){
+      $("#GENERAR").prop('disabled', true);
+    }
+
+    if( $("#not").val() == 1 ){
+      if ( num_n > 0 && num_e > 0 && num_c > 0 && num_a > 0 ){
+           $("#GENERAR").prop('disabled', false); 
+        }
+        else{
+            $("#GENERAR").prop('disabled', true); 
+        }
+    } 
+    else{
+      if ( num_e > 0 && num_c > 0 && num_a > 0 ){
+           $("#GENERAR").prop('disabled', false); 
+        }
+        else{
+            $("#GENERAR").prop('disabled', true); 
+        }
+    } 
+ });
+
+//Si el Documento es de Tipo Manual 
+$("#TipoFirmas").change(function(){
+
+  if( $("#not").val() == 1 ){
+    //Validamos los demas datos 
+    if( $("#idPla").val().length > 0 && $("#Notaria_seleccion").val().length > 0 && $("#idDocumento_Gama").val().length > 5){
+      
+        //Empresa
+        if( $("#input_emp").val() == 1 ){
+          $("#icono_emp").removeClass("disabled");
+        }else{
+          $("#icono_emp").addClass("disabled");
+        }
+        //Cliente
+        if( $("#input_cli").val() == 1 ){
+          $("#icono_cli").removeClass("disabled");
+        }else{
+           $("#icono_cli").addClass("disabled");
+        }  
+        $("#icono_not").removeClass("disabled");
+        $("#GENERAR").prop('disabled', true); 
+
+    }
+  }else{
+     if( $("#idPla").val().length > 0 && $("#idDocumento_Gama").val().length > 5){
+        //Empresa
+        if( $("#input_emp").val() == 1 ){
+          $("#icono_emp").removeClass("disabled");
+        }else{
+          $("#icono_emp").addClass("disabled");
+        }
+        //Cliente
+        if( $("#input_cli").val() == 1 ){
+          $("#icono_cli").removeClass("disabled");
+        }else{
+           $("#icono_cli").addClass("disabled");
+        }  
+        $("#icono_not").addClass("disabled");
+        $("#GENERAR").prop('disabled', true); 
+     }
+  }
+ 
+  //Firmantes Empresa
+  var row_emp = $("#tabla_emp tr").length;
+  var j = 0;
+  var respuesta_2 = "";
+
+  //Firmantes Clientes
+  var row_cli = $("#tabla_cli tr").length;
+  var i = 0;
+  var respuesta = "";
+
+  if( $("#TipoFirmas").val() == 2 ){ //Si es firma electronica
+
+      for( j = 0; j < row_emp ; j++ ){
+        //Valida que no se puede seleccionar formatos diferentes a Rut 
+        respuesta_2 = validaRut($("#emp_" + i).val());
+
+        if( respuesta_2 == false ){
+          $("#fila_emp_" + i).css("background-color","#f4f4f4");
+          $("#emp_" + i).prop("disabled", true);
+          $("#mensajeError").removeClass("callout callout-warning");
+          $("#mensajeError").html("");
+        }
+      }
+
+      for( i = 0; i < row_cli ; i++ ){
+        //Valida que no se puede seleccionar formatos diferentes a Rut 
+        respuesta = validaRut($("#cli_" + i).val());
+
+        if( respuesta == false ){
+          $("#fila_cli_" + i).css("background-color","#f4f4f4");
+          $("#cli_" + i).prop("disabled", true);
+          $("#mensajeError").removeClass("callout callout-warning");
+          $("#mensajeError").html("");
+        }
+      }
+  }
+  else{
+    for( j = 0; j < row_emp ; j++ ){
+    
+      $("#fila_emp_" + i).css("background-color","#fff");
+      $("#emp_" + i).prop("disabled", false);
+    }
+
+    for( i = 0; i < row_cli ; i++ ){
+
+      $("#fila_cli_" + i).css("background-color","#fff");
+      $("#cli_" + i).prop("disabled", false);
+    }
+  } 
+});
+
+
+$("#idDocumento").change(function(){
+
+  if( $("#idDocumento").val().length > 5 ){
+
+    if( $("#input_emp").val() == 1 ){
+      $("#icono_emp").removeClass("disabled");
+    }else{
+       $("#icono_emp").addClass("disabled");
+    }
+
+    if( $("#input_cli").val() == 1 ){
+      $("#icono_cli").removeClass("disabled");
+    }else{
+       $("#icono_cli").addClass("disabled");
+    }
+
+    if( $("#not").val() == 1 ){
+      $("#icono_not").removeClass("disabled");
+    }else{
+       $("#icono_not").addClass("disabled");
+    }
+
+  }
+  else{
+     $(".btn-circle-2").addClass("disabled");
+  }
+
+});
+
+</script>
+
+
+

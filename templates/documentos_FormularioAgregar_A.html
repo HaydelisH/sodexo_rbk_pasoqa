@@ -1,0 +1,1036 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <php:repeticion id="formulario">
+        <!--Botones de cabecera-->
+         <div class="box-header">
+          <a class="btn btn-default btn_letra_azul" onClick="history.back(-1)" ><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
+        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <!--Mensajes-->
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+
+       <!--Formulario de los datos propios de Categoria-->   
+      <form role="form" name="formulario" id="formulario" action="Documentos.php" method="POST" autocomplete="off">
+
+        <!--Seleccionar Proyecto-->
+         <div class="form-row">
+          <div class="col-md-6 xs-12" style=" padding-left: 10px;"  >
+           <label>Proyecto</label>
+            <div class="col-md-11 xs-12" style=" padding-left: 0px; padding-right: 0px;" >
+              <input class="form-control" type="text" name="idProyecto" id="idProyecto" value='<php:item id="idProyecto"/>' readonly style="background-color:white;"/>
+              <input type="hidden" id="RutEmpresaC" name="RutEmpresaC" value="<php:item id="RutEmpresaC"/>"/>
+              <input type="hidden" id="RutEmpresa" name="RutEmpresa" value="<php:item id="RutEmpresa"/>"/>
+              <input type="hidden" id="modelo_contrato" name="modelo_contrato" value="<php:item id="modelo_contrato"/>"/>
+              <input type="hidden" id="proyectos_emp" name="proyectos_emp" value="<php:item id="proyectos_emp"/>"/>
+            </div>
+            <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+               <button class="btn btn-md btn-primary btn-block" type="submit" name="accion" value="BUSCAR_PROYECTO" id="btn_proyecto" ><i class="fa fa-search"></i></button>  
+            </div>
+            </div>
+        </div>
+
+        <!--Buscar Documento -->
+         <div class="form-row">
+          <div class="col-md-6 xs-12" style=" padding-left: 10px;"  >
+           <label>Contrato Marco</label>
+            <div class="col-md-11 xs-12" style=" padding-left: 0px; padding-right: 0px;" >
+              <input class="form-control" type="text" name="idDocumento_Gama" id="idDocumento_Gama" value='<php:item id="idDocumento_Gama"/>' readonly style="background-color:white;"/>
+              <input type="hidden" id="RutEmpresaC" name="RutEmpresaC" value="<php:item id="RutEmpresaC"/>"/>
+              <input type="hidden" id="idProyecto" name="idProyecto" value="<php:item id="idProyecto"/>"/>
+              <input type="hidden" id="RutEmpresa" name="RutEmpresa" value="<php:item id="RutEmpresa"/>"/>
+              <input type="hidden" id="modelo_contrato" name="modelo_contrato" value="<php:item id="modelo_contrato"/>"/>
+              <input type="hidden" id="proyectos_emp" name="proyectos_emp" value="<php:item id="proyectos_emp"/>"/>
+            </div>
+            <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+               <button class="btn btn-md btn-primary btn-block" type="submit" name="accion" value="BUSCAR_CM" id="btn_cm" ><i class="fa fa-search"></i></button>  
+            </div>
+            </div>
+        </div>
+
+        <!--Formas de Pago-->
+        <div class="form-row">
+          <div class="col-md-6 xs-12">
+            <input type="hidden" name="idFormaPago" id="idFormaPago" value="<php:item id="idFormaPago"/>" />
+            <label>Formas de Pago</label>
+            <select class="form-control" id="FormasPago" name="FormasPago">
+              <option value="<php:texto id="idFormaPago"/>"><php:texto id="FormaPago"/></option>
+                <php:repeticion id="FormasPago">
+                  <option value="<php:item id="idFormaPago"/>"><php:item id="FormaPago"/></option>
+                </php:repeticion>   
+            </select>
+          </div>
+        </div> 
+
+     
+        <!--Fechas del Documento-->
+        <div class="col-md-6 xs-12" style=" padding-right: 5px;" >
+          <label for="">Fechas del Documento</label>
+           <div class="form-group">
+            <div class="input-group date">
+              <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+              </div>
+              <input type="datetime" style="background-color: white;" class="form-control pull-right" id="fechaFirma" name="fechaFirma" readonly placeholder="Fecha de Firma" value="<php:item id="fechaFirma"/>"  />
+            </div>
+          </div>
+        </div>
+ 
+      <div class="form-row">
+        <div class="col-md-12">
+          <h5></h5>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-12">
+          <h5><strong>Datos de Anexo</strong></h5>
+        </div>
+      </div>
+
+        <php:repeticion id="datos_anexo">
+        <div class="form-row">
+         <div class="col-md-6">
+          <label for="Marca">Marca</label>
+          <input type="text" class="form-control da" id="Marca" name="Marca" maxlength="50"  placeholder="Marca" value='<php:item id="Marca"/>' /> 
+         </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-6">
+            <label for="Modelo">Modelo</label>
+            <input type="text" class="form-control da" id="Modelo" name="Modelo" maxlength="50"  placeholder="Modelo" value='<php:item id="Modelo"/>'/>
+          </div>
+        </div>
+
+        <div class="form-row">       
+          <div class="col-md-6 xs-12">
+            <label for="CiudadEntrega">Ciudad de Entrega</label>
+            <input type="text" class="form-control da" id="CiudadEntrega" name="CiudadEntrega" maxlength="50" placeholder="Ciudad de Entrega" value='<php:item id="CiudadEntrega"/>'/>
+          </div>
+        </div>
+
+        <div class="form-row">
+         <div class="col-md-6 xs-12">
+            <label for="CiudadOperacion">Ciudad de Operaci&oacute;n</label>
+            <input type="text" class="form-control da" id="CiudadOperacion" name="CiudadOperacion" maxlength="50" placeholder="Ciudad de Operacion" value='<php:item id="CiudadOperacion"/>'/>
+          </div>
+        </div>
+
+        <div class="form-row">  
+          <div class="col-md-6 xs-12">
+            <label for="CiudadDevolucion">Ciudad Devoluci&oacute;n</label>
+            <input type="text" class="form-control da" id="CiudadDevolucion" name="CiudadDevolucion" maxlength="50" placeholder="Ciudad Devolucion" value='<php:item id="CiudadDevolucion"/>'/>
+         </div>
+        </div>
+
+        <div class="form-row">  
+          <div class="col-md-6 xs-12">
+            <label for="PeriodoArriendo">Periodo de Arriendo</label>
+            <input type="number" min="0" class="form-control da" id="PeriodoArriendo" name="PeriodoArriendo" title="Meses"  placeholder="Periodo de Arriendo" value='<php:item id="PeriodoArriendo"/>'/>
+         </div>
+        </div>  
+
+        <div class="form-row">
+         <div class="col-md-6 xs-12">
+          <label for="FechaInicio">Fecha Inicio</label>
+          <div class="input-group date">
+            <div class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </div>
+            <input type="datetime" class="form-control da" id="FechaInicio" name="FechaInicio"  readonly="readonly" placeholder="Fecha Inicio" value='<php:item id="FechaInicio"/>'/>
+          </div>
+         </div>
+        </div>
+
+       <div class="form-row">  
+        <div class="col-md-6 xs-12">
+          <label for="Fecha">Fecha de Entrega</label>
+            <div class="input-group date">
+              <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+              </div>
+              <input type="text" class="form-control da" id="FechaFinal" name="FechaFinal"  readonly="readonly" placeholder="Fecha Final" value='<php:item id="FechaFinal"/>'/>
+            </div>
+        </div>
+       </div>
+      
+        <div class="form-row"> 
+          <div class="col-md-2 xs-4">
+            <label for="Moneda">Monedas</label>
+            <select class= "form-control da" name="Tarifa" id="Tarifa" >
+              <option value='<php:item id="idMoneda_Tarifa"/>'><php:item id="NombreMoneda_Tarifa"/></option>
+              <option value="1">Pesos</option>
+              <option value="2">UF</option>
+            </select>
+          </div>
+
+          <div class="col-md-4 xs-8">
+            <label for="Tarifa">Tarifa</label>
+            <input type="number" min="0" step="any" class="form-control da" id="Tarifa" name="Tarifa" placeholder="Tarifa" value='<php:item id="Tarifa"/>'/>
+          </div>
+       </div>
+
+        <div class="form-row"> 
+          <div class="col-md-2 xs-4">
+            <label >Monedas</label>
+            <select class= "form-control da" name="Exceso" id="Exceso" >
+              <option value='<php:item id="idMoneda_KmsExceso"/>'><php:item id="NombreMoneda_KmsExceso"/></option>
+              <option value="1">Pesos</option>
+              <option value="2">UF</option>
+            </select>
+          </div>
+          <div class="col-md-4 xs-8">
+            <label >Cobro del Kms adicional</label>
+            <input type="number" step="any" min="0" step="0.1" class="form-control da" id="KmsExceso" name="KmsExceso" placeholder="Kms Exceso" value='<php:item id="KmsExceso"/>'/>
+          </div>
+        </div>    
+        
+       <div class="form-row">  
+            <div class="col-md-6 xs-12">
+              <label for="KmsMensuales">Kms Mensuales</label>
+              <input type="number" class="form-control da" id="KmsMensuales" name="KmsMensuales" value="<php:item id="KmsMensuales" />" placeholder="Kms Mensuales" />
+           </div>
+         </div>
+
+        <div class="form-row">  
+          <div class="col-md-6">
+            <label for="KmsContratados">Kms Contratados</label>
+            <input type="number" min="0" class="form-control da" id="KmsContratados" name="KmsContratados"   placeholder="Kms Contratados" value='<php:item id="KmsContratados"/>'/>
+         </div>
+        </div>
+
+        <div class="form-row">  
+          <div class="col-md-6 xs-12">
+            <label for="FrecuenciaMantencion">Frecuencia de Mantenci&oacute;n</label>
+            <input type="number" class="form-control da" id="FrecuenciaMantencion" name="FrecuenciaMantencion" placeholder="Frecuencia de Mantencion" value='<php:item id="FrecuenciaMantencion"/>'/>
+         </div>
+       </div>
+
+       <div class="form-row">  
+          <div class="col-md-6 xs-12">
+            <label for="FrecuenciaCambio">Frecuencia de Cambio de Neum&aacute;ticos</label>
+            <input type="number" min="0" class="form-control da" id="FrecuenciaCambio" name="FrecuenciaCambio" placeholder="Frecuencia de Cambio" value='<php:item id="FrecuenciaCambio"/>'/>
+         </div>
+       </div>
+                 
+       <div class="form-row">  
+          <div class="col-md-6 xs-12">
+            <label for="Cantidad">Cantidad</label>
+            <input type="number" min="0" class="form-control da" id="Cantidad" name="Cantidad" placeholder="Cantidad" value='<php:item id="Cantidad"/>' />
+         </div>
+       </div>
+
+      </php:repeticion>
+      <!--Fin de Datos de Anexo-->
+    
+      <div class="form-row">
+        <div class="col-md-12">
+          <h5></h5>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-12">
+          <h5></h5>
+        </div>
+      </div>
+    
+      <div class="form-row">
+        <div class="col-md-12">
+          <h5><strong>Datos variables</strong></h5>
+        </div>
+      </div>
+
+      <!--Porcentaje-->
+      <div class="form-row">
+        <div class="col-md-3 xs-12">
+          <label>L&iacute;mite en la entrega (%)</label>
+          <input type="number" step="any" class="form-control" name="Porcentaje" id="Porcentaje" min="0" placeholder="Porcentaje" />
+        </div>
+      </div>
+
+      <!--Propuesta-->
+      <div class="form-row">
+        <div class="col-md-3 xs-12">
+         <label>Propuesta</label>
+           <input class="form-control" maxlength="20" name="Propuesta" id="Propuesta" type="text" placeholder="Nombre de la Propuesta" />
+        </div>
+      </div>
+
+      <!--Fecha de Propuesta-->
+      <div class="form-row">
+        <div class="col-md-3 xs-12">
+         <label> Fecha de Propuesta</label>
+           <div class="form-group">
+            <div class="input-group date">
+              <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+              </div>
+              <input type="datetime" class="form-control pull-right" id="FechaPropuesta" name="FechaPropuesta" readonly style="background-color:white;" placeholder="Fecha de Propuesta" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--GPS-->
+      <div class="form-row">
+        <div class="col-md-3 xs-12">
+         <label>Valor del GPS</label>
+           <input class="form-control" name="GPS" id="GPS" type="number" min="0" step="any" placeholder="Valor del GPS" />
+        </div>
+      </div>
+               
+      <!--Equipamiento-->
+      <div class="col-md-12 xs-12">
+        <div class="form-row">
+          <div class="col-md-10 xs-11" style="padding-left: 0px; padding-right: 0px;">
+             <label>Equipamiento</label>
+             <input class="form-control" type="text" id="seleccion" name="seleccion" readonly style="background-color:white;"/>
+            </div>
+            <div class="col-md-2" style="margin-top:25px;text-align: center; ">
+              <button style="background-color: transparent;" class="btn" type="button" id="borrar_e"><i class="fa fa-trash-o" aria-hidden="true"></i></button> 
+              <button style="background-color: transparent;" class="btn" type="button" data-toggle="collapse" data-target="#s_equipamiento" aria-expanded="false" id="btn_equipamientos" aria-controls="collapseExample" name="accion"><i class="fa fa-plus" aria-hidden="true"></i></button>  
+            </div>
+        </div>
+      </div>
+
+          <!--Seleccion de Equipamiento-->
+          <div class="collapse" id="s_equipamiento">
+            <table id="example" class="table table-bordered table-hover pagin-table">
+              <thead>
+               <tr>
+                <th data-campo="DESCRIPCION" style="text-align: center;">Descripci&oacute;n</th>
+                <th data-campo="SELECCION" style="text-align: center;">Selecci&oacute;n </th>
+              </tr>
+              </thead>
+              <tbody >
+                <php:repeticion id="listado_equipamientos">
+                  <tr id="fila_<php:filamenos />">
+                    <!--Boton de Agregar-->
+                    <td data-campo="BOTON_AGREGAR"> 
+                      <div style="text-align: center">
+                          <php:item id="Descripcion"/>
+                      </div>
+                    </td>
+                    <!--Descripcion-->
+                    <td data-campo="Descripcion" style="text-align: center;"> <input type="checkbox" aria-label="Checkbox for following text input" class="equipa" value="<php:item id="Descripcion"/>"></td>
+
+                  </tr>
+                </php:repeticion>
+              </tbody>
+            </table> 
+          </div>
+
+          <!--Deducibles-->
+
+          <div class="col-md-12 xs-12">
+            <div class="form-row">
+              <div class="col-md-10 xs-11" style="padding-left: 0px; padding-right: 0px;">
+                 <label>Deducibles</label>
+                 <input class="form-control" type="text" id="seleccion_ded" name="seleccion_ded" readonly style="background-color:white;"/>
+                </div>
+                <div class="col-md-2" style="margin-top:25px; text-align: center;">
+                  <button style="background-color: transparent;" class="btn" type="button" id="borrar_d"><i class="fa fa-trash-o" aria-hidden="true"></i></button> 
+                  <button style="background-color: transparent;" class="btn" type="button" data-toggle="collapse" data-target="#s_deducibles" aria-expanded="false" aria-controls="collapseExample" name="accion" id="btn_deducibles"><i class="fa fa-plus" aria-hidden="true"></i></button>  
+                </div>
+            </div>
+          </div>
+
+          <!--Seleccion de Equipamiento-->
+          <div class="collapse" id="s_deducibles">
+            <table id="example" class="table table-bordered table-hover pagin-table">
+              <thead>
+               <tr>
+                <th data-campo="DESCRIPCION" style="text-align: center;">Descripci&oacute;n</th>
+                <th data-campo="DESCRIPCION" style="text-align: center;">Valor</th>
+                <th data-campo="SELECCION" style="text-align: center;">Selecci&oacute;n </th>
+              </tr>
+              </thead>
+              <tbody >
+                <php:repeticion id="listado_deducibles">
+                  <tr id="<php:filamenos />">
+                    <!--Descripcion-->
+                    <td data-campo="Descripcion" style="text-align: center;"><php:item id="Descripcion"/></td>
+                    <td data-campo="Valor" style="text-align: center;"><input type="text" id="valor_<php:filamenos />" class="valor"></td>
+                    <!--Boton de Agregar-->
+                    <td data-campo="BOTON_AGREGAR"> 
+                      <div style="text-align: center">
+                          <input type="checkbox" aria-label="Checkbox for following text input" class="deduci" id="<php:filamenos />" value="<php:item id="Descripcion"/>">
+                      </div>
+                    </td>
+                  </tr>
+                </php:repeticion>
+              </tbody>
+            </table> 
+          </div>
+                  
+          <div class="form-row">
+            <div class="col-md-6">
+              <label for="rut">Coordinador</label>
+              <div class="form-row">
+                <div class="col-md-4" style="padding-left: 0px; padding-right: 0px;" >
+                  <input class="form-control" maxlength="10" type="text" id="rut_coordinador" name="rut_coordinador" placeholder="Rut" >
+                </div>
+          
+                <div class="col-md-8" style="padding-left: 5px; padding-right: 0px;" >
+                  <input class="form-control" maxlength="50" type="text" id="nombre_coordinador" name="nombre_coordinador" placeholder="Nombre y Apellido" >
+                </div>
+              </div>
+            </div>
+          </div> 
+
+           <div class="form-row">
+            <div class="col-md-12">
+              <h5></h5>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-12">
+              <h5></h5>
+            </div>
+          </div>
+
+         <div class="form-row">  
+          <div class="col-md-2 xs-12 pull-right">
+             <input type="hidden" name="band" value='<php:item id="band"/>' /> 
+             <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" name="accion" id="FIRMANTES" value="FIRMANTES" >Siguiente</button>  
+          </div>
+         </div>                   
+       </form>
+      </div>
+    </php:repeticion>
+     </div>
+    </div>
+  </div>
+</div>
+    
+<!--Calendarios-->
+<script>
+
+  $('#fechaFirma').datepicker({
+    language: "es",
+    orientation: "bottom",
+    autoclose: true,
+    todayHighlight: true,
+    format: 'dd-mm-yyyy'
+    });
+
+  $('#FechaInicio').datepicker({
+    language: "es",
+    orientation: "bottom",
+    autoclose: true,
+    todayHighlight: true,
+    format: 'dd-mm-yyyy'
+    });
+
+  $('#FechaFin').datepicker({
+    language: "es",
+    orientation: "bottom",
+    autoclose: true,
+    todayHighlight: true,
+    format: 'dd-mm-yyyy'
+    });
+
+ $('#FechaPropuesta').datepicker({
+    language: "es",
+    orientation: "bottom",
+    autoclose: true,
+    todayHighlight: true,
+    format: 'dd-mm-yyyy'
+    });
+
+  $(document).ready(function(){
+
+    if( $("#idProyecto").val().length == 0 ){
+      $("#idProyecto").val("(Seleccione)"); 
+      $(".da").prop('readonly', true);
+      $("#Tarifa").attr('disabled', 'disabled');
+      $("#Exceso").attr('disabled', 'disabled');
+      $("#FIRMANTES").attr('disabled',true);
+    }else{
+      $("#FechaInicio").css({"background-color":"white"});
+      $("#FechaFinal").css({"background-color":"white"});
+    }
+
+    if($("#idDocumento_Gama").val().length == 0 ){
+      $("#idDocumento_Gama").val("(Seleccione)");
+    }
+
+    if( $("#Tarifa").val().length == 0 ){
+      $("#Tarifa option:selected").text("(Seleccione)");  
+    }
+
+    if( $("#Exceso").val().length == 0 ){
+       $("#Exceso option:selected").text("(Seleccione)"); 
+    }
+
+    if( $("#proyectos_emp").val() == 1){
+      $("#mensajeError").addClass("callout callout-warning");
+      $("#mensajeError").html("La Empresa seleccionada no tiene Proyectos asociados");
+      $("#btn_proyecto").attr("disabled",true);
+    }
+
+    if ( $("#KmsExceso").val().charAt(0) === '.' ){
+       var val = '0' + String($("#KmsExceso").val());
+       $("#KmsExceso").val( parseFloat(val));
+    }
+
+     if( $("#FormasPago").val().length == 0 ){
+        $("#FormasPago option:selected").text("(Seleccione)");  
+     }
+
+     if($("#seleccion").val().length == 0 ){
+        $("#seleccion").val("Seleccione...");
+     }
+     if($("#seleccion_ded").val().length == 0 ){
+      $("#seleccion_ded").val("Seleccione...");
+     }
+
+    
+  });
+
+  //Seleccion de checkbox de equipamientos
+  
+  var contenido ='';
+  var sub = '';
+  var contenido_ded ='';
+  var sub_ded = '';
+
+ $(".equipa").on( 'change', function() {
+    if( $(this).is(':checked') ) {
+        // Hacer algo si el checkbox ha sido seleccionado
+        if( contenido == '') {
+          contenido += $(this).val();
+        }
+        else{
+          contenido += ', ' + $(this).val();
+        }
+        $("#seleccion").val(contenido);
+    } else {
+         contenido = contenido.replace($(this).val()," ");
+         contenido = $.trim(contenido);
+
+         if(contenido.charAt(0)== ',' ){
+           contenido =  contenido.substring(contenido.length,1);
+         } 
+         if(contenido.charAt(contenido.length-1) == ","){   
+           contenido = contenido.substring(contenido.length-1, 0);
+         }
+         
+         if(contenido.search(",  , ") != -1){
+           sub = contenido.substring(contenido.length, contenido.search(",  , ") + 3 );
+           contenido = contenido.substring(contenido.search(",  , "), 0 );
+           contenido = contenido + sub;
+         }
+
+        $("#seleccion").val($.trim(contenido));
+    } 
+});
+
+ var nuevo ="";
+
+$(".deduci").on( 'change', function() {
+   
+    if( $(this).is(':checked') ) {
+
+        i = $(this).attr("id");
+
+        // Hacer algo si el checkbox ha sido seleccionado
+        if( contenido_ded == '') {
+
+          valor = $("#valor_" + i).val();
+
+          if( valor.length > 0 ){
+            nuevo = $(this).val() + " : " + valor;
+            contenido_ded += nuevo;
+          }
+          else{
+             $("#mensaje_deducibles").addClass("callout callout-warning");
+             $("#mensaje_deducibles").html("Introduzca el valor correspondiente");
+             $("#valor_"+ i).focus();
+             $(this).attr('checked', false);
+          }
+          
+        }
+        else{
+
+          valor = $("#valor_" + i).val();
+           if( valor.length > 0 ){
+              nuevo = $(this).val() + " : " + valor;
+              contenido_ded += ', ' + nuevo;
+            }
+            else{
+              $("#mensaje_deducibles").addClass("callout callout-warning");
+              $("#mensaje_deducibles").html("Introduzca el valor correspondiente");
+              $("#valor_" + i).focus();
+              $(this).attr('checked', false);
+            }
+        }
+        $("#seleccion_ded").val(contenido_ded);
+
+    } else {
+         i = $(this).attr("id");
+
+         valor = $("#valor_" + i).val();
+         contenido_ded = contenido_ded.replace($(this).val() + " : " + valor," ");
+         contenido_ded = $.trim(contenido_ded);
+
+         if(contenido_ded.charAt(0)== ',' ){
+           contenido_ded =  contenido_ded.substring(contenido_ded.length,1);
+         } 
+         if(contenido_ded.charAt(contenido_ded.length-1) == ","){   
+           contenido_ded = contenido_ded.substring(contenido_ded.length-1, 0);
+         }
+         
+         if(contenido_ded.search(",  , ") != -1){
+           sub_ded = contenido_ded.substring(contenido_ded.length, contenido_ded.search(",  , ") + 3 );
+           contenido_ded = contenido_ded.substring(contenido_ded.search(",  , "), 0 );
+           contenido_ded = contenido_ded + sub_ded;
+         }
+
+        $("#seleccion_ded").val($.trim(contenido_ded));
+    } 
+});
+
+//Validar los tipo Number 
+  $("#FIRMANTES").click(function(){
+   //Validar los datos del Proyecto
+    if($("#idProyecto").val().length == 0){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#idProyecto').focus();
+        return false;
+    }
+    //Datos del Anexo 
+    if($("#fechaFirma").val().length == 0){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#fechaFirma').focus();
+        return false;
+    }
+    if($("#Marca").val().length == 0){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#Marca').focus();
+        return false;
+    }
+    if($("#Modelo").val().length == 0){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#Modelo').focus();
+        return false;
+    }
+    if($("#CiudadEntrega").val().length == 0){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#CiudadEntrega').focus();
+        return false;
+    }
+    if($("#CiudadOperacion").val().length == 0){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#CiudadOperacion').focus();
+        return false;
+    }
+     if($("#CiudadDevolucion").val().length == 0){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no debe estar vacio");
+        $('#CiudadDevolucion').focus();
+        return false;
+    }
+    if ($("#PeriodoArriendo").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El Periodo de arriendo no puede estar vac&iacute;o");
+        $('#PeriodoArriendo').focus();
+        return false;
+    }
+   /* if ($("#FechaInicio").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Seleccione Fecha Inicio para continuar");
+        $('#FechaInicio').focus();
+        return false;
+    }
+    if ($("#FechaFin").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Seleccione Fecha Inicio para continuar");
+        $('#FechaFin').focus();
+        return false;
+    }*/
+    if ($("#Monedas").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Seleccione Tipo de Moneda para continuar");
+        $('#Monedas').focus();
+        return false;
+    }
+    if ($("#Tarifa").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Introduzca el monto de Tarifa correspondiente");
+        $('#Tarifa').focus();
+        return false;
+    }
+    if ($("#Exceso").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Seleccione Tipo de Moneda para continuar");
+        $('#Exceso').focus();
+        return false;
+    }
+    if ($("#KmsExceso").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Introduzca el monto de kms de exceso correspondiente");
+        $('#KmsExceso').focus();
+        return false;
+    }
+    if ($("#KmsContratados").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no puede ser 0");
+        $('#KmsContratados').focus();
+        return false;
+    }
+   if ( $("#FrecuenciaMantencion").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no puede ser 0");
+        $("#FrecuenciaMantencion").focus();
+        return false;
+    }
+    if ( $("#FrecuenciaCambio").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no puede ser 0");
+        $("#FrecuenciaCambio").focus();
+        return false;
+    }
+    if ( $("#Cantidad").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Campo no puede ser 0");
+        $("#Cantidad").focus();
+        return false;
+    }
+    //Datos variables
+    if ( $("#Porcentaje").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El Porcentaje no puede estar vac&iacute;o");
+        $("#Porcentaje").focus();
+        return false;
+    }
+    if ( $("#Propuesta").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El Propuesta no puede estar vac&iacute;o");
+        $("#Propuesta").focus();
+        return false;
+    }
+    if ( $("#FechaPropuesta").val() == 0 ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("Selecciona la Fecha de Propuesta para continuar");
+        $("#FechaPropuesta").focus();
+        return false;
+    }
+
+    if ( $("#GPS").val() == 0 ){
+        respuesta = confirm("No ha completado el valor del GPS, Desea continuar?");
+        if ( respuesta == false ){
+           $("#GPS").focus();
+           return false;
+        }
+    }
+
+    if ( $("#seleccion").val() == "Seleccione..." ){
+        respuesta = confirm("No ha seleccionado ningun Equipamientos, Desea continuar?");
+        if ( respuesta == false ){
+           $("#btn_equipamientos").focus();
+           return false;
+        }
+        else{
+          $("#seleccion").val("");
+        }
+    }
+
+    if ( $("#seleccion_ded").val() == "Seleccione..." ){
+         respuesta = confirm("No ha seleccionado ningun Deducible, Desea continuar?");
+        if ( respuesta == false ){
+           $("#btn_deducibles").focus();
+           return false;
+        }
+        else{
+          $("#seleccion_ded").val("");
+        }
+    }
+
+    if ( $("#rut_coordinador").val() == 0 && $("#nombre_coordinador").val() == 0){
+        respuesta = confirm("El campo Rut y Nombre del Coordinador estan vacios, desea continuar?");
+        if ( respuesta == false ){
+           $("#rut_coordinador").focus();
+           return false;
+        }
+    }  
+});
+
+//Validar Rut 
+ $("#rut_coordinador").change(function(){
+
+    if ( $("#rut_coordinador").val().length > 0 ){
+
+      var respuesta = validaRut($("#rut_coordinador").val());
+
+      if( respuesta == false ){
+        $("#mensajeError").addClass("callout callout-warning");
+        $("#mensajeError").html("El Rut del Coordinador no es un rut v&aacute;lido");
+        $("#rut_coordinador").focus();
+        return false;
+      }
+      else{
+        $("#mensajeError").removeClass("callout callout-warning");
+        $("#mensajeError").html("");
+      }
+  }
+});
+
+
+  $("#btn_equipamientos").click(function(){
+     $(this).find('i').toggleClass('fa-minus');
+  });
+
+  $("#btn_deducibles").click(function(){
+     $(this).find('i').toggleClass('fa-minus');
+  });
+
+  //Calcular Fecha de Entrega
+
+      //Variables 
+      var fechaInicio = "";
+      var separador = "-";
+      var fechaArray = "";
+      var dia = 0;
+      var mes = 0;
+      var anno = 0;
+      var mesesArriendo = 0;
+      var calculo = 0;
+
+   $("#FechaInicio").change(function() {
+
+      fechaInicio = $("#FechaInicio").val(); //22-06-2018
+      fechaArray = fechaInicio.split(separador); //[0=>22, 1=>06, 2=>2018]
+      dia = parseInt(fechaArray[0]) - 1;
+      mes = parseInt(fechaArray[1]);
+      anno = parseInt(fechaArray[2]);
+
+     //Calculo 
+     if( $("#PeriodoArriendo").val().length > 0 ){
+        //Calculo 
+        while( mesesArriendo > 12 ){
+          //Sumo al año
+          anno += 1;
+          //Resto a la variable
+          mesesArriendo -= 12;
+        }
+    
+        if( ( mes + mesesArriendo ) > 12){
+          anno++;
+          mes = ( mes + mesesArriendo ) - 12;
+        }
+        else{
+          mes += mesesArriendo;
+        }
+        //alert(dia);
+        if( dia == 0 ){
+
+          //Si el mes tiene 31 Dias 
+          if( (mes == 1) || (mes == 3) || (mes== 5) || (mes == 7) || (mes == 8) || (mes == 10) || (mes == 12)){
+            dia = 31;
+            mes-=1;
+            //alert(dia + " 31 dias");
+            if( mes == 0 ){
+              mes = 12;
+            }
+          
+          }else{
+
+              //Si el mes tiene 30 Dias
+              if( (mes == 4) || (mes == 6) || (mes == 9) || (mes == 11 )){
+                dia = 30;
+                mes-=1;
+                //alert(dia + " 30 dias");
+                if( mes == 0 ){
+                  mes = 12;
+                }
+              }
+              else{
+                //Si es Febrero
+                if( mes == 2 ){
+                  //Si es año bisiesto
+                  if ( ( anno % 100 != 0) && ((anno % 4 == 0) || (anno % 400 == 0))) {
+                    bis = 1;
+                    dia = 29;
+                    //mes-= 1;
+                  }
+                  else {
+                    bis = 0;
+                    dia = 28;
+                    //mes-=1;
+                  }
+                }
+              }
+            }
+          
+        }
+
+        if ( mes > 9 ){
+          //Asigno la nueva fecha Final 
+          if( dia < 10 ){
+             $("#FechaFinal").val($.trim("0" + dia + "-" + mes + "-" + anno)); 
+          }
+          else{
+             $("#FechaFinal").val($.trim(dia + "-" + mes + "-" + anno));
+          }
+         
+        }
+        else{
+          //Asigno la nueva fecha Final
+          if( dia < 10 ){
+              $("#FechaFinal").val($.trim("0"+ dia + "-0" + mes + "-" + anno));
+          }
+          else{
+              $("#FechaFinal").val($.trim(dia + "-0" + mes + "-" + anno));
+          }
+        }
+     }
+    else{
+      $("#FechaFinal").val(" ");
+     }     
+  }); 
+  
+  $("#PeriodoArriendo").change(function() { 
+       //Limpia el campo
+      //$("#FechaFinal").reset();
+      fechaInicio = "";
+      mesesArriendo = 0;
+      dia = 0;
+      mes = 0;
+      anno = 0;
+
+      mesesArriendo = parseInt($("#PeriodoArriendo").val());
+
+      alert($("#KmsMensuales").val());
+
+      calculo = parseInt($("#KmsMensuales").val()) * mesesArriendo;
+
+      //Calcula los KmsContratado
+      $("#KmsContratados").val(calculo);
+
+      fechaInicio = $("#FechaInicio").val(); //22-06-2018
+      fechaArray = fechaInicio.split('-'); //[0=>22, 1=>06, 2=>2018]
+      dia = parseInt(fechaArray[0])-1;
+      mes = parseInt(fechaArray[1]);
+      anno = parseInt(fechaArray[2]);
+      bis = 0;
+          
+    if( $("#FechaInicio").val().length > 0 ){
+        //Calculo 
+        while( mesesArriendo > 12 ){
+          //Sumo al año
+          anno += 1;
+          //Resto a la variable
+          mesesArriendo -= 12;
+        }
+    
+        if( ( mes + mesesArriendo ) > 12){
+          anno++;
+          mes = ( mes + mesesArriendo ) - 12;
+        }
+        else{
+          mes += mesesArriendo;
+        }
+        //alert(dia);
+        if( dia == 0 ){
+
+          //Si el mes tiene 31 Dias 
+          if( (mes == 1) || (mes == 3) || (mes== 5) || (mes == 7) || (mes == 8) || (mes == 10) || (mes == 12)){
+            dia = 31;
+            mes-=1;
+            //alert(dia + " 31 dias");
+            if( mes == 0 ){
+              mes = 12;
+            }
+          
+          }else{
+
+              //Si el mes tiene 30 Dias
+              if( (mes == 4) || (mes == 6) || (mes == 9) || (mes == 11 )){
+                dia = 30;
+                mes-=1;
+                //alert(dia + " 30 dias");
+                if( mes == 0 ){
+                  mes = 12;
+                }
+              }
+              else{
+                //Si es Febrero
+                if( mes == 2 ){
+                  //Si es año bisiesto
+                  if ( ( anno % 100 != 0) && ((anno % 4 == 0) || (anno % 400 == 0))) {
+                    bis = 1;
+                    dia = 29;
+                    //mes-= 1;
+                  }
+                  else {
+                    bis = 0;
+                    dia = 28;
+                    //mes-=1;
+                  }
+                }
+              }
+            }
+          
+        }
+
+        if ( mes > 9 ){
+          //Asigno la nueva fecha Final 
+          if( dia < 10 ){
+             $("#FechaFinal").val($.trim("0" + dia + "-" + mes + "-" + anno)); 
+          }
+          else{
+             $("#FechaFinal").val($.trim(dia + "-" + mes + "-" + anno));
+          }
+         
+        }
+        else{
+          //Asigno la nueva fecha Final
+          if( dia < 10 ){
+              $("#FechaFinal").val($.trim("0"+ dia + "-0" + mes + "-" + anno));
+          }
+          else{
+              $("#FechaFinal").val($.trim(dia + "-0" + mes + "-" + anno));
+          }
+        }
+     }
+    else{
+      $("#FechaFinal").val(" ");
+     }     
+  });
+
+  //Si cambian los Kms mensuales
+   $("#KmsMensuales").change(function(){
+       mesesArriendo = parseInt($("#PeriodoArriendo").val());
+       if ( mesesArriendo > 0 ){
+         calculo = parseInt($("#KmsMensuales").val()) * mesesArriendo;
+          //Calcula los KmsContratado
+          $("#KmsContratados").val(calculo);
+        }
+   });
+
+   //Si click en borrar, limpiar los campos 
+   $("#borrar_e").click(function(){
+      $("#seleccion").val("");
+      $(".equipa").prop("checked",false);
+      contenido = "";
+   });
+   $("#borrar_d").click(function(){
+      $("#seleccion_ded").val("");
+      $(".deduci").prop("checked",false);
+      $(".valor").val("");
+      contenido_ded="";
+   });
+
+</script>

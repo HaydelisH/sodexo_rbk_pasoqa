@@ -1,0 +1,478 @@
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box ">
+        <div class="box-body pad table-responsive">
+          <!--Botones de cabecera-->
+          <div class="box-header">
+            <form action="rl_imprespaldo.php" method="POST">
+              <button type="submit" name="accion" value="BUSCAR" class="btn btn-md btn-default btn_letra_azul"><i class="fa fa-home" aria-hidden="true"></i>Ir al listado</button>
+				<input type="hidden" name="pagina" 			value="<php:texto id="pagina" />">
+				<input type="hidden" name="proveedor" 		value="<php:texto id="proveedor" />">
+				<input type="hidden" name="iddocumentox" 	value="<php:texto id="iddocumentox" />">
+				
+            </form>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <!--Mensajes-->
+            <div id="mensajeError"><php:texto id="mensajeError" /></div>
+            <div id="mensajeOK"><php:texto id="mensajeOK" /></div>	
+         
+            <php:repeticion id="formulario">
+           
+            <div class="form-row">
+              <div class="col-md-12 col-xs-12">
+                <h4>Subida de Documentos</h4>
+              </div>
+            </div>
+
+                  <table id="tabla_documentos" class="table table-bordered table-hover " name="tbltabla">
+                    <thead>
+                      <tr>
+                        <th style="text-align: center;" data-campo="Obligatorio">Obligatorio</th>
+                        <th style="text-align: center;" data-campo="Tipo de Documento">Tipo de Documento</th>
+                        <th style="text-align: center;" data-campo="Nombre Archivo">Nombre Archivo</th>
+                        <th style="text-align: center;" data-campo="Opciones">Opciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <php:repeticion id="listado">
+                      <tr>
+                        <td style="text-align: center;" data-campo="Obligatorio"><php:funcion id="icono"><php:argumento id="Obligatorio"/></php:funcion></td>
+                        <td style="text-align: center;" data-campo="Nombre"><php:item id="nombretipodoc"/></td>
+                        <td style="text-align: center;" data-campo="Nombre Archivo"><php:item id="nombrearchivo"/></td>
+                        <td style="text-align: center;" data-campo="Opciones">
+                        
+                          <form name="formulario" id="formulario" action="rl_imprespaldo.php" method="POST">
+								<input type="hidden" name="iddocumento" 	value="<php:item id="iddocumento" />">
+								<input type="hidden" name="idrespaldo" 		value="<php:item id="idrespaldo" />">
+								<input type="hidden" name="idplantilla" 	value="<php:item id="idplantilla" />">
+								<input type="hidden" name="pagina" 			value="<php:texto id="pagina" />">
+								<input type="hidden" name="proveedor" 		value="<php:texto id="proveedor" />">
+								<input type="hidden" name="iddocumentox" 	value="<php:texto id="iddocumentox" />">
+								
+								<php:funcion id="acciones"><php:argumento id="idrespaldo"/><php:argumento id="iddocumento"/><php:argumento id="idTipoGestor"/><php:argumento id="nombretipodoc"/><php:argumento id="idplantilla"/></php:funcion>
+                          </form>
+                         
+                        </td>
+                      </tr>
+                      </php:repeticion>
+                    </tbody>
+
+                  </table>
+                  <div class="form-row"> 
+				  
+					
+                    <form name="formulario" id="formulario" action="rl_aprobarfirmar.php" method="POST"> 
+                      
+					  <div class="col-md-2 xs-12 pull-right">  
+						<input type="hidden" name="iddocumento" value="<php:item id="iddocumento" />" >
+						<input type="hidden" name="idDocumento" value="<php:item id="iddocumento" />" >
+						<php:repeticion id="aprobar">
+                        <button class="btn btn-md btn-success btn-block" type="submit"  name="accion" id="INICIOAPROBAR" value="INICIOAPROBAR" style="margin-top: 25px" data-toggle="tooltip" />Siguiente</button>
+						</php:repeticion>
+					 </div>
+                      
+					  <!--<div class="col-md-2 xs-12 pull-left">  
+                        <button class="btn btn-md btn-default btn-block" type="submit" name="accion" id="CANCELAR" value="CANCELAR" style="margin-top: 25px"  onclick="javascript:return cambiaEstado();" data-toggle="tooltip" tittle="Cancelar el flujo" >Cancelar flujo</button> 
+                      </div>-->
+					  
+                    </form>
+					
+                  </div>
+                <!-- </div>
+              </div>
+            </div>-->
+            <!-- </form>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Modal para subida de documentos-->
+<div class="modal fade bd-example-modal" id="modal_subir" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-header" align="center">
+        <h4 class="modal-title" id="ejemplo-titulo"> Seleccione Documento a subir <h3 id="num"></h3></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form name="formulario_subir" id="formulario_subir" action="rl_imprespaldo.php" method="POST" autocomplete="off" enctype="multipart/form-data" class="formulario">
+        <div class="modal-body">
+          <div id="mensajeError_modal"></div>
+          <input type="hidden" name="iddocumento" 	id="iddocumentoimp"/>
+		  <input type="hidden" name="idtipogestor" 	id="idtipogestorimp" />
+		  <input type="hidden" name="idplantilla" 	id="idplantillaimp" />
+		  <input type="hidden" name="pagina" 		value="<php:texto id="pagina" />">
+		  <input type="hidden" name="proveedor" 	value="<php:texto id="proveedor" />">
+		  
+          <!--Subir documento-->
+          <div class="form-row">
+            <div class="col-md-12" id="doc">
+              <label for="Subir" id="doc_label">Seleccione archivos PDF </label>
+              <div class="form-group" id="doc_hijo"> 
+                <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                  <input type="text" class="form-control" placeholder="Seleccione archivo de carga" name="Documento" id="Documento" readonly>
+                </div>
+                <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                  <span class="btn btn-primary btn-file">
+                    <i class="fa fa-upload" aria-hidden="true"></i>
+                    <input type="file" name="archivo" id="archivo"  accept="application/pdf"  />
+                  </span>
+                </div>
+                <span class="fileinput-filename"></span>
+                <span class="fileinput-new"></span>
+              </div>
+            </div>
+          </div>
+          <!--Tipo de Documento -->
+          <div class="form-row">
+            <div class="col-md-12" >
+              <label for="Tipo Documento">Tipo Documento</label>
+              <input type="text" class="form-control" name="nombretipogestor" id="nombretipogestor" readonly/>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer" >
+          <div class="form-row">
+            <div class="col-md-4 col-md-offset-4" style="margin-top:10px">
+              <button type="submit" name="accion" value="AGREGAR_DOC" id="AGREGAR_DOC" class="btn btn-primary btn-block" >Agregar Documentos</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+  </php:repeticion>
+  <script>
+  
+	function muevedatosimp($iddocumento,$idtipogestor,$nombretipogestor,$idplantilla)
+	{	
+		$("#iddocumentoimp").val($iddocumento);
+		$("#idtipogestorimp").val($idtipogestor);
+		$("#nombretipogestor").val($nombretipogestor);
+		$("#idplantillaimp").val($idplantilla);
+	}
+  
+    var idEstado = 0;
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip(); 
+      var filas = $("#tabla_documentos tr").length;
+      var i = 0;
+      idEstado = $("#idEstado").val();
+      //console.log(idEstado);
+      if( idEstado == 3 ){
+        $("#BTN-SIGUIENTE").removeAttr('disabled');
+        $("#BTN-SIGUIENTE").prop('title','');
+        $("#CANCELAR").html('Cancelar flujo');
+      }
+      if( idEstado == 6 ){
+        $(".subir").attr('disabled',true);
+        $(".eliminar").attr('disabled',true);
+        $(".subir_adicional").attr('disabled',true);
+        $("#CANCELAR").attr('disabled',true);
+        $("#CANCELAR").html('Cancelar flujo');
+        //$("#BTN-SIGUIENTE").css('display','none');
+      }
+      if( idEstado == 5 ){
+        $(".subir").attr('disabled',true);
+        $(".eliminar").attr('disabled',true);
+        $(".subir_adicional").attr('disabled',true);
+        $("#CANCELAR").html('Habilitar flujo');
+        $("#BTN-SIGUIENTE").css('display','none');
+      }
+    	if( idEstado == 1 || idEstado == 2 ){
+        $("#CANCELAR").html('Cancelar flujo');
+        $("#BTN-SIGUIENTE").attr('disabled',true);
+        $("#BTN-SIGUIENTE").prop('title','Faltan documentos obligatorios por subir');
+      }
+      if( idEstado == 4 ){
+        $("#CANCELAR").html('Cancelar flujo');
+        $("#BTN-SIGUIENTE").attr('disabled',false);
+        $("#BTN-SIGUIENTE").prop('title','');
+      }
+      for( i = 0; i < filas - 2; i++ ){
+        if( $("#documento_" + i).html().length > 0 ){
+          $("#Subir_" + i ).css('display','none');
+          $("#VER_DOCUMENTO_" + i ).css('display','inline');
+          $("#ELIMINAR_DOCUMENTO_" + i ).css('display','inline');
+        }else{
+          $("#Subir_" + i ).css('display','inline');
+          $("#VER_DOCUMENTO_" + i ).css('display','none');
+          $("#ELIMINAR_DOCUMENTO_" + i ).css('display','none');
+        }
+      }
+      if( $("#Representantes").val() == 1 ){
+        $(".firmantes").css("display","block");
+      }else{
+        $(".firmantes").css("display","none");
+      }
+    });
+    function cambiaEstado()
+    {
+      if (idEstado != 5) // Cancelado
+      {
+        return confirm('Desea Cancelar el Flujo de Contrataci\u00f3n?');
+      }
+      else{
+        return confirm('Desea Habilitar el Flujo de Contrataci\u00f3n?');
+      }
+    }
+    function asignarAlModal(i){
+      $("#idFicha_modal").val($("#fichaid_" + i).val());
+      $("#idTipoGestor_modal").val($("#idTipoGestor_" + i).val());
+      $("#Obligatorio_modal").val($("#Obligatorio_" + i).val());
+      $("#idTipoDoc").val($("#Nombre_" + i).val());
+      $("#idTipoGestor").val($("#idTipoGestor_" + i).val());
+    };
+    $("#archivo").change(function(){
+      $("#Documento").val($("#archivo").val());
+    });
+    $("#archivo_adicional").change(function(){
+      $("#Documento_adicional").val($("#archivo_adicional").val());
+    });
+    
+	$("#AGREGAR_DOC").click(function(){
+		if( $("#archivo").val() == '' ){
+			$("#mensajeError_modal").html("Debe seleccionar un documento");
+			$("#mensajeError_modal").addClass("callout callout-warning");
+			return false;
+		}else{
+			$("#mensajeError_modal").html("");
+			$("#mensajeError_modal").removeClass("callout callout-warning");
+		}
+	  
+		var fup = document.getElementById('archivo');
+		var fileName = fup.value;
+		var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+		if(ext == "pdf" || ext == "PDF")
+		{
+			if(fup.files[0].size > '20000000')
+			{	document.getElementById('archivo').value = "";
+				$("#mensajeError_modal").html("Archivo a importar supera el tama&ntilde;o permitido");
+				$("#mensajeError_modal").addClass("callout callout-warning");	
+			   return false;	
+			}	
+		} 
+		else
+		{
+			document.getElementById('archivo').value = "";
+			$("#mensajeError_modal").html("Solo se pueden seleccionar archivos pdf");
+			$("#mensajeError_modal").addClass("callout callout-warning");	
+			return false;	
+		}	  
+	  
+    });
+    
+	$("#AGREGAR_DOC_ADICIONAL").click(function(){
+      if( $("#archivo_adicional").val() == '' ){
+        $("#mensajeError_adicional").html("Debe seleccionar un documento");
+        $("#mensajeError_adicional").addClass("callout callout-warning");
+        return false;
+      }
+      if( $("#idTipoGestor_adicional").val() == 0 ){
+        $("#mensajeError_adicional").html("Debe seleccionar un tipo de documento");
+        $("#mensajeError_adicional").addClass("callout callout-warning");
+        return false;
+      }
+      $("#mensajeError_adicional").html("");
+      $("#mensajeError_adicional").removeClass("callout callout-warning");
+    });
+    //Boton eliminar documento de ficha 
+    $(".eliminar").click(function(){
+      var respuesta = confirm("Desea eliminar este Documento?");
+      if( respuesta ){
+        MostrarCargando();
+        var id = this.id;
+        var res = id.split('_');
+        var i = res[2]; 
+        $("#fichaid_eliminar_" + i).val($("#fichaid_" + i).val());
+        $("#documentoid_eliminar_" + i).val($("#documentoid_" + i).val());
+        $("#Obligatorio_eliminar_" + i).val($("#Obligatorio_" + i).val());
+        $("#formulario_eliminar_" + i).submit();
+      }
+      else{
+        return respuesta;
+      }
+    });
+    //Boton de ver documento
+    $(".ver").click(function(){
+      MostrarCargando();
+      var id = this.id;
+      var res = id.split('_');
+      var i = res[2]; 
+      $("#fichaid_ver_" + i).val($("#fichaid_" + i).val());
+      $("#documentoid_ver_" + i).val($("#documentoid_" + i).val());
+      $("#formulario_ver_" + i).submit();
+    });
+    let general = {
+      baseUrl: "",
+      apiKey: "",
+      digitalSignature: 0,
+      session: {
+        id: "",
+        companyId: "",
+        username: ""
+      },
+      currentAction: "CREATE",
+      operator: {
+        sessionId: null
+      }
+    };
+    let popupPage;
+    let openCheckId = function(action) 
+    {
+      MostrarCargando();
+      general.currentAction = action;
+      // Create popup window
+      var w = 900;
+      var h = 620;
+      // Fixes dual-screen position                         Most browsers      Firefox
+      var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+      var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+      var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+      var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+      var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+      var top = ((height / 2) - (h / 2)) + dualScreenTop;
+      var opciones = "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=" + w + ", height=" + h + ", top=" + top + ", left=" + left;
+      popupPage = window.open("checkid", "libPage", opciones);
+      var timer = setInterval(function() { 
+        if(popupPage.closed) {
+          clearInterval(timer);
+          document.getElementById('cargando').style.display='none';
+        }
+      }, 1000);
+      // Puts focus on the popupPage
+      if (window.focus) {
+        popupPage.focus();
+      }
+    };
+    let getParamsCreate = function() {
+      return {
+        action: "CREATE",
+        apiKey: general.apiKey,
+        sessionId: general.session.id,
+        companyId: general.session.companyId,
+        operationId: 1,
+        baseUrl: general.baseUrl,
+        useFingerprint: true,//si pide huella al que esta enrolando
+        usePin: true,//si pide pin al que esta enrolando
+        useKBA: false,//si se utiliza la pregunta de seguridad
+        operator: {
+          sessionId: general.operator.sessionId,
+          identityDocument: {
+            countryCode: general.countryCode,
+            type: general.type,
+            personalNumber: general.rutoperador 
+          }
+        },
+        digitalIdentity: {
+          personalData: {
+            givenNames: "desmond",
+            surnames: "miles",
+            dob: 20000101,
+            gender: "NOT_KNOWN"
+          },
+          emailAddresses: [
+            {
+              type: 'BUSINESS',
+              address: 'algo@algo.cl',
+              primary: true
+            },
+            {
+              type: 'PERSONAL',
+              address: 'algo@algo2.cl',
+              primary: false
+            }
+          ],
+          contactPhones: [
+            {
+              number: '+56982365612',
+              primary: false,
+              type: 'HOME'
+            },
+            {
+              number: '+56911111111',
+              primary: true,
+              type: 'PERSONAL'
+            }
+          ],
+          identityDocuments: [{
+            countryCode: general.countryCode,
+            type: general.type,
+            personalNumber: general.rutaenrolar 
+          }]
+        }
+      };
+    };
+    window.getParams = function()
+    {
+      return getParamsCreate();
+    }
+    //respuesta del formulario checkid
+    window.callback = function(result) 
+    {
+      popupPage.close();
+      document.getElementById('cargando').style.display='none';
+      if (result.numError == 0) 
+      {
+        //alert ("OK")
+      }
+      else
+      {
+        alert (result.numError +  " " + result.msError);
+      }
+      return false;
+    }
+    function enrolar()
+    {
+      consulta_sesion();
+    }
+    var conexion;
+    function crearXMLHttpRequest() 
+    {
+      var xmlHttp=null;
+      if (window.ActiveXObject) 
+        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+      else 
+        if (window.XMLHttpRequest) 
+          xmlHttp = new XMLHttpRequest();
+      return xmlHttp;
+    }
+    function consulta_sesion()
+    {
+      conexion=crearXMLHttpRequest();
+      conexion.open('POST', './consulta_sesion.php', false);
+      conexion.send(null);
+      // Devolvemos el resultado
+      respuesta =  conexion.responseText;   
+      arr_resp  = respuesta.split('|');
+      if (arr_resp[0] == 'ok')
+      {
+        general.baseUrl       = arr_resp[1];
+        general.session.companyId   = arr_resp[2];
+        general.username      = arr_resp[4];
+        general.session.id      = arr_resp[6];
+        general.countryCode     = arr_resp[7];
+        general.type        = arr_resp[8];
+        general.apiKey        = arr_resp[9];
+        <php:repeticion id="formulario">
+        var rut           = "<php:item id="usuarioid" />";
+        general.rutoperador     = rut.replace ("-","");
+        </php:repeticion>
+        var rut           = document.getElementById('rut').value; 
+        general.rutaenrolar     = rut.replace ("-","");
+        openCheckId("CREATE");
+      }
+      else
+      {
+        alert (respuesta);
+      }
+    }
+  </script>

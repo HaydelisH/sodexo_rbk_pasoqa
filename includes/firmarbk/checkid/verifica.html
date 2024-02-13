@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CheckId Verificar</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+</head>
+<body>
+  <div class="container-fluid">
+   
+        <div class="container-view" id="verify">
+          <div class="row">
+            <div class="col-sm-8">
+              <div class="card">
+                <div class="card-header">
+                  Verificación
+                </div>
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label for="inVerifyType" class="col-sm-2 col-form-label">Tipo Verificaci&oacute;n</label>
+                    <div class="col-sm-10">
+                      <select class="form-control" id="inVerifyType">
+                        <option value="">PIN o HUELLA</option>
+                        <option value="PIN">PIN</option>
+                        <option value="FINGERPRINT">HUELLA</option>
+                      </select>
+                    </div>
+                  </div>
+               
+                  <div class="form-group row">
+                    <label for="inVerifyDocPersonalNumber" class="col-sm-2 col-form-label">Rut a Verificar</label>
+                    <div class="col-sm-10">
+					    <label class="col-sm-6 col-form-label"></label>
+                      <input type="text" class="form-control" id="inVerifyDocPersonalNumber" value="97643182">
+                    </div>
+                  </div>
+                  
+				  <!--<div class="form-group row">
+                    <label for="inVerifyAuthenticationResult" class="col-sm-2 col-form-label">Resultado</label>
+                    <div class="col-sm-10">
+                      <input type="text" readonly class="form-control-plaintext" id="inVerifyAuthenticationResult" value="">
+                    </div>
+                  </div>-->
+                  <button type="button" class="btn btn-primary" onclick="verificar()" id="btn-verify">Verificar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+       
+  </div>
+
+  
+   <script type="text/javascript">
+  
+	 let general = {
+        baseUrl: "",
+        apiKey: "",
+        digitalSignature: 0,
+        session: {
+          id: "",
+          companyId: "",
+          username: ""
+        },
+        currentAction: "VERIFY",
+        operator: {
+          sessionId: null
+        }
+      };
+   
+	  
+	  let popupPage;
+      let openCheckId = function(action) 
+	  {
+        general.currentAction = action;
+        // Create popup window
+        var w = 900;
+        var h = 620;
+
+        // Fixes dual-screen position                         Most browsers      Firefox
+        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+
+        var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+        var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+        var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+        var top = ((height / 2) - (h / 2)) + dualScreenTop;
+
+        var opciones = "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=" + w + ", height=" + h + ", top=" + top + ", left=" + left;
+        popupPage = window.open("checkid/", "libPage", opciones);
+        // Puts focus on the popupPage
+        if (window.focus) {
+          popupPage.focus();
+        }
+      };
+
+	 
+      let getParamsVerify = function() {
+        return {
+          action: "VERIFY",
+          method: general.method,
+          apiKey: general.apiKey,
+          sessionId: general.session.id,
+          companyId: general.session.companyId,
+          operationId: 1,
+          baseUrl: general.baseUrl,
+          operator: {
+            sessionId: general.operator.sessionId,
+            identityDocument: {
+                countryCode: general.countryCode,
+                type: general.type,
+                personalNumber: general.rutaverificar
+            }
+          },
+          digitalIdentity: {
+            identityDocuments: [{
+              countryCode: general.countryCode,
+              type: general.type,
+              personalNumber: general.rutaverificar
+            }]
+          }
+          };
+      };
+	  
+	  
+	window.getParams = function()
+	{
+	  return getParamsVerify();
+	}
+	  
+	//respuesta del formulario checkid
+	window.callback = function(result) 
+	{
+		popupPage.close();
+		console.log("callback", result);
+
+		if (result.numError == 0) 
+		{
+			if (result.action == "VERIFY") 
+			{
+				let resultMessage = "Validación Errónea";
+				if (result.data.authenticated)
+				{
+					resultMessage = "Validación Exitosa!";
+			
+					general.lastVerify = result.data;
+		  
+					var verif_id			= general.lastVerify.id;
+					var verif_type			= general.lastVerify.type;
+					var verif_subtype 		= general.lastVerify.subtype;
+					var verif_authenticated = general.lastVerify.authenticated;
+					var verif_sign 			= general.lastVerify.sign;
+		  
+					//alert (verif_id + " " + verif_type + " " + verif_subtype + " " + verif_authenticated + " " + verif_sign);
+				}
+			}
+		}
+
+		return false;
+	}
+	  
+	function verificar()
+	{
+		consulta_sesion();
+	}
+	  
+	  
+	var conexion;
+			
+	function crearXMLHttpRequest() 
+	{
+		var xmlHttp=null;
+		if (window.ActiveXObject) 
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+		else 
+		if (window.XMLHttpRequest) 
+			xmlHttp = new XMLHttpRequest();
+		return xmlHttp;
+	}
+
+
+	function consulta_sesion()
+	{
+		conexion=crearXMLHttpRequest();
+	
+		conexion.open('POST', '../consulta_sesion.php', false);
+	
+		conexion.send(null);
+		// Devolvemos el resultado
+		respuesta =  conexion.responseText;		
+		arr_resp  = respuesta.split('|');
+		if (arr_resp[0] == 'ok')
+		{
+			general.baseUrl 			= arr_resp[1];
+			general.session.companyId 	= arr_resp[2];
+			general.username 			= arr_resp[4];
+			general.session.id 			= arr_resp[6];
+			general.countryCode 		= arr_resp[7];
+			general.type 				= arr_resp[8];
+			general.apiKey 				= arr_resp[9];
+			
+			var rut						= document.getElementById('inVerifyDocPersonalNumber').value;
+			general.rutaverificar		= rut.replace ("-","");
+			
+			general.method 				= document.getElementById('inVerifyType').value;
+					
+			openCheckId("VERIFY");
+		}
+		else
+		{
+			alert (respuesta);
+		}
+		
+	}
+ 
+  
+  </script>
+</body>
+</html>

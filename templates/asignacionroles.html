@@ -1,0 +1,205 @@
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="box ">
+      <div class="box-body pad table-responsive">
+      <!--Botones de cabecera-->
+
+      <!-- /.box-header -->
+      <div class="box-body">
+         <!--Mensajes-->
+		<div id="mensajeError"><php:texto id="mensajeError" /></div>
+		<div id="mensajeOK"><php:texto id="mensajeOK" /></div>	
+		<php:repeticion id="formulario">
+		<form name="formulario"  id="formulario" class="form-horizontal" method="POST" action="asignacionroles.php" autocomplete=off>
+		<div class="nav-tabs-custom">
+			<ul class="nav nav-tabs">
+				<li <php:item id="classconsultar" />"><a data-toggle="tab" id="href_persona" href="#consultar_roles">Consultar Roles</a></li>
+				<li <php:item id="classagregar" />"><a data-toggle="tab" id="href_contrato" href="#agregar_roles">Agregar Roles</a></li>
+				<li <php:item id="classeliminar" />"><a data-toggle="tab" id="href_anexo" href="#eliminar_roles">Eliminar Roles</a></li>
+			</ul>
+				
+			
+			<div class="tab-content">
+				<div id="consultar_roles" class="tab-pane fade <php:item id="activarconsultar" />">
+								 
+					<div class="form-group">
+						 <div class="col-md-4">
+							<label for="rut">Rut</label>
+							<input type="text" class="form-control" id="rut"  name="rut" placeholder="Rut v&aacute;lido" maxlength="10" value="<php:item id="rut" />" autofocus >
+						</div>
+					</div>
+								
+								
+					<button type="submit" name="accion" value="BUSCAR"  onclick="javascript:return verificar_rut(document.formulario.rut)" class="btn btn-primary">Buscar</button>
+					
+					
+					<div id="divtabla" class="tabla-responsiva" style="margin-top:10px" >
+					<!--Tabla-->
+					<table id="tbltabla" class="table table-bordered table-hover" name="tbltabla">
+					  <thead>
+						<tr>
+						<th data-campo="Rol" style="text-align: center;">Rol </th>
+						</tr>
+					  </thead>
+					  <tbody>
+					  <!--Contenido de Tabla-->
+					  <php:repeticion id="listado">
+						<tr>
+						  <td data-campo="Rol" style="text-align: center;"><php:item id="rol" /></td>
+						 
+					
+						</tr>
+					  </php:repeticion>
+					  </tbody>
+					</table>
+				  </div>
+							
+				</div><!--<div id="consultar_roles" class="tab-pane fade in active">-->
+			
+			<div id="agregar_roles" class="tab-pane fade <php:item id="activaragregar" />">
+								 
+					<div class="form-group">
+						 <div class="col-md-4">
+							<label for="rut">Rut</label>
+							<input type="text" class="form-control" id="rut_agregar"  name="rut_agregar" placeholder="Rut v&aacute;lido" maxlength="10" value="<php:item id="rut_agregar" />" autofocus >
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-4">
+							<label for="roles">Roles</label>
+							<select class= "form-control" name="rolagregar" id="rolagregar">
+							<php:repeticion id="rolesagregar">						
+								<option title="<php:item id="descripcion" />" value="<php:item id="rol" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="rol" /><php:argumento idvalor="rol" /></php:funcion>><php:item id="rol" /></option>
+							</php:repeticion>
+							</select>				
+						</div>				
+					</div>
+										
+					<button type="submit" name="accion" value="AGREGAR"  onclick="javascript:return verificar_rut_agregar(document.formulario.rut_agregar)" class="btn btn-primary">Agregar</button>
+					
+			</div><!--<div id="agregar_roles" class="tab-pane fade">-->
+			
+			<div id="eliminar_roles" class="tab-pane fade <php:item id="activareliminar" />">
+				<div class="form-group">
+						 <div class="col-md-4">
+							<label for="rut">Rut</label>
+							<input type="text" class="form-control" id="rut_eliminar"  name="rut_eliminar" placeholder="Rut v&aacute;lido" maxlength="10" value="<php:item id="rut_eliminar" />" autofocus >
+						</div>
+					</div>
+					
+					<div class="form-group">
+					<div class="col-sm-4">
+						<label for="roles">Roles</label>
+						<select class= "form-control" name="rolaeliminar" id="rolaeliminar">
+						<php:repeticion id="rolesagregar">						
+							<option  title="<php:item id="descripcion" />" value="<php:item id="rol" />" <php:funcion id="ContenedorUtilidades::evaluarSeleccion"><php:argumento id="rol" /><php:argumento idvalor="rol" /></php:funcion>><php:item id="rol" /></option>
+						</php:repeticion>
+						</select>				
+					</div>				
+					</div>
+					
+					
+					<button type="submit" name="accion" value="ELIMINAR"  onclick="javascript:return verificar_rut_eliminar(document.formulario.rut_eliminar)" class="btn btn-primary">Eliminar</button>
+					
+			</div><!--<div id="eliminar_roles" class="tab-pane fade">-->
+		
+			 </php:repeticion>
+		
+		</div><!--<div class="tab-content">-->
+</div>
+		</form>
+	   </div>
+      </div>
+    <!-- /.box -->
+    </div>
+  </div>
+  <!-- /.col -->
+  </div>
+
+   
+   
+</body>
+</html>
+
+<script>
+    
+  function verificar_rut(id)
+  { 
+	var rut_usuario = id.value;
+	
+	if( rut_usuario.length == 0 ){
+		$("#mensajeError").addClass("callout callout-warning");
+		$("#mensajeError").html("El campo rut no puede ser vac&iacute;o");
+		return false;
+	}
+	
+	$("#mensajeError").removeClass("callout callout-warning");
+	$("#mensajeError").html("");
+	
+	if ( validaRut2(id)){
+	   consulta_sesion();
+	}else{
+		return false;
+	}
+  }
+  
+  function verificar_rut_agregar(id)
+  { 
+	var rut_usuario = id.value;
+	var rolagregar = $("#rolagregar").val();
+	
+	if( rut_usuario.length === 0 ){
+		$("#mensajeError").addClass("callout callout-warning");
+		$("#mensajeError").html("El campo rut no puede ser vac&iacute;o");
+		return false;
+	}
+	
+	var respuesta = validaRut2(id);
+
+	if( rolagregar == '(Seleccione)' ){
+		$("#mensajeError").addClass("callout callout-warning");
+		$("#mensajeError").html("Debe seleccionar el rol");
+		return false;
+	}
+	
+	if( respuesta ){
+		$("#mensajeError").removeClass("callout callout-warning");
+		$("#mensajeError").html("");
+		consulta_sesion();
+	}else{
+		return false;
+	}
+  }
+  
+  function verificar_rut_eliminar(id)
+  { 
+	var rut_usuario = id.value;
+	var rolaeliminar = $("#rolaeliminar").val();
+	
+	if( rut_usuario.length == 0 ){
+		$("#mensajeError").addClass("callout callout-warning");
+		$("#mensajeError").html("El campo rut no puede ser vac&iacute;o");
+		return false;
+	}
+	
+	var respuesta = validaRut2(id);
+	
+	if( rolaeliminar == '(Seleccione)' ){
+		$("#mensajeError").addClass("callout callout-warning");
+		$("#mensajeError").html("Debe seleccionar el rol a eliminar");
+		return false;
+	}
+	
+	if( respuesta ){
+	
+		$("#mensajeError").removeClass("callout callout-warning");
+		$("#mensajeError").html("");
+		
+		consulta_sesion();
+	}else{
+		return false;
+	}
+  }
+</script>

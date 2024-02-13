@@ -1,0 +1,482 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body pad table-responsive">
+        <!--Botones de cabecera-->
+        <!--<div class="box-header">
+         <a class="btn btn-default btn_letra_azul" href="Documentos.php" ><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>-->
+        </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <!--Mensajes-->
+        <div id="mensajeOK"><php:texto id="mensajeOK" /></div>
+        <div id="mensajeError"><php:texto id="mensajeError" /></div>
+        <!--Formulario de los datos propios de Categoria-->   
+        <form role="form" name="formulario" id="formulario" action="Documentos.php" method="POST" autocomplete="off">
+          <php:repeticion id="formulario">
+            
+            <!--Empresa-->
+            <div class="col-md-6 xs-12">
+              <div class="box">
+                <div class="box-body pad table-responsive">
+                   <label>Empresa</label>
+                    <div class="box-body">
+                     <div class="form-row">
+                        <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                          <input class="form-control" type="text" name="RutEmp" id="RutEmp" autofocus value="<php:item id="RutEmpresa" />  <php:item id="RazonSocial"/>" readonly style="background-color:white;"/>
+                          <input type="hidden" name="RutEmpresa" id="RutEmpresa" value="<php:item id="RutEmpresa"/>"/>
+                        </div>
+                        <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                           <button class="btn btn-md btn-primary btn-block" type="submit" name="accion" value="BUSCAR_EMPRESA" ><i class="fa fa-search"></i></button>  
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>   
+
+           <!--Plantilla-->
+            <div class="col-md-6 xs-12">
+              <div class="box">
+                <div class="box-body pad table-responsive">
+                 <label>Plantilla</label>
+                 <div class="box-body">
+                   <div class="form-row">
+                      <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                        <input class="form-control" type="text" name="idPlan" id="idPla" value="<php:item id="idPlantilla" /> <php:item id="Descripcion_Pl"/>" readonly style="background-color:white;"/>
+                        <input type="hidden" name="idPlantilla" id="idPlantilla" value="<php:item id="idPlantilla"/>"/>
+                        <input type="hidden" name="idWF" id="idWF" value="<php:item id="idWF"/>"/>
+                        <input type="hidden" name="idTipoDoc" id="idTipoDoc" value="<php:item id="idTipoDoc"/>" />
+                        <input type="hidden" name="NombreTipoDoc" id="NombreTipoDoc" value="<php:item id="NombreTipoDoc"/>" />
+                      </div>
+                      <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                         <button class="btn btn-md btn-primary btn-block" type="submit" name="accion" value="BUSCAR_PLANTILLA" id="btn_plantilla"><i class="fa fa-search"></i></button>  
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--Proyecto-->
+            <div class="col-md-6 xs-12">
+              <div class="box">
+                <div class="box-body pad table-responsive">
+                  <label>Proyecto</label>
+                    <div class="box-body">
+                     <div class="form-row">
+                        <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                          <input class="form-control" type="text" name="idProyecto" id="idProyecto" value="<php:item id="idProyecto" />" readonly style="background-color:white;"/>
+                          <input type="hidden" id="RutEmpresaC" name="RutEmpresaC" value="<php:item id="RutEmpresaC"/>"/>
+                          <input type="hidden" name="not" id="not" value="<php:item id="not"/>" />
+                        </div>
+                        <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                           <button class="btn btn-md btn-primary btn-block" type="submit" name="accion" value="BUSCAR_PROYECTO" id="btn_proyecto"><i class="fa fa-search"></i></button>  
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <!--Notarias-->
+             <div class="col-md-6 xs-12" id="nota">
+              <div class="box">
+                <div class="box-body pad table-responsive">
+                  <label>Notaria</label>
+                  <div class="box-body">
+                   <div class="form-row">
+                      <div class="col-md-11 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                        <input class="form-control" type="text" name="Notaria" id="Notaria" value="<php:item id="RutEmpresaN" /> <php:item id="RazonSocialN" />" readonly style="background-color:white;" />
+                        <input type="hidden" name="RutEmpresaN" id="RutEmpresaN" value="<php:item id="RutEmpresaN"/>"/>
+                      </div>
+                      <div class="col-md-1 xs-12" style="padding-left: 5px; padding-right: 0px;">
+                         <button class="btn btn-md btn-primary btn-block" type="submit" name="accion" value="BUSCAR_NOTARIA" id="btn_notaria"><i class="fa fa-search"></i></button>  
+                      </div>
+                   </div>
+                  </div>
+                </div> 
+              </div>
+            </div>
+     
+            <!--Tipo de Firma-->
+            <div class="col-md-6 xs-12">
+              <div class="box">
+                <div class="box-body pad table-responsive">
+                  <label>Tipo de Firmas</label>
+                  <div class="box-body">
+                   <div class="form-row">
+                      <div class="col-md-12 xs-12" style="padding-left: 0px; padding-right: 0px;">
+                        <input type="hidden" name="idTipoFirma" id="idTipoFirma" value="<php:item id="idTipoFirma"/>" />
+                        <select class="form-control" id="TipoFirmas" name="TipoFirmas">
+                         <option value="<php:texto id="idTipoFirma"/>"><php:texto id="Descripcion"/></option>
+                         <php:repeticion id="TipoFirmas">
+                            <option value="<php:item id="idTipoFirma"/>"><php:item id="Descripcion"/></option>
+                         </php:repeticion>   
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+           <!--Anexo-->
+            <div class="col-md-12" id="anexo">
+              <div class="box">
+                <div class="box-body pad table-responsive">
+                  
+                  <!--Formas de Pago-->
+                    <div class="form-row">
+                      <div class="col-md-3 xs-12">
+                        <input type="hidden" name="idFormaPago" id="idFormaPago" value="<php:item id="idFormaPago"/>" />
+                        <label>Formas de Pago</label>
+                        <select class="form-control" id="FormasPago" name="FormasPago">
+                          <option value="<php:texto id="idFormaPago"/>"><php:texto id="FormaPago"/></option>
+                            <php:repeticion id="FormasPago">
+                              <option value="<php:item id="idFormaPago"/>"><php:item id="FormaPago"/></option>
+                            </php:repeticion>   
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <!--Porcentaje-->
+                    <div class="form-row">
+                      <div class="col-md-3 xs-12">
+                        <label>L&iacute;mite en la entrega (%)</label>
+                        <input type="number" class="form-control" name="Porcentaje" id="Porcentaje" min="0"/>
+                      </div>
+                    </div>
+
+                    <!--Propuesta-->
+                    <div class="form-row">
+                      <div class="col-md-3 xs-12">
+                       <label>Propuesta</label>
+                         <input class="form-control" name="NombreDoc" id="NombreDoc" type="text"/>
+                      </div>
+                    </div>
+
+                    <!--Fecha de Propuesta-->
+                    <div class="form-row">
+                      <div class="col-md-3 xs-12">
+                       <label> Fecha de Propuesta</label>
+                         <div class="form-group">
+                          <div class="input-group date">
+                            <div class="input-group-addon">
+                              <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="datetime" class="form-control pull-right" id="FechaDoc" name="FechaDoc" readonly style="background-color:white;"/>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!--Equipamiento-->
+                    <div class="col-md-3 xs-12">
+                      <div class="form-row">
+                        <div class="col-md-11 xs-11" style="padding-left: 0px; padding-right: 0px;">
+                           <label>Equipamiento</label>
+                           <input class="form-control" type="text" id="seleccion" readonly style="background-color:white;"/>
+                          </div>
+                          <div class="col-md-1" style="padding-left: 3px; padding-right: 0px; margin-top:25px;">
+                          <button style="background-color: transparent;" class="btn" type="button" data-toggle="collapse" data-target="#s_equipamiento" aria-expanded="false" aria-controls="collapseExample" name="accion"><i class="fa fa-plus" aria-hidden="true"></i></button>  
+                          </div>
+                      </div>
+                    </div>
+
+                    <!--Seleccion de Equipamiento-->
+                    <div class="collapse" id="s_equipamiento">
+                      <table id="example" class="table table-bordered table-hover pagin-table">
+                        <thead>
+                         <tr>
+                          <th data-campo="SELECCION" style="text-align: center;">Selecci&oacute;n </th>
+                          <th data-campo="DESCRIPCION" style="text-align: center;">Descripci&oacute;n</th>
+                        </tr>
+                        </thead>
+                        <tbody >
+                          <php:repeticion id="listado_equipamientos">
+                            <tr id="fila_<php:filamenos />">
+                              <!--Boton de Agregar-->
+                              <td data-campo="BOTON_AGREGAR"> 
+                                <div style="text-align: center">
+                                    <input type="checkbox" aria-label="Checkbox for following text input" name="Equipamiento[]" class="equipa" value="<php:item id="Descripcion"/>">
+                                </div>
+                              </td>
+                              <!--Descripcion-->
+                              <td data-campo="Descripcion" style="text-align: center;"><php:item id="Descripcion"/></td>
+                            </tr>
+                          </php:repeticion>
+                        </tbody>
+                      </table> 
+                    </div>
+
+                </div>
+              </div>
+            </div>
+
+          <!--Seleccionar Firmantes por Empresas -->
+            <div class="col-md-12">
+             <div class="box">
+              <div class="box-body pad table-responsive">
+                <label>Seleccione Firmantes</label>
+                <div class="box-body">
+                  <!-- Pasos-->
+                  <div class="steps-form-2">
+                      <div class="steps-row-2 setup-panel-2 d-flex justify-content-between">
+                          <div class="steps-step-2">
+                              <a href="#step-1" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0" data-placement="top" title="Empresa"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-building" aria-hidden="true"></i></a>
+                              <div>Empresa</div>
+                          </div>
+                          <div class="steps-step-2">
+                              <a href="#step-2" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0" data-placement="top" title="Cliente"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-users" aria-hidden="true"></i></a>
+                               <div>Cliente</div>
+                          </div>
+                          <div class="steps-step-2">
+                              <a href="#step-3" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0 not" data-placement="top" title="Notaria"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                              <div>Notaria</div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+                <!--Firmantes de Empresas-->
+                <div class="collapse" id="step-1">
+                 <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                        <h4> Representantes de la Empresa </h4>
+                        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="<php:item id="Personerias"/>">
+                          Ver Personerias
+                        </button>
+                    </tr> 
+                    <tr>
+                      <th style="text-align: center;">Selecci&oacute;n</th>
+                      <th style="text-align: center;">Rut</th>
+                      <th style="text-align: center;">Nombre y Apellido</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <php:repeticion id="firmantes_empresa">
+                    <tr>
+                      <td style="text-align: center;"><input type="checkbox" aria-label="Checkbox for following text input" name="Firmantes_Emp[]" value="<php:item id="personaid"/>"></td>
+                      <td style="text-align: center;"><php:item id="personaid"/></td>
+                      <td style="text-align: center;"><php:item id="nombre"/> <php:item id="appaterno"/></td>
+                    </tr>
+                  </php:repeticion>
+                  </tbody>                 
+                 </table>
+                </div>
+                <!--Fin de firmantes-->
+               
+                <!--Firmantes de Cliente-->
+                <div class="collapse" id="step-2">
+                 <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <h4> Firmantes del Cliente </h4>
+                      <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="<php:item id="PersoneriasC"/>">
+                        Ver Personerias
+                      </button>
+                    </tr> 
+                    <tr>
+                      <th style="text-align: center;">Selecci&oacute;n</th>
+                      <th style="text-align: center;">Rut</th>
+                      <th style="text-align: center;">Nombre y Apellido</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <php:repeticion id="firmantes_cliente">
+                    <tr>
+                      <td style="text-align: center;"><input type="checkbox" aria-label="Checkbox for following text input" name="Firmantes_Cli[]" value="<php:item id="personaid"/>"></td>
+                      <td style="text-align: center;"><php:item id="personaid"/></td>
+                      <td style="text-align: center;"><php:item id="nombre"/> <php:item id="appaterno"/></td>
+                    </tr>
+                    </php:repeticion>
+                  </tbody>                 
+                 </table>
+                </div>
+                 <!--Fin de firmantes-->
+                 
+                <!--Firmantes de Notaria-->
+                <div class="collapse" id="step-3">
+                 <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <h4> Notarios </h4>
+                      <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="<php:item id="PersoneriasN"/>">
+                        Ver Personerias
+                      </button>
+                    </tr> 
+                    <tr>
+                      <th style="text-align: center;">Selecci&oacute;n</th>
+                      <th style="text-align: center;">Rut</th>
+                      <th style="text-align: center;">Nombre y Apellido</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <php:repeticion id="firmantes_notaria">
+                    <tr>
+                      <td style="text-align: center;"><input type="checkbox" aria-label="Checkbox for following text input" name="Firmantes_Not[]" value="<php:item id="personaid"/>"></td>
+                      <td style="text-align: center;"><php:item id="personaid"/></td>
+                      <td style="text-align: center;"><php:item id="nombre"/> <php:item id="appaterno"/></td>
+                    </tr>
+                    </php:repeticion>
+                  </tbody>                 
+                 </table>
+                </div>
+                 <!--Fin de firmantes-->
+              </div>
+            </div>
+          </div>
+
+            <div class="form-row">  
+                <div class="col-md-2 xs-12">
+                   <!--<button class="btn btn-md btn-default btn-block" type="submit"  style="margin-top: 10px"><a href="#" data-toggle="modal" data-target="#exampleModal-vp">Vista previa</a></button>-->
+                </div>
+                <div class="col-md-2 xs-12 pull-right">
+                    <button class="btn btn-md btn-success btn-block" type="submit" style="margin-top: 10px" name="accion" id="GENERAR" value="GENERAR" >Generar</button>  
+                </div>
+                <!--<div class="col-md-2 xs-12 pull-right">
+                    <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-top: 10px" >Guardar</button>  
+                </div>-->
+            </div>  
+          </php:repeticion>  
+        </form>  
+      </div>
+      </div>
+    </div>
+  </div>
+
+<!--Calendarios-->
+<script>
+  $('#FechaDoc').datepicker({
+    language: "es",
+    orientation: "bottom",
+    autoclose: true,
+    todayHighlight: true
+  });
+</script>
+
+<!--Verificar las opciones de Formulario-->
+<script>
+
+  $(document).ready(function(){
+    
+    //Asignar datos 
+    $("#idTipoFirma").val($("#TipoFirmas").val());
+    
+    //Opcion de Notaria 
+     $("#nota").hide();
+
+    //Si aun no seleccionan la Empresa
+    if ( $("#RutEmpresa").val().length == 0 ){
+      //Inhabilitar las demas opciones del Formulario 
+      $("#btn_plantilla").prop("disabled", true );
+      $("#btn_proyecto").prop("disabled", true );
+      $("#TipoFirmas").prop("disabled", true );
+      $("#GENERAR").prop("disabled", true );
+    }
+
+    if( $("#idPla").val().length == 1){
+      $("#btn_proyecto").prop("disabled", true );
+    }
+
+    if ( $("#idProyecto").val().length == 0 ){
+      //Inhabilitar las demas opciones del Formulario 
+      $("#TipoFirmas").prop("disabled", true );
+    }
+      
+    //Si no han seleccionado el Proyecto 
+    if ( $("#idProyecto").val().length == 0 ){
+      //Inahibilitar los firmantes 
+      $(".btn-circle-2").addClass("disabled");
+      $("#btn_notaria").addClass("disabled");
+    }
+    else{
+      //Eliminar clase
+      $(".btn-circle-2").removeClass("disabled");
+    }
+    //Opcion para habilitar o deshabilitar Notarias
+    if( $("#not").val() == 0 ){
+      //Inahibilitar los firmantes 
+      $(".not").addClass("disabled");
+      //Se mantiene oculto mientras no haya Notario en el Flujo
+      $("#nota").hide();
+    }
+    else{
+      //Eliminar clase
+      $(".not").removeClass("disabled");
+      //Mostrar el selector de Notaria 
+      $("#nota").show();
+    }
+
+    //Opciones si es tipo de Contrato o Anexo
+    if( ($("#idTipoDoc").val().length == 0) || ($("#idTipoDoc").val() == 1)){
+      $("#anexo").hide();
+    }
+    else{
+       $("#anexo").show();
+    }
+
+    //Tooltip de personeria
+    $('[data-toggle="tooltip"]').tooltip();  
+
+    //Traer todos los check de equipamiento seleccionados 
+    $('.equipa:checked').each(
+      function() {
+          alert("El checkbox con valor " + $(this).val() + " está seleccionado");
+    });
+
+  });
+
+  //Combo de Firmas 
+  $("#TipoFirmas").change(function(){
+    $("#idTipoFirma").val($("#TipoFirmas").val());
+  });
+
+  //Seleccion de checkbox de equipamientos
+  
+  var contenido ='';
+  var sub = '';
+
+ $(".equipa").on( 'change', function() {
+    if( $(this).is(':checked') ) {
+        // Hacer algo si el checkbox ha sido seleccionado
+        if( contenido == '') {
+          contenido += $(this).val();
+        }
+        else{
+          contenido += ', ' + $(this).val();
+        }
+        $("#seleccion").val(contenido);
+    } else {
+
+         contenido = contenido.replace($(this).val()," ");
+         contenido = $.trim(contenido);
+
+         if(contenido.charAt(0)== ',' ){
+           contenido =  contenido.substring(contenido.length,1);
+         } 
+         if(contenido.charAt(contenido.length-1) == ","){   
+           contenido = contenido.substring(contenido.length-1, 0);
+         }
+         
+         if(contenido.search(",  , ") != -1){
+           sub = contenido.substring(contenido.length, contenido.search(",  , ") + 3 );
+           contenido = contenido.substring(contenido.search(",  , "), 0 );
+           contenido = contenido + sub;
+         }
+
+        $("#seleccion").val($.trim(contenido));
+    } 
+
+
+
+});
+
+  //Propuesta 
+    $("#FechaDoc").change(function(){
+      var cadena = $("#NombreDoc").val() + $("#FechaDoc").val();
+      $("#NombreDoc").val(cadena);
+    });
+ 
+</script>
