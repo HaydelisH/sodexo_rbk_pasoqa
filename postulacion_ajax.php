@@ -34,13 +34,13 @@ class postulacion {
 		}
 		
 		// creamos la seguridad
-		$this->seguridad = new Seguridad($this->pagina,$this->bd);
+		/*$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		// si no funciona hay que logearse
 		if (!$this->seguridad->sesionar()) 
 		{
 			echo 'Mensaje | Debe Iniciar sesión!';
 			exit;
-		}
+		}*/
 		$this->PostulacionBD = new PostulacionBD();
 		$this->PersonasBD = new PersonasBD();
 
@@ -50,7 +50,7 @@ class postulacion {
 
 		$dt = new DataTable();
 		$array = array ();
-		$datos = $_POST;
+		$datos = $_REQUEST;
 		//Consultar el tipo de firma que tiene asociada el usuario
 		if ( $this->PostulacionBD->obtener($datos,$dt)){
 			if( count($dt->data) > 0) 

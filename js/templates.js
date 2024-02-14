@@ -9241,6 +9241,7 @@ var ajaxVariablesPlantilla;
 var salida_GPorFichaAVariablesPlantilla;
 var datosDocumento = [];
 var datosDocumentoAux = [];
+
 function getVariablesPlantilla() {
     var url = "Generar_Documentos_Masivos3_ajax.php";
     var parametros = "idPlantilla=" + $('.idPlantilla_GPorFichaA').val();
@@ -9427,6 +9428,9 @@ function change_Plantilla() {
 
 }
 
+var ajax_GPorFichaA;
+var salida_GPorFichaA;
+
 function funcionCallback_Plantilla_GPorFichaA() {
     // Comprobamos si la peticion se ha completado (estado 4)
     if (ajax_GPorFichaA.readyState == 4) {
@@ -9502,9 +9506,9 @@ function filtrarPlantilla_GPorFichaA() {
 
             // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
             if (window.XMLHttpRequest)
-                ajax = new XMLHttpRequest(); // No Internet Explorer
+            ajax_GPorFichaA = new XMLHttpRequest(); // No Internet Explorer
             else
-                ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+            ajax_GPorFichaA = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
 
             // Almacenamos en el control al funcion que se invocara cuando la peticion
             // cambie de estado 
@@ -9558,7 +9562,7 @@ function funcionCallback_GPorFichaA() {
                         $(".idPlantilla_GPorFichaA").append('<option class="plan" ' + registro.Aprobado + ' value=' + registro.idPlantilla + '>' + registro.Descripcion_Pl + '</option>');
                     }
                 });
-                if (idPlantillaajax_GPorFichaA.length > 0) {
+                if (idPlantillaajax.length > 0) {
                     $(".idPlantilla_GPorFichaA").val(idPlantillaajax);
                 }
                 $('.idProceso_GPorFichaA').attr("disabled", false);
@@ -9596,6 +9600,8 @@ function mostrarFirmantes_GPorFichaA() {
 
 var numFirmantesEmpresa_GPorFichaA;
 $(".RutEmpresa_GPorFichaA").change(function () {
+
+    RutEmpresa = $(".RutEmpresa_GPorFichaA").val();
     $("#mensajeError").removeClass("callout callout-warning");
     $("#mensajeError").html("");
     $(".idTipoDoc_GPorFichaA").attr("disabled", true);
@@ -9626,12 +9632,11 @@ $(".RutEmpresa_GPorFichaA").change(function () {
 });
 var ajaxFirmantes;
 var salida_GPorFichaAFirmantes;
+var RutEmpresa;
 
 function change_RutEmpresa_GPorFichaA() {
     numFirmantesEmpresa_GPorFichaA = 0;
-    var RutEmpresa = $(".RutEmpresa_GPorFichaA").val();
-
-
+    RutEmpresa = $(".RutEmpresa_GPorFichaA").val();
 
     //Limpiar tabla 
     $(".fila").remove();
@@ -9955,9 +9960,9 @@ $(".newusuarioid_GPorFichaA").change(function () {
 
         // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
         if (window.XMLHttpRequest)
-            ajax = new XMLHttpRequest(); // No Internet Explorer
+            ajax_GPorFichaA = new XMLHttpRequest(); // No Internet Explorer
         else
-            ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+            ajax_GPorFichaA = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
 
         // Almacenamos en el control al funcion que se invocara cuando la peticion
         // cambie de estado 
@@ -9977,7 +9982,7 @@ function funcionCallback_rutusuario_GPorFichaA() {
         if (ajax_GPorFichaA.status == 200) {
             // Escribimos el resultado en la pagina HTML mediante DHTML
             salida_GPorFichaA = ajax_GPorFichaA.responseText;
-            datos = JSON.parse(salida_GPorFichaA);
+            let datos = JSON.parse(salida_GPorFichaA);
             var cant = Object.keys(datos).length;
             if (cant > 0) {
                 //console.log(datos);
@@ -10016,7 +10021,7 @@ function funcionCallback_rutusuario_GPorFichaA() {
 }
 
 
-
+var LugarPagoid;
 //Modal de Centros de Costo
 $(".btn_centro_costo_GPorFichaA").click(function () {
     RutEmpresa = $(".RutEmpresa_GPorFichaA").val();
@@ -10072,6 +10077,7 @@ var mostrarCC_GPorFichaA = function () {
 
     btn_agregar_cc_GPorFichaA("#tabla_centro_costo tbody", table);
     $('#tabla_centro_costo').css("width", "100%");
+    $("#modal_centro_costo").modal("show");
 };
 var btn_agregar_cc_GPorFichaA = function (tbody, table) {
     $(tbody).on("click", "tr", function () {
@@ -10110,7 +10116,11 @@ function Checkfiles_GPorFichaA() {
 var RutEmpresa_GPorFichaA;
 //Modal de Lugares de pago 
 $("#btn_lugares_pago").click(function () {
+
     RutEmpresa_GPorFichaA = $(".RutEmpresa_GPorFichaA").val();
+
+
+
     $(".fila_lp").remove();
     if (RutEmpresa_GPorFichaA == 0) {
         $("#mensajeError").addClass("callout callout-warning");
@@ -10157,6 +10167,8 @@ var mostrarLP_GPorFichaA = function () {
     btn_agregar_lp_GPorFichaA("#tabla_lugares_pago tbody", table);
 
     $('#tabla_lugares_pago').css("width", "100%");
+
+    $("#modal_lugares_pago").modal("show");
 };
 var btn_agregar_lp_GPorFichaA = function (tbody, table) {
     $(tbody).on("click", "tr", function () {
@@ -10184,9 +10196,9 @@ $(".VISTA_PREVIA_GPorFichaA").click(function () {
 
     // Creamos el control XMLHttpRequest segun el navegador en el que estemos 
     if (window.XMLHttpRequest)
-        ajax = new XMLHttpRequest(); // No Internet Explorer
+        ajax_GPorFichaA = new XMLHttpRequest(); // No Internet Explorer
     else
-        ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
+        ajax_GPorFichaA = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
     // Almacenamos en el control al funcion que se invocara cuando la peticion
     // cambie de estado 
     ajax_GPorFichaA.onreadystatechange = funcionCallback_inputToVar;

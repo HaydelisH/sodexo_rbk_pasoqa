@@ -17,7 +17,7 @@ class vistaprevia {
 	function __construct()
 	{
 		//Datos de la geeración
-		$datos = $_POST;
+		$datos = $_REQUEST;
 	
 		$resultado = array();
 		$resultado_documento = array();

@@ -36,13 +36,13 @@ class documentos {
 		}
 		
 		// creamos la seguridad
-		$this->seguridad = new Seguridad($this->pagina,$this->bd);
+		/*$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		// si no funciona hay que logearse
 		if (!$this->seguridad->sesionar()) 
 		{
 			echo 'Mensaje | Debe Iniciar sesión!';
 			exit;
-		}
+		}*/
 
 		// instanciamos del manejo de tablas
     	$this->documentosBD = new documentosBD();
@@ -58,7 +58,7 @@ class documentos {
 		$dt1 = new DataTable();
 		$anno = 0;
 
-		$datos = $_POST;
+		$datos = $_REQUEST;
 	
 		$datos["usuarioid"]=$this->seguridad->usuarioid;
 		$datos["ptipousuarioid"]=$this->seguridad->tipousuarioid;

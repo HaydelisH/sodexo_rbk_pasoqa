@@ -33,13 +33,13 @@ class linkPostulacion_ajax {
 		}
 		
 		// creamos la seguridad
-		$this->seguridad = new Seguridad($this->pagina,$this->bd);
+		/*$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		// si no funciona hay que logearse
 		if (!$this->seguridad->sesionar()) 
 		{
 			echo 'Mensaje | Debe Iniciar sesión!';
 			exit;
-		}
+		}*/
 		$this->postulacionBD = new postulacionBD();
 
 		$conecc = $this->bd->obtenerConexion();
@@ -47,7 +47,7 @@ class linkPostulacion_ajax {
 
 		$dt = new DataTable();
 		$array = array ();
-		$datos = $_POST;
+		$datos = $_REQUEST;
 		/*
 			array(
 				'proximidadCaducidadId'=>'1',

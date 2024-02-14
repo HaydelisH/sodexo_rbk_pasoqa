@@ -32,13 +32,13 @@ class clientes {
 		}
 		
 		// creamos la seguridad
-		$this->seguridad = new Seguridad($this->pagina,$this->bd);
+		/*$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		// si no funciona hay que logearse
 		if (!$this->seguridad->sesionar()) 
 		{
 			echo 'Mensaje | Debe Iniciar sesión!';
 			exit;
-		}
+		}*/
 
 		// instanciamos del manejo de tablas
     	$this->rl_proveedoresBD = new rl_proveedoresBD();
@@ -48,7 +48,7 @@ class clientes {
 		$this->rl_proveedoresBD->usarConexion($conecc);
 		
 		//Consultar las clientes que se tengan disponibles de ese tipo de contrato y esa empresa
-		$datos = $_POST;
+		$datos = $_REQUEST;
 
 		$dt = new DataTable();
 

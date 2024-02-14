@@ -40,7 +40,7 @@ class documentos {
 		
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_POST;
+		$datos = $_REQUEST;
 		$fecha = date('dmY_hms');
 		
 		//Llenar Select de Empresas registradas

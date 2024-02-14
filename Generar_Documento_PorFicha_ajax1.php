@@ -2,6 +2,7 @@
 
 include_once('includes/Seguridad.php');
 include_once("includes/lugarespagoBD.php");
+include_once("Config.php");
 
 //Opcion del AJAX para buscar el tipo de firma de una persona
 $page = new personas();
@@ -32,13 +33,13 @@ class personas {
 		}
 		
 		// creamos la seguridad
-		$this->seguridad = new Seguridad($this->pagina,$this->bd);
+		/*$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		// si no funciona hay que logearse
 		if (!$this->seguridad->sesionar()) 
 		{
 			echo 'Mensaje | Debe Iniciar sesión!';
 			exit;
-		}
+		}*/
 		$this->lugarespagoBD = new lugarespagoBD();
 
 		$conecc = $this->bd->obtenerConexion();
@@ -46,7 +47,8 @@ class personas {
 
 		$dt = new DataTable();
 		$array = array ();
-		$datos = $_POST;
+		$datos = $_REQUEST;
+
 		$datos['empresaid'] = $datos['RutEmpresa'];
 
 		//Consultar el tipo de firma que tiene asociada el usuario

@@ -18,7 +18,7 @@
 				
 				 <div class="card-body">
 		            <ul class="nav nav-tabs">
-		                <li id="personaldata" class="nav-item "><a id="datosPersonales" href="#form_dp" data-toggle="pill" role="tab"  class="nav-link clicktab_GPorFichaA active">Datos personales</a></li>
+		                <li id="personaldata" class="nav-item"><a id="datosPersonales" href="#form_dp" data-toggle="pill" role="tab"  class="nav-link clicktab_GPorFichaA active">Datos personales</a></li>
 						<li id="generaciondata" class="nav-item"><a id="generacion" href="#tab_4" data-toggle="pill" role="tab" class="nav-link clicktab_GPorFichaA">Generaci&oacute;n</a></li>
 						<li id="documentdata" class="nav-item"><a id="datosDocumento" href="#form_dc" data-toggle="pill" role="tab" class="nav-link clicktab_GPorFichaA">Datos de Documento</a></li>
 							
@@ -612,7 +612,7 @@
 			               
 			                  <!-- Pasos-->
 			                  <div class="steps-form-2">
-			                      <div class="steps-row-2 setup-panel-2 d-flex justify-content-between">
+			                      <div class="steps-row-2 setup-panel-2 d-flex justify-content-center">
 			                          <div class="steps-step-2" id="icono_representante" style="display:none">
 			                              <a href="#step-1" id="boton_emp" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0" data-placement="top" title="Empresa"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-building" aria-hidden="true"></i></a>
 			                              <div id="text_emp" class="text">Firmantes</div>
@@ -622,7 +622,7 @@
 			                               <div id="text_cli" class="text">Cliente</div>
 			                          </div>
 			                          <div class="steps-step-2" style="display:none">
-			                              <a href="#step-3" id="boton_not" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0 not steps-not" data-placement="top" title="Notaria"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+			                              <a href="#step-3" id="boton_not" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0 not steps-no" data-placement="top" title="Notaria"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 			                              <div id="text_not" class="text">Notaria</div>
 			                          </div>
 			                      </div>
@@ -659,7 +659,7 @@
               	</div>
             </div>		
 			
-		  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>">
+		  <input type="hidden" name="_csrf_token" id="_csrf_token"  value="<php:texto id='antiCSRF_token'/>" class="token">
                     </form>
 
 	 <!--Modal de Lugares de pago-->

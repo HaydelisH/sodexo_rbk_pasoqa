@@ -40,13 +40,13 @@ class clausulas {
 		}
 		
 		// creamos la seguridad
-		$this->seguridad = new Seguridad($this->pagina,$this->bd);
+		/*$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		// si no funciona hay que logearse
 		if (!$this->seguridad->sesionar()) 
 		{
 			echo 'Mensaje | Debe Iniciar sesión!';
 			exit;
-		}
+		}*/
 
 		
 		// instanciamos del manejo de tablas
@@ -57,7 +57,7 @@ class clausulas {
 		$this->clausulasBD->usarConexion($conecc);
 		
 		$dt = new DataTable();
-		$datos = $_POST;
+		$datos = $_REQUEST;
 
 		$this->clausulasBD->obtenerIdPlantillas($datos,$dt);
 		$this->mensajeError = $this->clausulasBD->mensajeError;

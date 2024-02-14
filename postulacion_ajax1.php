@@ -32,13 +32,13 @@ class postulacion {
 		}
 		
 		// creamos la seguridad
-		$this->seguridad = new Seguridad($this->pagina,$this->bd);
+		/*$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		// si no funciona hay que logearse
 		if (!$this->seguridad->sesionar()) 
 		{
 			echo 'Mensaje | Debe Iniciar sesión!';
 			exit;
-		}
+		}*/
 		$this->PostulacionBD = new PostulacionBD();
 
 		$conecc = $this->bd->obtenerConexion();
@@ -46,7 +46,7 @@ class postulacion {
 
 		$dt = new DataTable();
 		$array = array ();
-		$datos = $_POST;
+		$datos = $_REQUEST;
 		$ahora = date(VAR_FORMATO_FECHA);
         $datos['fechaPostulacionMIN'] = date(VAR_FORMATO_FECHA, strtotime($ahora."- " . VAR_X_MESES_TRAS . " month"));
 		if ( $this->PostulacionBD->existePostulacion($datos,$dt)){

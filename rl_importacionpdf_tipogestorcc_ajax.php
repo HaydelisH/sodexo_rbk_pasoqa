@@ -32,13 +32,13 @@ class rl_tipogestorcc {
 		}
 		
 		// creamos la seguridad
-		$this->seguridad = new Seguridad($this->pagina,$this->bd);
+		/*$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		// si no funciona hay que logearse
 		if (!$this->seguridad->sesionar()) 
 		{
 			echo 'Mensaje | Debe Iniciar sesión!';
 			exit;
-		}
+		}*/
 
 		// instanciamos del manejo de tablas
     	$this->rl_tipogestorccBD = new rl_tipogestorccBD();
@@ -48,7 +48,7 @@ class rl_tipogestorcc {
 		$this->rl_tipogestorccBD->usarConexion($conecc);
 		
 		//Consultar las plantillas que se tengan disponibles de ese tipo de contrato y esa empresa
-		$datos = $_POST;
+		$datos = $_REQUEST;
 
 		$dt = new DataTable();
 		$array = array ();

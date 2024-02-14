@@ -32,13 +32,13 @@ class clientes {
 		}
 		
 		// creamos la seguridad
-		$this->seguridad = new Seguridad($this->pagina,$this->bd);
+		/*$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		// si no funciona hay que logearse
 		if (!$this->seguridad->sesionar()) 
 		{
 			echo 'Mensaje | Debe Iniciar sesión!';
 			exit;
-		}
+		}*/
 		$this->rl_proveedoresBD = new rl_proveedoresBD();
 
 		$conecc = $this->bd->obtenerConexion();
@@ -46,7 +46,7 @@ class clientes {
 
 		$dt = new DataTable();
 		$array = array ();
-		$datos = $_POST;
+		$datos = $_REQUEST;
 		$datos["tipousuarioid"] = $this->seguridad->tipousuarioid;
 		$datos["decuantos"] = "10";
 		$datos["pagina"] = 1;

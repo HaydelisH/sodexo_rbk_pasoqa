@@ -34,13 +34,13 @@ class documentos {
 		}
 		
 		// creamos la seguridad
-		$this->seguridad = new Seguridad($this->pagina,$this->bd);
+		/*$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		// si no funciona hay que logearse
 		if (!$this->seguridad->sesionar()) 
 		{
 			echo 'Mensaje | Debe Iniciar sesión!';
 			exit;
-		}
+		}*/
 
 		// instanciamos del manejo de tablas
     	$this->firmasdocBD = new firmasdocBD();
@@ -51,7 +51,7 @@ class documentos {
 		
 		$dt = new DataTable();
 		
-		$datos = $_POST; 
+		$datos = $_REQUEST; 
 		$datos["pagina"] = 1;
 		$datos["decuantos"] = $datos["total_registros"] + 1;
 

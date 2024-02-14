@@ -54,20 +54,20 @@ class documentos {
 		}
 		
 		// creamos la seguridad
-		$this->seguridad = new Seguridad($this->pagina,$this->bd);
+		/*$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		
 		// si no funciona hay que logearse
 		if (!$this->seguridad->sesionar()) 
 		{
 			echo 'Mensaje | Debe Iniciar sesión!';
 			exit;
-		}
+		}*/
 		$firma = new firma();
 
 		$conecc = $this->bd->obtenerConexion();
 	
 		$dt = new DataTable();
-		$datos = $_POST;
+		$datos = $_REQUEST;
 		$usuarioid = $datos['usuarioid'];
 
 		switch (GESTOR_FIRMA) {

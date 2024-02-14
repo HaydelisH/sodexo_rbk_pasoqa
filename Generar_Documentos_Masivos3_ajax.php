@@ -32,13 +32,13 @@ class empresas {
 		}
 		
 		// creamos la seguridad
-		$this->seguridad = new Seguridad($this->pagina,$this->bd);
+		/*$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		// si no funciona hay que logearse
 		if (!$this->seguridad->sesionar()) 
 		{
 			echo 'Mensaje | Debe Iniciar sesión!';
 			exit;
-		}
+		}*/
 
 		// instanciamos del manejo de tablas
     	$this->plantillasBD = new plantillasBD();
@@ -48,7 +48,7 @@ class empresas {
 		$this->plantillasBD->usarConexion($conecc);
 		
 		//Consultar las empresas que se tengan disponibles de ese tipo de contrato y esa empresa
-		$datos = $_POST;
+		$datos = $_REQUEST;
 		$datos['PREFIJO_VAR'] = PREFIJO_VAR;
 		$datos['SUFIJO_VAR'] = SUFIJO_VAR;
 		$datos['SEPARADOR'] = SEPARADOR;

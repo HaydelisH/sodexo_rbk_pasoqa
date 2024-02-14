@@ -51,7 +51,7 @@ class ultimoCambioClave {
 
 		$dt = new DataTable();
         $array = array();
-        $datos = $_POST;
+        $datos = $_REQUEST;
         $datos["usuarioid"]=$this->seguridad->usuarioid;
 		//var_dump($datos);
 		//$this->cambioclaveBD->deshabiliarCuentasInactivas();

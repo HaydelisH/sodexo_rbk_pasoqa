@@ -42,13 +42,13 @@ class personas {
 		}
 		
 		// creamos la seguridad
-		$this->seguridad = new Seguridad($this->pagina,$this->bd);
+		/*$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		// si no funciona hay que logearse
 		if (!$this->seguridad->sesionar()) 
 		{
 			echo 'Mensaje | Debe Iniciar sesión!';
 			exit;
-		}
+		}*/
 		$this->rl_proveedoresBD = new rl_proveedoresBD();
 
 		$conecc = $this->bd->obtenerConexion();
@@ -83,7 +83,7 @@ class personas {
 	
 	private function agregarrol()
 	{
-		$datos = $_POST;
+		$datos = $_REQUEST;
 		
 		$rut = explode("-",$datos["rut"]);
 		$datos["personalNumber"]=$rut[0].$rut[1];
@@ -138,7 +138,7 @@ class personas {
 	
 	private function agregar()
 	{	
-		$datos = $_POST;
+		$datos = $_REQUEST;
 		
 		if ( $this->rl_proveedoresBD->agregar($datos,$dt))
 		{	
@@ -153,7 +153,7 @@ class personas {
 	
 	private function agregarfirmante()
 	{	
-		$datos = $_POST;
+		$datos = $_REQUEST;
 		
 		$rut_arr 	= explode("-",$datos["RutUsuario"]);
 		$rut_sindv 	= $rut_arr[0];		
@@ -176,7 +176,7 @@ class personas {
 	
 	private function buscar()
 	{	
-		$datos = $_POST;
+		$datos = $_REQUEST;
 		
 		if ( $this->rl_proveedoresBD->obtenerProveedor($datos,$dt))
 		{	
@@ -200,7 +200,7 @@ class personas {
 
 	private function buscarfirmante()
 	{	
-		$datos = $_POST;
+		$datos = $_REQUEST;
 		
 		if ( $this->rl_proveedoresBD->obtenerFirmanteUsuario($datos,$dt))
 		{	

@@ -33,13 +33,13 @@ class documentos {
 		}
 		
 		// creamos la seguridad
-		$this->seguridad = new Seguridad($this->pagina,$this->bd);
+		/*$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		// si no funciona hay que logearse
 		if (!$this->seguridad->sesionar()) 
 		{
 			echo 'Mensaje | Debe Iniciar sesión!';
 			exit;
-		}
+		}*/
 
 		$this->docvigentesBD = new docvigentesBD();
 
@@ -47,7 +47,7 @@ class documentos {
 		$this->docvigentesBD->usarConexion($conecc);
 
 		$dt = new DataTable();
-		$datos = $_POST;
+		$datos = $_REQUEST;
 
 		//Separar los idDocumentos
 		$this->docvigentesBD->modificar_aprobador($datos);

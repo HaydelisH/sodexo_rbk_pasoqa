@@ -32,13 +32,13 @@ class documentos {
 		}
 		
 		// creamos la seguridad
-		$this->seguridad = new Seguridad($this->pagina,$this->bd);
+		/*$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		// si no funciona hay que logearse
 		if (!$this->seguridad->sesionar()) 
 		{
 			echo 'Mensaje | Debe Iniciar sesión!';
 			exit;
-		}
+		}*/
 
 		$this->documentosBD	 = new documentosBD();
 
@@ -46,7 +46,7 @@ class documentos {
 		$this->documentosBD->usarConexion($conecc);
 
 		$dt = new DataTable();
-		$datos = $_POST;
+		$datos = $_REQUEST;
 
 		//Separar los idDocumentos
 		$docs = explode(',',$datos['docs']);

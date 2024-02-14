@@ -32,13 +32,13 @@ class plantillas {
 		}
 		
 		// creamos la seguridad
-		$this->seguridad = new Seguridad($this->pagina,$this->bd);
+		/*$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		// si no funciona hay que logearse
 		if (!$this->seguridad->sesionar()) 
 		{
 			echo 'Mensaje | Debe Iniciar sesión!';
 			exit;
-		}
+		}*/
 
 		// instanciamos del manejo de tablas
     	$this->plantillasBD = new plantillasBD();
@@ -50,7 +50,7 @@ class plantillas {
 		$dt = new DataTable();
 		// pedimos el listado
 
-		$datos = $_POST;
+		$datos = $_REQUEST;
 		$array = array ();
 
 		$this->plantillasBD->obtenerDatosFirmantesPlantilla($datos,$dt);

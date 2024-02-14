@@ -63,13 +63,13 @@ class documentos {
 		}
 		
 		// creamos la seguridad
-		$this->seguridad = new Seguridad($this->pagina,$this->bd);
+		/*$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		// si no funciona hay que logearse
 		if (!$this->seguridad->sesionar()) 
 		{
 			echo 'Mensaje | Debe Iniciar sesión!';
 			exit;
-		}
+		}*/
 		$this->documentosdetBD = new documentosdetBD();
 		$this->firmantesBD = new firmantesBD();
 
@@ -78,7 +78,7 @@ class documentos {
 		$this->firmantesBD->usarConexion($conecc);
 
 		$dt = new DataTable();
-		$datos = $_POST;
+		$datos = $_REQUEST;
 
 		$this->firmar();
 
@@ -101,7 +101,7 @@ class documentos {
 		
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_POST;
+		$datos = $_REQUEST;
 		$datos["idContrato"] = $datos["idDocumento"];
 		$datos['RutFirmante'] = $datos['usuarioid'];
 		$datos["code"] = $datos["doccode"];
@@ -150,7 +150,7 @@ class documentos {
 	//Accion de completar los datos del Firmante 
 	private function cargarFirmante(){
 
-		$datos = $_POST;
+		$datos = $_REQUEST;
 		$datos["idContrato"] = $datos["idDocumento"];
 
 		//Recibir $datos["idContrato"], $_POST["personaid"], $this->firma = tipo de firma del firmante
@@ -282,7 +282,7 @@ class documentos {
 	private function cargarDocumento(){
 
 		//Recibir $_POST["idContrato"]
-		$datos = $_POST;
+		$datos = $_REQUEST;
 		$datos["idContrato"] = $datos["idDocumento"];
 
 		//Variables para subida del Documento
@@ -381,7 +381,7 @@ class documentos {
 	public function actualizarFirma($FechaFirma,$documento,$RutFirmante){
 
 		//Recibir $_POST["idContrato"]
-		$datos = $_POST;
+		$datos = $_REQUEST;
 		$datos["idContrato"] = $datos["idDocumento"];
 		if( $FechaFirma == '' ){
 			$FechaFirma = date('d-m-Y H:i:s');
@@ -405,7 +405,7 @@ class documentos {
 	public function actualizaDocumento($code){
 
 		//Recibir $_POST["idContrato"]
-		$datos = $_POST;
+		$datos = $_REQUEST;
 		$datos["idContrato"] = $datos["idDocumento"];
 		$datos["DocCode"] = $code;
 
@@ -430,7 +430,7 @@ class documentos {
 	{
 		// creamos una nueva instancia de la tabla
 		$dt = new DataTable();
-		$datos = $_POST;
+		$datos = $_REQUEST;
 		$datos["idContrato"] = $datos["idDocumento"];
 
 		// Buscamos el idCategoria que vamos a asignar

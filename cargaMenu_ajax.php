@@ -47,7 +47,7 @@ class cargaMenu {
 	
 		$dt = new DataTable();
 		$resultado = array();
-		$datos = $_POST;
+		$datos = $_REQUEST;
 		
 		//para mostrar opciones en el menu
         $datos["tipousuarioid"]=$this->seguridad->tipousuarioid;

@@ -33,20 +33,20 @@ class documentos {
 		}
 		
 		// creamos la seguridad
-		$this->seguridad = new Seguridad($this->pagina,$this->bd);
+		/*$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		// si no funciona hay que logearse
 		if (!$this->seguridad->sesionar()) 
 		{
 			echo 'Mensaje | Debe Iniciar sesión!';
 			exit;
-		}
+		}*/
 		$this->documentosdetBD = new documentosdetBD();
 
 		$conecc = $this->bd->obtenerConexion();
 		$this->documentosdetBD->usarConexion($conecc);
 
 		$dt = new DataTable();
-		$datos = $_POST;
+		$datos = $_REQUEST;
 		$datos["personaid"] = $datos["usuarioid"];
 		$tipofirma = '';
 

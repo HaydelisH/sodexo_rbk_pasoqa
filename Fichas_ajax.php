@@ -43,11 +43,11 @@ class fichas {
 		$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		
 		// si no funciona hay que logearse
-		if (!$this->seguridad->sesionar()) 
+		/*if (!$this->seguridad->sesionar()) 
 		{
 			echo 'Mensaje | Debe Iniciar sesión!';
 			exit;
-		}
+		}*/
 
 		$this->fichasBD = new fichasBD();
 		$this->fichasDatosImportacionBD = new fichasDatosImportacionBD();
@@ -58,7 +58,7 @@ class fichas {
 		$this->fichasDatosImportacionBD->usarConexion($conecc);
 		$this->procesosBD->usarConexion($conecc);
 		
-		$datos = $_POST;
+		$datos = $_REQUEST;
 		$dt = new Datatable();
 		$dt2 = new Datatable();
 		$dt3 = new Datatable();

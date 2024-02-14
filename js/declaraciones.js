@@ -12,20 +12,24 @@ if( document.getElementById('tabla_switch') != null ){
 }
 
 //Tablas de Listado
-$(function () {
-    $('#example2').DataTable({
-        'paging': true,
-        'lengthMenu': [10, 25, 50],
-        'lengthChange': true,
-        'searching': true,
-        'ordering': true,
-        'info': true,
-        'autoWidth': false,
-        'fixedColumns': true
-    })
-})
-//Tabla de seleccion de Clausulas dentro de Plantillas
-$(function () {
+
+$(document).ready(function() {
+
+   if( $('#example2') ){
+      $('#example2').DataTable({
+          'paging': true,
+          'lengthMenu': [10, 25, 50],
+          'lengthChange': true,
+          'searching': true,
+          'ordering': true,
+          'info': true,
+          'autoWidth': false,
+          'fixedColumns': true
+      })
+  }
+  
+  if( $('#example3') ){
+    //Tabla de seleccion de Clausulas dentro de Plantillas
     $('#example3').DataTable({
         'paging': true,
         'lengthChange': false,
@@ -35,10 +39,10 @@ $(function () {
         'autoWidth': false,
         'fixedColumns': true
     })
-})
+  }
 
-//Tabla de resultado de generaci�n masiva 
-$(function () {
+  if( $('#example4') ){
+    //Tabla de resultado de generaci�n masiva 
     $('#example4').DataTable({
         'paging': true,
         'lengthMenu': [100, 500, 1000],
@@ -49,7 +53,7 @@ $(function () {
         'autoWidth': false,
         'fixedColumns': true
     })
-})
+  }
 
 if( document.getElementById('TextoTxt') ){
   
@@ -173,7 +177,7 @@ if( document.getElementById('TextoTxt') ){
     });
 }
 
-  $(document).ready(function() {
+  if( $("#table") ){
     $('#table').tableDnD({
           onDrop: function(table, row) {
             //Asigno el contenido del resultado al div
@@ -188,12 +192,14 @@ if( document.getElementById('TextoTxt') ){
             });
           }
       });
-  });
-
-
-$('table').each(function() {
-  var thetable = $(this);
-  $(this).find('tbody td').each(function() {
-      $(this).attr('data-heading', thetable.find('thead th:nth-child('+($(this).index()+1)+')').text());
-  });
-});
+  }
+  if( $("#table") ){
+    $('table').each(function() {
+      var thetable = $(this);
+      $(this).find('tbody td').each(function() {
+          $(this).attr('data-heading', thetable.find('thead th:nth-child('+($(this).index()+1)+')').text());
+      });
+    });
+  }
+  
+})

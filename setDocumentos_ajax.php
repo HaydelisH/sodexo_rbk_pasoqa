@@ -31,20 +31,20 @@ class personas {
 		}
 		
 		// creamos la seguridad
-		$this->seguridad = new Seguridad($this->pagina,$this->bd);
+		/*$this->seguridad = new Seguridad($this->pagina,$this->bd);
 		// si no funciona hay que logearse
 		if (!$this->seguridad->sesionar()) 
 		{
 			echo 'Mensaje | Debe Iniciar sesión!';
 			exit;
-        }
+        }*/
         
         $this->setDocumentosBD = new setDocumentosBD();
 
         $conecc = $this->bd->obtenerConexion();
         $this->setDocumentosBD->usarConexion($conecc);
         
-        $datos = $_POST;
+        $datos = $_REQUEST;
         switch ($_POST["accion"])
 		{
 			case "AGREGAR":
